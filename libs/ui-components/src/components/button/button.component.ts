@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, Input, computed, signal, input } from '@angular/core';
 import { classMerge } from '../../utils';
 
 export type ButtonVariant = 'primary' | 'outline' | 'ghost';
@@ -9,9 +9,9 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
   templateUrl: './button.component.html'
 })
 export class ButtonComponent {
-  @Input() variant: ButtonVariant = 'primary';
-  @Input() size: ButtonSize = 'md';
-  @Input() type: 'button' | 'submit' | 'reset' = 'button';
+  readonly variant = input<ButtonVariant>('primary');
+  readonly size = input<ButtonSize>('md');
+  readonly type = input<'button' | 'submit' | 'reset'>('button');
 
   @Input() set disabled(value: boolean) {
     this._disabled.set(value ?? false);
@@ -38,7 +38,7 @@ export class ButtonComponent {
       md: 'px-4 py-2 text-base',
       lg: 'px-6 py-3 text-lg'
     };
-    return classMerge(baseClasses, variantClasses[this.variant], sizeClasses[this.size]);
+    return classMerge(baseClasses, variantClasses[this.variant()], sizeClasses[this.size()]);
   });
 
   handleClick(event: Event): void {

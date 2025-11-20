@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed } from '@angular/core';
+import { Component, signal, computed, input } from '@angular/core';
 
 let tabIdCounter = 0;
 
@@ -7,7 +7,7 @@ let tabIdCounter = 0;
   templateUrl: './tab.component.html'
 })
 export class TabComponent {
-  @Input() label!: string;
+  readonly label = input.required<string>();
 
   id = `tab-${tabIdCounter++}`;
   isActive = signal(false);

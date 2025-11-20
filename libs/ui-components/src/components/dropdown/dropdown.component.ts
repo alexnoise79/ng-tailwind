@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed } from '@angular/core';
+import { Component, Input, signal, computed, input } from '@angular/core';
 import { OutsideClickDirective } from '../../directives';
 
 export type DropdownAlign = 'left' | 'right';
@@ -15,17 +15,17 @@ export class DropdownComponent {
   private _align = signal<DropdownAlign>('left');
   alignValue = computed(() => this._align());
 
-  @Input() isOpen = signal(false);
+  readonly isOpen = input(signal(false));
 
   toggle(): void {
-    this.isOpen.update(val => !val);
+    this.isOpen().update(val => !val);
   }
 
   close(): void {
-    this.isOpen.set(false);
+    this.isOpen().set(false);
   }
 
   open(): void {
-    this.isOpen.set(true);
+    this.isOpen().set(true);
   }
 }

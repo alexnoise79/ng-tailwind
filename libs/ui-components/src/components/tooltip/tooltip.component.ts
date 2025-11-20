@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, OnDestroy } from '@angular/core';
+import { Component, signal, computed, OnDestroy, input } from '@angular/core';
 
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
@@ -7,9 +7,9 @@ export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
   templateUrl: './tooltip.component.html'
 })
 export class TooltipComponent implements OnDestroy {
-  @Input() text!: string;
-  @Input() position: TooltipPosition = 'top';
-  @Input() delay = 200;
+  readonly text = input.required<string>();
+  readonly position = input<TooltipPosition>('top');
+  readonly delay = input(200);
 
   private showTimeout?: number;
   private hideTimeout?: number;
@@ -24,7 +24,7 @@ export class TooltipComponent implements OnDestroy {
       left: 'right-full mr-1 top-1/2 -translate-y-1/2',
       right: 'left-full ml-1 top-1/2 -translate-y-1/2'
     };
-    return `${base} ${positionClasses[this.position]}`;
+    return `${base} ${positionClasses[this.position()]}`;
   });
 
   ngOnDestroy(): void {
@@ -44,7 +44,7 @@ export class TooltipComponent implements OnDestroy {
     }
     this.showTimeout = window.setTimeout(() => {
       this.isVisible.set(true);
-    }, this.delay);
+    }, this.delay());
   }
 
   hide(): void {

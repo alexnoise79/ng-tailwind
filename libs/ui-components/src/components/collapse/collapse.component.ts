@@ -1,4 +1,4 @@
-import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, Input, signal, Signal, WritableSignal, input } from '@angular/core';
 
 @Component({
   selector: 'ui-collapse',
@@ -18,7 +18,7 @@ export class CollapseComponent {
   }
   private _isOpen: WritableSignal<boolean> = signal(false);
   
-  @Input() horizontal = false;
+  readonly horizontal = input(false);
 
   get isOpen(): Signal<boolean> {
     return this._isOpen;

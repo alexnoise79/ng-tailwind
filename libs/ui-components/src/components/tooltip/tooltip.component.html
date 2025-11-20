@@ -2,7 +2,7 @@
   <ng-content />
   @if (isVisible()) {
     <div [class]="tooltipClasses()" role="tooltip">
-      {{ text }}
+      {{ text() }}
     </div>
   }
 </div>

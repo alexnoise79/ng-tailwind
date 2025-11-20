@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
@@ -17,9 +17,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
   private _isOpen: WritableSignal<boolean> = signal(false);
   
-  @Input() title?: string;
-  @Input() showFooter = false;
-  @Input() closeOnBackdropClick = true;
+  readonly title = input<string>();
+  readonly showFooter = input(false);
+  readonly closeOnBackdropClick = input(true);
   @Output() close = new EventEmitter<void>();
 
   @ViewChild('modalContent') modalContent!: ElementRef<HTMLElement>;
@@ -61,7 +61,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   onBackdropClick(): void {
-    if (this.closeOnBackdropClick) {
+    if (this.closeOnBackdropClick()) {
       this.handleClose();
     }
   }

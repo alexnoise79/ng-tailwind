@@ -1,4 +1,4 @@
-import { Component, Input, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, input } from '@angular/core';
 import { AccordionComponent } from './accordion.component';
 
 let itemIdCounter = 0;
@@ -8,7 +8,7 @@ let itemIdCounter = 0;
   templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
-  @Input() title!: string;
+  readonly title = input.required<string>();
 
   private accordion = inject(AccordionComponent, { optional: true });
   private id = `accordion-item-${itemIdCounter++}`;
