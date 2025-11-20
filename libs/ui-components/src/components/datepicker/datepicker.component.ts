@@ -1,5 +1,4 @@
 import { Component, Input, signal, computed, input, output, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { classMerge } from '../../utils';
 
 export interface NgtDateStruct {
@@ -10,7 +9,6 @@ export interface NgtDateStruct {
 
 @Component({
   selector: 'ui-datepicker',
-  imports: [CommonModule],
   templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit {
