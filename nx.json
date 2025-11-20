@@ -3,7 +3,7 @@
   "defaultBase": "main",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/.eslintrc.json", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/test-setup.[jt]s", "!{projectRoot}/karma.conf.js", "!{projectRoot}/.storybook/**/*", "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/eslint.config.js", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/test-setup.[jt]s", "!{projectRoot}/karma.conf.js", "!{projectRoot}/.storybook/**/*", "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
     "sharedGlobals": []
   },
   "targetDefaults": {
@@ -13,7 +13,7 @@
       "cache": true
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
+      "inputs": ["default", "{workspaceRoot}/eslint.config.js"],
       "cache": true
     },
     "test": {
