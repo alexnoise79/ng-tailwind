@@ -44,6 +44,13 @@ export default [
     },
     rules: {
       ...angularTemplatePlugin.configs.recommended.rules,
+      '@angular-eslint/template/attributes-order': [
+        'error',
+        {
+          alphabetical: false,
+          order: ['STRUCTURAL_DIRECTIVE', 'TEMPLATE_REFERENCE', 'TWO_WAY_BINDING', 'INPUT_BINDING', 'OUTPUT_BINDING', 'ATTRIBUTE_BINDING'],
+        },
+      ],
     },
   },
 ];

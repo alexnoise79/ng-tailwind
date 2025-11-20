@@ -3,7 +3,6 @@ import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'ui-tabs',
-  imports: [],
   templateUrl: './tabs.component.html'
 })
 export class TabsComponent implements AfterContentInit {
