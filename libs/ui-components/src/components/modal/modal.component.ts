@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input, output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   readonly title = input<string>();
   readonly showFooter = input(false);
   readonly closeOnBackdropClick = input(true);
-  @Output() close = new EventEmitter<void>();
+  readonly close = output<void>();
 
   @ViewChild('modalContent') modalContent!: ElementRef<HTMLElement>;
 
@@ -67,6 +67,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   }
 
   handleClose(): void {
+    // TODO: The 'emit' function requires a mandatory void argument
     this.close.emit();
   }
 }
