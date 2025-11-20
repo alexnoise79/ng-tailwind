@@ -4,7 +4,6 @@ export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 @Component({
   selector: 'ui-tooltip',
-  standalone: true,
   templateUrl: './tooltip.component.html'
 })
 export class TooltipComponent implements OnDestroy {

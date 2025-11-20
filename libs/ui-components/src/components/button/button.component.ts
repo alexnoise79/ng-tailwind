@@ -6,7 +6,6 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ui-button',
-  standalone: true,
   templateUrl: './button.component.html'
 })
 export class ButtonComponent {

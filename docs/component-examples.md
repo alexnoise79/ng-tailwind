@@ -8,7 +8,6 @@
 import { ButtonComponent } from '@ng-tailwind/ui-components';
 
 @Component({
-  standalone: true,
   imports: [ButtonComponent],
   template: `
     <ui-button variant="primary">Primary Button</ui-button>

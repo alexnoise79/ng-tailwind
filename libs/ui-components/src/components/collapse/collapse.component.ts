@@ -2,7 +2,6 @@ import { Component, Input, signal, Signal, WritableSignal } from '@angular/core'
 
 @Component({
   selector: 'ui-collapse',
-  standalone: true,
   templateUrl: './collapse.component.html',
   host: {
     '[attr.aria-expanded]': 'isOpen()',

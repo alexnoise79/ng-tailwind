@@ -41,7 +41,6 @@ import { ButtonComponent } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-example',
-  standalone: true,
   imports: [ButtonComponent],
   template: `
     <ui-button variant="primary">Click me</ui-button>

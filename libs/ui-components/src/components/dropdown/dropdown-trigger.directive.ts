@@ -2,8 +2,7 @@ import { Directive, HostListener, inject } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 
 @Directive({
-  selector: '[ui-dropdown-trigger]',
-  standalone: true
+  selector: '[ui-dropdown-trigger]'
 })
 export class DropdownTriggerDirective {
   private dropdown = inject(DropdownComponent);

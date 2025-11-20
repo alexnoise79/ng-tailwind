@@ -4,7 +4,6 @@ import { TrapFocusDirective } from '../../directives';
 
 @Component({
   selector: 'ui-modal',
-  standalone: true,
   imports: [TrapFocusDirective],
   templateUrl: './modal.component.html'
 })

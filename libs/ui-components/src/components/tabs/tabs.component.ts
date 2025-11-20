@@ -3,7 +3,6 @@ import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'ui-tabs',
-  standalone: true,
   imports: [],
   templateUrl: './tabs.component.html'
 })

@@ -2,8 +2,7 @@ import { Directive, ElementRef, AfterViewInit, OnDestroy, inject } from '@angula
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 
 @Directive({
-  selector: '[uiTrapFocus]',
-  standalone: true
+  selector: '[uiTrapFocus]'
 })
 export class TrapFocusDirective implements AfterViewInit, OnDestroy {
   private focusTrapFactory = inject(FocusTrapFactory);

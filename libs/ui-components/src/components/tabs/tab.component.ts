@@ -4,7 +4,6 @@ let tabIdCounter = 0;
 
 @Component({
   selector: 'ui-tab',
-  standalone: true,
   templateUrl: './tab.component.html'
 })
 export class TabComponent {

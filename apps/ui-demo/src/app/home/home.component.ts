@@ -3,7 +3,6 @@ import { AccordionComponent, AccordionItemComponent, ButtonComponent, CollapseCo
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [ButtonComponent, ModalComponent, AccordionComponent, AccordionItemComponent, TabsComponent, TabComponent, DropdownComponent, DropdownTriggerDirective, DropdownContentDirective, TooltipComponent, CollapseComponent],
   templateUrl: './home.component.html'
 })

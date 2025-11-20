@@ -5,7 +5,6 @@ export type DropdownAlign = 'left' | 'right';
 
 @Component({
   selector: 'ui-dropdown',
-  standalone: true,
   imports: [OutsideClickDirective],
   templateUrl: './dropdown.component.html'
 })

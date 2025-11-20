@@ -4,7 +4,6 @@ import { ButtonComponent } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [RouterOutlet, ButtonComponent],
   template: `
     <div class="min-h-screen bg-gray-50">

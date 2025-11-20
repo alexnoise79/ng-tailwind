@@ -5,7 +5,6 @@ let itemIdCounter = 0;
 
 @Component({
   selector: 'ui-accordion-item',
-  standalone: true,
   templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
