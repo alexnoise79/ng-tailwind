@@ -1,5 +1,4 @@
 <div
-  class="overflow-hidden transition-all duration-300 ease-in-out"
   [class.h-full]="horizontal()"
   [class.w-full]="!horizontal()"
   [class.max-h-0]="!isOpen() && !horizontal()"
@@ -8,6 +7,7 @@
   [class.max-w-[9999px]]="isOpen() && horizontal()"
   [attr.aria-expanded]="isOpen()"
   [attr.aria-hidden]="!isOpen()"
+  class="overflow-hidden transition-all duration-300 ease-in-out"
 >
   <ng-content />
 </div>
