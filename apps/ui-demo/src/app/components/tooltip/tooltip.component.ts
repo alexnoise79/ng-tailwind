@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TooltipComponent } from '@ng-tailwind/ui-components';
 
 @Component({
-  selector: 'app-tooltip',
+  selector: 'section.tooltip',
   imports: [TooltipComponent],
   templateUrl: './tooltip.component.html'
 })

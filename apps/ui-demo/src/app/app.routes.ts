@@ -3,7 +3,11 @@ import { Routes } from '@angular/router';
 export const appRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./components/getting-started/getting-started.component').then(m => m.GettingStartedComponent)
+  },
+  {
+    path: 'getting-started',
+    loadComponent: () => import('./components/getting-started/getting-started.component').then(m => m.GettingStartedComponent)
   },
   {
     path: 'button',

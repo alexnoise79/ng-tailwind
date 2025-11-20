@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { ButtonComponent, CollapseComponent } from '@ng-tailwind/ui-components';
 
 @Component({
-  selector: 'app-collapse',
+  selector: 'section.collapse',
   imports: [ButtonComponent, CollapseComponent],
   templateUrl: './collapse.component.html'
 })

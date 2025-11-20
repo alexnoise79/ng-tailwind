@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AccordionComponent, AccordionItemComponent } from '@ng-tailwind/ui-components';
 
 @Component({
-  selector: 'app-accordion',
+  selector: 'section.accordion',
   imports: [AccordionComponent, AccordionItemComponent],
   templateUrl: './accordion.component.html'
 })
