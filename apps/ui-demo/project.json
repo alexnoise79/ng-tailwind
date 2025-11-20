@@ -1,0 +1,60 @@
+{
+  "name": "ui-demo",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/ui-demo/src",
+  "projectType": "application",
+  "prefix": "app",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ui-demo",
+        "index": "apps/ui-demo/src/index.html",
+        "browser": "apps/ui-demo/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ui-demo/tsconfig.app.json",
+        "assets": ["apps/ui-demo/src/favicon.ico", "apps/ui-demo/src/assets"],
+        "styles": ["apps/ui-demo/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "ui-demo:build:production"
+        },
+        "development": {
+          "buildTarget": "ui-demo:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    }
+  }
+}
+

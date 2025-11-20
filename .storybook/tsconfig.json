@@ -1,0 +1,24 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "types": ["node"]
+  },
+  "include": [
+    "../libs/ui-components/src/**/*.stories.ts",
+    "../libs/ui-components/src/components/**/*.ts",
+    "../libs/ui-components/src/directives/**/*.ts",
+    "../libs/ui-components/src/utils/**/*.ts",
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "../node_modules",
+    "../dist",
+    "../libs/**/*.spec.ts",
+    "../libs/**/*.test.ts",
+    "../apps/**/*.ts"
+  ]
+}
+

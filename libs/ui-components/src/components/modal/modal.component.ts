@@ -1,0 +1,150 @@
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  inject,
+  TemplateRef,
+  ViewChild,
+  ElementRef,
+  signal,
+  effect,
+} from '@angular/core';
+import { Overlay, OverlayRef, OverlayConfig } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
+import { TrapFocusDirective } from '../../directives';
+import { classMerge } from '../../utils';
+
+@Component({
+  selector: 'ui-modal',
+  standalone: true,
+  imports: [TrapFocusDirective],
+  template: `
+    @if (isOpen()) {
+      <div
+        class="fixed inset-0 z-50 overflow-y-auto"
+        [attr.aria-labelledby]="title ? 'modal-title' : null"
+        [attr.aria-modal]="true"
+        role="dialog"
+      >
+        <!-- Backdrop -->
+        <div
+          class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+          [class.opacity-0]="!isVisible()"
+          [class.opacity-100]="isVisible()"
+          (click)="onBackdropClick()"
+        ></div>
+
+        <!-- Modal Container -->
+        <div
+          class="flex min-h-full items-center justify-center p-4"
+          (click)="onBackdropClick()"
+        >
+          <div
+            #modalContent
+            uiTrapFocus
+            class="relative bg-white rounded-lg shadow-xl transform transition-all w-full max-w-lg"
+            [class.opacity-0]="!isVisible()"
+            [class.opacity-100]="isVisible()"
+            [class.scale-95]="!isVisible()"
+            [class.scale-100]="isVisible()"
+            (click)="$event.stopPropagation()"
+            role="document"
+          >
+            <!-- Header -->
+            @if (title) {
+              <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h3 id="modal-title" class="text-lg font-semibold text-gray-900">
+                  {{ title }}
+                </h3>
+                <button
+                  type="button"
+                  class="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md p-1"
+                  (click)="close()"
+                  aria-label="Close modal"
+                >
+                  <svg
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            }
+
+            <!-- Body -->
+            <div class="p-6">
+              <ng-content />
+            </div>
+
+            <!-- Footer -->
+            @if (showFooter) {
+              <div class="flex items-center justify-end gap-2 p-6 border-t border-gray-200">
+                <ng-content select="[footer]" />
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  `,
+})
+export class ModalComponent implements OnInit, OnDestroy {
+  @Input() isOpen = signal(false);
+  @Input() title?: string;
+  @Input() showFooter = false;
+  @Input() closeOnBackdropClick = true;
+  @Output() close = new EventEmitter<void>();
+
+  @ViewChild('modalContent') modalContent!: ElementRef<HTMLElement>;
+
+  private document = inject(DOCUMENT);
+  private isVisible = signal(false);
+  private escapeListener?: (event: KeyboardEvent) => void;
+
+  ngOnInit(): void {
+    this.escapeListener = (event: KeyboardEvent) => {
+      if (this.isOpen() && event.key === 'Escape') {
+        this.close.emit();
+      }
+    };
+    this.document.addEventListener('keydown', this.escapeListener as EventListener);
+
+    effect(() => {
+      if (this.isOpen()) {
+        // Prevent body scroll when modal is open
+        this.document.body.style.overflow = 'hidden';
+        // Trigger animation
+        setTimeout(() => this.isVisible.set(true), 10);
+      } else {
+        this.document.body.style.overflow = '';
+        this.isVisible.set(false);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.escapeListener) {
+      this.document.removeEventListener('keydown', this.escapeListener);
+    }
+    this.document.body.style.overflow = '';
+  }
+
+  onBackdropClick(): void {
+    if (this.closeOnBackdropClick) {
+      this.close.emit();
+    }
+  }
+}
+
