@@ -40,5 +40,9 @@ export const appRoutes: Routes = [
   {
     path: 'datepicker',
     loadComponent: () => import('./components/datepicker/datepicker.component').then(m => m.DatepickerDemoComponent)
+  },
+  {
+    path: 'offcanvas',
+    loadComponent: () => import('./components/offcanvas/offcanvas.component').then(m => m.OffcanvasDemoComponent)
   }
 ];
