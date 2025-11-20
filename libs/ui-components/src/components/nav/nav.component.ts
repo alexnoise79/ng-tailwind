@@ -108,7 +108,7 @@ export class NavComponent implements AfterContentInit {
       vertical: 'flex flex-col space-y-1'
     };
     const styleClasses = {
-      tabs: this.orientation() === 'horizontal' ? 'border-b border-gray-200' : 'border-r border-gray-200',
+      tabs: this.orientation() === 'horizontal' ? 'border-b border-gray-200' : '',
       pills: '',
       underline: ''
     };
@@ -129,7 +129,9 @@ export class NavComponent implements AfterContentInit {
   });
 
   getNavButtonClasses(item: NavItemComponent): string {
-    const baseClasses = 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses = this.orientation() === 'vertical' 
+      ? 'flex items-center justify-start font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed w-full'
+      : 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
     
     const isActive = this.selectedId() === item.id;
     const isDisabled = item.disabled();
