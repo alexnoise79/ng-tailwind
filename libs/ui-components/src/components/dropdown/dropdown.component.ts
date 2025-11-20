@@ -12,23 +12,7 @@ export type DropdownAlign = 'left' | 'right';
   selector: 'ui-dropdown',
   standalone: true,
   imports: [OutsideClickDirective],
-  template: `
-    <div class="relative inline-block">
-      <ng-content select="[ui-dropdown-trigger]" />
-      @if (isOpen()) {
-        <div
-          #dropdownContent
-          uiOutsideClick
-          (uiOutsideClick)="close()"
-          class="absolute z-50 mt-1"
-          [class.left-0]="alignValue() === 'left'"
-          [class.right-0]="alignValue() === 'right'"
-        >
-          <ng-content select="[ui-dropdown-content]" />
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './dropdown.component.html',
 })
 export class DropdownComponent {
   @Input() set align(value: DropdownAlign) {

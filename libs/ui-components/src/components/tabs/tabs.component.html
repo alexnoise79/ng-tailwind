@@ -1,0 +1,31 @@
+<div class="tabs-container">
+  <div
+    role="tablist"
+    class="flex border-b border-gray-200"
+    (keydown)="handleKeyDown($event)"
+  >
+    @for (tab of tabs(); track tab.id) {
+      <button
+        type="button"
+        [id]="tab.buttonId()"
+        [attr.aria-selected]="activeTabId() === tab.id"
+        [attr.aria-controls]="tab.panelId()"
+        [attr.tabindex]="activeTabId() === tab.id ? 0 : -1"
+        role="tab"
+        class="px-4 py-2 font-medium text-sm border-b-2 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        [class.border-primary-600]="activeTabId() === tab.id"
+        [class.text-primary-600]="activeTabId() === tab.id"
+        [class.border-transparent]="activeTabId() !== tab.id"
+        [class.text-gray-500]="activeTabId() !== tab.id"
+        [class.hover:text-gray-700]="activeTabId() !== tab.id"
+        (click)="selectTab(tab.id)"
+      >
+        {{ tab.label }}
+      </button>
+    }
+  </div>
+  <div class="tab-panels">
+    <ng-content />
+  </div>
+</div>
+

@@ -5,11 +5,7 @@ import { AccordionItemComponent } from './accordion-item.component';
   selector: 'ui-accordion',
   standalone: true,
   imports: [AccordionItemComponent],
-  template: `
-    <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
-      <ng-content />
-    </div>
-  `,
+  templateUrl: './accordion.component.html',
   providers: [AccordionComponent],
 })
 export class AccordionComponent {

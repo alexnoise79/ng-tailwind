@@ -11,25 +11,7 @@ export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 @Component({
   selector: 'ui-tooltip',
   standalone: true,
-  template: `
-    <div
-      class="relative inline-block"
-      (mouseenter)="show()"
-      (mouseleave)="hide()"
-      (focus)="show()"
-      (blur)="hide()"
-    >
-      <ng-content />
-      @if (isVisible()) {
-        <div
-          [class]="tooltipClasses()"
-          role="tooltip"
-        >
-          {{ text }}
-        </div>
-      }
-    </div>
-  `,
+  templateUrl: './tooltip.component.html',
 })
 export class TooltipComponent implements OnDestroy {
   @Input() text!: string;

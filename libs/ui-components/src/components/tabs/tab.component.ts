@@ -5,17 +5,7 @@ let tabIdCounter = 0;
 @Component({
   selector: 'ui-tab',
   standalone: true,
-  template: `
-    <div
-      [id]="panelId()"
-      [attr.aria-labelledby]="buttonId()"
-      [attr.role]="'tabpanel'"
-      [attr.hidden]="!isActive() ? true : null"
-      class="p-4"
-    >
-      <ng-content />
-    </div>
-  `,
+  templateUrl: './tab.component.html',
 })
 export class TabComponent {
   @Input() label!: string;
