@@ -126,27 +126,93 @@ import { AccordionComponent, AccordionItemComponent } from '@ng-tailwind/ui-comp
 </ui-accordion>
 ```
 
-## Tabs
+## Nav
+
+### Basic Navigation
 
 ```typescript
-import { TabsComponent, TabComponent } from '@ng-tailwind/ui-components';
+import { NavComponent, NavItemComponent } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<ui-tabs>
-  <ui-tab label="Overview">
-    <h3>Overview Content</h3>
-    <p>This is the overview tab</p>
-  </ui-tab>
-  <ui-tab label="Details">
-    <h3>Details Content</h3>
-    <p>This is the details tab</p>
-  </ui-tab>
-  <ui-tab label="Settings">
-    <h3>Settings Content</h3>
-    <p>This is the settings tab</p>
-  </ui-tab>
-</ui-tabs>
+<ui-nav>
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+  <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
+</ui-nav>
+```
+
+### Navigation Styles
+
+```html
+<!-- Tabs style (default) -->
+<ui-nav [style]="'tabs'">
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+</ui-nav>
+
+<!-- Pills style -->
+<ui-nav [style]="'pills'">
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+</ui-nav>
+
+<!-- Underline style -->
+<ui-nav [style]="'underline'">
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+</ui-nav>
+```
+
+### Alignment
+
+```html
+<!-- Start aligned (default) -->
+<ui-nav [align]="'start'">...</ui-nav>
+
+<!-- Center aligned -->
+<ui-nav [align]="'center'">...</ui-nav>
+
+<!-- End aligned -->
+<ui-nav [align]="'end'">...</ui-nav>
+
+<!-- Justified -->
+<ui-nav [align]="'justified'">...</ui-nav>
+```
+
+### Vertical Orientation
+
+```html
+<ui-nav [orientation]="'vertical'">
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+</ui-nav>
+```
+
+### With Disabled Items
+
+```html
+<ui-nav>
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+  <ui-nav-item label="Disabled" [itemId]="'disabled'" [disabled]="true"></ui-nav-item>
+</ui-nav>
+```
+
+### With Active ID
+
+```typescript
+export class MyComponent {
+  activeNavId = signal('about');
+}
+```
+
+```html
+<ui-nav [activeId]="activeNavId()">
+  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
+  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
+  <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
+</ui-nav>
 ```
 
 ## Dropdown

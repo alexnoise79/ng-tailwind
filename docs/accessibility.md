@@ -38,17 +38,17 @@ All components in ng-tailwind UI are built with accessibility (a11y) as a core r
 - ✅ Keyboard navigation (Enter/Space to toggle)
 - ✅ Proper heading hierarchy
 
-### Tabs
+### Nav
 
 - ✅ `role="tablist"` on container
-- ✅ `role="tab"` on tab buttons
-- ✅ `role="tabpanel"` on content panels
+- ✅ `role="tab"` on nav item buttons
 - ✅ `aria-selected` state management
-- ✅ `aria-controls` linking tabs to panels
-- ✅ Arrow key navigation (Left/Right)
+- ✅ `aria-disabled` for disabled items
+- ✅ Arrow key navigation (Left/Right for horizontal, Up/Down for vertical)
 - ✅ Home/End key support
-- ✅ Tab key cycles through tabs only
+- ✅ Tab key cycles through nav items only
 - ✅ Enter/Space to activate
+- ✅ Keyboard navigation respects disabled items
 
 ### Dropdown
 

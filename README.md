@@ -33,7 +33,7 @@ nx storybook ui-components
 - **Button** - Variants, sizes, and loading states
 - **Modal** - Dialog with backdrop and animations
 - **Accordion** - Collapsible content sections
-- **Tabs** - Tabbed interface with keyboard navigation
+- **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Dropdown** - Dropdown menu with positioning
 - **Tooltip** - Contextual information tooltips
 
