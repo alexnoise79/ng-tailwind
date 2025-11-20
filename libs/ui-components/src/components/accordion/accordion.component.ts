@@ -1,10 +1,10 @@
 import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
-import { AccordionItemComponent } from './accordion-item.component';
+
 
 @Component({
   selector: 'ui-accordion',
   standalone: true,
-  imports: [AccordionItemComponent],
+  imports: [],
   templateUrl: './accordion.component.html',
   providers: [AccordionComponent]
 })

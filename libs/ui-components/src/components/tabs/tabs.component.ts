@@ -4,7 +4,7 @@ import { TabComponent } from './tab.component';
 @Component({
   selector: 'ui-tabs',
   standalone: true,
-  imports: [TabComponent],
+  imports: [],
   templateUrl: './tabs.component.html'
 })
 export class TabsComponent implements AfterContentInit {
