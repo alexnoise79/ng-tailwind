@@ -1,16 +1,8 @@
-import {
-  Directive,
-  ElementRef,
-  EventEmitter,
-  Output,
-  HostListener,
-  OnDestroy,
-  inject,
-} from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Output, HostListener, OnDestroy, inject } from '@angular/core';
 
 @Directive({
   selector: '[uiOutsideClick]',
-  standalone: true,
+  standalone: true
 })
 export class OutsideClickDirective implements OnDestroy {
   @Output() uiOutsideClick = new EventEmitter<void>();
@@ -28,4 +20,3 @@ export class OutsideClickDirective implements OnDestroy {
     this.uiOutsideClick.complete();
   }
 }
-

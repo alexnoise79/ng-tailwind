@@ -89,10 +89,7 @@
         "lint": {
           "builder": "@nx/eslint:lint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui-components/**/*.ts",
-              "libs/ui-components/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/ui-components/**/*.ts", "libs/ui-components/**/*.html"]
           }
         },
         "storybook": {
@@ -124,4 +121,3 @@
     }
   }
 }
-

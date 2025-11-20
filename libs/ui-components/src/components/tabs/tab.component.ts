@@ -5,7 +5,7 @@ let tabIdCounter = 0;
 @Component({
   selector: 'ui-tab',
   standalone: true,
-  templateUrl: './tab.component.html',
+  templateUrl: './tab.component.html'
 })
 export class TabComponent {
   @Input() label!: string;
@@ -16,4 +16,3 @@ export class TabComponent {
   buttonId = computed(() => `${this.id}-button`);
   panelId = computed(() => `${this.id}-panel`);
 }
-

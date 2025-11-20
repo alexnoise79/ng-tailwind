@@ -6,7 +6,7 @@ import { AccordionItemComponent } from './accordion-item.component';
   standalone: true,
   imports: [AccordionItemComponent],
   templateUrl: './accordion.component.html',
-  providers: [AccordionComponent],
+  providers: [AccordionComponent]
 })
 export class AccordionComponent {
   @Input() multiOpen = signal(false);
@@ -36,4 +36,3 @@ export class AccordionComponent {
     this.openItems.set(current);
   }
 }
-

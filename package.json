@@ -7,7 +7,9 @@
     "test": "nx test",
     "lint": "nx lint",
     "serve": "nx serve",
-    "storybook": "nx storybook ui-components"
+    "storybook": "nx storybook ui-components",
+    "format": "nx format:write --all",
+    "format:check": "nx format:check --all"
   },
   "private": true,
   "dependencies": {

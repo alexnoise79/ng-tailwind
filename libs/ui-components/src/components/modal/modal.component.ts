@@ -1,16 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnDestroy,
-  inject,
-  ViewChild,
-  ElementRef,
-  signal,
-  effect,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
@@ -18,7 +6,7 @@ import { TrapFocusDirective } from '../../directives';
   selector: 'ui-modal',
   standalone: true,
   imports: [TrapFocusDirective],
-  templateUrl: './modal.component.html',
+  templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() isOpen = signal(false);
@@ -71,4 +59,3 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.close.emit();
   }
 }
-

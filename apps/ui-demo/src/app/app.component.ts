@@ -23,9 +23,8 @@ import { ButtonComponent } from '@ng-tailwind/ui-components';
         <router-outlet />
       </main>
     </div>
-  `,
+  `
 })
 export class AppComponent {
   title = 'ui-demo';
 }
-

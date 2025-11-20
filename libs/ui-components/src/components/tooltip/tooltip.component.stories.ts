@@ -8,18 +8,18 @@ const meta: Meta<TooltipComponent> = {
   argTypes: {
     text: {
       control: 'text',
-      description: 'Tooltip text content',
+      description: 'Tooltip text content'
     },
     position: {
       control: 'select',
       options: ['top', 'bottom', 'left', 'right'],
-      description: 'Tooltip position',
+      description: 'Tooltip position'
     },
     delay: {
       control: 'number',
-      description: 'Delay in milliseconds before showing tooltip',
-    },
-  },
+      description: 'Delay in milliseconds before showing tooltip'
+    }
+  }
 };
 
 export default meta;
@@ -29,9 +29,9 @@ export const Default: Story = {
   args: {
     text: 'This is a tooltip',
     position: 'top',
-    delay: 200,
+    delay: 200
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     template: `
       <div class="p-8">
@@ -41,8 +41,8 @@ export const Default: Story = {
           </button>
         </ui-tooltip>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const Positions: Story = {
@@ -68,7 +68,6 @@ export const Positions: Story = {
           </ui-tooltip>
         </div>
       </div>
-    `,
-  }),
+    `
+  })
 };
-

@@ -9,27 +9,27 @@ const meta: Meta<ButtonComponent> = {
     variant: {
       control: 'select',
       options: ['primary', 'outline', 'ghost'],
-      description: 'Button variant style',
+      description: 'Button variant style'
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Button size',
+      description: 'Button size'
     },
     type: {
       control: 'select',
       options: ['button', 'submit', 'reset'],
-      description: 'Button type attribute',
+      description: 'Button type attribute'
     },
     disabled: {
       control: 'boolean',
-      description: 'Whether the button is disabled',
+      description: 'Whether the button is disabled'
     },
     loading: {
       control: 'boolean',
-      description: 'Whether the button is in loading state',
-    },
-  },
+      description: 'Whether the button is in loading state'
+    }
+  }
 };
 
 export default meta;
@@ -41,34 +41,34 @@ export const Primary: Story = {
     size: 'md',
     type: 'button',
     disabled: false,
-    loading: false,
+    loading: false
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size" [type]="type" [disabled]="disabled" [loading]="loading">Button</ui-button>`,
-  }),
+    template: `<ui-button [variant]="variant" [size]="size" [type]="type" [disabled]="disabled" [loading]="loading">Button</ui-button>`
+  })
 };
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
-    size: 'md',
+    size: 'md'
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size">Outline Button</ui-button>`,
-  }),
+    template: `<ui-button [variant]="variant" [size]="size">Outline Button</ui-button>`
+  })
 };
 
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
-    size: 'md',
+    size: 'md'
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size">Ghost Button</ui-button>`,
-  }),
+    template: `<ui-button [variant]="variant" [size]="size">Ghost Button</ui-button>`
+  })
 };
 
 export const Sizes: Story = {
@@ -79,29 +79,28 @@ export const Sizes: Story = {
         <ui-button variant="primary" size="md">Medium</ui-button>
         <ui-button variant="primary" size="lg">Large</ui-button>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const Loading: Story = {
   args: {
     variant: 'primary',
-    loading: true,
+    loading: true
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [loading]="loading">Loading...</ui-button>`,
-  }),
+    template: `<ui-button [variant]="variant" [loading]="loading">Loading...</ui-button>`
+  })
 };
 
 export const Disabled: Story = {
   args: {
     variant: 'primary',
-    disabled: true,
+    disabled: true
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [disabled]="disabled">Disabled</ui-button>`,
-  }),
+    template: `<ui-button [variant]="variant" [disabled]="disabled">Disabled</ui-button>`
+  })
 };
-

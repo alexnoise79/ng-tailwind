@@ -23,5 +23,16 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
+  "angularCompilerOptions": {
+    "strictTemplates": true,
+    "strictInputAccessModifiers": true,
+    "strictInputTypes": true,
+    "strictNullInputTypes": true,
+    "strictAttributeTypes": true,
+    "strictSafeNavigationTypes": true,
+    "strictDomLocalRefTypes": true,
+    "strictOutputEventTypes": true,
+    "strictContextGenerics": true
+  },
   "exclude": ["node_modules", "tmp"]
 }

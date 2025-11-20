@@ -10,21 +10,21 @@ const meta: Meta<ModalComponent> = {
   argTypes: {
     isOpen: {
       control: 'boolean',
-      description: 'Whether the modal is open',
+      description: 'Whether the modal is open'
     },
     title: {
       control: 'text',
-      description: 'Modal title',
+      description: 'Modal title'
     },
     showFooter: {
       control: 'boolean',
-      description: 'Whether to show footer section',
+      description: 'Whether to show footer section'
     },
     closeOnBackdropClick: {
       control: 'boolean',
-      description: 'Whether to close on backdrop click',
-    },
-  },
+      description: 'Whether to close on backdrop click'
+    }
+  }
 };
 
 export default meta;
@@ -35,9 +35,9 @@ export const Default: Story = {
     isOpen: signal(false),
     title: 'Example Modal',
     showFooter: false,
-    closeOnBackdropClick: true,
+    closeOnBackdropClick: true
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [ButtonComponent],
     template: `
@@ -56,8 +56,8 @@ export const Default: Story = {
           </p>
         </ui-modal>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const WithFooter: Story = {
@@ -65,9 +65,9 @@ export const WithFooter: Story = {
     isOpen: signal(false),
     title: 'Modal with Footer',
     showFooter: true,
-    closeOnBackdropClick: true,
+    closeOnBackdropClick: true
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [ButtonComponent],
     template: `
@@ -88,7 +88,6 @@ export const WithFooter: Story = {
           </div>
         </ui-modal>
       </div>
-    `,
-  }),
+    `
+  })
 };
-

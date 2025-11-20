@@ -10,9 +10,9 @@ const meta: Meta<AccordionComponent> = {
   argTypes: {
     multiOpen: {
       control: 'boolean',
-      description: 'Whether multiple items can be open at once',
-    },
-  },
+      description: 'Whether multiple items can be open at once'
+    }
+  }
 };
 
 export default meta;
@@ -20,9 +20,9 @@ type Story = StoryObj<AccordionComponent>;
 
 export const SingleOpen: Story = {
   args: {
-    multiOpen: signal(false),
+    multiOpen: signal(false)
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [AccordionItemComponent],
     template: `
@@ -43,15 +43,15 @@ export const SingleOpen: Story = {
           </p>
         </ui-accordion-item>
       </ui-accordion>
-    `,
-  }),
+    `
+  })
 };
 
 export const MultiOpen: Story = {
   args: {
-    multiOpen: signal(true),
+    multiOpen: signal(true)
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [AccordionItemComponent],
     template: `
@@ -72,7 +72,6 @@ export const MultiOpen: Story = {
           </p>
         </ui-accordion-item>
       </ui-accordion>
-    `,
-  }),
+    `
+  })
 };
-

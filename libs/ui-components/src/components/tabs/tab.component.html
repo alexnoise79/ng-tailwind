@@ -1,10 +1,3 @@
-<div
-  [id]="panelId()"
-  [attr.aria-labelledby]="buttonId()"
-  [attr.role]="'tabpanel'"
-  [attr.hidden]="!isActive() ? true : null"
-  class="p-4"
->
+<div [id]="panelId()" [attr.aria-labelledby]="buttonId()" [attr.role]="'tabpanel'" [attr.hidden]="!isActive() ? true : null" class="p-4">
   <ng-content />
 </div>
-

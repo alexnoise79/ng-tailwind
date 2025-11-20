@@ -12,9 +12,9 @@ const meta: Meta<DropdownComponent> = {
     align: {
       control: 'select',
       options: ['left', 'right'],
-      description: 'Alignment of dropdown content',
-    },
-  },
+      description: 'Alignment of dropdown content'
+    }
+  }
 };
 
 export default meta;
@@ -23,9 +23,9 @@ type Story = StoryObj<DropdownComponent>;
 export const Default: Story = {
   args: {
     align: 'left',
-    isOpen: signal(false),
+    isOpen: signal(false)
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [DropdownTriggerDirective, DropdownContentDirective],
     template: `
@@ -42,16 +42,16 @@ export const Default: Story = {
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
         </div>
       </ui-dropdown>
-    `,
-  }),
+    `
+  })
 };
 
 export const RightAligned: Story = {
   args: {
     align: 'right',
-    isOpen: signal(false),
+    isOpen: signal(false)
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [DropdownTriggerDirective, DropdownContentDirective],
     template: `
@@ -70,7 +70,6 @@ export const RightAligned: Story = {
           </div>
         </ui-dropdown>
       </div>
-    `,
-  }),
+    `
+  })
 };
-

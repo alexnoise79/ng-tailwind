@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  inject,
-  signal,
-  computed,
-} from '@angular/core';
+import { Component, Input, inject, signal, computed } from '@angular/core';
 import { AccordionComponent } from './accordion.component';
 
 let itemIdCounter = 0;
@@ -12,7 +6,7 @@ let itemIdCounter = 0;
 @Component({
   selector: 'ui-accordion-item',
   standalone: true,
-  templateUrl: './accordion-item.component.html',
+  templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
   @Input() title!: string;
@@ -35,8 +29,7 @@ export class AccordionItemComponent {
     if (this.accordion) {
       this.accordion.toggleItem(this.id);
     } else {
-      this._isOpen.update((val) => !val);
+      this._isOpen.update(val => !val);
     }
   }
 }
-

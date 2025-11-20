@@ -2,7 +2,7 @@ import { Directive, ElementRef, AfterViewInit, Input } from '@angular/core';
 
 @Directive({
   selector: '[uiAutofocus]',
-  standalone: true,
+  standalone: true
 })
 export class AutofocusDirective implements AfterViewInit {
   @Input() uiAutofocus: boolean | string = true;
@@ -17,4 +17,3 @@ export class AutofocusDirective implements AfterViewInit {
     }
   }
 }
-

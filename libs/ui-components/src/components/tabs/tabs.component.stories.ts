@@ -5,7 +5,7 @@ import { TabComponent } from './tab.component';
 const meta: Meta<TabsComponent> = {
   title: 'Components/Tabs',
   component: TabsComponent,
-  tags: ['autodocs'],
+  tags: ['autodocs']
 };
 
 export default meta;
@@ -26,8 +26,8 @@ export const Default: Story = {
           <p class="text-gray-600">Content for Tab 3</p>
         </ui-tab>
       </ui-tabs>
-    `,
-  }),
+    `
+  })
 };
 
 export const WithRichContent: Story = {
@@ -60,7 +60,6 @@ export const WithRichContent: Story = {
           </div>
         </ui-tab>
       </ui-tabs>
-    `,
-  }),
+    `
+  })
 };
-

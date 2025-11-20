@@ -1,13 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "node_modules",
-    "dist",
-    ".nx",
-    "**/*.stories.ts",
-    "**/*.spec.ts",
-    "**/jest.config.ts"
-  ],
+  "ignorePatterns": ["node_modules", "dist", ".nx", "**/*.stories.ts", "**/*.spec.ts", "**/jest.config.ts"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],

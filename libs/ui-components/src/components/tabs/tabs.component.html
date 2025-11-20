@@ -1,9 +1,5 @@
 <div class="tabs-container">
-  <div
-    role="tablist"
-    class="flex border-b border-gray-200"
-    (keydown)="handleKeyDown($event)"
-  >
+  <div role="tablist" class="flex border-b border-gray-200" (keydown)="handleKeyDown($event)">
     @for (tab of tabs(); track tab.id) {
       <button
         type="button"
@@ -28,4 +24,3 @@
     <ng-content />
   </div>
 </div>
-

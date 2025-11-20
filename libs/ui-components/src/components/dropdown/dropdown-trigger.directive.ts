@@ -3,7 +3,7 @@ import { DropdownComponent } from './dropdown.component';
 
 @Directive({
   selector: '[ui-dropdown-trigger]',
-  standalone: true,
+  standalone: true
 })
 export class DropdownTriggerDirective {
   private dropdown = inject(DropdownComponent);
@@ -15,4 +15,3 @@ export class DropdownTriggerDirective {
     this.dropdown.toggle();
   }
 }
-

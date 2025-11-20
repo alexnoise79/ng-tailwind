@@ -1,18 +1,11 @@
-import {
-  Component,
-  ContentChildren,
-  QueryList,
-  AfterContentInit,
-  signal,
-  computed,
-} from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentInit, signal, computed } from '@angular/core';
 import { TabComponent } from './tab.component';
 
 @Component({
   selector: 'ui-tabs',
   standalone: true,
   imports: [TabComponent],
-  templateUrl: './tabs.component.html',
+  templateUrl: './tabs.component.html'
 })
 export class TabsComponent implements AfterContentInit {
   @ContentChildren(TabComponent) tabComponents!: QueryList<TabComponent>;
@@ -29,15 +22,13 @@ export class TabsComponent implements AfterContentInit {
 
   selectTab(id: string): void {
     this.activeTabId.set(id);
-    this.tabs().forEach((tab) => {
+    this.tabs().forEach(tab => {
       tab.isActive.set(tab.id === id);
     });
   }
 
   handleKeyDown(event: KeyboardEvent): void {
-    const currentIndex = this.tabs().findIndex(
-      (tab) => tab.id === this.activeTabId()
-    );
+    const currentIndex = this.tabs().findIndex(tab => tab.id === this.activeTabId());
     let newIndex = currentIndex;
 
     switch (event.key) {
@@ -69,4 +60,3 @@ export class TabsComponent implements AfterContentInit {
     }
   }
 }
-

@@ -3,26 +3,20 @@ import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../libs/ui-components/src/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
-  addons: [
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-interactions'],
   framework: {
     name: '@storybook/angular',
-    options: {},
+    options: {}
   },
   docs: {
-    autodocs: 'tag',
+    autodocs: 'tag'
   },
-  webpackFinal: async (config) => {
+  webpackFinal: async config => {
     // Find the CSS rule and update it to process Tailwind
     const rules = config.module?.rules || [];
-    
+
     // Find existing CSS rule and modify it, or add a new one
-    const cssRuleIndex = rules.findIndex(
-      (rule: any) => rule.test && rule.test.toString().includes('css')
-    );
+    const cssRuleIndex = rules.findIndex((rule: any) => rule.test && rule.test.toString().includes('css'));
 
     const cssRule = {
       test: /\.css$/,
@@ -33,15 +27,12 @@ const config: StorybookConfig = {
           loader: 'postcss-loader',
           options: {
             postcssOptions: {
-              config: path.resolve(__dirname, '../postcss.config.js'),
-            },
-          },
-        },
+              config: path.resolve(__dirname, '../postcss.config.js')
+            }
+          }
+        }
       ],
-      include: [
-        path.resolve(__dirname, '../apps'),
-        path.resolve(__dirname, '../libs'),
-      ],
+      include: [path.resolve(__dirname, '../apps'), path.resolve(__dirname, '../libs')]
     };
 
     if (cssRuleIndex >= 0) {
@@ -53,8 +44,7 @@ const config: StorybookConfig = {
     }
 
     return config;
-  },
+  }
 };
 
 export default config;
-

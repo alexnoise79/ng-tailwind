@@ -10,4 +10,3 @@ export function classMerge(...classes: (string | undefined | null | false)[]): s
     .join(' ')
     .trim();
 }
-

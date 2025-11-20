@@ -1,15 +1,9 @@
-import {
-  Directive,
-  ElementRef,
-  AfterViewInit,
-  OnDestroy,
-  inject,
-} from '@angular/core';
+import { Directive, ElementRef, AfterViewInit, OnDestroy, inject } from '@angular/core';
 import { FocusTrap, FocusTrapFactory } from '@angular/cdk/a11y';
 
 @Directive({
   selector: '[uiTrapFocus]',
-  standalone: true,
+  standalone: true
 })
 export class TrapFocusDirective implements AfterViewInit, OnDestroy {
   private focusTrapFactory = inject(FocusTrapFactory);
@@ -17,9 +11,7 @@ export class TrapFocusDirective implements AfterViewInit, OnDestroy {
   private focusTrap: FocusTrap | null = null;
 
   ngAfterViewInit(): void {
-    this.focusTrap = this.focusTrapFactory.create(
-      this.elementRef.nativeElement
-    );
+    this.focusTrap = this.focusTrapFactory.create(this.elementRef.nativeElement);
     this.focusTrap.focusInitialElement();
   }
 
@@ -29,4 +21,3 @@ export class TrapFocusDirective implements AfterViewInit, OnDestroy {
     }
   }
 }
-
