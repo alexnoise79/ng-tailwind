@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
 import { AccordionItemComponent } from './accordion-item.component';
 
 @Component({
@@ -9,8 +9,19 @@ import { AccordionItemComponent } from './accordion-item.component';
   providers: [AccordionComponent]
 })
 export class AccordionComponent {
-  @Input() multiOpen = signal(false);
+  @Input() set multiOpen(value: boolean | WritableSignal<boolean>) {
+    if (typeof value === 'boolean') {
+      this._multiOpen.set(value);
+    } else {
+      this._multiOpen = value;
+    }
+  }
+  private _multiOpen: WritableSignal<boolean> = signal(false);
   private openItems = signal<Set<string>>(new Set());
+
+  get multiOpen(): Signal<boolean> {
+    return this._multiOpen;
+  }
 
   isItemOpen(id: string): boolean {
     return this.openItems().has(id);

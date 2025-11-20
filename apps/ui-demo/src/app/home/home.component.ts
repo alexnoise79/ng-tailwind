@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { AccordionComponent, AccordionItemComponent, ButtonComponent, DropdownComponent, DropdownTriggerDirective, DropdownContentDirective, ModalComponent, TabsComponent, TabComponent, TooltipComponent } from '@ng-tailwind/ui-components';
+import { AccordionComponent, AccordionItemComponent, ButtonComponent, CollapseComponent, DropdownComponent, DropdownTriggerDirective, DropdownContentDirective, ModalComponent, TabsComponent, TabComponent, TooltipComponent } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ButtonComponent, ModalComponent, AccordionComponent, AccordionItemComponent, TabsComponent, TabComponent, DropdownComponent, DropdownTriggerDirective, DropdownContentDirective, TooltipComponent],
+  imports: [ButtonComponent, ModalComponent, AccordionComponent, AccordionItemComponent, TabsComponent, TabComponent, DropdownComponent, DropdownTriggerDirective, DropdownContentDirective, TooltipComponent, CollapseComponent],
   template: `
     <div class="space-y-12">
       <section>
@@ -92,9 +92,45 @@ import { AccordionComponent, AccordionItemComponent, ButtonComponent, DropdownCo
           </ui-tooltip>
         </div>
       </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Collapse</h2>
+        <div class="space-y-4">
+          <div>
+            <ui-button variant="primary" (click)="collapseOpen.set(!collapseOpen())">
+              {{ collapseOpen() ? 'Hide' : 'Show' }} Content
+            </ui-button>
+            <ui-collapse [isOpen]="collapseOpen()" [horizontal]="false">
+              <div class="bg-gray-50 border border-gray-200 rounded-md p-4 mt-2">
+                <p class="text-gray-700">
+                  This is collapsible content with smooth animations. Similar to ng-bootstrap's collapse component.
+                </p>
+                <p class="text-gray-600 mt-2">
+                  The content smoothly expands and collapses vertically.
+                </p>
+              </div>
+            </ui-collapse>
+          </div>
+          <div>
+            <ui-button variant="outline" (click)="horizontalCollapseOpen.set(!horizontalCollapseOpen())">
+              {{ horizontalCollapseOpen() ? 'Hide' : 'Show' }} Horizontal
+            </ui-button>
+            <div class="flex items-center gap-2 mt-2">
+              <ui-collapse [isOpen]="horizontalCollapseOpen()" [horizontal]="true">
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-4 whitespace-nowrap">
+                  <p class="text-gray-700">Horizontal collapse content</p>
+                </div>
+              </ui-collapse>
+              <span class="text-gray-500">After collapse</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   `
 })
 export class HomeComponent {
   showModal = signal(false);
+  collapseOpen = signal(false);
+  horizontalCollapseOpen = signal(false);
 }

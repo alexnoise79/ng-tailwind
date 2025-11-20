@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
@@ -9,7 +9,15 @@ import { TrapFocusDirective } from '../../directives';
   templateUrl: './modal.component.html'
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  @Input() isOpen = signal(false);
+  @Input() set isOpen(value: boolean | WritableSignal<boolean>) {
+    if (typeof value === 'boolean') {
+      this._isOpen.set(value);
+    } else {
+      this._isOpen = value;
+    }
+  }
+  private _isOpen: WritableSignal<boolean> = signal(false);
+  
   @Input() title?: string;
   @Input() showFooter = false;
   @Input() closeOnBackdropClick = true;
@@ -20,6 +28,10 @@ export class ModalComponent implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
   protected isVisible = signal(false);
   private escapeListener?: (event: KeyboardEvent) => void;
+
+  get isOpen(): Signal<boolean> {
+    return this._isOpen;
+  }
 
   ngOnInit(): void {
     this.escapeListener = (event: KeyboardEvent) => {

@@ -5,6 +5,7 @@ export * from './components/accordion';
 export * from './components/tabs';
 export * from './components/dropdown';
 export * from './components/tooltip';
+export * from './components/collapse';
 
 // Directives
 export * from './directives';
