@@ -1,0 +1,92 @@
+<div class="inline-block bg-white rounded-lg shadow-lg border border-gray-200 p-4" role="application" aria-label="Date picker">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="previousYear()"
+        [disabled]="disabled()"
+        class="p-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Previous year"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        (click)="previousMonth()"
+        [disabled]="disabled()"
+        class="p-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Previous month"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+    </div>
+    
+    <div class="flex items-center gap-2">
+      <span class="text-lg font-semibold text-gray-900" aria-live="polite">
+        {{ monthNames[currentMonth() - 1] }} {{ currentYear() }}
+      </span>
+    </div>
+    
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="nextMonth()"
+        [disabled]="disabled()"
+        class="p-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Next month"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        (click)="nextYear()"
+        [disabled]="disabled()"
+        class="p-1 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Next year"
+      >
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Day names header -->
+  <div class="grid grid-cols-7 gap-1 mb-2">
+    @for (dayName of dayNames; track dayName) {
+      <div class="w-10 h-10 flex items-center justify-center text-xs font-semibold text-gray-500">
+        {{ dayName }}
+      </div>
+    }
+  </div>
+
+  <!-- Calendar grid -->
+  <div class="grid grid-cols-7 gap-1" role="grid" aria-label="Calendar">
+    @for (date of calendarDays(); track date ? `${date.year}-${date.month}-${date.day}` : $index) {
+      @if (date) {
+        <button
+          type="button"
+          [class]="getDateClasses(date)"
+          [disabled]="isDisabled(date)"
+          (click)="selectDate(date)"
+          [attr.aria-label]="'Select ' + monthNames[date.month - 1] + ' ' + date.day + ', ' + date.year"
+          [attr.aria-selected]="isSelected(date)"
+          [attr.aria-disabled]="isDisabled(date)"
+          role="gridcell"
+        >
+          {{ date.day }}
+        </button>
+      } @else {
+        <div class="w-10 h-10"></div>
+      }
+    }
+  </div>
+</div>
+

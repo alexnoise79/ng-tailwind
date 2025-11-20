@@ -6,6 +6,7 @@ export * from './components/tabs';
 export * from './components/dropdown';
 export * from './components/tooltip';
 export * from './components/collapse';
+export * from './components/datepicker';
 
 // Directives
 export * from './directives';

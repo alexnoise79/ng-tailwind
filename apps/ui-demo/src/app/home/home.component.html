@@ -118,5 +118,20 @@
       </div>
     </div>
   </section>
+
+  <section>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Datepicker</h2>
+    <div class="space-y-4">
+      <ui-datepicker
+        [model]="selectedDate()"
+        (dateSelect)="selectedDate.set($event)"
+      ></ui-datepicker>
+      @if (selectedDate()) {
+        <p class="text-sm text-gray-600">
+          Selected date: {{ selectedDate()!.year }}-{{ selectedDate()!.month }}-{{ selectedDate()!.day }}
+        </p>
+      }
+    </div>
+  </section>
 </div>
 

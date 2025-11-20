@@ -236,3 +236,89 @@ import { TrapFocusDirective } from '@ng-tailwind/ui-components';
 </div>
 ```
 
+## Datepicker
+
+### Basic Usage
+
+```typescript
+import { DatepickerComponent, NgbDateStruct } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  selectedDate = signal<NgbDateStruct | null>(null);
+}
+```
+
+```html
+<ui-datepicker
+  [model]="selectedDate()"
+  (dateSelect)="selectedDate.set($event)"
+></ui-datepicker>
+
+@if (selectedDate()) {
+  <p>Selected: {{ selectedDate()!.year }}-{{ selectedDate()!.month }}-{{ selectedDate()!.day }}</p>
+}
+```
+
+### With Min/Max Dates
+
+```typescript
+export class MyComponent {
+  selectedDate = signal<NgbDateStruct | null>(null);
+  minDate: NgbDateStruct = { year: 2024, month: 1, day: 1 };
+  maxDate: NgbDateStruct = { year: 2024, month: 12, day: 31 };
+}
+```
+
+```html
+<ui-datepicker
+  [model]="selectedDate()"
+  [minDate]="minDate"
+  [maxDate]="maxDate"
+  (dateSelect)="selectedDate.set($event)"
+></ui-datepicker>
+```
+
+### With Initial Date
+
+```typescript
+export class MyComponent {
+  selectedDate = signal<NgbDateStruct>({ year: 2024, month: 3, day: 15 });
+}
+```
+
+```html
+<ui-datepicker
+  [model]="selectedDate()"
+  (dateSelect)="selectedDate.set($event)"
+></ui-datepicker>
+```
+
+### Disabled State
+
+```html
+<ui-datepicker
+  [model]="selectedDate()"
+  [disabled]="true"
+  (dateSelect)="selectedDate.set($event)"
+></ui-datepicker>
+```
+
+### Navigation Event
+
+```typescript
+export class MyComponent {
+  onNavigate(event: { current: { year: number; month: number } }) {
+    console.log('Navigated to:', event.current);
+  }
+}
+```
+
+```html
+<ui-datepicker
+  [model]="selectedDate()"
+  (dateSelect)="selectedDate.set($event)"
+  (navigate)="onNavigate($event)"
+></ui-datepicker>
+```
+
