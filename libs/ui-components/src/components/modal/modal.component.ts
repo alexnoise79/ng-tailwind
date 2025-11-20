@@ -63,7 +63,7 @@ import { classMerge } from '../../utils';
                 <button
                   type="button"
                   class="text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md p-1"
-                  (click)="close()"
+                  (click)="handleClose()"
                   aria-label="Close modal"
                 >
                   <svg
@@ -110,13 +110,13 @@ export class ModalComponent implements OnInit, OnDestroy {
   @ViewChild('modalContent') modalContent!: ElementRef<HTMLElement>;
 
   private document = inject(DOCUMENT);
-  private isVisible = signal(false);
+  protected isVisible = signal(false);
   private escapeListener?: (event: KeyboardEvent) => void;
 
   ngOnInit(): void {
     this.escapeListener = (event: KeyboardEvent) => {
       if (this.isOpen() && event.key === 'Escape') {
-        this.close.emit();
+        this.handleClose();
       }
     };
     this.document.addEventListener('keydown', this.escapeListener as EventListener);
@@ -143,8 +143,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   onBackdropClick(): void {
     if (this.closeOnBackdropClick) {
-      this.close.emit();
+      this.handleClose();
     }
+  }
+
+  handleClose(): void {
+    this.close.emit();
   }
 }
 
