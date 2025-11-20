@@ -48,7 +48,7 @@ export const Default: Story = {
           [title]="title"
           [showFooter]="showFooter"
           [closeOnBackdropClick]="closeOnBackdropClick"
-          (close)="isOpen.set(false)"
+          (closed)="isOpen.set(false)"
         >
           <p class="text-gray-600 mb-4">
             This is a modal dialog built with Angular CDK Overlay.
@@ -77,7 +77,7 @@ export const WithFooter: Story = {
           [isOpen]="isOpen"
           [title]="title"
           [showFooter]="showFooter"
-          (close)="isOpen.set(false)"
+          (closed)="isOpen.set(false)"
         >
           <p class="text-gray-600 mb-4">
             This modal has a footer section with action buttons.

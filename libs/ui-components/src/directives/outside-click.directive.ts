@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostListener, OnDestroy, inject, output } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject, output } from '@angular/core';
 
 @Directive({
   selector: '[uiOutsideClick]'
 })
-export class OutsideClickDirective implements OnDestroy {
+export class OutsideClickDirective {
   readonly uiOutsideClick = output<void>();
 
   private elementRef = inject(ElementRef);
@@ -14,8 +14,5 @@ export class OutsideClickDirective implements OnDestroy {
       // TODO: The 'emit' function requires a mandatory void argument
       this.uiOutsideClick.emit();
     }
-  }
-
-  ngOnDestroy(): void {
   }
 }

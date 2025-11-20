@@ -20,7 +20,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   readonly title = input<string>();
   readonly showFooter = input(false);
   readonly closeOnBackdropClick = input(true);
-  readonly close = output<void>();
+  readonly closed = output<void>();
 
   @ViewChild('modalContent') modalContent!: ElementRef<HTMLElement>;
 
@@ -68,6 +68,6 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   handleClose(): void {
     // TODO: The 'emit' function requires a mandatory void argument
-    this.close.emit();
+    this.closed.emit();
   }
 }
