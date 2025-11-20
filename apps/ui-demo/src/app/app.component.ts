@@ -1,29 +1,59 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ButtonComponent } from '@ng-tailwind/ui-components';
+import { Component, signal, OnInit, OnDestroy, AfterViewInit, ViewChild, effect } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { filter, Subscription } from 'rxjs';
+import { ButtonComponent, NavComponent, NavItemComponent } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonComponent],
-  template: `
-    <div class="min-h-screen bg-gray-50">
-      <nav class="bg-white shadow-sm border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16 items-center">
-            <h1 class="text-xl font-semibold text-gray-900">ng-tailwind UI Demo</h1>
-            <div class="flex gap-2">
-              <ui-button variant="outline" size="sm">Documentation</ui-button>
-              <ui-button variant="primary" size="sm">Get Started</ui-button>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <router-outlet />
-      </main>
-    </div>
-  `
+  imports: [RouterOutlet, ButtonComponent, NavComponent, NavItemComponent],
+  templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'ui-demo';
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+  activeRouteId = signal<string>('home');
+  private routerSubscription?: Subscription;
+
+  @ViewChild(NavComponent) navComponent?: NavComponent;
+
+  constructor(private router: Router) {
+    // Watch for activeRouteId changes and update nav selection
+    effect(() => {
+      const routeId = this.activeRouteId();
+      // Use setTimeout to ensure ViewChild is available
+      setTimeout(() => {
+        if (this.navComponent) {
+          this.navComponent.selectItem(routeId);
+        }
+      });
+    });
+  }
+
+  ngOnInit(): void {
+    // Set initial route
+    const currentRoute = this.router.url.replace('/', '') || 'home';
+    this.activeRouteId.set(currentRoute);
+
+    // Update active route based on current URL
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const route = event.urlAfterRedirects.replace('/', '') || 'home';
+        this.activeRouteId.set(route);
+      });
+  }
+
+  ngAfterViewInit(): void {
+    // Set initial selection after view is initialized
+    const currentRoute = this.router.url.replace('/', '') || 'home';
+    if (this.navComponent) {
+      this.navComponent.selectItem(currentRoute);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
+  }
+
+  navigateTo(path: string): void {
+    this.router.navigate([path]);
+  }
 }

@@ -1,0 +1,37 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Accordion</h2>
+    <p class="text-gray-600 mb-4">Collapsible content sections with smooth animations.</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Single Open (Default)</h3>
+    <ui-accordion [multiOpen]="false">
+      <ui-accordion-item title="First Item">
+        <p class="text-gray-600">This is the content of the first accordion item.</p>
+      </ui-accordion-item>
+      <ui-accordion-item title="Second Item">
+        <p class="text-gray-600">This is the content of the second accordion item.</p>
+      </ui-accordion-item>
+      <ui-accordion-item title="Third Item">
+        <p class="text-gray-600">This is the content of the third accordion item.</p>
+      </ui-accordion-item>
+    </ui-accordion>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Multiple Open</h3>
+    <ui-accordion [multiOpen]="true">
+      <ui-accordion-item title="First Item">
+        <p class="text-gray-600">This is the content of the first accordion item.</p>
+      </ui-accordion-item>
+      <ui-accordion-item title="Second Item">
+        <p class="text-gray-600">This is the content of the second accordion item.</p>
+      </ui-accordion-item>
+      <ui-accordion-item title="Third Item">
+        <p class="text-gray-600">This is the content of the third accordion item.</p>
+      </ui-accordion-item>
+    </ui-accordion>
+  </section>
+</div>
+

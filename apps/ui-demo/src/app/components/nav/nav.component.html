@@ -1,0 +1,73 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Nav</h2>
+    <p class="text-gray-600 mb-4">Navigation component with multiple styles and orientations.</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Default (Tabs style)</h3>
+    <ui-nav>
+      <ui-nav-item label="Home" [itemId]="'nav-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-about'"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Pills style</h3>
+    <ui-nav [style]="'pills'">
+      <ui-nav-item label="Home" [itemId]="'nav-pills-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-pills-about'"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-pills-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Underline style</h3>
+    <ui-nav [style]="'underline'">
+      <ui-nav-item label="Home" [itemId]="'nav-underline-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-underline-about'"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-underline-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Center aligned</h3>
+    <ui-nav [align]="'center'">
+      <ui-nav-item label="Home" [itemId]="'nav-center-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-center-about'"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-center-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Justified</h3>
+    <ui-nav [align]="'justified'">
+      <ui-nav-item label="Home" [itemId]="'nav-justified-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-justified-about'"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-justified-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">With disabled item</h3>
+    <ui-nav>
+      <ui-nav-item label="Home" [itemId]="'nav-disabled-home'"></ui-nav-item>
+      <ui-nav-item label="About" [itemId]="'nav-disabled-about'"></ui-nav-item>
+      <ui-nav-item label="Disabled" [itemId]="'nav-disabled-disabled'" [disabled]="true"></ui-nav-item>
+      <ui-nav-item label="Contact" [itemId]="'nav-disabled-contact'"></ui-nav-item>
+    </ui-nav>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vertical orientation</h3>
+    <div class="max-w-xs">
+      <ui-nav [orientation]="'vertical'">
+        <ui-nav-item label="Home" [itemId]="'nav-vertical-home'"></ui-nav-item>
+        <ui-nav-item label="About" [itemId]="'nav-vertical-about'"></ui-nav-item>
+        <ui-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ui-nav-item>
+      </ui-nav>
+    </div>
+  </section>
+</div>
+

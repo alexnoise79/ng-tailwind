@@ -1,0 +1,22 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Datepicker</h2>
+    <p class="text-gray-600 mb-4">Date selection component with calendar interface.</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Datepicker</h3>
+    <div class="space-y-4">
+      <ui-datepicker
+        [model]="selectedDate()"
+        (dateSelect)="selectedDate.set($event)"
+      ></ui-datepicker>
+      @if (selectedDate()) {
+        <p class="text-sm text-gray-600">
+          Selected date: {{ selectedDate()!.year }}-{{ selectedDate()!.month }}-{{ selectedDate()!.day }}
+        </p>
+      }
+    </div>
+  </section>
+</div>
+
