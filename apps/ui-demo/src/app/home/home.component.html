@@ -62,6 +62,71 @@
   </section>
 
   <section>
+    <h2 class="text-2xl font-semibold text-gray-900 mb-4">Nav</h2>
+    <div class="space-y-8">
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Default (Tabs style)</h3>
+        <ui-nav>
+          <ui-nav-item label="Home" [itemId]="'nav-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-about'"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Pills style</h3>
+        <ui-nav [style]="'pills'">
+          <ui-nav-item label="Home" [itemId]="'nav-pills-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-pills-about'"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-pills-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Underline style</h3>
+        <ui-nav [style]="'underline'">
+          <ui-nav-item label="Home" [itemId]="'nav-underline-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-underline-about'"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-underline-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Center aligned</h3>
+        <ui-nav [align]="'center'">
+          <ui-nav-item label="Home" [itemId]="'nav-center-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-center-about'"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-center-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Justified</h3>
+        <ui-nav [align]="'justified'">
+          <ui-nav-item label="Home" [itemId]="'nav-justified-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-justified-about'"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-justified-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">With disabled item</h3>
+        <ui-nav>
+          <ui-nav-item label="Home" [itemId]="'nav-disabled-home'"></ui-nav-item>
+          <ui-nav-item label="About" [itemId]="'nav-disabled-about'"></ui-nav-item>
+          <ui-nav-item label="Disabled" [itemId]="'nav-disabled-disabled'" [disabled]="true"></ui-nav-item>
+          <ui-nav-item label="Contact" [itemId]="'nav-disabled-contact'"></ui-nav-item>
+        </ui-nav>
+      </div>
+      <div>
+        <h3 class="text-lg font-medium text-gray-800 mb-3">Vertical orientation</h3>
+        <div class="max-w-xs">
+          <ui-nav [orientation]="'vertical'">
+            <ui-nav-item label="Home" [itemId]="'nav-vertical-home'"></ui-nav-item>
+            <ui-nav-item label="About" [itemId]="'nav-vertical-about'"></ui-nav-item>
+            <ui-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ui-nav-item>
+          </ui-nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2 class="text-2xl font-semibold text-gray-900 mb-4">Dropdown</h2>
     <ui-dropdown [align]="'left'">
       <button ui-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Open Dropdown</button>

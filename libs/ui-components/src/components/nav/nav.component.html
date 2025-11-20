@@ -1,0 +1,31 @@
+<div class="nav-container">
+  <ul 
+    (keydown)="handleKeyDown($event)" 
+    role="tablist" 
+    [class]="navClasses()"
+  >
+    @for (item of items(); track item.id) {
+      <li [class]="getNavItemClasses(item)">
+        <button
+          [id]="item.buttonId()"
+          [attr.aria-selected]="selectedId() === item.id"
+          [attr.aria-disabled]="item.disabled() ? 'true' : null"
+          [attr.tabindex]="selectedId() === item.id && !item.disabled() ? 0 : -1"
+          [disabled]="item.disabled()"
+          (click)="selectItem(item.id)"
+          type="button"
+          role="tab"
+          [class]="getNavButtonClasses(item)"
+        >
+          @if (item.label()) {
+            {{ item.label() }}
+          }
+        </button>
+      </li>
+    }
+  </ul>
+  <div class="nav-content">
+    <ng-content />
+  </div>
+</div>
+
