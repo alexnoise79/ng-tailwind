@@ -2,7 +2,7 @@ import { Component, Input, signal, computed, input, output, OnInit } from '@angu
 import { CommonModule } from '@angular/common';
 import { classMerge } from '../../utils';
 
-export interface NgbDateStruct {
+export interface NgtDateStruct {
   year: number;
   month: number;
   day: number;
@@ -14,7 +14,7 @@ export interface NgbDateStruct {
   templateUrl: './datepicker.component.html'
 })
 export class DatepickerComponent implements OnInit {
-  @Input() set model(value: NgbDateStruct | null | undefined) {
+  @Input() set model(value: NgtDateStruct | null | undefined) {
     if (value) {
       this._model.set(value);
       this._currentMonth.set(value.month);
@@ -23,15 +23,15 @@ export class DatepickerComponent implements OnInit {
       this._model.set(null);
     }
   }
-  private _model = signal<NgbDateStruct | null>(null);
+  private _model = signal<NgtDateStruct | null>(null);
   
   readonly disabled = input(false);
-  readonly minDate = input<NgbDateStruct | null>(null);
-  readonly maxDate = input<NgbDateStruct | null>(null);
-  readonly startDate = input<NgbDateStruct | null>(null);
-  readonly markDisabled = input<((date: NgbDateStruct) => boolean) | undefined>(undefined);
+  readonly minDate = input<NgtDateStruct | null>(null);
+  readonly maxDate = input<NgtDateStruct | null>(null);
+  readonly startDate = input<NgtDateStruct | null>(null);
+  readonly markDisabled = input<((date: NgtDateStruct) => boolean) | undefined>(undefined);
   
-  readonly dateSelect = output<NgbDateStruct>();
+  readonly dateSelect = output<NgtDateStruct>();
   readonly navigate = output<{ current: { year: number; month: number }; prev: { year: number; month: number } }>();
 
   private _currentMonth = signal(new Date().getMonth() + 1);
@@ -69,7 +69,7 @@ export class DatepickerComponent implements OnInit {
     const year = this.currentYear();
     const daysInMonth = this.getDaysInMonth(month, year);
     const firstDay = this.getFirstDayOfMonth(month, year);
-    const days: (NgbDateStruct | null)[] = [];
+    const days: (NgtDateStruct | null)[] = [];
 
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
@@ -84,13 +84,13 @@ export class DatepickerComponent implements OnInit {
     return days;
   });
 
-  isSelected(date: NgbDateStruct | null): boolean {
+  isSelected(date: NgtDateStruct | null): boolean {
     if (!date || !this.modelValue()) return false;
     const model = this.modelValue()!;
     return date.year === model.year && date.month === model.month && date.day === model.day;
   }
 
-  isToday(date: NgbDateStruct | null): boolean {
+  isToday(date: NgtDateStruct | null): boolean {
     if (!date) return false;
     const today = new Date();
     return date.year === today.getFullYear() && 
@@ -98,7 +98,7 @@ export class DatepickerComponent implements OnInit {
            date.day === today.getDate();
   }
 
-  isDisabled(date: NgbDateStruct | null): boolean {
+  isDisabled(date: NgtDateStruct | null): boolean {
     if (!date || this.disabled()) return true;
     
     // Check minDate
@@ -127,7 +127,7 @@ export class DatepickerComponent implements OnInit {
     return false;
   }
 
-  selectDate(date: NgbDateStruct): void {
+  selectDate(date: NgtDateStruct): void {
     if (this.isDisabled(date)) return;
     
     this._model.set(date);
@@ -190,7 +190,7 @@ export class DatepickerComponent implements OnInit {
     });
   }
 
-  getDateClasses(date: NgbDateStruct | null): string {
+  getDateClasses(date: NgtDateStruct | null): string {
     if (!date) return '';
     
     const base = 'w-10 h-10 flex items-center justify-center text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1';

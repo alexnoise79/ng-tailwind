@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { DatepickerComponent, NgbDateStruct } from './datepicker.component';
+import { DatepickerComponent, NgtDateStruct } from './datepicker.component';
 import { signal } from '@angular/core';
 
 const meta: Meta<DatepickerComponent> = {
@@ -39,12 +39,12 @@ export const Default: Story = {
     disabled: false
   },
   render: args => {
-    const model = signal<NgbDateStruct | null>(args.model || null);
+    const model = signal<NgtDateStruct | null>(args.model || null);
     return {
       props: {
         ...args,
         model: model,
-        onDateSelect: (date: NgbDateStruct) => {
+        onDateSelect: (date: NgtDateStruct) => {
           model.set(date);
           console.log('Date selected:', date);
         },
@@ -80,12 +80,12 @@ export const WithInitialDate: Story = {
     disabled: false
   },
   render: args => {
-    const model = signal<NgbDateStruct | null>(args.model || null);
+    const model = signal<NgtDateStruct | null>(args.model || null);
     return {
       props: {
         ...args,
         model: model,
-        onDateSelect: (date: NgbDateStruct) => {
+        onDateSelect: (date: NgtDateStruct) => {
           model.set(date);
         }
       },
@@ -115,12 +115,12 @@ export const WithMinMaxDates: Story = {
     maxDate: { year: 2024, month: 12, day: 31 }
   },
   render: args => {
-    const model = signal<NgbDateStruct | null>(args.model || null);
+    const model = signal<NgtDateStruct | null>(args.model || null);
     return {
       props: {
         ...args,
         model: model,
-        onDateSelect: (date: NgbDateStruct) => {
+        onDateSelect: (date: NgtDateStruct) => {
           model.set(date);
         }
       },
@@ -150,12 +150,12 @@ export const Disabled: Story = {
     disabled: true
   },
   render: args => {
-    const model = signal<NgbDateStruct | null>(args.model || null);
+    const model = signal<NgtDateStruct | null>(args.model || null);
     return {
       props: {
         ...args,
         model: model,
-        onDateSelect: (date: NgbDateStruct) => {
+        onDateSelect: (date: NgtDateStruct) => {
           model.set(date);
         }
       },
@@ -179,12 +179,12 @@ export const WithCustomStartDate: Story = {
     startDate: { year: 2025, month: 6, day: 1 }
   },
   render: args => {
-    const model = signal<NgbDateStruct | null>(args.model || null);
+    const model = signal<NgtDateStruct | null>(args.model || null);
     return {
       props: {
         ...args,
         model: model,
-        onDateSelect: (date: NgbDateStruct) => {
+        onDateSelect: (date: NgtDateStruct) => {
           model.set(date);
         }
       },

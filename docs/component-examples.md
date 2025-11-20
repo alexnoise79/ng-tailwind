@@ -241,11 +241,11 @@ import { TrapFocusDirective } from '@ng-tailwind/ui-components';
 ### Basic Usage
 
 ```typescript
-import { DatepickerComponent, NgbDateStruct } from '@ng-tailwind/ui-components';
+import { DatepickerComponent, NgtDateStruct } from '@ng-tailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
-  selectedDate = signal<NgbDateStruct | null>(null);
+  selectedDate = signal<NgtDateStruct | null>(null);
 }
 ```
 
@@ -264,9 +264,9 @@ export class MyComponent {
 
 ```typescript
 export class MyComponent {
-  selectedDate = signal<NgbDateStruct | null>(null);
-  minDate: NgbDateStruct = { year: 2024, month: 1, day: 1 };
-  maxDate: NgbDateStruct = { year: 2024, month: 12, day: 31 };
+  selectedDate = signal<NgtDateStruct | null>(null);
+  minDate: NgtDateStruct = { year: 2024, month: 1, day: 1 };
+  maxDate: NgtDateStruct = { year: 2024, month: 12, day: 31 };
 }
 ```
 
@@ -283,7 +283,7 @@ export class MyComponent {
 
 ```typescript
 export class MyComponent {
-  selectedDate = signal<NgbDateStruct>({ year: 2024, month: 3, day: 15 });
+  selectedDate = signal<NgtDateStruct>({ year: 2024, month: 3, day: 15 });
 }
 ```
 
