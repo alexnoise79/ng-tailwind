@@ -45,6 +45,9 @@ export const Primary: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `<ngt-button [variant]="variant" [size]="size" [type]="type" [disabled]="disabled" [loading]="loading">Button</ngt-button>`
   })
 };
@@ -56,6 +59,9 @@ export const Outline: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `<ngt-button [variant]="variant" [size]="size">Outline Button</ngt-button>`
   })
 };
@@ -67,12 +73,18 @@ export const Ghost: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `<ngt-button [variant]="variant" [size]="size">Ghost Button</ngt-button>`
   })
 };
 
 export const Sizes: Story = {
   render: () => ({
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `
       <div class="flex gap-4 items-center">
         <ngt-button variant="primary" size="sm">Small</ngt-button>
@@ -90,6 +102,9 @@ export const Loading: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `<ngt-button [variant]="variant" [loading]="loading">Loading...</ngt-button>`
   })
 };
@@ -101,6 +116,9 @@ export const Disabled: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtButton]
+    },
     template: `<ngt-button [variant]="variant" [disabled]="disabled">Disabled</ngt-button>`
   })
 };
