@@ -99,7 +99,7 @@
 
 /* Theme Overrides - Using CSS variables that override @theme values */
 
-/* Cyberpunk Theme - Neon purple and pink */
+/* Cyberpunk Theme - Neon purple and pink, sharp edges, vibrant shadows */
 [data-theme="cyberpunk"] {
   --color-primary-50: #fdf4ff;
   --color-primary-100: #fae8ff;
@@ -112,9 +112,24 @@
   --color-primary-800: #86198f;
   --color-primary-900: #701a75;
   --color-primary-950: #4a044e;
+  
+  /* Sharp, angular design */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 1rem;
+  
+  /* Vibrant, glowing shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(217 70 239 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(217 70 239 / 0.4), 0 2px 4px -2px rgb(217 70 239 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(217 70 239 / 0.4), 0 4px 6px -4px rgb(217 70 239 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(217 70 239 / 0.4), 0 8px 10px -6px rgb(217 70 239 / 0.3);
+  --shadow-2xl: 0 25px 50px -12px rgb(217 70 239 / 0.5);
 }
 
-/* Minimalist Theme - Clean black and white */
+/* Minimalist Theme - Clean black and white, subtle shadows, rounded */
 [data-theme="minimalist"] {
   --color-primary-50: #fafafa;
   --color-primary-100: #f5f5f5;
@@ -127,9 +142,24 @@
   --color-primary-800: #262626;
   --color-primary-900: #171717;
   --color-primary-950: #0a0a0a;
+  
+  /* Very subtle, minimal shadows */
+  --shadow-sm: 0 1px 1px 0 rgb(0 0 0 / 0.02);
+  --shadow-md: 0 2px 4px 0 rgb(0 0 0 / 0.03);
+  --shadow-lg: 0 4px 8px 0 rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 8px 16px 0 rgb(0 0 0 / 0.05);
+  --shadow-2xl: 0 12px 24px 0 rgb(0 0 0 / 0.06);
+  
+  /* Generous border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
 }
 
-/* Nature Theme - Green and earth tones */
+/* Nature Theme - Green and earth tones, organic curves, soft shadows */
 [data-theme="nature"] {
   --color-primary-50: #f0fdf4;
   --color-primary-100: #dcfce7;
@@ -142,9 +172,24 @@
   --color-primary-800: #166534;
   --color-primary-900: #14532d;
   --color-primary-950: #052e16;
+  
+  /* Organic, rounded shapes */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  
+  /* Soft, natural shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(34 197 94 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(34 197 94 / 0.1), 0 2px 4px -2px rgb(34 197 94 / 0.08);
+  --shadow-lg: 0 10px 15px -3px rgb(34 197 94 / 0.12), 0 4px 6px -4px rgb(34 197 94 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(34 197 94 / 0.12), 0 8px 10px -6px rgb(34 197 94 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(34 197 94 / 0.15);
 }
 
-/* Tech Theme - Blue and cyan */
+/* Tech Theme - Blue and cyan, modern crisp edges, tech shadows */
 [data-theme="tech"] {
   --color-primary-50: #ecfeff;
   --color-primary-100: #cffafe;
@@ -157,9 +202,24 @@
   --color-primary-800: #155e75;
   --color-primary-900: #164e63;
   --color-primary-950: #083344;
+  
+  /* Modern, crisp corners */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  
+  /* Tech-inspired shadows with blue tint */
+  --shadow-sm: 0 1px 2px 0 rgb(6 182 212 / 0.15);
+  --shadow-md: 0 4px 6px -1px rgb(6 182 212 / 0.2), 0 2px 4px -2px rgb(6 182 212 / 0.15);
+  --shadow-lg: 0 10px 15px -3px rgb(6 182 212 / 0.2), 0 4px 6px -4px rgb(6 182 212 / 0.15);
+  --shadow-xl: 0 20px 25px -5px rgb(6 182 212 / 0.25), 0 8px 10px -6px rgb(6 182 212 / 0.2);
+  --shadow-2xl: 0 25px 50px -12px rgb(6 182 212 / 0.3);
 }
 
-/* Elegant Theme - Purple and gold accents */
+/* Elegant Theme - Gold/amber, refined curves, sophisticated shadows */
 [data-theme="elegant"] {
   --color-primary-50: #fffbeb;
   --color-primary-100: #fef3c7;
@@ -172,6 +232,21 @@
   --color-primary-800: #92400e;
   --color-primary-900: #78350f;
   --color-primary-950: #451a03;
+  
+  /* Refined, elegant curves */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+  
+  /* Sophisticated, warm shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(245 158 11 / 0.15);
+  --shadow-md: 0 4px 6px -1px rgb(245 158 11 / 0.2), 0 2px 4px -2px rgb(245 158 11 / 0.15);
+  --shadow-lg: 0 10px 15px -3px rgb(245 158 11 / 0.2), 0 4px 6px -4px rgb(245 158 11 / 0.15);
+  --shadow-xl: 0 20px 25px -5px rgb(245 158 11 / 0.25), 0 8px 10px -6px rgb(245 158 11 / 0.2);
+  --shadow-2xl: 0 25px 50px -12px rgb(245 158 11 / 0.3);
 }
 
 body {
