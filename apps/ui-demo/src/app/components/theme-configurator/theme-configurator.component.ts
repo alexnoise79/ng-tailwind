@@ -5,7 +5,6 @@ export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tec
 
 @Component({
   selector: 'app-theme-configurator',
-  standalone: true,
   imports: [],
   templateUrl: './theme-configurator.component.html',
   styleUrls: ['./theme-configurator.component.css']

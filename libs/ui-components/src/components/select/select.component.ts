@@ -23,7 +23,6 @@ import { Size, SelectOption, SelectGroup } from '../../models';
 
 @Component({
   selector: 'ngt-select',
-  standalone: true,
   imports: [NgTemplateOutlet, FormsModule, OutsideClickDirective],
   templateUrl: './select.component.html',
   providers: [

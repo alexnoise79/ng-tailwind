@@ -19,7 +19,6 @@ import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
 
 @Component({
   selector: 'ngt-table',
-  standalone: true,
   imports: [NgTemplateOutlet, NgtPagination],
   templateUrl: './table.component.html'
 })
