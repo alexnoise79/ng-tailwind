@@ -27,20 +27,15 @@ export class NgtModal implements OnInit, OnDestroy {
   private document = inject(DOCUMENT);
   protected isVisible = signal(false);
   private escapeListener?: (event: KeyboardEvent) => void;
+  private effectRef?: ReturnType<typeof effect>;
 
   get isOpen(): Signal<boolean> {
     return this._isOpen;
   }
 
-  ngOnInit(): void {
-    this.escapeListener = (event: KeyboardEvent) => {
-      if (this.isOpen() && event.key === 'Escape') {
-        this.handleClose();
-      }
-    };
-    this.document.addEventListener('keydown', this.escapeListener as EventListener);
-
-    effect(() => {
+  constructor() {
+    // effect() must be called in an injection context (constructor)
+    this.effectRef = effect(() => {
       if (this.isOpen()) {
         // Prevent body scroll when modal is open
         this.document.body.style.overflow = 'hidden';
@@ -53,9 +48,21 @@ export class NgtModal implements OnInit, OnDestroy {
     });
   }
 
+  ngOnInit(): void {
+    this.escapeListener = (event: KeyboardEvent) => {
+      if (this.isOpen() && event.key === 'Escape') {
+        this.handleClose();
+      }
+    };
+    this.document.addEventListener('keydown', this.escapeListener as EventListener);
+  }
+
   ngOnDestroy(): void {
     if (this.escapeListener) {
       this.document.removeEventListener('keydown', this.escapeListener);
+    }
+    if (this.effectRef) {
+      this.effectRef.destroy();
     }
     this.document.body.style.overflow = '';
   }
