@@ -24,7 +24,9 @@ export const SingleOpen: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtAccordionItem],
+    moduleMetadata: {
+      imports: [NgtAccordion, NgtAccordionItem]
+    },
     template: `
       <ngt-accordion [multiOpen]="multiOpen">
         <ngt-accordion-item title="First Item">
@@ -53,7 +55,9 @@ export const MultiOpen: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtAccordionItem],
+    moduleMetadata: {
+      imports: [NgtAccordion, NgtAccordionItem]
+    },
     template: `
       <ngt-accordion [multiOpen]="multiOpen">
         <ngt-accordion-item title="First Item">
