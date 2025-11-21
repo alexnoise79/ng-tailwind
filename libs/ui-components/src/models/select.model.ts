@@ -3,10 +3,10 @@
  */
 export interface SelectOption {
   label: string;
-  value: any;
+  value: unknown;
   group?: string;
   disabled?: boolean;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /**

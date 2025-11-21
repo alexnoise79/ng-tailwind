@@ -1,5 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
-import { NgtButton } from '@ng-tailwind/ui-components';
+import { Component, OnInit, signal } from '@angular/core';
 
 export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
 

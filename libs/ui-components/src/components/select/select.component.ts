@@ -73,13 +73,13 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   readonly editable = input(false);
 
   // Content templates
-  @ContentChild('item') itemTemplate?: TemplateRef<any>;
-  @ContentChild('selectedItem') selectedItemTemplate?: TemplateRef<any>;
-  @ContentChild('group') groupTemplate?: TemplateRef<any>;
-  @ContentChild('header') headerTemplate?: TemplateRef<any>;
-  @ContentChild('footer') footerTemplate?: TemplateRef<any>;
-  @ContentChild('emptyMessage') emptyMessageTemplate?: TemplateRef<any>;
-  @ContentChild('dropdownicon') dropdownIconTemplate?: TemplateRef<any>;
+  @ContentChild('item') itemTemplate?: TemplateRef<unknown>;
+  @ContentChild('selectedItem') selectedItemTemplate?: TemplateRef<unknown>;
+  @ContentChild('group') groupTemplate?: TemplateRef<unknown>;
+  @ContentChild('header') headerTemplate?: TemplateRef<unknown>;
+  @ContentChild('footer') footerTemplate?: TemplateRef<unknown>;
+  @ContentChild('emptyMessage') emptyMessageTemplate?: TemplateRef<unknown>;
+  @ContentChild('dropdownicon') dropdownIconTemplate?: TemplateRef<unknown>;
 
   // ViewChild
   @ViewChild('trigger') triggerRef!: ElementRef<HTMLElement>;
@@ -102,6 +102,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   private _isOpening = false;
 
   // ControlValueAccessor callbacks
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: unknown) => {};
   private onTouched = () => {};
 
@@ -652,6 +653,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getOptionClasses(_option?: SelectOption): string {
     const base = 'flex items-center px-3 py-2 text-sm hover:bg-gray-100 hover:text-primary-900 transition-colors';
     const sizeClasses = {

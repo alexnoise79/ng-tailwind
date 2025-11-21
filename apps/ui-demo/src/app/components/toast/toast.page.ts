@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { NgtToastService, NgtToastContainer, NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
+import { NgtToastService, NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
 

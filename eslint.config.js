@@ -19,7 +19,12 @@ export default [
       ecmaVersion: 2020,
       sourceType: 'module',
       parserOptions: {
-        project: './tsconfig.base.json'
+        project: [
+          'tsconfig.base.json',
+          'apps/*/tsconfig.*.json',
+          'libs/*/tsconfig.*.json'
+        ],
+        tsconfigRootDir: import.meta.dirname || process.cwd()
       }
     },
     rules: {
