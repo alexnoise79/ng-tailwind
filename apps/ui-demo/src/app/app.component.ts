@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
+import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule, NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch],
+  imports: [RouterOutlet, FormsModule, NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch, ThemeConfiguratorComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -20,6 +21,12 @@ export class AppComponent implements OnInit {
       this.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     this.updateTheme();
+    
+    // Set default theme if not already set
+    if (!document.documentElement.getAttribute('data-theme')) {
+      const savedTheme = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
   }
 
   onToggleChange(): void {
