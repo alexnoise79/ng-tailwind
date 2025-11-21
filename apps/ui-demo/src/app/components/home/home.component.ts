@@ -1,8 +1,0 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'section.getting-started',
-  templateUrl: './home.component.html'
-})
-export class GettingStartedComponent {}
-

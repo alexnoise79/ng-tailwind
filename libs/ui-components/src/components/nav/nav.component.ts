@@ -1,4 +1,5 @@
 import { Component, ContentChildren, QueryList, AfterContentInit, signal, computed, input } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgtNavItem } from './nav-item.component';
 
 export type NavOrientation = 'horizontal' | 'vertical';
@@ -7,6 +8,7 @@ export type NavAlign = 'start' | 'center' | 'end' | 'justified';
 
 @Component({
   selector: 'ngt-nav',
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav.component.html'
 })
 export class NgtNav implements AfterContentInit {
@@ -23,16 +25,11 @@ export class NgtNav implements AfterContentInit {
   ngAfterContentInit(): void {
     this.items.set(this.navItems.toArray());
     
-    // Set initial active item
+    // Set initial active item only if activeId is provided
+    // If using routerLink, RouterLinkActive will handle the active state
     const activeIdValue = this.activeId();
     if (activeIdValue) {
       this.selectItem(activeIdValue);
-    } else if (this.items().length > 0) {
-      // If no activeId provided, select first item by default
-      const firstNonDisabled = this.items().find(item => !item.disabled());
-      if (firstNonDisabled) {
-        this.selectItem(firstNonDisabled.id);
-      }
     }
   }
 
