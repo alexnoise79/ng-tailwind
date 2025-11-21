@@ -39,6 +39,18 @@
     </ngt-table>
   </section>
 
+  <!-- Striped Columns -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Columns</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating column colors for better readability.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="stripedTableSize()"
+      [stripedColumns]="true">
+    </ngt-table>
+  </section>
+
   <!-- Table Sizes -->
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Table Sizes</h3>
@@ -102,8 +114,8 @@
           }
         </tr>
       </ng-template>
-      <ng-template #body let-product let-columns="columns">
-        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+      <ng-template #body let-product let-columns="columns" let-trClasses="trClasses">
+        <tr [class]="trClasses" class="hover:bg-gray-50 dark:hover:bg-gray-800">
           @for (col of columns; track col.field) {
             <td class="px-4 py-3 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
               @if (col.field === 'price') {

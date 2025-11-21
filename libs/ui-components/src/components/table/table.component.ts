@@ -53,6 +53,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   readonly size = input<TableSize>('md');
   readonly showGridlines = input<boolean>(false);
   readonly striped = input<boolean>(false);
+  readonly stripedColumns = input<boolean>(false);
   readonly paginator = input<boolean>(false);
   readonly rows = input<number>(10);
   readonly totalRecords = input<number | null>(null);
@@ -75,7 +76,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
 
   // Template references
   @ContentChild('header') headerTemplate?: TemplateRef<{ $implicit: TableColumn[]; columns: TableColumn[] }>;
-  @ContentChild('body') bodyTemplate?: TemplateRef<{ $implicit: unknown; rowIndex: number; columns: TableColumn[] }>;
+  @ContentChild('body') bodyTemplate?: TemplateRef<{ $implicit: unknown; rowIndex: number; columns: TableColumn[]; trClasses: string }>;
   @ContentChild('footer') footerTemplate?: TemplateRef<{ $implicit: TableColumn[]; columns: TableColumn[] }>;
   @ContentChild('caption') captionTemplate?: TemplateRef<unknown>;
   @ContentChild('groupheader') groupHeaderTemplate?: TemplateRef<unknown>;
@@ -176,8 +177,13 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
       lg: 'px-6 py-4 text-base'
     };
     const gridlineClasses = this.showGridlines() ? 'border border-gray-200 dark:border-gray-700' : '';
-    const stripedClasses = this.striped() ? 'even:bg-gray-50 dark:even:bg-gray-800/50' : '';
-    return `${baseClasses} ${sizeClasses[this.size()]} ${gridlineClasses} ${stripedClasses}`;
+    const stripedColumnClasses = this.stripedColumns() ? 'even:bg-gray-50 dark:even:bg-gray-800/50' : '';
+    return `${baseClasses} ${sizeClasses[this.size()]} ${gridlineClasses} ${stripedColumnClasses}`;
+  });
+
+  readonly trClasses = computed(() => {
+    const stripedRowClasses = this.striped() ? 'even:bg-gray-50 dark:even:bg-gray-800/50' : '';
+    return stripedRowClasses;
   });
 
   readonly totalPages = computed(() => {

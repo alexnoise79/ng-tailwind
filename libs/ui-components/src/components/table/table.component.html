@@ -69,13 +69,13 @@
       @if (bodyTemplate) {
         <tbody [class]="tbodyClasses()">
           @for (row of groupedValue(); track $index; let rowIndex = $index) {
-            <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: row, rowIndex: rowIndex, columns: _columns() }"></ng-container>
+            <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: row, rowIndex: rowIndex, columns: _columns(), trClasses: trClasses() }"></ng-container>
           }
         </tbody>
       } @else if (_columns().length > 0) {
         <tbody [class]="tbodyClasses()">
           @for (row of groupedValue(); track $index) {
-            <tr>
+            <tr [class]="trClasses()">
               @for (col of _columns(); track col.field) {
                 <td [class]="tdClasses()" [style]="getColumnStyle(col)">
                   {{ resolveFieldData(row, col.field) }}
