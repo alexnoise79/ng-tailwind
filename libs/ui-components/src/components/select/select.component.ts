@@ -16,7 +16,7 @@ import {
   effect
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { OutsideClickDirective } from '../../directives';
 import { classMerge } from '../../utils';
 import { Size, SelectOption, SelectGroup } from '../../models';
@@ -24,7 +24,7 @@ import { Size, SelectOption, SelectGroup } from '../../models';
 @Component({
   selector: 'ngt-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, OutsideClickDirective],
+  imports: [NgTemplateOutlet, FormsModule, OutsideClickDirective],
   templateUrl: './select.component.html',
   providers: [
     {

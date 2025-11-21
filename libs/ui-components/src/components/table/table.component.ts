@@ -13,14 +13,14 @@ import {
   AfterViewChecked,
   OnDestroy
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { NgtPagination } from '../pagination/pagination.component';
 import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
 
 @Component({
   selector: 'ngt-table',
   standalone: true,
-  imports: [CommonModule, NgtPagination],
+  imports: [NgTemplateOutlet, NgtPagination],
   templateUrl: './table.component.html'
 })
 export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {

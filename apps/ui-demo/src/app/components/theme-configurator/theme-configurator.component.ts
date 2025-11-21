@@ -1,5 +1,4 @@
 import { Component, OnInit, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NgtButton } from '@ng-tailwind/ui-components';
 
 export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
@@ -7,7 +6,7 @@ export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tec
 @Component({
   selector: 'app-theme-configurator',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './theme-configurator.component.html',
   styleUrls: ['./theme-configurator.component.css']
 })

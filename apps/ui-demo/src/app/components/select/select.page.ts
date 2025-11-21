@@ -1,13 +1,13 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
 import { NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
-import { CommonModule } from '@angular/common';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { City, Country, DemoTab } from '../../models/demo.models';
 
 @Component({
   selector: 'section.select',
-  imports: [CommonModule, FormsModule, NgtSelect, NgtButton, NgtNav, NgtNavItem],
+  imports: [FormsModule, JsonPipe, NgtSelect, NgtButton, NgtNav, NgtNavItem],
   templateUrl: './select.page.html'
 })
 export class SelectPage {

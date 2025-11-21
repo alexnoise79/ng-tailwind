@@ -1,11 +1,11 @@
 import { Component, Input, signal, computed, output, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { classMerge } from '../../utils';
 import { ToastSeverity } from './toast.interface';
 
 @Component({
   selector: 'ngt-toast',
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet],
   templateUrl: './toast.component.html'
 })
 export class NgtToast implements OnInit, OnDestroy {
