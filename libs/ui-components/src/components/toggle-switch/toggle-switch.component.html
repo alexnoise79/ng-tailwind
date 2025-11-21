@@ -12,7 +12,7 @@
     [attr.aria-checked]="value()"
     [attr.aria-disabled]="isDisabled()"
     [class]="toggleClasses()"
-    (click)="toggle()">
+    (click)="toggle($event)">
     <span [class]="thumbClasses()"></span>
   </span>
   @if (label()) {

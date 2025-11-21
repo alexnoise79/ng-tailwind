@@ -75,9 +75,14 @@ export class NgtToggleSwitch implements ControlValueAccessor {
     );
   });
 
-  toggle(): void {
+  toggle(event?: Event): void {
     if (this.isDisabled()) {
       return;
+    }
+    // Prevent label's default behavior of toggling the checkbox
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
     }
     const newValue = !this._value();
     this._value.set(newValue);
