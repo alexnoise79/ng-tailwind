@@ -21,13 +21,6 @@
         "passWithNoTests": true
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["libs/ui-components/**/*.ts", "libs/ui-components/**/*.html"],
-        "eslintConfig": "{workspaceRoot}/eslint.config.js"
-      }
-    },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {

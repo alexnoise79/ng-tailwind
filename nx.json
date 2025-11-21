@@ -27,6 +27,12 @@
       "options": {
         "analytics": false
       }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
     }
   ]
 }
