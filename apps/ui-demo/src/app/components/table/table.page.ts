@@ -13,7 +13,7 @@ interface Product {
 }
 
 @Component({
-  selector: 'section.table',
+  selector: 'section.table-page',
   imports: [NgtTable, NgtNav, NgtNavItem],
   templateUrl: './table.page.html'
 })
