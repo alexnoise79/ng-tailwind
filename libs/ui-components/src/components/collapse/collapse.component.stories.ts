@@ -59,7 +59,9 @@ export const Horizontal: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtCollapse, NgtButton]
+    },
     template: `
       <div class="space-y-4">
         <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">
@@ -85,7 +87,9 @@ export const WithRichContent: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtCollapse, NgtButton]
+    },
     template: `
       <div class="space-y-4">
         <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">

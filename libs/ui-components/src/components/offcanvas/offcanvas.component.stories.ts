@@ -97,7 +97,9 @@ export const FromStart: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtOffCanvas, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open from Start</ngt-button>
@@ -129,7 +131,9 @@ export const FromTop: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtOffCanvas, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open from Top</ngt-button>
@@ -161,7 +165,9 @@ export const FromBottom: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtOffCanvas, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open from Bottom</ngt-button>
@@ -193,7 +199,9 @@ export const WithoutBackdrop: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtOffCanvas, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open without Backdrop</ngt-button>
