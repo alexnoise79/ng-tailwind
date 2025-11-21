@@ -4,9 +4,9 @@ import { NgtButton, NgtOffCanvas } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.offcanvas',
   imports: [NgtButton, NgtOffCanvas],
-  templateUrl: './offcanvas.component.html'
+  templateUrl: './offcanvas.page.html'
 })
-export class OffcanvasDemoComponent {
+export class OffcanvasPage {
   showStart = signal(false);
   showEnd = signal(false);
   showTop = signal(false);
@@ -15,3 +15,4 @@ export class OffcanvasDemoComponent {
   showWithoutBackdrop = signal(false);
   showWithTitle = signal(false);
 }
+

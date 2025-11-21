@@ -4,9 +4,9 @@ import { NgtPagination } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.pagination',
   imports: [NgtPagination],
-  templateUrl: './pagination.component.html'
+  templateUrl: './pagination.page.html'
 })
-export class PaginationDemoComponent {
+export class PaginationPage {
   currentPage1 = signal(1);
   currentPage2 = signal(1);
   currentPage3 = signal(5);
@@ -22,3 +22,4 @@ export class PaginationDemoComponent {
     console.log(`${signalName} changed to page:`, page);
   }
 }
+

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'section.getting-started',
-  templateUrl: './getting-started.component.html'
+  templateUrl: './getting-started.page.html'
 })
-export class GettingStartedComponent {}
+export class GettingStartedPage {}
+

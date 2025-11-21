@@ -4,6 +4,7 @@ import { NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.nav',
   imports: [NgtNav, NgtNavItem],
-  templateUrl: './nav.component.html'
+  templateUrl: './nav.page.html'
 })
-export class NavDemoComponent {}
+export class NavPage {}
+

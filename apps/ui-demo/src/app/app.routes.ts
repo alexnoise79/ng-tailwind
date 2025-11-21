@@ -8,62 +8,62 @@ export const appRoutes: Routes = [
   },
   {
     path: 'getting-started',
-    loadComponent: () => import('./components/getting-started/getting-started.component').then(m => m.GettingStartedComponent)
+    loadComponent: () => import('./components/getting-started/getting-started.page').then(m => m.GettingStartedPage)
   },
   {
     path: 'button',
-    loadComponent: () => import('./components/button/button.component').then(m => m.ButtonDemoComponent)
+    loadComponent: () => import('./components/button/button.page').then(m => m.ButtonPage)
   },
   {
     path: 'modal',
-    loadComponent: () => import('./components/modal/modal.component').then(m => m.ModalDemoComponent)
+    loadComponent: () => import('./components/modal/modal.page').then(m => m.ModalPage)
   },
   {
     path: 'accordion',
-    loadComponent: () => import('./components/accordion/accordion.component').then(m => m.AccordionDemoComponent)
+    loadComponent: () => import('./components/accordion/accordion.page').then(m => m.AccordionPage)
   },
   {
     path: 'nav',
-    loadComponent: () => import('./components/nav/nav.component').then(m => m.NavDemoComponent)
+    loadComponent: () => import('./components/nav/nav.page').then(m => m.NavPage)
   },
   {
     path: 'dropdown',
-    loadComponent: () => import('./components/dropdown/dropdown.component').then(m => m.DropdownDemoComponent)
+    loadComponent: () => import('./components/dropdown/dropdown.page').then(m => m.DropdownPage)
   },
   {
     path: 'tooltip',
-    loadComponent: () => import('./components/tooltip/tooltip.component').then(m => m.TooltipDemoComponent)
+    loadComponent: () => import('./components/tooltip/tooltip.page').then(m => m.TooltipPage)
   },
   {
     path: 'collapse',
-    loadComponent: () => import('./components/collapse/collapse.component').then(m => m.CollapseDemoComponent)
+    loadComponent: () => import('./components/collapse/collapse.page').then(m => m.CollapsePage)
   },
   {
     path: 'datepicker',
-    loadComponent: () => import('./components/datepicker/datepicker.component').then(m => m.DatepickerDemoComponent)
+    loadComponent: () => import('./components/datepicker/datepicker.page').then(m => m.DatepickerPage)
   },
   {
     path: 'offcanvas',
-    loadComponent: () => import('./components/offcanvas/offcanvas.component').then(m => m.OffcanvasDemoComponent)
+    loadComponent: () => import('./components/offcanvas/offcanvas.page').then(m => m.OffcanvasPage)
   },
   {
     path: 'pagination',
-    loadComponent: () => import('./components/pagination/pagination.component').then(m => m.PaginationDemoComponent)
+    loadComponent: () => import('./components/pagination/pagination.page').then(m => m.PaginationPage)
   },
   {
     path: 'toggle-switch',
-    loadComponent: () => import('./components/toggle-switch/toggle-switch.component').then(m => m.ToggleSwitchDemoComponent)
+    loadComponent: () => import('./components/toggle-switch/toggle-switch.page').then(m => m.ToggleSwitchPage)
   },
   {
     path: 'toast',
-    loadComponent: () => import('./components/toast/toast.component').then(m => m.ToastDemoComponent)
+    loadComponent: () => import('./components/toast/toast.page').then(m => m.ToastPage)
   },
   {
     path: 'table',
-    loadComponent: () => import('./components/table/table.component').then(m => m.TableDemoComponent)
+    loadComponent: () => import('./components/table/table.page').then(m => m.TablePage)
   },
   {
     path: 'select',
-    loadComponent: () => import('./components/select/select.component').then(m => m.SelectDemoComponent)
+    loadComponent: () => import('./components/select/select.page').then(m => m.SelectPage)
   }
 ];

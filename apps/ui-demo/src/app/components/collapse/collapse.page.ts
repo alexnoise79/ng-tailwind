@@ -4,9 +4,10 @@ import { NgtButton, NgtCollapse } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.collapse-demo',
   imports: [NgtButton, NgtCollapse],
-  templateUrl: './collapse.component.html'
+  templateUrl: './collapse.page.html'
 })
-export class CollapseDemoComponent {
+export class CollapsePage {
   collapseOpen = signal(false);
   horizontalCollapseOpen = signal(false);
 }
+

@@ -14,9 +14,9 @@ interface Product {
 @Component({
   selector: 'section.table',
   imports: [NgtTable],
-  templateUrl: './table.component.html'
+  templateUrl: './table.page.html'
 })
-export class TableDemoComponent {
+export class TablePage {
   products = signal<Product[]>([
     { code: '001', name: 'Product 1', category: 'Electronics', quantity: 10, price: 99.99, rating: 4, inventoryStatus: 'INSTOCK' },
     { code: '002', name: 'Product 2', category: 'Clothing', quantity: 25, price: 49.99, rating: 3, inventoryStatus: 'INSTOCK' },

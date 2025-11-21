@@ -18,9 +18,9 @@ interface Country {
 @Component({
   selector: 'section.select',
   imports: [CommonModule, FormsModule, NgtSelect, NgtButton, NgtNav, NgtNavItem],
-  templateUrl: './select.component.html'
+  templateUrl: './select.page.html'
 })
-export class SelectDemoComponent {
+export class SelectPage {
   private toastService = inject(NgtToastService);
 
   // Basic

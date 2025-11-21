@@ -4,6 +4,7 @@ import { NgtAccordion, NgtAccordionItem } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.accordion',
   imports: [NgtAccordion, NgtAccordionItem],
-  templateUrl: './accordion.component.html'
+  templateUrl: './accordion.page.html'
 })
-export class AccordionDemoComponent {}
+export class AccordionPage {}
+

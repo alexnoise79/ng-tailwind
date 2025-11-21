@@ -4,9 +4,9 @@ import { NgtToastService, NgtToastContainer, NgtButton } from '@ng-tailwind/ui-c
 @Component({
   selector: 'section.toast',
   imports: [NgtButton],
-  templateUrl: './toast.component.html'
+  templateUrl: './toast.page.html'
 })
-export class ToastDemoComponent {
+export class ToastPage {
   private toastService = inject(NgtToastService);
 
   showSuccess(): void {
@@ -97,3 +97,4 @@ export class ToastDemoComponent {
     this.toastService.clear();
   }
 }
+

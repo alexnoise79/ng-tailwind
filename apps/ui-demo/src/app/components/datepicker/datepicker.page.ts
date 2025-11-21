@@ -4,8 +4,9 @@ import { NgtDatepicker, NgtDateStruct } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.datepicker',
   imports: [NgtDatepicker],
-  templateUrl: './datepicker.component.html'
+  templateUrl: './datepicker.page.html'
 })
-export class DatepickerDemoComponent {
+export class DatepickerPage {
   selectedDate = signal<NgtDateStruct | null>(null);
 }
+

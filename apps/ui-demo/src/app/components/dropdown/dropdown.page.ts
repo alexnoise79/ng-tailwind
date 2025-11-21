@@ -4,6 +4,7 @@ import { NgtDropdown, NgtDropdownTrigger, NgtDropdownContent } from '@ng-tailwin
 @Component({
   selector: 'section.dropdown',
   imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent],
-  templateUrl: './dropdown.component.html'
+  templateUrl: './dropdown.page.html'
 })
-export class DropdownDemoComponent {}
+export class DropdownPage {}
+

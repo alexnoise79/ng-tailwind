@@ -4,6 +4,7 @@ import { NgtTooltip } from '@ng-tailwind/ui-components';
 @Component({
   selector: 'section.tooltip',
   imports: [NgtTooltip],
-  templateUrl: './tooltip.component.html'
+  templateUrl: './tooltip.page.html'
 })
-export class TooltipDemoComponent {}
+export class TooltipPage {}
+
