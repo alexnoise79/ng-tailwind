@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { ButtonComponent, ModalComponent } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtModal } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.modal',
-  imports: [ButtonComponent, ModalComponent],
+  imports: [NgtButton, NgtModal],
   templateUrl: './modal.component.html'
 })
 export class ModalDemoComponent {

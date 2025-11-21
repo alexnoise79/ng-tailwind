@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { ButtonComponent, OffcanvasComponent } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtOffCanvas } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.offcanvas',
-  imports: [ButtonComponent, OffcanvasComponent],
+  imports: [NgtButton, NgtOffCanvas],
   templateUrl: './offcanvas.component.html'
 })
 export class OffcanvasDemoComponent {

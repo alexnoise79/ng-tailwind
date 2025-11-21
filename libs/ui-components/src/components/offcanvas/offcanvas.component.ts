@@ -5,11 +5,11 @@ import { TrapFocusDirective } from '../../directives';
 export type OffcanvasPosition = 'start' | 'end' | 'top' | 'bottom';
 
 @Component({
-  selector: 'ui-offcanvas',
+  selector: 'ngt-offcanvas',
   imports: [TrapFocusDirective],
   templateUrl: './offcanvas.component.html'
 })
-export class OffcanvasComponent implements OnInit, OnDestroy {
+export class NgtOffCanvas implements OnInit, OnDestroy {
   @Input() set isOpen(value: boolean | WritableSignal<boolean>) {
     if (typeof value === 'boolean') {
       this._isOpen.set(value);

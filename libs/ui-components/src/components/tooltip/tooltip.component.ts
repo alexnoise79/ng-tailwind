@@ -3,10 +3,10 @@ import { Component, signal, computed, OnDestroy, input } from '@angular/core';
 export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 
 @Component({
-  selector: 'ui-tooltip',
+  selector: 'ngt-tooltip',
   templateUrl: './tooltip.component.html'
 })
-export class TooltipComponent implements OnDestroy {
+export class NgtTooltip implements OnDestroy {
   readonly text = input.required<string>();
   readonly position = input<TooltipPosition>('top');
   readonly delay = input(200);

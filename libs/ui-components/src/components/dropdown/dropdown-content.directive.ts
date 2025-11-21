@@ -1,6 +1,6 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[ui-dropdown-content]'
+  selector: '[ngt-dropdown-content]'
 })
-export class DropdownContentDirective {}
+export class NgtDropdownContent {}

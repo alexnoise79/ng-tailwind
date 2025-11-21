@@ -2,12 +2,12 @@ import { Component, Input, signal, Signal, WritableSignal } from '@angular/core'
 
 
 @Component({
-  selector: 'ui-accordion',
+  selector: 'ngt-accordion',
   imports: [],
   templateUrl: './accordion.component.html',
-  providers: [AccordionComponent]
+  providers: [NgtAccordion]
 })
-export class AccordionComponent {
+export class NgtAccordion {
   @Input() set multiOpen(value: boolean | WritableSignal<boolean>) {
     if (typeof value === 'boolean') {
       this._multiOpen.set(value);

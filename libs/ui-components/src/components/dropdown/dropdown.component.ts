@@ -4,11 +4,11 @@ import { OutsideClickDirective } from '../../directives';
 export type DropdownAlign = 'left' | 'right';
 
 @Component({
-  selector: 'ui-dropdown',
+  selector: 'ngt-dropdown',
   imports: [OutsideClickDirective],
   templateUrl: './dropdown.component.html'
 })
-export class DropdownComponent {
+export class NgtDropdown {
   @Input() set align(value: DropdownAlign) {
     this._align.set(value);
   }

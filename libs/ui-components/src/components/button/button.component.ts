@@ -5,10 +5,10 @@ export type ButtonVariant = 'primary' | 'outline' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
-  selector: 'ui-button',
+  selector: 'ngt-button',
   templateUrl: './button.component.html'
 })
-export class ButtonComponent {
+export class NgtButton {
   readonly variant = input<ButtonVariant>('primary');
   readonly size = input<ButtonSize>('md');
   readonly type = input<'button' | 'submit' | 'reset'>('button');

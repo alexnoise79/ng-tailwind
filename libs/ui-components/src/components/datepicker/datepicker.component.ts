@@ -8,10 +8,10 @@ export interface NgtDateStruct {
 }
 
 @Component({
-  selector: 'ui-datepicker',
+  selector: 'ngt-datepicker',
   templateUrl: './datepicker.component.html'
 })
-export class DatepickerComponent implements OnInit {
+export class NgtDatepicker implements OnInit {
   @Input() set model(value: NgtDateStruct | null | undefined) {
     if (value) {
       this._model.set(value);

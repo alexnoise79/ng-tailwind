@@ -6,31 +6,31 @@
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Dropdown</h3>
-    <ui-dropdown [align]="'left'">
-      <button ui-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+    <ngt-dropdown [align]="'left'">
+      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
         Open Dropdown
       </button>
-      <div ui-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
+      <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a>
         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
       </div>
-    </ui-dropdown>
+    </ngt-dropdown>
   </section>
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Right Aligned</h3>
     <div class="flex justify-end">
-      <ui-dropdown [align]="'right'">
-        <button ui-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+      <ngt-dropdown [align]="'right'">
+        <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
           Right Aligned Dropdown
         </button>
-        <div ui-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
+        <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a>
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
         </div>
-      </ui-dropdown>
+      </ngt-dropdown>
     </div>
   </section>
 </div>

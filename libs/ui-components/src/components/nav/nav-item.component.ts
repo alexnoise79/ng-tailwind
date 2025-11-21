@@ -3,10 +3,10 @@ import { Component, signal, computed, input, output, effect, AfterContentInit } 
 let navItemIdCounter = 0;
 
 @Component({
-  selector: 'ui-nav-item',
+  selector: 'ngt-nav-item',
   template: '<ng-content />'
 })
-export class NavItemComponent implements AfterContentInit {
+export class NgtNavItem implements AfterContentInit {
   readonly itemId = input<string | null>(null);
   readonly label = input.required<string>();
   readonly disabled = input<boolean>(false);

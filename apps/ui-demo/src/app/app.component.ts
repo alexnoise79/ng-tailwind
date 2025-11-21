@@ -1,11 +1,11 @@
 import { Component, signal, OnInit, OnDestroy, AfterViewInit, ViewChild, effect, inject } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
-import { ButtonComponent, NavComponent, NavItemComponent } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonComponent, NavComponent, NavItemComponent],
+  imports: [RouterOutlet, NgtButton, NgtNav, NgtNavItem],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   private routerSubscription?: Subscription;
   private router = inject(Router);
 
-  @ViewChild(NavComponent) navComponent?: NavComponent;
+  @ViewChild(NgtNav) navComponent?: NgtNav;
 
   constructor() {
     // Watch for activeRouteId changes and update nav selection

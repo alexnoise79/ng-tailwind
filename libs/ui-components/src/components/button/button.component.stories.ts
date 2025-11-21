@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ButtonComponent } from './button.component';
+import { NgtButton } from './button.component';
 
-const meta: Meta<ButtonComponent> = {
+const meta: Meta<NgtButton> = {
   title: 'Components/Button',
-  component: ButtonComponent,
+  component: NgtButton,
   tags: ['autodocs'],
   argTypes: {
     variant: {
@@ -33,7 +33,7 @@ const meta: Meta<ButtonComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<NgtButton>;
 
 export const Primary: Story = {
   args: {
@@ -45,7 +45,7 @@ export const Primary: Story = {
   },
   render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size" [type]="type" [disabled]="disabled" [loading]="loading">Button</ui-button>`
+    template: `<ngt-button [variant]="variant" [size]="size" [type]="type" [disabled]="disabled" [loading]="loading">Button</ngt-button>`
   })
 };
 
@@ -56,7 +56,7 @@ export const Outline: Story = {
   },
   render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size">Outline Button</ui-button>`
+    template: `<ngt-button [variant]="variant" [size]="size">Outline Button</ngt-button>`
   })
 };
 
@@ -67,7 +67,7 @@ export const Ghost: Story = {
   },
   render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [size]="size">Ghost Button</ui-button>`
+    template: `<ngt-button [variant]="variant" [size]="size">Ghost Button</ngt-button>`
   })
 };
 
@@ -75,9 +75,9 @@ export const Sizes: Story = {
   render: () => ({
     template: `
       <div class="flex gap-4 items-center">
-        <ui-button variant="primary" size="sm">Small</ui-button>
-        <ui-button variant="primary" size="md">Medium</ui-button>
-        <ui-button variant="primary" size="lg">Large</ui-button>
+        <ngt-button variant="primary" size="sm">Small</ngt-button>
+        <ngt-button variant="primary" size="md">Medium</ngt-button>
+        <ngt-button variant="primary" size="lg">Large</ngt-button>
       </div>
     `
   })
@@ -90,7 +90,7 @@ export const Loading: Story = {
   },
   render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [loading]="loading">Loading...</ui-button>`
+    template: `<ngt-button [variant]="variant" [loading]="loading">Loading...</ngt-button>`
   })
 };
 
@@ -101,6 +101,6 @@ export const Disabled: Story = {
   },
   render: args => ({
     props: args,
-    template: `<ui-button [variant]="variant" [disabled]="disabled">Disabled</ui-button>`
+    template: `<ngt-button [variant]="variant" [disabled]="disabled">Disabled</ngt-button>`
   })
 };

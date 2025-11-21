@@ -7,29 +7,29 @@
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Examples</h3>
     <div class="flex flex-wrap gap-4">
-      <ui-button variant="primary" (click)="showStart.set(true)">Open from Start</ui-button>
-      <ui-button variant="primary" (click)="showEnd.set(true)">Open from End</ui-button>
-      <ui-button variant="primary" (click)="showTop.set(true)">Open from Top</ui-button>
-      <ui-button variant="primary" (click)="showBottom.set(true)">Open from Bottom</ui-button>
+      <ngt-button variant="primary" (click)="showStart.set(true)">Open from Start</ngt-button>
+      <ngt-button variant="primary" (click)="showEnd.set(true)">Open from End</ngt-button>
+      <ngt-button variant="primary" (click)="showTop.set(true)">Open from Top</ngt-button>
+      <ngt-button variant="primary" (click)="showBottom.set(true)">Open from Bottom</ngt-button>
     </div>
   </section>
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">With Title</h3>
-    <ui-button variant="primary" (click)="showWithTitle.set(true)">Open with Title</ui-button>
+    <ngt-button variant="primary" (click)="showWithTitle.set(true)">Open with Title</ngt-button>
   </section>
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Backdrop Options</h3>
     <div class="flex flex-wrap gap-4">
-      <ui-button variant="primary" (click)="showWithBackdrop.set(true)">With Backdrop</ui-button>
-      <ui-button variant="primary" (click)="showWithoutBackdrop.set(true)">Without Backdrop</ui-button>
+      <ngt-button variant="primary" (click)="showWithBackdrop.set(true)">With Backdrop</ngt-button>
+      <ngt-button variant="primary" (click)="showWithoutBackdrop.set(true)">Without Backdrop</ngt-button>
     </div>
   </section>
 
   <!-- Offcanvas from Start -->
   @if (showStart()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showStart()" 
       (closed)="showStart.set(false)" 
       [position]="'start'"
@@ -38,16 +38,16 @@
         <p class="text-gray-600">This offcanvas slides in from the left side.</p>
         <p class="text-gray-600">You can place any content here.</p>
         <div class="flex gap-2 mt-6">
-          <ui-button variant="outline" (click)="showStart.set(false)">Close</ui-button>
-          <ui-button variant="primary" (click)="showStart.set(false)">Save Changes</ui-button>
+          <ngt-button variant="outline" (click)="showStart.set(false)">Close</ngt-button>
+          <ngt-button variant="primary" (click)="showStart.set(false)">Save Changes</ngt-button>
         </div>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas from End -->
   @if (showEnd()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showEnd()" 
       (closed)="showEnd.set(false)" 
       [position]="'end'"
@@ -61,16 +61,16 @@
           <li>Feature 3</li>
         </ul>
         <div class="flex gap-2 mt-6">
-          <ui-button variant="outline" (click)="showEnd.set(false)">Cancel</ui-button>
-          <ui-button variant="primary" (click)="showEnd.set(false)">Apply</ui-button>
+          <ngt-button variant="outline" (click)="showEnd.set(false)">Cancel</ngt-button>
+          <ngt-button variant="primary" (click)="showEnd.set(false)">Apply</ngt-button>
         </div>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas from Top -->
   @if (showTop()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showTop()" 
       (closed)="showTop.set(false)" 
       [position]="'top'"
@@ -79,12 +79,12 @@
         <p class="text-gray-600">This offcanvas slides in from the top of the screen.</p>
         <p class="text-gray-600">Perfect for notifications or action bars.</p>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas from Bottom -->
   @if (showBottom()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showBottom()" 
       (closed)="showBottom.set(false)" 
       [position]="'bottom'"
@@ -93,12 +93,12 @@
         <p class="text-gray-600">This offcanvas slides in from the bottom of the screen.</p>
         <p class="text-gray-600">Commonly used for mobile navigation menus.</p>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas with Title -->
   @if (showWithTitle()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showWithTitle()" 
       (closed)="showWithTitle.set(false)" 
       [position]="'end'"
@@ -117,12 +117,12 @@
           <p class="text-gray-600">Control how you receive notifications.</p>
         </div>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas with Backdrop -->
   @if (showWithBackdrop()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showWithBackdrop()" 
       (closed)="showWithBackdrop.set(false)" 
       [position]="'end'"
@@ -132,12 +132,12 @@
         <p class="text-gray-600">This offcanvas has a backdrop that dims the background.</p>
         <p class="text-gray-600">Clicking the backdrop will close the offcanvas.</p>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 
   <!-- Offcanvas without Backdrop -->
   @if (showWithoutBackdrop()) {
-    <ui-offcanvas 
+    <ngt-offcanvas 
       [isOpen]="showWithoutBackdrop()" 
       (closed)="showWithoutBackdrop.set(false)" 
       [position]="'end'"
@@ -147,7 +147,7 @@
         <p class="text-gray-600">This offcanvas has no backdrop.</p>
         <p class="text-gray-600">The background remains fully visible and interactive.</p>
       </div>
-    </ui-offcanvas>
+    </ngt-offcanvas>
   }
 </div>
 

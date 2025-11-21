@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { DatepickerComponent, NgtDateStruct } from './datepicker.component';
+import { NgtDatepicker, NgtDateStruct } from './datepicker.component';
 import { signal } from '@angular/core';
 
-const meta: Meta<DatepickerComponent> = {
+const meta: Meta<NgtDatepicker> = {
   title: 'Components/Datepicker',
-  component: DatepickerComponent,
+  component: NgtDatepicker,
   tags: ['autodocs'],
   argTypes: {
     model: {
@@ -31,7 +31,7 @@ const meta: Meta<DatepickerComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<DatepickerComponent>;
+type Story = StoryObj<NgtDatepicker>;
 
 export const Default: Story = {
   args: {
@@ -54,7 +54,7 @@ export const Default: Story = {
       },
       template: `
         <div class="p-8">
-          <ui-datepicker
+          <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
             [minDate]="minDate"
@@ -62,7 +62,7 @@ export const Default: Story = {
             [startDate]="startDate"
             (dateSelect)="onDateSelect($event)"
             (navigate)="onNavigate($event)"
-          ></ui-datepicker>
+          ></ngt-datepicker>
           @if (model()) {
             <p class="mt-4 text-sm text-gray-600">
               Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
@@ -91,11 +91,11 @@ export const WithInitialDate: Story = {
       },
       template: `
         <div class="p-8">
-          <ui-datepicker
+          <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
             (dateSelect)="onDateSelect($event)"
-          ></ui-datepicker>
+          ></ngt-datepicker>
           @if (model()) {
             <p class="mt-4 text-sm text-gray-600">
               Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
@@ -126,13 +126,13 @@ export const WithMinMaxDates: Story = {
       },
       template: `
         <div class="p-8">
-          <ui-datepicker
+          <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
             [minDate]="minDate"
             [maxDate]="maxDate"
             (dateSelect)="onDateSelect($event)"
-          ></ui-datepicker>
+          ></ngt-datepicker>
           @if (model()) {
             <p class="mt-4 text-sm text-gray-600">
               Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
@@ -161,11 +161,11 @@ export const Disabled: Story = {
       },
       template: `
         <div class="p-8">
-          <ui-datepicker
+          <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
             (dateSelect)="onDateSelect($event)"
-          ></ui-datepicker>
+          ></ngt-datepicker>
         </div>
       `
     };
@@ -190,12 +190,12 @@ export const WithCustomStartDate: Story = {
       },
       template: `
         <div class="p-8">
-          <ui-datepicker
+          <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
             [startDate]="startDate"
             (dateSelect)="onDateSelect($event)"
-          ></ui-datepicker>
+          ></ngt-datepicker>
           @if (model()) {
             <p class="mt-4 text-sm text-gray-600">
               Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}

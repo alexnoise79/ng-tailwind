@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { ModalComponent } from './modal.component';
-import { ButtonComponent } from '../button/button.component';
+import { NgtModal } from './modal.component';
+import { NgtButton } from '../button/button.component';
 import { signal } from '@angular/core';
 
-const meta: Meta<ModalComponent> = {
+const meta: Meta<NgtModal> = {
   title: 'Components/Modal',
-  component: ModalComponent,
+  component: NgtModal,
   tags: ['autodocs'],
   argTypes: {
     isOpen: {
@@ -28,7 +28,7 @@ const meta: Meta<ModalComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<ModalComponent>;
+type Story = StoryObj<NgtModal>;
 
 export const Default: Story = {
   args: {
@@ -39,11 +39,11 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
-    imports: [ButtonComponent],
+    imports: [NgtButton],
     template: `
       <div>
-        <ui-button variant="primary" (click)="isOpen.set(true)">Open Modal</ui-button>
-        <ui-modal
+        <ngt-button variant="primary" (click)="isOpen.set(true)">Open Modal</ngt-button>
+        <ngt-modal
           [isOpen]="isOpen"
           [title]="title"
           [showFooter]="showFooter"
@@ -54,7 +54,7 @@ export const Default: Story = {
             This is a modal dialog built with Angular CDK Overlay.
             It includes focus trapping, keyboard navigation, and animations.
           </p>
-        </ui-modal>
+        </ngt-modal>
       </div>
     `
   })
@@ -69,11 +69,11 @@ export const WithFooter: Story = {
   },
   render: args => ({
     props: args,
-    imports: [ButtonComponent],
+    imports: [NgtButton],
     template: `
       <div>
-        <ui-button variant="primary" (click)="isOpen.set(true)">Open Modal</ui-button>
-        <ui-modal
+        <ngt-button variant="primary" (click)="isOpen.set(true)">Open Modal</ngt-button>
+        <ngt-modal
           [isOpen]="isOpen"
           [title]="title"
           [showFooter]="showFooter"
@@ -83,10 +83,10 @@ export const WithFooter: Story = {
             This modal has a footer section with action buttons.
           </p>
           <div footer>
-            <ui-button variant="outline" (click)="isOpen.set(false)">Cancel</ui-button>
-            <ui-button variant="primary" (click)="isOpen.set(false)">Confirm</ui-button>
+            <ngt-button variant="outline" (click)="isOpen.set(false)">Cancel</ngt-button>
+            <ngt-button variant="primary" (click)="isOpen.set(false)">Confirm</ngt-button>
           </div>
-        </ui-modal>
+        </ngt-modal>
       </div>
     `
   })

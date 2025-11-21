@@ -1,16 +1,16 @@
 import { Component, inject, signal, computed, input } from '@angular/core';
-import { AccordionComponent } from './accordion.component';
+import { NgtAccordion } from './accordion.component';
 
 let itemIdCounter = 0;
 
 @Component({
-  selector: 'ui-accordion-item',
+  selector: 'ngt-accordion-item',
   templateUrl: './accordion-item.component.html'
 })
-export class AccordionItemComponent {
+export class NgtAccordionItem {
   readonly title = input.required<string>();
 
-  private accordion = inject(AccordionComponent, { optional: true });
+  private accordion = inject(NgtAccordion, { optional: true });
   private id = `accordion-item-${itemIdCounter++}`;
   private _isOpen = signal(false);
 

@@ -1,11 +1,11 @@
 import { Directive, HostListener, inject } from '@angular/core';
-import { DropdownComponent } from './dropdown.component';
+import { NgtDropdown } from './dropdown.component';
 
 @Directive({
-  selector: '[ui-dropdown-trigger]'
+  selector: '[ngt-dropdown-trigger]'
 })
-export class DropdownTriggerDirective {
-  private dropdown = inject(DropdownComponent);
+export class NgtDropdownTrigger {
+  private dropdown = inject(NgtDropdown);
 
   @HostListener('click', ['$event'])
   onClick(event: Event): void {

@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { CollapseComponent } from './collapse.component';
-import { ButtonComponent } from '../button/button.component';
+import { NgtCollapse } from './collapse.component';
+import { NgtButton } from '../button/button.component';
 import { signal } from '@angular/core';
 
-const meta: Meta<CollapseComponent> = {
+const meta: Meta<NgtCollapse> = {
   title: 'Components/Collapse',
-  component: CollapseComponent,
+  component: NgtCollapse,
   tags: ['autodocs'],
   argTypes: {
     isOpen: {
@@ -20,7 +20,7 @@ const meta: Meta<CollapseComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<CollapseComponent>;
+type Story = StoryObj<NgtCollapse>;
 
 export const Default: Story = {
   args: {
@@ -29,13 +29,13 @@ export const Default: Story = {
   },
   render: (args) => ({
     props: args,
-    imports: [ButtonComponent],
+    imports: [NgtButton],
     template: `
       <div class="space-y-4">
-        <ui-button variant="primary" (click)="isOpen.set(!isOpen())">
+        <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">
           {{ isOpen() ? 'Hide' : 'Show' }} Content
-        </ui-button>
-        <ui-collapse [isOpen]="isOpen" [horizontal]="horizontal">
+        </ngt-button>
+        <ngt-collapse [isOpen]="isOpen" [horizontal]="horizontal">
           <div class="bg-gray-100 p-4 rounded-md">
             <p class="text-gray-700">
               This is collapsible content. It can be shown or hidden with smooth animations.
@@ -44,7 +44,7 @@ export const Default: Story = {
               The collapse component supports both vertical and horizontal collapsing.
             </p>
           </div>
-        </ui-collapse>
+        </ngt-collapse>
       </div>
     `,
   }),
@@ -57,18 +57,18 @@ export const Horizontal: Story = {
   },
   render: (args) => ({
     props: args,
-    imports: [ButtonComponent],
+    imports: [NgtButton],
     template: `
       <div class="space-y-4">
-        <ui-button variant="primary" (click)="isOpen.set(!isOpen())">
+        <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">
           {{ isOpen() ? 'Hide' : 'Show' }} Content
-        </ui-button>
+        </ngt-button>
         <div class="flex items-center gap-2">
-          <ui-collapse [isOpen]="isOpen" [horizontal]="horizontal">
+          <ngt-collapse [isOpen]="isOpen" [horizontal]="horizontal">
             <div class="bg-gray-100 p-4 rounded-md whitespace-nowrap">
               <p class="text-gray-700">Horizontal collapse content</p>
             </div>
-          </ui-collapse>
+          </ngt-collapse>
           <span class="text-gray-500">After collapse</span>
         </div>
       </div>
@@ -83,13 +83,13 @@ export const WithRichContent: Story = {
   },
   render: (args) => ({
     props: args,
-    imports: [ButtonComponent],
+    imports: [NgtButton],
     template: `
       <div class="space-y-4">
-        <ui-button variant="primary" (click)="isOpen.set(!isOpen())">
+        <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">
           Toggle Rich Content
-        </ui-button>
-        <ui-collapse [isOpen]="isOpen">
+        </ngt-button>
+        <ngt-collapse [isOpen]="isOpen">
           <div class="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
             <h3 class="text-lg font-semibold text-gray-900 mb-2">Rich Content Example</h3>
             <p class="text-gray-600 mb-4">
@@ -102,11 +102,11 @@ export const WithRichContent: Story = {
               <li>Feature three</li>
             </ul>
             <div class="flex gap-2">
-              <ui-button variant="outline" size="sm">Action 1</ui-button>
-              <ui-button variant="primary" size="sm">Action 2</ui-button>
+              <ngt-button variant="outline" size="sm">Action 1</ngt-button>
+              <ngt-button variant="primary" size="sm">Action 2</ngt-button>
             </div>
           </div>
-        </ui-collapse>
+        </ngt-collapse>
       </div>
     `,
   }),

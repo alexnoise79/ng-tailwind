@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NavComponent, NavItemComponent } from '@ng-tailwind/ui-components';
+import { NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.nav',
-  imports: [NavComponent, NavItemComponent],
+  imports: [NgtNav, NgtNavItem],
   templateUrl: './nav.component.html'
 })
 export class NavDemoComponent {}

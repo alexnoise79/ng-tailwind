@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { TooltipComponent } from './tooltip.component';
+import { NgtTooltip } from './tooltip.component';
 
-const meta: Meta<TooltipComponent> = {
+const meta: Meta<NgtTooltip> = {
   title: 'Components/Tooltip',
-  component: TooltipComponent,
+  component: NgtTooltip,
   tags: ['autodocs'],
   argTypes: {
     text: {
@@ -23,7 +23,7 @@ const meta: Meta<TooltipComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<TooltipComponent>;
+type Story = StoryObj<NgtTooltip>;
 
 export const Default: Story = {
   args: {
@@ -35,11 +35,11 @@ export const Default: Story = {
     props: args,
     template: `
       <div class="p-8">
-        <ui-tooltip [text]="text" [position]="position" [delay]="delay">
+        <ngt-tooltip [text]="text" [position]="position" [delay]="delay">
           <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
             Hover me
           </button>
-        </ui-tooltip>
+        </ngt-tooltip>
       </div>
     `
   })
@@ -50,22 +50,22 @@ export const Positions: Story = {
     template: `
       <div class="p-16 space-y-8">
         <div class="flex justify-center">
-          <ui-tooltip text="Top tooltip" position="top">
+          <ngt-tooltip text="Top tooltip" position="top">
             <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Top</button>
-          </ui-tooltip>
+          </ngt-tooltip>
         </div>
         <div class="flex justify-between">
-          <ui-tooltip text="Left tooltip" position="left">
+          <ngt-tooltip text="Left tooltip" position="left">
             <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Left</button>
-          </ui-tooltip>
-          <ui-tooltip text="Right tooltip" position="right">
+          </ngt-tooltip>
+          <ngt-tooltip text="Right tooltip" position="right">
             <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Right</button>
-          </ui-tooltip>
+          </ngt-tooltip>
         </div>
         <div class="flex justify-center">
-          <ui-tooltip text="Bottom tooltip" position="bottom">
+          <ngt-tooltip text="Bottom tooltip" position="bottom">
             <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Bottom</button>
-          </ui-tooltip>
+          </ngt-tooltip>
         </div>
       </div>
     `

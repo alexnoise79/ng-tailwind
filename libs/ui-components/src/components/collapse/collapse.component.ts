@@ -1,14 +1,14 @@
 import { Component, Input, signal, Signal, WritableSignal, input } from '@angular/core';
 
 @Component({
-  selector: 'ui-collapse',
+  selector: 'ngt-collapse',
   templateUrl: './collapse.component.html',
   host: {
     '[attr.aria-expanded]': 'isOpen()',
     '[class.show]': 'isOpen()'
   }
 })
-export class CollapseComponent {
+export class NgtCollapse {
   @Input() set isOpen(value: boolean | WritableSignal<boolean>) {
     if (typeof value === 'boolean') {
       this._isOpen.set(value);

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { DropdownComponent, DropdownTriggerDirective, DropdownContentDirective } from '@ng-tailwind/ui-components';
+import { NgtDropdown, NgtDropdownTrigger, NgtDropdownContent } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.dropdown',
-  imports: [DropdownComponent, DropdownTriggerDirective, DropdownContentDirective],
+  imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent],
   templateUrl: './dropdown.component.html'
 })
 export class DropdownDemoComponent {}

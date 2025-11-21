@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { AccordionComponent } from './accordion.component';
-import { AccordionItemComponent } from './accordion-item.component';
+import { NgtAccordion } from './accordion.component';
+import { NgtAccordionItem } from './accordion-item.component';
 import { signal } from '@angular/core';
 
-const meta: Meta<AccordionComponent> = {
+const meta: Meta<NgtAccordion> = {
   title: 'Components/Accordion',
-  component: AccordionComponent,
+  component: NgtAccordion,
   tags: ['autodocs'],
   argTypes: {
     multiOpen: {
@@ -16,7 +16,7 @@ const meta: Meta<AccordionComponent> = {
 };
 
 export default meta;
-type Story = StoryObj<AccordionComponent>;
+type Story = StoryObj<NgtAccordion>;
 
 export const SingleOpen: Story = {
   args: {
@@ -24,25 +24,25 @@ export const SingleOpen: Story = {
   },
   render: args => ({
     props: args,
-    imports: [AccordionItemComponent],
+    imports: [NgtAccordionItem],
     template: `
-      <ui-accordion [multiOpen]="multiOpen">
-        <ui-accordion-item title="First Item">
+      <ngt-accordion [multiOpen]="multiOpen">
+        <ngt-accordion-item title="First Item">
           <p class="text-gray-600">
             This is the content of the first accordion item.
           </p>
-        </ui-accordion-item>
-        <ui-accordion-item title="Second Item">
+        </ngt-accordion-item>
+        <ngt-accordion-item title="Second Item">
           <p class="text-gray-600">
             This is the content of the second accordion item.
           </p>
-        </ui-accordion-item>
-        <ui-accordion-item title="Third Item">
+        </ngt-accordion-item>
+        <ngt-accordion-item title="Third Item">
           <p class="text-gray-600">
             This is the content of the third accordion item.
           </p>
-        </ui-accordion-item>
-      </ui-accordion>
+        </ngt-accordion-item>
+      </ngt-accordion>
     `
   })
 };
@@ -53,25 +53,25 @@ export const MultiOpen: Story = {
   },
   render: args => ({
     props: args,
-    imports: [AccordionItemComponent],
+    imports: [NgtAccordionItem],
     template: `
-      <ui-accordion [multiOpen]="multiOpen">
-        <ui-accordion-item title="First Item">
+      <ngt-accordion [multiOpen]="multiOpen">
+        <ngt-accordion-item title="First Item">
           <p class="text-gray-600">
             This is the content of the first accordion item.
           </p>
-        </ui-accordion-item>
-        <ui-accordion-item title="Second Item">
+        </ngt-accordion-item>
+        <ngt-accordion-item title="Second Item">
           <p class="text-gray-600">
             This is the content of the second accordion item.
           </p>
-        </ui-accordion-item>
-        <ui-accordion-item title="Third Item">
+        </ngt-accordion-item>
+        <ngt-accordion-item title="Third Item">
           <p class="text-gray-600">
             This is the content of the third accordion item.
           </p>
-        </ui-accordion-item>
-      </ui-accordion>
+        </ngt-accordion-item>
+      </ngt-accordion>
     `
   })
 };

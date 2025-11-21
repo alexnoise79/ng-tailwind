@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { ButtonComponent, CollapseComponent } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtCollapse } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.collapse',
-  imports: [ButtonComponent, CollapseComponent],
+  imports: [NgtButton, NgtCollapse],
   templateUrl: './collapse.component.html'
 })
 export class CollapseDemoComponent {

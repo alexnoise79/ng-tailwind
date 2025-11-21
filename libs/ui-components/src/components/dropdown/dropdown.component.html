@@ -1,8 +1,8 @@
 <div class="relative inline-block">
-  <ng-content select="[ui-dropdown-trigger]" />
+  <ng-content select="[ngt-dropdown-trigger]" />
   @if (isOpen()()) {
     <div #dropdownContent [class.left-0]="alignValue() === 'left'" [class.right-0]="alignValue() === 'right'" (uiOutsideClick)="close()" uiOutsideClick class="absolute z-50 mt-1">
-      <ng-content select="[ui-dropdown-content]" />
+      <ng-content select="[ngt-dropdown-content]" />
     </div>
   }
 </div>

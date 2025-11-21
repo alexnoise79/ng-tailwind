@@ -1,91 +1,91 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NavComponent } from './nav.component';
-import { NavItemComponent } from './nav-item.component';
+import { NgtNav } from './nav.component';
+import { NgtNavItem } from './nav-item.component';
 
-const meta: Meta<NavComponent> = {
+const meta: Meta<NgtNav> = {
   title: 'Components/Nav',
-  component: NavComponent,
+  component: NgtNav,
   tags: ['autodocs']
 };
 
 export default meta;
-type Story = StoryObj<NavComponent>;
+type Story = StoryObj<NgtNav>;
 
 export const Default: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav>
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav>
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const Pills: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav [style]="'pills'">
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav [style]="'pills'">
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const Underline: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav [style]="'underline'">
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav [style]="'underline'">
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const CenterAligned: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav [align]="'center'">
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav [align]="'center'">
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const Justified: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav [align]="'justified'">
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav [align]="'justified'">
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const Vertical: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
       <div class="max-w-xs">
-        <ui-nav [orientation]="'vertical'">
-          <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-          <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-          <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-        </ui-nav>
+        <ngt-nav [orientation]="'vertical'">
+          <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+          <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+          <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+        </ngt-nav>
       </div>
     `
   })
@@ -93,27 +93,27 @@ export const Vertical: Story = {
 
 export const WithDisabled: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav>
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Disabled" [itemId]="'disabled'" [disabled]="true"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav>
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Disabled" [itemId]="'disabled'" [disabled]="true"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };
 
 export const WithActiveId: Story = {
   render: () => ({
-    imports: [NavItemComponent],
+    imports: [NgtNavItem],
     template: `
-      <ui-nav [activeId]="'about'">
-        <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-        <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-        <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-      </ui-nav>
+      <ngt-nav [activeId]="'about'">
+        <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+        <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+        <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+      </ngt-nav>
     `
   })
 };

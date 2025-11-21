@@ -5,58 +5,58 @@
       <h1 class="text-xl font-semibold text-gray-900">ng-tailwind UI</h1>
     </div>
     <nav class="flex-1 px-4 py-4">
-      <ui-nav [orientation]="'vertical'" [style]="'tabs'" [activeId]="activeRouteId()">
-        <ui-nav-item 
+      <ngt-nav [orientation]="'vertical'" [style]="'tabs'" [activeId]="activeRouteId()">
+        <ngt-nav-item 
           label="Getting Started" 
           [itemId]="'getting-started'"
           (activated)="navigateTo('/getting-started')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Button" 
           [itemId]="'button'"
           (activated)="navigateTo('/button')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Modal" 
           [itemId]="'modal'"
           (activated)="navigateTo('/modal')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Accordion" 
           [itemId]="'accordion'"
           (activated)="navigateTo('/accordion')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Nav" 
           [itemId]="'nav'"
           (activated)="navigateTo('/nav')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Dropdown" 
           [itemId]="'dropdown'"
           (activated)="navigateTo('/dropdown')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Tooltip" 
           [itemId]="'tooltip'"
           (activated)="navigateTo('/tooltip')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Collapse" 
           [itemId]="'collapse'"
           (activated)="navigateTo('/collapse')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Datepicker" 
           [itemId]="'datepicker'"
           (activated)="navigateTo('/datepicker')">
-        </ui-nav-item>
-        <ui-nav-item 
+        </ngt-nav-item>
+        <ngt-nav-item 
           label="Offcanvas" 
           [itemId]="'offcanvas'"
           (activated)="navigateTo('/offcanvas')">
-        </ui-nav-item>
-      </ui-nav>
+        </ngt-nav-item>
+      </ngt-nav>
     </nav>
   </aside>
 
@@ -67,8 +67,8 @@
         <div class="flex justify-between items-center w-full">
           <h2 class="text-lg font-semibold text-gray-900">Component Demo</h2>
           <div class="flex gap-2">
-            <ui-button variant="outline" size="sm">Documentation</ui-button>
-            <ui-button variant="primary" size="sm">Get Started</ui-button>
+            <ngt-button variant="outline" size="sm">Documentation</ngt-button>
+            <ngt-button variant="primary" size="sm">Get Started</ngt-button>
           </div>
         </div>
       </div>

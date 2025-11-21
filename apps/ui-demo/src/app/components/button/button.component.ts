@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { ButtonComponent } from '@ng-tailwind/ui-components';
+import { NgtButton } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'section.button',
-  imports: [ButtonComponent],
+  imports: [NgtButton],
   templateUrl: './button.component.html'
 })
 export class ButtonDemoComponent {}

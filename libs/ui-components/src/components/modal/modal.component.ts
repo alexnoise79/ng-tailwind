@@ -3,11 +3,11 @@ import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
 @Component({
-  selector: 'ui-modal',
+  selector: 'ngt-modal',
   imports: [TrapFocusDirective],
   templateUrl: './modal.component.html'
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class NgtModal implements OnInit, OnDestroy {
   @Input() set isOpen(value: boolean | WritableSignal<boolean>) {
     if (typeof value === 'boolean') {
       this._isOpen.set(value);

@@ -1,23 +1,23 @@
 import { Component, ContentChildren, QueryList, AfterContentInit, signal, computed, input } from '@angular/core';
-import { NavItemComponent } from './nav-item.component';
+import { NgtNavItem } from './nav-item.component';
 
 export type NavOrientation = 'horizontal' | 'vertical';
 export type NavStyle = 'tabs' | 'pills' | 'underline';
 export type NavAlign = 'start' | 'center' | 'end' | 'justified';
 
 @Component({
-  selector: 'ui-nav',
+  selector: 'ngt-nav',
   templateUrl: './nav.component.html'
 })
-export class NavComponent implements AfterContentInit {
+export class NgtNav implements AfterContentInit {
   readonly orientation = input<NavOrientation>('horizontal');
   readonly style = input<NavStyle>('tabs');
   readonly align = input<NavAlign>('start');
   readonly activeId = input<string | null>(null);
 
-  @ContentChildren(NavItemComponent) navItems!: QueryList<NavItemComponent>;
+  @ContentChildren(NgtNavItem) navItems!: QueryList<NgtNavItem>;
 
-  items = signal<NavItemComponent[]>([]);
+  items = signal<NgtNavItem[]>([]);
   selectedId = signal<string | null>(null);
 
   ngAfterContentInit(): void {
@@ -128,7 +128,7 @@ export class NavComponent implements AfterContentInit {
     return classes;
   });
 
-  getNavButtonClasses(item: NavItemComponent): string {
+  getNavButtonClasses(item: NgtNavItem): string {
     const baseClasses = this.orientation() === 'vertical' 
       ? 'flex items-center justify-start font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed w-full'
       : 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
@@ -178,7 +178,7 @@ export class NavComponent implements AfterContentInit {
     return classes;
   }
 
-  getNavItemClasses(item: NavItemComponent): string {
+  getNavItemClasses(item: NgtNavItem): string {
     if (this.align() === 'justified' && this.orientation() === 'horizontal') {
       return 'flex-1';
     }
