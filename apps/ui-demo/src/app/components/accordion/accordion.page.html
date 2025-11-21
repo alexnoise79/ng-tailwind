@@ -1,37 +1,181 @@
-<div class="space-y-12">
-  <section>
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">Accordion</h2>
-    <p class="text-gray-600 mb-4">Collapsible content sections with smooth animations.</p>
-  </section>
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Accordion</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      Collapsible content sections with smooth animations.
+    </p>
+  </div>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Single Open (Default)</h3>
-    <ngt-accordion [multiOpen]="false">
-      <ngt-accordion-item title="First Item">
-        <p class="text-gray-600">This is the content of the first accordion item.</p>
-      </ngt-accordion-item>
-      <ngt-accordion-item title="Second Item">
-        <p class="text-gray-600">This is the content of the second accordion item.</p>
-      </ngt-accordion-item>
-      <ngt-accordion-item title="Third Item">
-        <p class="text-gray-600">This is the content of the third accordion item.</p>
-      </ngt-accordion-item>
-    </ngt-accordion>
-  </section>
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item 
+        [itemId]="'showcase'" 
+        label="Showcase"
+        (activated)="setActiveTab('showcase')"
+      ></ngt-nav-item>
+      <ngt-nav-item 
+        [itemId]="'api'" 
+        label="API"
+        (activated)="setActiveTab('api')"
+      ></ngt-nav-item>
+    </ngt-nav>
+  </div>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Multiple Open</h3>
-    <ngt-accordion [multiOpen]="true">
-      <ngt-accordion-item title="First Item">
-        <p class="text-gray-600">This is the content of the first accordion item.</p>
-      </ngt-accordion-item>
-      <ngt-accordion-item title="Second Item">
-        <p class="text-gray-600">This is the content of the second accordion item.</p>
-      </ngt-accordion-item>
-      <ngt-accordion-item title="Third Item">
-        <p class="text-gray-600">This is the content of the third accordion item.</p>
-      </ngt-accordion-item>
-    </ngt-accordion>
-  </section>
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-8">
+      <!-- Single Open -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Single Open (Default)</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-accordion [multiOpen]="false">
+              <ngt-accordion-item title="First Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the first accordion item.</p>
+              </ngt-accordion-item>
+              <ngt-accordion-item title="Second Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the second accordion item.</p>
+              </ngt-accordion-item>
+              <ngt-accordion-item title="Third Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the third accordion item.</p>
+              </ngt-accordion-item>
+            </ngt-accordion>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.singleOpen)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.singleOpen }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multiple Open -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiple Open</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-accordion [multiOpen]="true">
+              <ngt-accordion-item title="First Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the first accordion item.</p>
+              </ngt-accordion-item>
+              <ngt-accordion-item title="Second Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the second accordion item.</p>
+              </ngt-accordion-item>
+              <ngt-accordion-item title="Third Item">
+                <p class="text-gray-600 dark:text-gray-400">This is the content of the third accordion item.</p>
+              </ngt-accordion-item>
+            </ngt-accordion>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.multipleOpen)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.multipleOpen }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+        
+        <!-- NgtAccordion Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtAccordion - Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">multiOpen</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean | WritableSignal&lt;boolean&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether multiple accordion items can be open at the same time.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- NgtAccordionItem Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtAccordionItem - Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">title</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Required. The title text displayed in the accordion item header.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Templates -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Component</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtAccordionItem</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">ng-content</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The content to display when the accordion item is expanded. Can contain any HTML or Angular components.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
 </div>
-

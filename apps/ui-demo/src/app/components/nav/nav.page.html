@@ -1,73 +1,374 @@
-<div class="space-y-12">
-  <section>
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">Nav</h2>
-    <p class="text-gray-600 mb-4">Navigation component with multiple styles and orientations.</p>
-  </section>
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Nav</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      Navigation component with multiple styles and orientations.
+    </p>
+  </div>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Default (Tabs style)</h3>
-    <ngt-nav>
-      <ngt-nav-item label="Home" [itemId]="'nav-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-about'"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-contact'"></ngt-nav-item>
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item 
+        [itemId]="'showcase'" 
+        label="Showcase"
+        (activated)="setActiveTab('showcase')"
+      ></ngt-nav-item>
+      <ngt-nav-item 
+        [itemId]="'api'" 
+        label="API"
+        (activated)="setActiveTab('api')"
+      ></ngt-nav-item>
     </ngt-nav>
-  </section>
+  </div>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Pills style</h3>
-    <ngt-nav [style]="'pills'">
-      <ngt-nav-item label="Home" [itemId]="'nav-pills-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-pills-about'"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-pills-contact'"></ngt-nav-item>
-    </ngt-nav>
-  </section>
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-8">
+      <!-- Default (Tabs style) -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Default (Tabs style)</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav>
+              <ngt-nav-item label="Home" [itemId]="'nav-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.default)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.default }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Underline style</h3>
-    <ngt-nav [style]="'underline'">
-      <ngt-nav-item label="Home" [itemId]="'nav-underline-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-underline-about'"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-underline-contact'"></ngt-nav-item>
-    </ngt-nav>
-  </section>
+      <!-- Pills style -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pills style</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav [style]="'pills'">
+              <ngt-nav-item label="Home" [itemId]="'nav-pills-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-pills-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-pills-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.pills)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.pills }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Center aligned</h3>
-    <ngt-nav [align]="'center'">
-      <ngt-nav-item label="Home" [itemId]="'nav-center-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-center-about'"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-center-contact'"></ngt-nav-item>
-    </ngt-nav>
-  </section>
+      <!-- Underline style -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Underline style</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav [style]="'underline'">
+              <ngt-nav-item label="Home" [itemId]="'nav-underline-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-underline-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-underline-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.underline)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.underline }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Justified</h3>
-    <ngt-nav [align]="'justified'">
-      <ngt-nav-item label="Home" [itemId]="'nav-justified-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-justified-about'"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-justified-contact'"></ngt-nav-item>
-    </ngt-nav>
-  </section>
+      <!-- Center aligned -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Center aligned</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav [align]="'center'">
+              <ngt-nav-item label="Home" [itemId]="'nav-center-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-center-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-center-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.center)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.center }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">With disabled item</h3>
-    <ngt-nav>
-      <ngt-nav-item label="Home" [itemId]="'nav-disabled-home'"></ngt-nav-item>
-      <ngt-nav-item label="About" [itemId]="'nav-disabled-about'"></ngt-nav-item>
-      <ngt-nav-item label="Disabled" [itemId]="'nav-disabled-disabled'" [disabled]="true"></ngt-nav-item>
-      <ngt-nav-item label="Contact" [itemId]="'nav-disabled-contact'"></ngt-nav-item>
-    </ngt-nav>
-  </section>
+      <!-- Justified -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Justified</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav [align]="'justified'">
+              <ngt-nav-item label="Home" [itemId]="'nav-justified-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-justified-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-justified-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.justified)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.justified }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vertical orientation</h3>
-    <div class="max-w-xs">
-      <ngt-nav [orientation]="'vertical'">
-        <ngt-nav-item label="Home" [itemId]="'nav-vertical-home'"></ngt-nav-item>
-        <ngt-nav-item label="About" [itemId]="'nav-vertical-about'"></ngt-nav-item>
-        <ngt-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ngt-nav-item>
-      </ngt-nav>
+      <!-- With disabled item -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With disabled item</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-nav>
+              <ngt-nav-item label="Home" [itemId]="'nav-disabled-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-disabled-about'"></ngt-nav-item>
+              <ngt-nav-item label="Disabled" [itemId]="'nav-disabled-disabled'" [disabled]="true"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-disabled-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.disabled)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.disabled }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vertical orientation -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical orientation</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 max-w-xs">
+            <ngt-nav [orientation]="'vertical'">
+              <ngt-nav-item label="Home" [itemId]="'nav-vertical-home'"></ngt-nav-item>
+              <ngt-nav-item label="About" [itemId]="'nav-vertical-about'"></ngt-nav-item>
+              <ngt-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ngt-nav-item>
+            </ngt-nav>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.vertical)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.vertical }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
-</div>
+  }
 
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+        
+        <!-- NgtNav Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNav - Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">orientation</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal' | 'vertical'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The orientation of the navigation items.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">style</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs' | 'pills' | 'underline'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style of the navigation.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start' | 'center' | 'end' | 'justified'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of navigation items (horizontal only).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activeId</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The ID of the currently active navigation item.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- NgtNavItem Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">itemId</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional unique identifier for the navigation item. If not provided, an auto-generated ID will be used.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Required. The label text displayed in the navigation item.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the navigation item is disabled.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">routerLink</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | string[] | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional Angular Router link. When provided, the item will use router navigation and sync with RouterLinkActive.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- NgtNavItem Outputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Outputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activated</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;void&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the navigation item becomes active (only when routerLink is not used).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Templates -->
+        <section>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Component</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtNavItem</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">ng-content</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom content for the navigation item. If provided, it will be used instead of the label.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</div>

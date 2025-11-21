@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { NgtTable, TableColumn } from '@ng-tailwind/ui-components';
+import { Component, signal, inject } from '@angular/core';
+import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 
 interface Product {
   code: string;
@@ -13,10 +14,23 @@ interface Product {
 
 @Component({
   selector: 'section.table',
-  imports: [NgtTable],
+  imports: [NgtTable, NgtNav, NgtNavItem],
   templateUrl: './table.page.html'
 })
 export class TablePage {
+  private toastService = inject(NgtToastService);
+
+  // Tab management
+  activeTab = signal<'showcase' | 'api'>('showcase');
+
+  setActiveTab(tab: 'showcase' | 'api'): void {
+    this.activeTab.set(tab);
+  }
+
+  // Copy to clipboard functionality
+  copyToClipboard(code: string): void {
+    copyToClipboard(code, this.toastService);
+  }
   products = signal<Product[]>([
     { code: '001', name: 'Product 1', category: 'Electronics', quantity: 10, price: 99.99, rating: 4, inventoryStatus: 'INSTOCK' },
     { code: '002', name: 'Product 2', category: 'Clothing', quantity: 25, price: 49.99, rating: 3, inventoryStatus: 'INSTOCK' },
@@ -87,5 +101,37 @@ export class TablePage {
         return '';
     }
   }
+
+  // Code snippets for each demo
+  codeSnippets = {
+    basic: `<ngt-table
+  [value]="products()"
+  [columns]="basicColumns"
+  [size]="'md'">
+</ngt-table>`,
+    gridlines: `<ngt-table
+  [value]="products()"
+  [columns]="basicColumns"
+  [showGridlines]="true">
+</ngt-table>`,
+    striped: `<ngt-table
+  [value]="products()"
+  [columns]="basicColumns"
+  [striped]="true">
+</ngt-table>`,
+    pagination: `<ngt-table
+  [value]="products()"
+  [columns]="basicColumns"
+  [paginator]="true"
+  [rows]="5"
+  (pageChange)="onPageChange($event)">
+</ngt-table>`,
+    reorderable: `<ngt-table
+  [value]="products()"
+  [columns]="basicColumns"
+  [reorderableColumns]="true"
+  (columnReorder)="onColumnReorder($event)">
+</ngt-table>`
+  };
 }
 

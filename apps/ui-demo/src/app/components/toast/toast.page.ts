@@ -1,13 +1,26 @@
-import { Component, inject } from '@angular/core';
-import { NgtToastService, NgtToastContainer, NgtButton } from '@ng-tailwind/ui-components';
+import { Component, inject, signal } from '@angular/core';
+import { NgtToastService, NgtToastContainer, NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
+import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 
 @Component({
   selector: 'section.toast',
-  imports: [NgtButton],
+  imports: [NgtButton, NgtNav, NgtNavItem],
   templateUrl: './toast.page.html'
 })
 export class ToastPage {
   private toastService = inject(NgtToastService);
+
+  // Tab management
+  activeTab = signal<'showcase' | 'api'>('showcase');
+
+  setActiveTab(tab: 'showcase' | 'api'): void {
+    this.activeTab.set(tab);
+  }
+
+  // Copy to clipboard functionality
+  copyToClipboard(code: string): void {
+    copyToClipboard(code, this.toastService);
+  }
 
   showSuccess(): void {
     this.toastService.show({
@@ -96,5 +109,37 @@ export class ToastPage {
   clearAll(): void {
     this.toastService.clear();
   }
+
+  // Code snippets for each demo
+  codeSnippets = {
+    basic: `// In your component
+private toastService = inject(NgtToastService);
+
+showSuccess(): void {
+  this.toastService.show({
+    severity: 'success',
+    summary: 'Success',
+    detail: 'Operation completed successfully'
+  });
+}
+
+// In your template
+<ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>`,
+    withSummary: `this.toastService.show({
+  severity: 'info',
+  summary: 'Update Available',
+  detail: 'A new version of the application is available.'
+});`,
+    textOnly: `this.toastService.show({
+  severity: 'info',
+  text: 'Simple toast message without summary or detail'
+});`,
+    sticky: `this.toastService.show({
+  severity: 'warning',
+  summary: 'Sticky Toast',
+  detail: 'This toast will not auto-close.',
+  sticky: true
+});`
+  };
 }
 

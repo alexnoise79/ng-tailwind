@@ -1,185 +1,477 @@
-<div class="space-y-12">
-  <section>
-    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Table</h2>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">A comprehensive table component with sorting, pagination, column reordering, and more.</p>
-  </section>
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Table</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      A comprehensive table component with sorting, pagination, column reordering, and more.
+    </p>
+  </div>
 
-  <!-- Basic Table -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Basic Table</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Simple table with sortable columns.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="basicTableSize()">
-    </ngt-table>
-  </section>
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item 
+        [itemId]="'showcase'" 
+        label="Showcase"
+        (activated)="setActiveTab('showcase')"
+      ></ngt-nav-item>
+      <ngt-nav-item 
+        [itemId]="'api'" 
+        label="API"
+        (activated)="setActiveTab('api')"
+      ></ngt-nav-item>
+    </ngt-nav>
+  </div>
 
-  <!-- Table with Gridlines -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Gridlines</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with visible borders between cells.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="gridlinesTableSize()"
-      [showGridlines]="true">
-    </ngt-table>
-  </section>
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-12">
 
-  <!-- Striped Rows -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Rows</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating row colors for better readability.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="stripedTableSize()"
-      [striped]="true">
-    </ngt-table>
-  </section>
-
-  <!-- Striped Columns -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Columns</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating column colors for better readability.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="stripedTableSize()"
-      [stripedColumns]="true">
-    </ngt-table>
-  </section>
-
-  <!-- Table Sizes -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Table Sizes</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Different table sizes: small, medium, and large.</p>
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Size:</label>
-      <select
-        [value]="selectedSize()"
-        (change)="selectedSize.set($any($event.target).value)"
-        class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
-        <option value="sm">Small</option>
-        <option value="md">Medium</option>
-        <option value="lg">Large</option>
-      </select>
-    </div>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="selectedSize()"
-      [showGridlines]="true">
-    </ngt-table>
-  </section>
-
-  <!-- Table with Pagination -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Pagination</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with integrated pagination component.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="paginationTableSize()"
-      [paginator]="true"
-      [rows]="5"
-      (pageChange)="onPageChange($event)">
-    </ngt-table>
-  </section>
-
-  <!-- Table with Custom Template -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Custom Template</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with custom header, body, and footer templates.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="extendedColumns"
-      [size]="templateTableSize()"
-      [showGridlines]="true">
-      <ng-template #caption>
-        <div class="flex items-center justify-between mb-4">
-          <span class="text-xl font-bold text-gray-900 dark:text-white">Products</span>
-          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
-            Refresh
-          </button>
+      <!-- Basic Table -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Basic Table</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Simple table with sortable columns.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="basicTableSize()">
+            </ngt-table>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.basic)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+            </div>
+          </div>
         </div>
-      </ng-template>
-      <ng-template #header let-columns>
-        <tr>
-          @for (col of columns; track col.field) {
-            <th class="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-              {{ col.header }}
-            </th>
-          }
-        </tr>
-      </ng-template>
-      <ng-template #body let-product let-columns="columns" let-trClasses="trClasses">
-        <tr [class]="trClasses" class="hover:bg-gray-50 dark:hover:bg-gray-800">
-          @for (col of columns; track col.field) {
-            <td class="px-4 py-3 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-              @if (col.field === 'price') {
-                ${{ product[col.field] }}
-              } @else {
-                {{ product[col.field] }}
-              }
-            </td>
-          }
-        </tr>
-      </ng-template>
-      <ng-template #footer let-columns>
-        <tr>
-          <td [attr.colspan]="columns.length" class="px-4 py-3 text-center text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            In total there are {{ products().length }} products.
-          </td>
-        </tr>
-      </ng-template>
-    </ngt-table>
-  </section>
+      </section>
 
-  <!-- Reorderable Columns -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Reorderable Columns</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Drag and drop column headers to reorder columns.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="basicColumns"
-      [size]="reorderableTableSize()"
-      [showGridlines]="true"
-      [reorderableColumns]="true"
-      (columnReorder)="onColumnReorder($event)">
-    </ngt-table>
-  </section>
+      <!-- Table with Gridlines -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Gridlines</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with visible borders between cells.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="gridlinesTableSize()"
+              [showGridlines]="true">
+            </ngt-table>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.gridlines)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.gridlines }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Multiple Sort -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Multiple Column Sort</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with multiple column sorting enabled.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="extendedColumns"
-      [size]="multipleSortTableSize()"
-      [showGridlines]="true"
-      [sortMode]="'multiple'"
-      (sortChange)="onSort($event)">
-    </ngt-table>
-  </section>
+      <!-- Striped Rows -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Rows</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating row colors for better readability.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="stripedTableSize()"
+              [striped]="true">
+            </ngt-table>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.striped)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.striped }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <!-- Combined Features -->
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Combined Features</h3>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with gridlines, striped rows, pagination, and sorting.</p>
-    <ngt-table
-      [value]="products()"
-      [columns]="extendedColumns"
-      [size]="combinedTableSize()"
-      [showGridlines]="true"
-      [striped]="true"
-      [paginator]="true"
-      [rows]="5"
-      (sortChange)="onSort($event)"
-      (pageChange)="onPageChange($event)">
-    </ngt-table>
-  </section>
+      <!-- Striped Columns -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Columns</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating column colors for better readability.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="stripedTableSize()"
+              [stripedColumns]="true">
+            </ngt-table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Table Sizes -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Table Sizes</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Different table sizes: small, medium, and large.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Size:</label>
+            <select
+              [value]="selectedSize()"
+              (change)="selectedSize.set($any($event.target).value)"
+              class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+              <option value="sm">Small</option>
+              <option value="md">Medium</option>
+              <option value="lg">Large</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="selectedSize()"
+              [showGridlines]="true">
+            </ngt-table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Table with Pagination -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Pagination</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with integrated pagination component.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="paginationTableSize()"
+              [paginator]="true"
+              [rows]="5"
+              (pageChange)="onPageChange($event)">
+            </ngt-table>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.pagination)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.pagination }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Table with Custom Template -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Custom Template</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with custom header, body, and footer templates.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="extendedColumns"
+              [size]="templateTableSize()"
+              [showGridlines]="true">
+              <ng-template #caption>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="text-xl font-bold text-gray-900 dark:text-white">Products</span>
+                  <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                    Refresh
+                  </button>
+                </div>
+              </ng-template>
+              <ng-template #header let-columns>
+                <tr>
+                  @for (col of columns; track col.field) {
+                    <th class="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                      {{ col.header }}
+                    </th>
+                  }
+                </tr>
+              </ng-template>
+              <ng-template #body let-product let-columns="columns" let-trClasses="trClasses">
+                <tr [class]="trClasses" class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  @for (col of columns; track col.field) {
+                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                      @if (col.field === 'price') {
+                        ${{ product[col.field] }}
+                      } @else {
+                        {{ product[col.field] }}
+                      }
+                    </td>
+                  }
+                </tr>
+              </ng-template>
+              <ng-template #footer let-columns>
+                <tr>
+                  <td [attr.colspan]="columns.length" class="px-4 py-3 text-center text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                    In total there are {{ products().length }} products.
+                  </td>
+                </tr>
+              </ng-template>
+            </ngt-table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reorderable Columns -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Reorderable Columns</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Drag and drop column headers to reorder columns.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="basicColumns"
+              [size]="reorderableTableSize()"
+              [showGridlines]="true"
+              [reorderableColumns]="true"
+              (columnReorder)="onColumnReorder($event)">
+            </ngt-table>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.reorderable)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.reorderable }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multiple Sort -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Multiple Column Sort</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with multiple column sorting enabled.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="extendedColumns"
+              [size]="multipleSortTableSize()"
+              [showGridlines]="true"
+              [sortMode]="'multiple'"
+              (sortChange)="onSort($event)">
+            </ngt-table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Combined Features -->
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Combined Features</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with gridlines, striped rows, pagination, and sorting.</p>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <ngt-table
+              [value]="products()"
+              [columns]="extendedColumns"
+              [size]="combinedTableSize()"
+              [showGridlines]="true"
+              [striped]="true"
+              [paginator]="true"
+              [rows]="5"
+              (sortChange)="onSort($event)"
+              (pageChange)="onPageChange($event)">
+            </ngt-table>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+        
+        <!-- Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">value</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">unknown[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">An array of objects to display in the table.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">columns</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">TableColumn[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Array of column definitions. Each column has field, header, and optional sortable property.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Size of the table cells.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showGridlines</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show borders between cells.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">striped</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to apply alternating row colors.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">paginator</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show pagination controls.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">rows</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">10</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Number of rows to display per page.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">reorderableColumns</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether columns can be reordered by dragging.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">sortMode</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'single' | 'multiple'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'single'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to allow single or multiple column sorting.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Outputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">sortChange</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;&#123; field: string; order: SortOrder &#125;&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the sort order changes.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">pageChange</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;&#123; page: number; first: number; rows: number &#125;&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the page changes (only when paginator is enabled).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">columnReorder</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;&#123; columns: TableColumn[]; dragIndex: number; dropIndex: number &#125;&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when columns are reordered (only when reorderableColumns is enabled).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Templates -->
+        <section>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Context</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#header</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">columns: TableColumn[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the table header row.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#body</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">row: unknown, rowIndex: number, columns: TableColumn[], trClasses: string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for each table body row.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#footer</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">columns: TableColumn[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the table footer row.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#caption</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the table caption.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
 </div>
 
