@@ -105,24 +105,11 @@ body {
 }
 
 /* Default text colors for better contrast in dark mode */
-/* These can be overridden with Tailwind utility classes */
+/* Using Tailwind utilities via @apply */
 h1, h2, h3, h4, h5, h6 {
-  color: rgb(17 24 39); /* gray-900 - light mode */
-}
-
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6 {
-  color: rgb(255 255 255); /* white - dark mode */
+  @apply text-gray-900 dark:text-white;
 }
 
 p {
-  color: rgb(55 65 81); /* gray-700 - light mode */
-}
-
-.dark p {
-  color: rgb(209 213 219); /* gray-300 - dark mode */
+  @apply text-gray-700 dark:text-gray-300;
 }
