@@ -1,0 +1,117 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Pagination</h2>
+    <p class="text-gray-600 mb-4">Pagination components for navigating through multiple pages of content.</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Example</h3>
+    <p class="text-gray-600 mb-4">Simple pagination with 10 pages.</p>
+    <ngt-pagination
+      [currentPage]="currentPage1()"
+      [totalPages]="10"
+      (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"
+    ></ngt-pagination>
+    <p class="text-sm text-gray-500 mt-2">Current page: {{ currentPage1() }}</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">With Total Items</h3>
+    <p class="text-gray-600 mb-4">Pagination calculated from total items and page size.</p>
+    <ngt-pagination
+      [currentPage]="currentPage2()"
+      [totalItems]="100"
+      [pageSize]="10"
+      (pageChanged)="currentPage2.set($event); onPageChange($event, 'currentPage2')"
+    ></ngt-pagination>
+    <p class="text-sm text-gray-500 mt-2">Current page: {{ currentPage2() }} of {{ Math.ceil(100 / 10) }}</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Sizes</h3>
+    <div class="space-y-4">
+      <div>
+        <p class="text-gray-600 mb-2">Small:</p>
+        <ngt-pagination
+          [currentPage]="currentPage3()"
+          [totalPages]="20"
+          [size]="'sm'"
+          (pageChanged)="currentPage3.set($event); onPageChange($event, 'currentPage3')"
+        ></ngt-pagination>
+      </div>
+      <div>
+        <p class="text-gray-600 mb-2">Medium (default):</p>
+        <ngt-pagination
+          [currentPage]="currentPage4()"
+          [totalPages]="20"
+          [size]="'md'"
+          (pageChanged)="currentPage4.set($event); onPageChange($event, 'currentPage4')"
+        ></ngt-pagination>
+      </div>
+      <div>
+        <p class="text-gray-600 mb-2">Large:</p>
+        <ngt-pagination
+          [currentPage]="currentPage4()"
+          [totalPages]="20"
+          [size]="'lg'"
+          (pageChanged)="currentPage4.set($event); onPageChange($event, 'currentPage4')"
+        ></ngt-pagination>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Many Pages with Ellipsis</h3>
+    <p class="text-gray-600 mb-4">Pagination with many pages shows ellipsis for better navigation.</p>
+    <ngt-pagination
+      [currentPage]="currentPage5()"
+      [totalPages]="100"
+      [maxVisiblePages]="7"
+      (pageChanged)="currentPage5.set($event); onPageChange($event, 'currentPage5')"
+    ></ngt-pagination>
+    <p class="text-sm text-gray-500 mt-2">Current page: {{ currentPage5() }}</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Without First/Last Buttons</h3>
+    <p class="text-gray-600 mb-4">Pagination without first and last page buttons.</p>
+    <ngt-pagination
+      [currentPage]="currentPage6()"
+      [totalPages]="20"
+      [showFirstLast]="false"
+      (pageChanged)="currentPage6.set($event); onPageChange($event, 'currentPage6')"
+    ></ngt-pagination>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Without Previous/Next Buttons</h3>
+    <p class="text-gray-600 mb-4">Pagination without previous and next buttons.</p>
+    <ngt-pagination
+      [currentPage]="currentPage7()"
+      [totalPages]="20"
+      [showPrevNext]="false"
+      (pageChanged)="currentPage7.set($event); onPageChange($event, 'currentPage7')"
+    ></ngt-pagination>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Disabled</h3>
+    <p class="text-gray-600 mb-4">Disabled pagination component.</p>
+    <ngt-pagination
+      [currentPage]="currentPage8()"
+      [totalPages]="20"
+      [disabled]="true"
+    ></ngt-pagination>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Few Pages</h3>
+    <p class="text-gray-600 mb-4">Pagination with only a few pages shows all page numbers.</p>
+    <ngt-pagination
+      [currentPage]="currentPage1()"
+      [totalPages]="3"
+      (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"
+    ></ngt-pagination>
+  </section>
+</div>
+

@@ -44,5 +44,9 @@ export const appRoutes: Routes = [
   {
     path: 'offcanvas',
     loadComponent: () => import('./components/offcanvas/offcanvas.component').then(m => m.OffcanvasDemoComponent)
+  },
+  {
+    path: 'pagination',
+    loadComponent: () => import('./components/pagination/pagination.component').then(m => m.PaginationDemoComponent)
   }
 ];
