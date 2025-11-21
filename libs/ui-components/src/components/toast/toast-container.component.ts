@@ -3,13 +3,13 @@ import { NgtToastService } from './toast.service';
 
 @Component({
   selector: 'ngt-toast-container',
-  template: '<div #container></div>',
+  template: '<div #container class="toast-container-inner"></div>',
   styles: [`
     :host {
       position: fixed;
       top: 1rem;
       right: 1rem;
-      z-index: 9999;
+      z-index: 99999;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -18,8 +18,11 @@ import { NgtToastService } from './toast.service';
       pointer-events: none;
     }
     
-    :host > div {
+    :host > div.toast-container-inner {
       pointer-events: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
   `]
 })

@@ -3,7 +3,7 @@ import { NgtToastService, NgtToastContainer, NgtButton } from '@ng-tailwind/ui-c
 
 @Component({
   selector: 'section.toast',
-  imports: [NgtToastContainer, NgtButton],
+  imports: [NgtButton],
   templateUrl: './toast.component.html'
 })
 export class ToastDemoComponent {
@@ -97,4 +97,3 @@ export class ToastDemoComponent {
     this.toastService.clear();
   }
 }
-
