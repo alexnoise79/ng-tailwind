@@ -134,7 +134,6 @@ export class NgtNav implements AfterContentInit {
       : 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
     
     const isActive = this.selectedId() === item.id;
-    const isDisabled = item.disabled();
     
     let classes = baseClasses;
     
@@ -178,7 +177,7 @@ export class NgtNav implements AfterContentInit {
     return classes;
   }
 
-  getNavItemClasses(item: NgtNavItem): string {
+  getNavItemClasses(): string {
     if (this.align() === 'justified' && this.orientation() === 'horizontal') {
       return 'flex-1';
     }
