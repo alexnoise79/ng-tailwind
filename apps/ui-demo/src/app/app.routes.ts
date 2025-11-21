@@ -53,5 +53,9 @@ export const appRoutes: Routes = [
   {
     path: 'toggle-switch',
     loadComponent: () => import('./components/toggle-switch/toggle-switch.component').then(m => m.ToggleSwitchDemoComponent)
+  },
+  {
+    path: 'toast',
+    loadComponent: () => import('./components/toast/toast.component').then(m => m.ToastDemoComponent)
   }
 ];

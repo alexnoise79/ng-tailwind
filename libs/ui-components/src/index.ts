@@ -10,6 +10,7 @@ export * from './components/datepicker';
 export * from './components/offcanvas';
 export * from './components/pagination';
 export * from './components/toggle-switch';
+export * from './components/toast';
 
 // Directives
 export * from './directives';

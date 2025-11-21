@@ -1,0 +1,42 @@
+<div #toastElement [class]="toastClasses()" [attr.aria-live]="severityValue() === 'danger' ? 'assertive' : 'polite'" role="alert">
+  @if (iconValue() || defaultIcon()) {
+    <div [class]="iconClasses()">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path [attr.d]="defaultIcon()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+      </svg>
+    </div>
+  }
+  
+  <div class="flex-1 min-w-0">
+    @if (summaryValue()) {
+      <div class="font-semibold mb-1">{{ summaryValue() }}</div>
+    }
+    @if (detailValue()) {
+      <div class="text-sm">{{ detailValue() }}</div>
+    }
+    @if (textValue() && !summaryValue() && !detailValue()) {
+      @if (isTextTemplate() && textTemplate()) {
+        <ng-container *ngTemplateOutlet="textTemplate()!; context: { $implicit: data() }"></ng-container>
+      } @else {
+        <div>{{ textValue() }}</div>
+      }
+    }
+  </div>
+
+  @if (closableValue()) {
+    <button
+      [attr.aria-label]="'Close'"
+      (click)="handleClose()"
+      type="button"
+      class="flex-shrink-0 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded p-1 transition-colors">
+      @if (closeIconValue()) {
+        <span class="text-sm">{{ closeIconValue() }}</span>
+      } @else {
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      }
+    </button>
+  }
+</div>
+

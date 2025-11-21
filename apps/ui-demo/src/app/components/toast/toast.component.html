@@ -1,0 +1,75 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">Toast</h2>
+    <p class="text-gray-600 mb-4">A toast component for displaying non-blocking notifications to users. Use the NgtToastService to show and manage toasts.</p>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Usage</h3>
+    <p class="text-gray-600 mb-4">Add <code class="bg-gray-100 px-2 py-1 rounded">&lt;ngt-toast-container&gt;&lt;/ngt-toast-container&gt;</code> to your app component, then inject NgtToastService to show toasts.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>
+      <ngt-button (click)="showInfo()" variant="primary">Info Toast</ngt-button>
+      <ngt-button (click)="showWarning()" variant="primary">Warning Toast</ngt-button>
+      <ngt-button (click)="showDanger()" variant="primary">Danger Toast</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">With Summary and Detail</h3>
+    <p class="text-gray-600 mb-4">Toasts can display both a summary (title) and detail (description) text.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showWithSummary()" variant="outline">Show Toast with Summary</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Text Only</h3>
+    <p class="text-gray-600 mb-4">Toasts can display just text without summary or detail.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showTextOnly()" variant="outline">Show Text Only Toast</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Sticky Toasts</h3>
+    <p class="text-gray-600 mb-4">Sticky toasts will not auto-close and must be closed manually.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showSticky()" variant="outline">Show Sticky Toast</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Not Closable</h3>
+    <p class="text-gray-600 mb-4">Toasts can be configured to not show a close button.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showNotClosable()" variant="outline">Show Not Closable Toast</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Custom Delay</h3>
+    <p class="text-gray-600 mb-4">Control how long a toast stays visible before auto-closing.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showCustomDelay()" variant="outline">Show Toast (10s delay)</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Custom Icon</h3>
+    <p class="text-gray-600 mb-4">Toasts can use custom icons via SVG path data.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="showWithIcon()" variant="outline">Show Toast with Custom Icon</ngt-button>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Clear All</h3>
+    <p class="text-gray-600 mb-4">Remove all currently visible toasts.</p>
+    <div class="flex flex-wrap gap-4">
+      <ngt-button (click)="clearAll()" variant="ghost">Clear All Toasts</ngt-button>
+    </div>
+  </section>
+</div>
+
+
