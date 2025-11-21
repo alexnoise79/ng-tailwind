@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgtToast, NgtToastService, NgtToastContainer } from './toast.component';
+import { NgtToast } from './toast.component';
+import { NgtToastService } from './toast.service';
+import { NgtToastContainer } from './toast-container.component';
 import { Component, inject } from '@angular/core';
 
 @Component({
@@ -22,7 +24,7 @@ import { Component, inject } from '@angular/core';
   imports: [NgtToastContainer]
 })
 class ToastStoryWrapper {
-  private toastService = inject(NgtToastService);
+  private readonly toastService = inject(NgtToastService);
 
   showSuccess(): void {
     this.toastService.show({
@@ -126,7 +128,10 @@ type Story = StoryObj<NgtToast>;
 
 export const Interactive: Story = {
   render: () => ({
-    component: ToastStoryWrapper
+    component: ToastStoryWrapper,
+    moduleMetadata: {
+      imports: [NgtToastContainer]
+    }
   })
 };
 
