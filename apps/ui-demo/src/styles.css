@@ -256,6 +256,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Apply custom scrollbar to body */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
 /* Default text colors for better contrast in dark mode */
 /* Using Tailwind utilities via @apply */
 h1,
@@ -270,3 +296,19 @@ h6 {
 p {
   @apply text-gray-700 dark:text-gray-300;
 }
+
+/* Custom Scrollbar Variables */
+@theme {
+  /* Scrollbar colors - Light mode */
+  --scrollbar-thumb: rgb(203 213 225); /* gray-300 */
+  --scrollbar-track: rgb(241 245 249); /* gray-100 */
+  --scrollbar-thumb-hover: rgb(148 163 184); /* gray-400 */
+}
+
+/* Dark mode scrollbar variables */
+.dark {
+  --scrollbar-thumb: rgb(71 85 105); /* gray-600 */
+  --scrollbar-track: rgb(30 41 59); /* gray-800 */
+  --scrollbar-thumb-hover: rgb(100 116 139); /* gray-500 */
+}
+
