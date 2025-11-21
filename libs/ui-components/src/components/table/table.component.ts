@@ -10,6 +10,7 @@ import {
   ElementRef,
   ViewChild,
   AfterViewInit,
+  AfterViewChecked,
   OnDestroy
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -45,7 +46,7 @@ export interface TableRowGroup {
   imports: [CommonModule, NgtPagination],
   templateUrl: './table.component.html'
 })
-export class NgtTable implements AfterViewInit, OnDestroy {
+export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   // Inputs
   readonly value = input<unknown[]>([]);
   readonly columns = input<TableColumn[]>([]);
@@ -186,13 +187,31 @@ export class NgtTable implements AfterViewInit, OnDestroy {
   });
 
   private dragListeners: (() => void)[] = [];
+  private isColumnReorderSetup = false;
+  private lastReorderableState = false;
+  private lastColumnsLength = 0;
+  private hasLocalColumnReorder = false; // Track if columns have been reordered locally
 
   constructor() {
-    // Sync inputs with internal signals
+    // Sync inputs with internal signals - always create a new copy
+    // But don't overwrite if columns have been reordered locally
     effect(() => {
       const columns = this.columns();
-      if (columns.length > 0) {
-        this._columns.set([...columns]);
+      // Only sync from input if columns haven't been locally reordered
+      // or if the column count/fields have actually changed
+      if (!this.hasLocalColumnReorder) {
+        if (columns.length > 0) {
+          // Create a deep copy to ensure each table instance has its own columns
+          const currentColumns = this._columns();
+          const columnsChanged = currentColumns.length !== columns.length ||
+            columns.some((col, idx) => !currentColumns[idx] || currentColumns[idx].field !== col.field);
+          
+          if (columnsChanged) {
+            this._columns.set(columns.map(col => ({ ...col })));
+          }
+        } else {
+          this._columns.set([]);
+        }
       }
     });
 
@@ -216,11 +235,48 @@ export class NgtTable implements AfterViewInit, OnDestroy {
         this._multiSortMeta.set([...multiSortMeta]);
       }
     });
+
   }
 
   ngAfterViewInit(): void {
+    // Column reorder setup is handled in ngAfterViewChecked to ensure DOM is ready
+    // This method is required by the AfterViewInit interface
     if (this.reorderableColumns() && this.thead) {
-      this.setupColumnReorder();
+      // Trigger initial check
+      setTimeout(() => this.ngAfterViewChecked(), 0);
+    }
+  }
+
+  ngAfterViewChecked(): void {
+    const reorderable = this.reorderableColumns();
+    const columnsLength = this._columns().length;
+    
+    // Only re-setup if state actually changed and we're not currently dragging
+    const stateChanged = this.lastReorderableState !== reorderable || 
+                         this.lastColumnsLength !== columnsLength;
+    
+    if (stateChanged && !this._draggedColumnIndex()) {
+      if (reorderable && this.thead) {
+        // Clean up existing listeners
+        this.dragListeners.forEach(cleanup => cleanup());
+        this.dragListeners = [];
+        this.isColumnReorderSetup = false;
+        
+        // Setup column reorder
+        setTimeout(() => {
+          if (this.thead && this.reorderableColumns()) {
+            this.setupColumnReorder();
+            this.lastReorderableState = reorderable;
+            this.lastColumnsLength = columnsLength;
+          }
+        }, 0);
+      } else if (!reorderable && this.isColumnReorderSetup) {
+        // Clean up if reorderable is disabled
+        this.dragListeners.forEach(cleanup => cleanup());
+        this.dragListeners = [];
+        this.isColumnReorderSetup = false;
+        this.lastReorderableState = false;
+      }
     }
   }
 
@@ -229,53 +285,93 @@ export class NgtTable implements AfterViewInit, OnDestroy {
   }
 
   private setupColumnReorder(): void {
-    if (!this.thead) return;
+    if (!this.thead || !this.reorderableColumns()) {
+      this.isColumnReorderSetup = false;
+      return;
+    }
 
     const headerCells = this.thead.nativeElement.querySelectorAll('th[data-column-index]');
-    headerCells.forEach((cell: Element, index: number) => {
-      const htmlCell = cell as HTMLElement;
-      if (!htmlCell.hasAttribute('data-sortable')) {
-        htmlCell.setAttribute('draggable', 'true');
-        htmlCell.style.cursor = 'move';
+    
+    if (headerCells.length === 0) {
+      // Retry after a short delay if cells aren't ready
+      setTimeout(() => this.setupColumnReorder(), 50);
+      return;
+    }
+
+    headerCells.forEach((cell: Element) => {
+        const htmlCell = cell as HTMLElement;
+        const columnIndex = parseInt(htmlCell.getAttribute('data-column-index') || '0');
+        
+        // Ensure draggable is set
+        if (this.reorderableColumns()) {
+          htmlCell.setAttribute('draggable', 'true');
+        }
 
         const onDragStart = (e: DragEvent) => {
-          this._draggedColumnIndex.set(index);
-          e.dataTransfer!.effectAllowed = 'move';
-          htmlCell.classList.add('opacity-50');
+          e.stopPropagation();
+          if (e.dataTransfer) {
+            this._draggedColumnIndex.set(columnIndex);
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', columnIndex.toString());
+            htmlCell.classList.add('opacity-50', 'cursor-grabbing');
+            // Prevent text selection during drag
+            e.dataTransfer.setDragImage(htmlCell, 0, 0);
+          }
         };
 
         const onDragEnd = () => {
           this._draggedColumnIndex.set(null);
-          htmlCell.classList.remove('opacity-50');
+          htmlCell.classList.remove('opacity-50', 'cursor-grabbing');
+          // Remove drag-over class from all cells
+          headerCells.forEach((c: Element) => {
+            (c as HTMLElement).classList.remove('border-l-2', 'border-primary-500');
+          });
         };
 
         const onDragOver = (e: DragEvent) => {
           e.preventDefault();
-          e.dataTransfer!.dropEffect = 'move';
+          if (e.dataTransfer) {
+            e.dataTransfer.dropEffect = 'move';
+          }
+          // Add visual indicator for drop target
+          htmlCell.classList.add('border-l-2', 'border-primary-500');
+        };
+
+        const onDragLeave = () => {
+          htmlCell.classList.remove('border-l-2', 'border-primary-500');
         };
 
         const onDrop = (e: DragEvent) => {
           e.preventDefault();
-          const dropIndex = parseInt((e.currentTarget as HTMLElement).getAttribute('data-column-index') || '0');
+          e.stopPropagation();
+          const dropIndex = columnIndex;
           const dragIndex = this._draggedColumnIndex();
           if (dragIndex !== null && dragIndex !== dropIndex) {
             this.reorderColumn(dragIndex, dropIndex);
           }
+          htmlCell.classList.remove('border-l-2', 'border-primary-500');
+          // Reset dragged index after a short delay to allow visual feedback
+          setTimeout(() => {
+            this._draggedColumnIndex.set(null);
+          }, 100);
         };
 
         htmlCell.addEventListener('dragstart', onDragStart);
         htmlCell.addEventListener('dragend', onDragEnd);
         htmlCell.addEventListener('dragover', onDragOver);
+        htmlCell.addEventListener('dragleave', onDragLeave);
         htmlCell.addEventListener('drop', onDrop);
 
         this.dragListeners.push(() => {
           htmlCell.removeEventListener('dragstart', onDragStart);
           htmlCell.removeEventListener('dragend', onDragEnd);
           htmlCell.removeEventListener('dragover', onDragOver);
+          htmlCell.removeEventListener('dragleave', onDragLeave);
           htmlCell.removeEventListener('drop', onDrop);
         });
-      }
-    });
+      });
+    
+    this.isColumnReorderSetup = true;
   }
 
   sort(event: Event, field: string): void {
@@ -360,12 +456,17 @@ export class NgtTable implements AfterViewInit, OnDestroy {
   }
 
   reorderColumn(dragIndex: number, dropIndex: number): void {
+    // Create a new array to avoid mutating the original
     const columns = [...this._columns()];
-    const draggedColumn = columns[dragIndex];
+    const draggedColumn = { ...columns[dragIndex] }; // Deep copy the column object
     columns.splice(dragIndex, 1);
     columns.splice(dropIndex, 0, draggedColumn);
+    // Mark that columns have been locally reordered
+    this.hasLocalColumnReorder = true;
+    // Update only this table instance's columns
     this._columns.set(columns);
-    this.columnReorder.emit({ columns, dragIndex, dropIndex });
+    // Emit event with the new column order (but don't mutate the input)
+    this.columnReorder.emit({ columns: columns.map(col => ({ ...col })), dragIndex, dropIndex });
   }
 
   getColumnStyle(column: TableColumn): Record<string, string> {

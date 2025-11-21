@@ -11,7 +11,7 @@
     <ngt-table
       [value]="products()"
       [columns]="basicColumns"
-      [size]="selectedSize()">
+      [size]="basicTableSize()">
     </ngt-table>
   </section>
 
@@ -22,7 +22,7 @@
     <ngt-table
       [value]="products()"
       [columns]="basicColumns"
-      [size]="selectedSize()"
+      [size]="gridlinesTableSize()"
       [showGridlines]="true">
     </ngt-table>
   </section>
@@ -34,7 +34,7 @@
     <ngt-table
       [value]="products()"
       [columns]="basicColumns"
-      [size]="selectedSize()"
+      [size]="stripedTableSize()"
       [striped]="true">
     </ngt-table>
   </section>
@@ -69,7 +69,7 @@
     <ngt-table
       [value]="products()"
       [columns]="basicColumns"
-      [size]="selectedSize()"
+      [size]="paginationTableSize()"
       [paginator]="true"
       [rows]="5"
       (pageChange)="onPageChange($event)">
@@ -83,7 +83,7 @@
     <ngt-table
       [value]="products()"
       [columns]="extendedColumns"
-      [size]="selectedSize()"
+      [size]="templateTableSize()"
       [showGridlines]="true">
       <ng-template #caption>
         <div class="flex items-center justify-between mb-4">
@@ -132,7 +132,7 @@
     <ngt-table
       [value]="products()"
       [columns]="basicColumns"
-      [size]="selectedSize()"
+      [size]="reorderableTableSize()"
       [showGridlines]="true"
       [reorderableColumns]="true"
       (columnReorder)="onColumnReorder($event)">
@@ -146,7 +146,7 @@
     <ngt-table
       [value]="products()"
       [columns]="extendedColumns"
-      [size]="selectedSize()"
+      [size]="multipleSortTableSize()"
       [showGridlines]="true"
       [sortMode]="'multiple'"
       (sortChange)="onSort($event)">
@@ -160,7 +160,7 @@
     <ngt-table
       [value]="products()"
       [columns]="extendedColumns"
-      [size]="selectedSize()"
+      [size]="combinedTableSize()"
       [showGridlines]="true"
       [striped]="true"
       [paginator]="true"

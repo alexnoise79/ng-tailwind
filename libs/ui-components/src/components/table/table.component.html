@@ -44,12 +44,15 @@
               <th
                 [attr.data-column-index]="i"
                 [attr.data-sortable]="col.sortable ? 'true' : null"
+                [attr.data-reorderable]="reorderableColumns() ? 'true' : null"
                 [class]="thClasses()"
-                [class.cursor-pointer]="col.sortable"
-                [class.select-none]="col.sortable"
+                [class.cursor-pointer]="col.sortable && !reorderableColumns()"
+                [class.cursor-grab]="reorderableColumns()"
+                [class.cursor-grabbing]="reorderableColumns() && _draggedColumnIndex() === i"
+                [class.select-none]="col.sortable || reorderableColumns()"
                 [style]="getColumnStyle(col)"
-                [draggable]="reorderableColumns() && !col.sortable"
-                (click)="col.sortable ? sort($event, col.field) : null">
+                [draggable]="reorderableColumns()"
+                (click)="col.sortable && !reorderableColumns() ? sort($event, col.field) : null">
                 <div class="flex items-center gap-2">
                   <span>{{ col.header }}</span>
                   @if (col.sortable) {

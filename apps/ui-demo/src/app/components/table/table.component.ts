@@ -47,7 +47,18 @@ export class TableDemoComponent {
     { field: 'price', header: 'Price', sortable: true }
   ];
 
+  // Size for the "Table Sizes" demo section only
   selectedSize = signal<'sm' | 'md' | 'lg'>('md');
+  
+  // Independent sizes for other tables
+  basicTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  gridlinesTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  stripedTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  paginationTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  templateTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  reorderableTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  multipleSortTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  combinedTableSize = signal<'sm' | 'md' | 'lg'>('md');
 
   onSort(event: { field: string; order: 'asc' | 'desc' | null }): void {
     console.log('Sort event:', event);
@@ -59,8 +70,8 @@ export class TableDemoComponent {
 
   onColumnReorder(event: { columns: TableColumn[]; dragIndex: number; dropIndex: number }): void {
     console.log('Column reorder event:', event);
-    this.basicColumns = event.columns;
-    this.extendedColumns = event.columns;
+    // Don't update the shared column arrays - each table maintains its own state
+    // The table component handles the reordering internally, so we don't need to update the input
   }
 
   getSeverity(status?: string): string {
