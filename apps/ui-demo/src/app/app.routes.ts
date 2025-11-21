@@ -61,5 +61,9 @@ export const appRoutes: Routes = [
   {
     path: 'table',
     loadComponent: () => import('./components/table/table.component').then(m => m.TableDemoComponent)
+  },
+  {
+    path: 'select',
+    loadComponent: () => import('./components/select/select.component').then(m => m.SelectDemoComponent)
   }
 ];

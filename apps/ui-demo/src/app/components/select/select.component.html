@@ -1,0 +1,282 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Select</h1>
+    <p class="text-gray-600 dark:text-gray-400">
+      Select component for choosing items from a collection of options with full ControlValueAccessor support.
+    </p>
+  </div>
+
+  <!-- Basic -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+        <ngt-select
+          [options]="cities()"
+          [(ngModel)]="selectedCity1"
+          placeholder="Select a City"
+          class="w-full md:w-56"
+        />
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Selected: {{ selectedCity1() || 'None' }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Object Options -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Object Options</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+        <ngt-select
+          [options]="cityObjects()"
+          [(ngModel)]="selectedCity2"
+          optionLabel="name"
+          optionValue="code"
+          placeholder="Select a City"
+          class="w-full md:w-56"
+          (selectionChange)="onSelectChange($event)"
+        />
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Key-Value Pairs -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Key-Value Pairs</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+        <ngt-select
+          [options]="cityKeyValue()"
+          [(ngModel)]="selectedCity3"
+          placeholder="Select a City"
+          class="w-full md:w-56"
+        />
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Selected: {{ selectedCity3() || 'None' }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Sizes -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
+          <ngt-select
+            [options]="cities()"
+            [(ngModel)]="selectedCity4"
+            size="sm"
+            placeholder="Select a City"
+            class="w-full md:w-56"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
+          <ngt-select
+            [options]="cities()"
+            [(ngModel)]="selectedCity5"
+            size="md"
+            placeholder="Select a City"
+            class="w-full md:w-56"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
+          <ngt-select
+            [options]="cities()"
+            [(ngModel)]="selectedCity6"
+            size="lg"
+            placeholder="Select a City"
+            class="w-full md:w-56"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Checkmark -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Checkmark</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+        <ngt-select
+          [options]="cityObjects()"
+          [(ngModel)]="selectedCity7"
+          [checkmark]="true"
+          optionLabel="name"
+          optionValue="code"
+          [showClear]="true"
+          placeholder="Select a City"
+          class="w-full md:w-56"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Clear Icon -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Clear Icon</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
+          <ngt-select
+            [options]="cityObjects()"
+            [(ngModel)]="selectedCity8"
+            optionLabel="name"
+            optionValue="code"
+            [showClear]="true"
+            placeholder="Select a City"
+            class="w-full md:w-56"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
+          <ngt-select
+            [options]="cityObjects()"
+            [(ngModel)]="selectedCity9"
+            optionLabel="name"
+            optionValue="code"
+            [showClear]="true"
+            placeholder="Select a City"
+            class="w-full md:w-56"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Filter</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
+        <ngt-select
+          [options]="countries()"
+          [(ngModel)]="selectedCountry1"
+          [filter]="true"
+          filterBy="name"
+          optionLabel="name"
+          optionValue="code"
+          [showClear]="true"
+          placeholder="Select a Country"
+          class="w-full md:w-56"
+        />
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Multiselect -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiselect</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
+          <ngt-select
+            [options]="cities()"
+            [(ngModel)]="selectedCities1"
+            [multiselect]="true"
+            placeholder="Select Cities"
+            class="w-full md:w-56"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
+          <ngt-select
+            [options]="cityObjects()"
+            [(ngModel)]="selectedCities2"
+            [multiselect]="true"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="Select Cities"
+            class="w-full md:w-56"
+          />
+        </div>
+      </div>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grouped Options -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Grouped Options</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+        <ngt-select
+          [options]="groupedCities()"
+          [(ngModel)]="selectedCity10"
+          [group]="true"
+          optionLabel="name"
+          optionValue="code"
+          optionGroup="country"
+          placeholder="Select a City"
+          class="w-full md:w-56"
+        >
+          <ng-template #group let-group>
+            <div class="font-semibold">{{ group.label }}</div>
+          </ng-template>
+        </ngt-select>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}
+      </p>
+    </div>
+  </section>
+
+  <!-- Forms -->
+  <section class="space-y-4">
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
+    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Template Driven Form</h3>
+          <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
+            <div class="flex flex-col gap-1">
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+              <ngt-select
+                #city="ngModel"
+                [(ngModel)]="selectedCityForm"
+                name="city"
+                [options]="cities()"
+                [invalid]="!!(city.invalid && (city.touched || formSubmitted()))"
+                placeholder="Select a City"
+                class="w-full md:w-56"
+                required
+              />
+              @if (city.invalid && (city.touched || formSubmitted())) {
+                <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
+              }
+            </div>
+            <ngt-button type="submit" variant="primary" size="md">Submit</ngt-button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
