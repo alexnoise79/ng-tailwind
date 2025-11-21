@@ -108,7 +108,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
       return 'w-full';
     }
     
-    return 'w-full sm:w-96 md:w-[28rem] lg:w-[32rem]';
+    return 'w-full sm:w-96 md:w-md lg:w-lg';
   }
 }
 

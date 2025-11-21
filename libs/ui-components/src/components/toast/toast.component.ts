@@ -117,7 +117,7 @@ export class NgtToast implements OnInit, OnDestroy {
   });
 
   iconClasses = computed(() => {
-    const baseClasses = 'flex-shrink-0';
+    const baseClasses = 'shrink-0';
     const severityClasses = {
       success: 'text-green-600',
       info: 'text-blue-600',

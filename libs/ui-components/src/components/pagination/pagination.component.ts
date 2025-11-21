@@ -141,9 +141,9 @@ export class NgtPagination {
   getButtonClasses(isActive: boolean = false): string {
     const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2';
     const sizeClasses = {
-      sm: 'px-2 py-1 min-w-[2rem]',
-      md: 'px-3 py-2 min-w-[2.5rem]',
-      lg: 'px-4 py-2.5 min-w-[3rem]'
+      sm: 'px-2 py-1 min-w-8',
+      md: 'px-3 py-2 min-w-10',
+      lg: 'px-4 py-2.5 min-w-12'
     };
     const stateClasses = isActive
       ? 'bg-primary-600 text-white'
