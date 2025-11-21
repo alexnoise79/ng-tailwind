@@ -6,21 +6,39 @@
   >
     @for (item of items(); track item.id) {
       <li [class]="getNavItemClasses()">
-        <button
-          [id]="item.buttonId()"
-          [attr.aria-selected]="selectedId() === item.id"
-          [attr.aria-disabled]="item.disabled() ? 'true' : null"
-          [attr.tabindex]="selectedId() === item.id && !item.disabled() ? 0 : -1"
-          [disabled]="item.disabled()"
-          [class]="getNavButtonClasses(item)"
-          (click)="selectItem(item.id)"
-          type="button"
-          role="tab"
-        >
-          @if (item.label()) {
-            {{ item.label() }}
-          }
-        </button>
+        @if (item.routerLink()) {
+          <a
+            [id]="item.buttonId()"
+            [routerLink]="item.routerLink()!"
+            routerLinkActive="active"
+            [attr.aria-selected]="selectedId() === item.id"
+            [attr.aria-disabled]="item.disabled() ? 'true' : null"
+            [attr.tabindex]="selectedId() === item.id && !item.disabled() ? 0 : -1"
+            [class]="getNavButtonClasses(item)"
+            (click)="selectItem(item.id)"
+            role="tab"
+            [class.pointer-events-none]="item.disabled()">
+            @if (item.label()) {
+              {{ item.label() }}
+            }
+          </a>
+        } @else {
+          <button
+            [id]="item.buttonId()"
+            [attr.aria-selected]="selectedId() === item.id"
+            [attr.aria-disabled]="item.disabled() ? 'true' : null"
+            [attr.tabindex]="selectedId() === item.id && !item.disabled() ? 0 : -1"
+            [disabled]="item.disabled()"
+            [class]="getNavButtonClasses(item)"
+            (click)="selectItem(item.id)"
+            type="button"
+            role="tab"
+          >
+            @if (item.label()) {
+              {{ item.label() }}
+            }
+          </button>
+        }
       </li>
     }
   </ul>
@@ -28,4 +46,3 @@
     <ng-content />
   </div>
 </div>
-

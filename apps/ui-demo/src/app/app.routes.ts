@@ -3,7 +3,8 @@ import { Routes } from '@angular/router';
 export const appRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./components/getting-started/getting-started.component').then(m => m.GettingStartedComponent)
+    redirectTo: 'getting-started',
+    pathMatch: 'full'
   },
   {
     path: 'getting-started',

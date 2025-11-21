@@ -5,61 +5,61 @@
       <h1 class="text-xl font-semibold text-gray-900">ng-tailwind UI</h1>
     </div>
     <nav class="flex-1 px-4 py-4">
-      <ngt-nav [orientation]="'vertical'" [style]="'tabs'" [activeId]="activeRouteId()">
+      <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
         <ngt-nav-item 
           label="Getting Started" 
           [itemId]="'getting-started'"
-          (activated)="navigateTo('/getting-started')">
+          [routerLink]="'/getting-started'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Button" 
           [itemId]="'button'"
-          (activated)="navigateTo('/button')">
+          [routerLink]="'/button'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Modal" 
           [itemId]="'modal'"
-          (activated)="navigateTo('/modal')">
+          [routerLink]="'/modal'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Accordion" 
           [itemId]="'accordion'"
-          (activated)="navigateTo('/accordion')">
+          [routerLink]="'/accordion'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Nav" 
           [itemId]="'nav'"
-          (activated)="navigateTo('/nav')">
+          [routerLink]="'/nav'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Dropdown" 
           [itemId]="'dropdown'"
-          (activated)="navigateTo('/dropdown')">
+          [routerLink]="'/dropdown'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Tooltip" 
           [itemId]="'tooltip'"
-          (activated)="navigateTo('/tooltip')">
+          [routerLink]="'/tooltip'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Collapse" 
           [itemId]="'collapse'"
-          (activated)="navigateTo('/collapse')">
+          [routerLink]="'/collapse'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Datepicker" 
           [itemId]="'datepicker'"
-          (activated)="navigateTo('/datepicker')">
+          [routerLink]="'/datepicker'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Offcanvas" 
           [itemId]="'offcanvas'"
-          (activated)="navigateTo('/offcanvas')">
+          [routerLink]="'/offcanvas'">
         </ngt-nav-item>
         <ngt-nav-item 
           label="Pagination" 
           [itemId]="'pagination'"
-          (activated)="navigateTo('/pagination')">
+          [routerLink]="'/pagination'">
         </ngt-nav-item>
       </ngt-nav>
     </nav>

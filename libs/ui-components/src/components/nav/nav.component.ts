@@ -1,5 +1,6 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, signal, computed, input } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, ContentChildren, QueryList, AfterContentInit, AfterViewChecked, signal, computed, input, inject, ElementRef } from '@angular/core';
+import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 import { NgtNavItem } from './nav-item.component';
 
 export type NavOrientation = 'horizontal' | 'vertical';
@@ -11,7 +12,7 @@ export type NavAlign = 'start' | 'center' | 'end' | 'justified';
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav.component.html'
 })
-export class NgtNav implements AfterContentInit {
+export class NgtNav implements AfterContentInit, AfterViewChecked {
   readonly orientation = input<NavOrientation>('horizontal');
   readonly style = input<NavStyle>('tabs');
   readonly align = input<NavAlign>('start');
@@ -21,6 +22,8 @@ export class NgtNav implements AfterContentInit {
 
   items = signal<NgtNavItem[]>([]);
   selectedId = signal<string | null>(null);
+  private router = inject(Router);
+  private elementRef = inject(ElementRef);
 
   ngAfterContentInit(): void {
     this.items.set(this.navItems.toArray());
@@ -30,6 +33,38 @@ export class NgtNav implements AfterContentInit {
     const activeIdValue = this.activeId();
     if (activeIdValue) {
       this.selectItem(activeIdValue);
+    } else {
+      // Sync with router if using routerLink
+      this.syncWithRouter();
+    }
+
+    // Listen to router events to sync active state
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.syncWithRouter();
+      });
+  }
+
+  ngAfterViewChecked(): void {
+    // Sync with router after view check to catch RouterLinkActive changes
+    this.syncWithRouter();
+  }
+
+  private syncWithRouter(): void {
+    // Find the active item by checking for RouterLinkActive class
+    const activeElement = this.elementRef.nativeElement.querySelector('a.active') as HTMLElement;
+    if (activeElement) {
+      const activeButtonId = activeElement.getAttribute('id');
+      if (activeButtonId) {
+        const item = this.items().find(i => i.buttonId() === activeButtonId);
+        if (item && this.selectedId() !== item.id) {
+          this.selectedId.set(item.id);
+          this.items().forEach(navItem => {
+            navItem.isActive.set(navItem.id === item.id);
+          });
+        }
+      }
     }
   }
 

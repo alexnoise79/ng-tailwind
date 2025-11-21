@@ -10,6 +10,7 @@ export class NgtNavItem implements AfterContentInit {
   readonly itemId = input<string | null>(null);
   readonly label = input.required<string>();
   readonly disabled = input<boolean>(false);
+  readonly routerLink = input<string | string[] | null>(null);
 
   activated = output<void>();
 
@@ -19,9 +20,9 @@ export class NgtNavItem implements AfterContentInit {
   constructor() {
     this.id = `nav-item-${navItemIdCounter++}`;
 
-    // Emit activated event when item becomes active
+    // Emit activated event when item becomes active (only if no routerLink)
     effect(() => {
-      if (this.isActive()) {
+      if (this.isActive() && !this.routerLink()) {
         this.activated.emit();
       }
     });
