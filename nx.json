@@ -16,6 +16,10 @@
       "inputs": ["default", "{workspaceRoot}/eslint.config.js"],
       "cache": true
     },
+    "lint-fix": {
+      "inputs": ["default", "{workspaceRoot}/eslint.config.js"],
+      "cache": false
+    },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
@@ -32,6 +36,13 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint-fix",
+        "fix": true
       }
     }
   ]
