@@ -27,16 +27,16 @@ export class NgtButton {
   isLoading = computed(() => this._loading());
 
   buttonClasses = computed(() => {
-    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed';
     const variantClasses = {
       primary: 'bg-primary-600 text-white hover:bg-primary-700',
-      outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50',
-      ghost: 'text-primary-600 hover:bg-primary-50'
+      outline: 'border border-primary-600 text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20',
+      ghost: 'text-primary-600 hover:bg-primary-50 dark:hover:bg-primary-900/20'
     };
     const sizeClasses = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg'
+      sm: this.variant() === 'outline' ? 'px-[calc(0.75rem-1px)] py-[calc(0.375rem-1px)] text-sm' : 'px-3 py-1.5 text-sm',
+      md: this.variant() === 'outline' ? 'px-[calc(1rem-1px)] py-[calc(0.5rem-1px)] text-base' : 'px-4 py-2 text-base',
+      lg: this.variant() === 'outline' ? 'px-[calc(1.5rem-1px)] py-[calc(0.75rem-1px)] text-lg' : 'px-6 py-3 text-lg'
     };
     return classMerge(baseClasses, variantClasses[this.variant()], sizeClasses[this.size()]);
   });
