@@ -300,15 +300,15 @@ p {
 /* Custom Scrollbar Variables */
 @theme {
   /* Scrollbar colors - Light mode */
-  --scrollbar-thumb: rgb(203 213 225); /* gray-300 */
+  --scrollbar-thumb: var(--color-primary-500); /* primary-500 */
   --scrollbar-track: rgb(241 245 249); /* gray-100 */
-  --scrollbar-thumb-hover: rgb(148 163 184); /* gray-400 */
+  --scrollbar-thumb-hover: var(--color-primary-600); /* primary-600 */
 }
 
 /* Dark mode scrollbar variables */
 .dark {
-  --scrollbar-thumb: rgb(71 85 105); /* gray-600 */
+  --scrollbar-thumb: var(--color-primary-400); /* primary-400 for better visibility in dark mode */
   --scrollbar-track: rgb(30 41 59); /* gray-800 */
-  --scrollbar-thumb-hover: rgb(100 116 139); /* gray-500 */
+  --scrollbar-thumb-hover: var(--color-primary-500); /* primary-500 */
 }
 
