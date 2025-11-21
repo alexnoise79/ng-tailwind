@@ -6,277 +6,672 @@
     </p>
   </div>
 
-  <!-- Basic -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-        <ngt-select
-          [options]="cities()"
-          [(ngModel)]="selectedCity1"
-          placeholder="Select a City"
-          class="w-full md:w-56"
-        />
-      </div>
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        Selected: {{ selectedCity1() || 'None' }}
-      </p>
-    </div>
-  </section>
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item 
+        [itemId]="'showcase'" 
+        label="Showcase"
+        (activated)="setActiveTab('showcase')"
+      ></ngt-nav-item>
+      <ngt-nav-item 
+        [itemId]="'api'" 
+        label="API"
+        (activated)="setActiveTab('api')"
+      ></ngt-nav-item>
+    </ngt-nav>
+  </div>
 
-  <!-- Object Options -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Object Options</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-        <ngt-select
-          [options]="cityObjects()"
-          [(ngModel)]="selectedCity2"
-          optionLabel="name"
-          optionValue="code"
-          placeholder="Select a City"
-          class="w-full md:w-56"
-          (selectionChange)="onSelectChange($event)"
-        />
-      </div>
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Key-Value Pairs -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Key-Value Pairs</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-        <ngt-select
-          [options]="cityKeyValue()"
-          [(ngModel)]="selectedCity3"
-          placeholder="Select a City"
-          class="w-full md:w-56"
-        />
-      </div>
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        Selected: {{ selectedCity3() || 'None' }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Sizes -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
-          <ngt-select
-            [options]="cities()"
-            [(ngModel)]="selectedCity4"
-            size="sm"
-            placeholder="Select a City"
-            class="w-full md:w-56"
-          />
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-8">
+      <!-- Basic -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+            <ngt-select
+              [options]="cities()"
+              [(ngModel)]="selectedCity1"
+              placeholder="Select a City"
+              class="w-full md:w-56"
+            />
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Selected: {{ selectedCity1() || 'None' }}
+          </p>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.basic)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+            </div>
+          </div>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
-          <ngt-select
-            [options]="cities()"
-            [(ngModel)]="selectedCity5"
-            size="md"
-            placeholder="Select a City"
-            class="w-full md:w-56"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
-          <ngt-select
-            [options]="cities()"
-            [(ngModel)]="selectedCity6"
-            size="lg"
-            placeholder="Select a City"
-            class="w-full md:w-56"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Checkmark -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Checkmark</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-        <ngt-select
-          [options]="cityObjects()"
-          [(ngModel)]="selectedCity7"
-          [checkmark]="true"
-          optionLabel="name"
-          optionValue="code"
-          [showClear]="true"
-          placeholder="Select a City"
-          class="w-full md:w-56"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Clear Icon -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Clear Icon</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
-          <ngt-select
-            [options]="cityObjects()"
-            [(ngModel)]="selectedCity8"
-            optionLabel="name"
-            optionValue="code"
-            [showClear]="true"
-            placeholder="Select a City"
-            class="w-full md:w-56"
-          />
+      <!-- Object Options -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Object Options</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+            <ngt-select
+              [options]="cityObjects()"
+              [(ngModel)]="selectedCity2"
+              optionLabel="name"
+              optionValue="code"
+              placeholder="Select a City"
+              class="w-full md:w-56"
+              (selectionChange)="onSelectChange($event)"
+            />
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}
+          </p>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.objectOptions)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.objectOptions }}</code></pre>
+            </div>
+          </div>
         </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
-          <ngt-select
-            [options]="cityObjects()"
-            [(ngModel)]="selectedCity9"
-            optionLabel="name"
-            optionValue="code"
-            [showClear]="true"
-            placeholder="Select a City"
-            class="w-full md:w-56"
-          />
+      </section>
+
+      <!-- Key-Value Pairs -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Key-Value Pairs</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+            <ngt-select
+              [options]="cityKeyValue()"
+              [(ngModel)]="selectedCity3"
+              placeholder="Select a City"
+              class="w-full md:w-56"
+            />
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Selected: {{ selectedCity3() || 'None' }}
+          </p>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.keyValue)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.keyValue }}</code></pre>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Filter -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Filter</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
-        <ngt-select
-          [options]="countries()"
-          [(ngModel)]="selectedCountry1"
-          [filter]="true"
-          filterBy="name"
-          optionLabel="name"
-          optionValue="code"
-          [showClear]="true"
-          placeholder="Select a Country"
-          class="w-full md:w-56"
-        />
-      </div>
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Multiselect -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiselect</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
-          <ngt-select
-            [options]="cities()"
-            [(ngModel)]="selectedCities1"
-            [multiselect]="true"
-            placeholder="Select Cities"
-            class="w-full md:w-56"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
-          <ngt-select
-            [options]="cityObjects()"
-            [(ngModel)]="selectedCities2"
-            [multiselect]="true"
-            optionLabel="name"
-            optionValue="code"
-            placeholder="Select Cities"
-            class="w-full md:w-56"
-          />
-        </div>
-      </div>
-      <div class="mt-4 space-y-2">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}
-        </p>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Grouped Options -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Grouped Options</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-        <ngt-select
-          [options]="groupedCities()"
-          [(ngModel)]="selectedCity10"
-          [group]="true"
-          optionLabel="name"
-          optionValue="code"
-          optionGroup="country"
-          placeholder="Select a City"
-          class="w-full md:w-56"
-        >
-          <ng-template #group let-group>
-            <div class="font-semibold">{{ group.label }}</div>
-          </ng-template>
-        </ngt-select>
-      </div>
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}
-      </p>
-    </div>
-  </section>
-
-  <!-- Forms -->
-  <section class="space-y-4">
-    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
-    <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-      <div class="space-y-4">
-        <div>
-          <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Template Driven Form</h3>
-          <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
-            <div class="flex flex-col gap-1">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+      <!-- Sizes -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
               <ngt-select
-                #city="ngModel"
-                [(ngModel)]="selectedCityForm"
-                name="city"
                 [options]="cities()"
-                [invalid]="!!(city.invalid && (city.touched || formSubmitted()))"
+                [(ngModel)]="selectedCity4"
+                size="sm"
                 placeholder="Select a City"
                 class="w-full md:w-56"
-                required
               />
-              @if (city.invalid && (city.touched || formSubmitted())) {
-                <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
-              }
             </div>
-            <ngt-button type="submit" variant="primary" size="md">Submit</ngt-button>
-          </form>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
+              <ngt-select
+                [options]="cities()"
+                [(ngModel)]="selectedCity5"
+                size="md"
+                placeholder="Select a City"
+                class="w-full md:w-56"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
+              <ngt-select
+                [options]="cities()"
+                [(ngModel)]="selectedCity6"
+                size="lg"
+                placeholder="Select a City"
+                class="w-full md:w-56"
+              />
+            </div>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.sizes)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sizes }}</code></pre>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- Checkmark -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Checkmark</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+            <ngt-select
+              [options]="cityObjects()"
+              [(ngModel)]="selectedCity7"
+              [checkmark]="true"
+              optionLabel="name"
+              optionValue="code"
+              [showClear]="true"
+              placeholder="Select a City"
+              class="w-full md:w-56"
+            />
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.checkmark)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.checkmark }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clear Icon -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Clear Icon</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
+              <ngt-select
+                [options]="cityObjects()"
+                [(ngModel)]="selectedCity8"
+                optionLabel="name"
+                optionValue="code"
+                [showClear]="true"
+                placeholder="Select a City"
+                class="w-full md:w-56"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
+              <ngt-select
+                [options]="cityObjects()"
+                [(ngModel)]="selectedCity9"
+                optionLabel="name"
+                optionValue="code"
+                [showClear]="true"
+                placeholder="Select a City"
+                class="w-full md:w-56"
+              />
+            </div>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.clear)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.clear }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Filter -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Filter</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
+            <ngt-select
+              [options]="countries()"
+              [(ngModel)]="selectedCountry1"
+              [filter]="true"
+              filterBy="name"
+              optionLabel="name"
+              optionValue="code"
+              [showClear]="true"
+              placeholder="Select a Country"
+              class="w-full md:w-56"
+            />
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}
+          </p>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.filter)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.filter }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multiselect -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiselect</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
+              <ngt-select
+                [options]="cities()"
+                [(ngModel)]="selectedCities1"
+                [multiselect]="true"
+                placeholder="Select Cities"
+                class="w-full md:w-56"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
+              <ngt-select
+                [options]="cityObjects()"
+                [(ngModel)]="selectedCities2"
+                [multiselect]="true"
+                optionLabel="name"
+                optionValue="code"
+                placeholder="Select Cities"
+                class="w-full md:w-56"
+              />
+            </div>
+          </div>
+          <div class="mt-4 space-y-2">
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}
+            </p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}
+            </p>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.multiselect)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.multiselect }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grouped Options -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Grouped Options</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+            <ngt-select
+              [options]="groupedCities()"
+              [(ngModel)]="selectedCity10"
+              [group]="true"
+              optionLabel="name"
+              optionValue="code"
+              optionGroup="country"
+              placeholder="Select a City"
+              class="w-full md:w-56"
+            >
+              <ng-template #group let-group>
+                <div class="font-semibold">{{ group.label }}</div>
+              </ng-template>
+            </ngt-select>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}
+          </p>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.grouped)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.grouped }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Forms -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Template Driven Form</h3>
+              <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
+                <div class="flex flex-col gap-1">
+                  <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+                  <ngt-select
+                    #city="ngModel"
+                    [(ngModel)]="selectedCityForm"
+                    name="city"
+                    [options]="cities()"
+                    [invalid]="!!(city.invalid && (city.touched || formSubmitted()))"
+                    placeholder="Select a City"
+                    class="w-full md:w-56"
+                    required
+                  />
+                  @if (city.invalid && (city.touched || formSubmitted())) {
+                    <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
+                  }
+                </div>
+                <ngt-button type="submit" variant="primary" size="md">Submit</ngt-button>
+              </form>
+            </div>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button
+                type="button"
+                (click)="copyToClipboard(codeSnippets.forms)"
+                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                title="Copy code"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.forms }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+        
+        <!-- Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">options</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Record&lt;string, unknown&gt;[] | unknown[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[]</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Array of options to display. Can be primitives, objects, or key-value pairs.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionLabel</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'label'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as label for object options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionValue</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'value'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as value for object options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionDisabled</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'disabled'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to check for disabled state in object options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionGroup</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'group'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use for grouping options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Disables the select component.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">placeholder</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Placeholder text displayed when no option is selected.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Size of the select component.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">checkmark</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a checkmark next to the selected option in single-select mode.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showClear</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a clear button to reset the selection.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">multiselect</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables multiple selection mode.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">group</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables grouping of options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filter</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables filtering/searching of options.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterBy</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to filter by when using object options. If not specified, filters by the label.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">fluid</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select component take full width of its container.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">invalid</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Marks the select as invalid (useful for form validation).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">editable</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select editable (allows typing to filter).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Outputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">selectionChange</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;unknown&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the selection changes. Emits the selected value(s).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterChange</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;string&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the filter text changes (only when filter is enabled).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Templates -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Context</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#item</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering each option in the dropdown.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#selectedItem</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering the selected item in the trigger.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#group</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">group: SelectGroup</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering group headers (only when group is enabled).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#header</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown header.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#footer</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown footer.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#emptyMessage</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the empty state message when no options are found.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#dropdownicon</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown arrow icon.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ControlValueAccessor -->
+        <section>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">
+            The NgtSelect component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, 
+            making it compatible with Angular forms (both template-driven and reactive forms).
+          </p>
+          <p class="text-gray-600 dark:text-gray-400">
+            You can use it with <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ngModel</code>, 
+            <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControl</code>, or 
+            <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControlName</code>.
+          </p>
+        </section>
       </div>
     </div>
-  </section>
+  }
 </div>
-
