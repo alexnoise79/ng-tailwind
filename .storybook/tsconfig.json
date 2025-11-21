@@ -6,6 +6,6 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["../libs/ui-components/src/**/*.stories.ts", "../libs/ui-components/src/components/**/*.ts", "../libs/ui-components/src/directives/**/*.ts", "../libs/ui-components/src/utils/**/*.ts", "./**/*.ts"],
-  "exclude": ["../node_modules", "../dist", "../libs/**/*.spec.ts", "../libs/**/*.test.ts", "../apps/**/*.ts"]
+  "include": ["../libs/ui-components/src/**/*.stories.ts", "../libs/ui-components/src/components/**/*.ts", "../libs/ui-components/src/directives/**/*.ts", "../libs/ui-components/src/utils/**/*.ts", "./preview.ts"],
+  "exclude": ["../node_modules", "../dist", "../libs/**/*.spec.ts", "../libs/**/*.test.ts", "../apps/**/*.ts", "./main.ts", "../libs/ui-components/src/components/**/index.ts", "../libs/ui-components/src/index.ts"]
 }
