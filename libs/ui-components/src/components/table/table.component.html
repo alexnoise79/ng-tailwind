@@ -1,4 +1,4 @@
-<div class="ngt-table-wrapper" [style]="tableStyle()">
+<div [style]="tableStyle()" class="ngt-table-wrapper">
   <!-- Caption Template -->
   @if (captionTemplate) {
     <div class="mb-4">
@@ -6,7 +6,7 @@
     </div>
   }
 
-  <div class="overflow-x-auto" [style.max-height]="scrollable() && scrollHeight() ? scrollHeight() : null">
+  <div [style.max-height]="scrollable() && scrollHeight() ? scrollHeight() : null" class="overflow-x-auto">
     <table #tableElement [class]="tableClasses()" [style]="tableStyle()">
       <!-- Column Groups -->
       @if (columnGroups().length > 0) {
