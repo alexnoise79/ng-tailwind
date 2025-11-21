@@ -39,7 +39,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtModal, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open Modal</ngt-button>
@@ -69,7 +71,9 @@ export const WithFooter: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtModal, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open Modal</ngt-button>

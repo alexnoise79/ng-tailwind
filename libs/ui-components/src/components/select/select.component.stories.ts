@@ -86,7 +86,7 @@ export const Basic: Story = {
       <p class="mt-2 text-sm text-gray-600">Selected: {{ selectedCity || 'None' }}</p>
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -117,7 +117,7 @@ export const ObjectOptions: Story = {
       <p class="mt-2 text-sm text-gray-600">Selected: {{ selectedCity || 'None' }}</p>
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -129,6 +129,9 @@ export const Sizes: Story = {
       selectedCity1: null,
       selectedCity2: null,
       selectedCity3: null
+    },
+    moduleMetadata: {
+      imports: [NgtSelect, FormsModule]
     },
     template: `
       <div class="space-y-4">
@@ -163,10 +166,7 @@ export const Sizes: Story = {
           />
         </div>
       </div>
-    `,
-    moduleMetadata: {
-      imports: [FormsModule]
-    }
+    `
   })
 };
 
@@ -199,7 +199,7 @@ export const WithCheckmark: Story = {
       />
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -231,7 +231,7 @@ export const WithClear: Story = {
       />
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -267,7 +267,7 @@ export const WithFilter: Story = {
       />
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -296,7 +296,7 @@ export const Multiselect: Story = {
       <p class="mt-2 text-sm text-gray-600">Selected: {{ selectedCities.length > 0 ? selectedCities.join(', ') : 'None' }}</p>
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -324,7 +324,7 @@ export const Disabled: Story = {
       />
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };
@@ -353,7 +353,7 @@ export const Invalid: Story = {
       <p class="mt-1 text-sm text-red-600">This field is required.</p>
     `,
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtSelect, FormsModule]
     }
   })
 };

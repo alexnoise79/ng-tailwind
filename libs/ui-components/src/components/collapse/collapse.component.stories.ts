@@ -29,7 +29,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtCollapse, NgtButton]
+    },
     template: `
       <div class="space-y-4">
         <ngt-button variant="primary" (click)="isOpen.set(!isOpen())">

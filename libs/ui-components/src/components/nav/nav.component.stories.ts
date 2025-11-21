@@ -13,7 +13,9 @@ type Story = StoryObj<NgtNav>;
 
 export const Default: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav>
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
@@ -93,7 +95,9 @@ export const Vertical: Story = {
 
 export const WithDisabled: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav>
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>

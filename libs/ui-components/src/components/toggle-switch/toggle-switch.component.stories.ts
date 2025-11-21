@@ -33,6 +33,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToggleSwitch]
+    },
     template: `<ngt-toggle-switch [size]="size" [disabled]="disabled"></ngt-toggle-switch>`
   })
 };
@@ -45,12 +48,18 @@ export const WithLabel: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToggleSwitch]
+    },
     template: `<ngt-toggle-switch [size]="size" [label]="label" [disabled]="disabled"></ngt-toggle-switch>`
   })
 };
 
 export const Sizes: Story = {
   render: () => ({
+    moduleMetadata: {
+      imports: [NgtToggleSwitch]
+    },
     template: `
       <div class="flex flex-col gap-4 items-start">
         <ngt-toggle-switch size="sm" label="Small"></ngt-toggle-switch>
@@ -69,6 +78,9 @@ export const Disabled: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToggleSwitch]
+    },
     template: `<ngt-toggle-switch [size]="size" [label]="label" [disabled]="disabled"></ngt-toggle-switch>`
   })
 };
@@ -76,7 +88,7 @@ export const Disabled: Story = {
 export const WithNgModel: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtToggleSwitch, FormsModule]
     },
     template: `
       <div class="p-8 space-y-4">
@@ -96,7 +108,7 @@ export const WithNgModel: Story = {
 export const MultipleToggles: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [FormsModule]
+      imports: [NgtToggleSwitch, FormsModule]
     },
     template: `
       <div class="p-8 space-y-4">

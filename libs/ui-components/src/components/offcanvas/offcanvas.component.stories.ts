@@ -50,7 +50,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtButton],
+    moduleMetadata: {
+      imports: [NgtOffCanvas, NgtButton]
+    },
     template: `
       <div>
         <ngt-button variant="primary" (click)="isOpen.set(true)">Open Offcanvas</ngt-button>

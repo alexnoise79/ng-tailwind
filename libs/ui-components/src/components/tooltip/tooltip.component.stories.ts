@@ -33,6 +33,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtTooltip]
+    },
     template: `
       <div class="p-8">
         <ngt-tooltip [text]="text" [position]="position" [delay]="delay">
@@ -47,6 +50,9 @@ export const Default: Story = {
 
 export const Positions: Story = {
   render: () => ({
+    moduleMetadata: {
+      imports: [NgtTooltip]
+    },
     template: `
       <div class="p-16 space-y-8">
         <div class="flex justify-center">

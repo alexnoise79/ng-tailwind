@@ -52,6 +52,9 @@ export const Default: Story = {
           console.log('Navigated to:', event.current);
         }
       },
+      moduleMetadata: {
+        imports: [NgtDatepicker]
+      },
       template: `
         <div class="p-8">
           <ngt-datepicker

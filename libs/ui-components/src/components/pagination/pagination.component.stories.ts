@@ -66,6 +66,9 @@ export const Default: Story = {
         console.log('Page changed to:', page);
       }
     },
+    moduleMetadata: {
+      imports: [NgtPagination]
+    },
     template: `
       <ngt-pagination
         [currentPage]="currentPage()"
@@ -96,6 +99,9 @@ export const WithTotalItems: Story = {
         console.log('Page changed to:', page);
       }
     },
+    moduleMetadata: {
+      imports: [NgtPagination]
+    },
     template: `
       <ngt-pagination
         [currentPage]="currentPage()"
@@ -124,6 +130,9 @@ export const Small: Story = {
       onPageChange: (page: number) => {
         console.log('Page changed to:', page);
       }
+    },
+    moduleMetadata: {
+      imports: [NgtPagination]
     },
     template: `
       <ngt-pagination
@@ -154,6 +163,9 @@ export const Large: Story = {
         console.log('Page changed to:', page);
       }
     },
+    moduleMetadata: {
+      imports: [NgtPagination]
+    },
     template: `
       <ngt-pagination
         [currentPage]="currentPage()"
@@ -182,6 +194,9 @@ export const WithoutFirstLast: Story = {
         console.log('Page changed to:', page);
       }
     },
+    moduleMetadata: {
+      imports: [NgtPagination]
+    },
     template: `
       <ngt-pagination
         [currentPage]="currentPage()"
@@ -208,6 +223,9 @@ export const WithoutPrevNext: Story = {
       onPageChange: (page: number) => {
         console.log('Page changed to:', page);
       }
+    },
+    moduleMetadata: {
+      imports: [NgtPagination]
     },
     template: `
       <ngt-pagination
@@ -236,6 +254,9 @@ export const ManyPages: Story = {
       onPageChange: (page: number) => {
         console.log('Page changed to:', page);
       }
+    },
+    moduleMetadata: {
+      imports: [NgtPagination]
     },
     template: `
       <ngt-pagination
@@ -289,6 +310,9 @@ export const FewPages: Story = {
       onPageChange: (page: number) => {
         console.log('Page changed to:', page);
       }
+    },
+    moduleMetadata: {
+      imports: [NgtPagination]
     },
     template: `
       <ngt-pagination

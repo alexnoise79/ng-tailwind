@@ -27,7 +27,9 @@ export const Default: Story = {
   },
   render: args => ({
     props: args,
-    imports: [NgtDropdownTrigger, NgtDropdownContent],
+    moduleMetadata: {
+      imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent]
+    },
     template: `
       <ngt-dropdown [align]="align" [isOpen]="isOpen">
         <button

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/angular';
 import { NgtTable } from './table.component';
 import { TableColumn } from '../../models';
 import { signal } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 const meta: Meta<NgtTable> = {
   title: 'Components/Table',
@@ -75,6 +76,9 @@ export const Basic: Story = {
       ...args,
       value: signal(args.value || [])
     },
+    moduleMetadata: {
+      imports: [NgtTable]
+    },
     template: `
       <ngt-table
         [value]="value()"
@@ -100,6 +104,9 @@ export const WithGridlines: Story = {
       ...args,
       value: signal(args.value || [])
     },
+    moduleMetadata: {
+      imports: [NgtTable]
+    },
     template: `
       <ngt-table
         [value]="value()"
@@ -124,6 +131,9 @@ export const Striped: Story = {
     props: {
       ...args,
       value: signal(args.value || [])
+    },
+    moduleMetadata: {
+      imports: [NgtTable]
     },
     template: `
       <ngt-table
@@ -153,6 +163,9 @@ export const WithPagination: Story = {
       value: signal(args.value || []),
       currentPage: signal(1)
     },
+    moduleMetadata: {
+      imports: [NgtTable]
+    },
     template: `
       <ngt-table
         [value]="value()"
@@ -181,6 +194,9 @@ export const Small: Story = {
       ...args,
       value: signal(args.value || [])
     },
+    moduleMetadata: {
+      imports: [NgtTable]
+    },
     template: `
       <ngt-table
         [value]="value()"
@@ -206,6 +222,9 @@ export const Large: Story = {
       ...args,
       value: signal(args.value || [])
     },
+    moduleMetadata: {
+      imports: [NgtTable]
+    },
     template: `
       <ngt-table
         [value]="value()"
@@ -230,6 +249,9 @@ export const WithTemplate: Story = {
     props: {
       ...args,
       value: signal(args.value || [])
+    },
+    moduleMetadata: {
+      imports: [NgtTable, NgFor]
     },
     template: `
       <ngt-table
