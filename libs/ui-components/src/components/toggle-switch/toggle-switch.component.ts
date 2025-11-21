@@ -40,12 +40,12 @@ export class NgtToggleSwitch implements ControlValueAccessor {
     };
     const stateClasses = this.value() 
       ? 'bg-primary-600' 
-      : 'bg-gray-200';
+      : 'bg-gray-200 dark:bg-gray-700';
     return classMerge(baseClasses, sizeClasses[this.size()], stateClasses);
   });
 
   thumbClasses = computed(() => {
-    const baseClasses = 'inline-block rounded-full bg-white shadow transform transition-transform';
+    const baseClasses = 'inline-block rounded-full bg-white dark:bg-gray-200 shadow transform transition-transform';
     const sizeClasses = {
       sm: 'h-3 w-3',
       md: 'h-4 w-4',
@@ -63,7 +63,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
 
   labelClasses = computed(() => {
     return classMerge(
-      'text-sm font-medium text-gray-700',
+      'text-sm font-medium text-gray-700 dark:text-gray-300',
       this.isDisabled() ? 'opacity-50' : ''
     );
   });
