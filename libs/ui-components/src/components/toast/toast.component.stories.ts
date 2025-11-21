@@ -127,12 +127,10 @@ export default meta;
 type Story = StoryObj<NgtToast>;
 
 export const Interactive: Story = {
-  render: () => ({
-    component: ToastStoryWrapper,
-    moduleMetadata: {
-      imports: [NgtToastContainer]
-    }
-  })
+  render: () =>
+    ({
+      component: ToastStoryWrapper
+    }) as any
 };
 
 export const Success: Story = {
@@ -144,6 +142,9 @@ export const Success: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast
@@ -166,6 +167,9 @@ export const Info: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast
@@ -188,6 +192,9 @@ export const Warning: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast
@@ -210,6 +217,9 @@ export const Danger: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast
@@ -225,6 +235,9 @@ export const Danger: Story = {
 
 export const AllSeverities: Story = {
   render: () => ({
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8 space-y-4">
         <ngt-toast severity="success" summary="Success" detail="Operation completed successfully"></ngt-toast>
@@ -244,6 +257,9 @@ export const WithTextOnly: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast
@@ -265,6 +281,9 @@ export const NotClosable: Story = {
   },
   render: args => ({
     props: args,
+    moduleMetadata: {
+      imports: [NgtToast]
+    },
     template: `
       <div class="p-8">
         <ngt-toast

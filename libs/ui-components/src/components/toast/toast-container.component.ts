@@ -5,27 +5,8 @@ import { NgtToastService } from './toast.service';
   selector: 'ngt-toast-container',
   template: '<div #container class="toast-container-inner"></div>',
   styles: [
-    `
-      :host {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 99999;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        max-width: 28rem;
-        width: 100%;
-        pointer-events: none;
-      }
-
-      :host > div.toast-container-inner {
-        pointer-events: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-    `
+    ':host { position: fixed; top: 1rem; right: 1rem; z-index: 99999; display: flex; flex-direction: column; gap: 0.75rem; max-width: 28rem; width: 100%; pointer-events: none; }',
+    ':host > div.toast-container-inner { pointer-events: auto; display: flex; flex-direction: column; gap: 0.75rem; }'
   ]
 })
 export class NgtToastContainer implements AfterViewInit {

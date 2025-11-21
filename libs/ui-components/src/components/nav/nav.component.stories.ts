@@ -28,7 +28,9 @@ export const Default: Story = {
 
 export const Pills: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav [style]="'pills'">
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
@@ -41,7 +43,9 @@ export const Pills: Story = {
 
 export const Underline: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav [style]="'underline'">
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
@@ -54,7 +58,9 @@ export const Underline: Story = {
 
 export const CenterAligned: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav [align]="'center'">
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
@@ -67,7 +73,9 @@ export const CenterAligned: Story = {
 
 export const Justified: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav [align]="'justified'">
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
@@ -80,7 +88,9 @@ export const Justified: Story = {
 
 export const Vertical: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <div class="max-w-xs">
         <ngt-nav [orientation]="'vertical'">
@@ -111,7 +121,9 @@ export const WithDisabled: Story = {
 
 export const WithActiveId: Story = {
   render: () => ({
-    imports: [NgtNavItem],
+    moduleMetadata: {
+      imports: [NgtNav, NgtNavItem]
+    },
     template: `
       <ngt-nav [activeId]="'about'">
         <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
