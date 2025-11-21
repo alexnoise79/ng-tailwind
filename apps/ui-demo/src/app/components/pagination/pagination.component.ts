@@ -22,4 +22,3 @@ export class PaginationDemoComponent {
     console.log(`${signalName} changed to page:`, page);
   }
 }
-

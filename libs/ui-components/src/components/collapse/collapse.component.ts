@@ -17,11 +17,10 @@ export class NgtCollapse {
     }
   }
   private _isOpen: WritableSignal<boolean> = signal(false);
-  
+
   readonly horizontal = input(false);
 
   get isOpen(): Signal<boolean> {
     return this._isOpen;
   }
 }
-

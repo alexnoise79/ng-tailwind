@@ -7,4 +7,3 @@ import { NgtDropdown, NgtDropdownTrigger, NgtDropdownContent } from '@ng-tailwin
   templateUrl: './dropdown.component.html'
 })
 export class DropdownDemoComponent {}
-

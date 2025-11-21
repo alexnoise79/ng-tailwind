@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
       this.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     this.updateTheme();
-    
+
     // Set default theme if not already set
     if (!document.documentElement.getAttribute('data-theme')) {
       const savedTheme = localStorage.getItem('theme') || 'default';

@@ -27,7 +27,7 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
 
   ngAfterContentInit(): void {
     this.items.set(this.navItems.toArray());
-    
+
     // Set initial active item only if activeId is provided
     // If using routerLink, RouterLinkActive will handle the active state
     const activeIdValue = this.activeId();
@@ -39,11 +39,9 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
     }
 
     // Listen to router events to sync active state
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.syncWithRouter();
-      });
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.syncWithRouter();
+    });
   }
 
   ngAfterViewChecked(): void {
@@ -67,7 +65,6 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
       }
     }
   }
-
 
   selectItem(id: string): void {
     this.selectedId.set(id);
@@ -152,7 +149,7 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
     };
 
     let classes = `${baseClasses} ${orientationClasses[this.orientation()]} ${styleClasses[this.style()]}`;
-    
+
     if (this.orientation() === 'horizontal') {
       classes += ` ${alignClasses[this.align()]}`;
     }
@@ -161,14 +158,13 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
   });
 
   getNavButtonClasses(item: NgtNavItem): string {
-    const baseClasses = this.orientation() === 'vertical' 
-      ? 'flex items-center justify-start font-medium text-sm transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full'
-      : 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
-    
+    const baseClasses =
+      this.orientation() === 'vertical' ? 'flex items-center justify-start font-medium text-sm transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed w-full' : 'inline-flex items-center justify-center font-medium text-sm transition-colors focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed';
+
     const isActive = this.selectedId() === item.id;
-    
+
     let classes = baseClasses;
-    
+
     if (this.style() === 'tabs') {
       if (this.orientation() === 'horizontal') {
         classes += ' px-4 py-2 border-b-2';
@@ -205,7 +201,7 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
         classes += ' text-gray-500 hover:text-gray-700';
       }
     }
-    
+
     return classes;
   }
 
@@ -215,6 +211,4 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
     }
     return '';
   }
-
 }
-

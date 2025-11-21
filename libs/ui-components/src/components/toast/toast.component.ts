@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, ViewContainerRef } from '@angular/core';
+import { Component, Input, signal, computed, output, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { classMerge } from '../../utils';
 import { ToastSeverity } from './toast.interface';
@@ -10,11 +10,11 @@ import { ToastSeverity } from './toast.interface';
 })
 export class NgtToast implements OnInit, OnDestroy {
   toastId = '';
-  
-  @Input() set text(value: string | TemplateRef<any> | undefined) {
+
+  @Input() set text(value: string | TemplateRef<unknown> | undefined) {
     this._text.set(value);
   }
-  private _text = signal<string | TemplateRef<any> | undefined>(undefined);
+  private _text = signal<string | TemplateRef<unknown> | undefined>(undefined);
 
   @Input() set severity(value: ToastSeverity) {
     this._severity.set(value || 'info');
@@ -46,10 +46,10 @@ export class NgtToast implements OnInit, OnDestroy {
   }
   private _closable = signal<boolean>(true);
 
-  @Input() set data(value: any) {
+  @Input() set data(value: unknown) {
     this._data.set(value);
   }
-  private _data = signal<any>(undefined);
+  private _data = signal<unknown>(undefined);
 
   @Input() set icon(value: string | undefined) {
     this._icon.set(value);
@@ -92,6 +92,10 @@ export class NgtToast implements OnInit, OnDestroy {
     return text instanceof TemplateRef ? text : null;
   });
 
+  templateContext = computed(() => {
+    return { $implicit: this._data() as Record<string, unknown> };
+  });
+
   toastClasses = computed(() => {
     const baseClasses = 'flex items-start gap-3 p-4 rounded-lg shadow-lg border transition-all duration-300 transform relative pointer-events-auto';
     const severityClasses = {
@@ -100,20 +104,11 @@ export class NgtToast implements OnInit, OnDestroy {
       warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
       danger: 'bg-red-50 border-red-200 text-red-800'
     };
-    const visibilityClasses = this.isRemoving() 
-      ? 'opacity-0 translate-x-full' 
-      : this.isVisible() 
-        ? 'opacity-100 translate-x-0' 
-        : 'opacity-0 -translate-x-full';
-    
+    const visibilityClasses = this.isRemoving() ? 'opacity-0 translate-x-full' : this.isVisible() ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full';
+
     const customClass = this.styleClassValue();
-    
-    return classMerge(
-      baseClasses,
-      severityClasses[this.severityValue()],
-      visibilityClasses,
-      customClass || ''
-    );
+
+    return classMerge(baseClasses, severityClasses[this.severityValue()], visibilityClasses, customClass || '');
   });
 
   iconClasses = computed(() => {
@@ -148,7 +143,9 @@ export class NgtToast implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Cleanup
+    // Lifecycle hook - cleanup handled automatically by Angular
+    this.isRemoving.set(false);
+    this.isVisible.set(false);
   }
 
   close(): void {
@@ -164,4 +161,3 @@ export class NgtToast implements OnInit, OnDestroy {
     }
   }
 }
-

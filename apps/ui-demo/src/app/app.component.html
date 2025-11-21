@@ -1,4 +1,3 @@
-
 <ngt-toast-container></ngt-toast-container>
 <div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex transition-colors duration-200">
   <!-- Left Sidebar Navigation -->
@@ -8,71 +7,19 @@
     </div>
     <nav class="flex-1 px-4 py-4">
       <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-        <ngt-nav-item 
-          label="Getting Started" 
-          [itemId]="'getting-started'"
-          [routerLink]="'/getting-started'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Button" 
-          [itemId]="'button'"
-          [routerLink]="'/button'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Modal" 
-          [itemId]="'modal'"
-          [routerLink]="'/modal'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Accordion" 
-          [itemId]="'accordion'"
-          [routerLink]="'/accordion'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Nav" 
-          [itemId]="'nav'"
-          [routerLink]="'/nav'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Dropdown" 
-          [itemId]="'dropdown'"
-          [routerLink]="'/dropdown'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Tooltip" 
-          [itemId]="'tooltip'"
-          [routerLink]="'/tooltip'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Collapse" 
-          [itemId]="'collapse'"
-          [routerLink]="'/collapse'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Datepicker" 
-          [itemId]="'datepicker'"
-          [routerLink]="'/datepicker'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Offcanvas" 
-          [itemId]="'offcanvas'"
-          [routerLink]="'/offcanvas'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Pagination" 
-          [itemId]="'pagination'"
-          [routerLink]="'/pagination'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Toggle Switch" 
-          [itemId]="'toggle-switch'"
-          [routerLink]="'/toggle-switch'">
-        </ngt-nav-item>
-        <ngt-nav-item 
-          label="Toast" 
-          [itemId]="'toast'"
-          [routerLink]="'/toast'">
-        </ngt-nav-item>
+        <ngt-nav-item [itemId]="'getting-started'" [routerLink]="'/getting-started'" label="Getting Started"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'button'" [routerLink]="'/button'" label="Button"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'modal'" [routerLink]="'/modal'" label="Modal"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'accordion'" [routerLink]="'/accordion'" label="Accordion"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'nav'" [routerLink]="'/nav'" label="Nav"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'dropdown'" [routerLink]="'/dropdown'" label="Dropdown"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'tooltip'" [routerLink]="'/tooltip'" label="Tooltip"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'collapse'" [routerLink]="'/collapse'" label="Collapse"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'datepicker'" [routerLink]="'/datepicker'" label="Datepicker"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'offcanvas'" [routerLink]="'/offcanvas'" label="Offcanvas"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'pagination'" [routerLink]="'/pagination'" label="Pagination"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'toggle-switch'" [routerLink]="'/toggle-switch'" label="Toggle Switch"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'toast'" [routerLink]="'/toast'" label="Toast"> </ngt-nav-item>
       </ngt-nav>
     </nav>
   </aside>
@@ -86,11 +33,7 @@
           <div class="flex gap-3 items-center">
             <div class="flex items-center gap-2">
               <span class="text-sm text-gray-600 dark:text-gray-400 hidden sm:inline">Light</span>
-              <ngt-toggle-switch 
-                [(ngModel)]="isDarkMode"
-                (ngModelChange)="onToggleChange()"
-                size="md">
-              </ngt-toggle-switch>
+              <ngt-toggle-switch [(ngModel)]="isDarkMode" (ngModelChange)="onToggleChange()" size="md"> </ngt-toggle-switch>
               <span class="text-sm text-gray-600 dark:text-gray-400 hidden sm:inline">Dark</span>
             </div>
             <div class="flex gap-2">
@@ -110,5 +53,3 @@
 </div>
 
 <app-theme-configurator></app-theme-configurator>
-
-

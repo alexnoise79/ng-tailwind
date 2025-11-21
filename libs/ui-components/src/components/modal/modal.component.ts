@@ -16,7 +16,7 @@ export class NgtModal implements OnInit, OnDestroy {
     }
   }
   private _isOpen: WritableSignal<boolean> = signal(false);
-  
+
   readonly title = input<string>();
   readonly showFooter = input(false);
   readonly closeOnBackdropClick = input(true);

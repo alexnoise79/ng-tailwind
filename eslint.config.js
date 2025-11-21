@@ -6,41 +6,34 @@ import angularTemplateParser from '@angular-eslint/template-parser';
 
 export default [
   {
-    ignores: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/.nx/**',
-      '**/*.stories.ts',
-      '**/*.spec.ts',
-      '**/jest.config.ts',
-    ],
+    ignores: ['**/node_modules/**', '**/dist/**', '**/.nx/**', '**/*.stories.ts', '**/*.spec.ts', '**/jest.config.ts']
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      '@angular-eslint': angularPlugin,
+      '@angular-eslint': angularPlugin
     },
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 2020,
       sourceType: 'module',
       parserOptions: {
-        project: './tsconfig.base.json',
-      },
+        project: './tsconfig.base.json'
+      }
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
-      ...angularPlugin.configs.recommended.rules,
-    },
+      ...angularPlugin.configs.recommended.rules
+    }
   },
   {
     files: ['**/*.html'],
     plugins: {
-      '@angular-eslint/template': angularTemplatePlugin,
+      '@angular-eslint/template': angularTemplatePlugin
     },
     languageOptions: {
-      parser: angularTemplateParser,
+      parser: angularTemplateParser
     },
     rules: {
       ...angularTemplatePlugin.configs.recommended.rules,
@@ -48,10 +41,9 @@ export default [
         'error',
         {
           alphabetical: false,
-          order: ['STRUCTURAL_DIRECTIVE', 'TEMPLATE_REFERENCE', 'TWO_WAY_BINDING', 'INPUT_BINDING', 'OUTPUT_BINDING', 'ATTRIBUTE_BINDING'],
-        },
-      ],
-    },
-  },
+          order: ['STRUCTURAL_DIRECTIVE', 'TEMPLATE_REFERENCE', 'TWO_WAY_BINDING', 'INPUT_BINDING', 'OUTPUT_BINDING', 'ATTRIBUTE_BINDING']
+        }
+      ]
+    }
+  }
 ];
-

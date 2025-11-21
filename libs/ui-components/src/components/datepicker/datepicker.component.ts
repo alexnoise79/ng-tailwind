@@ -22,13 +22,13 @@ export class NgtDatepicker implements OnInit {
     }
   }
   private _model = signal<NgtDateStruct | null>(null);
-  
+
   readonly disabled = input(false);
   readonly minDate = input<NgtDateStruct | null>(null);
   readonly maxDate = input<NgtDateStruct | null>(null);
   readonly startDate = input<NgtDateStruct | null>(null);
   readonly markDisabled = input<((date: NgtDateStruct) => boolean) | undefined>(undefined);
-  
+
   readonly dateSelect = output<NgtDateStruct>();
   readonly navigate = output<{ current: { year: number; month: number }; prev: { year: number; month: number } }>();
 
@@ -91,14 +91,12 @@ export class NgtDatepicker implements OnInit {
   isToday(date: NgtDateStruct | null): boolean {
     if (!date) return false;
     const today = new Date();
-    return date.year === today.getFullYear() && 
-           date.month === today.getMonth() + 1 && 
-           date.day === today.getDate();
+    return date.year === today.getFullYear() && date.month === today.getMonth() + 1 && date.day === today.getDate();
   }
 
   isDisabled(date: NgtDateStruct | null): boolean {
     if (!date || this.disabled()) return true;
-    
+
     // Check minDate
     if (this.minDate()) {
       const min = this.minDate()!;
@@ -127,7 +125,7 @@ export class NgtDatepicker implements OnInit {
 
   selectDate(date: NgtDateStruct): void {
     if (this.isDisabled(date)) return;
-    
+
     this._model.set(date);
     this.dateSelect.emit(date);
   }
@@ -135,7 +133,7 @@ export class NgtDatepicker implements OnInit {
   previousMonth(): void {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
-    
+
     if (this.currentMonth() === 1) {
       this._currentMonth.set(12);
       this._currentYear.set(this.currentYear() - 1);
@@ -152,7 +150,7 @@ export class NgtDatepicker implements OnInit {
   nextMonth(): void {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
-    
+
     if (this.currentMonth() === 12) {
       this._currentMonth.set(1);
       this._currentYear.set(this.currentYear() + 1);
@@ -170,7 +168,7 @@ export class NgtDatepicker implements OnInit {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
     this._currentYear.set(this.currentYear() - 1);
-    
+
     this.navigate.emit({
       current: { year: this.currentYear(), month: this.currentMonth() },
       prev: { year: prevYear, month: prevMonth }
@@ -181,7 +179,7 @@ export class NgtDatepicker implements OnInit {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
     this._currentYear.set(this.currentYear() + 1);
-    
+
     this.navigate.emit({
       current: { year: this.currentYear(), month: this.currentMonth() },
       prev: { year: prevYear, month: prevMonth }
@@ -190,22 +188,21 @@ export class NgtDatepicker implements OnInit {
 
   getDateClasses(date: NgtDateStruct | null): string {
     if (!date) return '';
-    
+
     const base = 'w-10 h-10 flex items-center justify-center text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1';
-    
+
     if (this.isDisabled(date)) {
       return classMerge(base, 'text-gray-300 dark:text-gray-600 cursor-not-allowed');
     }
-    
+
     if (this.isSelected(date)) {
       return classMerge(base, 'bg-primary-600 text-white font-semibold hover:bg-primary-700');
     }
-    
+
     if (this.isToday(date)) {
       return classMerge(base, 'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 font-semibold hover:bg-primary-100 dark:hover:bg-primary-900/50');
     }
-    
+
     return classMerge(base, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700');
   }
 }
-

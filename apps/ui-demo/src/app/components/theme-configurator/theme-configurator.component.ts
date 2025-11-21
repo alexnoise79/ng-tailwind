@@ -7,7 +7,7 @@ export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tec
 @Component({
   selector: 'app-theme-configurator',
   standalone: true,
-  imports: [CommonModule, NgtButton],
+  imports: [CommonModule],
   templateUrl: './theme-configurator.component.html',
   styleUrls: ['./theme-configurator.component.css']
 })
@@ -46,4 +46,3 @@ export class ThemeConfiguratorComponent implements OnInit {
     document.documentElement.setAttribute('data-theme', theme);
   }
 }
-

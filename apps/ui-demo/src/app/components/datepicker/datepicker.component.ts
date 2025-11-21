@@ -9,4 +9,3 @@ import { NgtDatepicker, NgtDateStruct } from '@ng-tailwind/ui-components';
 export class DatepickerDemoComponent {
   selectedDate = signal<NgtDateStruct | null>(null);
 }
-

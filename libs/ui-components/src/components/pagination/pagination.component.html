@@ -3,13 +3,7 @@
     <!-- First Button -->
     @if (showFirstLast()) {
       <li>
-        <button
-          [disabled]="isFirstPage() || disabled()"
-          [class]="getButtonClasses()"
-          [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null"
-          (click)="goToFirst()"
-          type="button"
-          aria-label="Go to first page">
+        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToFirst()" type="button" aria-label="Go to first page">
           <span aria-hidden="true">«</span>
         </button>
       </li>
@@ -18,13 +12,7 @@
     <!-- Previous Button -->
     @if (showPrevNext()) {
       <li>
-        <button
-          [disabled]="isFirstPage() || disabled()"
-          [class]="getButtonClasses()"
-          [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null"
-          (click)="goToPrevious()"
-          type="button"
-          aria-label="Go to previous page">
+        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToPrevious()" type="button" aria-label="Go to previous page">
           <span aria-hidden="true">‹</span>
         </button>
       </li>
@@ -33,14 +21,7 @@
     <!-- Start Ellipsis -->
     @if (showStartEllipsis()) {
       <li>
-        <button
-          [disabled]="disabled()"
-          [class]="getButtonClasses()"
-          (click)="goToPage(1)"
-          type="button"
-          aria-label="Go to page 1">
-          1
-        </button>
+        <button [disabled]="disabled()" [class]="getButtonClasses()" (click)="goToPage(1)" type="button" aria-label="Go to page 1">1</button>
       </li>
       <li>
         <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
@@ -50,13 +31,7 @@
     <!-- Page Numbers -->
     @for (page of visiblePages(); track page) {
       <li>
-        <button
-          [disabled]="disabled()"
-          [class]="getButtonClasses(page === _currentPage())"
-          [attr.aria-current]="page === _currentPage() ? 'page' : null"
-          [attr.aria-label]="'Go to page ' + page"
-          (click)="goToPage(page)"
-          type="button">
+        <button [disabled]="disabled()" [class]="getButtonClasses(page === _currentPage())" [attr.aria-current]="page === _currentPage() ? 'page' : null" [attr.aria-label]="'Go to page ' + page" (click)="goToPage(page)" type="button">
           {{ page }}
         </button>
       </li>
@@ -68,12 +43,7 @@
         <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
       </li>
       <li>
-        <button
-          [disabled]="disabled()"
-          [class]="getButtonClasses()"
-          [attr.aria-label]="'Go to page ' + totalPagesValue()"
-          (click)="goToPage(totalPagesValue())"
-          type="button">
+        <button [disabled]="disabled()" [class]="getButtonClasses()" [attr.aria-label]="'Go to page ' + totalPagesValue()" (click)="goToPage(totalPagesValue())" type="button">
           {{ totalPagesValue() }}
         </button>
       </li>
@@ -82,13 +52,7 @@
     <!-- Next Button -->
     @if (showPrevNext()) {
       <li>
-        <button
-          [disabled]="isLastPage() || disabled()"
-          [class]="getButtonClasses()"
-          [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null"
-          (click)="goToNext()"
-          type="button"
-          aria-label="Go to next page">
+        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToNext()" type="button" aria-label="Go to next page">
           <span aria-hidden="true">›</span>
         </button>
       </li>
@@ -97,17 +61,10 @@
     <!-- Last Button -->
     @if (showFirstLast()) {
       <li>
-        <button
-          [disabled]="isLastPage() || disabled()"
-          [class]="getButtonClasses()"
-          [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null"
-          (click)="goToLast()"
-          type="button"
-          aria-label="Go to last page">
+        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToLast()" type="button" aria-label="Go to last page">
           <span aria-hidden="true">»</span>
         </button>
       </li>
     }
   </ul>
 </nav>
-

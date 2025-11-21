@@ -25,8 +25,13 @@ export class NgtToggleSwitch implements ControlValueAccessor {
   @ViewChild('checkbox', { static: true }) checkboxRef!: ElementRef<HTMLInputElement>;
 
   private _value = signal(false);
-  private onChange = (value: boolean) => {};
-  private onTouched = () => {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private onChange = (_value: boolean) => {
+    // Default implementation - will be replaced by registerOnChange
+  };
+  private onTouched = () => {
+    // Default implementation - will be replaced by registerOnTouched
+  };
 
   isDisabled = computed(() => this._disabled());
   value = computed(() => this._value());
@@ -38,9 +43,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
       md: 'h-5 w-9',
       lg: 'h-6 w-11'
     };
-    const stateClasses = this.value() 
-      ? 'bg-primary-600' 
-      : 'bg-gray-200 dark:bg-gray-700';
+    const stateClasses = this.value() ? 'bg-primary-600' : 'bg-gray-200 dark:bg-gray-700';
     return classMerge(baseClasses, sizeClasses[this.size()], stateClasses);
   });
 
@@ -62,17 +65,11 @@ export class NgtToggleSwitch implements ControlValueAccessor {
   });
 
   labelClasses = computed(() => {
-    return classMerge(
-      'text-sm font-medium text-gray-700 dark:text-gray-300',
-      this.isDisabled() ? 'opacity-50' : ''
-    );
+    return classMerge('text-sm font-medium text-gray-700 dark:text-gray-300', this.isDisabled() ? 'opacity-50' : '');
   });
 
   containerClasses = computed(() => {
-    return classMerge(
-      'inline-flex items-center gap-2',
-      this.isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer'
-    );
+    return classMerge('inline-flex items-center gap-2', this.isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer');
   });
 
   toggle(event?: Event): void {
@@ -121,4 +118,3 @@ export class NgtToggleSwitch implements ControlValueAccessor {
     this._disabled.set(isDisabled);
   }
 }
-

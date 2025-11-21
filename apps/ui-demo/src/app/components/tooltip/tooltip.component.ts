@@ -7,4 +7,3 @@ import { NgtTooltip } from '@ng-tailwind/ui-components';
   templateUrl: './tooltip.component.html'
 })
 export class TooltipDemoComponent {}
-

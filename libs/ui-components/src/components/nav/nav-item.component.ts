@@ -37,4 +37,3 @@ export class NgtNavItem implements AfterContentInit {
 
   buttonId = computed(() => `${this.id}-button`);
 }
-

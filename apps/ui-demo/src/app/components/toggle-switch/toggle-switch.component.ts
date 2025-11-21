@@ -14,4 +14,3 @@ export class ToggleSwitchDemoComponent {
   smsNotifications = true;
   disabledToggle = true;
 }
-

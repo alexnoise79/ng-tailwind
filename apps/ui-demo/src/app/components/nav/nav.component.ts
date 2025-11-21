@@ -7,4 +7,3 @@ import { NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
   templateUrl: './nav.component.html'
 })
 export class NavDemoComponent {}
-

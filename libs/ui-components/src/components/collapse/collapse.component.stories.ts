@@ -10,13 +10,13 @@ const meta: Meta<NgtCollapse> = {
   argTypes: {
     isOpen: {
       control: 'boolean',
-      description: 'Whether the collapse is open',
+      description: 'Whether the collapse is open'
     },
     horizontal: {
       control: 'boolean',
-      description: 'Whether to collapse horizontally instead of vertically',
-    },
-  },
+      description: 'Whether to collapse horizontally instead of vertically'
+    }
+  }
 };
 
 export default meta;
@@ -25,9 +25,9 @@ type Story = StoryObj<NgtCollapse>;
 export const Default: Story = {
   args: {
     isOpen: signal(false),
-    horizontal: false,
+    horizontal: false
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [NgtButton],
     template: `
@@ -46,16 +46,16 @@ export const Default: Story = {
           </div>
         </ngt-collapse>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const Horizontal: Story = {
   args: {
     isOpen: signal(false),
-    horizontal: true,
+    horizontal: true
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [NgtButton],
     template: `
@@ -72,16 +72,16 @@ export const Horizontal: Story = {
           <span class="text-gray-500">After collapse</span>
         </div>
       </div>
-    `,
-  }),
+    `
+  })
 };
 
 export const WithRichContent: Story = {
   args: {
     isOpen: signal(false),
-    horizontal: false,
+    horizontal: false
   },
-  render: (args) => ({
+  render: args => ({
     props: args,
     imports: [NgtButton],
     template: `
@@ -108,7 +108,6 @@ export const WithRichContent: Story = {
           </div>
         </ngt-collapse>
       </div>
-    `,
-  }),
+    `
+  })
 };
-

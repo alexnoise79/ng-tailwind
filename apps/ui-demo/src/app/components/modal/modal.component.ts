@@ -9,4 +9,3 @@ import { NgtButton, NgtModal } from '@ng-tailwind/ui-components';
 export class ModalDemoComponent {
   showModal = signal(false);
 }
-

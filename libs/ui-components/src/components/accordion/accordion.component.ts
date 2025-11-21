@@ -1,6 +1,5 @@
 import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
 
-
 @Component({
   selector: 'ngt-accordion',
   imports: [],

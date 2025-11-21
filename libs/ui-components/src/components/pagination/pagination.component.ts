@@ -145,9 +145,7 @@ export class NgtPagination {
       md: 'px-3 py-2 min-w-10',
       lg: 'px-4 py-2.5 min-w-12'
     };
-    const stateClasses = isActive
-      ? 'bg-primary-600 text-white'
-      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700';
+    const stateClasses = isActive ? 'bg-primary-600 text-white' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700';
     const disabledClasses = this.disabled() ? 'opacity-50 cursor-not-allowed' : '';
 
     return `${baseClasses} ${sizeClasses[this.size()]} ${stateClasses} ${disabledClasses}`;
@@ -162,4 +160,3 @@ export class NgtPagination {
     return `inline-flex items-center justify-center text-gray-500 dark:text-gray-400 ${sizeClasses[this.size()]}`;
   }
 }
-

@@ -301,4 +301,3 @@ export const FewPages: Story = {
     `
   })
 };
-

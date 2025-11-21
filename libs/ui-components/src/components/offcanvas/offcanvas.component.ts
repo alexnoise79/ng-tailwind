@@ -18,7 +18,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     }
   }
   private _isOpen: WritableSignal<boolean> = signal(false);
-  
+
   readonly title = input<string>();
   readonly position = input<OffcanvasPosition>('end');
   readonly showHeader = input(true);
@@ -86,7 +86,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     const isVisible = this.isVisible();
 
     const baseClasses = 'fixed z-50 bg-white dark:bg-gray-800 shadow-xl transition-transform duration-300 ease-in-out flex flex-col';
-    
+
     switch (position) {
       case 'start':
         return `${baseClasses} left-0 top-0 bottom-0 h-full ${isVisible ? 'translate-x-0' : '-translate-x-full'}`;
@@ -103,12 +103,11 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
 
   getWidthClasses(): string {
     const position = this.position();
-    
+
     if (position === 'top' || position === 'bottom') {
       return 'w-full';
     }
-    
+
     return 'w-full sm:w-96 md:w-md lg:w-lg';
   }
 }
-

@@ -7,4 +7,3 @@ import { NgtAccordion, NgtAccordionItem } from '@ng-tailwind/ui-components';
   templateUrl: './accordion.component.html'
 })
 export class AccordionDemoComponent {}
-

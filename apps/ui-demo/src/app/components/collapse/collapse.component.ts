@@ -10,4 +10,3 @@ export class CollapseDemoComponent {
   collapseOpen = signal(false);
   horizontalCollapseOpen = signal(false);
 }
-

@@ -7,4 +7,3 @@ import { NgtButton } from '@ng-tailwind/ui-components';
   templateUrl: './button.component.html'
 })
 export class ButtonDemoComponent {}
-

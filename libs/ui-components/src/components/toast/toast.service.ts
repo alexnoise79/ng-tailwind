@@ -16,7 +16,7 @@ export class NgtToastService {
 
   show(message: NgtToastMessage): string {
     const toastId = `toast-${++this.toastCounter}`;
-    
+
     if (!this.containerRef) {
       console.warn('Toast container not set. Please add <ngt-toast-container></ngt-toast-container> to your app component.');
       return toastId;
@@ -76,4 +76,3 @@ export class NgtToastService {
     });
   }
 }
-
