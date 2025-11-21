@@ -11,13 +11,13 @@
     <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
       <ngt-nav-item 
         [itemId]="'showcase'" 
-        label="Showcase"
         (activated)="setActiveTab('showcase')"
+        label="Showcase"
       ></ngt-nav-item>
       <ngt-nav-item 
         [itemId]="'api'" 
-        label="API"
         (activated)="setActiveTab('api')"
+        label="API"
       ></ngt-nav-item>
     </ngt-nav>
   </div>
@@ -30,13 +30,13 @@
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Modal</h2>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
-            <ngt-button variant="primary" (click)="showModal.set(true)">Open Modal</ngt-button>
+            <ngt-button (click)="showModal.set(true)" variant="primary">Open Modal</ngt-button>
             @if (showModal()) {
               <ngt-modal [isOpen]="showModal()" (closed)="showModal.set(false)" title="Example Modal">
                 <p class="text-gray-600 dark:text-gray-300 mb-4">This is a modal dialog built with Angular CDK Overlay.</p>
                 <div class="flex justify-end gap-2">
-                  <ngt-button variant="outline" (click)="showModal.set(false)">Cancel</ngt-button>
-                  <ngt-button variant="primary" (click)="showModal.set(false)">Confirm</ngt-button>
+                  <ngt-button (click)="showModal.set(false)" variant="outline">Cancel</ngt-button>
+                  <ngt-button (click)="showModal.set(false)" variant="primary">Confirm</ngt-button>
                 </div>
               </ngt-modal>
             }
@@ -44,8 +44,8 @@
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
               <button
-                type="button"
                 (click)="copyToClipboard(codeSnippets.basic)"
+                type="button"
                 class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
                 title="Copy code"
               >
@@ -64,13 +64,13 @@
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Modal with Footer</h2>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
-            <ngt-button variant="primary" (click)="showModalWithFooter.set(true)">Open Modal with Footer</ngt-button>
+            <ngt-button (click)="showModalWithFooter.set(true)" variant="primary">Open Modal with Footer</ngt-button>
             @if (showModalWithFooter()) {
-              <ngt-modal [isOpen]="showModalWithFooter()" [showFooter]="true" title="Modal with Footer" (closed)="showModalWithFooter.set(false)">
+              <ngt-modal [isOpen]="showModalWithFooter()" [showFooter]="true" (closed)="showModalWithFooter.set(false)" title="Modal with Footer">
                 <p class="text-gray-600 dark:text-gray-300 mb-4">This modal has a dedicated footer section.</p>
                 <div footer>
-                  <ngt-button variant="outline" (click)="showModalWithFooter.set(false)">Cancel</ngt-button>
-                  <ngt-button variant="primary" (click)="showModalWithFooter.set(false)">Confirm</ngt-button>
+                  <ngt-button (click)="showModalWithFooter.set(false)" variant="outline">Cancel</ngt-button>
+                  <ngt-button (click)="showModalWithFooter.set(false)" variant="primary">Confirm</ngt-button>
                 </div>
               </ngt-modal>
             }
@@ -78,8 +78,8 @@
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
               <button
-                type="button"
                 (click)="copyToClipboard(codeSnippets.withFooter)"
+                type="button"
                 class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
                 title="Copy code"
               >

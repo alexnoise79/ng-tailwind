@@ -7,35 +7,35 @@
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Examples</h3>
     <div class="flex flex-wrap gap-4">
-      <ngt-button variant="primary" (click)="showStart.set(true)">Open from Start</ngt-button>
-      <ngt-button variant="primary" (click)="showEnd.set(true)">Open from End</ngt-button>
-      <ngt-button variant="primary" (click)="showTop.set(true)">Open from Top</ngt-button>
-      <ngt-button variant="primary" (click)="showBottom.set(true)">Open from Bottom</ngt-button>
+      <ngt-button (click)="showStart.set(true)" variant="primary">Open from Start</ngt-button>
+      <ngt-button (click)="showEnd.set(true)" variant="primary">Open from End</ngt-button>
+      <ngt-button (click)="showTop.set(true)" variant="primary">Open from Top</ngt-button>
+      <ngt-button (click)="showBottom.set(true)" variant="primary">Open from Bottom</ngt-button>
     </div>
   </section>
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">With Title</h3>
-    <ngt-button variant="primary" (click)="showWithTitle.set(true)">Open with Title</ngt-button>
+    <ngt-button (click)="showWithTitle.set(true)" variant="primary">Open with Title</ngt-button>
   </section>
 
   <section>
     <h3 class="text-2xl font-semibold text-gray-900 mb-4">Backdrop Options</h3>
     <div class="flex flex-wrap gap-4">
-      <ngt-button variant="primary" (click)="showWithBackdrop.set(true)">With Backdrop</ngt-button>
-      <ngt-button variant="primary" (click)="showWithoutBackdrop.set(true)">Without Backdrop</ngt-button>
+      <ngt-button (click)="showWithBackdrop.set(true)" variant="primary">With Backdrop</ngt-button>
+      <ngt-button (click)="showWithoutBackdrop.set(true)" variant="primary">Without Backdrop</ngt-button>
     </div>
   </section>
 
   <!-- Offcanvas from Start -->
   @if (showStart()) {
-    <ngt-offcanvas [isOpen]="showStart()" (closed)="showStart.set(false)" [position]="'start'" title="Offcanvas from Start">
+    <ngt-offcanvas [isOpen]="showStart()" [position]="'start'" (closed)="showStart.set(false)" title="Offcanvas from Start">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas slides in from the left side.</p>
         <p class="text-gray-600">You can place any content here.</p>
         <div class="flex gap-2 mt-6">
-          <ngt-button variant="outline" (click)="showStart.set(false)">Close</ngt-button>
-          <ngt-button variant="primary" (click)="showStart.set(false)">Save Changes</ngt-button>
+          <ngt-button (click)="showStart.set(false)" variant="outline">Close</ngt-button>
+          <ngt-button (click)="showStart.set(false)" variant="primary">Save Changes</ngt-button>
         </div>
       </div>
     </ngt-offcanvas>
@@ -43,7 +43,7 @@
 
   <!-- Offcanvas from End -->
   @if (showEnd()) {
-    <ngt-offcanvas [isOpen]="showEnd()" (closed)="showEnd.set(false)" [position]="'end'" title="Offcanvas from End">
+    <ngt-offcanvas [isOpen]="showEnd()" [position]="'end'" (closed)="showEnd.set(false)" title="Offcanvas from End">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas slides in from the right side.</p>
         <p class="text-gray-600">This is the default position for offcanvas components.</p>
@@ -53,8 +53,8 @@
           <li>Feature 3</li>
         </ul>
         <div class="flex gap-2 mt-6">
-          <ngt-button variant="outline" (click)="showEnd.set(false)">Cancel</ngt-button>
-          <ngt-button variant="primary" (click)="showEnd.set(false)">Apply</ngt-button>
+          <ngt-button (click)="showEnd.set(false)" variant="outline">Cancel</ngt-button>
+          <ngt-button (click)="showEnd.set(false)" variant="primary">Apply</ngt-button>
         </div>
       </div>
     </ngt-offcanvas>
@@ -62,7 +62,7 @@
 
   <!-- Offcanvas from Top -->
   @if (showTop()) {
-    <ngt-offcanvas [isOpen]="showTop()" (closed)="showTop.set(false)" [position]="'top'" title="Offcanvas from Top">
+    <ngt-offcanvas [isOpen]="showTop()" [position]="'top'" (closed)="showTop.set(false)" title="Offcanvas from Top">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas slides in from the top of the screen.</p>
         <p class="text-gray-600">Perfect for notifications or action bars.</p>
@@ -72,7 +72,7 @@
 
   <!-- Offcanvas from Bottom -->
   @if (showBottom()) {
-    <ngt-offcanvas [isOpen]="showBottom()" (closed)="showBottom.set(false)" [position]="'bottom'" title="Offcanvas from Bottom">
+    <ngt-offcanvas [isOpen]="showBottom()" [position]="'bottom'" (closed)="showBottom.set(false)" title="Offcanvas from Bottom">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas slides in from the bottom of the screen.</p>
         <p class="text-gray-600">Commonly used for mobile navigation menus.</p>
@@ -82,7 +82,7 @@
 
   <!-- Offcanvas with Title -->
   @if (showWithTitle()) {
-    <ngt-offcanvas [isOpen]="showWithTitle()" (closed)="showWithTitle.set(false)" [position]="'end'" title="Settings">
+    <ngt-offcanvas [isOpen]="showWithTitle()" [position]="'end'" (closed)="showWithTitle.set(false)" title="Settings">
       <div class="space-y-6">
         <div>
           <h4 class="font-semibold text-gray-900 mb-2">General Settings</h4>
@@ -102,7 +102,7 @@
 
   <!-- Offcanvas with Backdrop -->
   @if (showWithBackdrop()) {
-    <ngt-offcanvas [isOpen]="showWithBackdrop()" (closed)="showWithBackdrop.set(false)" [position]="'end'" [backdrop]="true" title="With Backdrop">
+    <ngt-offcanvas [isOpen]="showWithBackdrop()" [position]="'end'" [backdrop]="true" (closed)="showWithBackdrop.set(false)" title="With Backdrop">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas has a backdrop that dims the background.</p>
         <p class="text-gray-600">Clicking the backdrop will close the offcanvas.</p>
@@ -112,7 +112,7 @@
 
   <!-- Offcanvas without Backdrop -->
   @if (showWithoutBackdrop()) {
-    <ngt-offcanvas [isOpen]="showWithoutBackdrop()" (closed)="showWithoutBackdrop.set(false)" [position]="'end'" [backdrop]="false" title="Without Backdrop">
+    <ngt-offcanvas [isOpen]="showWithoutBackdrop()" [position]="'end'" [backdrop]="false" (closed)="showWithoutBackdrop.set(false)" title="Without Backdrop">
       <div class="space-y-4">
         <p class="text-gray-600">This offcanvas has no backdrop.</p>
         <p class="text-gray-600">The background remains fully visible and interactive.</p>

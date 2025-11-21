@@ -11,13 +11,13 @@
     <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
       <ngt-nav-item 
         [itemId]="'showcase'" 
-        label="Showcase"
         (activated)="setActiveTab('showcase')"
+        label="Showcase"
       ></ngt-nav-item>
       <ngt-nav-item 
         [itemId]="'api'" 
-        label="API"
         (activated)="setActiveTab('api')"
+        label="API"
       ></ngt-nav-item>
     </ngt-nav>
   </div>
@@ -45,8 +45,8 @@
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
               <button
-                type="button"
                 (click)="copyToClipboard(codeSnippets.singleOpen)"
+                type="button"
                 class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
                 title="Copy code"
               >
@@ -80,8 +80,8 @@
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
               <button
-                type="button"
                 (click)="copyToClipboard(codeSnippets.multipleOpen)"
+                type="button"
                 class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
                 title="Copy code"
               >
