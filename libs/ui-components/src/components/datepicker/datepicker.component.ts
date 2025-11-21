@@ -194,7 +194,7 @@ export class NgtDatepicker implements OnInit {
     const base = 'w-10 h-10 flex items-center justify-center text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1';
     
     if (this.isDisabled(date)) {
-      return classMerge(base, 'text-gray-300 cursor-not-allowed');
+      return classMerge(base, 'text-gray-300 dark:text-gray-600 cursor-not-allowed');
     }
     
     if (this.isSelected(date)) {
@@ -202,10 +202,10 @@ export class NgtDatepicker implements OnInit {
     }
     
     if (this.isToday(date)) {
-      return classMerge(base, 'bg-primary-50 text-primary-700 font-semibold hover:bg-primary-100');
+      return classMerge(base, 'bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 font-semibold hover:bg-primary-100 dark:hover:bg-primary-900/50');
     }
     
-    return classMerge(base, 'text-gray-700 hover:bg-gray-100');
+    return classMerge(base, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700');
   }
 }
 
