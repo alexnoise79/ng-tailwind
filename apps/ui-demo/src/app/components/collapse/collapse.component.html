@@ -1,21 +1,21 @@
 <div class="space-y-12">
   <section>
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">Collapse</h2>
-    <p class="text-gray-600 mb-4">Collapsible content with smooth animations.</p>
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Collapse</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Collapsible content with smooth animations.</p>
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vertical Collapse</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Vertical Collapse</h3>
     <div class="space-y-4">
       <ngt-button variant="primary" (click)="collapseOpen.set(!collapseOpen())">
         {{ collapseOpen() ? 'Hide' : 'Show' }} Content
       </ngt-button>
       <ngt-collapse [isOpen]="collapseOpen()" [horizontal]="false">
-        <div class="bg-gray-50 border border-gray-200 rounded-md p-4 mt-2">
-          <p class="text-gray-700">
+        <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md p-4 mt-2">
+          <p class="text-gray-700 dark:text-gray-300">
             This is collapsible content with smooth animations. Similar to ng-bootstrap's collapse component.
           </p>
-          <p class="text-gray-600 mt-2">
+          <p class="text-gray-600 dark:text-gray-400 mt-2">
             The content smoothly expands and collapses vertically.
           </p>
         </div>
@@ -24,18 +24,18 @@
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Horizontal Collapse</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Horizontal Collapse</h3>
     <div class="space-y-4">
       <ngt-button variant="outline" (click)="horizontalCollapseOpen.set(!horizontalCollapseOpen())">
         {{ horizontalCollapseOpen() ? 'Hide' : 'Show' }} Horizontal
       </ngt-button>
       <div class="flex items-center gap-2 mt-2">
         <ngt-collapse [isOpen]="horizontalCollapseOpen()" [horizontal]="true">
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-4 whitespace-nowrap">
-            <p class="text-gray-700">Horizontal collapse content</p>
+          <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md p-4 whitespace-nowrap">
+            <p class="text-gray-700 dark:text-gray-300">Horizontal collapse content</p>
           </div>
         </ngt-collapse>
-        <span class="text-gray-500">After collapse</span>
+        <span class="text-gray-500 dark:text-gray-400">After collapse</span>
       </div>
     </div>
   </section>

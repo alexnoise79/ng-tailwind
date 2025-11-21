@@ -17,7 +17,7 @@ export class NgtTooltip implements OnDestroy {
   isVisible = signal(false);
 
   tooltipClasses = computed(() => {
-    const base = 'absolute z-50 px-2 py-1 text-sm text-white bg-gray-900 rounded-md shadow-lg pointer-events-none whitespace-nowrap';
+    const base = 'absolute z-50 px-2 py-1 text-sm text-white dark:text-gray-900 bg-gray-900 dark:bg-gray-100 rounded-md shadow-lg pointer-events-none whitespace-nowrap';
     const positionClasses: Record<TooltipPosition, string> = {
       top: 'bottom-full mb-1 left-1/2 -translate-x-1/2',
       bottom: 'top-full mt-1 left-1/2 -translate-x-1/2',
