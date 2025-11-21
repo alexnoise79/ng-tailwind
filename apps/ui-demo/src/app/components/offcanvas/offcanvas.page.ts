@@ -15,4 +15,3 @@ export class OffcanvasPage {
   showWithoutBackdrop = signal(false);
   showWithTitle = signal(false);
 }
-

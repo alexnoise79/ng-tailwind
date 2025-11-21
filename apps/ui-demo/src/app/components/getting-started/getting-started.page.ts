@@ -5,4 +5,3 @@ import { Component } from '@angular/core';
   templateUrl: './getting-started.page.html'
 })
 export class GettingStartedPage {}
-

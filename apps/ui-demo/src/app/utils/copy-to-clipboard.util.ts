@@ -6,10 +6,7 @@ import { NgtToastService } from '@ng-tailwind/ui-components';
  * @param toastService - The toast service instance to show the notification
  * @returns Promise that resolves when copy is complete
  */
-export async function copyToClipboard(
-  text: string,
-  toastService: NgtToastService
-): Promise<void> {
+export async function copyToClipboard(text: string, toastService: NgtToastService): Promise<void> {
   try {
     await navigator.clipboard.writeText(text);
     toastService.show({
@@ -28,4 +25,3 @@ export async function copyToClipboard(
     });
   }
 }
-

@@ -39,4 +39,3 @@ export class TooltipPage {
 </ngt-tooltip>`
   };
 }
-

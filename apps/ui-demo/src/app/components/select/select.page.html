@@ -1,24 +1,14 @@
 <div class="space-y-8">
   <div>
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Select</h1>
-    <p class="text-gray-600 dark:text-gray-400">
-      Select component for choosing items from a collection of options with full ControlValueAccessor support.
-    </p>
+    <p class="text-gray-600 dark:text-gray-400">Select component for choosing items from a collection of options with full ControlValueAccessor support.</p>
   </div>
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
     <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item 
-        [itemId]="'showcase'" 
-        (activated)="setActiveTab('showcase')"
-        label="Showcase"
-      ></ngt-nav-item>
-      <ngt-nav-item 
-        [itemId]="'api'" 
-        (activated)="setActiveTab('api')"
-        label="API"
-      ></ngt-nav-item>
+      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
+      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
     </ngt-nav>
   </div>
 
@@ -31,24 +21,12 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-            <ngt-select
-              [(ngModel)]="selectedCity1"
-              [options]="cities()"
-              placeholder="Select a City"
-              class="w-full md:w-56"
-            />
+            <ngt-select [(ngModel)]="selectedCity1" [options]="cities()" placeholder="Select a City" class="w-full md:w-56" />
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Selected: {{ selectedCity1() || 'None' }}
-          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity1() || 'None' }}</p>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.basic)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.basic)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -65,27 +43,12 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-            <ngt-select
-              [(ngModel)]="selectedCity2"
-              [options]="cityObjects()"
-              (selectionChange)="onSelectChange($event)"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="Select a City"
-              class="w-full md:w-56"
-            />
+            <ngt-select [(ngModel)]="selectedCity2" [options]="cityObjects()" (selectionChange)="onSelectChange($event)" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}
-          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}</p>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.objectOptions)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.objectOptions)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -102,24 +65,12 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-            <ngt-select
-              [(ngModel)]="selectedCity3"
-              [options]="cityKeyValue()"
-              placeholder="Select a City"
-              class="w-full md:w-56"
-            />
+            <ngt-select [(ngModel)]="selectedCity3" [options]="cityKeyValue()" placeholder="Select a City" class="w-full md:w-56" />
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Selected: {{ selectedCity3() || 'None' }}
-          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity3() || 'None' }}</p>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.keyValue)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.keyValue)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -137,43 +88,20 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
-              <ngt-select
-                [(ngModel)]="selectedCity4"
-                [options]="cities()"
-                size="sm"
-                placeholder="Select a City"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCity4" [options]="cities()" size="sm" placeholder="Select a City" class="w-full md:w-56" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
-              <ngt-select
-                [(ngModel)]="selectedCity5"
-                [options]="cities()"
-                size="md"
-                placeholder="Select a City"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCity5" [options]="cities()" size="md" placeholder="Select a City" class="w-full md:w-56" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
-              <ngt-select
-                [(ngModel)]="selectedCity6"
-                [options]="cities()"
-                size="lg"
-                placeholder="Select a City"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCity6" [options]="cities()" size="lg" placeholder="Select a City" class="w-full md:w-56" />
             </div>
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.sizes)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.sizes)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -190,25 +118,11 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-            <ngt-select
-              [(ngModel)]="selectedCity7"
-              [options]="cityObjects()"
-              [checkmark]="true"
-              [showClear]="true"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="Select a City"
-              class="w-full md:w-56"
-            />
+            <ngt-select [(ngModel)]="selectedCity7" [options]="cityObjects()" [checkmark]="true" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.checkmark)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.checkmark)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -226,37 +140,16 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
-              <ngt-select
-                [(ngModel)]="selectedCity8"
-                [options]="cityObjects()"
-                [showClear]="true"
-                optionLabel="name"
-                optionValue="code"
-                placeholder="Select a City"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCity8" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
-              <ngt-select
-                [(ngModel)]="selectedCity9"
-                [options]="cityObjects()"
-                [showClear]="true"
-                optionLabel="name"
-                optionValue="code"
-                placeholder="Select a City"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCity9" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
             </div>
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.clear)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.clear)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -273,29 +166,12 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
-            <ngt-select
-              [(ngModel)]="selectedCountry1"
-              [options]="countries()"
-              [filter]="true"
-              [showClear]="true"
-              filterBy="name"
-              optionLabel="name"
-              optionValue="code"
-              placeholder="Select a Country"
-              class="w-full md:w-56"
-            />
+            <ngt-select [(ngModel)]="selectedCountry1" [options]="countries()" [filter]="true" [showClear]="true" filterBy="name" optionLabel="name" optionValue="code" placeholder="Select a Country" class="w-full md:w-56" />
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}
-          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}</p>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.filter)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.filter)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -313,43 +189,20 @@
           <div class="space-y-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
-              <ngt-select
-                [(ngModel)]="selectedCities1"
-                [options]="cities()"
-                [multiselect]="true"
-                placeholder="Select Cities"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCities1" [options]="cities()" [multiselect]="true" placeholder="Select Cities" class="w-full md:w-56" />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
-              <ngt-select
-                [(ngModel)]="selectedCities2"
-                [options]="cityObjects()"
-                [multiselect]="true"
-                optionLabel="name"
-                optionValue="code"
-                placeholder="Select Cities"
-                class="w-full md:w-56"
-              />
+              <ngt-select [(ngModel)]="selectedCities2" [options]="cityObjects()" [multiselect]="true" optionLabel="name" optionValue="code" placeholder="Select Cities" class="w-full md:w-56" />
             </div>
           </div>
           <div class="mt-4 space-y-2">
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}
-            </p>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
-              Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}
-            </p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}</p>
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.multiselect)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.multiselect)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -366,32 +219,16 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-            <ngt-select
-              [(ngModel)]="selectedCity10"
-              [options]="groupedCities()"
-              [group]="true"
-              optionLabel="name"
-              optionValue="code"
-              optionGroup="country"
-              placeholder="Select a City"
-              class="w-full md:w-56"
-            >
+            <ngt-select [(ngModel)]="selectedCity10" [options]="groupedCities()" [group]="true" optionLabel="name" optionValue="code" optionGroup="country" placeholder="Select a City" class="w-full md:w-56">
               <ng-template #group let-group>
                 <div class="font-semibold">{{ group.label }}</div>
               </ng-template>
             </ngt-select>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}
-          </p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}</p>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.grouped)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.grouped)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -412,16 +249,7 @@
               <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
                 <div class="flex flex-col gap-1">
                   <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
-                  <ngt-select
-                    #city="ngModel"
-                    [(ngModel)]="selectedCityForm"
-                    [options]="cities()"
-                    [invalid]="!!(city.invalid && (city.touched || formSubmitted()))"
-                    name="city"
-                    placeholder="Select a City"
-                    class="w-full md:w-56"
-                    required
-                  />
+                  <ngt-select #city="ngModel" [(ngModel)]="selectedCityForm" [options]="cities()" [invalid]="!!(city.invalid && (city.touched || formSubmitted()))" name="city" placeholder="Select a City" class="w-full md:w-56" required />
                   @if (city.invalid && (city.touched || formSubmitted())) {
                     <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
                   }
@@ -432,12 +260,7 @@
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
             <div class="relative">
-              <button
-                (click)="copyToClipboard(codeSnippets.forms)"
-                type="button"
-                class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
-                title="Copy code"
-              >
+              <button (click)="copyToClipboard(codeSnippets.forms)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -455,7 +278,7 @@
     <div class="space-y-6">
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-        
+
         <!-- Inputs -->
         <section class="mb-8">
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
@@ -661,15 +484,8 @@
         <!-- ControlValueAccessor -->
         <section>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            The NgtSelect component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, 
-            making it compatible with Angular forms (both template-driven and reactive forms).
-          </p>
-          <p class="text-gray-600 dark:text-gray-400">
-            You can use it with <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ngModel</code>, 
-            <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControl</code>, or 
-            <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControlName</code>.
-          </p>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">The NgtSelect component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, making it compatible with Angular forms (both template-driven and reactive forms).</p>
+          <p class="text-gray-600 dark:text-gray-400">You can use it with <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ngModel</code>, <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControl</code>, or <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControlName</code>.</p>
         </section>
       </div>
     </div>

@@ -8,6 +8,7 @@
     "test": "nx test",
     "lint": "nx lint",
     "lint:fix": "nx run-many --target=lint --fix",
+    "format:write": "nx format:write --all",
     "serve": "nx serve",
     "storybook": "nx storybook ui-components"
   },

@@ -17,4 +17,3 @@ export interface SelectGroup {
   value: string;
   items: SelectOption[];
 }
-

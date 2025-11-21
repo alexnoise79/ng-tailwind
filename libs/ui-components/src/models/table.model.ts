@@ -29,4 +29,3 @@ export interface TableRowGroup {
   header?: string;
   footer?: string;
 }
-

@@ -1,20 +1,4 @@
-import {
-  Component,
-  Input,
-  signal,
-  computed,
-  input,
-  output,
-  forwardRef,
-  TemplateRef,
-  ViewChild,
-  ElementRef,
-  OnInit,
-  OnDestroy,
-  HostListener,
-  ContentChild,
-  effect
-} from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, HostListener, ContentChild, effect } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { NgTemplateOutlet } from '@angular/common';
 import { OutsideClickDirective } from '../../directives';
@@ -144,22 +128,24 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     if (!this.group()) {
       return [];
     }
-    
+
     const groups = this._groupedOptions();
-    
+
     // If filtering is enabled, filter the grouped options
     if (this.filter() && this.filterText()) {
-      const filtered = groups.map(group => ({
-        ...group,
-        items: group.items.filter(item => {
-          const filteredOpts = this._filteredOptions();
-          return filteredOpts.some(opt => this.compareValues(this.getOptionValue(opt), this.getOptionValue(item)));
-        })
-      })).filter(group => group.items.length > 0);
-      
+      const filtered = groups
+        .map(group => ({
+          ...group,
+          items: group.items.filter(item => {
+            const filteredOpts = this._filteredOptions();
+            return filteredOpts.some(opt => this.compareValues(this.getOptionValue(opt), this.getOptionValue(item)));
+          })
+        }))
+        .filter(group => group.items.length > 0);
+
       return filtered;
     }
-    
+
     return groups;
   });
 
@@ -175,12 +161,12 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   selectedOptions = computed(() => {
     const val = this.value();
     if (!val) return [];
-    
+
     if (this.isMulti()) {
       if (!Array.isArray(val)) return [];
       return this.processedOptions().filter(opt => val.includes(this.getOptionValue(opt)));
     }
-    
+
     const option = this.processedOptions().find(opt => this.getOptionValue(opt) === val);
     return option ? [option] : [];
   });
@@ -209,7 +195,6 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     const base = 'absolute z-50 mt-1 w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto';
     return classMerge(base);
   });
-
 
   constructor() {
     // Effect to update filtered options when filter text changes
@@ -331,7 +316,9 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
       const filterByValue = this._filterBy();
       if (filterByValue) {
         const fieldValue = this.getNestedProperty(opt, filterBy);
-        return String(fieldValue ?? '').toLowerCase().includes(text);
+        return String(fieldValue ?? '')
+          .toLowerCase()
+          .includes(text);
       }
       return this.getOptionLabel(opt).toLowerCase().includes(text);
     });
@@ -418,7 +405,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
     const groupKey = this.getOptionGroupKey();
     const opt = option as Record<string, unknown>;
-    return opt[groupKey] ? String(opt[groupKey]) : (opt.group ? String(opt.group) : undefined);
+    return opt[groupKey] ? String(opt[groupKey]) : opt.group ? String(opt.group) : undefined;
   }
 
   toggle(): void {
@@ -435,7 +422,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this._isOpening = true;
     this._isOpen.set(true);
     this._focusedIndex.set(-1);
-    
+
     // Focus filter input if filtering is enabled
     setTimeout(() => {
       this._isOpening = false;
@@ -541,7 +528,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     const target = event.target as HTMLInputElement;
     this._filterText.set(target.value);
     this.filterChange.emit(target.value);
-    
+
     if (this.filter()) {
       this.updateFilteredOptions();
     }
@@ -585,16 +572,15 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-
   private focusNext(options: SelectOption[]): void {
     let index = this.focusedIndex();
     index = index < options.length - 1 ? index + 1 : 0;
-    
+
     // Skip disabled options
     while (index < options.length && this.getOptionDisabled(options[index])) {
       index++;
     }
-    
+
     if (index >= options.length) {
       index = 0;
       while (index < options.length && this.getOptionDisabled(options[index])) {
@@ -609,12 +595,12 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   private focusPrevious(options: SelectOption[]): void {
     let index = this.focusedIndex();
     index = index > 0 ? index - 1 : options.length - 1;
-    
+
     // Skip disabled options
     while (index >= 0 && this.getOptionDisabled(options[index])) {
       index--;
     }
-    
+
     if (index < 0) {
       index = options.length - 1;
       while (index >= 0 && this.getOptionDisabled(options[index])) {
@@ -688,4 +674,3 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     return this.filteredOptions();
   }
 }
-

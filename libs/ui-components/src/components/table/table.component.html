@@ -12,18 +12,14 @@
       @if (columnGroups().length > 0) {
         <colgroup>
           @for (col of _columns(); track col.field) {
-            <col [style.width]="col.width || 'auto'">
+            <col [style.width]="col.width || 'auto'" />
           }
         </colgroup>
         <thead [class]="theadClasses()">
           @for (group of columnGroups(); track $index) {
             <tr>
               @for (col of group; track col.field) {
-                <th
-                  [attr.colspan]="col.colspan || 1"
-                  [attr.rowspan]="col.rowspan || 1"
-                  [class]="thClasses()"
-                  [style]="getColumnStyle(col)">
+                <th [attr.colspan]="col.colspan || 1" [attr.rowspan]="col.rowspan || 1" [class]="thClasses()" [style]="getColumnStyle(col)">
                   {{ col.header }}
                 </th>
               }
@@ -52,7 +48,8 @@
                 [class.select-none]="col.sortable || reorderableColumns()"
                 [style]="getColumnStyle(col)"
                 [draggable]="reorderableColumns()"
-                (click)="col.sortable && !reorderableColumns() ? sort($event, col.field) : null">
+                (click)="col.sortable && !reorderableColumns() ? sort($event, col.field) : null"
+              >
                 <div class="flex items-center gap-2">
                   <span>{{ col.header }}</span>
                   @if (col.sortable) {
@@ -85,9 +82,7 @@
           }
           @if (groupedValue().length === 0) {
             <tr>
-              <td [attr.colspan]="_columns().length" [class]="tdClasses()" class="text-center">
-                No records found
-              </td>
+              <td [attr.colspan]="_columns().length" [class]="tdClasses()" class="text-center">No records found</td>
             </tr>
           }
         </tbody>
@@ -113,13 +108,7 @@
   <!-- Pagination -->
   @if (paginator()) {
     <div class="mt-4 flex justify-center">
-      <ngt-pagination
-        [currentPage]="_currentPage()"
-        [totalItems]="totalRecords() ?? value().length"
-        [pageSize]="rows()"
-        (pageChanged)="onPageChangeHandler($event)">
-      </ngt-pagination>
+      <ngt-pagination [currentPage]="_currentPage()" [totalItems]="totalRecords() ?? value().length" [pageSize]="rows()" (pageChanged)="onPageChangeHandler($event)"> </ngt-pagination>
     </div>
   }
 </div>
-

@@ -54,7 +54,7 @@ export class TablePage {
 
   // Size for the "Table Sizes" demo section only
   selectedSize = signal<Size>('md');
-  
+
   // Independent sizes for other tables
   basicTableSize = signal<Size>('md');
   gridlinesTableSize = signal<Size>('md');
@@ -125,4 +125,3 @@ export class TablePage {
 </ngt-table>`
   };
 }
-

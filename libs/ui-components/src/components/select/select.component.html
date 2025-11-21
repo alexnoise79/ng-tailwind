@@ -1,31 +1,14 @@
 <div [class.w-full]="fluid()" (uiOutsideClick)="onOutsideClick()" class="relative" uiOutsideClick>
   <!-- Trigger Button/Input -->
-  <div
-    #trigger
-    [class]="inputClasses()"
-    [class.cursor-pointer]="!isDisabled() && !editable()"
-    [class.cursor-text]="editable()"
-    [attr.aria-expanded]="isOpen()"
-    [attr.aria-disabled]="isDisabled()"
-    [attr.aria-haspopup]="'listbox'"
-    (click)="!isDisabled() && !editable() && toggle()"
-    role="combobox"
-  >
+  <div #trigger [class]="inputClasses()" [class.cursor-pointer]="!isDisabled() && !editable()" [class.cursor-text]="editable()" [attr.aria-expanded]="isOpen()" [attr.aria-disabled]="isDisabled()" [attr.aria-haspopup]="'listbox'" (click)="!isDisabled() && !editable() && toggle()" role="combobox">
     <div class="flex items-center gap-2 min-h-[inherit]">
       <!-- Multiselect Chips -->
       @if (isMulti() && hasValue()) {
         <div class="flex flex-wrap items-center gap-1 flex-1 py-1">
           @for (option of selectedOptions(); track getOptionValue(option)) {
-            <span
-              class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm"
-            >
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-sm">
               <span>{{ getOptionLabel(option) }}</span>
-              <button
-                [attr.aria-label]="'Remove ' + getOptionLabel(option)"
-                (click)="removeChip(getOptionValue(option), $event)"
-                type="button"
-                class="hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
-              >
+              <button [attr.aria-label]="'Remove ' + getOptionLabel(option)" (click)="removeChip(getOptionValue(option), $event)" type="button" class="hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -50,12 +33,7 @@
       <div class="flex items-center gap-1 shrink-0">
         <!-- Clear Icon -->
         @if (showClear() && hasValue() && !isDisabled()) {
-          <button
-            [attr.aria-label]="'Clear selection'"
-            (click)="clear($event)"
-            type="button"
-            class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none"
-          >
+          <button [attr.aria-label]="'Clear selection'" (click)="clear($event)" type="button" class="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none">
             <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -66,13 +44,7 @@
         @if (dropdownIconTemplate) {
           <ng-container *ngTemplateOutlet="dropdownIconTemplate" />
         } @else {
-          <svg
-            [class.rotate-180]="isOpen()"
-            class="w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg [class.rotate-180]="isOpen()" class="w-4 h-4 text-gray-500 dark:text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         }
@@ -82,12 +54,7 @@
 
   <!-- Dropdown Panel -->
   @if (isOpen()) {
-    <div
-      #panel
-      [class]="panelClasses()"
-      [attr.aria-label]="'Select option'"
-      role="listbox"
-    >
+    <div #panel [class]="panelClasses()" [attr.aria-label]="'Select option'" role="listbox">
       <!-- Header Template -->
       @if (headerTemplate) {
         <div class="border-b border-gray-200 dark:border-gray-700">
@@ -145,24 +112,14 @@
                   @if (isMulti()) {
                     <!-- Checkbox for multiselect -->
                     <span class="mr-2">
-                      <input
-                        [checked]="isSelected(option)"
-                        [disabled]="getOptionDisabled(option)"
-                        (click)="$event.stopPropagation()"
-                        type="checkbox"
-                        class="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
-                      />
+                      <input [checked]="isSelected(option)" [disabled]="getOptionDisabled(option)" (click)="$event.stopPropagation()" type="checkbox" class="w-4 h-4 text-primary-600 rounded focus:ring-primary-500" />
                     </span>
                   } @else {
                     <!-- Checkmark for single select -->
                     @if (checkmark() && isSelected(option)) {
                       <span class="mr-2">
                         <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path
-                            fill-rule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
-                          />
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                         </svg>
                       </span>
                     }
@@ -204,24 +161,14 @@
                 @if (isMulti()) {
                   <!-- Checkbox for multiselect -->
                   <span class="mr-2">
-                    <input
-                      [checked]="isSelected(option)"
-                      [disabled]="getOptionDisabled(option)"
-                      (click)="$event.stopPropagation()"
-                      type="checkbox"
-                      class="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
-                    />
+                    <input [checked]="isSelected(option)" [disabled]="getOptionDisabled(option)" (click)="$event.stopPropagation()" type="checkbox" class="w-4 h-4 text-primary-600 rounded focus:ring-primary-500" />
                   </span>
                 } @else {
                   <!-- Checkmark for single select -->
                   @if (checkmark() && isSelected(option)) {
                     <span class="mr-2">
                       <svg class="w-4 h-4 text-primary-600 dark:text-primary-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          fill-rule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clip-rule="evenodd"
-                        />
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                       </svg>
                     </span>
                   }
@@ -248,4 +195,3 @@
     </div>
   }
 </div>
-

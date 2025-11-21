@@ -36,4 +36,3 @@ export interface Product {
   rating?: number;
   inventoryStatus?: string;
 }
-

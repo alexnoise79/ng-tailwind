@@ -1,18 +1,4 @@
-import {
-  Component,
-  ContentChild,
-  TemplateRef,
-  input,
-  output,
-  signal,
-  computed,
-  effect,
-  ElementRef,
-  ViewChild,
-  AfterViewInit,
-  AfterViewChecked,
-  OnDestroy
-} from '@angular/core';
+import { Component, ContentChild, TemplateRef, input, output, signal, computed, effect, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgtPagination } from '../pagination/pagination.component';
 import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
@@ -185,9 +171,8 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
         if (columns.length > 0) {
           // Create a deep copy to ensure each table instance has its own columns
           const currentColumns = this._columns();
-          const columnsChanged = currentColumns.length !== columns.length ||
-            columns.some((col, idx) => !currentColumns[idx] || currentColumns[idx].field !== col.field);
-          
+          const columnsChanged = currentColumns.length !== columns.length || columns.some((col, idx) => !currentColumns[idx] || currentColumns[idx].field !== col.field);
+
           if (columnsChanged) {
             this._columns.set(columns.map(col => ({ ...col })));
           }
@@ -217,7 +202,6 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
         this._multiSortMeta.set([...multiSortMeta]);
       }
     });
-
   }
 
   ngAfterViewInit(): void {
@@ -232,18 +216,17 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   ngAfterViewChecked(): void {
     const reorderable = this.reorderableColumns();
     const columnsLength = this._columns().length;
-    
+
     // Only re-setup if state actually changed and we're not currently dragging
-    const stateChanged = this.lastReorderableState !== reorderable || 
-                         this.lastColumnsLength !== columnsLength;
-    
+    const stateChanged = this.lastReorderableState !== reorderable || this.lastColumnsLength !== columnsLength;
+
     if (stateChanged && !this._draggedColumnIndex()) {
       if (reorderable && this.thead) {
         // Clean up existing listeners
         this.dragListeners.forEach(cleanup => cleanup());
         this.dragListeners = [];
         this.isColumnReorderSetup = false;
-        
+
         // Setup column reorder
         setTimeout(() => {
           if (this.thead && this.reorderableColumns()) {
@@ -273,7 +256,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     }
 
     const headerCells = this.thead.nativeElement.querySelectorAll('th[data-column-index]');
-    
+
     if (headerCells.length === 0) {
       // Retry after a short delay if cells aren't ready
       setTimeout(() => this.setupColumnReorder(), 50);
@@ -281,78 +264,78 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     }
 
     headerCells.forEach((cell: Element) => {
-        const htmlCell = cell as HTMLElement;
-        const columnIndex = parseInt(htmlCell.getAttribute('data-column-index') || '0');
-        
-        // Ensure draggable is set
-        if (this.reorderableColumns()) {
-          htmlCell.setAttribute('draggable', 'true');
+      const htmlCell = cell as HTMLElement;
+      const columnIndex = parseInt(htmlCell.getAttribute('data-column-index') || '0');
+
+      // Ensure draggable is set
+      if (this.reorderableColumns()) {
+        htmlCell.setAttribute('draggable', 'true');
+      }
+
+      const onDragStart = (e: DragEvent) => {
+        e.stopPropagation();
+        if (e.dataTransfer) {
+          this._draggedColumnIndex.set(columnIndex);
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', columnIndex.toString());
+          htmlCell.classList.add('opacity-50', 'cursor-grabbing');
+          // Prevent text selection during drag
+          e.dataTransfer.setDragImage(htmlCell, 0, 0);
         }
+      };
 
-        const onDragStart = (e: DragEvent) => {
-          e.stopPropagation();
-          if (e.dataTransfer) {
-            this._draggedColumnIndex.set(columnIndex);
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', columnIndex.toString());
-            htmlCell.classList.add('opacity-50', 'cursor-grabbing');
-            // Prevent text selection during drag
-            e.dataTransfer.setDragImage(htmlCell, 0, 0);
-          }
-        };
-
-        const onDragEnd = () => {
-          this._draggedColumnIndex.set(null);
-          htmlCell.classList.remove('opacity-50', 'cursor-grabbing');
-          // Remove drag-over class from all cells
-          headerCells.forEach((c: Element) => {
-            (c as HTMLElement).classList.remove('border-l-2', 'border-primary-500');
-          });
-        };
-
-        const onDragOver = (e: DragEvent) => {
-          e.preventDefault();
-          if (e.dataTransfer) {
-            e.dataTransfer.dropEffect = 'move';
-          }
-          // Add visual indicator for drop target
-          htmlCell.classList.add('border-l-2', 'border-primary-500');
-        };
-
-        const onDragLeave = () => {
-          htmlCell.classList.remove('border-l-2', 'border-primary-500');
-        };
-
-        const onDrop = (e: DragEvent) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const dropIndex = columnIndex;
-          const dragIndex = this._draggedColumnIndex();
-          if (dragIndex !== null && dragIndex !== dropIndex) {
-            this.reorderColumn(dragIndex, dropIndex);
-          }
-          htmlCell.classList.remove('border-l-2', 'border-primary-500');
-          // Reset dragged index after a short delay to allow visual feedback
-          setTimeout(() => {
-            this._draggedColumnIndex.set(null);
-          }, 100);
-        };
-
-        htmlCell.addEventListener('dragstart', onDragStart);
-        htmlCell.addEventListener('dragend', onDragEnd);
-        htmlCell.addEventListener('dragover', onDragOver);
-        htmlCell.addEventListener('dragleave', onDragLeave);
-        htmlCell.addEventListener('drop', onDrop);
-
-        this.dragListeners.push(() => {
-          htmlCell.removeEventListener('dragstart', onDragStart);
-          htmlCell.removeEventListener('dragend', onDragEnd);
-          htmlCell.removeEventListener('dragover', onDragOver);
-          htmlCell.removeEventListener('dragleave', onDragLeave);
-          htmlCell.removeEventListener('drop', onDrop);
+      const onDragEnd = () => {
+        this._draggedColumnIndex.set(null);
+        htmlCell.classList.remove('opacity-50', 'cursor-grabbing');
+        // Remove drag-over class from all cells
+        headerCells.forEach((c: Element) => {
+          (c as HTMLElement).classList.remove('border-l-2', 'border-primary-500');
         });
+      };
+
+      const onDragOver = (e: DragEvent) => {
+        e.preventDefault();
+        if (e.dataTransfer) {
+          e.dataTransfer.dropEffect = 'move';
+        }
+        // Add visual indicator for drop target
+        htmlCell.classList.add('border-l-2', 'border-primary-500');
+      };
+
+      const onDragLeave = () => {
+        htmlCell.classList.remove('border-l-2', 'border-primary-500');
+      };
+
+      const onDrop = (e: DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const dropIndex = columnIndex;
+        const dragIndex = this._draggedColumnIndex();
+        if (dragIndex !== null && dragIndex !== dropIndex) {
+          this.reorderColumn(dragIndex, dropIndex);
+        }
+        htmlCell.classList.remove('border-l-2', 'border-primary-500');
+        // Reset dragged index after a short delay to allow visual feedback
+        setTimeout(() => {
+          this._draggedColumnIndex.set(null);
+        }, 100);
+      };
+
+      htmlCell.addEventListener('dragstart', onDragStart);
+      htmlCell.addEventListener('dragend', onDragEnd);
+      htmlCell.addEventListener('dragover', onDragOver);
+      htmlCell.addEventListener('dragleave', onDragLeave);
+      htmlCell.addEventListener('drop', onDrop);
+
+      this.dragListeners.push(() => {
+        htmlCell.removeEventListener('dragstart', onDragStart);
+        htmlCell.removeEventListener('dragend', onDragEnd);
+        htmlCell.removeEventListener('dragover', onDragOver);
+        htmlCell.removeEventListener('dragleave', onDragLeave);
+        htmlCell.removeEventListener('drop', onDrop);
       });
-    
+    });
+
     this.isColumnReorderSetup = true;
   }
 
@@ -428,7 +411,6 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     return 0;
   }
 
-
   onPageChangeHandler(page: number): void {
     const rows = this.rows();
     const first = (page - 1) * rows;
@@ -476,4 +458,3 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     }, dataObj);
   }
 }
-

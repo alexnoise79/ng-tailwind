@@ -36,4 +36,3 @@ export class ButtonPage {
 <ngt-button variant="primary" [disabled]="true">Disabled</ngt-button>`
   };
 }
-

@@ -14,4 +14,3 @@ export class ToggleSwitchPage {
   smsNotifications = true;
   disabledToggle = true;
 }
-

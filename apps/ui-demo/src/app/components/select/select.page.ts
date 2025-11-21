@@ -29,11 +29,7 @@ export class SelectPage {
 
   // Key-Value pairs
   selectedCity3 = signal<string | null>(null);
-  cityKeyValue = signal<Record<string, string>[]>([
-    { NY: 'New York' },
-    { LDN: 'London' },
-    { PRS: 'Paris' }
-  ]);
+  cityKeyValue = signal<Record<string, string>[]>([{ NY: 'New York' }, { LDN: 'London' }, { PRS: 'Paris' }]);
 
   // Sizes
   selectedCity4 = signal<string | null>(null);
@@ -212,4 +208,3 @@ export class SelectPage {
 </form>`
   };
 }
-
