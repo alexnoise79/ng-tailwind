@@ -1,0 +1,173 @@
+<div class="space-y-12">
+  <section>
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Table</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">A comprehensive table component with sorting, pagination, column reordering, and more.</p>
+  </section>
+
+  <!-- Basic Table -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Basic Table</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Simple table with sortable columns.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()">
+    </ngt-table>
+  </section>
+
+  <!-- Table with Gridlines -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Gridlines</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with visible borders between cells.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true">
+    </ngt-table>
+  </section>
+
+  <!-- Striped Rows -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Rows</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating row colors for better readability.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()"
+      [striped]="true">
+    </ngt-table>
+  </section>
+
+  <!-- Table Sizes -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Table Sizes</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Different table sizes: small, medium, and large.</p>
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select Size:</label>
+      <select
+        [value]="selectedSize()"
+        (change)="selectedSize.set($any($event.target).value)"
+        class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white">
+        <option value="sm">Small</option>
+        <option value="md">Medium</option>
+        <option value="lg">Large</option>
+      </select>
+    </div>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true">
+    </ngt-table>
+  </section>
+
+  <!-- Table with Pagination -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Pagination</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with integrated pagination component.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()"
+      [paginator]="true"
+      [rows]="5"
+      (pageChange)="onPageChange($event)">
+    </ngt-table>
+  </section>
+
+  <!-- Table with Custom Template -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Custom Template</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with custom header, body, and footer templates.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="extendedColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true">
+      <ng-template #caption>
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-xl font-bold text-gray-900 dark:text-white">Products</span>
+          <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+            Refresh
+          </button>
+        </div>
+      </ng-template>
+      <ng-template #header let-columns>
+        <tr>
+          @for (col of columns; track col.field) {
+            <th class="px-4 py-3 text-left font-semibold text-gray-900 dark:text-white bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+              {{ col.header }}
+            </th>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #body let-product let-columns="columns">
+        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+          @for (col of columns; track col.field) {
+            <td class="px-4 py-3 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+              @if (col.field === 'price') {
+                ${{ product[col.field] }}
+              } @else {
+                {{ product[col.field] }}
+              }
+            </td>
+          }
+        </tr>
+      </ng-template>
+      <ng-template #footer let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length" class="px-4 py-3 text-center text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+            In total there are {{ products().length }} products.
+          </td>
+        </tr>
+      </ng-template>
+    </ngt-table>
+  </section>
+
+  <!-- Reorderable Columns -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Reorderable Columns</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Drag and drop column headers to reorder columns.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="basicColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true"
+      [reorderableColumns]="true"
+      (columnReorder)="onColumnReorder($event)">
+    </ngt-table>
+  </section>
+
+  <!-- Multiple Sort -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Multiple Column Sort</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with multiple column sorting enabled.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="extendedColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true"
+      [sortMode]="'multiple'"
+      (sortChange)="onSort($event)">
+    </ngt-table>
+  </section>
+
+  <!-- Combined Features -->
+  <section>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Combined Features</h3>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">Table with gridlines, striped rows, pagination, and sorting.</p>
+    <ngt-table
+      [value]="products()"
+      [columns]="extendedColumns"
+      [size]="selectedSize()"
+      [showGridlines]="true"
+      [striped]="true"
+      [paginator]="true"
+      [rows]="5"
+      (sortChange)="onSort($event)"
+      (pageChange)="onPageChange($event)">
+    </ngt-table>
+  </section>
+</div>
+

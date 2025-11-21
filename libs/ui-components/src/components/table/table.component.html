@@ -1,0 +1,122 @@
+<div class="ngt-table-wrapper" [style]="tableStyle()">
+  <!-- Caption Template -->
+  @if (captionTemplate) {
+    <div class="mb-4">
+      <ng-container *ngTemplateOutlet="captionTemplate"></ng-container>
+    </div>
+  }
+
+  <div class="overflow-x-auto" [style.max-height]="scrollable() && scrollHeight() ? scrollHeight() : null">
+    <table #tableElement [class]="tableClasses()" [style]="tableStyle()">
+      <!-- Column Groups -->
+      @if (columnGroups().length > 0) {
+        <colgroup>
+          @for (col of _columns(); track col.field) {
+            <col [style.width]="col.width || 'auto'">
+          }
+        </colgroup>
+        <thead [class]="theadClasses()">
+          @for (group of columnGroups(); track $index) {
+            <tr>
+              @for (col of group; track col.field) {
+                <th
+                  [attr.colspan]="col.colspan || 1"
+                  [attr.rowspan]="col.rowspan || 1"
+                  [class]="thClasses()"
+                  [style]="getColumnStyle(col)">
+                  {{ col.header }}
+                </th>
+              }
+            </tr>
+          }
+        </thead>
+      }
+
+      <!-- Header Template -->
+      @if (headerTemplate) {
+        <thead #thead [class]="theadClasses()">
+          <ng-container *ngTemplateOutlet="headerTemplate; context: { $implicit: _columns(), columns: _columns() }"></ng-container>
+        </thead>
+      } @else if (_columns().length > 0) {
+        <thead #thead [class]="theadClasses()">
+          <tr>
+            @for (col of _columns(); track col.field; let i = $index) {
+              <th
+                [attr.data-column-index]="i"
+                [attr.data-sortable]="col.sortable ? 'true' : null"
+                [class]="thClasses()"
+                [class.cursor-pointer]="col.sortable"
+                [class.select-none]="col.sortable"
+                [style]="getColumnStyle(col)"
+                [draggable]="reorderableColumns() && !col.sortable"
+                (click)="col.sortable ? sort($event, col.field) : null">
+                <div class="flex items-center gap-2">
+                  <span>{{ col.header }}</span>
+                  @if (col.sortable) {
+                    <span class="text-primary-600 dark:text-primary-400">{{ getSortIcon(col.field) }}</span>
+                  }
+                </div>
+              </th>
+            }
+          </tr>
+        </thead>
+      }
+
+      <!-- Body Template -->
+      @if (bodyTemplate) {
+        <tbody [class]="tbodyClasses()">
+          @for (row of groupedValue(); track $index; let rowIndex = $index) {
+            <ng-container *ngTemplateOutlet="bodyTemplate; context: { $implicit: row, rowIndex: rowIndex, columns: _columns() }"></ng-container>
+          }
+        </tbody>
+      } @else if (_columns().length > 0) {
+        <tbody [class]="tbodyClasses()">
+          @for (row of groupedValue(); track $index) {
+            <tr>
+              @for (col of _columns(); track col.field) {
+                <td [class]="tdClasses()" [style]="getColumnStyle(col)">
+                  {{ resolveFieldData(row, col.field) }}
+                </td>
+              }
+            </tr>
+          }
+          @if (groupedValue().length === 0) {
+            <tr>
+              <td [attr.colspan]="_columns().length" [class]="tdClasses()" class="text-center">
+                No records found
+              </td>
+            </tr>
+          }
+        </tbody>
+      }
+
+      <!-- Footer Template -->
+      @if (footerTemplate) {
+        <tfoot [class]="theadClasses()">
+          <ng-container *ngTemplateOutlet="footerTemplate; context: { $implicit: _columns(), columns: _columns() }"></ng-container>
+        </tfoot>
+      } @else if (_columns().length > 0) {
+        <tfoot [class]="theadClasses()">
+          <tr>
+            @for (col of _columns(); track col.field) {
+              <th [class]="thClasses()" [style]="getColumnStyle(col)"></th>
+            }
+          </tr>
+        </tfoot>
+      }
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  @if (paginator()) {
+    <div class="mt-4 flex justify-center">
+      <ngt-pagination
+        [currentPage]="_currentPage()"
+        [totalItems]="totalRecords() ?? value().length"
+        [pageSize]="rows()"
+        (pageChanged)="onPageChangeHandler($event)">
+      </ngt-pagination>
+    </div>
+  }
+</div>
+

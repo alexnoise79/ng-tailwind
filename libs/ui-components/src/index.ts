@@ -11,6 +11,7 @@ export * from './components/offcanvas';
 export * from './components/pagination';
 export * from './components/toggle-switch';
 export * from './components/toast';
+export * from './components/table';
 
 // Directives
 export * from './directives';

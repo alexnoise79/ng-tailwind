@@ -57,5 +57,9 @@ export const appRoutes: Routes = [
   {
     path: 'toast',
     loadComponent: () => import('./components/toast/toast.component').then(m => m.ToastDemoComponent)
+  },
+  {
+    path: 'table',
+    loadComponent: () => import('./components/table/table.component').then(m => m.TableDemoComponent)
   }
 ];
