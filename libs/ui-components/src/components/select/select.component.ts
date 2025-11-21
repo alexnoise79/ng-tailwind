@@ -222,7 +222,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   });
 
   panelClasses = computed(() => {
-    const base = 'absolute z-50 mt-1 w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto';
+    const base = 'absolute z-50 mt-1 w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto';
     return classMerge(base);
   });
 
@@ -683,7 +683,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   getOptionClasses(_option?: SelectOption): string {
-    const base = 'flex items-center px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors';
+    const base = 'flex items-center px-3 py-2 text-sm hover:bg-gray-100 hover:text-primary-900 transition-colors';
     const sizeClasses = {
       sm: 'py-1.5 text-xs',
       md: 'py-2 text-sm',
