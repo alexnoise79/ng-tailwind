@@ -1,0 +1,22 @@
+<label [class]="containerClasses()">
+  <input
+    #checkbox
+    type="checkbox"
+    [checked]="value()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="label() || undefined"
+    class="sr-only"
+    (change)="onCheckboxChange($event)">
+  <span
+    role="switch"
+    [attr.aria-checked]="value()"
+    [attr.aria-disabled]="isDisabled()"
+    [class]="toggleClasses()"
+    (click)="toggle()">
+    <span [class]="thumbClasses()"></span>
+  </span>
+  @if (label()) {
+    <span [class]="labelClasses()">{{ label() }}</span>
+  }
+</label>
+

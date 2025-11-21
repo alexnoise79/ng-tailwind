@@ -49,5 +49,9 @@ export const appRoutes: Routes = [
   {
     path: 'pagination',
     loadComponent: () => import('./components/pagination/pagination.component').then(m => m.PaginationDemoComponent)
+  },
+  {
+    path: 'toggle-switch',
+    loadComponent: () => import('./components/toggle-switch/toggle-switch.component').then(m => m.ToggleSwitchDemoComponent)
   }
 ];
