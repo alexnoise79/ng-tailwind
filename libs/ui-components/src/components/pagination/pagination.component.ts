@@ -1,6 +1,5 @@
 import { Component, signal, computed, input, output, effect } from '@angular/core';
-
-export type PaginationSize = 'sm' | 'md' | 'lg';
+import { Size } from '../../models';
 
 @Component({
   selector: 'ngt-pagination',
@@ -14,7 +13,7 @@ export class NgtPagination {
   readonly maxVisiblePages = input<number>(5);
   readonly showFirstLast = input<boolean>(true);
   readonly showPrevNext = input<boolean>(true);
-  readonly size = input<PaginationSize>('md');
+  readonly size = input<Size>('md');
   readonly disabled = input<boolean>(false);
 
   pageChanged = output<number>();

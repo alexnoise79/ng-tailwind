@@ -15,30 +15,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgtPagination } from '../pagination/pagination.component';
-
-export type TableSize = 'sm' | 'md' | 'lg';
-export type SortOrder = 'asc' | 'desc' | null;
-
-export interface TableColumn {
-  field: string;
-  header: string;
-  sortable?: boolean;
-  width?: string;
-  frozen?: boolean;
-  rowspan?: number;
-  colspan?: number;
-}
-
-export interface SortMeta {
-  field: string;
-  order: SortOrder;
-}
-
-export interface TableRowGroup {
-  field: string;
-  header?: string;
-  footer?: string;
-}
+import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
 
 @Component({
   selector: 'ngt-table',
@@ -50,7 +27,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   // Inputs
   readonly value = input<unknown[]>([]);
   readonly columns = input<TableColumn[]>([]);
-  readonly size = input<TableSize>('md');
+  readonly size = input<Size>('md');
   readonly showGridlines = input<boolean>(false);
   readonly striped = input<boolean>(false);
   readonly stripedColumns = input<boolean>(false);

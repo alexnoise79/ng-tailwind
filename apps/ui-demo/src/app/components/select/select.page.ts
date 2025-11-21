@@ -3,17 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { CommonModule } from '@angular/common';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-
-interface City {
-  name: string;
-  code: string;
-  country?: string;
-}
-
-interface Country {
-  name: string;
-  code: string;
-}
+import { City, Country, DemoTab } from '../../models/demo.models';
 
 @Component({
   selector: 'section.select',
@@ -112,9 +102,9 @@ export class SelectPage {
   }
 
   // Tab management
-  activeTab = signal<'showcase' | 'api'>('showcase');
+  activeTab = signal<DemoTab>('showcase');
 
-  setActiveTab(tab: 'showcase' | 'api'): void {
+  setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
 

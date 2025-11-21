@@ -19,22 +19,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/f
 import { CommonModule } from '@angular/common';
 import { OutsideClickDirective } from '../../directives';
 import { classMerge } from '../../utils';
-
-export type SelectSize = 'sm' | 'md' | 'lg';
-
-export interface SelectOption {
-  label: string;
-  value: any;
-  group?: string;
-  disabled?: boolean;
-  [key: string]: any;
-}
-
-export interface SelectGroup {
-  label: string;
-  value: string;
-  items: SelectOption[];
-}
+import { Size, SelectOption, SelectGroup } from '../../models';
 
 @Component({
   selector: 'ngt-select',
@@ -94,7 +79,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   }
   private _filterBy = signal<string>('');
 
-  readonly size = input<SelectSize>('md');
+  readonly size = input<Size>('md');
   readonly checkmark = input(false);
   readonly showClear = input(false);
   readonly multiselect = input(false);

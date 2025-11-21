@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { NgtToastService, NgtToastContainer, NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
+import { DemoTab } from '../../models/demo.models';
 
 @Component({
   selector: 'section.toast',
@@ -11,9 +12,9 @@ export class ToastPage {
   private toastService = inject(NgtToastService);
 
   // Tab management
-  activeTab = signal<'showcase' | 'api'>('showcase');
+  activeTab = signal<DemoTab>('showcase');
 
-  setActiveTab(tab: 'showcase' | 'api'): void {
+  setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
 

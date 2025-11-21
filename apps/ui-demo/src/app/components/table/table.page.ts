@@ -1,16 +1,7 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtToastService, Size, SortOrder } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-
-interface Product {
-  code: string;
-  name: string;
-  category: string;
-  quantity: number;
-  price: number;
-  rating?: number;
-  inventoryStatus?: string;
-}
+import { Product, DemoTab } from '../../models/demo.models';
 
 @Component({
   selector: 'section.table-page',
@@ -21,9 +12,9 @@ export class TablePage {
   private toastService = inject(NgtToastService);
 
   // Tab management
-  activeTab = signal<'showcase' | 'api'>('showcase');
+  activeTab = signal<DemoTab>('showcase');
 
-  setActiveTab(tab: 'showcase' | 'api'): void {
+  setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
 
@@ -62,19 +53,19 @@ export class TablePage {
   ];
 
   // Size for the "Table Sizes" demo section only
-  selectedSize = signal<'sm' | 'md' | 'lg'>('md');
+  selectedSize = signal<Size>('md');
   
   // Independent sizes for other tables
-  basicTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  gridlinesTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  stripedTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  paginationTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  templateTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  reorderableTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  multipleSortTableSize = signal<'sm' | 'md' | 'lg'>('md');
-  combinedTableSize = signal<'sm' | 'md' | 'lg'>('md');
+  basicTableSize = signal<Size>('md');
+  gridlinesTableSize = signal<Size>('md');
+  stripedTableSize = signal<Size>('md');
+  paginationTableSize = signal<Size>('md');
+  templateTableSize = signal<Size>('md');
+  reorderableTableSize = signal<Size>('md');
+  multipleSortTableSize = signal<Size>('md');
+  combinedTableSize = signal<Size>('md');
 
-  onSort(event: { field: string; order: 'asc' | 'desc' | null }): void {
+  onSort(event: { field: string; order: SortOrder }): void {
     console.log('Sort event:', event);
   }
 

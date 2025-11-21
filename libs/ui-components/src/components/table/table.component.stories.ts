@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgtTable, TableColumn } from './table.component';
+import { NgtTable } from './table.component';
+import { TableColumn } from '../../models';
 import { signal } from '@angular/core';
 
 const meta: Meta<NgtTable> = {

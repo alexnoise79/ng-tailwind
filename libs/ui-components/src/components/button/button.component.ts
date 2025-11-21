@@ -1,8 +1,8 @@
 import { Component, Input, computed, signal, input } from '@angular/core';
 import { classMerge } from '../../utils';
+import { Size } from '../../models';
 
 export type ButtonVariant = 'primary' | 'outline' | 'ghost';
-export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'ngt-button',
@@ -10,7 +10,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 })
 export class NgtButton {
   readonly variant = input<ButtonVariant>('primary');
-  readonly size = input<ButtonSize>('md');
+  readonly size = input<Size>('md');
   readonly type = input<'button' | 'submit' | 'reset'>('button');
 
   @Input() set disabled(value: boolean) {

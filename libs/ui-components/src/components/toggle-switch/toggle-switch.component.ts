@@ -1,6 +1,7 @@
 import { Component, Input, signal, computed, input, forwardRef, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { classMerge } from '../../utils';
+import { Size } from '../../models';
 
 @Component({
   selector: 'ngt-toggle-switch',
@@ -19,7 +20,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
   }
   private _disabled = signal(false);
 
-  readonly size = input<'sm' | 'md' | 'lg'>('md');
+  readonly size = input<Size>('md');
   readonly label = input<string>();
 
   @ViewChild('checkbox', { static: true }) checkboxRef!: ElementRef<HTMLInputElement>;
