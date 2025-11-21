@@ -85,7 +85,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     const position = this.position();
     const isVisible = this.isVisible();
 
-    const baseClasses = 'fixed z-50 bg-white shadow-xl transition-transform duration-300 ease-in-out flex flex-col';
+    const baseClasses = 'fixed z-50 bg-white dark:bg-gray-800 shadow-xl transition-transform duration-300 ease-in-out flex flex-col';
     
     switch (position) {
       case 'start':
