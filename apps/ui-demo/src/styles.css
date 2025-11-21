@@ -95,6 +95,11 @@
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
   --radius-full: 9999px;
+
+  /* Scrollbar Colors - Light mode */
+  --scrollbar-thumb: var(--color-primary-500); /* primary-500 */
+  --scrollbar-track: rgb(241 245 249); /* gray-100 */
+  --scrollbar-thumb-hover: var(--color-primary-600); /* primary-600 */
 }
 
 /* Theme Overrides - Using CSS variables that override @theme values */
@@ -297,18 +302,10 @@ p {
   @apply text-gray-700 dark:text-gray-300;
 }
 
-/* Custom Scrollbar Variables */
-@theme {
-  /* Scrollbar colors - Light mode */
-  --scrollbar-thumb: var(--color-primary-500); /* primary-500 */
-  --scrollbar-track: rgb(241 245 249); /* gray-100 */
-  --scrollbar-thumb-hover: var(--color-primary-600); /* primary-600 */
-}
-
 /* Dark mode scrollbar variables */
 .dark {
-  --scrollbar-thumb: var(--color-primary-400); /* primary-400 for better visibility in dark mode */
+  --scrollbar-thumb: var(--color-primary-500); /* primary-400 for better visibility in dark mode */
   --scrollbar-track: rgb(30 41 59); /* gray-800 */
-  --scrollbar-thumb-hover: var(--color-primary-500); /* primary-500 */
+  --scrollbar-thumb-hover: var(--color-primary-600); /* primary-500 */
 }
 
