@@ -1,11 +1,11 @@
 <div class="space-y-12">
   <section>
-    <h2 class="text-3xl font-bold text-gray-900 mb-6">Toggle Switch</h2>
-    <p class="text-gray-600 mb-4">A toggle switch component that supports ngModel and can be used in forms.</p>
+    <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Toggle Switch</h2>
+    <p class="text-gray-600 dark:text-gray-400 mb-4">A toggle switch component that supports ngModel and can be used in forms.</p>
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Basic Usage</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h3>
     <div class="flex flex-col gap-4">
       <ngt-toggle-switch></ngt-toggle-switch>
       <ngt-toggle-switch label="Enable notifications"></ngt-toggle-switch>
@@ -13,7 +13,7 @@
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Sizes</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Sizes</h3>
     <div class="flex flex-col gap-4">
       <ngt-toggle-switch size="sm" label="Small toggle"></ngt-toggle-switch>
       <ngt-toggle-switch size="md" label="Medium toggle"></ngt-toggle-switch>
@@ -22,30 +22,30 @@
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">With ngModel</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">With ngModel</h3>
     <div class="flex flex-col gap-4">
       <ngt-toggle-switch [(ngModel)]="basicToggle" label="Basic toggle"></ngt-toggle-switch>
-      <p class="text-sm text-gray-600">Current value: {{ basicToggle }}</p>
+      <p class="text-sm text-gray-700 dark:text-gray-300">Current value: {{ basicToggle }}</p>
     </div>
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Multiple Toggles</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Multiple Toggles</h3>
     <div class="flex flex-col gap-4">
       <ngt-toggle-switch [(ngModel)]="emailNotifications" label="Email notifications"></ngt-toggle-switch>
       <ngt-toggle-switch [(ngModel)]="pushNotifications" label="Push notifications"></ngt-toggle-switch>
       <ngt-toggle-switch [(ngModel)]="smsNotifications" label="SMS notifications"></ngt-toggle-switch>
-      <div class="mt-4 p-4 bg-gray-100 rounded-lg">
-        <p class="text-sm font-semibold mb-2">Current state:</p>
-        <p class="text-sm text-gray-600">Email: {{ emailNotifications }}</p>
-        <p class="text-sm text-gray-600">Push: {{ pushNotifications }}</p>
-        <p class="text-sm text-gray-600">SMS: {{ smsNotifications }}</p>
+      <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+        <p class="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">Current state:</p>
+        <p class="text-sm text-gray-700 dark:text-gray-300">Email: {{ emailNotifications }}</p>
+        <p class="text-sm text-gray-700 dark:text-gray-300">Push: {{ pushNotifications }}</p>
+        <p class="text-sm text-gray-700 dark:text-gray-300">SMS: {{ smsNotifications }}</p>
       </div>
     </div>
   </section>
 
   <section>
-    <h3 class="text-2xl font-semibold text-gray-900 mb-4">Disabled State</h3>
+    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Disabled State</h3>
     <div class="flex flex-col gap-4">
       <ngt-toggle-switch [disabled]="true" label="Disabled toggle (off)"></ngt-toggle-switch>
       <ngt-toggle-switch [(ngModel)]="disabledToggle" [disabled]="true" label="Disabled toggle (on)"></ngt-toggle-switch>
