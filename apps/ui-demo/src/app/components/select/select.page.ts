@@ -4,6 +4,7 @@ import { JsonPipe } from '@angular/common';
 import { NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { City, Country, DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.select',
@@ -104,6 +105,40 @@ export class SelectPage {
     this.activeTab.set(tab);
   }
 
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      basic: 'showcase',
+      objectOptions: 'showcase',
+      keyValue: 'showcase',
+      sizes: 'showcase',
+      checkmark: 'showcase',
+      clear: 'showcase',
+      filter: 'showcase',
+      multiselect: 'showcase',
+      grouped: 'showcase',
+      forms: 'showcase'
+    },
+    {
+      basic: 'html',
+      objectOptions: 'html',
+      keyValue: 'html',
+      sizes: 'html',
+      checkmark: 'html',
+      clear: 'html',
+      filter: 'html',
+      multiselect: 'html',
+      grouped: 'html',
+      forms: 'html'
+    }
+  );
+
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
+
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
@@ -111,13 +146,22 @@ export class SelectPage {
 
   // Code snippets for each demo
   codeSnippets = {
-    basic: `<ngt-select
+    basic: {
+      html: `<ngt-select
   [options]="cities()"
   [(ngModel)]="selectedCity1"
   placeholder="Select a City"
   class="w-full md:w-56"
 />`,
-    objectOptions: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity1 = signal<string | null>(null);
+  cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
+}`
+    },
+    objectOptions: {
+      html: `<ngt-select
   [options]="cityObjects()"
   [(ngModel)]="selectedCity2"
   optionLabel="name"
@@ -126,20 +170,56 @@ export class SelectPage {
   class="w-full md:w-56"
   (selectionChange)="onSelectChange($event)"
 />`,
-    keyValue: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity2 = signal<City | null>(null);
+  cityObjects = signal<City[]>([
+    { name: 'New York', code: 'NY' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Paris', code: 'PRS' }
+  ]);
+
+  onSelectChange(value: unknown): void {
+    console.log('Selection changed:', value);
+  }
+}`
+    },
+    keyValue: {
+      html: `<ngt-select
   [options]="cityKeyValue()"
   [(ngModel)]="selectedCity3"
   placeholder="Select a City"
   class="w-full md:w-56"
 />`,
-    sizes: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity3 = signal<string | null>(null);
+  cityKeyValue = signal<Record<string, string>[]>([
+    { NY: 'New York' },
+    { LDN: 'London' },
+    { PRS: 'Paris' }
+  ]);
+}`
+    },
+    sizes: {
+      html: `<ngt-select
   [options]="cities()"
   [(ngModel)]="selectedCity4"
   size="sm"
   placeholder="Select a City"
   class="w-full md:w-56"
 />`,
-    checkmark: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity4 = signal<string | null>(null);
+  cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
+}`
+    },
+    checkmark: {
+      html: `<ngt-select
   [options]="cityObjects()"
   [(ngModel)]="selectedCity7"
   [checkmark]="true"
@@ -149,7 +229,19 @@ export class SelectPage {
   placeholder="Select a City"
   class="w-full md:w-56"
 />`,
-    clear: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity7 = signal<City | null>(null);
+  cityObjects = signal<City[]>([
+    { name: 'New York', code: 'NY' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Paris', code: 'PRS' }
+  ]);
+}`
+    },
+    clear: {
+      html: `<ngt-select
   [options]="cityObjects()"
   [(ngModel)]="selectedCity8"
   optionLabel="name"
@@ -158,7 +250,19 @@ export class SelectPage {
   placeholder="Select a City"
   class="w-full md:w-56"
 />`,
-    filter: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity8 = signal<City | null>(null);
+  cityObjects = signal<City[]>([
+    { name: 'New York', code: 'NY' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Paris', code: 'PRS' }
+  ]);
+}`
+    },
+    filter: {
+      html: `<ngt-select
   [options]="countries()"
   [(ngModel)]="selectedCountry1"
   [filter]="true"
@@ -169,14 +273,34 @@ export class SelectPage {
   placeholder="Select a Country"
   class="w-full md:w-56"
 />`,
-    multiselect: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCountry1 = signal<Country | null>(null);
+  countries = signal<Country[]>([
+    { name: 'United States', code: 'US' },
+    { name: 'United Kingdom', code: 'UK' },
+    { name: 'France', code: 'FR' }
+  ]);
+}`
+    },
+    multiselect: {
+      html: `<ngt-select
   [options]="cities()"
   [(ngModel)]="selectedCities1"
   [multiselect]="true"
   placeholder="Select Cities"
   class="w-full md:w-56"
 />`,
-    grouped: `<ngt-select
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCities1 = signal<string[]>([]);
+  cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
+}`
+    },
+    grouped: {
+      html: `<ngt-select
   [options]="groupedCities()"
   [(ngModel)]="selectedCity10"
   [group]="true"
@@ -190,7 +314,19 @@ export class SelectPage {
     <div class="font-semibold">{{ group.label }}</div>
   </ng-template>
 </ngt-select>`,
-    forms: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCity10 = signal<City | null>(null);
+  groupedCities = signal<City[]>([
+    { name: 'New York', code: 'NY', country: 'USA' },
+    { name: 'London', code: 'LDN', country: 'UK' },
+    { name: 'Paris', code: 'PRS', country: 'France' }
+  ]);
+}`
+    },
+    forms: {
+      html: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">
   <ngt-select
     #city="ngModel"
     [(ngModel)]="selectedCityForm"
@@ -205,6 +341,71 @@ export class SelectPage {
     <p class="text-sm text-red-600">City is required.</p>
   }
   <ngt-button type="submit" variant="primary">Submit</ngt-button>
-</form>`
+</form>`,
+      ts: `import { signal } from '@angular/core';
+
+export class SelectPage {
+  selectedCityForm = signal<string | null>(null);
+  formSubmitted = signal(false);
+  cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
+
+  onSubmit(): void {
+    this.formSubmitted.set(true);
+    console.log('Form submitted with value:', this.selectedCityForm());
+  }
+}`
+    }
   };
+
+  // Helper to get code snippet for a specific tab
+  getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
+    return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      basic: {
+        html: 'select-basic.html',
+        ts: 'select-basic.ts'
+      },
+      objectOptions: {
+        html: 'select-object-options.html',
+        ts: 'select-object-options.ts'
+      },
+      keyValue: {
+        html: 'select-key-value.html',
+        ts: 'select-key-value.ts'
+      },
+      sizes: {
+        html: 'select-sizes.html',
+        ts: 'select-sizes.ts'
+      },
+      checkmark: {
+        html: 'select-checkmark.html',
+        ts: 'select-checkmark.ts'
+      },
+      clear: {
+        html: 'select-clear.html',
+        ts: 'select-clear.ts'
+      },
+      filter: {
+        html: 'select-filter.html',
+        ts: 'select-filter.ts'
+      },
+      multiselect: {
+        html: 'select-multiselect.html',
+        ts: 'select-multiselect.ts'
+      },
+      grouped: {
+        html: 'select-grouped.html',
+        ts: 'select-grouped.ts'
+      },
+      forms: {
+        html: 'select-forms.html',
+        ts: 'select-forms.ts'
+      }
+    };
+    return this.codeViewUtil.getTabFileName('select', demoKey, fileType, fileNames);
+  }
 }

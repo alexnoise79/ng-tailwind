@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtToastService, Size, SortOrder } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { Product, DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.table-page',
@@ -17,6 +18,30 @@ export class TablePage {
   setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
+
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      basic: 'showcase',
+      gridlines: 'showcase',
+      striped: 'showcase',
+      pagination: 'showcase',
+      reorderable: 'showcase'
+    },
+    {
+      basic: 'html',
+      gridlines: 'html',
+      striped: 'html',
+      pagination: 'html',
+      reorderable: 'html'
+    }
+  );
+
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
@@ -95,33 +120,127 @@ export class TablePage {
 
   // Code snippets for each demo
   codeSnippets = {
-    basic: `<ngt-table
+    basic: {
+      html: `<ngt-table
   [value]="products()"
   [columns]="basicColumns"
   [size]="'md'">
 </ngt-table>`,
-    gridlines: `<ngt-table
+      ts: `import { signal } from '@angular/core';
+import { TableColumn } from '@ng-tailwind/ui-components';
+
+export class TablePage {
+  products = signal<Product[]>([
+    { code: '001', name: 'Product 1', category: 'Electronics', quantity: 10, price: 99.99, rating: 4, inventoryStatus: 'INSTOCK' },
+    { code: '002', name: 'Product 2', category: 'Clothing', quantity: 25, price: 49.99, rating: 3, inventoryStatus: 'INSTOCK' }
+  ]);
+
+  basicColumns: TableColumn[] = [
+    { field: 'code', header: 'Code', sortable: true },
+    { field: 'name', header: 'Name', sortable: true },
+    { field: 'category', header: 'Category', sortable: true },
+    { field: 'quantity', header: 'Quantity', sortable: true }
+  ];
+}`
+    },
+    gridlines: {
+      html: `<ngt-table
   [value]="products()"
   [columns]="basicColumns"
   [showGridlines]="true">
 </ngt-table>`,
-    striped: `<ngt-table
+      ts: `import { signal } from '@angular/core';
+import { TableColumn } from '@ng-tailwind/ui-components';
+
+export class TablePage {
+  products = signal<Product[]>([...]);
+  basicColumns: TableColumn[] = [...];
+}`
+    },
+    striped: {
+      html: `<ngt-table
   [value]="products()"
   [columns]="basicColumns"
   [striped]="true">
 </ngt-table>`,
-    pagination: `<ngt-table
+      ts: `import { signal } from '@angular/core';
+import { TableColumn } from '@ng-tailwind/ui-components';
+
+export class TablePage {
+  products = signal<Product[]>([...]);
+  basicColumns: TableColumn[] = [...];
+}`
+    },
+    pagination: {
+      html: `<ngt-table
   [value]="products()"
   [columns]="basicColumns"
   [paginator]="true"
   [rows]="5"
   (pageChange)="onPageChange($event)">
 </ngt-table>`,
-    reorderable: `<ngt-table
+      ts: `import { signal } from '@angular/core';
+import { TableColumn } from '@ng-tailwind/ui-components';
+
+export class TablePage {
+  products = signal<Product[]>([...]);
+  basicColumns: TableColumn[] = [...];
+
+  onPageChange(event: { page: number; first: number; rows: number }): void {
+    console.log('Page change event:', event);
+  }
+}`
+    },
+    reorderable: {
+      html: `<ngt-table
   [value]="products()"
   [columns]="basicColumns"
   [reorderableColumns]="true"
   (columnReorder)="onColumnReorder($event)">
-</ngt-table>`
+</ngt-table>`,
+      ts: `import { signal } from '@angular/core';
+import { TableColumn } from '@ng-tailwind/ui-components';
+
+export class TablePage {
+  products = signal<Product[]>([...]);
+  basicColumns: TableColumn[] = [...];
+
+  onColumnReorder(event: { columns: TableColumn[]; dragIndex: number; dropIndex: number }): void {
+    console.log('Column reorder event:', event);
+  }
+}`
+    }
   };
+
+  // Helper to get code snippet for a specific tab
+  getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
+    return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      basic: {
+        html: 'table-basic.html',
+        ts: 'table-basic.ts'
+      },
+      gridlines: {
+        html: 'table-gridlines.html',
+        ts: 'table-gridlines.ts'
+      },
+      striped: {
+        html: 'table-striped.html',
+        ts: 'table-striped.ts'
+      },
+      pagination: {
+        html: 'table-pagination.html',
+        ts: 'table-pagination.ts'
+      },
+      reorderable: {
+        html: 'table-reorderable.html',
+        ts: 'table-reorderable.ts'
+      }
+    };
+    return this.codeViewUtil.getTabFileName('table', demoKey, fileType, fileNames);
+  }
 }
