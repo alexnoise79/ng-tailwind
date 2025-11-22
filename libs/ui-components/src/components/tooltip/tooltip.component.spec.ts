@@ -71,9 +71,30 @@ describe('NgtTooltip', () => {
   describe('Lifecycle', () => {
     it('should cleanup timeouts on destroy', () => {
       component.show();
+      expect(component.isVisible()).toBe(false);
+      
+      // Verify timeout is set
+      const showTimeout = (component as any).showTimeout;
+      expect(showTimeout).toBeDefined();
+      
+      // Spy on clearTimeout to verify it's called
+      const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
+      
+      // Destroy should clear timeouts and not throw
       component.ngOnDestroy();
-      // Should not throw
-      expect(true).toBe(true);
+      
+      // Verify clearTimeout was called to clean up timeouts
+      // hide() is called first, which may set hideTimeout, then both are cleared
+      expect(clearTimeoutSpy).toHaveBeenCalled();
+      // After destroy, showTimeout should be cleared (set to undefined by hide())
+      expect((component as any).showTimeout).toBeUndefined();
+      // hide() is called which sets visibility to false
+      expect(component.isVisible()).toBe(false);
+      
+      // Advance timers to ensure no timers are still pending
+      vi.advanceTimersByTime(300);
+      
+      clearTimeoutSpy.mockRestore();
     });
   });
 });

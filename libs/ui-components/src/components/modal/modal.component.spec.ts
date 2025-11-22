@@ -107,13 +107,28 @@ describe('NgtModal', () => {
     it('should initialize', () => {
       component.ngOnInit();
       expect(component).toBeTruthy();
+      // Verify escape listener is set up
+      expect((component as any).escapeListener).toBeDefined();
+      expect(mockDocument.addEventListener).toHaveBeenCalledWith('keydown', expect.any(Function));
     });
 
     it('should cleanup on destroy', () => {
       component.ngOnInit();
+      expect((component as any).escapeListener).toBeDefined();
+      const effectRef = (component as any).effectRef;
+      expect(effectRef).toBeDefined();
+      
+      // Spy on destroy method
+      const destroySpy = vi.spyOn(effectRef, 'destroy');
+      
       component.ngOnDestroy();
-      // Should not throw
-      expect(true).toBe(true);
+      
+      // Verify event listeners are removed
+      expect(mockDocument.removeEventListener).toHaveBeenCalledWith('keydown', expect.any(Function));
+      // Verify effect destroy method was called
+      expect(destroySpy).toHaveBeenCalled();
+      // Verify body overflow is reset
+      expect(mockDocument.body.style.overflow).toBe('');
     });
   });
 });

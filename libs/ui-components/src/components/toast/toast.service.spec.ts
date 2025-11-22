@@ -7,29 +7,32 @@ import { NgtToastMessage } from './toast.interface';
 describe('NgtToastService', () => {
   let service: NgtToastService;
   let mockViewContainerRef: Partial<ViewContainerRef>;
-  let mockComponentRef: Partial<ComponentRef<NgtToast>>;
+  let mockComponentRefs: Array<Partial<ComponentRef<NgtToast>>>;
 
   beforeEach(() => {
     vi.useFakeTimers();
     service = new NgtToastService();
-    
-    mockComponentRef = {
-      instance: {
-        toastId: '',
-        text: '',
-        severity: 'info',
-        closed: {
-          subscribe: vi.fn((callback) => {
-            return { unsubscribe: vi.fn() };
-          })
-        } as any,
-        close: vi.fn()
-      } as Partial<NgtToast> as NgtToast,
-      destroy: vi.fn()
-    };
+    mockComponentRefs = [];
 
     mockViewContainerRef = {
-      createComponent: vi.fn(() => mockComponentRef as ComponentRef<NgtToast>)
+      createComponent: vi.fn(() => {
+        const mockComponentRef: Partial<ComponentRef<NgtToast>> = {
+          instance: {
+            toastId: '',
+            text: '',
+            severity: 'info',
+            closed: {
+              subscribe: vi.fn((callback) => {
+                return { unsubscribe: vi.fn() };
+              })
+            } as any,
+            close: vi.fn()
+          } as Partial<NgtToast> as NgtToast,
+          destroy: vi.fn()
+        };
+        mockComponentRefs.push(mockComponentRef);
+        return mockComponentRef as ComponentRef<NgtToast>;
+      })
     };
 
     service.setContainer(mockViewContainerRef as ViewContainerRef);
@@ -68,7 +71,7 @@ describe('NgtToastService', () => {
       
       // The service calls remove which calls close then destroy after 300ms
       vi.advanceTimersByTime(300);
-      expect(mockComponentRef.destroy).toHaveBeenCalled();
+      expect(mockComponentRefs[0]?.destroy).toHaveBeenCalled();
     });
 
     it('should not auto-remove sticky toast', () => {
@@ -81,7 +84,7 @@ describe('NgtToastService', () => {
       service.show(message);
       vi.advanceTimersByTime(3000);
       
-      expect(mockComponentRef.destroy).not.toHaveBeenCalled();
+      expect(mockComponentRefs[0]?.destroy).not.toHaveBeenCalled();
     });
   });
 
@@ -96,7 +99,7 @@ describe('NgtToastService', () => {
       service.remove(toastId);
       vi.advanceTimersByTime(300);
       
-      expect(mockComponentRef.instance?.close).toHaveBeenCalled();
+      expect(mockComponentRefs[0]?.instance?.close).toHaveBeenCalled();
     });
   });
 
@@ -105,10 +108,22 @@ describe('NgtToastService', () => {
       service.show({ text: 'Toast 1', severity: 'info' });
       service.show({ text: 'Toast 2', severity: 'info' });
       
-      service.clear();
-      vi.advanceTimersByTime(300);
+      expect(mockComponentRefs.length).toBe(2);
       
-      expect(mockComponentRef.instance?.close).toHaveBeenCalled();
+      // Before clear, toasts should not be closed
+      expect(mockComponentRefs[0]?.instance?.close).not.toHaveBeenCalled();
+      expect(mockComponentRefs[1]?.instance?.close).not.toHaveBeenCalled();
+      
+      service.clear();
+      
+      // Both toasts should have close() called immediately
+      expect(mockComponentRefs[0]?.instance?.close).toHaveBeenCalled();
+      expect(mockComponentRefs[1]?.instance?.close).toHaveBeenCalled();
+      
+      // Both toasts should be destroyed after animation delay (300ms)
+      vi.advanceTimersByTime(300);
+      expect(mockComponentRefs[0]?.destroy).toHaveBeenCalled();
+      expect(mockComponentRefs[1]?.destroy).toHaveBeenCalled();
     });
   });
 });

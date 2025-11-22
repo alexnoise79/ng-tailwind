@@ -86,9 +86,22 @@ describe('NgtToast', () => {
   describe('Lifecycle', () => {
     it('should initialize', () => {
       component.ngOnInit();
+      
+      // After initialization, component should be ready
+      expect(component).toBeTruthy();
+      expect(component.toastId).toBeDefined();
+      
+      // Visibility signal should be initialized
+      const isVisible = (component as any).isVisible;
+      expect(isVisible).toBeDefined();
+      expect(isVisible()).toBe(false); // Initially false before setTimeout
+      
+      // Advance time to trigger the setTimeout that sets visibility to true
       vi.advanceTimersByTime(10);
-      // Should not throw
-      expect(true).toBe(true);
+      expect(isVisible()).toBe(true); // Should be true after delay
+      
+      // Component should be properly initialized without errors
+      expect(component).toBeTruthy();
     });
   });
 });

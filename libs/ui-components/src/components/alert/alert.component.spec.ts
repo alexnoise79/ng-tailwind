@@ -9,6 +9,7 @@ describe('NgtAlert', () => {
   let injector: Injector;
 
   beforeEach(() => {
+    vi.useFakeTimers();
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
     
@@ -18,6 +19,10 @@ describe('NgtAlert', () => {
     
     (component as any).variant = signal<AlertVariant>('info');
     (component as any).dismissible = signal(false);
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it('should create', () => {
@@ -39,10 +44,11 @@ describe('NgtAlert', () => {
       component.handleClose();
       
       expect(component.isVisibleValue()).toBe(false);
-      // Wait for setTimeout to complete
-      setTimeout(() => {
-        expect(closeEmitted).toBe(true);
-      }, 350);
+      expect(closeEmitted).toBe(false);
+      
+      // Advance time to trigger the setTimeout
+      vi.advanceTimersByTime(300);
+      expect(closeEmitted).toBe(true);
     });
 
     it('should not hide when dismissed if not dismissible', () => {

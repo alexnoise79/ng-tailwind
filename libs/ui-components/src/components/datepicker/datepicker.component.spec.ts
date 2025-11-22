@@ -89,8 +89,23 @@ describe('NgtDatepicker', () => {
       (component as any)._currentYear.set(2024);
       
       const days = component.calendarDays();
-      // January 1, 2024 is a Monday, so first day should be at index 0
+      // January 1, 2024 is a Monday (firstDay = 0), so first day should be at index 0
       expect(days[0]).not.toBeNull();
+      expect(days[0]).toEqual({ year: 2024, month: 1, day: 1 });
+    });
+
+    it('should include empty cells when month starts mid-week', () => {
+      (component as any)._currentMonth.set(2); // February 2024 starts on Thursday (firstDay = 3)
+      (component as any)._currentYear.set(2024);
+      
+      const days = component.calendarDays();
+      // First 3 cells should be null (Mon, Tue, Wed)
+      expect(days[0]).toBeNull();
+      expect(days[1]).toBeNull();
+      expect(days[2]).toBeNull();
+      // Fourth cell should be February 1, 2024
+      expect(days[3]).not.toBeNull();
+      expect(days[3]).toEqual({ year: 2024, month: 2, day: 1 });
     });
   });
 
