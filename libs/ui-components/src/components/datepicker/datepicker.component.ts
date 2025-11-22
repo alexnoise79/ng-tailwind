@@ -81,6 +81,14 @@ export class NgtDatepicker implements OnInit {
     second: this.showTime() ? this.currentSecond() : undefined
   }));
 
+  shouldShowTime = computed(() => {
+    // Only show timepicker if showTime is true AND format supports time
+    if (!this.showTime()) return false;
+    const formatType = this.format();
+    // 'date' format doesn't include time, so don't show timepicker
+    return formatType !== 'date';
+  });
+
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
