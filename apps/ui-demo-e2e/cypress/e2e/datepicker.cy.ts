@@ -3,8 +3,6 @@
 describe('Datepicker E2E', () => {
   beforeEach(() => {
     cy.visit('/datepicker');
-    // Navigate to Showcase tab if not already there
-    cy.contains('Showcase').click();
   });
 
   describe('Basic Datepicker', () => {
