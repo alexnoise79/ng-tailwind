@@ -13,7 +13,7 @@ export default defineConfig({
       reportsDirectory: '../../coverage/libs/ui-components',
       provider: 'v8',
     },
-    setupFiles: ['<rootDir>/src/test-setup.ts'],
+    setupFiles: ['./src/test-setup.ts'],
   },
 });
 
