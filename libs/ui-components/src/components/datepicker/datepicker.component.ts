@@ -42,6 +42,21 @@ export class NgtDatepicker implements OnInit {
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+  // Generate years list (100 years range: 50 years before and 50 years after current year)
+  availableYears = computed(() => {
+    const currentYear = new Date().getFullYear();
+    const years: number[] = [];
+    for (let i = currentYear - 50; i <= currentYear + 50; i++) {
+      years.push(i);
+    }
+    return years;
+  });
+
+  // Generate months list with index
+  availableMonths = computed(() => {
+    return this.monthNames.map((name, index) => ({ value: index + 1, name }));
+  });
+
   ngOnInit(): void {
     if (this.startDate()) {
       this._currentMonth.set(this.startDate()!.month);
@@ -179,6 +194,32 @@ export class NgtDatepicker implements OnInit {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
     this._currentYear.set(this.currentYear() + 1);
+
+    this.navigate.emit({
+      current: { year: this.currentYear(), month: this.currentMonth() },
+      prev: { year: prevYear, month: prevMonth }
+    });
+  }
+
+  onYearChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const newYear = parseInt(target.value, 10);
+    const prevMonth = this.currentMonth();
+    const prevYear = this.currentYear();
+    this._currentYear.set(newYear);
+
+    this.navigate.emit({
+      current: { year: this.currentYear(), month: this.currentMonth() },
+      prev: { year: prevYear, month: prevMonth }
+    });
+  }
+
+  onMonthChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    const newMonth = parseInt(target.value, 10);
+    const prevMonth = this.currentMonth();
+    const prevYear = this.currentYear();
+    this._currentMonth.set(newMonth);
 
     this.navigate.emit({
       current: { year: this.currentYear(), month: this.currentMonth() },
