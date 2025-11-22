@@ -1,5 +1,6 @@
 import { Component, Input, signal, computed, input, output, OnInit, effect } from '@angular/core';
 import { classMerge } from '../../utils';
+import { NgtTimepicker, NgtTimeStruct } from '../timepicker';
 
 export interface NgtDateStruct {
   year: number;
@@ -15,6 +16,7 @@ export type DateFormat = 'iso' | 'iso-local' | 'date' | 'datetime';
 
 @Component({
   selector: 'ngt-datepicker',
+  imports: [NgtTimepicker],
   templateUrl: './datepicker.component.html'
 })
 export class NgtDatepicker implements OnInit {
@@ -75,25 +77,6 @@ export class NgtDatepicker implements OnInit {
     return this.monthNames.map((name, index) => ({ value: index + 1, name }));
   });
 
-  // Generate hours list (0-23)
-  availableHours = computed(() => {
-    const hours: number[] = [];
-    for (let i = 0; i < 24; i++) {
-      hours.push(i);
-    }
-    return hours;
-  });
-
-  // Generate minutes/seconds list (0-59)
-  availableMinutes = computed(() => {
-    const minutes: number[] = [];
-    for (let i = 0; i < 60; i++) {
-      minutes.push(i);
-    }
-    return minutes;
-  });
-
-  availableSeconds = computed(() => this.availableMinutes());
 
   private previousFormat: DateFormat | null = null;
 
@@ -303,25 +286,21 @@ export class NgtDatepicker implements OnInit {
     this.dateSelect.emit(this.formatDateOutput(dateWithTime));
   }
 
-  onHourChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const newHour = parseInt(target.value, 10);
-    this._currentHour.set(newHour);
+  onTimeChange(time: NgtTimeStruct): void {
+    this._currentHour.set(time.hour);
+    this._currentMinute.set(time.minute);
+    if (time.second !== undefined) {
+      this._currentSecond.set(time.second);
+    }
     this.emitDateIfSelected();
   }
 
-  onMinuteChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const newMinute = parseInt(target.value, 10);
-    this._currentMinute.set(newMinute);
-    this.emitDateIfSelected();
-  }
-
-  onSecondChange(event: Event): void {
-    const target = event.target as HTMLSelectElement;
-    const newSecond = parseInt(target.value, 10);
-    this._currentSecond.set(newSecond);
-    this.emitDateIfSelected();
+  getCurrentTime(): NgtTimeStruct {
+    return {
+      hour: this.currentHour(),
+      minute: this.currentMinute(),
+      second: this.showTime() ? this.currentSecond() : undefined
+    };
   }
 
   private emitDateIfSelected(): void {
@@ -440,7 +419,4 @@ export class NgtDatepicker implements OnInit {
     return classMerge(base, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700');
   }
 
-  formatTimeValue(value: number): string {
-    return String(value).padStart(2, '0');
-  }
 }

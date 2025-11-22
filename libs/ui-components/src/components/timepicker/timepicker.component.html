@@ -1,0 +1,130 @@
+<div class="inline-flex items-center gap-2" role="group" aria-label="Time picker">
+  <!-- Hour -->
+  <div class="flex flex-col items-center">
+    <button
+      [disabled]="disabled()"
+      (click)="incrementHour()"
+      type="button"
+      class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label="Increment hour"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+    <input
+      [disabled]="disabled()"
+      [value]="meridian() ? getDisplayHour() : formatTimeValue(currentHour())"
+      (change)="onHourChange($event)"
+      type="number"
+      [min]="meridian() ? 1 : 0"
+      [max]="meridian() ? 12 : 23"
+      class="w-12 px-2 py-1 text-center text-sm font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+      aria-label="Hour"
+    />
+    <button
+      [disabled]="disabled()"
+      (click)="decrementHour()"
+      type="button"
+      class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label="Decrement hour"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </div>
+
+  <span class="text-lg font-semibold text-gray-700 dark:text-gray-300">:</span>
+
+  <!-- Minute -->
+  <div class="flex flex-col items-center">
+    <button
+      [disabled]="disabled()"
+      (click)="incrementMinute()"
+      type="button"
+      class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label="Increment minute"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+    <input
+      [disabled]="disabled()"
+      [value]="formatTimeValue(currentMinute())"
+      (change)="onMinuteChange($event)"
+      type="number"
+      min="0"
+      max="59"
+      class="w-12 px-2 py-1 text-center text-sm font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+      aria-label="Minute"
+    />
+    <button
+      [disabled]="disabled()"
+      (click)="decrementMinute()"
+      type="button"
+      class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+      aria-label="Decrement minute"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Second (optional) -->
+  @if (showSeconds()) {
+    <span class="text-lg font-semibold text-gray-700 dark:text-gray-300">:</span>
+    <div class="flex flex-col items-center">
+      <button
+        [disabled]="disabled()"
+        (click)="incrementSecond()"
+        type="button"
+        class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Increment second"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+      </button>
+      <input
+        [disabled]="disabled()"
+        [value]="formatTimeValue(currentSecond())"
+        (change)="onSecondChange($event)"
+        type="number"
+        min="0"
+        max="59"
+        class="w-12 px-2 py-1 text-center text-sm font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]"
+        aria-label="Second"
+      />
+      <button
+        [disabled]="disabled()"
+        (click)="decrementSecond()"
+        type="button"
+        class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        aria-label="Decrement second"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  }
+
+  <!-- Meridian (AM/PM) -->
+  @if (meridian()) {
+    <div class="flex flex-col items-center ml-2">
+      <button
+        [disabled]="disabled()"
+        (click)="toggleMeridian()"
+        type="button"
+        class="px-3 py-1 text-sm font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        aria-label="Toggle AM/PM"
+      >
+        {{ currentMeridian() }}
+      </button>
+    </div>
+  }
+</div>
+

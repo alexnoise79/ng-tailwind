@@ -1,0 +1,233 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Timepicker</h1>
+    <p class="text-gray-600 dark:text-gray-400">Time selection component with hour, minute, and second controls.</p>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
+      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    </ngt-nav>
+  </div>
+
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-8">
+      <!-- Basic Timepicker -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Timepicker</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
+            @if (selectedTime()) {
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTime()) }}</p>
+            }
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.basic)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timepicker with Seconds -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Seconds</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-timepicker [model]="selectedTimeWithSeconds()" [showSeconds]="true" (timeSelect)="selectedTimeWithSeconds.set($event)"></ngt-timepicker>
+            @if (selectedTimeWithSeconds()) {
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeWithSeconds()) }}</p>
+            }
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withSeconds)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withSeconds }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timepicker with Meridian (12-hour format) -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Meridian (12-hour format)</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-timepicker [model]="selectedTimeMeridian()" [meridian]="true" (timeSelect)="selectedTimeMeridian.set($event)"></ngt-timepicker>
+            @if (selectedTimeMeridian()) {
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeMeridian()) }}</p>
+            }
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withMeridian)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withMeridian }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timepicker with String Input -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with String Input</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-timepicker [model]="'14:30:00'" [showSeconds]="true" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>
+            <p class="text-sm text-gray-600 dark:text-gray-400">The timepicker accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct as input.</p>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withStringInput)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withStringInput }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Disabled Timepicker -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled Timepicker</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.disabled }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  }
+
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+        <!-- Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">model</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">TimeInput</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The selected time value. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the timepicker is disabled.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showSeconds</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show the second input field.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">meridian</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to use 12-hour format with AM/PM toggle.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Outputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">timeSelect</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;NgtTimeStruct&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the time is changed (via buttons or input fields).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Interfaces -->
+        <section>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Interfaces</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Interface</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Properties</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtTimeStruct</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">hour: number<br>minute: number<br>second?: number</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Structure representing a time with hour, minute, and optional second.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">TimeInput</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | Date | NgtTimeStruct | null | undefined</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Type for time input. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</div>
+

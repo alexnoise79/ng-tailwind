@@ -10,6 +10,7 @@ export * from './components/dropdown';
 export * from './components/tooltip';
 export * from './components/collapse';
 export * from './components/datepicker';
+export * from './components/timepicker';
 export * from './components/offcanvas';
 export * from './components/pagination';
 export * from './components/toggle-switch';
