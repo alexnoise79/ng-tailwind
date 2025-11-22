@@ -72,4 +72,56 @@
       }
     }
   </div>
+
+  <!-- Time selection -->
+  @if (showTime()) {
+    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex items-center justify-center gap-3">
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Hour:</label>
+          <select
+            [disabled]="disabled()"
+            [value]="currentHour()"
+            (change)="onHourChange($event)"
+            class="px-2 py-1 text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Select hour"
+          >
+            @for (hour of availableHours(); track hour) {
+              <option [value]="hour">{{ formatTimeValue(hour) }}</option>
+            }
+          </select>
+        </div>
+        <span class="text-gray-500 dark:text-gray-400">:</span>
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Minute:</label>
+          <select
+            [disabled]="disabled()"
+            [value]="currentMinute()"
+            (change)="onMinuteChange($event)"
+            class="px-2 py-1 text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Select minute"
+          >
+            @for (minute of availableMinutes(); track minute) {
+              <option [value]="minute">{{ formatTimeValue(minute) }}</option>
+            }
+          </select>
+        </div>
+        <span class="text-gray-500 dark:text-gray-400">:</span>
+        <div class="flex items-center gap-2">
+          <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Second:</label>
+          <select
+            [disabled]="disabled()"
+            [value]="currentSecond()"
+            (change)="onSecondChange($event)"
+            class="px-2 py-1 text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Select second"
+          >
+            @for (second of availableSeconds(); track second) {
+              <option [value]="second">{{ formatTimeValue(second) }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  }
 </div>

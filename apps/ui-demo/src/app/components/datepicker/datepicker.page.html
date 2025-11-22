@@ -22,7 +22,7 @@
           <div class="mb-4 space-y-4">
             <ngt-datepicker [model]="selectedDate()" (dateSelect)="selectedDate.set($event)"></ngt-datepicker>
             @if (selectedDate()) {
-              <p class="text-sm text-gray-600 dark:text-gray-400">Selected date: {{ selectedDate()!.year }}-{{ selectedDate()!.month }}-{{ selectedDate()!.day }}</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected date: {{ selectedDate() }}</p>
             }
           </div>
           <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
@@ -33,6 +33,86 @@
                 </svg>
               </button>
               <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Datepicker with Time -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with Time</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-datepicker [model]="selectedDateWithTime()" [showTime]="true" (dateSelect)="selectedDateWithTime.set($event)"></ngt-datepicker>
+            @if (selectedDateWithTime()) {
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected date with time: {{ selectedDateWithTime() }}</p>
+            }
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withTime)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withTime }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Datepicker with Custom Format -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with Custom Format</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <div class="flex items-center gap-3 mb-4">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Format:</label>
+              <select
+                [value]="selectedFormat()"
+                (change)="onFormatChange($event)"
+                class="px-3 py-1 text-sm text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              >
+                <option value="iso">ISO (UTC)</option>
+                <option value="iso-local">ISO (Local)</option>
+                <option value="date">Date (YYYY-MM-DD)</option>
+                <option value="datetime">DateTime (YYYY-MM-DD HH:mm:ss)</option>
+              </select>
+            </div>
+            <ngt-datepicker [model]="selectedDateCustomFormat()" [format]="selectedFormat()" [showTime]="true" (dateSelect)="selectedDateCustomFormat.set($event)"></ngt-datepicker>
+            @if (selectedDateCustomFormat()) {
+              <p class="text-sm text-gray-600 dark:text-gray-400">Selected date ({{ selectedFormat() }} format): {{ selectedDateCustomFormat() }}</p>
+            }
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withFormat)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withFormat }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Datepicker with String Input -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with String Input</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 space-y-4">
+            <ngt-datepicker [model]="'2024-03-15T10:30:00'" [showTime]="true" (dateSelect)="onDateSelect($event)"></ngt-datepicker>
+            <p class="text-sm text-gray-600 dark:text-gray-400">The datepicker accepts string, Date object, or NgtDateStruct as input.</p>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.withStringInput)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withStringInput }}</code></pre>
             </div>
           </div>
         </div>
@@ -62,9 +142,9 @@
               <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">model</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">NgtDateStruct | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | Date | NgtDateStruct | null</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The selected date value.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The selected date value. Accepts ISO string, Date object, or NgtDateStruct.</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
@@ -74,27 +154,39 @@
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">minDate</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">NgtDateStruct | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">DateInput</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The minimum selectable date.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The minimum selectable date. Accepts ISO string, Date object, or NgtDateStruct.</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">maxDate</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">NgtDateStruct | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">DateInput</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The maximum selectable date.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The maximum selectable date. Accepts ISO string, Date object, or NgtDateStruct.</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">startDate</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">NgtDateStruct | null</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">DateInput</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The initial month/year to display when no date is selected.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The initial month/year to display when no date is selected. Accepts ISO string, Date object, or NgtDateStruct.</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">markDisabled</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">((date: NgtDateStruct) => boolean) | undefined</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">undefined</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom function to mark specific dates as disabled.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showTime</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show time selection (hour, minute, second).</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">format</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'iso' | 'iso-local' | 'date' | 'datetime'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'iso'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Output format for the date string. 'iso' (UTC), 'iso-local' (local time), 'date' (YYYY-MM-DD), 'datetime' (YYYY-MM-DD HH:mm:ss).</td>
                 </tr>
               </tbody>
             </table>
@@ -116,8 +208,8 @@
               <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">dateSelect</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;NgtDateStruct&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when a date is selected.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;string&gt;</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when a date is selected. Returns a formatted date string based on the format option.</td>
                 </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">navigate</td>
@@ -144,8 +236,18 @@
               <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtDateStruct</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">year: number<br>month: number<br>day: number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Structure representing a date with year, month, and day.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">year: number<br>month: number<br>day: number<br>hour?: number<br>minute?: number<br>second?: number</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Structure representing a date with year, month, day, and optional time components.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">DateInput</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | Date | NgtDateStruct | null | undefined</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Type for date input. Accepts ISO string, Date object, or NgtDateStruct.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">DateFormat</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'iso' | 'iso-local' | 'date' | 'datetime'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Type for output date format options.</td>
                 </tr>
               </tbody>
             </table>
