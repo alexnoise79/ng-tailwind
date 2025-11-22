@@ -1,6 +1,5 @@
 import { Component, signal, computed, OnDestroy, input } from '@angular/core';
-
-export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
+import { Position } from '../../models';
 
 @Component({
   selector: 'ngt-tooltip',
@@ -8,7 +7,7 @@ export type TooltipPosition = 'top' | 'bottom' | 'left' | 'right';
 })
 export class NgtTooltip implements OnDestroy {
   readonly text = input.required<string>();
-  readonly position = input<TooltipPosition>('top');
+  readonly position = input<Position>('top');
   readonly delay = input(200);
 
   private showTimeout?: number;
@@ -18,7 +17,7 @@ export class NgtTooltip implements OnDestroy {
 
   tooltipClasses = computed(() => {
     const base = 'absolute z-50 px-2 py-1 text-sm text-white dark:text-gray-900 bg-gray-900 dark:bg-gray-100 rounded-md shadow-lg pointer-events-none whitespace-nowrap';
-    const positionClasses: Record<TooltipPosition, string> = {
+    const positionClasses: Record<Position, string> = {
       top: 'bottom-full mb-1 left-1/2 -translate-x-1/2',
       bottom: 'top-full mt-1 left-1/2 -translate-x-1/2',
       left: 'right-full mr-1 top-1/2 -translate-y-1/2',
