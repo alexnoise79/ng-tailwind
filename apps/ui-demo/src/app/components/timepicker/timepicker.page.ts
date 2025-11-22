@@ -13,6 +13,8 @@ export class TimepickerPage {
   selectedTime = signal<NgtTimeStruct | null>(null);
   selectedTimeWithSeconds = signal<NgtTimeStruct | null>(null);
   selectedTimeMeridian = signal<NgtTimeStruct | null>(null);
+  selectedTimeSmall = signal<NgtTimeStruct | null>(null);
+  selectedTimeLarge = signal<NgtTimeStruct | null>(null);
 
   // Tab management
   activeTab = signal<DemoTab>('showcase');
@@ -33,7 +35,9 @@ export class TimepickerPage {
     withMeridian: `<ngt-timepicker [model]="selectedTimeMeridian()" [meridian]="true" (timeSelect)="selectedTimeMeridian.set($event)"></ngt-timepicker>`,
     withStringInput: `<ngt-timepicker [model]="'14:30:00'" [showSeconds]="true" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>`,
     withDateInput: `<ngt-timepicker [model]="new Date()" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>`,
-    disabled: `<ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>`
+    disabled: `<ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>`,
+    small: `<ngt-timepicker [model]="selectedTimeSmall()" [size]="'sm'" (timeSelect)="selectedTimeSmall.set($event)"></ngt-timepicker>`,
+    large: `<ngt-timepicker [model]="selectedTimeLarge()" [size]="'lg'" (timeSelect)="selectedTimeLarge.set($event)"></ngt-timepicker>`
   };
 
   onTimeSelect(time: NgtTimeStruct): void {

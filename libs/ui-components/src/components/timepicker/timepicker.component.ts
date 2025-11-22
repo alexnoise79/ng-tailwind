@@ -1,4 +1,5 @@
 import { Component, Input, signal, computed, input, output, OnInit } from '@angular/core';
+import { Size } from '../../models';
 
 export interface NgtTimeStruct {
   hour: number;
@@ -42,6 +43,7 @@ export class NgtTimepicker implements OnInit {
   readonly disabled = input(false);
   readonly showSeconds = input(false);
   readonly meridian = input(false); // 12-hour format with AM/PM
+  readonly size = input<Size>('md');
 
   readonly timeSelect = output<NgtTimeStruct>();
 
@@ -249,6 +251,55 @@ export class NgtTimepicker implements OnInit {
   formatTimeValue(value: number): string {
     return String(value).padStart(2, '0');
   }
+
+  // Size-based classes
+  inputClasses = computed(() => {
+    const sizeClasses = {
+      sm: 'w-10 px-1.5 py-0.5 text-xs',
+      md: 'w-12 px-2 py-1 text-sm',
+      lg: 'w-14 px-2.5 py-1.5 text-base'
+    };
+    const base = 'text-center font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]';
+    return `${base} ${sizeClasses[this.size()]}`;
+  });
+
+  buttonClasses = computed(() => {
+    const sizeClasses = {
+      sm: 'p-0.5',
+      md: 'p-1',
+      lg: 'p-1.5'
+    };
+    const base = 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed';
+    return `${base} ${sizeClasses[this.size()]}`;
+  });
+
+  iconClasses = computed(() => {
+    const sizeClasses = {
+      sm: 'w-3 h-3',
+      md: 'w-4 h-4',
+      lg: 'w-5 h-5'
+    };
+    return sizeClasses[this.size()];
+  });
+
+  separatorClasses = computed(() => {
+    const sizeClasses = {
+      sm: 'text-base',
+      md: 'text-lg',
+      lg: 'text-xl'
+    };
+    return `font-semibold text-gray-700 dark:text-gray-300 ${sizeClasses[this.size()]}`;
+  });
+
+  meridianButtonClasses = computed(() => {
+    const sizeClasses = {
+      sm: 'px-2 py-0.5 text-xs',
+      md: 'px-3 py-1 text-sm',
+      lg: 'px-4 py-1.5 text-base'
+    };
+    const base = 'font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
+    return `${base} ${sizeClasses[this.size()]}`;
+  });
 
   private emitTime(): void {
     const time: NgtTimeStruct = {
