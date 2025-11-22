@@ -6,7 +6,7 @@ import angularTemplateParser from '@angular-eslint/template-parser';
 
 export default [
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/.nx/**', '**/*.stories.ts', '**/*.spec.ts', '**/jest.config.ts']
+    ignores: ['**/node_modules/**', '**/dist/**', '**/.nx/**', '**/*.stories.ts', '**/*.spec.ts', '**/vitest.config.ts']
   },
   {
     files: ['**/*.ts', '**/*.tsx'],
