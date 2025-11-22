@@ -53,6 +53,10 @@
         },
         "development": {
           "buildTarget": "ui-demo:build:development"
+        },
+        "e2e": {
+          "buildTarget": "ui-demo:build:development",
+          "port": 4201
         }
       },
       "defaultConfiguration": "development"
