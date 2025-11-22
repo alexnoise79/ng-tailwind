@@ -39,7 +39,8 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "tsConfig": "apps/ui-demo/tsconfig.cy.json"
         }
       },
       "defaultConfiguration": "production"
@@ -52,9 +53,21 @@
         },
         "development": {
           "buildTarget": "ui-demo:build:development"
+        },
+        "e2e": {
+          "buildTarget": "ui-demo:build:development",
+          "port": 4201
         }
       },
       "defaultConfiguration": "development"
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ui-demo/cypress.config.js",
+        "testingType": "component",
+        "devServerTarget": "ui-demo:build:development"
+      }
     }
   }
 }

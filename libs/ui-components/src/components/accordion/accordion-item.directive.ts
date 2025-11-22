@@ -6,26 +6,18 @@ let itemIdCounter = 0;
 @Directive({
   selector: '[ngtAccordionItem]',
   exportAs: 'NgtAccordionItem',
-  standalone: true,
-  host: {
-    '[class.accordion-item]': 'true'
-  }
+  standalone: true
 })
 export class NgtAccordionItem {
-  readonly itemId = input<string>();
-  readonly collapsed = input<boolean>(true);
   readonly disabled = input<boolean>(false);
 
   private accordion = inject(NgtAccordion, { optional: true });
-  private id = `accordion-item-${itemIdCounter++}`;
-  private _isOpen = signal(!this.collapsed());
-
-  buttonId = computed(() => `${this.id}-button`);
-  contentId = computed(() => `${this.id}-content`);
+  private id = `item-${itemIdCounter++}`;
+  private _isOpen = signal(false);
 
   isOpen = computed(() => {
     if (this.accordion) {
-      return this.accordion.isItemOpen(this.id);
+      return this.accordion.openItems().has(this.id);
     }
     return this._isOpen();
   });

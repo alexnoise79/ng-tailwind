@@ -1,10 +1,9 @@
-import { Directive, Input, signal, Signal, WritableSignal } from '@angular/core';
+import { Directive, input, signal } from '@angular/core';
 
 @Directive({
   selector: '[ngtAccordion]',
   exportAs: 'NgtAccordion',
   standalone: true,
-  providers: [NgtAccordion],
   host: {
     '[class.border]': 'true',
     '[class.border-gray-200]': 'true',
@@ -16,42 +15,28 @@ import { Directive, Input, signal, Signal, WritableSignal } from '@angular/core'
   }
 })
 export class NgtAccordion {
-  @Input() set multiOpen(value: boolean | WritableSignal<boolean>) {
-    if (typeof value === 'boolean') {
-      this._multiOpen.set(value);
-    } else {
-      this._multiOpen = value;
-    }
-  }
-  private _multiOpen: WritableSignal<boolean> = signal(false);
-  private openItems = signal<Set<string>>(new Set());
-
-  get multiOpen(): Signal<boolean> {
-    return this._multiOpen;
-  }
-
-  isItemOpen(id: string): boolean {
-    return this.openItems().has(id);
-  }
+  readonly multiOpen = input<boolean>(false);
+  openItems = signal<Set<string>>(new Set());
 
   toggleItem(id: string): void {
-    const current = new Set(this.openItems());
-    if (this.multiOpen()) {
-      if (current.has(id)) {
-        current.delete(id);
+    this.openItems.update(current => {
+      const newSet = new Set(current);
+      if (this.multiOpen()) {
+        // Multiple open mode: toggle the item
+        if (newSet.has(id)) {
+          newSet.delete(id);
+        } else {
+          newSet.add(id);
+        }
       } else {
-        current.add(id);
+        // Single open mode: clear and add only this item
+        newSet.clear();
+        if (!current.has(id)) {
+          newSet.add(id);
+        }
       }
-    } else {
-      // Single open mode: if clicking the same item, close it; otherwise open the new one
-      if (current.has(id)) {
-        current.clear();
-      } else {
-        current.clear();
-        current.add(id);
-      }
-    }
-    this.openItems.set(current);
+      return newSet;
+    });
   }
 }
 

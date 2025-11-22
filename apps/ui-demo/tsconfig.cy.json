@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "module": "ES2022",
+    "types": ["cypress", "node"],
+    "allowJs": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.cy.ts",
+    "cypress/**/*.ts"
+  ],
+  "exclude": []
+}
+

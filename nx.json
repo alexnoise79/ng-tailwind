@@ -3,7 +3,7 @@
   "defaultBase": "main",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/eslint.config.js", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/test-setup.[jt]s", "!{projectRoot}/karma.conf.js", "!{projectRoot}/.storybook/**/*", "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
+    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/eslint.config.js", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/test-setup.[jt]s", "!{projectRoot}/karma.conf.js", "!{projectRoot}/.storybook/**/*", "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)", "!{projectRoot}/cypress/**/*", "!{projectRoot}/**/*.cy.[jt]s?(x)", "!{projectRoot}/cypress.config.[jt]s"],
     "sharedGlobals": []
   },
   "targetDefaults": {
@@ -19,6 +19,14 @@
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
+    },
+    "e2e": {
+      "cache": true,
+      "inputs": ["default", "^production"]
+    },
+    "component-test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "plugins": [
