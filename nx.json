@@ -3,44 +3,32 @@
   "defaultBase": "main",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": ["default", "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)", "!{projectRoot}/tsconfig.spec.json", "!{projectRoot}/eslint.config.js", "!{projectRoot}/src/test-setup.[jt]s", "!{projectRoot}/test-setup.[jt]s", "!{projectRoot}/karma.conf.js", "!{projectRoot}/.storybook/**/*", "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)", "!{projectRoot}/cypress/**/*", "!{projectRoot}/**/*.cy.[jt]s?(x)", "!{projectRoot}/cypress.config.[jt]s"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/karma.conf.js",
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+      "!{projectRoot}/cypress/**/*",
+      "!{projectRoot}/**/*.cy.[jt]s?(x)",
+      "!{projectRoot}/cypress.config.[jt]s"
+    ],
     "sharedGlobals": []
   },
   "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"],
-      "cache": true
-    },
-    "lint": {
-      "inputs": ["default", "{workspaceRoot}/eslint.config.js"],
-      "cache": true
-    },
-    "test": {
-      "inputs": ["default", "^production"],
-      "cache": false
-    },
-    "e2e": {
-      "cache": true,
-      "inputs": ["default", "^production"]
-    },
-    "component-test": {
-      "cache": true,
-      "inputs": ["default", "^production"]
-    }
+    "build": { "dependsOn": ["^build"], "inputs": ["production", "^production"], "cache": true },
+    "lint": { "inputs": ["default", "{workspaceRoot}/eslint.config.js"], "cache": true },
+    "test": { "inputs": ["default", "^production"], "cache": false },
+    "e2e": { "cache": true, "inputs": ["default", "^production"] },
+    "component-test": { "cache": true, "inputs": ["default", "^production"] }
   },
   "plugins": [
-    {
-      "plugin": "@nx/angular/plugin",
-      "options": {
-        "analytics": false
-      }
-    },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    }
-  ]
+    { "plugin": "@nx/angular/plugin", "options": { "analytics": false } },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } }
+  ],
+  "nxCloudId": "692248e75c017f0402a7210c"
 }
