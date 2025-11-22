@@ -18,6 +18,36 @@ export class AlertPage {
     this.activeTab.set(tab);
   }
 
+  // View mode for each demo section (showcase or code)
+  demoViewMode = signal<Record<string, 'showcase' | 'code'>>({
+    allVariants: 'showcase',
+    dismissible: 'showcase',
+    notDismissible: 'showcase'
+  });
+
+  toggleDemoView(demoKey: string): void {
+    const current = this.demoViewMode();
+    this.demoViewMode.set({
+      ...current,
+      [demoKey]: current[demoKey] === 'showcase' ? 'code' : 'showcase'
+    });
+  }
+
+  // Active code tab for each demo (html or ts)
+  activeCodeTab = signal<Record<string, 'html' | 'ts'>>({
+    allVariants: 'html',
+    dismissible: 'html',
+    notDismissible: 'html'
+  });
+
+  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
+    const current = this.activeCodeTab();
+    this.activeCodeTab.set({
+      ...current,
+      [demoKey]: tab
+    });
+  }
+
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
@@ -60,5 +90,34 @@ export class AlertPage {
   This alert cannot be dismissed.
 </ngt-alert>`
   };
+
+  // Helper to check if demo is showing code
+  isShowingCode(demoKey: string): boolean {
+    return this.demoViewMode()[demoKey] === 'code';
+  }
+
+  // Helper to get active code tab for a demo
+  getActiveCodeTab(demoKey: string): 'html' | 'ts' {
+    return this.activeCodeTab()[demoKey] || 'html';
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      allVariants: {
+        html: 'alert-variants.html',
+        ts: 'alert-variants.ts'
+      },
+      dismissible: {
+        html: 'alert-dismissible.html',
+        ts: 'alert-dismissible.ts'
+      },
+      notDismissible: {
+        html: 'alert-not-dismissible.html',
+        ts: 'alert-not-dismissible.ts'
+      }
+    };
+    return fileNames[demoKey]?.[fileType] || `alert-${demoKey}.${fileType}`;
+  }
 }
 
