@@ -652,6 +652,106 @@ export class MyComponent {
 ></ngt-table>
 ```
 
+## Alert
+
+### Basic Usage
+
+```typescript
+import { NgtAlert } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  showAlert = signal(true);
+  
+  onAlertClose() {
+    this.showAlert.set(false);
+  }
+}
+```
+
+```html
+@if (showAlert()) {
+  <ngt-alert variant="success" [dismissible]="true" (close)="onAlertClose()">
+    <strong>Success!</strong> Operation completed successfully.
+  </ngt-alert>
+}
+```
+
+### Variants
+
+```html
+<!-- Success -->
+<ngt-alert variant="success" [dismissible]="true">
+  <strong>Success!</strong> Operation completed successfully.
+</ngt-alert>
+
+<!-- Info -->
+<ngt-alert variant="info" [dismissible]="true">
+  <strong>Info:</strong> This is an informational message.
+</ngt-alert>
+
+<!-- Warning -->
+<ngt-alert variant="warning" [dismissible]="true">
+  <strong>Warning:</strong> Please review this action carefully.
+</ngt-alert>
+
+<!-- Danger -->
+<ngt-alert variant="danger" [dismissible]="true">
+  <strong>Error:</strong> An error has occurred.
+</ngt-alert>
+
+<!-- Primary -->
+<ngt-alert variant="primary" [dismissible]="true">
+  <strong>Primary:</strong> This is a primary alert.
+</ngt-alert>
+
+<!-- Secondary -->
+<ngt-alert variant="secondary" [dismissible]="true">
+  <strong>Secondary:</strong> This is a secondary alert.
+</ngt-alert>
+
+<!-- Light -->
+<ngt-alert variant="light" [dismissible]="true">
+  <strong>Light:</strong> This is a light alert.
+</ngt-alert>
+
+<!-- Dark -->
+<ngt-alert variant="dark" [dismissible]="true">
+  <strong>Dark:</strong> This is a dark alert.
+</ngt-alert>
+```
+
+### Dismissible
+
+```html
+<!-- Dismissible alert -->
+<ngt-alert variant="info" [dismissible]="true" (close)="onClose()">
+  This alert can be dismissed by clicking the close button.
+</ngt-alert>
+
+<!-- Non-dismissible alert -->
+<ngt-alert variant="info" [dismissible]="false">
+  This alert cannot be dismissed.
+</ngt-alert>
+```
+
+### With Close Event
+
+```typescript
+export class MyComponent {
+  onClose() {
+    console.log('Alert was closed');
+    // Handle alert close event
+  }
+}
+```
+
+```html
+<ngt-alert variant="warning" [dismissible]="true" (close)="onClose()">
+  <strong>Warning:</strong> This alert will trigger a close event when dismissed.
+</ngt-alert>
+```
+
 ## Select
 
 ### Basic Usage

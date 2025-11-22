@@ -16,6 +16,7 @@ export * from './components/toggle-switch';
 export * from './components/toast';
 export * from './components/table';
 export * from './components/select';
+export * from './components/alert';
 
 // Directives
 export * from './directives';

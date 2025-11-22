@@ -65,5 +65,9 @@ export const appRoutes: Routes = [
   {
     path: 'select',
     loadComponent: () => import('./components/select/select.page').then(m => m.SelectPage)
+  },
+  {
+    path: 'alert',
+    loadComponent: () => import('./components/alert/alert.page').then(m => m.AlertPage)
   }
 ];

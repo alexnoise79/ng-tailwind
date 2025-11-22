@@ -49,6 +49,7 @@ nx storybook ui-components
 - **Toast** - Notification messages with severity levels and auto-dismiss
 - **Table** - Data table with sorting, pagination, grouping, and column reordering
 - **Select** - Dropdown select with form integration and option grouping
+- **Alert** - Alert component with multiple variants and dismissible functionality
 
 ## Documentation
 
