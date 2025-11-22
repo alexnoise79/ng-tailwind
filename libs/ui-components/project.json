@@ -15,10 +15,10 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nx/vitest:test",
       "outputs": ["{workspaceRoot}/coverage/libs/ui-components"],
       "options": {
-        "jestConfig": "libs/ui-components/jest.config.ts",
+        "config": "libs/ui-components/vitest.config.ts",
         "passWithNoTests": true
       }
     },
