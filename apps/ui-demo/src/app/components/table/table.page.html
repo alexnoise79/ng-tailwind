@@ -17,64 +17,133 @@
     <div class="space-y-12">
       <!-- Basic Table -->
       <section>
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Basic Table</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Simple table with sortable columns.</p>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Table</h3>
+            <p class="text-gray-600 dark:text-gray-400">Simple table with sortable columns.</p>
+          </div>
+          <button 
+            (click)="toggleDemoView('basic')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('basic')"
+            [class.dark:bg-gray-700]="isShowingCode('basic')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-table [value]="products()" [columns]="basicColumns" [size]="basicTableSize()"> </ngt-table>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.basic)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+          @if (!isShowingCode('basic')) {
+            <div class="mb-4">
+              <ngt-table [value]="products()" [columns]="basicColumns" [size]="basicTableSize()"> </ngt-table>
             </div>
-          </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button (click)="setActiveCodeTab('basic', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('basic') === 'html'" [class.dark:text-white]="getActiveCodeTab('basic') === 'html'" [class.bg-white]="getActiveCodeTab('basic') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'" [class.border-b-2]="getActiveCodeTab('basic') === 'html'" [class.border-primary-500]="getActiveCodeTab('basic') === 'html'" [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">{{ getTabFileName('basic', 'html') }}</button>
+                <button (click)="setActiveCodeTab('basic', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'" [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'" [class.bg-white]="getActiveCodeTab('basic') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'" [class.border-b-2]="getActiveCodeTab('basic') === 'ts'" [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'" [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">{{ getTabFileName('basic', 'ts') }}</button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 
       <!-- Table with Gridlines -->
       <section>
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Gridlines</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with visible borders between cells.</p>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">With Gridlines</h3>
+            <p class="text-gray-600 dark:text-gray-400">Table with visible borders between cells.</p>
+          </div>
+          <button 
+            (click)="toggleDemoView('gridlines')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('gridlines')"
+            [class.dark:bg-gray-700]="isShowingCode('gridlines')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-table [value]="products()" [columns]="basicColumns" [size]="gridlinesTableSize()" [showGridlines]="true"> </ngt-table>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.gridlines)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.gridlines }}</code></pre>
+          @if (!isShowingCode('gridlines')) {
+            <div class="mb-4">
+              <ngt-table [value]="products()" [columns]="basicColumns" [size]="gridlinesTableSize()" [showGridlines]="true"> </ngt-table>
             </div>
-          </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button (click)="setActiveCodeTab('gridlines', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('gridlines') === 'html'" [class.dark:text-white]="getActiveCodeTab('gridlines') === 'html'" [class.bg-white]="getActiveCodeTab('gridlines') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('gridlines') === 'html'" [class.border-b-2]="getActiveCodeTab('gridlines') === 'html'" [class.border-primary-500]="getActiveCodeTab('gridlines') === 'html'" [class.text-gray-500]="getActiveCodeTab('gridlines') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('gridlines') !== 'html'">{{ getTabFileName('gridlines', 'html') }}</button>
+                <button (click)="setActiveCodeTab('gridlines', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('gridlines') === 'ts'" [class.dark:text-white]="getActiveCodeTab('gridlines') === 'ts'" [class.bg-white]="getActiveCodeTab('gridlines') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('gridlines') === 'ts'" [class.border-b-2]="getActiveCodeTab('gridlines') === 'ts'" [class.border-primary-500]="getActiveCodeTab('gridlines') === 'ts'" [class.text-gray-500]="getActiveCodeTab('gridlines') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('gridlines') !== 'ts'">{{ getTabFileName('gridlines', 'ts') }}</button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('gridlines', getActiveCodeTab('gridlines')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('gridlines', getActiveCodeTab('gridlines')) }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 
       <!-- Striped Rows -->
       <section>
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Striped Rows</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with alternating row colors for better readability.</p>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Striped Rows</h3>
+            <p class="text-gray-600 dark:text-gray-400">Table with alternating row colors for better readability.</p>
+          </div>
+          <button 
+            (click)="toggleDemoView('striped')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('striped')"
+            [class.dark:bg-gray-700]="isShowingCode('striped')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-table [value]="products()" [columns]="basicColumns" [size]="stripedTableSize()" [striped]="true"> </ngt-table>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.striped)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.striped }}</code></pre>
+          @if (!isShowingCode('striped')) {
+            <div class="mb-4">
+              <ngt-table [value]="products()" [columns]="basicColumns" [size]="stripedTableSize()" [striped]="true"> </ngt-table>
             </div>
-          </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button (click)="setActiveCodeTab('striped', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('striped') === 'html'" [class.dark:text-white]="getActiveCodeTab('striped') === 'html'" [class.bg-white]="getActiveCodeTab('striped') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('striped') === 'html'" [class.border-b-2]="getActiveCodeTab('striped') === 'html'" [class.border-primary-500]="getActiveCodeTab('striped') === 'html'" [class.text-gray-500]="getActiveCodeTab('striped') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('striped') !== 'html'">{{ getTabFileName('striped', 'html') }}</button>
+                <button (click)="setActiveCodeTab('striped', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('striped') === 'ts'" [class.dark:text-white]="getActiveCodeTab('striped') === 'ts'" [class.bg-white]="getActiveCodeTab('striped') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('striped') === 'ts'" [class.border-b-2]="getActiveCodeTab('striped') === 'ts'" [class.border-primary-500]="getActiveCodeTab('striped') === 'ts'" [class.text-gray-500]="getActiveCodeTab('striped') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('striped') !== 'ts'">{{ getTabFileName('striped', 'ts') }}</button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('striped', getActiveCodeTab('striped')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('striped', getActiveCodeTab('striped')) }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 
@@ -110,22 +179,45 @@
 
       <!-- Table with Pagination -->
       <section>
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">With Pagination</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Table with integrated pagination component.</p>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">With Pagination</h3>
+            <p class="text-gray-600 dark:text-gray-400">Table with integrated pagination component.</p>
+          </div>
+          <button 
+            (click)="toggleDemoView('pagination')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('pagination')"
+            [class.dark:bg-gray-700]="isShowingCode('pagination')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-table [value]="products()" [columns]="basicColumns" [size]="paginationTableSize()" [paginator]="true" [rows]="5" (pageChange)="onPageChange($event)"> </ngt-table>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.pagination)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.pagination }}</code></pre>
+          @if (!isShowingCode('pagination')) {
+            <div class="mb-4">
+              <ngt-table [value]="products()" [columns]="basicColumns" [size]="paginationTableSize()" [paginator]="true" [rows]="5" (pageChange)="onPageChange($event)"> </ngt-table>
             </div>
-          </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button (click)="setActiveCodeTab('pagination', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('pagination') === 'html'" [class.dark:text-white]="getActiveCodeTab('pagination') === 'html'" [class.bg-white]="getActiveCodeTab('pagination') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('pagination') === 'html'" [class.border-b-2]="getActiveCodeTab('pagination') === 'html'" [class.border-primary-500]="getActiveCodeTab('pagination') === 'html'" [class.text-gray-500]="getActiveCodeTab('pagination') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('pagination') !== 'html'">{{ getTabFileName('pagination', 'html') }}</button>
+                <button (click)="setActiveCodeTab('pagination', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('pagination') === 'ts'" [class.dark:text-white]="getActiveCodeTab('pagination') === 'ts'" [class.bg-white]="getActiveCodeTab('pagination') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('pagination') === 'ts'" [class.border-b-2]="getActiveCodeTab('pagination') === 'ts'" [class.border-primary-500]="getActiveCodeTab('pagination') === 'ts'" [class.text-gray-500]="getActiveCodeTab('pagination') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('pagination') !== 'ts'">{{ getTabFileName('pagination', 'ts') }}</button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('pagination', getActiveCodeTab('pagination')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('pagination', getActiveCodeTab('pagination')) }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 
@@ -176,22 +268,45 @@
 
       <!-- Reorderable Columns -->
       <section>
-        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Reorderable Columns</h3>
-        <p class="text-gray-600 dark:text-gray-400 mb-4">Drag and drop column headers to reorder columns.</p>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">Reorderable Columns</h3>
+            <p class="text-gray-600 dark:text-gray-400">Drag and drop column headers to reorder columns.</p>
+          </div>
+          <button 
+            (click)="toggleDemoView('reorderable')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('reorderable')"
+            [class.dark:bg-gray-700]="isShowingCode('reorderable')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-table [value]="products()" [columns]="basicColumns" [size]="reorderableTableSize()" [showGridlines]="true" [reorderableColumns]="true" (columnReorder)="onColumnReorder($event)"> </ngt-table>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.reorderable)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.reorderable }}</code></pre>
+          @if (!isShowingCode('reorderable')) {
+            <div class="mb-4">
+              <ngt-table [value]="products()" [columns]="basicColumns" [size]="reorderableTableSize()" [showGridlines]="true" [reorderableColumns]="true" (columnReorder)="onColumnReorder($event)"> </ngt-table>
             </div>
-          </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button (click)="setActiveCodeTab('reorderable', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('reorderable') === 'html'" [class.dark:text-white]="getActiveCodeTab('reorderable') === 'html'" [class.bg-white]="getActiveCodeTab('reorderable') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('reorderable') === 'html'" [class.border-b-2]="getActiveCodeTab('reorderable') === 'html'" [class.border-primary-500]="getActiveCodeTab('reorderable') === 'html'" [class.text-gray-500]="getActiveCodeTab('reorderable') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('reorderable') !== 'html'">{{ getTabFileName('reorderable', 'html') }}</button>
+                <button (click)="setActiveCodeTab('reorderable', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('reorderable') === 'ts'" [class.dark:text-white]="getActiveCodeTab('reorderable') === 'ts'" [class.bg-white]="getActiveCodeTab('reorderable') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('reorderable') === 'ts'" [class.border-b-2]="getActiveCodeTab('reorderable') === 'ts'" [class.border-primary-500]="getActiveCodeTab('reorderable') === 'ts'" [class.text-gray-500]="getActiveCodeTab('reorderable') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('reorderable') !== 'ts'">{{ getTabFileName('reorderable', 'ts') }}</button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('reorderable', getActiveCodeTab('reorderable')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('reorderable', getActiveCodeTab('reorderable')) }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 

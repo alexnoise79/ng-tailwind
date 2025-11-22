@@ -1,0 +1,130 @@
+<div class="inline-flex items-center gap-2" role="group" aria-label="Time picker">
+  <!-- Hour -->
+  <div class="flex flex-col items-center">
+    <button
+      [disabled]="disabled()"
+      (click)="incrementHour()"
+      type="button"
+      [class]="buttonClasses()"
+      aria-label="Increment hour"
+    >
+      <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+    <input
+      [disabled]="disabled()"
+      [value]="meridian() ? getDisplayHour() : formatTimeValue(currentHour())"
+      (change)="onHourChange($event)"
+      type="number"
+      [min]="meridian() ? 1 : 0"
+      [max]="meridian() ? 12 : 23"
+      [class]="inputClasses()"
+      aria-label="Hour"
+    />
+    <button
+      [disabled]="disabled()"
+      (click)="decrementHour()"
+      type="button"
+      [class]="buttonClasses()"
+      aria-label="Decrement hour"
+    >
+      <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </div>
+
+  <span [class]="separatorClasses()">:</span>
+
+  <!-- Minute -->
+  <div class="flex flex-col items-center">
+    <button
+      [disabled]="disabled()"
+      (click)="incrementMinute()"
+      type="button"
+      [class]="buttonClasses()"
+      aria-label="Increment minute"
+    >
+      <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </button>
+    <input
+      [disabled]="disabled()"
+      [value]="formatTimeValue(currentMinute())"
+      (change)="onMinuteChange($event)"
+      type="number"
+      min="0"
+      max="59"
+      [class]="inputClasses()"
+      aria-label="Minute"
+    />
+    <button
+      [disabled]="disabled()"
+      (click)="decrementMinute()"
+      type="button"
+      [class]="buttonClasses()"
+      aria-label="Decrement minute"
+    >
+      <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Second (optional) -->
+  @if (showSeconds()) {
+    <span [class]="separatorClasses()">:</span>
+    <div class="flex flex-col items-center">
+      <button
+        [disabled]="disabled()"
+        (click)="incrementSecond()"
+        type="button"
+        [class]="buttonClasses()"
+        aria-label="Increment second"
+      >
+        <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+        </svg>
+      </button>
+      <input
+        [disabled]="disabled()"
+        [value]="formatTimeValue(currentSecond())"
+        (change)="onSecondChange($event)"
+        type="number"
+        min="0"
+        max="59"
+        [class]="inputClasses()"
+        aria-label="Second"
+      />
+      <button
+        [disabled]="disabled()"
+        (click)="decrementSecond()"
+        type="button"
+        [class]="buttonClasses()"
+        aria-label="Decrement second"
+      >
+        <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  }
+
+  <!-- Meridian (AM/PM) -->
+  @if (meridian()) {
+    <div class="flex flex-col items-center ml-2">
+      <button
+        [disabled]="disabled()"
+        (click)="toggleMeridian()"
+        type="button"
+        [class]="meridianButtonClasses()"
+        aria-label="Toggle AM/PM"
+      >
+        {{ currentMeridian() }}
+      </button>
+    </div>
+  }
+</div>
+

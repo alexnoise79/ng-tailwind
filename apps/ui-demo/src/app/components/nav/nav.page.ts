@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.nav',
@@ -17,6 +18,34 @@ export class NavPage {
   setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
+
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      default: 'showcase',
+      pills: 'showcase',
+      underline: 'showcase',
+      center: 'showcase',
+      justified: 'showcase',
+      disabled: 'showcase',
+      vertical: 'showcase'
+    },
+    {
+      default: 'html',
+      pills: 'html',
+      underline: 'html',
+      center: 'html',
+      justified: 'html',
+      disabled: 'html',
+      vertical: 'html'
+    }
+  );
+
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
@@ -62,4 +91,39 @@ export class NavPage {
   <ngt-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ngt-nav-item>
 </ngt-nav>`
   };
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      default: {
+        html: 'nav-default.html',
+        ts: 'nav-default.ts'
+      },
+      pills: {
+        html: 'nav-pills.html',
+        ts: 'nav-pills.ts'
+      },
+      underline: {
+        html: 'nav-underline.html',
+        ts: 'nav-underline.ts'
+      },
+      center: {
+        html: 'nav-center.html',
+        ts: 'nav-center.ts'
+      },
+      justified: {
+        html: 'nav-justified.html',
+        ts: 'nav-justified.ts'
+      },
+      disabled: {
+        html: 'nav-disabled.html',
+        ts: 'nav-disabled.ts'
+      },
+      vertical: {
+        html: 'nav-vertical.html',
+        ts: 'nav-vertical.ts'
+      }
+    };
+    return this.codeViewUtil.getTabFileName('nav', demoKey, fileType, fileNames);
+  }
 }

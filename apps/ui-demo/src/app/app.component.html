@@ -1,45 +1,90 @@
 <ngt-toast-container></ngt-toast-container>
 <div class="min-h-screen bg-gray-50 dark:bg-gray-900 flex transition-colors duration-200">
+  <!-- Mobile Overlay -->
+  @if (isMobileMenuOpen) {
+    <div 
+      class="fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-200"
+      (click)="closeMobileMenu()"
+    ></div>
+  }
+
   <!-- Left Sidebar Navigation -->
-  <aside class="w-64 bg-white dark:bg-gray-800 shadow-sm border-r border-gray-200 dark:border-gray-700 shrink-0 flex flex-col transition-colors duration-200 sticky top-0 h-screen overflow-y-auto z-20">
-    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 shrink-0 h-16 flex items-center transition-colors duration-200">
-      <h1 class="text-xl font-semibold text-gray-900 dark:text-white">ng-tailwind UI</h1>
+  <aside 
+    class="fixed lg:sticky top-0 left-0 h-screen w-64 bg-white dark:bg-gray-800 shadow-lg lg:shadow-sm border-r border-gray-200 dark:border-gray-700 shrink-0 flex flex-col transition-all duration-300 z-50 transform -translate-x-full lg:translate-x-0"
+    [class.translate-x-0]="isMobileMenuOpen"
+  >
+    <div class="px-4 sm:px-6 py-4 border-b border-gray-200 dark:border-gray-700 shrink-0 h-16 flex items-center justify-between transition-colors duration-200">
+      <h1 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white">ng-tailwind UI</h1>
+      <button 
+        class="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        (click)="closeMobileMenu()"
+        aria-label="Close menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
-    <nav class="flex-1 px-4 py-4">
+    <nav class="flex-1 px-2 sm:px-4 py-4 overflow-y-auto">
       <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-        <ngt-nav-item [itemId]="'getting-started'" [routerLink]="'/getting-started'" label="Getting Started"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'accordion'" [routerLink]="'/accordion'" label="Accordion"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'alert'" [routerLink]="'/alert'" label="Alert"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'button'" [routerLink]="'/button'" label="Button"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'collapse'" [routerLink]="'/collapse'" label="Collapse"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'datepicker'" [routerLink]="'/datepicker'" label="Datepicker"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'dropdown'" [routerLink]="'/dropdown'" label="Dropdown"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'modal'" [routerLink]="'/modal'" label="Modal"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'nav'" [routerLink]="'/nav'" label="Nav"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'offcanvas'" [routerLink]="'/offcanvas'" label="Offcanvas"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'pagination'" [routerLink]="'/pagination'" label="Pagination"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'select'" [routerLink]="'/select'" label="Select"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'table'" [routerLink]="'/table'" label="Table"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'toast'" [routerLink]="'/toast'" label="Toast"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'toggle-switch'" [routerLink]="'/toggle-switch'" label="Toggle Switch"> </ngt-nav-item>
-        <ngt-nav-item [itemId]="'tooltip'" [routerLink]="'/tooltip'" label="Tooltip"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'getting-started'" [routerLink]="'/getting-started'" (click)="closeMobileMenu()" label="Getting Started"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'accordion'" [routerLink]="'/accordion'" (click)="closeMobileMenu()" label="Accordion"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'alert'" [routerLink]="'/alert'" (click)="closeMobileMenu()" label="Alert"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'button'" [routerLink]="'/button'" (click)="closeMobileMenu()" label="Button"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'collapse'" [routerLink]="'/collapse'" (click)="closeMobileMenu()" label="Collapse"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'datepicker'" [routerLink]="'/datepicker'" (click)="closeMobileMenu()" label="Datepicker"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'dropdown'" [routerLink]="'/dropdown'" (click)="closeMobileMenu()" label="Dropdown"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'modal'" [routerLink]="'/modal'" (click)="closeMobileMenu()" label="Modal"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'nav'" [routerLink]="'/nav'" (click)="closeMobileMenu()" label="Nav"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'offcanvas'" [routerLink]="'/offcanvas'" (click)="closeMobileMenu()" label="Offcanvas"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'pagination'" [routerLink]="'/pagination'" (click)="closeMobileMenu()" label="Pagination"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'select'" [routerLink]="'/select'" (click)="closeMobileMenu()" label="Select"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'table'" [routerLink]="'/table'" (click)="closeMobileMenu()" label="Table"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'timepicker'" [routerLink]="'/timepicker'" (click)="closeMobileMenu()" label="Timepicker"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'toast'" [routerLink]="'/toast'" (click)="closeMobileMenu()" label="Toast"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'toggle-switch'" [routerLink]="'/toggle-switch'" (click)="closeMobileMenu()" label="Toggle Switch"> </ngt-nav-item>
+        <ngt-nav-item [itemId]="'tooltip'" [routerLink]="'/tooltip'" (click)="closeMobileMenu()" label="Tooltip"> </ngt-nav-item>
       </ngt-nav>
     </nav>
   </aside>
 
   <!-- Main Content Area -->
-  <div class="flex-1 flex flex-col">
-    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 h-16 shrink-0 transition-colors duration-200 sticky top-0 z-10">
-      <div class="px-6 py-4 h-full flex items-center">
-        <div class="flex justify-between items-center w-full">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Component Demo</h2>
-          <div class="flex gap-3 items-center">
+  <div class="flex-1 flex flex-col w-full lg:w-auto min-w-0">
+    <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 h-14 sm:h-16 shrink-0 transition-colors duration-200 sticky top-0 z-30">
+      <div class="px-3 sm:px-4 md:px-6 py-3 sm:py-4 h-full flex items-center">
+        <div class="flex justify-between items-center w-full gap-2 sm:gap-4">
+          <!-- Mobile Menu Button -->
+          <button 
+            class="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white -ml-2"
+            (click)="toggleMobileMenu()"
+            aria-label="Open menu"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+          <h2 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white truncate">Component Demo</h2>
+          <div class="flex gap-2 sm:gap-3 items-center shrink-0">
             <div class="flex items-center gap-2">
-              <span class="text-sm text-gray-600 dark:text-gray-400 hidden sm:inline">Light</span>
-              <ngt-toggle-switch [(ngModel)]="isDarkMode" (ngModelChange)="onToggleChange()" size="md"> </ngt-toggle-switch>
-              <span class="text-sm text-gray-600 dark:text-gray-400 hidden sm:inline">Dark</span>
+              <!-- Sun Icon -->
+              <svg 
+                class="w-5 h-5 text-gray-600 dark:text-gray-400" 
+                viewBox="0 0 20 20"
+                aria-label="Light mode"
+              >
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+              </svg>
+              <ngt-toggle-switch [(ngModel)]="isDarkMode" (ngModelChange)="onToggleChange()" size="sm" class="sm:size-md"> </ngt-toggle-switch>
+              <!-- Moon Icon -->
+              <svg 
+                class="w-5 h-5 text-gray-600 dark:text-gray-400" 
+                viewBox="0 0 20 20"
+                aria-label="Dark mode"
+              >
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
             </div>
-            <div class="flex gap-2">
+            <div class="hidden sm:flex gap-2">
               <ngt-button variant="primary" size="sm">Get Started</ngt-button>
             </div>
           </div>
@@ -47,7 +92,7 @@
       </div>
     </header>
     <main class="flex-1 overflow-auto bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-      <div class="max-w-7xl mx-auto px-6 py-8">
+      <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
         <router-outlet />
       </div>
     </main>

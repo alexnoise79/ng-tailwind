@@ -1,11 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgtAccordion } from './accordion.component';
-import { NgtAccordionItem } from './accordion-item.component';
+import { 
+  NgtAccordion, 
+  NgtAccordionItem,
+  NgtAccordionHeader,
+  NgtAccordionButton,
+  NgtAccordionCollapse,
+  NgtAccordionBody
+} from './index';
 import { signal } from '@angular/core';
 
 const meta: Meta<NgtAccordion> = {
   title: 'Components/Accordion',
-  component: NgtAccordion,
   tags: ['autodocs'],
   argTypes: {
     multiOpen: {
@@ -25,26 +30,69 @@ export const SingleOpen: Story = {
   render: args => ({
     props: args,
     moduleMetadata: {
-      imports: [NgtAccordion, NgtAccordionItem]
+      imports: [
+        NgtAccordion, 
+        NgtAccordionItem,
+        NgtAccordionHeader,
+        NgtAccordionButton,
+        NgtAccordionCollapse,
+        NgtAccordionBody
+      ]
     },
     template: `
-      <ngt-accordion [multiOpen]="multiOpen">
-        <ngt-accordion-item title="First Item">
-          <p class="text-gray-600">
-            This is the content of the first accordion item.
-          </p>
-        </ngt-accordion-item>
-        <ngt-accordion-item title="Second Item">
-          <p class="text-gray-600">
-            This is the content of the second accordion item.
-          </p>
-        </ngt-accordion-item>
-        <ngt-accordion-item title="Third Item">
-          <p class="text-gray-600">
-            This is the content of the third accordion item.
-          </p>
-        </ngt-accordion-item>
-      </ngt-accordion>
+      <div ngtAccordion [multiOpen]="multiOpen">
+        <div ngtAccordionItem #firstItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">First Item</span>
+              <svg [class.rotate-180]="firstItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the first accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #secondItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
+              <svg [class.rotate-180]="secondItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the second accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #thirdItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
+              <svg [class.rotate-180]="thirdItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the third accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     `
   })
 };
@@ -56,26 +104,126 @@ export const MultiOpen: Story = {
   render: args => ({
     props: args,
     moduleMetadata: {
-      imports: [NgtAccordion, NgtAccordionItem]
+      imports: [
+        NgtAccordion, 
+        NgtAccordionItem,
+        NgtAccordionHeader,
+        NgtAccordionButton,
+        NgtAccordionCollapse,
+        NgtAccordionBody
+      ]
     },
     template: `
-      <ngt-accordion [multiOpen]="multiOpen">
-        <ngt-accordion-item title="First Item">
-          <p class="text-gray-600">
-            This is the content of the first accordion item.
-          </p>
-        </ngt-accordion-item>
-        <ngt-accordion-item title="Second Item">
-          <p class="text-gray-600">
-            This is the content of the second accordion item.
-          </p>
-        </ngt-accordion-item>
-        <ngt-accordion-item title="Third Item">
-          <p class="text-gray-600">
-            This is the content of the third accordion item.
-          </p>
-        </ngt-accordion-item>
-      </ngt-accordion>
+      <div ngtAccordion [multiOpen]="multiOpen">
+        <div ngtAccordionItem #firstItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">First Item</span>
+              <svg [class.rotate-180]="firstItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the first accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #secondItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
+              <svg [class.rotate-180]="secondItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the second accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #thirdItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
+              <svg [class.rotate-180]="thirdItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This is the content of the third accordion item.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  })
+};
+
+export const Disabled: Story = {
+  args: {
+    multiOpen: signal(false)
+  },
+  render: args => ({
+    props: args,
+    moduleMetadata: {
+      imports: [
+        NgtAccordion, 
+        NgtAccordionItem,
+        NgtAccordionHeader,
+        NgtAccordionButton,
+        NgtAccordionCollapse,
+        NgtAccordionBody
+      ]
+    },
+    template: `
+      <div ngtAccordion [multiOpen]="multiOpen">
+        <div ngtAccordionItem [disabled]="true">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Disabled Item</span>
+              <svg class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This accordion item is disabled and cannot be toggled.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #enabledItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Enabled Item</span>
+              <svg [class.rotate-180]="enabledItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This accordion item is enabled and can be toggled.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     `
   })
 };

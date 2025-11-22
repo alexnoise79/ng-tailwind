@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { NgtAlert, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.alert',
@@ -17,6 +18,26 @@ export class AlertPage {
   setActiveTab(tab: DemoTab): void {
     this.activeTab.set(tab);
   }
+
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      allVariants: 'showcase',
+      dismissible: 'showcase',
+      notDismissible: 'showcase'
+    },
+    {
+      allVariants: 'html',
+      dismissible: 'html',
+      notDismissible: 'html'
+    }
+  );
+
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
@@ -60,5 +81,24 @@ export class AlertPage {
   This alert cannot be dismissed.
 </ngt-alert>`
   };
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      allVariants: {
+        html: 'alert-variants.html',
+        ts: 'alert-variants.ts'
+      },
+      dismissible: {
+        html: 'alert-dismissible.html',
+        ts: 'alert-dismissible.ts'
+      },
+      notDismissible: {
+        html: 'alert-not-dismissible.html',
+        ts: 'alert-not-dismissible.ts'
+      }
+    };
+    return this.codeViewUtil.getTabFileName('alert', demoKey, fileType, fileNames);
+  }
 }
 

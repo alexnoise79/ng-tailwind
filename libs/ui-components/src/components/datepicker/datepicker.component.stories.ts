@@ -9,7 +9,7 @@ const meta: Meta<NgtDatepicker> = {
   argTypes: {
     model: {
       control: 'object',
-      description: 'Selected date model'
+      description: 'Selected date model (string, Date, or NgtDateStruct)'
     },
     disabled: {
       control: 'boolean',
@@ -26,6 +26,15 @@ const meta: Meta<NgtDatepicker> = {
     startDate: {
       control: 'object',
       description: 'Initial month/year to display'
+    },
+    showTime: {
+      control: 'boolean',
+      description: 'Whether to show time selection'
+    },
+    format: {
+      control: 'select',
+      options: ['iso', 'iso-local', 'date', 'datetime'],
+      description: 'Output format for the date string'
     }
   }
 };
@@ -36,16 +45,18 @@ type Story = StoryObj<NgtDatepicker>;
 export const Default: Story = {
   args: {
     model: null,
-    disabled: false
+    disabled: false,
+    showTime: false,
+    format: 'iso'
   },
   render: args => {
-    const model = signal<NgtDateStruct | null>(args.model || null);
+    const selectedDate = signal<string | null>(null);
     return {
       props: {
         ...args,
-        model: model,
-        onDateSelect: (date: NgtDateStruct) => {
-          model.set(date);
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
           console.log('Date selected:', date);
         },
         onNavigate: (event: { current: { year: number; month: number } }) => {
@@ -63,12 +74,14 @@ export const Default: Story = {
             [minDate]="minDate"
             [maxDate]="maxDate"
             [startDate]="startDate"
+            [showTime]="showTime"
+            [format]="format"
             (dateSelect)="onDateSelect($event)"
             (navigate)="onNavigate($event)"
           ></ngt-datepicker>
-          @if (model()) {
+          @if (selectedDate()) {
             <p class="mt-4 text-sm text-gray-600">
-              Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
+              Selected: {{ selectedDate() }}
             </p>
           }
         </div>
@@ -80,16 +93,18 @@ export const Default: Story = {
 export const WithInitialDate: Story = {
   args: {
     model: { year: 2024, month: 3, day: 15 },
-    disabled: false
+    disabled: false,
+    showTime: false,
+    format: 'iso'
   },
   render: args => {
-    const model = signal<NgtDateStruct | null>(args.model || null);
+    const selectedDate = signal<string | null>(null);
     return {
       props: {
         ...args,
-        model: model,
-        onDateSelect: (date: NgtDateStruct) => {
-          model.set(date);
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
         }
       },
       template: `
@@ -97,11 +112,124 @@ export const WithInitialDate: Story = {
           <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
+            [showTime]="showTime"
+            [format]="format"
             (dateSelect)="onDateSelect($event)"
           ></ngt-datepicker>
-          @if (model()) {
+          @if (selectedDate()) {
             <p class="mt-4 text-sm text-gray-600">
-              Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
+              Selected: {{ selectedDate() }}
+            </p>
+          }
+        </div>
+      `
+    };
+  }
+};
+
+export const WithTime: Story = {
+  args: {
+    model: null,
+    disabled: false,
+    showTime: true,
+    format: 'iso'
+  },
+  render: args => {
+    const selectedDate = signal<string | null>(null);
+    return {
+      props: {
+        ...args,
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
+        }
+      },
+      template: `
+        <div class="p-8">
+          <ngt-datepicker
+            [model]="model"
+            [disabled]="disabled"
+            [showTime]="showTime"
+            [format]="format"
+            (dateSelect)="onDateSelect($event)"
+          ></ngt-datepicker>
+          @if (selectedDate()) {
+            <p class="mt-4 text-sm text-gray-600">
+              Selected: {{ selectedDate() }}
+            </p>
+          }
+        </div>
+      `
+    };
+  }
+};
+
+export const WithStringInput: Story = {
+  args: {
+    model: '2024-03-15T10:30:00Z',
+    disabled: false,
+    showTime: true,
+    format: 'iso'
+  },
+  render: args => {
+    const selectedDate = signal<string | null>(null);
+    return {
+      props: {
+        ...args,
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
+        }
+      },
+      template: `
+        <div class="p-8">
+          <ngt-datepicker
+            [model]="model"
+            [disabled]="disabled"
+            [showTime]="showTime"
+            [format]="format"
+            (dateSelect)="onDateSelect($event)"
+          ></ngt-datepicker>
+          @if (selectedDate()) {
+            <p class="mt-4 text-sm text-gray-600">
+              Selected: {{ selectedDate() }}
+            </p>
+          }
+        </div>
+      `
+    };
+  }
+};
+
+export const WithDateTimeFormat: Story = {
+  args: {
+    model: null,
+    disabled: false,
+    showTime: true,
+    format: 'datetime'
+  },
+  render: args => {
+    const selectedDate = signal<string | null>(null);
+    return {
+      props: {
+        ...args,
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
+        }
+      },
+      template: `
+        <div class="p-8">
+          <ngt-datepicker
+            [model]="model"
+            [disabled]="disabled"
+            [showTime]="showTime"
+            [format]="format"
+            (dateSelect)="onDateSelect($event)"
+          ></ngt-datepicker>
+          @if (selectedDate()) {
+            <p class="mt-4 text-sm text-gray-600">
+              Selected: {{ selectedDate() }}
             </p>
           }
         </div>
@@ -115,16 +243,18 @@ export const WithMinMaxDates: Story = {
     model: null,
     disabled: false,
     minDate: { year: 2024, month: 1, day: 1 },
-    maxDate: { year: 2024, month: 12, day: 31 }
+    maxDate: { year: 2024, month: 12, day: 31 },
+    showTime: false,
+    format: 'iso'
   },
   render: args => {
-    const model = signal<NgtDateStruct | null>(args.model || null);
+    const selectedDate = signal<string | null>(null);
     return {
       props: {
         ...args,
-        model: model,
-        onDateSelect: (date: NgtDateStruct) => {
-          model.set(date);
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
         }
       },
       template: `
@@ -134,11 +264,13 @@ export const WithMinMaxDates: Story = {
             [disabled]="disabled"
             [minDate]="minDate"
             [maxDate]="maxDate"
+            [showTime]="showTime"
+            [format]="format"
             (dateSelect)="onDateSelect($event)"
           ></ngt-datepicker>
-          @if (model()) {
+          @if (selectedDate()) {
             <p class="mt-4 text-sm text-gray-600">
-              Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
+              Selected: {{ selectedDate() }}
             </p>
           }
         </div>
@@ -150,16 +282,18 @@ export const WithMinMaxDates: Story = {
 export const Disabled: Story = {
   args: {
     model: null,
-    disabled: true
+    disabled: true,
+    showTime: false,
+    format: 'iso'
   },
   render: args => {
-    const model = signal<NgtDateStruct | null>(args.model || null);
+    const selectedDate = signal<string | null>(null);
     return {
       props: {
         ...args,
-        model: model,
-        onDateSelect: (date: NgtDateStruct) => {
-          model.set(date);
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
         }
       },
       template: `
@@ -167,6 +301,8 @@ export const Disabled: Story = {
           <ngt-datepicker
             [model]="model"
             [disabled]="disabled"
+            [showTime]="showTime"
+            [format]="format"
             (dateSelect)="onDateSelect($event)"
           ></ngt-datepicker>
         </div>
@@ -179,16 +315,18 @@ export const WithCustomStartDate: Story = {
   args: {
     model: null,
     disabled: false,
-    startDate: { year: 2025, month: 6, day: 1 }
+    startDate: { year: 2025, month: 6, day: 1 },
+    showTime: false,
+    format: 'iso'
   },
   render: args => {
-    const model = signal<NgtDateStruct | null>(args.model || null);
+    const selectedDate = signal<string | null>(null);
     return {
       props: {
         ...args,
-        model: model,
-        onDateSelect: (date: NgtDateStruct) => {
-          model.set(date);
+        selectedDate: selectedDate,
+        onDateSelect: (date: string) => {
+          selectedDate.set(date);
         }
       },
       template: `
@@ -197,11 +335,13 @@ export const WithCustomStartDate: Story = {
             [model]="model"
             [disabled]="disabled"
             [startDate]="startDate"
+            [showTime]="showTime"
+            [format]="format"
             (dateSelect)="onDateSelect($event)"
           ></ngt-datepicker>
-          @if (model()) {
+          @if (selectedDate()) {
             <p class="mt-4 text-sm text-gray-600">
-              Selected: {{ model()!.year }}-{{ model()!.month }}-{{ model()!.day }}
+              Selected: {{ selectedDate() }}
             </p>
           }
         </div>
