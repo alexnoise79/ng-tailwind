@@ -4,7 +4,6 @@ import { Directive, Input, signal, Signal, WritableSignal } from '@angular/core'
   selector: '[ngtAccordion]',
   exportAs: 'NgtAccordion',
   standalone: true,
-  providers: [NgtAccordion],
   host: {
     '[class.border]': 'true',
     '[class.border-gray-200]': 'true',
