@@ -12,11 +12,11 @@ describe('NgtButton', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtButton();
     });
-    
+
     (component as any).variant = signal<ButtonVariant>('primary');
     (component as any).size = signal<Size>('md');
     (component as any).type = signal<'button' | 'submit' | 'reset'>('button');
@@ -60,7 +60,7 @@ describe('NgtButton', () => {
 
   describe('Variants', () => {
     const variants: ButtonVariant[] = ['primary', 'outline', 'ghost'];
-    
+
     variants.forEach(variant => {
       it(`should apply correct classes for ${variant} variant`, () => {
         (component as any).variant.set(variant);
@@ -91,7 +91,7 @@ describe('NgtButton', () => {
 
   describe('Sizes', () => {
     const sizes: Size[] = ['sm', 'md', 'lg'];
-    
+
     sizes.forEach(size => {
       it(`should apply correct classes for ${size} size`, () => {
         (component as any).size.set(size);
@@ -107,9 +107,9 @@ describe('NgtButton', () => {
       const event = new Event('click');
       const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
       const stopPropagationSpy = vi.spyOn(event, 'stopPropagation');
-      
+
       component.handleClick(event);
-      
+
       expect(preventDefaultSpy).toHaveBeenCalled();
       expect(stopPropagationSpy).toHaveBeenCalled();
     });
@@ -119,9 +119,9 @@ describe('NgtButton', () => {
       const event = new Event('click');
       const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
       const stopPropagationSpy = vi.spyOn(event, 'stopPropagation');
-      
+
       component.handleClick(event);
-      
+
       expect(preventDefaultSpy).toHaveBeenCalled();
       expect(stopPropagationSpy).toHaveBeenCalled();
     });
@@ -131,9 +131,9 @@ describe('NgtButton', () => {
       component.loading = false;
       const event = new Event('click');
       const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
-      
+
       component.handleClick(event);
-      
+
       expect(preventDefaultSpy).not.toHaveBeenCalled();
     });
   });
@@ -155,4 +155,3 @@ describe('NgtButton', () => {
     });
   });
 });
-

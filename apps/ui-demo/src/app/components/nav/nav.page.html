@@ -19,13 +19,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Default (Tabs style)</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('default')" 
-            [class.dark:bg-gray-700]="isShowingCode('default')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('default')"
+            [class.dark:bg-gray-700]="isShowingCode('default')"
             (click)="toggleDemoView('default')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -47,11 +48,7 @@
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <!-- Code Content -->
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.default)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.default)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -67,13 +64,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pills style</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('pills')" 
-            [class.dark:bg-gray-700]="isShowingCode('pills')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('pills')"
+            [class.dark:bg-gray-700]="isShowingCode('pills')"
             (click)="toggleDemoView('pills')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -92,11 +90,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.pills)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.pills)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -112,13 +106,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Underline style</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('underline')" 
-            [class.dark:bg-gray-700]="isShowingCode('underline')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('underline')"
+            [class.dark:bg-gray-700]="isShowingCode('underline')"
             (click)="toggleDemoView('underline')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -137,11 +132,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.underline)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.underline)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -157,13 +148,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Center aligned</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('center')" 
-            [class.dark:bg-gray-700]="isShowingCode('center')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('center')"
+            [class.dark:bg-gray-700]="isShowingCode('center')"
             (click)="toggleDemoView('center')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -182,11 +174,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.center)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.center)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -202,13 +190,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Justified</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('justified')" 
-            [class.dark:bg-gray-700]="isShowingCode('justified')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('justified')"
+            [class.dark:bg-gray-700]="isShowingCode('justified')"
             (click)="toggleDemoView('justified')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -227,11 +216,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.justified)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.justified)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -247,13 +232,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With disabled item</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('disabled')" 
-            [class.dark:bg-gray-700]="isShowingCode('disabled')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('disabled')"
+            [class.dark:bg-gray-700]="isShowingCode('disabled')"
             (click)="toggleDemoView('disabled')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -273,11 +259,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.disabled)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -293,13 +275,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical orientation</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('vertical')" 
-            [class.dark:bg-gray-700]="isShowingCode('vertical')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('vertical')"
+            [class.dark:bg-gray-700]="isShowingCode('vertical')"
             (click)="toggleDemoView('vertical')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -318,11 +301,7 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.vertical)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.vertical)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>

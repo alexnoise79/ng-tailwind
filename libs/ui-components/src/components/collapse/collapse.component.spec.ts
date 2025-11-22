@@ -11,11 +11,11 @@ describe('NgtCollapse', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtCollapse();
     });
-    
+
     (component as any).horizontal = signal(false);
   });
 
@@ -37,7 +37,7 @@ describe('NgtCollapse', () => {
       const openSignal = signal(true);
       component.isOpen = openSignal;
       expect(component.isOpen()).toBe(true);
-      
+
       openSignal.set(false);
       expect(component.isOpen()).toBe(false);
     });
@@ -45,7 +45,7 @@ describe('NgtCollapse', () => {
     it('should toggle isOpen state', () => {
       component.isOpen = false;
       expect(component.isOpen()).toBe(false);
-      
+
       component.isOpen = true;
       expect(component.isOpen()).toBe(true);
     });
@@ -61,4 +61,3 @@ describe('NgtCollapse', () => {
     });
   });
 });
-

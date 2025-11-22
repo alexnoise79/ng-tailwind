@@ -19,13 +19,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Single Open (Default)</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('singleOpen')" 
-            [class.dark:bg-gray-700]="isShowingCode('singleOpen')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('singleOpen')"
+            [class.dark:bg-gray-700]="isShowingCode('singleOpen')"
             (click)="toggleDemoView('singleOpen')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -98,17 +99,14 @@
                   [class.dark:text-gray-400]="getActiveCodeTab('singleOpen') !== 'html'"
                   (click)="setActiveCodeTab('singleOpen', 'html')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors">
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                >
                   {{ getTabFileName('singleOpen', 'html') }}
                 </button>
               </div>
               <!-- Code Content -->
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.singleOpen)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.singleOpen)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -124,13 +122,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiple Open</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('multipleOpen')" 
-            [class.dark:bg-gray-700]="isShowingCode('multipleOpen')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('multipleOpen')"
+            [class.dark:bg-gray-700]="isShowingCode('multipleOpen')"
             (click)="toggleDemoView('multipleOpen')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -203,17 +202,14 @@
                   [class.dark:text-gray-400]="getActiveCodeTab('multipleOpen') !== 'html'"
                   (click)="setActiveCodeTab('multipleOpen', 'html')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors">
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                >
                   {{ getTabFileName('multipleOpen', 'html') }}
                 </button>
               </div>
               <!-- Code Content -->
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.multipleOpen)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.multipleOpen)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
@@ -229,13 +225,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled State</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('disabled')" 
-            [class.dark:bg-gray-700]="isShowingCode('disabled')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('disabled')"
+            [class.dark:bg-gray-700]="isShowingCode('disabled')"
             (click)="toggleDemoView('disabled')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -293,17 +290,14 @@
                   [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'html'"
                   (click)="setActiveCodeTab('disabled', 'html')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors">
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                >
                   {{ getTabFileName('disabled', 'html') }}
                 </button>
               </div>
               <!-- Code Content -->
               <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(codeSnippets.disabled)" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
+                <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>

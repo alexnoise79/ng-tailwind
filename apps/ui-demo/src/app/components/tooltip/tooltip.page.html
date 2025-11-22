@@ -19,13 +19,14 @@
       <section class="space-y-4">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Positions</h2>
-          <button 
-            [class.bg-gray-100]="isShowingCode('positions')" 
-            [class.dark:bg-gray-700]="isShowingCode('positions')" 
+          <button
+            [class.bg-gray-100]="isShowingCode('positions')"
+            [class.dark:bg-gray-700]="isShowingCode('positions')"
             (click)="toggleDemoView('positions')"
             type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view">
+            title="Toggle code view"
+          >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
@@ -51,7 +52,19 @@
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button [class.text-gray-900]="getActiveCodeTab('positions') === 'html'" [class.dark:text-white]="getActiveCodeTab('positions') === 'html'" [class.bg-white]="getActiveCodeTab('positions') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'html'" [class.border-b-2]="getActiveCodeTab('positions') === 'html'" [class.border-primary-500]="getActiveCodeTab('positions') === 'html'" (click)="setActiveCodeTab('positions', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors">{{ getTabFileName('positions', 'html') }}</button>
+                <button
+                  [class.text-gray-900]="getActiveCodeTab('positions') === 'html'"
+                  [class.dark:text-white]="getActiveCodeTab('positions') === 'html'"
+                  [class.bg-white]="getActiveCodeTab('positions') === 'html'"
+                  [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'html'"
+                  [class.border-b-2]="getActiveCodeTab('positions') === 'html'"
+                  [class.border-primary-500]="getActiveCodeTab('positions') === 'html'"
+                  (click)="setActiveCodeTab('positions', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                >
+                  {{ getTabFileName('positions', 'html') }}
+                </button>
               </div>
               <div class="relative bg-gray-100 dark:bg-gray-900">
                 <button (click)="copyToClipboard(getCodeSnippet('positions', getActiveCodeTab('positions')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">

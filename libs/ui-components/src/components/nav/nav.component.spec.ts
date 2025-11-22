@@ -20,11 +20,11 @@ describe('NgtNav', () => {
       providers: [{ provide: ElementRef, useValue: mockElementRef }]
     });
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtNav();
     });
-    
+
     (component as any).orientation = signal<NavOrientation>('horizontal');
     (component as any).style = signal<NavStyle>('tabs');
     (component as any).align = signal<NavAlign>('start');
@@ -75,4 +75,3 @@ describe('NgtNav', () => {
     });
   });
 });
-

@@ -12,11 +12,11 @@ describe('NgtAlert', () => {
     vi.useFakeTimers();
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtAlert();
     });
-    
+
     (component as any).variant = signal<AlertVariant>('info');
     (component as any).dismissible = signal(false);
   });
@@ -42,10 +42,10 @@ describe('NgtAlert', () => {
       });
 
       component.handleClose();
-      
+
       expect(component.isVisibleValue()).toBe(false);
       expect(closeEmitted).toBe(false);
-      
+
       // Advance time to trigger the setTimeout
       vi.advanceTimersByTime(300);
       expect(closeEmitted).toBe(true);
@@ -53,16 +53,16 @@ describe('NgtAlert', () => {
 
     it('should not hide when dismissed if not dismissible', () => {
       (component as any).dismissible.set(false);
-      
+
       component.handleClose();
-      
+
       expect(component.isVisibleValue()).toBe(true);
     });
   });
 
   describe('Variants', () => {
     const variants: AlertVariant[] = ['success', 'info', 'warning', 'danger', 'primary', 'secondary', 'light', 'dark'];
-    
+
     variants.forEach(variant => {
       it(`should apply correct classes for ${variant} variant`, () => {
         (component as any).variant.set(variant);
@@ -105,4 +105,3 @@ describe('NgtAlert', () => {
     });
   });
 });
-

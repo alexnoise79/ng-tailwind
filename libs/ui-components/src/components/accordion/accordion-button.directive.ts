@@ -43,4 +43,3 @@ export class NgtAccordionButton {
     this.accordionItem?.toggle();
   }
 }
-

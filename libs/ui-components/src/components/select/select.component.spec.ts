@@ -12,11 +12,11 @@ describe('NgtSelect', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtSelect();
     });
-    
+
     (component as any).size = signal<Size>('md');
     (component as any).checkmark = signal(false);
     (component as any).showClear = signal(false);
@@ -26,7 +26,7 @@ describe('NgtSelect', () => {
     (component as any).fluid = signal(false);
     (component as any).invalid = signal(false);
     (component as any).editable = signal(false);
-    
+
     // Mock ViewChild refs
     (component as any).triggerRef = { nativeElement: {} };
     (component as any).inputRef = { nativeElement: {} };
@@ -48,7 +48,7 @@ describe('NgtSelect', () => {
     it('should process primitive options', () => {
       component.options = ['Option 1', 'Option 2', 'Option 3'];
       component.ngOnInit();
-      
+
       const processed = component.processedOptions();
       expect(processed.length).toBe(3);
       if (processed.length > 0) {
@@ -62,7 +62,7 @@ describe('NgtSelect', () => {
         { label: 'Option 2', value: 'opt2' }
       ];
       component.ngOnInit();
-      
+
       const processed = component.processedOptions();
       expect(processed.length).toBe(2);
     });
@@ -71,10 +71,10 @@ describe('NgtSelect', () => {
   describe('Toggle', () => {
     it('should toggle open state', () => {
       expect(component.isOpen()).toBe(false);
-      
+
       component.toggle();
       expect(component.isOpen()).toBe(true);
-      
+
       component.toggle();
       expect(component.isOpen()).toBe(false);
     });
@@ -90,15 +90,15 @@ describe('NgtSelect', () => {
     it('should select option in single select mode', () => {
       component.options = [{ label: 'Option 1', value: 'opt1' }];
       component.ngOnInit();
-      
+
       let emittedValue: unknown;
-      component.selectionChange.subscribe((value) => {
+      component.selectionChange.subscribe(value => {
         emittedValue = value;
       });
-      
+
       const option = component.processedOptions()[0];
       component.selectOption(option);
-      
+
       expect(component.value()).toBe('opt1');
       expect(emittedValue).toBe('opt1');
     });
@@ -110,11 +110,11 @@ describe('NgtSelect', () => {
         { label: 'Option 2', value: 'opt2' }
       ];
       component.ngOnInit();
-      
+
       const options = component.processedOptions();
       component.selectOption(options[0]);
       component.selectOption(options[1]);
-      
+
       const value = component.value();
       expect(Array.isArray(value)).toBe(true);
       expect((value as unknown[]).length).toBe(2);
@@ -130,12 +130,12 @@ describe('NgtSelect', () => {
     it('should register onChange callback', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       component.options = [{ label: 'Option 1', value: 'opt1' }];
       component.ngOnInit();
       const option = component.processedOptions()[0];
       component.selectOption(option);
-      
+
       expect(onChangeFn).toHaveBeenCalled();
     });
 
@@ -149,12 +149,11 @@ describe('NgtSelect', () => {
     it('should clear selection', () => {
       component.writeValue('opt1');
       expect(component.value()).toBe('opt1');
-      
+
       const event = new Event('click');
       component.clear(event);
-      
+
       expect(component.value()).toBeNull();
     });
   });
 });
-

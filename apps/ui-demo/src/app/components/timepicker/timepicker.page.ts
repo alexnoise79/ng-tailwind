@@ -193,4 +193,3 @@ export class TimepickerPage {
     return this.codeViewUtil.getTabFileName('timepicker', demoKey, fileType, fileNames);
   }
 }
-

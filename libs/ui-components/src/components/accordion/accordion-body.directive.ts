@@ -9,6 +9,4 @@ import { Directive } from '@angular/core';
     '[class.dark:text-gray-300]': 'true'
   }
 })
-export class NgtAccordionBody {
-}
-
+export class NgtAccordionBody {}

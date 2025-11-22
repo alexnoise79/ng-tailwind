@@ -19,7 +19,7 @@ describe('NgtAccordion', () => {
       providers: [{ provide: ElementRef, useValue: mockElementRef }]
     });
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtAccordion();
     });
@@ -147,7 +147,7 @@ describe('NgtAccordionItem', () => {
       providers: [{ provide: ElementRef, useValue: mockElementRef }]
     });
     injector = TestBed.inject(Injector);
-    
+
     accordion = runInInjectionContext(injector, () => {
       const acc = new NgtAccordion();
       (acc as any).elementRef = mockElementRef;
@@ -187,11 +187,11 @@ describe('NgtAccordionItem', () => {
     it('should reflect accordion state', () => {
       // Item 1 should be closed initially
       expect(item1.isOpen()).toBe(false);
-      
+
       // Toggle item 1
       item1.toggle();
       expect(item1.isOpen()).toBe(true);
-      
+
       // In single open mode, opening item 2 should close item 1
       item2.toggle();
       expect(item1.isOpen()).toBe(false);
@@ -202,10 +202,10 @@ describe('NgtAccordionItem', () => {
   describe('toggle method', () => {
     it('should toggle item state', () => {
       expect(item1.isOpen()).toBe(false);
-      
+
       item1.toggle();
       expect(item1.isOpen()).toBe(true);
-      
+
       item1.toggle();
       expect(item1.isOpen()).toBe(false);
     });
@@ -213,7 +213,7 @@ describe('NgtAccordionItem', () => {
     it('should not toggle when disabled', () => {
       (item1 as any).disabled = signal(true);
       expect(item1.isOpen()).toBe(false);
-      
+
       item1.toggle();
       expect(item1.isOpen()).toBe(false);
     });

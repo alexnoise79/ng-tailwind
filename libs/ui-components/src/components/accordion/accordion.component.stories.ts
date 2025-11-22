@@ -1,12 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { 
-  NgtAccordion, 
-  NgtAccordionItem,
-  NgtAccordionHeader,
-  NgtAccordionButton,
-  NgtAccordionCollapse,
-  NgtAccordionBody
-} from './index';
+import { NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody } from './index';
 import { signal } from '@angular/core';
 
 const meta: Meta<NgtAccordion> = {
@@ -30,14 +23,7 @@ export const SingleOpen: Story = {
   render: args => ({
     props: args,
     moduleMetadata: {
-      imports: [
-        NgtAccordion, 
-        NgtAccordionItem,
-        NgtAccordionHeader,
-        NgtAccordionButton,
-        NgtAccordionCollapse,
-        NgtAccordionBody
-      ]
+      imports: [NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody]
     },
     template: `
       <div ngtAccordion [multiOpen]="multiOpen">
@@ -104,14 +90,7 @@ export const MultiOpen: Story = {
   render: args => ({
     props: args,
     moduleMetadata: {
-      imports: [
-        NgtAccordion, 
-        NgtAccordionItem,
-        NgtAccordionHeader,
-        NgtAccordionButton,
-        NgtAccordionCollapse,
-        NgtAccordionBody
-      ]
+      imports: [NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody]
     },
     template: `
       <div ngtAccordion [multiOpen]="multiOpen">
@@ -178,14 +157,7 @@ export const Disabled: Story = {
   render: args => ({
     props: args,
     moduleMetadata: {
-      imports: [
-        NgtAccordion, 
-        NgtAccordionItem,
-        NgtAccordionHeader,
-        NgtAccordionButton,
-        NgtAccordionCollapse,
-        NgtAccordionBody
-      ]
+      imports: [NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody]
     },
     template: `
       <div ngtAccordion [multiOpen]="multiOpen">

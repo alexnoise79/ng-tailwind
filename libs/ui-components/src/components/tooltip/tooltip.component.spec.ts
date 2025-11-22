@@ -12,11 +12,11 @@ describe('NgtTooltip', () => {
     vi.useFakeTimers();
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtTooltip();
     });
-    
+
     (component as any).text = signal('Test tooltip');
     (component as any).position = signal<TooltipPosition>('top');
     (component as any).delay = signal(200);
@@ -39,7 +39,7 @@ describe('NgtTooltip', () => {
     it('should show after delay', () => {
       component.show();
       expect(component.isVisible()).toBe(false);
-      
+
       vi.advanceTimersByTime(200);
       expect(component.isVisible()).toBe(true);
     });
@@ -48,7 +48,7 @@ describe('NgtTooltip', () => {
       component.show();
       vi.advanceTimersByTime(200);
       expect(component.isVisible()).toBe(true);
-      
+
       component.hide();
       vi.advanceTimersByTime(50);
       expect(component.isVisible()).toBe(false);
@@ -57,7 +57,7 @@ describe('NgtTooltip', () => {
 
   describe('Position classes', () => {
     const positions: TooltipPosition[] = ['top', 'bottom', 'left', 'right'];
-    
+
     positions.forEach(position => {
       it(`should return correct classes for ${position} position`, () => {
         (component as any).position.set(position);
@@ -72,17 +72,17 @@ describe('NgtTooltip', () => {
     it('should cleanup timeouts on destroy', () => {
       component.show();
       expect(component.isVisible()).toBe(false);
-      
+
       // Verify timeout is set
       const showTimeout = (component as any).showTimeout;
       expect(showTimeout).toBeDefined();
-      
+
       // Spy on clearTimeout to verify it's called
       const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
-      
+
       // Destroy should clear timeouts and not throw
       component.ngOnDestroy();
-      
+
       // Verify clearTimeout was called to clean up timeouts
       // hide() is called first, which may set hideTimeout, then both are cleared
       expect(clearTimeoutSpy).toHaveBeenCalled();
@@ -90,12 +90,11 @@ describe('NgtTooltip', () => {
       expect((component as any).showTimeout).toBeUndefined();
       // hide() is called which sets visibility to false
       expect(component.isVisible()).toBe(false);
-      
+
       // Advance timers to ensure no timers are still pending
       vi.advanceTimersByTime(300);
-      
+
       clearTimeoutSpy.mockRestore();
     });
   });
 });
-

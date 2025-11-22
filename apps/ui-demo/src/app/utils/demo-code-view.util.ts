@@ -7,14 +7,11 @@ import { signal, WritableSignal } from '@angular/core';
 export class DemoCodeViewUtil {
   // View mode for each demo section (showcase or code)
   demoViewMode: WritableSignal<Record<string, 'showcase' | 'code'>>;
-  
+
   // Active code tab for each demo (html or ts)
   activeCodeTab: WritableSignal<Record<string, 'html' | 'ts'>>;
 
-  constructor(
-    initialViewModes: Record<string, 'showcase' | 'code'>,
-    initialCodeTabs: Record<string, 'html' | 'ts'>
-  ) {
+  constructor(initialViewModes: Record<string, 'showcase' | 'code'>, initialCodeTabs: Record<string, 'html' | 'ts'>) {
     this.demoViewMode = signal(initialViewModes);
     this.activeCodeTab = signal(initialCodeTabs);
   }
@@ -58,12 +55,7 @@ export class DemoCodeViewUtil {
   /**
    * Get tab file name based on demo key and component name
    */
-  getTabFileName(
-    componentName: string,
-    demoKey: string,
-    fileType: 'html' | 'ts',
-    customFileNames?: Record<string, Record<'html' | 'ts', string>>
-  ): string {
+  getTabFileName(componentName: string, demoKey: string, fileType: 'html' | 'ts', customFileNames?: Record<string, Record<'html' | 'ts', string>>): string {
     if (customFileNames && customFileNames[demoKey]?.[fileType]) {
       return customFileNames[demoKey][fileType];
     }
@@ -74,13 +66,9 @@ export class DemoCodeViewUtil {
    * Get code snippet for a specific tab
    * Handles both string snippets and object snippets with html/ts properties
    */
-  getCodeSnippet(
-    codeSnippets: Record<string, string | { html: string; ts: string }>,
-    demoKey: string,
-    fileType: 'html' | 'ts'
-  ): string {
+  getCodeSnippet(codeSnippets: Record<string, string | { html: string; ts: string }>, demoKey: string, fileType: 'html' | 'ts'): string {
     const snippet = codeSnippets[demoKey];
-    
+
     if (!snippet) {
       return '';
     }
@@ -98,4 +86,3 @@ export class DemoCodeViewUtil {
     return '';
   }
 }
-

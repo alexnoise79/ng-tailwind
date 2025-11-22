@@ -11,11 +11,11 @@ describe('NgtDropdown', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtDropdown();
     });
-    
+
     (component as any).isOpen = signal(signal(false));
   });
 
@@ -42,10 +42,10 @@ describe('NgtDropdown', () => {
   describe('Toggle', () => {
     it('should toggle isOpen state', () => {
       expect(component.isOpen()()).toBe(false);
-      
+
       component.toggle();
       expect(component.isOpen()()).toBe(true);
-      
+
       component.toggle();
       expect(component.isOpen()()).toBe(false);
     });
@@ -55,7 +55,7 @@ describe('NgtDropdown', () => {
     it('should open dropdown', () => {
       component.close();
       expect(component.isOpen()()).toBe(false);
-      
+
       component.open();
       expect(component.isOpen()()).toBe(true);
     });
@@ -65,10 +65,9 @@ describe('NgtDropdown', () => {
     it('should close dropdown', () => {
       component.open();
       expect(component.isOpen()()).toBe(true);
-      
+
       component.close();
       expect(component.isOpen()()).toBe(false);
     });
   });
 });
-

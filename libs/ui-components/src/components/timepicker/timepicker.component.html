@@ -1,34 +1,13 @@
 <div class="inline-flex items-center gap-2" role="group" aria-label="Time picker">
   <!-- Hour -->
   <div class="flex flex-col items-center">
-    <button
-      [disabled]="disabled()"
-      [class]="buttonClasses()"
-      (click)="incrementHour()"
-      type="button"
-      aria-label="Increment hour"
-    >
+    <button [disabled]="disabled()" [class]="buttonClasses()" (click)="incrementHour()" type="button" aria-label="Increment hour">
       <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
       </svg>
     </button>
-    <input
-      [disabled]="disabled()"
-      [value]="meridian() ? getDisplayHour() : formatTimeValue(currentHour())"
-      [min]="meridian() ? 1 : 0"
-      [max]="meridian() ? 12 : 23"
-      [class]="inputClasses()"
-      (change)="onHourChange($event)"
-      type="number"
-      aria-label="Hour"
-    />
-    <button
-      [disabled]="disabled()"
-      [class]="buttonClasses()"
-      (click)="decrementHour()"
-      type="button"
-      aria-label="Decrement hour"
-    >
+    <input [disabled]="disabled()" [value]="meridian() ? getDisplayHour() : formatTimeValue(currentHour())" [min]="meridian() ? 1 : 0" [max]="meridian() ? 12 : 23" [class]="inputClasses()" (change)="onHourChange($event)" type="number" aria-label="Hour" />
+    <button [disabled]="disabled()" [class]="buttonClasses()" (click)="decrementHour()" type="button" aria-label="Decrement hour">
       <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
@@ -39,34 +18,13 @@
 
   <!-- Minute -->
   <div class="flex flex-col items-center">
-    <button
-      [disabled]="disabled()"
-      [class]="buttonClasses()"
-      (click)="incrementMinute()"
-      type="button"
-      aria-label="Increment minute"
-    >
+    <button [disabled]="disabled()" [class]="buttonClasses()" (click)="incrementMinute()" type="button" aria-label="Increment minute">
       <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
       </svg>
     </button>
-    <input
-      [disabled]="disabled()"
-      [value]="formatTimeValue(currentMinute())"
-      [class]="inputClasses()"
-      (change)="onMinuteChange($event)"
-      type="number"
-      min="0"
-      max="59"
-      aria-label="Minute"
-    />
-    <button
-      [disabled]="disabled()"
-      [class]="buttonClasses()"
-      (click)="decrementMinute()"
-      type="button"
-      aria-label="Decrement minute"
-    >
+    <input [disabled]="disabled()" [value]="formatTimeValue(currentMinute())" [class]="inputClasses()" (change)="onMinuteChange($event)" type="number" min="0" max="59" aria-label="Minute" />
+    <button [disabled]="disabled()" [class]="buttonClasses()" (click)="decrementMinute()" type="button" aria-label="Decrement minute">
       <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
@@ -77,34 +35,13 @@
   @if (showSeconds()) {
     <span [class]="separatorClasses()">:</span>
     <div class="flex flex-col items-center">
-      <button
-        [disabled]="disabled()"
-        [class]="buttonClasses()"
-        (click)="incrementSecond()"
-        type="button"
-        aria-label="Increment second"
-      >
+      <button [disabled]="disabled()" [class]="buttonClasses()" (click)="incrementSecond()" type="button" aria-label="Increment second">
         <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
         </svg>
       </button>
-      <input
-        [disabled]="disabled()"
-        [value]="formatTimeValue(currentSecond())"
-        [class]="inputClasses()"
-        (change)="onSecondChange($event)"
-        type="number"
-        min="0"
-        max="59"
-        aria-label="Second"
-      />
-      <button
-        [disabled]="disabled()"
-        [class]="buttonClasses()"
-        (click)="decrementSecond()"
-        type="button"
-        aria-label="Decrement second"
-      >
+      <input [disabled]="disabled()" [value]="formatTimeValue(currentSecond())" [class]="inputClasses()" (change)="onSecondChange($event)" type="number" min="0" max="59" aria-label="Second" />
+      <button [disabled]="disabled()" [class]="buttonClasses()" (click)="decrementSecond()" type="button" aria-label="Decrement second">
         <svg [class]="iconClasses()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
@@ -115,16 +52,9 @@
   <!-- Meridian (AM/PM) -->
   @if (meridian()) {
     <div class="flex flex-col items-center ml-2">
-      <button
-        [disabled]="disabled()"
-        [class]="meridianButtonClasses()"
-        (click)="toggleMeridian()"
-        type="button"
-        aria-label="Toggle AM/PM"
-      >
+      <button [disabled]="disabled()" [class]="meridianButtonClasses()" (click)="toggleMeridian()" type="button" aria-label="Toggle AM/PM">
         {{ currentMeridian() }}
       </button>
     </div>
   }
 </div>
-

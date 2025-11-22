@@ -10,4 +10,3 @@ describe('Accordion Page E2E', () => {
     cy.contains('Collapsible content sections with smooth animations');
   });
 });
-

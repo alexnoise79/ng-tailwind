@@ -11,9 +11,8 @@ export default defineConfig({
     reporters: ['default'],
     coverage: {
       reportsDirectory: '../../coverage/libs/ui-components',
-      provider: 'v8',
+      provider: 'v8'
     },
-    setupFiles: ['./src/test-setup.ts'],
-  },
+    setupFiles: ['./src/test-setup.ts']
+  }
 });
-

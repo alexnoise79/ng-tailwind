@@ -28,15 +28,12 @@ export class NgtDatepicker implements OnInit {
       // Only update time if:
       // 1. There's no current model (initial load)
       // 2. The date part changed (year, month, or day) - in this case, reset time to parsed time
-      const dateChanged = !currentModel || 
-        currentModel.year !== parsed.year || 
-        currentModel.month !== parsed.month || 
-        currentModel.day !== parsed.day;
-      
+      const dateChanged = !currentModel || currentModel.year !== parsed.year || currentModel.month !== parsed.month || currentModel.day !== parsed.day;
+
       this._model.set(parsed);
       this._currentMonth.set(parsed.month);
       this._currentYear.set(parsed.year);
-      
+
       // Only update time if date changed (new date selected) or if there's no current model
       // This prevents time from being reset when model is updated from our own dateSelect output
       if (dateChanged) {
@@ -107,7 +104,6 @@ export class NgtDatepicker implements OnInit {
     return this.monthNames.map((name, index) => ({ value: index + 1, name }));
   });
 
-
   private previousFormat: DateFormat | null = null;
 
   constructor() {
@@ -115,7 +111,7 @@ export class NgtDatepicker implements OnInit {
     effect(() => {
       const currentFormat = this.format();
       const model = this.modelValue();
-      
+
       // Only emit if format changed and we have a selected date
       if (this.previousFormat !== null && this.previousFormat !== currentFormat && model) {
         const dateWithTime: NgtDateStruct = {
@@ -126,7 +122,7 @@ export class NgtDatepicker implements OnInit {
         };
         this.dateSelect.emit(this.formatDateOutput(dateWithTime));
       }
-      
+
       this.previousFormat = currentFormat;
     });
   }
@@ -440,5 +436,4 @@ export class NgtDatepicker implements OnInit {
 
     return classMerge(base, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700');
   }
-
 }

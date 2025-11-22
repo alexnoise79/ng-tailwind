@@ -12,11 +12,11 @@ describe('NgtTable', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtTable();
     });
-    
+
     (component as any).size = signal<Size>('md');
     (component as any).showGridlines = signal(false);
     (component as any).striped = signal(false);
@@ -45,51 +45,43 @@ describe('NgtTable', () => {
 
   describe('Sorting', () => {
     it('should sort by field', () => {
-      const columns: TableColumn[] = [
-        { field: 'name', header: 'Name', sortable: true }
-      ];
+      const columns: TableColumn[] = [{ field: 'name', header: 'Name', sortable: true }];
       (component as any).columns = signal(columns);
-      (component as any).value = signal([
-        { name: 'B' },
-        { name: 'A' },
-        { name: 'C' }
-      ]);
+      (component as any).value = signal([{ name: 'B' }, { name: 'A' }, { name: 'C' }]);
       // Wait for effect to sync columns
       (component as any)._columns.set(columns);
-      
+
       const event = new Event('click');
       component.sort(event, 'name');
-      
+
       expect((component as any)._sortField()).toBe('name');
       expect((component as any)._sortOrder()).toBe('asc');
     });
 
     it('should toggle sort order', () => {
-      const columns: TableColumn[] = [
-        { field: 'name', header: 'Name', sortable: true }
-      ];
+      const columns: TableColumn[] = [{ field: 'name', header: 'Name', sortable: true }];
       (component as any).columns = signal(columns);
       (component as any)._columns.set(columns);
       (component as any)._sortField.set('name');
       (component as any)._sortOrder.set('asc');
-      
+
       const event = new Event('click');
       component.sort(event, 'name');
-      
+
       expect((component as any)._sortOrder()).toBe('desc');
     });
 
     it('should get sort icon', () => {
       (component as any)._sortField.set('name');
       (component as any)._sortOrder.set('asc');
-      
+
       expect(component.getSortIcon('name')).toBe('↑');
     });
 
     it('should check if column is sorted', () => {
       (component as any)._sortField.set('name');
       (component as any)._sortOrder.set('asc');
-      
+
       expect(component.isColumnSorted('name')).toBe(true);
       expect(component.isColumnSorted('other')).toBe(false);
     });
@@ -100,21 +92,21 @@ describe('NgtTable', () => {
       (component as any).value = signal([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
       (component as any).rows.set(5);
       (component as any).paginator.set(true);
-      
+
       expect(component.totalPages()).toBe(3);
     });
 
     it('should handle page change', () => {
       (component as any).paginator.set(true);
       (component as any).rows.set(5);
-      
+
       let emittedPage: any;
-      component.pageChange.subscribe((event) => {
+      component.pageChange.subscribe(event => {
         emittedPage = event;
       });
-      
+
       component.onPageChangeHandler(2);
-      
+
       expect((component as any)._currentPage()).toBe(2);
       expect(emittedPage).toEqual({ page: 2, first: 5, rows: 5 });
     });
@@ -134,4 +126,3 @@ describe('NgtTable', () => {
     });
   });
 });
-

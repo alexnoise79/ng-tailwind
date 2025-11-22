@@ -12,11 +12,11 @@ describe('NgtToast', () => {
     vi.useFakeTimers();
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtToast();
     });
-    
+
     (component as any).toastElement = { nativeElement: {} };
   });
 
@@ -37,10 +37,10 @@ describe('NgtToast', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.close();
       vi.advanceTimersByTime(300);
-      
+
       expect(closedEmitted).toBe(true);
     });
 
@@ -50,10 +50,10 @@ describe('NgtToast', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.handleClose();
       vi.advanceTimersByTime(300);
-      
+
       expect(closedEmitted).toBe(true);
     });
 
@@ -63,16 +63,16 @@ describe('NgtToast', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.handleClose();
-      
+
       expect(closedEmitted).toBe(false);
     });
   });
 
   describe('Severity', () => {
     const severities: ToastSeverity[] = ['success', 'info', 'warning', 'danger'];
-    
+
     severities.forEach(severity => {
       it(`should apply correct classes for ${severity} severity`, () => {
         component.severity = severity;
@@ -86,23 +86,22 @@ describe('NgtToast', () => {
   describe('Lifecycle', () => {
     it('should initialize', () => {
       component.ngOnInit();
-      
+
       // After initialization, component should be ready
       expect(component).toBeTruthy();
       expect(component.toastId).toBeDefined();
-      
+
       // Visibility signal should be initialized
       const isVisible = (component as any).isVisible;
       expect(isVisible).toBeDefined();
       expect(isVisible()).toBe(false); // Initially false before setTimeout
-      
+
       // Advance time to trigger the setTimeout that sets visibility to true
       vi.advanceTimersByTime(10);
       expect(isVisible()).toBe(true); // Should be true after delay
-      
+
       // Component should be properly initialized without errors
       expect(component).toBeTruthy();
     });
   });
 });
-

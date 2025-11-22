@@ -18,4 +18,3 @@ export class NgtAccordionCollapse {
     return this.accordionItem?.isOpen() ? 1000 : 0;
   });
 }
-

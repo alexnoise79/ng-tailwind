@@ -11,18 +11,18 @@ describe('NgtDatepicker', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtDatepicker();
     });
-    
+
     // Mock input signals
     (component as any).disabled = signal(false);
     (component as any).minDate = signal<NgtDateStruct | null>(null);
     (component as any).maxDate = signal<NgtDateStruct | null>(null);
     (component as any).startDate = signal<NgtDateStruct | null>(null);
     (component as any).markDisabled = signal<((date: NgtDateStruct) => boolean) | undefined>(undefined);
-    
+
     component.ngOnInit();
   });
 
@@ -41,7 +41,7 @@ describe('NgtDatepicker', () => {
       const startDate: NgtDateStruct = { year: 2023, month: 6, day: 15 };
       (component as any).startDate.set(startDate);
       component.ngOnInit();
-      
+
       expect(component.currentMonth()).toBe(6);
       expect(component.currentYear()).toBe(2023);
     });
@@ -50,7 +50,7 @@ describe('NgtDatepicker', () => {
       const modelDate: NgtDateStruct = { year: 2024, month: 3, day: 10 };
       component.model = modelDate;
       component.ngOnInit();
-      
+
       expect(component.currentMonth()).toBe(3);
       expect(component.currentYear()).toBe(2024);
     });
@@ -60,7 +60,7 @@ describe('NgtDatepicker', () => {
     it('should generate correct number of days for a month', () => {
       (component as any)._currentMonth.set(1); // January
       (component as any)._currentYear.set(2024);
-      
+
       const days = component.calendarDays();
       const actualDays = days.filter(d => d !== null);
       expect(actualDays.length).toBe(31);
@@ -69,7 +69,7 @@ describe('NgtDatepicker', () => {
     it('should generate correct number of days for February in leap year', () => {
       (component as any)._currentMonth.set(2); // February
       (component as any)._currentYear.set(2024); // Leap year
-      
+
       const days = component.calendarDays();
       const actualDays = days.filter(d => d !== null);
       expect(actualDays.length).toBe(29);
@@ -78,7 +78,7 @@ describe('NgtDatepicker', () => {
     it('should generate correct number of days for February in non-leap year', () => {
       (component as any)._currentMonth.set(2); // February
       (component as any)._currentYear.set(2023); // Non-leap year
-      
+
       const days = component.calendarDays();
       const actualDays = days.filter(d => d !== null);
       expect(actualDays.length).toBe(28);
@@ -87,7 +87,7 @@ describe('NgtDatepicker', () => {
     it('should include empty cells for days before first day of month', () => {
       (component as any)._currentMonth.set(1); // January 2024 starts on Monday
       (component as any)._currentYear.set(2024);
-      
+
       const days = component.calendarDays();
       // January 1, 2024 is a Monday (firstDay = 0), so first day should be at index 0
       expect(days[0]).not.toBeNull();
@@ -97,7 +97,7 @@ describe('NgtDatepicker', () => {
     it('should include empty cells when month starts mid-week', () => {
       (component as any)._currentMonth.set(2); // February 2024 starts on Thursday (firstDay = 3)
       (component as any)._currentYear.set(2024);
-      
+
       const days = component.calendarDays();
       // First 3 cells should be null (Mon, Tue, Wed)
       expect(days[0]).toBeNull();
@@ -127,13 +127,13 @@ describe('NgtDatepicker', () => {
     it('should select a date and emit dateSelect event', () => {
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       let emittedDate: string | undefined;
-      
-      component.dateSelect.subscribe((d) => {
+
+      component.dateSelect.subscribe(d => {
         emittedDate = d;
       });
-      
+
       component.selectDate(date);
-      
+
       expect(component.modelValue()).toEqual(date);
       expect(emittedDate).toBeTruthy();
       expect(typeof emittedDate).toBe('string');
@@ -142,16 +142,16 @@ describe('NgtDatepicker', () => {
     it('should not select disabled date', () => {
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       (component as any).disabled.set(true);
-      
+
       component.selectDate(date);
-      
+
       expect(component.modelValue()).toBeNull();
     });
 
     it('should update current month and year when model is set', () => {
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       component.model = date;
-      
+
       expect(component.currentMonth()).toBe(6);
       expect(component.currentYear()).toBe(2024);
       expect(component.modelValue()).toEqual(date);
@@ -162,7 +162,7 @@ describe('NgtDatepicker', () => {
     it('should return true for selected date', () => {
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       component.model = date;
-      
+
       expect(component.isSelected(date)).toBe(true);
     });
 
@@ -170,7 +170,7 @@ describe('NgtDatepicker', () => {
       const selectedDate: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       const otherDate: NgtDateStruct = { year: 2024, month: 6, day: 16 };
       component.model = selectedDate;
-      
+
       expect(component.isSelected(otherDate)).toBe(false);
     });
 
@@ -185,14 +185,14 @@ describe('NgtDatepicker', () => {
   });
 
   describe('isToday', () => {
-    it('should return true for today\'s date', () => {
+    it("should return true for today's date", () => {
       const today = new Date();
       const todayStruct: NgtDateStruct = {
         year: today.getFullYear(),
         month: today.getMonth() + 1,
         day: today.getDate()
       };
-      
+
       expect(component.isToday(todayStruct)).toBe(true);
     });
 
@@ -210,7 +210,7 @@ describe('NgtDatepicker', () => {
     it('should return true when component is disabled', () => {
       (component as any).disabled.set(true);
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
-      
+
       expect(component.isDisabled(date)).toBe(true);
     });
 
@@ -218,14 +218,14 @@ describe('NgtDatepicker', () => {
       const minDate: NgtDateStruct = { year: 2024, month: 6, day: 10 };
       const date: NgtDateStruct = { year: 2024, month: 6, day: 5 };
       (component as any).minDate.set(minDate);
-      
+
       expect(component.isDisabled(date)).toBe(true);
     });
 
     it('should return false for date equal to minDate', () => {
       const minDate: NgtDateStruct = { year: 2024, month: 6, day: 10 };
       (component as any).minDate.set(minDate);
-      
+
       expect(component.isDisabled(minDate)).toBe(false);
     });
 
@@ -233,14 +233,14 @@ describe('NgtDatepicker', () => {
       const maxDate: NgtDateStruct = { year: 2024, month: 6, day: 20 };
       const date: NgtDateStruct = { year: 2024, month: 6, day: 25 };
       (component as any).maxDate.set(maxDate);
-      
+
       expect(component.isDisabled(date)).toBe(true);
     });
 
     it('should return false for date equal to maxDate', () => {
       const maxDate: NgtDateStruct = { year: 2024, month: 6, day: 20 };
       (component as any).maxDate.set(maxDate);
-      
+
       expect(component.isDisabled(maxDate)).toBe(false);
     });
 
@@ -248,9 +248,9 @@ describe('NgtDatepicker', () => {
       const date: NgtDateStruct = { year: 2024, month: 6, day: 15 };
       const markDisabledFn = (d: NgtDateStruct) => d.day === 15;
       (component as any).markDisabled.set(markDisabledFn);
-      
+
       expect(component.isDisabled(date)).toBe(true);
-      
+
       const otherDate: NgtDateStruct = { year: 2024, month: 6, day: 16 };
       expect(component.isDisabled(otherDate)).toBe(false);
     });
@@ -269,14 +269,14 @@ describe('NgtDatepicker', () => {
     it('should navigate to previous month', () => {
       (component as any)._currentMonth.set(6);
       (component as any)._currentYear.set(2024);
-      
+
       let navigationEvent: any;
-      component.navigate.subscribe((event) => {
+      component.navigate.subscribe(event => {
         navigationEvent = event;
       });
-      
+
       component.previousMonth();
-      
+
       expect(component.currentMonth()).toBe(5);
       expect(component.currentYear()).toBe(2024);
       expect(navigationEvent).toEqual({
@@ -288,9 +288,9 @@ describe('NgtDatepicker', () => {
     it('should navigate to previous year when at January', () => {
       (component as any)._currentMonth.set(1);
       (component as any)._currentYear.set(2024);
-      
+
       component.previousMonth();
-      
+
       expect(component.currentMonth()).toBe(12);
       expect(component.currentYear()).toBe(2023);
     });
@@ -298,14 +298,14 @@ describe('NgtDatepicker', () => {
     it('should navigate to next month', () => {
       (component as any)._currentMonth.set(6);
       (component as any)._currentYear.set(2024);
-      
+
       let navigationEvent: any;
-      component.navigate.subscribe((event) => {
+      component.navigate.subscribe(event => {
         navigationEvent = event;
       });
-      
+
       component.nextMonth();
-      
+
       expect(component.currentMonth()).toBe(7);
       expect(component.currentYear()).toBe(2024);
       expect(navigationEvent).toEqual({
@@ -317,9 +317,9 @@ describe('NgtDatepicker', () => {
     it('should navigate to next year when at December', () => {
       (component as any)._currentMonth.set(12);
       (component as any)._currentYear.set(2024);
-      
+
       component.nextMonth();
-      
+
       expect(component.currentMonth()).toBe(1);
       expect(component.currentYear()).toBe(2025);
     });
@@ -329,14 +329,14 @@ describe('NgtDatepicker', () => {
     it('should navigate to previous year', () => {
       (component as any)._currentMonth.set(6);
       (component as any)._currentYear.set(2024);
-      
+
       let navigationEvent: any;
-      component.navigate.subscribe((event) => {
+      component.navigate.subscribe(event => {
         navigationEvent = event;
       });
-      
+
       component.previousYear();
-      
+
       expect(component.currentYear()).toBe(2023);
       expect(component.currentMonth()).toBe(6);
       expect(navigationEvent).toEqual({
@@ -348,14 +348,14 @@ describe('NgtDatepicker', () => {
     it('should navigate to next year', () => {
       (component as any)._currentMonth.set(6);
       (component as any)._currentYear.set(2024);
-      
+
       let navigationEvent: any;
-      component.navigate.subscribe((event) => {
+      component.navigate.subscribe(event => {
         navigationEvent = event;
       });
-      
+
       component.nextYear();
-      
+
       expect(component.currentYear()).toBe(2025);
       expect(component.currentMonth()).toBe(6);
       expect(navigationEvent).toEqual({
@@ -369,7 +369,7 @@ describe('NgtDatepicker', () => {
     it('should set model to null when null is provided', () => {
       component.model = { year: 2024, month: 6, day: 15 };
       expect(component.modelValue()).not.toBeNull();
-      
+
       component.model = null;
       expect(component.modelValue()).toBeNull();
     });
@@ -377,7 +377,7 @@ describe('NgtDatepicker', () => {
     it('should set model to null when undefined is provided', () => {
       component.model = { year: 2024, month: 6, day: 15 };
       expect(component.modelValue()).not.toBeNull();
-      
+
       component.model = undefined;
       expect(component.modelValue()).toBeNull();
     });

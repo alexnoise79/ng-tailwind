@@ -12,11 +12,11 @@ describe('NgtPagination', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtPagination();
     });
-    
+
     (component as any).currentPage = signal(1);
     (component as any).totalPages = signal<number | null>(null);
     (component as any).totalItems = signal<number | null>(null);
@@ -62,7 +62,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(30);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(1);
-      
+
       const pages = component.visiblePages();
       expect(pages.length).toBe(3);
       expect(pages).toEqual([1, 2, 3]);
@@ -73,7 +73,7 @@ describe('NgtPagination', () => {
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(5);
       (component as any).maxVisiblePages.set(5);
-      
+
       const pages = component.visiblePages();
       expect(pages.length).toBeLessThanOrEqual(5);
     });
@@ -84,7 +84,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(10);
-      
+
       expect(component.showStartEllipsis()).toBe(true);
     });
 
@@ -92,7 +92,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(1);
-      
+
       expect(component.showEndEllipsis()).toBe(true);
     });
   });
@@ -102,14 +102,14 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(1);
-      
+
       let emittedPage: number | undefined;
-      component.pageChanged.subscribe((page) => {
+      component.pageChanged.subscribe(page => {
         emittedPage = page;
       });
-      
+
       component.goToPage(5);
-      
+
       expect((component as any)._currentPage()).toBe(5);
       expect(emittedPage).toBe(5);
     });
@@ -118,10 +118,10 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(5);
-      
+
       component.goToPage(0);
       expect((component as any)._currentPage()).toBe(5);
-      
+
       component.goToPage(11);
       expect((component as any)._currentPage()).toBe(5);
     });
@@ -129,7 +129,7 @@ describe('NgtPagination', () => {
     it('should not go to page when disabled', () => {
       (component as any).disabled.set(true);
       (component as any)._currentPage.set(1);
-      
+
       component.goToPage(2);
       expect((component as any)._currentPage()).toBe(1);
     });
@@ -138,7 +138,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(5);
-      
+
       component.goToFirst();
       expect((component as any)._currentPage()).toBe(1);
     });
@@ -147,7 +147,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(1);
-      
+
       component.goToLast();
       expect((component as any)._currentPage()).toBe(10);
     });
@@ -156,7 +156,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(5);
-      
+
       component.goToPrevious();
       expect((component as any)._currentPage()).toBe(4);
     });
@@ -165,7 +165,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(5);
-      
+
       component.goToNext();
       expect((component as any)._currentPage()).toBe(6);
     });
@@ -174,7 +174,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(1);
-      
+
       component.goToPrevious();
       expect((component as any)._currentPage()).toBe(1);
     });
@@ -183,7 +183,7 @@ describe('NgtPagination', () => {
       (component as any).totalItems.set(100);
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(10);
-      
+
       component.goToNext();
       expect((component as any)._currentPage()).toBe(10);
     });
@@ -193,7 +193,7 @@ describe('NgtPagination', () => {
     it('should identify first page', () => {
       (component as any)._currentPage.set(1);
       expect(component.isFirstPage()).toBe(true);
-      
+
       (component as any)._currentPage.set(2);
       expect(component.isFirstPage()).toBe(false);
     });
@@ -203,7 +203,7 @@ describe('NgtPagination', () => {
       (component as any).pageSize.set(10);
       (component as any)._currentPage.set(10);
       expect(component.isLastPage()).toBe(true);
-      
+
       (component as any)._currentPage.set(9);
       expect(component.isLastPage()).toBe(false);
     });
@@ -228,4 +228,3 @@ describe('NgtPagination', () => {
     });
   });
 });
-

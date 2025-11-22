@@ -25,11 +25,11 @@ describe('NgtModal', () => {
       providers: [{ provide: DOCUMENT, useValue: mockDocument }]
     });
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtModal();
     });
-    
+
     (component as any).title = signal<string | undefined>(undefined);
     (component as any).showFooter = signal(false);
     (component as any).closeOnBackdropClick = signal(true);
@@ -63,7 +63,7 @@ describe('NgtModal', () => {
       const openSignal = signal(true);
       component.isOpen = openSignal;
       expect(component.isOpen()).toBe(true);
-      
+
       openSignal.set(false);
       expect(component.isOpen()).toBe(false);
     });
@@ -75,7 +75,7 @@ describe('NgtModal', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.handleClose();
       expect(closedEmitted).toBe(true);
     });
@@ -86,7 +86,7 @@ describe('NgtModal', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.onBackdropClick();
       expect(closedEmitted).toBe(true);
     });
@@ -97,7 +97,7 @@ describe('NgtModal', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.onBackdropClick();
       expect(closedEmitted).toBe(false);
     });
@@ -117,12 +117,12 @@ describe('NgtModal', () => {
       expect((component as any).escapeListener).toBeDefined();
       const effectRef = (component as any).effectRef;
       expect(effectRef).toBeDefined();
-      
+
       // Spy on destroy method
       const destroySpy = vi.spyOn(effectRef, 'destroy');
-      
+
       component.ngOnDestroy();
-      
+
       // Verify event listeners are removed
       expect(mockDocument.removeEventListener).toHaveBeenCalledWith('keydown', expect.any(Function));
       // Verify effect destroy method was called
@@ -132,4 +132,3 @@ describe('NgtModal', () => {
     });
   });
 });
-

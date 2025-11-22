@@ -1,31 +1,12 @@
 import { Component, signal, inject } from '@angular/core';
-import { 
-  NgtAccordion, 
-  NgtAccordionItem, 
-  NgtAccordionHeader,
-  NgtAccordionButton,
-  NgtAccordionCollapse,
-  NgtAccordionBody,
-  NgtNav, 
-  NgtNavItem, 
-  NgtToastService 
-} from '@ng-tailwind/ui-components';
+import { NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.accordion',
-  imports: [
-    NgtAccordion, 
-    NgtAccordionItem, 
-    NgtAccordionHeader,
-    NgtAccordionButton,
-    NgtAccordionCollapse,
-    NgtAccordionBody,
-    NgtNav, 
-    NgtNavItem
-  ],
+  imports: [NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody, NgtNav, NgtNavItem],
   templateUrl: './accordion.page.html'
 })
 export class AccordionPage {

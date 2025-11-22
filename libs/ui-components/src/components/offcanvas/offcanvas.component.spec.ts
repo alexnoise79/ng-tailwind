@@ -25,11 +25,11 @@ describe('NgtOffCanvas', () => {
       providers: [{ provide: DOCUMENT, useValue: mockDocument }]
     });
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtOffCanvas();
     });
-    
+
     (component as any).title = signal<string | undefined>(undefined);
     (component as any).position = signal<OffcanvasPosition>('end');
     (component as any).showHeader = signal(true);
@@ -70,7 +70,7 @@ describe('NgtOffCanvas', () => {
 
   describe('Position classes', () => {
     const positions: OffcanvasPosition[] = ['start', 'end', 'top', 'bottom'];
-    
+
     positions.forEach(position => {
       it(`should return correct classes for ${position} position`, () => {
         (component as any).position.set(position);
@@ -105,7 +105,7 @@ describe('NgtOffCanvas', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.handleClose();
       expect(closedEmitted).toBe(true);
     });
@@ -116,7 +116,7 @@ describe('NgtOffCanvas', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.onBackdropClick();
       expect(closedEmitted).toBe(true);
     });
@@ -127,10 +127,9 @@ describe('NgtOffCanvas', () => {
       component.closed.subscribe(() => {
         closedEmitted = true;
       });
-      
+
       component.onBackdropClick();
       expect(closedEmitted).toBe(false);
     });
   });
 });
-

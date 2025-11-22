@@ -12,14 +12,14 @@ describe('NgtToggleSwitch', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({});
     injector = TestBed.inject(Injector);
-    
+
     component = runInInjectionContext(injector, () => {
       return new NgtToggleSwitch();
     });
-    
+
     (component as any).size = signal<Size>('md');
     (component as any).label = signal<string | undefined>(undefined);
-    
+
     // Mock checkboxRef
     (component as any).checkboxRef = {
       nativeElement: {
@@ -40,7 +40,7 @@ describe('NgtToggleSwitch', () => {
     it('should toggle value', () => {
       component.toggle();
       expect(component.value()).toBe(true);
-      
+
       component.toggle();
       expect(component.value()).toBe(false);
     });
@@ -59,7 +59,7 @@ describe('NgtToggleSwitch', () => {
     it('should not toggle when disabled', () => {
       component.disabled = true;
       const initialValue = component.value();
-      
+
       component.toggle();
       expect(component.value()).toBe(initialValue);
     });
@@ -79,7 +79,7 @@ describe('NgtToggleSwitch', () => {
     it('should register onChange callback', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       component.toggle();
       expect(onChangeFn).toHaveBeenCalledWith(true);
     });
@@ -87,7 +87,7 @@ describe('NgtToggleSwitch', () => {
     it('should register onTouched callback', () => {
       const onTouchedFn = vi.fn();
       component.registerOnTouched(onTouchedFn);
-      
+
       component.toggle();
       expect(onTouchedFn).toHaveBeenCalled();
     });
@@ -133,4 +133,3 @@ describe('NgtToggleSwitch', () => {
     });
   });
 });
-

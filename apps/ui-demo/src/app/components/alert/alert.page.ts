@@ -11,7 +11,7 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 })
 export class AlertPage {
   private toastService = inject(NgtToastService);
-  
+
   // Tab management
   activeTab = signal<DemoTab>('showcase');
 
@@ -101,4 +101,3 @@ export class AlertPage {
     return this.codeViewUtil.getTabFileName('alert', demoKey, fileType, fileNames);
   }
 }
-
