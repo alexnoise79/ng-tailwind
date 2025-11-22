@@ -1,11 +1,30 @@
 {
-  "name": "@ng-tailwind/ui-components",
-  "version": "0.0.0",
-  "description": "Angular UI component library built with TailwindCSS",
+  "name": "@alexnoise79/ngtailwind",
+  "version": "1.0.0",
+  "description": "A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK",
+  "keywords": [
+    "angular",
+    "tailwindcss",
+    "ui-components",
+    "component-library",
+    "angular-components",
+    "tailwind",
+    "angular-20"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexnoise79/ng-tailwind.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alexnoise79/ng-tailwind/issues"
+  },
+  "homepage": "https://github.com/alexnoise79/ng-tailwind#readme",
   "peerDependencies": {
-    "@angular/common": "^18.0.0",
-    "@angular/core": "^18.0.0",
-    "@angular/cdk": "^18.0.0"
+    "@angular/common": "^20.0.0",
+    "@angular/core": "^20.0.0",
+    "@angular/cdk": "^20.0.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
