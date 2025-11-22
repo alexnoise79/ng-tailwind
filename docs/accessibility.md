@@ -65,6 +65,82 @@ All components in ng-tailwind UI are built with accessibility (a11y) as a core r
 - ✅ Screen reader compatible
 - ✅ Proper timing for show/hide
 
+### Collapse
+
+- ✅ `aria-expanded` state management
+- ✅ Keyboard accessible (Enter/Space to toggle)
+- ✅ Proper semantic structure
+
+### Datepicker
+
+- ✅ Keyboard navigation (arrow keys, Home/End, Page Up/Down)
+- ✅ `aria-label` and `aria-describedby` for date inputs
+- ✅ `role="grid"` for calendar view
+- ✅ `role="gridcell"` for date cells
+- ✅ `aria-selected` for selected dates
+- ✅ `aria-disabled` for disabled dates
+- ✅ Focus management for calendar navigation
+- ✅ Screen reader announcements for date selection
+
+### Offcanvas
+
+- ✅ `role="dialog"` and `aria-modal="true"`
+- ✅ `aria-labelledby` for title association
+- ✅ Focus trapping using Angular CDK
+- ✅ Escape key to close
+- ✅ Backdrop click to close (configurable)
+- ✅ Focus returns to trigger element on close
+- ✅ Body scroll prevention when open
+
+### Pagination
+
+- ✅ `role="navigation"` and `aria-label` for pagination
+- ✅ `aria-current="page"` for current page
+- ✅ Keyboard navigation (arrow keys, Enter/Space)
+- ✅ Disabled state properly communicated
+- ✅ Screen reader announcements for page changes
+
+### Toggle Switch
+
+- ✅ Proper `input[type="checkbox"]` semantics
+- ✅ `aria-label` or associated label
+- ✅ `disabled` state properly communicated
+- ✅ Keyboard accessible (Space to toggle)
+- ✅ Focus indicators with visible outline
+
+### Toast
+
+- ✅ `role="alert"` or `role="status"` based on severity
+- ✅ `aria-live` regions for announcements
+- ✅ Keyboard accessible dismiss
+- ✅ Screen reader compatible
+- ✅ Proper timing for auto-dismiss
+- ✅ Focus management for multiple toasts
+
+### Table
+
+- ✅ `role="table"` with proper structure
+- ✅ `role="columnheader"` for sortable columns
+- ✅ `aria-sort` for sort state (ascending/descending/none)
+- ✅ Keyboard navigation (arrow keys, Tab)
+- ✅ `aria-label` for table and columns
+- ✅ `aria-rowcount` and `aria-rowindex` for large datasets
+- ✅ Focus management for sortable columns
+- ✅ Screen reader announcements for sorting
+
+### Select
+
+- ✅ `role="combobox"` on trigger
+- ✅ `aria-expanded` state management
+- ✅ `aria-haspopup="listbox"`
+- ✅ `aria-controls` linking trigger to dropdown
+- ✅ `role="listbox"` on dropdown
+- ✅ `role="option"` on options
+- ✅ `aria-selected` for selected option
+- ✅ Keyboard navigation (arrow keys, Enter, Escape)
+- ✅ Focus management
+- ✅ Screen reader announcements for selection
+
 ## Directives
 
 ### Autofocus Directive

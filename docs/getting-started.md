@@ -7,7 +7,7 @@ Welcome to **ng-tailwind UI Components** - a modern Angular component library bu
 ### Prerequisites
 
 - Node.js 18+ and npm/yarn/pnpm
-- Angular 18+
+- Angular 20.0.0
 - Nx workspace
 
 ### Setup
@@ -37,13 +37,13 @@ The demo application will be available at `http://localhost:4200`.
 All components are standalone and can be imported directly:
 
 ```typescript
-import { ButtonComponent } from '@ng-tailwind/ui-components';
+import { NgtButton } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-example',
-  imports: [ButtonComponent],
+  imports: [NgtButton],
   template: `
-    <ui-button variant="primary">Click me</ui-button>
+    <ngt-button variant="primary">Click me</ngt-button>
   `,
 })
 export class ExampleComponent {}
@@ -57,6 +57,14 @@ export class ExampleComponent {}
 - **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Dropdown** - Dropdown menu with positioning
 - **Tooltip** - Contextual information tooltips
+- **Collapse** - Expandable/collapsible content (horizontal or vertical)
+- **Datepicker** - Date selection component with calendar view
+- **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
+- **Pagination** - Page navigation with customizable options
+- **Toggle Switch** - Form control for boolean values with sizes
+- **Toast** - Notification messages with severity levels and auto-dismiss
+- **Table** - Data table with sorting, pagination, grouping, and column reordering
+- **Select** - Dropdown select with form integration and option grouping
 
 ## Storybook
 

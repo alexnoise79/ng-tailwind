@@ -5,14 +5,14 @@
 ### Basic Usage
 
 ```typescript
-import { ButtonComponent } from '@ng-tailwind/ui-components';
+import { NgtButton } from '@ng-tailwind/ui-components';
 
 @Component({
-  imports: [ButtonComponent],
+  imports: [NgtButton],
   template: `
-    <ui-button variant="primary">Primary Button</ui-button>
-    <ui-button variant="outline">Outline Button</ui-button>
-    <ui-button variant="ghost">Ghost Button</ui-button>
+    <ngt-button variant="primary">Primary Button</ngt-button>
+    <ngt-button variant="outline">Outline Button</ngt-button>
+    <ngt-button variant="ghost">Ghost Button</ngt-button>
   `,
 })
 export class MyComponent {}
@@ -21,9 +21,9 @@ export class MyComponent {}
 ### Sizes
 
 ```typescript
-<ui-button variant="primary" size="sm">Small</ui-button>
-<ui-button variant="primary" size="md">Medium</ui-button>
-<ui-button variant="primary" size="lg">Large</ui-button>
+<ngt-button variant="primary" size="sm">Small</ngt-button>
+<ngt-button variant="primary" size="md">Medium</ngt-button>
+<ngt-button variant="primary" size="lg">Large</ngt-button>
 ```
 
 ### Loading State
@@ -43,9 +43,9 @@ export class MyComponent {
 ```
 
 ```html
-<ui-button variant="primary" [loading]="loading" (click)="handleClick()">
+<ngt-button variant="primary" [loading]="loading" (click)="handleClick()">
   Submit
-</ui-button>
+</ngt-button>
 ```
 
 ## Modal
@@ -53,7 +53,7 @@ export class MyComponent {
 ### Basic Modal
 
 ```typescript
-import { ModalComponent } from '@ng-tailwind/ui-components';
+import { NgtModal, NgtButton } from '@ng-tailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -62,25 +62,25 @@ export class MyComponent {
 ```
 
 ```html
-<ui-button variant="primary" (click)="showModal.set(true)">
+<ngt-button variant="primary" (click)="showModal.set(true)">
   Open Modal
-</ui-button>
+</ngt-button>
 
 @if (showModal()) {
-  <ui-modal
+  <ngt-modal
     [isOpen]="showModal()"
     [title]="'My Modal'"
     (close)="showModal.set(false)"
   >
     <p>Modal content goes here</p>
-  </ui-modal>
+  </ngt-modal>
 }
 ```
 
 ### Modal with Footer
 
 ```html
-<ui-modal
+<ngt-modal
   [isOpen]="showModal()"
   [title]="'Confirm Action'"
   [showFooter]="true"
@@ -88,10 +88,10 @@ export class MyComponent {
 >
   <p>Are you sure you want to proceed?</p>
   <div footer>
-    <ui-button variant="outline" (click)="showModal.set(false)">Cancel</ui-button>
-    <ui-button variant="primary" (click)="handleConfirm()">Confirm</ui-button>
+    <ngt-button variant="outline" (click)="showModal.set(false)">Cancel</ngt-button>
+    <ngt-button variant="primary" (click)="handleConfirm()">Confirm</ngt-button>
   </div>
-</ui-modal>
+</ngt-modal>
 ```
 
 ## Accordion
@@ -99,31 +99,31 @@ export class MyComponent {
 ### Single Open Mode
 
 ```typescript
-import { AccordionComponent, AccordionItemComponent } from '@ng-tailwind/ui-components';
+import { NgtAccordion, NgtAccordionItem } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<ui-accordion [multiOpen]="false">
-  <ui-accordion-item title="Section 1">
+<ngt-accordion [multiOpen]="false">
+  <ngt-accordion-item title="Section 1">
     <p>Content for section 1</p>
-  </ui-accordion-item>
-  <ui-accordion-item title="Section 2">
+  </ngt-accordion-item>
+  <ngt-accordion-item title="Section 2">
     <p>Content for section 2</p>
-  </ui-accordion-item>
-</ui-accordion>
+  </ngt-accordion-item>
+</ngt-accordion>
 ```
 
 ### Multi-Open Mode
 
 ```html
-<ui-accordion [multiOpen]="true">
-  <ui-accordion-item title="Section 1">
+<ngt-accordion [multiOpen]="true">
+  <ngt-accordion-item title="Section 1">
     <p>Content for section 1</p>
-  </ui-accordion-item>
-  <ui-accordion-item title="Section 2">
+  </ngt-accordion-item>
+  <ngt-accordion-item title="Section 2">
     <p>Content for section 2</p>
-  </ui-accordion-item>
-</ui-accordion>
+  </ngt-accordion-item>
+</ngt-accordion>
 ```
 
 ## Nav
@@ -131,72 +131,72 @@ import { AccordionComponent, AccordionItemComponent } from '@ng-tailwind/ui-comp
 ### Basic Navigation
 
 ```typescript
-import { NavComponent, NavItemComponent } from '@ng-tailwind/ui-components';
+import { NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<ui-nav>
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-  <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-</ui-nav>
+<ngt-nav>
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+  <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+</ngt-nav>
 ```
 
 ### Navigation Styles
 
 ```html
 <!-- Tabs style (default) -->
-<ui-nav [style]="'tabs'">
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-</ui-nav>
+<ngt-nav [style]="'tabs'">
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+</ngt-nav>
 
 <!-- Pills style -->
-<ui-nav [style]="'pills'">
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-</ui-nav>
+<ngt-nav [style]="'pills'">
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+</ngt-nav>
 
 <!-- Underline style -->
-<ui-nav [style]="'underline'">
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-</ui-nav>
+<ngt-nav [style]="'underline'">
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+</ngt-nav>
 ```
 
 ### Alignment
 
 ```html
 <!-- Start aligned (default) -->
-<ui-nav [align]="'start'">...</ui-nav>
+<ngt-nav [align]="'start'">...</ngt-nav>
 
 <!-- Center aligned -->
-<ui-nav [align]="'center'">...</ui-nav>
+<ngt-nav [align]="'center'">...</ngt-nav>
 
 <!-- End aligned -->
-<ui-nav [align]="'end'">...</ui-nav>
+<ngt-nav [align]="'end'">...</ngt-nav>
 
 <!-- Justified -->
-<ui-nav [align]="'justified'">...</ui-nav>
+<ngt-nav [align]="'justified'">...</ngt-nav>
 ```
 
 ### Vertical Orientation
 
 ```html
-<ui-nav [orientation]="'vertical'">
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-</ui-nav>
+<ngt-nav [orientation]="'vertical'">
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+</ngt-nav>
 ```
 
 ### With Disabled Items
 
 ```html
-<ui-nav>
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-  <ui-nav-item label="Disabled" [itemId]="'disabled'" [disabled]="true"></ui-nav-item>
-</ui-nav>
+<ngt-nav>
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+  <ngt-nav-item label="Disabled" [itemId]="'disabled'" [disabled]="true"></ngt-nav-item>
+</ngt-nav>
 ```
 
 ### With Active ID
@@ -208,20 +208,20 @@ export class MyComponent {
 ```
 
 ```html
-<ui-nav [activeId]="activeNavId()">
-  <ui-nav-item label="Home" [itemId]="'home'"></ui-nav-item>
-  <ui-nav-item label="About" [itemId]="'about'"></ui-nav-item>
-  <ui-nav-item label="Contact" [itemId]="'contact'"></ui-nav-item>
-</ui-nav>
+<ngt-nav [activeId]="activeNavId()">
+  <ngt-nav-item label="Home" [itemId]="'home'"></ngt-nav-item>
+  <ngt-nav-item label="About" [itemId]="'about'"></ngt-nav-item>
+  <ngt-nav-item label="Contact" [itemId]="'contact'"></ngt-nav-item>
+</ngt-nav>
 ```
 
 ## Dropdown
 
 ```typescript
 import { 
-  DropdownComponent,
-  DropdownTriggerDirective,
-  DropdownContentDirective 
+  NgtDropdown,
+  NgtDropdownTrigger,
+  NgtDropdownContent 
 } from '@ng-tailwind/ui-components';
 import { signal } from '@angular/core';
 
@@ -231,39 +231,39 @@ export class MyComponent {
 ```
 
 ```html
-<ui-dropdown [align]="'left'" [isOpen]="dropdownOpen">
-  <button ui-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md">
+<ngt-dropdown [align]="'left'" [isOpen]="dropdownOpen">
+  <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md">
     Open Menu
   </button>
-  <div ui-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
+  <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 1</a>
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 2</a>
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 3</a>
   </div>
-</ui-dropdown>
+</ngt-dropdown>
 ```
 
 ## Tooltip
 
 ```typescript
-import { TooltipComponent } from '@ng-tailwind/ui-components';
+import { NgtTooltip } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<ui-tooltip text="This is a helpful tooltip" position="top">
+<ngt-tooltip text="This is a helpful tooltip" position="top">
   <button class="px-4 py-2 bg-primary-600 text-white rounded-md">
     Hover me
   </button>
-</ui-tooltip>
+</ngt-tooltip>
 ```
 
 ### Tooltip Positions
 
 ```html
-<ui-tooltip text="Top tooltip" position="top">...</ui-tooltip>
-<ui-tooltip text="Bottom tooltip" position="bottom">...</ui-tooltip>
-<ui-tooltip text="Left tooltip" position="left">...</ui-tooltip>
-<ui-tooltip text="Right tooltip" position="right">...</ui-tooltip>
+<ngt-tooltip text="Top tooltip" position="top">...</ngt-tooltip>
+<ngt-tooltip text="Bottom tooltip" position="bottom">...</ngt-tooltip>
+<ngt-tooltip text="Left tooltip" position="left">...</ngt-tooltip>
+<ngt-tooltip text="Right tooltip" position="right">...</ngt-tooltip>
 ```
 
 ## Directives
@@ -271,21 +271,21 @@ import { TooltipComponent } from '@ng-tailwind/ui-components';
 ### Autofocus
 
 ```typescript
-import { AutofocusDirective } from '@ng-tailwind/ui-components';
+import { NgtAutofocus } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<input type="text" uiAutofocus />
+<input type="text" ngtAutofocus />
 ```
 
 ### Outside Click
 
 ```typescript
-import { OutsideClickDirective } from '@ng-tailwind/ui-components';
+import { NgtOutsideClick } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<div uiOutsideClick (uiOutsideClick)="handleOutsideClick()">
+<div ngtOutsideClick (ngtOutsideClick)="handleOutsideClick()">
   Content
 </div>
 ```
@@ -293,11 +293,11 @@ import { OutsideClickDirective } from '@ng-tailwind/ui-components';
 ### Trap Focus
 
 ```typescript
-import { TrapFocusDirective } from '@ng-tailwind/ui-components';
+import { NgtTrapFocus } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<div uiTrapFocus>
+<div ngtTrapFocus>
   <!-- Focus will be trapped within this element -->
 </div>
 ```
@@ -307,7 +307,7 @@ import { TrapFocusDirective } from '@ng-tailwind/ui-components';
 ### Basic Usage
 
 ```typescript
-import { DatepickerComponent, NgtDateStruct } from '@ng-tailwind/ui-components';
+import { NgtDatepicker, NgtDateStruct } from '@ng-tailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -316,10 +316,10 @@ export class MyComponent {
 ```
 
 ```html
-<ui-datepicker
+<ngt-datepicker
   [model]="selectedDate()"
   (dateSelect)="selectedDate.set($event)"
-></ui-datepicker>
+></ngt-datepicker>
 
 @if (selectedDate()) {
   <p>Selected: {{ selectedDate()!.year }}-{{ selectedDate()!.month }}-{{ selectedDate()!.day }}</p>
@@ -337,12 +337,12 @@ export class MyComponent {
 ```
 
 ```html
-<ui-datepicker
+<ngt-datepicker
   [model]="selectedDate()"
   [minDate]="minDate"
   [maxDate]="maxDate"
   (dateSelect)="selectedDate.set($event)"
-></ui-datepicker>
+></ngt-datepicker>
 ```
 
 ### With Initial Date
@@ -354,20 +354,20 @@ export class MyComponent {
 ```
 
 ```html
-<ui-datepicker
+<ngt-datepicker
   [model]="selectedDate()"
   (dateSelect)="selectedDate.set($event)"
-></ui-datepicker>
+></ngt-datepicker>
 ```
 
 ### Disabled State
 
 ```html
-<ui-datepicker
+<ngt-datepicker
   [model]="selectedDate()"
   [disabled]="true"
   (dateSelect)="selectedDate.set($event)"
-></ui-datepicker>
+></ngt-datepicker>
 ```
 
 ### Navigation Event
@@ -381,10 +381,355 @@ export class MyComponent {
 ```
 
 ```html
-<ui-datepicker
+<ngt-datepicker
   [model]="selectedDate()"
   (dateSelect)="selectedDate.set($event)"
   (navigate)="onNavigate($event)"
-></ui-datepicker>
+></ngt-datepicker>
+```
+
+## Collapse
+
+### Basic Usage
+
+```typescript
+import { NgtCollapse } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  isOpen = signal(false);
+}
+```
+
+```html
+<button (click)="isOpen.set(!isOpen())">Toggle</button>
+<ngt-collapse [isOpen]="isOpen()">
+  <div class="p-4 bg-gray-100 rounded">
+    Collapsible content goes here
+  </div>
+</ngt-collapse>
+```
+
+### Horizontal Collapse
+
+```html
+<ngt-collapse [isOpen]="isOpen()" [horizontal]="true">
+  <div class="p-4 bg-gray-100 rounded">
+    Horizontal collapsible content
+  </div>
+</ngt-collapse>
+```
+
+## Offcanvas
+
+### Basic Usage
+
+```typescript
+import { NgtOffCanvas } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  isOpen = signal(false);
+}
+```
+
+```html
+<button (click)="isOpen.set(true)">Open Offcanvas</button>
+
+<ngt-offcanvas
+  [isOpen]="isOpen()"
+  [title]="'My Offcanvas'"
+  [position]="'end'"
+  (closed)="isOpen.set(false)"
+>
+  <p>Offcanvas content goes here</p>
+</ngt-offcanvas>
+```
+
+### Positions
+
+```html
+<!-- Start (left) -->
+<ngt-offcanvas [isOpen]="isOpen()" [position]="'start'">...</ngt-offcanvas>
+
+<!-- End (right) -->
+<ngt-offcanvas [isOpen]="isOpen()" [position]="'end'">...</ngt-offcanvas>
+
+<!-- Top -->
+<ngt-offcanvas [isOpen]="isOpen()" [position]="'top'">...</ngt-offcanvas>
+
+<!-- Bottom -->
+<ngt-offcanvas [isOpen]="isOpen()" [position]="'bottom'">...</ngt-offcanvas>
+```
+
+## Pagination
+
+### Basic Usage
+
+```typescript
+import { NgtPagination } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  currentPage = signal(1);
+  totalItems = signal(100);
+  pageSize = signal(10);
+}
+```
+
+```html
+<ngt-pagination
+  [currentPage]="currentPage()"
+  [totalItems]="totalItems()"
+  [pageSize]="pageSize()"
+  (pageChanged)="currentPage.set($event)"
+></ngt-pagination>
+```
+
+### With Total Pages
+
+```html
+<ngt-pagination
+  [currentPage]="currentPage()"
+  [totalPages]="10"
+  (pageChanged)="currentPage.set($event)"
+></ngt-pagination>
+```
+
+### Sizes
+
+```html
+<ngt-pagination [currentPage]="1" [totalPages]="10" [size]="'sm'"></ngt-pagination>
+<ngt-pagination [currentPage]="1" [totalPages]="10" [size]="'md'"></ngt-pagination>
+<ngt-pagination [currentPage]="1" [totalPages]="10" [size]="'lg'"></ngt-pagination>
+```
+
+## Toggle Switch
+
+### Basic Usage
+
+```typescript
+import { NgtToggleSwitch } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  enabled = signal(false);
+}
+```
+
+```html
+<ngt-toggle-switch
+  [ngModel]="enabled()"
+  (ngModelChange)="enabled.set($event)"
+  [label]="'Enable notifications'"
+></ngt-toggle-switch>
+```
+
+### With Form Control
+
+```typescript
+import { FormControl } from '@angular/forms';
+
+export class MyComponent {
+  toggleControl = new FormControl(false);
+}
+```
+
+```html
+<ngt-toggle-switch
+  [formControl]="toggleControl"
+  [label]="'Enable feature'"
+></ngt-toggle-switch>
+```
+
+### Sizes
+
+```html
+<ngt-toggle-switch [size]="'sm'" [label]="'Small'"></ngt-toggle-switch>
+<ngt-toggle-switch [size]="'md'" [label]="'Medium'"></ngt-toggle-switch>
+<ngt-toggle-switch [size]="'lg'" [label]="'Large'"></ngt-toggle-switch>
+```
+
+## Toast
+
+### Basic Usage
+
+```typescript
+import { NgtToastService, NgtToastContainer } from '@ng-tailwind/ui-components';
+
+export class MyComponent {
+  constructor(private toastService: NgtToastService) {}
+
+  showToast() {
+    this.toastService.show({
+      text: 'Operation completed successfully',
+      severity: 'success'
+    });
+  }
+}
+```
+
+```html
+<ngt-toast-container></ngt-toast-container>
+<button (click)="showToast()">Show Toast</button>
+```
+
+### Severity Levels
+
+```typescript
+this.toastService.show({ text: 'Info message', severity: 'info' });
+this.toastService.show({ text: 'Success message', severity: 'success' });
+this.toastService.show({ text: 'Warning message', severity: 'warning' });
+this.toastService.show({ text: 'Error message', severity: 'error' });
+```
+
+### With Summary and Detail
+
+```typescript
+this.toastService.show({
+  summary: 'Update Complete',
+  detail: 'Your changes have been saved',
+  severity: 'success'
+});
+```
+
+## Table
+
+### Basic Usage
+
+```typescript
+import { NgtTable } from '@ng-tailwind/ui-components';
+
+export class MyComponent {
+  data = [
+    { id: 1, name: 'John', age: 30 },
+    { id: 2, name: 'Jane', age: 25 },
+    { id: 3, name: 'Bob', age: 35 }
+  ];
+
+  columns = [
+    { field: 'id', header: 'ID' },
+    { field: 'name', header: 'Name' },
+    { field: 'age', header: 'Age' }
+  ];
+}
+```
+
+```html
+<ngt-table
+  [value]="data"
+  [columns]="columns"
+></ngt-table>
+```
+
+### With Pagination
+
+```html
+<ngt-table
+  [value]="data"
+  [columns]="columns"
+  [paginator]="true"
+  [rows]="10"
+></ngt-table>
+```
+
+### With Sorting
+
+```typescript
+export class MyComponent {
+  sortField = signal<string | null>(null);
+  sortOrder = signal<'asc' | 'desc' | null>(null);
+}
+```
+
+```html
+<ngt-table
+  [value]="data"
+  [columns]="columns"
+  [sortField]="sortField()"
+  [sortOrder]="sortOrder()"
+  (sort)="handleSort($event)"
+></ngt-table>
+```
+
+## Select
+
+### Basic Usage
+
+```typescript
+import { NgtSelect } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  selectedValue = signal<string | null>(null);
+  options = [
+    { label: 'Option 1', value: '1' },
+    { label: 'Option 2', value: '2' },
+    { label: 'Option 3', value: '3' }
+  ];
+}
+```
+
+```html
+<ngt-select
+  [options]="options"
+  optionLabel="label"
+  optionValue="value"
+  [ngModel]="selectedValue()"
+  (ngModelChange)="selectedValue.set($event)"
+  [placeholder]="'Select an option'"
+></ngt-select>
+```
+
+### With Form Control
+
+```typescript
+import { FormControl } from '@angular/forms';
+
+export class MyComponent {
+  selectControl = new FormControl(null);
+  options = ['Option 1', 'Option 2', 'Option 3'];
+}
+```
+
+```html
+<ngt-select
+  [formControl]="selectControl"
+  [options]="options"
+  [placeholder]="'Choose...'"
+></ngt-select>
+```
+
+### With Option Groups
+
+```typescript
+export class MyComponent {
+  groupedOptions = [
+    {
+      label: 'Group 1',
+      items: [
+        { label: 'Item 1', value: '1' },
+        { label: 'Item 2', value: '2' }
+      ]
+    },
+    {
+      label: 'Group 2',
+      items: [
+        { label: 'Item 3', value: '3' },
+        { label: 'Item 4', value: '4' }
+      ]
+    }
+  ];
+}
+```
+
+```html
+<ngt-select
+  [options]="groupedOptions"
+  optionLabel="label"
+  optionValue="value"
+  [optionGroupLabel]="'label'"
+  [optionGroupChildren]="'items'"
+></ngt-select>
 ```
 

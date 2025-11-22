@@ -1,6 +1,8 @@
 # Theme Customization Guide
 
-The ng-tailwind UI library uses CSS variables for theming, making it easy to customize colors, spacing, shadows, and other design tokens.
+The ng-tailwind UI library uses Tailwind CSS 4.1.17 with CSS variables for theming, making it easy to customize colors, spacing, shadows, and other design tokens.
+
+> **Note**: This library uses Tailwind CSS v4, which defines themes in CSS using the `@theme` directive rather than in the JavaScript config file.
 
 ## CSS Variables
 
@@ -90,9 +92,9 @@ Create a custom theme by overriding the CSS variables in your application's glob
 }
 ```
 
-### 2. Update Tailwind Config
+### 2. Tailwind CSS v4 Configuration
 
-The `tailwind.config.js` file references these CSS variables. If you add new variables, make sure to update the Tailwind config accordingly.
+In Tailwind CSS v4, themes are defined in CSS using the `@theme` directive. The `tailwind.config.js` file is minimal and mainly used for content paths. All theme customization should be done in your CSS files using CSS variables or the `@theme` directive.
 
 ### 3. Dark Mode Support
 
