@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { NgtButton, NgtCollapse, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.collapse-demo',
@@ -20,6 +21,24 @@ export class CollapsePage {
     this.activeTab.set(tab);
   }
 
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      vertical: 'showcase',
+      horizontal: 'showcase'
+    },
+    {
+      vertical: 'html',
+      horizontal: 'html'
+    }
+  );
+
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
+
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
@@ -27,7 +46,8 @@ export class CollapsePage {
 
   // Code snippets for each demo
   codeSnippets = {
-    vertical: `<ngt-button variant="primary" (click)="collapseOpen.set(!collapseOpen())">
+    vertical: {
+      html: `<ngt-button variant="primary" (click)="collapseOpen.set(!collapseOpen())">
   {{ collapseOpen() ? 'Hide' : 'Show' }} Content
 </ngt-button>
 <ngt-collapse [isOpen]="collapseOpen()" [horizontal]="false">
@@ -35,7 +55,14 @@ export class CollapsePage {
     <p class="text-gray-700 dark:text-gray-300">This is collapsible content with smooth animations.</p>
   </div>
 </ngt-collapse>`,
-    horizontal: `<ngt-button variant="outline" (click)="horizontalCollapseOpen.set(!horizontalCollapseOpen())">
+      ts: `import { signal } from '@angular/core';
+
+export class CollapsePage {
+  collapseOpen = signal(false);
+}`
+    },
+    horizontal: {
+      html: `<ngt-button variant="outline" (click)="horizontalCollapseOpen.set(!horizontalCollapseOpen())">
   {{ horizontalCollapseOpen() ? 'Hide' : 'Show' }} Horizontal
 </ngt-button>
 <div class="flex items-center gap-2 mt-2">
@@ -45,6 +72,32 @@ export class CollapsePage {
     </div>
   </ngt-collapse>
   <span class="text-gray-500 dark:text-gray-400">After collapse</span>
-</div>`
+</div>`,
+      ts: `import { signal } from '@angular/core';
+
+export class CollapsePage {
+  horizontalCollapseOpen = signal(false);
+}`
+    }
   };
+
+  // Helper to get code snippet for a specific tab
+  getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
+    return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      vertical: {
+        html: 'collapse-vertical.html',
+        ts: 'collapse-vertical.ts'
+      },
+      horizontal: {
+        html: 'collapse-horizontal.html',
+        ts: 'collapse-horizontal.ts'
+      }
+    };
+    return this.codeViewUtil.getTabFileName('collapse', demoKey, fileType, fileNames);
+  }
 }
