@@ -18,6 +18,38 @@ export class ToastPage {
     this.activeTab.set(tab);
   }
 
+  // View mode for each demo section (showcase or code)
+  demoViewMode = signal<Record<string, 'showcase' | 'code'>>({
+    basic: 'showcase',
+    withSummary: 'showcase',
+    textOnly: 'showcase',
+    sticky: 'showcase'
+  });
+
+  toggleDemoView(demoKey: string): void {
+    const current = this.demoViewMode();
+    this.demoViewMode.set({
+      ...current,
+      [demoKey]: current[demoKey] === 'showcase' ? 'code' : 'showcase'
+    });
+  }
+
+  // Active code tab for each demo (html or ts)
+  activeCodeTab = signal<Record<string, 'html' | 'ts'>>({
+    basic: 'html',
+    withSummary: 'ts',
+    textOnly: 'ts',
+    sticky: 'ts'
+  });
+
+  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
+    const current = this.activeCodeTab();
+    this.activeCodeTab.set({
+      ...current,
+      [demoKey]: tab
+    });
+  }
+
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
@@ -113,8 +145,8 @@ export class ToastPage {
 
   // Code snippets for each demo
   codeSnippets = {
-    basic: `// In your component
-private toastService = inject(NgtToastService);
+    basic: {
+      ts: `private toastService = inject(NgtToastService);
 
 showSuccess(): void {
   this.toastService.show({
@@ -124,8 +156,34 @@ showSuccess(): void {
   });
 }
 
-// In your template
-<ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>`,
+showInfo(): void {
+  this.toastService.show({
+    severity: 'info',
+    summary: 'Information',
+    detail: 'This is an informational message'
+  });
+}
+
+showWarning(): void {
+  this.toastService.show({
+    severity: 'warning',
+    summary: 'Warning',
+    detail: 'Please review this action'
+  });
+}
+
+showDanger(): void {
+  this.toastService.show({
+    severity: 'danger',
+    summary: 'Error',
+    detail: 'An error occurred while processing your request'
+  });
+}`,
+      html: `<ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>
+<ngt-button (click)="showInfo()" variant="primary">Info Toast</ngt-button>
+<ngt-button (click)="showWarning()" variant="primary">Warning Toast</ngt-button>
+<ngt-button (click)="showDanger()" variant="primary">Danger Toast</ngt-button>`
+    },
     withSummary: `this.toastService.show({
   severity: 'info',
   summary: 'Update Available',
@@ -142,4 +200,47 @@ showSuccess(): void {
   sticky: true
 });`
   };
+
+  // Helper to check if demo is showing code
+  isShowingCode(demoKey: string): boolean {
+    return this.demoViewMode()[demoKey] === 'code';
+  }
+
+  // Helper to get active code tab for a demo
+  getActiveCodeTab(demoKey: string): 'html' | 'ts' {
+    return this.activeCodeTab()[demoKey] || 'ts';
+  }
+
+  // Helper to get code snippet for a specific tab
+  getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
+    if (demoKey === 'basic' && typeof this.codeSnippets.basic === 'object') {
+      return this.codeSnippets.basic[fileType] || '';
+    }
+    return typeof this.codeSnippets[demoKey as keyof typeof this.codeSnippets] === 'string' 
+      ? this.codeSnippets[demoKey as keyof typeof this.codeSnippets] as string 
+      : '';
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      basic: {
+        html: 'toast-basic.html',
+        ts: 'toast-basic.ts'
+      },
+      withSummary: {
+        html: 'toast-with-summary.ts',
+        ts: 'toast-with-summary.ts'
+      },
+      textOnly: {
+        html: 'toast-text-only.ts',
+        ts: 'toast-text-only.ts'
+      },
+      sticky: {
+        html: 'toast-sticky.ts',
+        ts: 'toast-sticky.ts'
+      }
+    };
+    return fileNames[demoKey]?.[fileType] || `toast-${demoKey}.${fileType}`;
+  }
 }
