@@ -87,19 +87,22 @@ describe('Accordion Page E2E', () => {
         // Open first item and wait for animation
         cy.contains('First Item').click({ force: true });
         cy.wait(500); // Wait for animation to complete
+        cy.contains('This is the content of the first accordion item').should('be.visible');
         
-        // Open second item - first should still be open (verify by checking both exist in DOM)
+        // Open second item - first should still be open and visible
         cy.contains('Second Item').click({ force: true });
         cy.wait(500);
+        cy.contains('This is the content of the second accordion item').should('be.visible');
+        cy.contains('This is the content of the first accordion item').should('be.visible');
         
-        // Open third item - all should be open
+        // Open third item - all should be open and visible
         cy.contains('Third Item').click({ force: true });
         cy.wait(500);
         
-        // Verify all three content texts exist in the DOM (they may be in collapsed state but should exist)
-        cy.contains('This is the content of the first accordion item').should('exist');
-        cy.contains('This is the content of the second accordion item').should('exist');
-        cy.contains('This is the content of the third accordion item').should('exist');
+        // Verify all three content texts are visible at the same time
+        cy.contains('This is the content of the first accordion item').should('be.visible');
+        cy.contains('This is the content of the second accordion item').should('be.visible');
+        cy.contains('This is the content of the third accordion item').should('be.visible');
       });
     });
   });

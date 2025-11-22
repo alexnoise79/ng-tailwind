@@ -18,6 +18,10 @@
         },
         "ci": {
           "devServerTarget": "ui-demo:serve:static"
+        },
+        "no-serve": {
+          "baseUrl": "http://localhost:4200",
+          "skipServe": true
         }
       }
     },
