@@ -41,6 +41,14 @@ nx storybook ui-components
 - **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Dropdown** - Dropdown menu with positioning
 - **Tooltip** - Contextual information tooltips
+- **Collapse** - Expandable/collapsible content (horizontal or vertical)
+- **Datepicker** - Date selection component with calendar view
+- **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
+- **Pagination** - Page navigation with customizable options
+- **Toggle Switch** - Form control for boolean values with sizes
+- **Toast** - Notification messages with severity levels and auto-dismiss
+- **Table** - Data table with sorting, pagination, grouping, and column reordering
+- **Select** - Dropdown select with form integration and option grouping
 
 ## Documentation
 
