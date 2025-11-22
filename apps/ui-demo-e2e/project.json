@@ -22,6 +22,11 @@
         "no-serve": {
           "baseUrl": "http://localhost:4200",
           "skipServe": true
+        },
+        "watch": {
+          "watch": true,
+          "port": 4201,
+          "devServerTarget": "ui-demo:serve:e2e"
         }
       }
     },
