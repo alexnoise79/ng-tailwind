@@ -45,7 +45,7 @@ jobs:
           fi
 
       - name: Build ui-demo
-        run: npx nx build ui-demo --configuration=production --base-href=/
+        run: npx nx build ui-demo --configuration=production
 
       - name: Verify build output
         run: |
