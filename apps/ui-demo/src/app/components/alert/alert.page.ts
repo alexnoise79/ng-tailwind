@@ -45,18 +45,6 @@ export class AlertPage {
 
   // Code snippets for each demo
   codeSnippets = {
-    variants: `<ngt-alert variant="success" [dismissible]="false">
-  <strong>Success!</strong> Operation completed successfully.
-</ngt-alert>
-<ngt-alert variant="info" [dismissible]="false">
-  <strong>Info:</strong> This is an informational message.
-</ngt-alert>
-<ngt-alert variant="warning" [dismissible]="false">
-  <strong>Warning:</strong> Please review this action carefully.
-</ngt-alert>
-<ngt-alert variant="danger" [dismissible]="false">
-  <strong>Error:</strong> An error has occurred.
-</ngt-alert>`,
     allVariants: `<ngt-alert variant="success" [dismissible]="false">Success alert</ngt-alert>
 <ngt-alert variant="info" [dismissible]="false">Info alert</ngt-alert>
 <ngt-alert variant="warning" [dismissible]="false">Warning alert</ngt-alert>
