@@ -194,8 +194,16 @@ describe('Accordion Page E2E', () => {
         .parent()
         .parent()
         .within(() => {
-          cy.contains('Disabled Item').click();
-          cy.wait(200);
+          // Verify disabled item content is not visible initially
+          cy.contains('This accordion item is disabled and cannot be toggled.').should('not.be.visible');
+          
+          // Find the button containing "Disabled Item" and verify it's disabled
+          cy.contains('Disabled Item')
+            .closest('button')
+            .should('be.disabled')
+            .should('have.attr', 'aria-disabled', 'true');
+          
+          // Content should remain not visible (disabled items cannot be toggled)
           cy.contains('This accordion item is disabled and cannot be toggled.').should('not.be.visible');
         });
     });
