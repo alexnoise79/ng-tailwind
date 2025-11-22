@@ -17,106 +17,229 @@
     <div class="space-y-8">
       <!-- All Variants -->
       <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">All Variants</h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">All Variants</h2>
+          <button 
+            (click)="toggleDemoView('allVariants')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('allVariants')"
+            [class.dark:bg-gray-700]="isShowingCode('allVariants')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <div class="mb-3">
-              <ngt-alert variant="success" [dismissible]="false">
-                <strong>Success!</strong> This is a success alert.
-              </ngt-alert>
+          @if (!isShowingCode('allVariants')) {
+            <!-- Showcase View -->
+            <div class="mb-4">
+              <div class="mb-3">
+                <ngt-alert variant="success" [dismissible]="false">
+                  <strong>Success!</strong> This is a success alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="info" [dismissible]="false">
+                  <strong>Info:</strong> This is an info alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="warning" [dismissible]="false">
+                  <strong>Warning:</strong> This is a warning alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="danger" [dismissible]="false">
+                  <strong>Error:</strong> This is a danger alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="primary" [dismissible]="false">
+                  <strong>Primary:</strong> This is a primary alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="secondary" [dismissible]="false">
+                  <strong>Secondary:</strong> This is a secondary alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="light" [dismissible]="false">
+                  <strong>Light:</strong> This is a light alert.
+                </ngt-alert>
+              </div>
+              <div class="mb-3">
+                <ngt-alert variant="dark" [dismissible]="false">
+                  <strong>Dark:</strong> This is a dark alert.
+                </ngt-alert>
+              </div>
             </div>
-            <div class="mb-3">
-              <ngt-alert variant="info" [dismissible]="false">
-                <strong>Info:</strong> This is an info alert.
-              </ngt-alert>
+          } @else {
+            <!-- Code View -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <!-- Code Tabs -->
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button
+                  (click)="setActiveCodeTab('allVariants', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  [class.text-gray-900]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.dark:text-white]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.bg-white]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.dark:bg-gray-800]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.border-b-2]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.border-primary-500]="getActiveCodeTab('allVariants') === 'html'"
+                  [class.text-gray-500]="getActiveCodeTab('allVariants') !== 'html'"
+                  [class.dark:text-gray-400]="getActiveCodeTab('allVariants') !== 'html'">
+                  {{ getTabFileName('allVariants', 'html') }}
+                </button>
+              </div>
+              <!-- Code Content -->
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button 
+                  (click)="copyToClipboard(codeSnippets.allVariants)" 
+                  type="button" 
+                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
+                  title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.allVariants }}</code></pre>
+              </div>
             </div>
-            <div class="mb-3">
-              <ngt-alert variant="warning" [dismissible]="false">
-                <strong>Warning:</strong> This is a warning alert.
-              </ngt-alert>
-            </div>
-            <div class="mb-3">
-              <ngt-alert variant="danger" [dismissible]="false">
-                <strong>Error:</strong> This is a danger alert.
-              </ngt-alert>
-            </div>
-            <div class="mb-3">
-              <ngt-alert variant="primary" [dismissible]="false">
-                <strong>Primary:</strong> This is a primary alert.
-              </ngt-alert>
-            </div>
-            <div class="mb-3">
-              <ngt-alert variant="secondary" [dismissible]="false">
-                <strong>Secondary:</strong> This is a secondary alert.
-              </ngt-alert>
-            </div>
-            <div class="mb-3">
-              <ngt-alert variant="light" [dismissible]="false">
-                <strong>Light:</strong> This is a light alert.
-              </ngt-alert>
-            </div>
-            <div class="mb-3">
-              <ngt-alert variant="dark" [dismissible]="false">
-                <strong>Dark:</strong> This is a dark alert.
-              </ngt-alert>
-            </div>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.allVariants)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.allVariants }}</code></pre>
-            </div>
-          </div>
+          }
         </div>
       </section>
 
       <!-- Dismissible -->
       <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Dismissible</h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Dismissible</h2>
+          <button 
+            (click)="toggleDemoView('dismissible')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('dismissible')"
+            [class.dark:bg-gray-700]="isShowingCode('dismissible')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            @if (visibleAlerts().info) {
-              <ngt-alert variant="info" [dismissible]="true" (close)="onAlertClose('info')">
-                This alert can be dismissed by clicking the close button.
-              </ngt-alert>
-            }
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.dismissible)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.dismissible }}</code></pre>
+          @if (!isShowingCode('dismissible')) {
+            <!-- Showcase View -->
+            <div class="mb-4">
+              @if (visibleAlerts().info) {
+                <ngt-alert variant="info" [dismissible]="true" (close)="onAlertClose('info')">
+                  This alert can be dismissed by clicking the close button.
+                </ngt-alert>
+              }
             </div>
-          </div>
+          } @else {
+            <!-- Code View -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <!-- Code Tabs -->
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button
+                  (click)="setActiveCodeTab('dismissible', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  [class.text-gray-900]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.dark:text-white]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.bg-white]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.dark:bg-gray-800]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.border-b-2]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.border-primary-500]="getActiveCodeTab('dismissible') === 'html'"
+                  [class.text-gray-500]="getActiveCodeTab('dismissible') !== 'html'"
+                  [class.dark:text-gray-400]="getActiveCodeTab('dismissible') !== 'html'">
+                  {{ getTabFileName('dismissible', 'html') }}
+                </button>
+              </div>
+              <!-- Code Content -->
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button 
+                  (click)="copyToClipboard(codeSnippets.dismissible)" 
+                  type="button" 
+                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
+                  title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.dismissible }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
 
       <!-- Not Dismissible -->
       <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Not Dismissible</h2>
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Not Dismissible</h2>
+          <button 
+            (click)="toggleDemoView('notDismissible')" 
+            type="button" 
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            [class.bg-gray-100]="isShowingCode('notDismissible')"
+            [class.dark:bg-gray-700]="isShowingCode('notDismissible')"
+            title="Toggle code view">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-alert variant="info" [dismissible]="false">
-              This alert cannot be dismissed.
-            </ngt-alert>
-          </div>
-          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
-            <div class="relative">
-              <button (click)="copyToClipboard(codeSnippets.notDismissible)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-              </button>
-              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.notDismissible }}</code></pre>
+          @if (!isShowingCode('notDismissible')) {
+            <!-- Showcase View -->
+            <div class="mb-4">
+              <ngt-alert variant="info" [dismissible]="false">
+                This alert cannot be dismissed.
+              </ngt-alert>
             </div>
-          </div>
+          } @else {
+            <!-- Code View -->
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <!-- Code Tabs -->
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button
+                  (click)="setActiveCodeTab('notDismissible', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  [class.text-gray-900]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.dark:text-white]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.bg-white]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.dark:bg-gray-800]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.border-b-2]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.border-primary-500]="getActiveCodeTab('notDismissible') === 'html'"
+                  [class.text-gray-500]="getActiveCodeTab('notDismissible') !== 'html'"
+                  [class.dark:text-gray-400]="getActiveCodeTab('notDismissible') !== 'html'">
+                  {{ getTabFileName('notDismissible', 'html') }}
+                </button>
+              </div>
+              <!-- Code Content -->
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button 
+                  (click)="copyToClipboard(codeSnippets.notDismissible)" 
+                  type="button" 
+                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
+                  title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.notDismissible }}</code></pre>
+              </div>
+            </div>
+          }
         </div>
       </section>
     </div>

@@ -312,6 +312,11 @@ p {
   @apply text-gray-700 dark:text-gray-300;
 }
 
+/* All SVGs use currentColor for fill */
+svg {
+  fill: currentColor;
+}
+
 /* Dark mode scrollbar variables */
 .dark {
   --scrollbar-thumb: var(--color-primary-500); /* primary-400 for better visibility in dark mode */

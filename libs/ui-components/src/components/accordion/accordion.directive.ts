@@ -1,10 +1,19 @@
-import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
+import { Directive, Input, signal, Signal, WritableSignal } from '@angular/core';
 
-@Component({
-  selector: 'ngt-accordion',
-  imports: [],
-  templateUrl: './accordion.component.html',
-  providers: [NgtAccordion]
+@Directive({
+  selector: '[ngtAccordion]',
+  exportAs: 'NgtAccordion',
+  standalone: true,
+  providers: [NgtAccordion],
+  host: {
+    '[class.border]': 'true',
+    '[class.border-gray-200]': 'true',
+    '[class.dark:border-gray-700]': 'true',
+    '[class.rounded-lg]': 'true',
+    '[class.divide-y]': 'true',
+    '[class.divide-gray-200]': 'true',
+    '[class.dark:divide-gray-700]': 'true'
+  }
 })
 export class NgtAccordion {
   @Input() set multiOpen(value: boolean | WritableSignal<boolean>) {
@@ -45,3 +54,4 @@ export class NgtAccordion {
     this.openItems.set(current);
   }
 }
+
