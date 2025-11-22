@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { NgtAccordion } from './accordion.component';
+import { NgtAccordion } from './accordion.directive';
 import { signal } from '@angular/core';
 
 describe('NgtAccordion', () => {
