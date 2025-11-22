@@ -1,18 +1,23 @@
-import { Component, inject, signal, computed, input } from '@angular/core';
-import { NgtAccordion } from './accordion.component';
+import { Directive, inject, signal, computed, input, Optional, HostBinding } from '@angular/core';
+import { NgtAccordion } from './accordion.directive';
 
 let itemIdCounter = 0;
 
-@Component({
-  selector: 'ngt-accordion-item',
-  templateUrl: './accordion-item.component.html'
+@Directive({
+  selector: '[ngtAccordionItem]',
+  exportAs: 'NgtAccordionItem',
+  standalone: true,
+  host: {
+    '[class.accordion-item]': 'true'
+  }
 })
 export class NgtAccordionItem {
-  readonly title = input.required<string>();
+  readonly itemId = input<string>();
+  readonly collapsed = input<boolean>(true);
 
   private accordion = inject(NgtAccordion, { optional: true });
   private id = `accordion-item-${itemIdCounter++}`;
-  private _isOpen = signal(false);
+  private _isOpen = signal(!this.collapsed());
 
   buttonId = computed(() => `${this.id}-button`);
   contentId = computed(() => `${this.id}-content`);
@@ -32,3 +37,4 @@ export class NgtAccordionItem {
     }
   }
 }
+

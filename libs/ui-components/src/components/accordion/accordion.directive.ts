@@ -1,12 +1,46 @@
-import { Component, Input, signal, Signal, WritableSignal } from '@angular/core';
+import { Directive, Input, signal, Signal, WritableSignal, computed, HostBinding } from '@angular/core';
 
-@Component({
-  selector: 'ngt-accordion',
-  imports: [],
-  templateUrl: './accordion.component.html',
+@Directive({
+  selector: '[ngtAccordion]',
+  exportAs: 'NgtAccordion',
+  standalone: true,
   providers: [NgtAccordion]
 })
 export class NgtAccordion {
+  @HostBinding('class.border')
+  get border(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.border-gray-200')
+  get borderColor(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.dark:border-gray-700')
+  get darkBorderColor(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.rounded-lg')
+  get rounded(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.divide-y')
+  get divideY(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.divide-gray-200')
+  get divideColor(): boolean {
+    return true;
+  }
+
+  @HostBinding('class.dark:divide-gray-700')
+  get darkDivideColor(): boolean {
+    return true;
+  }
   @Input() set multiOpen(value: boolean | WritableSignal<boolean>) {
     if (typeof value === 'boolean') {
       this._multiOpen.set(value);
@@ -45,3 +79,4 @@ export class NgtAccordion {
     this.openItems.set(current);
   }
 }
+
