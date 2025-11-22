@@ -47,6 +47,20 @@ jobs:
       - name: Build ui-demo
         run: npx nx build ui-demo --configuration=production --base-href=/
 
+      - name: Verify build output
+        run: |
+          echo "Listing files in build output:"
+          ls -la ./dist/apps/ui-demo/browser/ || true
+          echo ""
+          echo "Checking if JS/CSS files exist:"
+          find ./dist/apps/ui-demo/browser -name "*.js" -o -name "*.css" | head -10 || true
+          echo ""
+          echo "Checking index.html base href:"
+          cat ./dist/apps/ui-demo/browser/index.html | grep -i "base href" || true
+          echo ""
+          echo "Checking index.html script references:"
+          cat ./dist/apps/ui-demo/browser/index.html | grep -o 'src="[^"]*"' | head -5 || true
+
       - name: Copy index.html to 404.html for client-side routing
         run: cp ./dist/apps/ui-demo/browser/index.html ./dist/apps/ui-demo/browser/404.html
 
