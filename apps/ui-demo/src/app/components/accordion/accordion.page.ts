@@ -107,6 +107,28 @@ export class AccordionPage {
       </div>
     </div>
   </div>
+</div>`,
+    disabled: `<div ngtAccordion>
+  <div ngtAccordionItem [disabled]="true">
+    <h2 ngtAccordionHeader>
+      <button ngtAccordionButton>Disabled Item</button>
+    </h2>
+    <div ngtAccordionCollapse>
+      <div ngtAccordionBody>
+        <p class="text-gray-600">This item is disabled and cannot be toggled.</p>
+      </div>
+    </div>
+  </div>
+  <div ngtAccordionItem>
+    <h2 ngtAccordionHeader>
+      <button ngtAccordionButton>Enabled Item</button>
+    </h2>
+    <div ngtAccordionCollapse>
+      <div ngtAccordionBody>
+        <p class="text-gray-600">This item is enabled and can be toggled.</p>
+      </div>
+    </div>
+  </div>
 </div>`
   };
 }

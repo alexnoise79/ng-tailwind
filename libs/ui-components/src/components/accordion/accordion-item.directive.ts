@@ -1,4 +1,4 @@
-import { Directive, inject, signal, computed, input, Optional, HostBinding } from '@angular/core';
+import { Directive, inject, signal, computed, input } from '@angular/core';
 import { NgtAccordion } from './accordion.directive';
 
 let itemIdCounter = 0;
@@ -14,6 +14,7 @@ let itemIdCounter = 0;
 export class NgtAccordionItem {
   readonly itemId = input<string>();
   readonly collapsed = input<boolean>(true);
+  readonly disabled = input<boolean>(false);
 
   private accordion = inject(NgtAccordion, { optional: true });
   private id = `accordion-item-${itemIdCounter++}`;
@@ -30,6 +31,9 @@ export class NgtAccordionItem {
   });
 
   toggle(): void {
+    if (this.disabled()) {
+      return;
+    }
     if (this.accordion) {
       this.accordion.toggleItem(this.id);
     } else {

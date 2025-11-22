@@ -170,3 +170,60 @@ export const MultiOpen: Story = {
     `
   })
 };
+
+export const Disabled: Story = {
+  args: {
+    multiOpen: signal(false)
+  },
+  render: args => ({
+    props: args,
+    moduleMetadata: {
+      imports: [
+        NgtAccordion, 
+        NgtAccordionItem,
+        NgtAccordionHeader,
+        NgtAccordionButton,
+        NgtAccordionCollapse,
+        NgtAccordionBody
+      ]
+    },
+    template: `
+      <div ngtAccordion [multiOpen]="multiOpen">
+        <div ngtAccordionItem [disabled]="true">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Disabled Item</span>
+              <svg class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This accordion item is disabled and cannot be toggled.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div ngtAccordionItem #enabledItem="NgtAccordionItem">
+          <h2 ngtAccordionHeader>
+            <button ngtAccordionButton>
+              <span class="font-medium text-gray-900 dark:text-white">Enabled Item</span>
+              <svg [class.rotate-180]="enabledItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </h2>
+          <div ngtAccordionCollapse>
+            <div ngtAccordionBody>
+              <p class="text-gray-600">
+                This accordion item is enabled and can be toggled.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  })
+};

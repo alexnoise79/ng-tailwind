@@ -11,21 +11,30 @@ import { NgtAccordionItem } from './accordion-item.directive';
     '[class.justify-between]': 'true',
     '[class.p-4]': 'true',
     '[class.text-left]': 'true',
-    '[class.hover:bg-gray-50]': 'true',
-    '[class.dark:hover:bg-gray-800]': 'true',
+    '[class.hover:bg-gray-50]': '!isDisabled',
+    '[class.dark:hover:bg-gray-800]': '!isDisabled',
     '[class.focus:outline-none]': 'true',
-    '[class.focus:ring-2]': 'true',
-    '[class.focus:ring-primary-500]': 'true',
-    '[class.focus:ring-inset]': 'true',
+    '[class.focus:ring-2]': '!isDisabled',
+    '[class.focus:ring-primary-500]': '!isDisabled',
+    '[class.focus:ring-inset]': '!isDisabled',
     '[class.transition-colors]': 'true',
+    '[class.opacity-50]': 'isDisabled',
+    '[class.cursor-not-allowed]': 'isDisabled',
+    '[class.cursor-pointer]': '!isDisabled',
     '[id]': 'id',
     '[attr.aria-expanded]': 'ariaExpanded',
     '[attr.aria-controls]': 'ariaControls',
+    '[attr.aria-disabled]': 'isDisabled',
+    '[attr.disabled]': 'isDisabled || null',
     '[type]': 'type'
   }
 })
 export class NgtAccordionButton {
   private accordionItem = inject(NgtAccordionItem, { optional: true });
+
+  get isDisabled(): boolean {
+    return this.accordionItem?.disabled() || false;
+  }
 
   get id(): string {
     return this.accordionItem?.buttonId() || '';
@@ -43,8 +52,13 @@ export class NgtAccordionButton {
     return 'button';
   }
 
-  @HostListener('click')
-  onClick(): void {
+  @HostListener('click', ['$event'])
+  onClick(event: Event): void {
+    if (this.isDisabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
     this.accordionItem?.toggle();
   }
 
