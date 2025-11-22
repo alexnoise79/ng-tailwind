@@ -1,5 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AlertPage } from './alert.page';
+// Import support file to ensure types are loaded
+import '../../../../cypress/support/component';
 
 describe(AlertPage.name, () => {
   beforeEach(() => {
