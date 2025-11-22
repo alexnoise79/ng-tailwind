@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nx build",
     "build:lib": "mv tailwind.config.js tailwind.config.js.bak 2>/dev/null || true && nx build ui-components && mv tailwind.config.js.bak tailwind.config.js 2>/dev/null || true",
-    "prepublish:lib": "npm run build:lib && node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('dist/libs/ui-components/package.json'));delete pkg.scripts;fs.writeFileSync('dist/libs/ui-components/package.json',JSON.stringify(pkg,null,2));\"",
+    "prepublish:lib": "npm run build:lib && cp README.md dist/libs/ui-components/ && node -e \"const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('dist/libs/ui-components/package.json'));delete pkg.scripts;fs.writeFileSync('dist/libs/ui-components/package.json',JSON.stringify(pkg,null,2));\"",
     "publish:lib": "npm run prepublish:lib && cd dist/libs/ui-components && npm publish --access=public",
     "publish:lib:dry-run": "npm run prepublish:lib && cd dist/libs/ui-components && npm publish --dry-run --access=public",
     "test": "nx test",
