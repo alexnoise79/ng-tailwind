@@ -1,54 +1,178 @@
-<div class="space-y-12">
-  <section>
-    <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6">Toggle Switch</h2>
-    <p class="text-gray-600 dark:text-gray-400 mb-4">A toggle switch component that supports ngModel and can be used in forms.</p>
-  </section>
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Toggle Switch</h1>
+    <p class="text-gray-600 dark:text-gray-400">A toggle switch component that supports ngModel and can be used in forms.</p>
+  </div>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Basic Usage</h3>
-    <div class="flex flex-col gap-4">
-      <ngt-toggle-switch></ngt-toggle-switch>
-      <ngt-toggle-switch label="Enable notifications"></ngt-toggle-switch>
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
+      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
+      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    </ngt-nav>
+  </div>
+
+  <!-- Showcase Tab -->
+  @if (activeTab() === 'showcase') {
+    <div class="space-y-8">
+      <!-- Basic Usage -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Usage</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 flex flex-col gap-4">
+            <ngt-toggle-switch></ngt-toggle-switch>
+            <ngt-toggle-switch label="Enable notifications"></ngt-toggle-switch>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.basic)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sizes -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 flex flex-col gap-4">
+            <ngt-toggle-switch size="sm" label="Small toggle"></ngt-toggle-switch>
+            <ngt-toggle-switch size="md" label="Medium toggle"></ngt-toggle-switch>
+            <ngt-toggle-switch size="lg" label="Large toggle"></ngt-toggle-switch>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.sizes)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sizes }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- With ngModel -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With ngModel</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 flex flex-col gap-4">
+            <ngt-toggle-switch [(ngModel)]="basicToggle" label="Basic toggle"></ngt-toggle-switch>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Current value: {{ basicToggle }}</p>
+          </div>
+          <div class="mt-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+            <div class="relative">
+              <button (click)="copyToClipboard(codeSnippets.ngModel)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <pre class="bg-gray-100 dark:bg-gray-900 p-4 rounded text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.ngModel }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Multiple Toggles -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiple Toggles</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 flex flex-col gap-4">
+            <ngt-toggle-switch [(ngModel)]="emailNotifications" label="Email notifications"></ngt-toggle-switch>
+            <ngt-toggle-switch [(ngModel)]="pushNotifications" label="Push notifications"></ngt-toggle-switch>
+            <ngt-toggle-switch [(ngModel)]="smsNotifications" label="SMS notifications"></ngt-toggle-switch>
+            <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+              <p class="text-sm font-semibold mb-2 text-gray-900 dark:text-white">Current state:</p>
+              <p class="text-sm text-gray-700 dark:text-gray-300">Email: {{ emailNotifications }}</p>
+              <p class="text-sm text-gray-700 dark:text-gray-300">Push: {{ pushNotifications }}</p>
+              <p class="text-sm text-gray-700 dark:text-gray-300">SMS: {{ smsNotifications }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Disabled State -->
+      <section class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled State</h2>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div class="mb-4 flex flex-col gap-4">
+            <ngt-toggle-switch [disabled]="true" label="Disabled toggle (off)"></ngt-toggle-switch>
+            <ngt-toggle-switch [(ngModel)]="disabledToggle" [disabled]="true" label="Disabled toggle (on)"></ngt-toggle-switch>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
+  }
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Sizes</h3>
-    <div class="flex flex-col gap-4">
-      <ngt-toggle-switch size="sm" label="Small toggle"></ngt-toggle-switch>
-      <ngt-toggle-switch size="md" label="Medium toggle"></ngt-toggle-switch>
-      <ngt-toggle-switch size="lg" label="Large toggle"></ngt-toggle-switch>
-    </div>
-  </section>
+  <!-- API Tab -->
+  @if (activeTab() === 'api') {
+    <div class="space-y-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">With ngModel</h3>
-    <div class="flex flex-col gap-4">
-      <ngt-toggle-switch [(ngModel)]="basicToggle" label="Basic toggle"></ngt-toggle-switch>
-      <p class="text-sm text-gray-700 dark:text-gray-300">Current value: {{ basicToggle }}</p>
-    </div>
-  </section>
+        <!-- Inputs -->
+        <section class="mb-8">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+              <thead class="bg-gray-50 dark:bg-gray-900">
+                <tr>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ngModel</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Two-way binding for the toggle switch value. Supports Angular Forms integration.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the toggle switch.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional label text displayed next to the toggle switch.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the toggle switch is disabled.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
 
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Multiple Toggles</h3>
-    <div class="flex flex-col gap-4">
-      <ngt-toggle-switch [(ngModel)]="emailNotifications" label="Email notifications"></ngt-toggle-switch>
-      <ngt-toggle-switch [(ngModel)]="pushNotifications" label="Push notifications"></ngt-toggle-switch>
-      <ngt-toggle-switch [(ngModel)]="smsNotifications" label="SMS notifications"></ngt-toggle-switch>
-      <div class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-        <p class="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">Current state:</p>
-        <p class="text-sm text-gray-700 dark:text-gray-300">Email: {{ emailNotifications }}</p>
-        <p class="text-sm text-gray-700 dark:text-gray-300">Push: {{ pushNotifications }}</p>
-        <p class="text-sm text-gray-700 dark:text-gray-300">SMS: {{ smsNotifications }}</p>
+        <!-- Features -->
+        <section>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Features</h3>
+          <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+            <li>Full Angular Forms integration (ControlValueAccessor)</li>
+            <li>Three size options: sm, md, lg</li>
+            <li>Optional label support</li>
+            <li>Disabled state support</li>
+            <li>Accessible with proper ARIA attributes</li>
+            <li>Keyboard navigation support</li>
+            <li>Two-way data binding with ngModel</li>
+          </ul>
+        </section>
       </div>
     </div>
-  </section>
-
-  <section>
-    <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Disabled State</h3>
-    <div class="flex flex-col gap-4">
-      <ngt-toggle-switch [disabled]="true" label="Disabled toggle (off)"></ngt-toggle-switch>
-      <ngt-toggle-switch [(ngModel)]="disabledToggle" [disabled]="true" label="Disabled toggle (on)"></ngt-toggle-switch>
-    </div>
-  </section>
+  }
 </div>
