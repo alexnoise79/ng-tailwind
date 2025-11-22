@@ -138,8 +138,6 @@ export class NgtTimepicker implements OnInit {
     let newMinute = this.currentMinute() + 1;
     if (newMinute >= 60) {
       newMinute = 0;
-      this.incrementHour();
-      return;
     }
     this._currentMinute.set(newMinute);
     this.emitTime();
@@ -150,8 +148,6 @@ export class NgtTimepicker implements OnInit {
     let newMinute = this.currentMinute() - 1;
     if (newMinute < 0) {
       newMinute = 59;
-      this.decrementHour();
-      return;
     }
     this._currentMinute.set(newMinute);
     this.emitTime();
@@ -162,8 +158,6 @@ export class NgtTimepicker implements OnInit {
     let newSecond = this.currentSecond() + 1;
     if (newSecond >= 60) {
       newSecond = 0;
-      this.incrementMinute();
-      return;
     }
     this._currentSecond.set(newSecond);
     this.emitTime();
@@ -174,8 +168,6 @@ export class NgtTimepicker implements OnInit {
     let newSecond = this.currentSecond() - 1;
     if (newSecond < 0) {
       newSecond = 59;
-      this.decrementMinute();
-      return;
     }
     this._currentSecond.set(newSecond);
     this.emitTime();
