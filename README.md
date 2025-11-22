@@ -2,10 +2,15 @@
 
 A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK.
 
+## Versions
+
+- **Angular**: 20.0.0
+- **Tailwind CSS**: 4.1.17
+
 ## Features
 
 - 🎨 **TailwindCSS** - Utility-first CSS framework
-- 🚀 **Angular 18+** - Latest Angular features with standalone components
+- 🚀 **Angular 20** - Latest Angular features with standalone components
 - ♿ **Accessible** - WCAG 2.1 AA compliant components
 - 📦 **CDK Integration** - Uses Angular CDK for overlays, portals, and focus management
 - 📚 **Storybook** - Interactive component documentation
