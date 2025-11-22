@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical Collapse</h2>
           <button 
-            (click)="toggleDemoView('vertical')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('vertical')" 
+            [class.dark:bg-gray-700]="isShowingCode('vertical')" 
+            (click)="toggleDemoView('vertical')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('vertical')"
-            [class.dark:bg-gray-700]="isShowingCode('vertical')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -50,9 +50,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('vertical', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('vertical') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('vertical') === 'html'"
                   [class.bg-white]="getActiveCodeTab('vertical') === 'html'"
@@ -60,13 +57,13 @@
                   [class.border-b-2]="getActiveCodeTab('vertical') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('vertical') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('vertical') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('vertical') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('vertical') !== 'html'"
+                  (click)="setActiveCodeTab('vertical', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('vertical', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('vertical', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('vertical') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('vertical') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('vertical') === 'ts'"
@@ -74,7 +71,10 @@
                   [class.border-b-2]="getActiveCodeTab('vertical') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('vertical') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('vertical') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('vertical') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('vertical') !== 'ts'"
+                  (click)="setActiveCodeTab('vertical', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('vertical', 'ts') }}
                 </button>
               </div>
@@ -101,11 +101,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Horizontal Collapse</h2>
           <button 
-            (click)="toggleDemoView('horizontal')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('horizontal')" 
+            [class.dark:bg-gray-700]="isShowingCode('horizontal')" 
+            (click)="toggleDemoView('horizontal')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('horizontal')"
-            [class.dark:bg-gray-700]="isShowingCode('horizontal')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -133,9 +133,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('horizontal', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('horizontal') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('horizontal') === 'html'"
                   [class.bg-white]="getActiveCodeTab('horizontal') === 'html'"
@@ -143,13 +140,13 @@
                   [class.border-b-2]="getActiveCodeTab('horizontal') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('horizontal') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('horizontal') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('horizontal') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('horizontal') !== 'html'"
+                  (click)="setActiveCodeTab('horizontal', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('horizontal', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('horizontal', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('horizontal') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('horizontal') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('horizontal') === 'ts'"
@@ -157,7 +154,10 @@
                   [class.border-b-2]="getActiveCodeTab('horizontal') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('horizontal') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('horizontal') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('horizontal') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('horizontal') !== 'ts'"
+                  (click)="setActiveCodeTab('horizontal', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('horizontal', 'ts') }}
                 </button>
               </div>

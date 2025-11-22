@@ -37,7 +37,7 @@ describe('NgtAlert', () => {
     it('should hide when dismissed if dismissible', () => {
       (component as any).dismissible.set(true);
       let closeEmitted = false;
-      component.close.subscribe(() => {
+      component.closed.subscribe(() => {
         closeEmitted = true;
       });
 

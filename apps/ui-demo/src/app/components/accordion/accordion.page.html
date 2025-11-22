@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Single Open (Default)</h2>
           <button 
-            (click)="toggleDemoView('singleOpen')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('singleOpen')" 
+            [class.dark:bg-gray-700]="isShowingCode('singleOpen')" 
+            (click)="toggleDemoView('singleOpen')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('singleOpen')"
-            [class.dark:bg-gray-700]="isShowingCode('singleOpen')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -35,8 +35,8 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           @if (!isShowingCode('singleOpen')) {
             <!-- Showcase View -->
-            <div ngtAccordion [multiOpen]="false">
-              <div ngtAccordionItem #firstItem="NgtAccordionItem">
+            <div [multiOpen]="false" ngtAccordion>
+              <div #firstItem="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">First Item</span>
@@ -51,7 +51,7 @@
                   </div>
                 </div>
               </div>
-              <div ngtAccordionItem #secondItem="NgtAccordionItem">
+              <div #secondItem="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
@@ -66,7 +66,7 @@
                   </div>
                 </div>
               </div>
-              <div ngtAccordionItem #thirdItem="NgtAccordionItem">
+              <div #thirdItem="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
@@ -88,9 +88,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('singleOpen', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('singleOpen') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('singleOpen') === 'html'"
                   [class.bg-white]="getActiveCodeTab('singleOpen') === 'html'"
@@ -98,7 +95,10 @@
                   [class.border-b-2]="getActiveCodeTab('singleOpen') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('singleOpen') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('singleOpen') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('singleOpen') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('singleOpen') !== 'html'"
+                  (click)="setActiveCodeTab('singleOpen', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('singleOpen', 'html') }}
                 </button>
               </div>
@@ -125,11 +125,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiple Open</h2>
           <button 
-            (click)="toggleDemoView('multipleOpen')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('multipleOpen')" 
+            [class.dark:bg-gray-700]="isShowingCode('multipleOpen')" 
+            (click)="toggleDemoView('multipleOpen')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('multipleOpen')"
-            [class.dark:bg-gray-700]="isShowingCode('multipleOpen')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -140,8 +140,8 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           @if (!isShowingCode('multipleOpen')) {
             <!-- Showcase View -->
-            <div ngtAccordion [multiOpen]="true">
-              <div ngtAccordionItem #firstItemMulti="NgtAccordionItem">
+            <div [multiOpen]="true" ngtAccordion>
+              <div #firstItemMulti="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">First Item</span>
@@ -156,7 +156,7 @@
                   </div>
                 </div>
               </div>
-              <div ngtAccordionItem #secondItemMulti="NgtAccordionItem">
+              <div #secondItemMulti="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
@@ -171,7 +171,7 @@
                   </div>
                 </div>
               </div>
-              <div ngtAccordionItem #thirdItemMulti="NgtAccordionItem">
+              <div #thirdItemMulti="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
@@ -193,9 +193,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('multipleOpen', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('multipleOpen') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('multipleOpen') === 'html'"
                   [class.bg-white]="getActiveCodeTab('multipleOpen') === 'html'"
@@ -203,7 +200,10 @@
                   [class.border-b-2]="getActiveCodeTab('multipleOpen') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('multipleOpen') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('multipleOpen') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('multipleOpen') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('multipleOpen') !== 'html'"
+                  (click)="setActiveCodeTab('multipleOpen', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('multipleOpen', 'html') }}
                 </button>
               </div>
@@ -230,11 +230,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled State</h2>
           <button 
-            (click)="toggleDemoView('disabled')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('disabled')" 
+            [class.dark:bg-gray-700]="isShowingCode('disabled')" 
+            (click)="toggleDemoView('disabled')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('disabled')"
-            [class.dark:bg-gray-700]="isShowingCode('disabled')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -246,7 +246,7 @@
           @if (!isShowingCode('disabled')) {
             <!-- Showcase View -->
             <div ngtAccordion>
-              <div ngtAccordionItem [disabled]="true">
+              <div [disabled]="true" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Disabled Item</span>
@@ -261,7 +261,7 @@
                   </div>
                 </div>
               </div>
-              <div ngtAccordionItem #enabledItem="NgtAccordionItem">
+              <div #enabledItem="NgtAccordionItem" ngtAccordionItem>
                 <h2 ngtAccordionHeader>
                   <button ngtAccordionButton>
                     <span class="font-medium text-gray-900 dark:text-white">Enabled Item</span>
@@ -283,9 +283,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('disabled', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('disabled') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('disabled') === 'html'"
                   [class.bg-white]="getActiveCodeTab('disabled') === 'html'"
@@ -293,7 +290,10 @@
                   [class.border-b-2]="getActiveCodeTab('disabled') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('disabled') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('disabled') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'html'"
+                  (click)="setActiveCodeTab('disabled', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('disabled', 'html') }}
                 </button>
               </div>

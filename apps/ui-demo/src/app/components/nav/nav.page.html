@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Default (Tabs style)</h2>
           <button 
-            (click)="toggleDemoView('default')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('default')" 
+            [class.dark:bg-gray-700]="isShowingCode('default')" 
+            (click)="toggleDemoView('default')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('default')"
-            [class.dark:bg-gray-700]="isShowingCode('default')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -68,11 +68,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pills style</h2>
           <button 
-            (click)="toggleDemoView('pills')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('pills')" 
+            [class.dark:bg-gray-700]="isShowingCode('pills')" 
+            (click)="toggleDemoView('pills')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('pills')"
-            [class.dark:bg-gray-700]="isShowingCode('pills')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -113,11 +113,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Underline style</h2>
           <button 
-            (click)="toggleDemoView('underline')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('underline')" 
+            [class.dark:bg-gray-700]="isShowingCode('underline')" 
+            (click)="toggleDemoView('underline')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('underline')"
-            [class.dark:bg-gray-700]="isShowingCode('underline')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -158,11 +158,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Center aligned</h2>
           <button 
-            (click)="toggleDemoView('center')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('center')" 
+            [class.dark:bg-gray-700]="isShowingCode('center')" 
+            (click)="toggleDemoView('center')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('center')"
-            [class.dark:bg-gray-700]="isShowingCode('center')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -203,11 +203,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Justified</h2>
           <button 
-            (click)="toggleDemoView('justified')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('justified')" 
+            [class.dark:bg-gray-700]="isShowingCode('justified')" 
+            (click)="toggleDemoView('justified')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('justified')"
-            [class.dark:bg-gray-700]="isShowingCode('justified')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -248,11 +248,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With disabled item</h2>
           <button 
-            (click)="toggleDemoView('disabled')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('disabled')" 
+            [class.dark:bg-gray-700]="isShowingCode('disabled')" 
+            (click)="toggleDemoView('disabled')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('disabled')"
-            [class.dark:bg-gray-700]="isShowingCode('disabled')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -294,11 +294,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical orientation</h2>
           <button 
-            (click)="toggleDemoView('vertical')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('vertical')" 
+            [class.dark:bg-gray-700]="isShowingCode('vertical')" 
+            (click)="toggleDemoView('vertical')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('vertical')"
-            [class.dark:bg-gray-700]="isShowingCode('vertical')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />

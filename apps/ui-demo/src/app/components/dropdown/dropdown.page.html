@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Dropdown</h2>
           <button 
-            (click)="toggleDemoView('basic')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('basic')" 
+            [class.dark:bg-gray-700]="isShowingCode('basic')" 
+            (click)="toggleDemoView('basic')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -51,9 +51,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'html'"
@@ -61,13 +58,13 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                  (click)="setActiveCodeTab('basic', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
@@ -75,7 +72,10 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                  (click)="setActiveCodeTab('basic', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'ts') }}
                 </button>
               </div>
@@ -102,11 +102,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Right Aligned</h2>
           <button 
-            (click)="toggleDemoView('rightAligned')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('rightAligned')" 
+            [class.dark:bg-gray-700]="isShowingCode('rightAligned')" 
+            (click)="toggleDemoView('rightAligned')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('rightAligned')"
-            [class.dark:bg-gray-700]="isShowingCode('rightAligned')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -133,9 +133,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('rightAligned', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'html'"
                   [class.bg-white]="getActiveCodeTab('rightAligned') === 'html'"
@@ -143,13 +140,13 @@
                   [class.border-b-2]="getActiveCodeTab('rightAligned') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'html'"
+                  (click)="setActiveCodeTab('rightAligned', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('rightAligned', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('rightAligned', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('rightAligned') === 'ts'"
@@ -157,7 +154,10 @@
                   [class.border-b-2]="getActiveCodeTab('rightAligned') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'ts'"
+                  (click)="setActiveCodeTab('rightAligned', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('rightAligned', 'ts') }}
                 </button>
               </div>

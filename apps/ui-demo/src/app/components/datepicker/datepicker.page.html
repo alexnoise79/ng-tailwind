@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Datepicker</h2>
           <button 
-            (click)="toggleDemoView('basic')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('basic')" 
+            [class.dark:bg-gray-700]="isShowingCode('basic')" 
+            (click)="toggleDemoView('basic')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -47,9 +47,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'html'"
@@ -57,13 +54,13 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                  (click)="setActiveCodeTab('basic', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
@@ -71,7 +68,10 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                  (click)="setActiveCodeTab('basic', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'ts') }}
                 </button>
               </div>
@@ -98,11 +98,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with Time</h2>
           <button 
-            (click)="toggleDemoView('withTime')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('withTime')" 
+            [class.dark:bg-gray-700]="isShowingCode('withTime')" 
+            (click)="toggleDemoView('withTime')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('withTime')"
-            [class.dark:bg-gray-700]="isShowingCode('withTime')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -125,9 +125,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('withTime', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withTime') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('withTime') === 'html'"
                   [class.bg-white]="getActiveCodeTab('withTime') === 'html'"
@@ -135,13 +132,13 @@
                   [class.border-b-2]="getActiveCodeTab('withTime') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('withTime') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('withTime') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTime') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withTime') !== 'html'"
+                  (click)="setActiveCodeTab('withTime', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withTime', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('withTime', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withTime') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('withTime') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('withTime') === 'ts'"
@@ -149,7 +146,10 @@
                   [class.border-b-2]="getActiveCodeTab('withTime') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('withTime') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('withTime') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTime') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withTime') !== 'ts'"
+                  (click)="setActiveCodeTab('withTime', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withTime', 'ts') }}
                 </button>
               </div>
@@ -176,11 +176,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with Custom Format</h2>
           <button 
-            (click)="toggleDemoView('withFormat')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('withFormat')" 
+            [class.dark:bg-gray-700]="isShowingCode('withFormat')" 
+            (click)="toggleDemoView('withFormat')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('withFormat')"
-            [class.dark:bg-gray-700]="isShowingCode('withFormat')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -216,9 +216,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('withFormat', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withFormat') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('withFormat') === 'html'"
                   [class.bg-white]="getActiveCodeTab('withFormat') === 'html'"
@@ -226,13 +223,13 @@
                   [class.border-b-2]="getActiveCodeTab('withFormat') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('withFormat') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('withFormat') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withFormat') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withFormat') !== 'html'"
+                  (click)="setActiveCodeTab('withFormat', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withFormat', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('withFormat', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withFormat') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('withFormat') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('withFormat') === 'ts'"
@@ -240,7 +237,10 @@
                   [class.border-b-2]="getActiveCodeTab('withFormat') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('withFormat') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('withFormat') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withFormat') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withFormat') !== 'ts'"
+                  (click)="setActiveCodeTab('withFormat', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withFormat', 'ts') }}
                 </button>
               </div>
@@ -267,11 +267,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Datepicker with String Input</h2>
           <button 
-            (click)="toggleDemoView('withStringInput')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('withStringInput')" 
+            [class.dark:bg-gray-700]="isShowingCode('withStringInput')" 
+            (click)="toggleDemoView('withStringInput')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('withStringInput')"
-            [class.dark:bg-gray-700]="isShowingCode('withStringInput')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -292,9 +292,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('withStringInput', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'html'"
                   [class.bg-white]="getActiveCodeTab('withStringInput') === 'html'"
@@ -302,13 +299,13 @@
                   [class.border-b-2]="getActiveCodeTab('withStringInput') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'html'"
+                  (click)="setActiveCodeTab('withStringInput', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withStringInput', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('withStringInput', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('withStringInput') === 'ts'"
@@ -316,7 +313,10 @@
                   [class.border-b-2]="getActiveCodeTab('withStringInput') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'ts'"
+                  (click)="setActiveCodeTab('withStringInput', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withStringInput', 'ts') }}
                 </button>
               </div>

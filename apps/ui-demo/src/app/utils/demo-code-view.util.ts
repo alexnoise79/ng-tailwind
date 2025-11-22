@@ -1,4 +1,4 @@
-import { signal, Signal, WritableSignal } from '@angular/core';
+import { signal, WritableSignal } from '@angular/core';
 
 /**
  * Utility class for managing demo code view state

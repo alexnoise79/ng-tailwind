@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Positions</h2>
           <button 
-            (click)="toggleDemoView('positions')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('positions')" 
+            [class.dark:bg-gray-700]="isShowingCode('positions')" 
+            (click)="toggleDemoView('positions')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('positions')"
-            [class.dark:bg-gray-700]="isShowingCode('positions')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -67,9 +67,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('positions', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('positions') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('positions') === 'html'"
                   [class.bg-white]="getActiveCodeTab('positions') === 'html'"
@@ -77,13 +74,13 @@
                   [class.border-b-2]="getActiveCodeTab('positions') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('positions') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('positions') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'html'"
+                  (click)="setActiveCodeTab('positions', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('positions', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('positions', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('positions') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('positions') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('positions') === 'ts'"
@@ -91,7 +88,10 @@
                   [class.border-b-2]="getActiveCodeTab('positions') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('positions') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('positions') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'ts'"
+                  (click)="setActiveCodeTab('positions', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('positions', 'ts') }}
                 </button>
               </div>
@@ -128,11 +128,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Backdrop Options</h2>
           <button 
-            (click)="toggleDemoView('backdrop')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('backdrop')" 
+            [class.dark:bg-gray-700]="isShowingCode('backdrop')" 
+            (click)="toggleDemoView('backdrop')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('backdrop')"
-            [class.dark:bg-gray-700]="isShowingCode('backdrop')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -163,9 +163,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('backdrop', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('backdrop') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('backdrop') === 'html'"
                   [class.bg-white]="getActiveCodeTab('backdrop') === 'html'"
@@ -173,13 +170,13 @@
                   [class.border-b-2]="getActiveCodeTab('backdrop') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('backdrop') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'html'"
+                  (click)="setActiveCodeTab('backdrop', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('backdrop', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('backdrop', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('backdrop') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('backdrop') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('backdrop') === 'ts'"
@@ -187,7 +184,10 @@
                   [class.border-b-2]="getActiveCodeTab('backdrop') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('backdrop') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'ts'"
+                  (click)="setActiveCodeTab('backdrop', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('backdrop', 'ts') }}
                 </button>
               </div>

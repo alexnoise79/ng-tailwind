@@ -20,11 +20,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Example</h2>
           <button 
-            (click)="toggleDemoView('basic')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('basic')" 
+            [class.dark:bg-gray-700]="isShowingCode('basic')" 
+            (click)="toggleDemoView('basic')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -46,9 +46,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'html'"
@@ -56,13 +53,13 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                  (click)="setActiveCodeTab('basic', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
@@ -70,7 +67,10 @@
                   [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                  (click)="setActiveCodeTab('basic', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('basic', 'ts') }}
                 </button>
               </div>
@@ -97,11 +97,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Total Items</h2>
           <button 
-            (click)="toggleDemoView('withTotalItems')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('withTotalItems')" 
+            [class.dark:bg-gray-700]="isShowingCode('withTotalItems')" 
+            (click)="toggleDemoView('withTotalItems')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('withTotalItems')"
-            [class.dark:bg-gray-700]="isShowingCode('withTotalItems')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -123,9 +123,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('withTotalItems', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'html'"
                   [class.bg-white]="getActiveCodeTab('withTotalItems') === 'html'"
@@ -133,13 +130,13 @@
                   [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'html'"
+                  (click)="setActiveCodeTab('withTotalItems', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withTotalItems', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('withTotalItems', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('withTotalItems') === 'ts'"
@@ -147,7 +144,10 @@
                   [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'ts'"
+                  (click)="setActiveCodeTab('withTotalItems', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('withTotalItems', 'ts') }}
                 </button>
               </div>
@@ -174,11 +174,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
           <button 
-            (click)="toggleDemoView('sizes')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('sizes')" 
+            [class.dark:bg-gray-700]="isShowingCode('sizes')" 
+            (click)="toggleDemoView('sizes')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('sizes')"
-            [class.dark:bg-gray-700]="isShowingCode('sizes')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -209,9 +209,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('sizes', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
                   [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
@@ -219,13 +216,13 @@
                   [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'"
+                  (click)="setActiveCodeTab('sizes', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('sizes', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('sizes', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('sizes') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('sizes') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('sizes') === 'ts'"
@@ -233,7 +230,10 @@
                   [class.border-b-2]="getActiveCodeTab('sizes') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('sizes') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('sizes') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'"
+                  (click)="setActiveCodeTab('sizes', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('sizes', 'ts') }}
                 </button>
               </div>
@@ -260,11 +260,11 @@
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Many Pages with Ellipsis</h2>
           <button 
-            (click)="toggleDemoView('ellipsis')" 
-            type="button" 
+            [class.bg-gray-100]="isShowingCode('ellipsis')" 
+            [class.dark:bg-gray-700]="isShowingCode('ellipsis')" 
+            (click)="toggleDemoView('ellipsis')"
+            type="button"
             class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('ellipsis')"
-            [class.dark:bg-gray-700]="isShowingCode('ellipsis')"
             title="Toggle code view">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
@@ -286,9 +286,6 @@
               <!-- Code Tabs -->
               <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                 <button
-                  (click)="setActiveCodeTab('ellipsis', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'html'"
                   [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'html'"
                   [class.bg-white]="getActiveCodeTab('ellipsis') === 'html'"
@@ -296,13 +293,13 @@
                   [class.border-b-2]="getActiveCodeTab('ellipsis') === 'html'"
                   [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'html'"
                   [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'html'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'html'"
+                  (click)="setActiveCodeTab('ellipsis', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('ellipsis', 'html') }}
                 </button>
                 <button
-                  (click)="setActiveCodeTab('ellipsis', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
                   [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'ts'"
                   [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'ts'"
                   [class.bg-white]="getActiveCodeTab('ellipsis') === 'ts'"
@@ -310,7 +307,10 @@
                   [class.border-b-2]="getActiveCodeTab('ellipsis') === 'ts'"
                   [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'ts'"
                   [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'ts'">
+                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'ts'"
+                  (click)="setActiveCodeTab('ellipsis', 'ts')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors">
                   {{ getTabFileName('ellipsis', 'ts') }}
                 </button>
               </div>

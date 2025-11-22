@@ -74,7 +74,7 @@ export class AlertPage {
 <ngt-alert variant="secondary" [dismissible]="false">Secondary alert</ngt-alert>
 <ngt-alert variant="light" [dismissible]="false">Light alert</ngt-alert>
 <ngt-alert variant="dark" [dismissible]="false">Dark alert</ngt-alert>`,
-    dismissible: `<ngt-alert variant="info" [dismissible]="true" (close)="onClose()">
+    dismissible: `<ngt-alert variant="info" [dismissible]="true" (closed)="onClose()">
   This alert can be dismissed by clicking the close button.
 </ngt-alert>`,
     notDismissible: `<ngt-alert variant="info" [dismissible]="false">
