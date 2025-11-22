@@ -34,7 +34,7 @@
             }
           ],
           "outputHashing": "all",
-          "baseHref": "/"
+          "baseHref": "/ng-tailwind/"
         },
         "development": {
           "optimization": false,
