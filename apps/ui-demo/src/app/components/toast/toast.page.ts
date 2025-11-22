@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { NgtToastService, NgtButton, NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.toast',
@@ -18,37 +19,27 @@ export class ToastPage {
     this.activeTab.set(tab);
   }
 
-  // View mode for each demo section (showcase or code)
-  demoViewMode = signal<Record<string, 'showcase' | 'code'>>({
-    basic: 'showcase',
-    withSummary: 'showcase',
-    textOnly: 'showcase',
-    sticky: 'showcase'
-  });
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      basic: 'showcase',
+      withSummary: 'showcase',
+      textOnly: 'showcase',
+      sticky: 'showcase'
+    },
+    {
+      basic: 'html',
+      withSummary: 'ts',
+      textOnly: 'ts',
+      sticky: 'ts'
+    }
+  );
 
-  toggleDemoView(demoKey: string): void {
-    const current = this.demoViewMode();
-    this.demoViewMode.set({
-      ...current,
-      [demoKey]: current[demoKey] === 'showcase' ? 'code' : 'showcase'
-    });
-  }
-
-  // Active code tab for each demo (html or ts)
-  activeCodeTab = signal<Record<string, 'html' | 'ts'>>({
-    basic: 'html',
-    withSummary: 'ts',
-    textOnly: 'ts',
-    sticky: 'ts'
-  });
-
-  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
-    const current = this.activeCodeTab();
-    this.activeCodeTab.set({
-      ...current,
-      [demoKey]: tab
-    });
-  }
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'ts');
 
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
@@ -201,24 +192,9 @@ showDanger(): void {
 });`
   };
 
-  // Helper to check if demo is showing code
-  isShowingCode(demoKey: string): boolean {
-    return this.demoViewMode()[demoKey] === 'code';
-  }
-
-  // Helper to get active code tab for a demo
-  getActiveCodeTab(demoKey: string): 'html' | 'ts' {
-    return this.activeCodeTab()[demoKey] || 'ts';
-  }
-
   // Helper to get code snippet for a specific tab
   getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
-    if (demoKey === 'basic' && typeof this.codeSnippets.basic === 'object') {
-      return this.codeSnippets.basic[fileType] || '';
-    }
-    return typeof this.codeSnippets[demoKey as keyof typeof this.codeSnippets] === 'string' 
-      ? this.codeSnippets[demoKey as keyof typeof this.codeSnippets] as string 
-      : '';
+    return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
   }
 
   // Helper to get tab file name based on demo key
@@ -241,6 +217,6 @@ showDanger(): void {
         ts: 'toast-sticky.ts'
       }
     };
-    return fileNames[demoKey]?.[fileType] || `toast-${demoKey}.${fileType}`;
+    return this.codeViewUtil.getTabFileName('toast', demoKey, fileType, fileNames);
   }
 }

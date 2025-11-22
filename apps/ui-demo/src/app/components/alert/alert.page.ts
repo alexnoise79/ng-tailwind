@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { NgtAlert, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
+import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.alert',
@@ -18,35 +19,25 @@ export class AlertPage {
     this.activeTab.set(tab);
   }
 
-  // View mode for each demo section (showcase or code)
-  demoViewMode = signal<Record<string, 'showcase' | 'code'>>({
-    allVariants: 'showcase',
-    dismissible: 'showcase',
-    notDismissible: 'showcase'
-  });
+  // Demo code view utility
+  codeViewUtil = new DemoCodeViewUtil(
+    {
+      allVariants: 'showcase',
+      dismissible: 'showcase',
+      notDismissible: 'showcase'
+    },
+    {
+      allVariants: 'html',
+      dismissible: 'html',
+      notDismissible: 'html'
+    }
+  );
 
-  toggleDemoView(demoKey: string): void {
-    const current = this.demoViewMode();
-    this.demoViewMode.set({
-      ...current,
-      [demoKey]: current[demoKey] === 'showcase' ? 'code' : 'showcase'
-    });
-  }
-
-  // Active code tab for each demo (html or ts)
-  activeCodeTab = signal<Record<string, 'html' | 'ts'>>({
-    allVariants: 'html',
-    dismissible: 'html',
-    notDismissible: 'html'
-  });
-
-  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
-    const current = this.activeCodeTab();
-    this.activeCodeTab.set({
-      ...current,
-      [demoKey]: tab
-    });
-  }
+  // Expose utility methods for template
+  toggleDemoView = (demoKey: string) => this.codeViewUtil.toggleDemoView(demoKey);
+  setActiveCodeTab = (demoKey: string, tab: 'html' | 'ts') => this.codeViewUtil.setActiveCodeTab(demoKey, tab);
+  isShowingCode = (demoKey: string) => this.codeViewUtil.isShowingCode(demoKey);
+  getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
@@ -91,16 +82,6 @@ export class AlertPage {
 </ngt-alert>`
   };
 
-  // Helper to check if demo is showing code
-  isShowingCode(demoKey: string): boolean {
-    return this.demoViewMode()[demoKey] === 'code';
-  }
-
-  // Helper to get active code tab for a demo
-  getActiveCodeTab(demoKey: string): 'html' | 'ts' {
-    return this.activeCodeTab()[demoKey] || 'html';
-  }
-
   // Helper to get tab file name based on demo key
   getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
     const fileNames: Record<string, Record<'html' | 'ts', string>> = {
@@ -117,7 +98,7 @@ export class AlertPage {
         ts: 'alert-not-dismissible.ts'
       }
     };
-    return fileNames[demoKey]?.[fileType] || `alert-${demoKey}.${fileType}`;
+    return this.codeViewUtil.getTabFileName('alert', demoKey, fileType, fileNames);
   }
 }
 
