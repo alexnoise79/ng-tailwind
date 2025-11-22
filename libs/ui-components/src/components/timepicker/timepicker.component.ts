@@ -16,12 +16,25 @@ export class NgtTimepicker implements OnInit {
   @Input() set model(value: TimeInput) {
     const parsed = this.parseTimeInput(value);
     if (parsed) {
-      this._model.set(parsed);
-      this._currentHour.set(parsed.hour);
-      this._currentMinute.set(parsed.minute);
-      if (parsed.second !== undefined) this._currentSecond.set(parsed.second);
+      // Only update if the values actually changed to avoid circular updates
+      const currentModel = this._model();
+      const hasChanged = !currentModel || 
+          currentModel.hour !== parsed.hour || 
+          currentModel.minute !== parsed.minute || 
+          (currentModel.second ?? undefined) !== (parsed.second ?? undefined);
+      
+      if (hasChanged) {
+        this._model.set(parsed);
+        this._currentHour.set(parsed.hour);
+        this._currentMinute.set(parsed.minute);
+        if (parsed.second !== undefined) {
+          this._currentSecond.set(parsed.second);
+        }
+      }
     } else {
-      this._model.set(null);
+      if (this._model() !== null) {
+        this._model.set(null);
+      }
     }
   }
   private _model = signal<NgtTimeStruct | null>(null);

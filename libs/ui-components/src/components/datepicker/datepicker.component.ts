@@ -23,12 +23,28 @@ export class NgtDatepicker implements OnInit {
   @Input() set model(value: DateInput) {
     const parsed = this.parseDateInput(value);
     if (parsed) {
+      const currentModel = this._model();
+      // Preserve current time when model is updated from dateSelect output (circular update)
+      // Only update time if:
+      // 1. There's no current model (initial load)
+      // 2. The date part changed (year, month, or day) - in this case, reset time to parsed time
+      const dateChanged = !currentModel || 
+        currentModel.year !== parsed.year || 
+        currentModel.month !== parsed.month || 
+        currentModel.day !== parsed.day;
+      
       this._model.set(parsed);
       this._currentMonth.set(parsed.month);
       this._currentYear.set(parsed.year);
-      if (parsed.hour !== undefined) this._currentHour.set(parsed.hour);
-      if (parsed.minute !== undefined) this._currentMinute.set(parsed.minute);
-      if (parsed.second !== undefined) this._currentSecond.set(parsed.second);
+      
+      // Only update time if date changed (new date selected) or if there's no current model
+      // This prevents time from being reset when model is updated from our own dateSelect output
+      if (dateChanged) {
+        if (parsed.hour !== undefined) this._currentHour.set(parsed.hour);
+        if (parsed.minute !== undefined) this._currentMinute.set(parsed.minute);
+        if (parsed.second !== undefined) this._currentSecond.set(parsed.second);
+      }
+      // If date didn't change, preserve the current time signals (they're already correct)
     } else {
       this._model.set(null);
     }
@@ -58,6 +74,12 @@ export class NgtDatepicker implements OnInit {
   currentHour = computed(() => this._currentHour());
   currentMinute = computed(() => this._currentMinute());
   currentSecond = computed(() => this._currentSecond());
+
+  currentTime = computed(() => ({
+    hour: this.currentHour(),
+    minute: this.currentMinute(),
+    second: this.showTime() ? this.currentSecond() : undefined
+  }));
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
@@ -293,14 +315,6 @@ export class NgtDatepicker implements OnInit {
       this._currentSecond.set(time.second);
     }
     this.emitDateIfSelected();
-  }
-
-  getCurrentTime(): NgtTimeStruct {
-    return {
-      hour: this.currentHour(),
-      minute: this.currentMinute(),
-      second: this.showTime() ? this.currentSecond() : undefined
-    };
   }
 
   private emitDateIfSelected(): void {
