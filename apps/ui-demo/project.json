@@ -39,7 +39,8 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "tsConfig": "apps/ui-demo/tsconfig.cy.json"
         }
       },
       "defaultConfiguration": "production"
@@ -55,6 +56,14 @@
         }
       },
       "defaultConfiguration": "development"
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ui-demo/cypress.config.js",
+        "testingType": "component",
+        "devServerTarget": "ui-demo:build:development"
+      }
     }
   }
 }
