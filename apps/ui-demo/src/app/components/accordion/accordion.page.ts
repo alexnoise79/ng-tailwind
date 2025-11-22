@@ -37,6 +37,36 @@ export class AccordionPage {
     this.activeTab.set(tab);
   }
 
+  // View mode for each demo section (showcase or code)
+  demoViewMode = signal<Record<string, 'showcase' | 'code'>>({
+    singleOpen: 'showcase',
+    multipleOpen: 'showcase',
+    disabled: 'showcase'
+  });
+
+  toggleDemoView(demoKey: string): void {
+    const current = this.demoViewMode();
+    this.demoViewMode.set({
+      ...current,
+      [demoKey]: current[demoKey] === 'showcase' ? 'code' : 'showcase'
+    });
+  }
+
+  // Active code tab for each demo (html or ts)
+  activeCodeTab = signal<Record<string, 'html' | 'ts'>>({
+    singleOpen: 'html',
+    multipleOpen: 'html',
+    disabled: 'html'
+  });
+
+  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
+    const current = this.activeCodeTab();
+    this.activeCodeTab.set({
+      ...current,
+      [demoKey]: tab
+    });
+  }
+
   // Copy to clipboard functionality
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
@@ -131,4 +161,33 @@ export class AccordionPage {
   </div>
 </div>`
   };
+
+  // Helper to check if demo is showing code
+  isShowingCode(demoKey: string): boolean {
+    return this.demoViewMode()[demoKey] === 'code';
+  }
+
+  // Helper to get active code tab for a demo
+  getActiveCodeTab(demoKey: string): 'html' | 'ts' {
+    return this.activeCodeTab()[demoKey] || 'html';
+  }
+
+  // Helper to get tab file name based on demo key
+  getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
+    const fileNames: Record<string, Record<'html' | 'ts', string>> = {
+      singleOpen: {
+        html: 'accordion-single-open.html',
+        ts: 'accordion-single-open.ts'
+      },
+      multipleOpen: {
+        html: 'accordion-multiple-open.html',
+        ts: 'accordion-multiple-open.ts'
+      },
+      disabled: {
+        html: 'accordion-disabled.html',
+        ts: 'accordion-disabled.ts'
+      }
+    };
+    return fileNames[demoKey]?.[fileType] || `accordion-${demoKey}.${fileType}`;
+  }
 }
