@@ -7,7 +7,3 @@ export default defineConfig({
     buildTarget: 'ui-demo:build:development'
   })
 });
-<<<<<<< HEAD
-
-=======
->>>>>>> main
