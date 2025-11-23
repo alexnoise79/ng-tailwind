@@ -1,5 +1,5 @@
-import { Directive, HostListener, inject, ElementRef, HostBinding, Optional, SkipSelf, effect, Renderer2, OnInit, OnDestroy, EffectRef, Injector, runInInjectionContext } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Directive, HostListener, inject, ElementRef, HostBinding, effect, Renderer2, OnInit, OnDestroy, EffectRef, Injector, runInInjectionContext } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
 

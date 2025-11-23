@@ -40,6 +40,7 @@
               <ul #nav="ngtNav" ngtNav>
                 <li [itemId]="'nav-home'" ngtNavItem>
                   <button ngtNavLink>Home</button>
+                  <ng-template ngtNavContent>First content</ng-template>
                 </li>
                 <li [itemId]="'nav-about'" ngtNavItem>
                   <button ngtNavLink>About</button>
@@ -48,6 +49,7 @@
                   <button ngtNavLink>Contact</button>
                 </li>
               </ul>
+              <div [ngtNavOutlet]="nav"></div>
             </div>
           } @else {
             <!-- Code View -->
