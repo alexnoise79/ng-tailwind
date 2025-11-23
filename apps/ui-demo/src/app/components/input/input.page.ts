@@ -322,7 +322,7 @@ export class InputPage {
   scrollHeight="200px"
   placeholder="Search items (min 2 chars)"
   class="w-full md:w-64"
-  (onSelect)="onItemSelect($event)"
+  (itemSelect)="onItemSelect($event)"
 />
 
 <ngt-input

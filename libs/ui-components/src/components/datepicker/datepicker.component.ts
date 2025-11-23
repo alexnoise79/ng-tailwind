@@ -36,7 +36,8 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   private _model = signal<NgtDateStruct | null>(null);
 
   // ControlValueAccessor implementation
-  private onChange = (value: string | null) => {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private onChange = (_value: string | null) => {};
   protected onTouched = () => {};
 
   // Calendar visibility
@@ -381,8 +382,9 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState(_isDisabled: boolean): void {
     // This will be handled by the disabled input
+    void _isDisabled; // Explicitly mark as intentionally unused
   }
 
   // Calendar visibility methods

@@ -57,7 +57,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this._optionValue.set(value || null);
   }
   private _optionValue = signal<string | ((item: unknown) => string) | null>(null);
-  readonly onSelect = output<AutoCompleteSelectEvent>();
+  readonly itemSelect = output<AutoCompleteSelectEvent>();
 
   // Content templates
   @ContentChild('item') itemTemplate?: TemplateRef<unknown>;
@@ -556,8 +556,8 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this.onChange(this._value());
     this.valueChange.emit(this._value());
 
-    // Emit onSelect event
-    this.onSelect.emit({
+    // Emit itemSelect event
+    this.itemSelect.emit({
       originalEvent: event,
       value: value
     });

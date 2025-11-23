@@ -672,7 +672,7 @@
                   <div class="space-y-6">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Basic Autocomplete</label>
-                      <ngt-input [(ngModel)]="autocompleteValue1" [completeMethod]="searchItems.bind(this)" [minQueryLength]="2" [delay]="300" (onSelect)="onItemSelect($event)" type="text" optionLabel="name" optionValue="id" scrollHeight="200px" placeholder="Search items (min 2 chars)" class="w-full md:w-64" />
+                      <ngt-input [(ngModel)]="autocompleteValue1" [completeMethod]="searchItems.bind(this)" [minQueryLength]="2" [delay]="300" (itemSelect)="onItemSelect($event)" type="text" optionLabel="name" optionValue="id" scrollHeight="200px" placeholder="Search items (min 2 chars)" class="w-full md:w-64" />
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ autocompleteValue1() || 'Empty' }}</p>
                       @if (selectedItem()) {
                         <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedItem()?.name }} (ID: {{ selectedItem()?.id }})</p>
@@ -982,7 +982,7 @@
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the input value changes.</td>
                       </tr>
                       <tr>
-                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">onSelect</td>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">itemSelect</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;AutoCompleteSelectEvent&gt;</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Callback to invoke when a suggestion is selected. Event contains <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">originalEvent</code> and <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">value</code>.</td>
                       </tr>
