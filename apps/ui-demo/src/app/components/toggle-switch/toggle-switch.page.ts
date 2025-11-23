@@ -1,4 +1,4 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgtToggleSwitch, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
