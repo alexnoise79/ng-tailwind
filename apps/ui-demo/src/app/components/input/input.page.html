@@ -672,7 +672,7 @@
                   <div class="space-y-6">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Basic Autocomplete</label>
-                      <ngt-input type="text" [(ngModel)]="autocompleteValue1" [completeMethod]="searchItems.bind(this)" optionLabel="name" optionValue="id" [minQueryLength]="2" [delay]="300" scrollHeight="200px" placeholder="Search items (min 2 chars)" class="w-full md:w-64" (onSelect)="onItemSelect($event)" />
+                      <ngt-input [(ngModel)]="autocompleteValue1" [completeMethod]="searchItems.bind(this)" [minQueryLength]="2" [delay]="300" (onSelect)="onItemSelect($event)" type="text" optionLabel="name" optionValue="id" scrollHeight="200px" placeholder="Search items (min 2 chars)" class="w-full md:w-64" />
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ autocompleteValue1() || 'Empty' }}</p>
                       @if (selectedItem()) {
                         <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedItem()?.name }} (ID: {{ selectedItem()?.id }})</p>
@@ -680,7 +680,7 @@
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">With Custom Templates</label>
-                      <ngt-input type="text" [(ngModel)]="autocompleteValue2" [completeMethod]="searchItems.bind(this)" optionLabel="name" [minQueryLength]="1" [delay]="500" scrollHeight="250px" placeholder="Search with custom template" class="w-full md:w-64">
+                      <ngt-input [(ngModel)]="autocompleteValue2" [completeMethod]="searchItems.bind(this)" [minQueryLength]="1" [delay]="500" type="text" optionLabel="name" scrollHeight="250px" placeholder="Search with custom template" class="w-full md:w-64">
                         <ng-template #item let-item>
                           <div class="flex items-center justify-between">
                             <div>
