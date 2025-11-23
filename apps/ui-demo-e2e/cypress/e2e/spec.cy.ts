@@ -14,3 +14,7 @@ describe('ui-demo e2e', () => {
     cy.get('aside').should('exist');
   });
 });
+<<<<<<< HEAD
+
+=======
+>>>>>>> main

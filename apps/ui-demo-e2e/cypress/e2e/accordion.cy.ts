@@ -5,6 +5,14 @@ describe('Accordion Page E2E', () => {
     cy.visit('/accordion');
   });
 
+<<<<<<< HEAD
+  it('should display the accordion page title', () => {
+    cy.contains('Accordion');
+    cy.contains('Collapsible content sections with smooth animations');
+  });
+});
+
+=======
   it('should display the accordion page title and description', () => {
     cy.contains('Accordion');
     cy.contains('Collapsible content sections with smooth animations');
@@ -230,3 +238,4 @@ describe('Accordion Page E2E', () => {
     });
   });
 });
+>>>>>>> main
