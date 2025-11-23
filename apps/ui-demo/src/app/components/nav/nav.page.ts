@@ -1,7 +1,6 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgtNav, NgtNavItem, NgtNavLink, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
@@ -11,13 +10,6 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 })
 export class NavPage {
   private toastService = inject(NgtToastService);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

@@ -6,455 +6,456 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Default (Tabs style) -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Default (Tabs style)</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('default')"
+                  [class.dark:bg-gray-700]="isShowingCode('default')"
+                  (click)="toggleDemoView('default')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('default')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ul #nav="ngtNav" ngtNav>
+                      <li ngtNavItem>
+                        <button ngtNavLink>Home</button>
+                        <ng-template ngtNavContent>First content</ng-template>
+                      </li>
+                      <li ngtNavItem>
+                        <button ngtNavLink>About</button>
+                      </li>
+                      <li ngtNavItem>
+                        <button ngtNavLink>Contact</button>
+                      </li>
+                    </ul>
+                    <div [ngtNavOutlet]="nav"></div>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.default)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.default }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Pills style -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pills style</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('pills')"
+                  [class.dark:bg-gray-700]="isShowingCode('pills')"
+                  (click)="toggleDemoView('pills')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('pills')) {
+                  <div class="mb-4">
+                    <ngt-nav [style]="'pills'">
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.pills)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.pills }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Underline style -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Underline style</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('underline')"
+                  [class.dark:bg-gray-700]="isShowingCode('underline')"
+                  (click)="toggleDemoView('underline')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('underline')) {
+                  <div class="mb-4">
+                    <ngt-nav [style]="'underline'">
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.underline)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.underline }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Center aligned -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Center aligned</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('center')"
+                  [class.dark:bg-gray-700]="isShowingCode('center')"
+                  (click)="toggleDemoView('center')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('center')) {
+                  <div class="mb-4">
+                    <ngt-nav [align]="'center'">
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.center)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.center }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Justified -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Justified</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('justified')"
+                  [class.dark:bg-gray-700]="isShowingCode('justified')"
+                  (click)="toggleDemoView('justified')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('justified')) {
+                  <div class="mb-4">
+                    <ngt-nav [align]="'justified'">
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.justified)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.justified }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- With disabled item -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With disabled item</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('disabled')"
+                  [class.dark:bg-gray-700]="isShowingCode('disabled')"
+                  (click)="toggleDemoView('disabled')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('disabled')) {
+                  <div class="mb-4">
+                    <ngt-nav>
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item [disabled]="true" label="Disabled"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.disabled }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Vertical orientation -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical orientation</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('vertical')"
+                  [class.dark:bg-gray-700]="isShowingCode('vertical')"
+                  (click)="toggleDemoView('vertical')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('vertical')) {
+                  <div class="mb-4 max-w-xs">
+                    <ngt-nav [orientation]="'vertical'">
+                      <ngt-nav-item label="Home"></ngt-nav-item>
+                      <ngt-nav-item label="About"></ngt-nav-item>
+                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    </ngt-nav>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.vertical)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.vertical }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- NgtNav Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNav - Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">orientation</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal' | 'vertical'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The orientation of the navigation items.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">style</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs' | 'pills' | 'underline'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style of the navigation.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start' | 'center' | 'end' | 'justified'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of navigation items (horizontal only).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activeId</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The ID of the currently active navigation item.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- NgtNavItem Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Required. The label text displayed in the navigation item.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the navigation item is disabled.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">routerLink</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | string[] | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional Angular Router link. When provided, the item will use router navigation and sync with RouterLinkActive.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- NgtNavItem Outputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activated</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;void&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the navigation item becomes active (only when routerLink is not used).</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Component</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtNavItem</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">ng-content</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom content for the navigation item. If provided, it will be used instead of the label.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Default (Tabs style) -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Default (Tabs style)</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('default')"
-            [class.dark:bg-gray-700]="isShowingCode('default')"
-            (click)="toggleDemoView('default')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('default')) {
-            <!-- Showcase View -->
-            <div class="mb-4">
-              <ul #nav="ngtNav" ngtNav>
-                <li ngtNavItem>
-                  <button ngtNavLink>Home</button>
-                  <ng-template ngtNavContent>First content</ng-template>
-                </li>
-                <li ngtNavItem>
-                  <button ngtNavLink>About</button>
-                </li>
-                <li ngtNavItem>
-                  <button ngtNavLink>Contact</button>
-                </li>
-              </ul>
-              <div [ngtNavOutlet]="nav"></div>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.default)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.default }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Pills style -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Pills style</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('pills')"
-            [class.dark:bg-gray-700]="isShowingCode('pills')"
-            (click)="toggleDemoView('pills')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('pills')) {
-            <div class="mb-4">
-              <ngt-nav [style]="'pills'">
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.pills)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.pills }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Underline style -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Underline style</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('underline')"
-            [class.dark:bg-gray-700]="isShowingCode('underline')"
-            (click)="toggleDemoView('underline')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('underline')) {
-            <div class="mb-4">
-              <ngt-nav [style]="'underline'">
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.underline)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.underline }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Center aligned -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Center aligned</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('center')"
-            [class.dark:bg-gray-700]="isShowingCode('center')"
-            (click)="toggleDemoView('center')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('center')) {
-            <div class="mb-4">
-              <ngt-nav [align]="'center'">
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.center)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.center }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Justified -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Justified</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('justified')"
-            [class.dark:bg-gray-700]="isShowingCode('justified')"
-            (click)="toggleDemoView('justified')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('justified')) {
-            <div class="mb-4">
-              <ngt-nav [align]="'justified'">
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.justified)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.justified }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- With disabled item -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With disabled item</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('disabled')"
-            [class.dark:bg-gray-700]="isShowingCode('disabled')"
-            (click)="toggleDemoView('disabled')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('disabled')) {
-            <div class="mb-4">
-              <ngt-nav>
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item [disabled]="true" label="Disabled"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.disabled }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Vertical orientation -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Vertical orientation</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('vertical')"
-            [class.dark:bg-gray-700]="isShowingCode('vertical')"
-            (click)="toggleDemoView('vertical')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('vertical')) {
-            <div class="mb-4 max-w-xs">
-              <ngt-nav [orientation]="'vertical'">
-                <ngt-nav-item label="Home"></ngt-nav-item>
-                <ngt-nav-item label="About"></ngt-nav-item>
-                <ngt-nav-item label="Contact"></ngt-nav-item>
-              </ngt-nav>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.vertical)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.vertical }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- NgtNav Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNav - Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">orientation</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal' | 'vertical'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'horizontal'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The orientation of the navigation items.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">style</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs' | 'pills' | 'underline'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'tabs'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style of the navigation.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start' | 'center' | 'end' | 'justified'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of navigation items (horizontal only).</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activeId</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The ID of the currently active navigation item.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- NgtNavItem Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Required. The label text displayed in the navigation item.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the navigation item is disabled.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">routerLink</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | string[] | null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional Angular Router link. When provided, the item will use router navigation and sync with RouterLinkActive.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- NgtNavItem Outputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtNavItem - Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">activated</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;void&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the navigation item becomes active (only when routerLink is not used).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Templates -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Component</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtNavItem</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">ng-content</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom content for the navigation item. If provided, it will be used instead of the label.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>
