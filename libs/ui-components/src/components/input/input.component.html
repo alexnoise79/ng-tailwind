@@ -1,10 +1,10 @@
-<div class="relative flex rounded-md shadow-sm">
-  <div class="relative flex-1">
+<div class="relative flex rounded-md shadow-sm" [class.border]="hasChips() && chip() !== null" [class.border-gray-300]="hasChips() && chip() !== null" [class.dark:border-gray-600]="hasChips() && chip() !== null" [class.focus-within:ring-2]="hasChips() && chip() !== null" [class.focus-within:ring-primary-500]="hasChips() && chip() !== null" [class.focus-within:border-transparent]="hasChips() && chip() !== null">
+  <div class="relative flex-1 flex items-center gap-1 min-h-0">
     <!-- Chips display -->
     @if (hasChips() && chip() !== null) {
-      <div class="absolute inset-0 flex items-center gap-1 px-3 py-2 pointer-events-none">
+      <div class="flex items-center gap-1 flex-wrap px-3 py-2 shrink-0">
         @for (chipValue of chips(); track chipValue) {
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs pointer-events-auto">
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs whitespace-nowrap">
             <span>{{ chipValue }}</span>
             <button
               [attr.aria-label]="'Remove ' + chipValue"
@@ -22,33 +22,36 @@
       </div>
     }
 
-    <input
-      #inputElement
-      [type]="type()"
-      [value]="displayValue()"
-      [placeholder]="placeholder()"
-      [disabled]="isDisabled()"
-      [class]="inputClasses()"
-      [class.pr-20]="showClear() && hasValue()"
-      [class.opacity-0]="hasChips() && chip() !== null"
-      (input)="onInput($event)"
-      (focus)="onFocus()"
-      (blur)="onBlur()"
-      [attr.aria-label]="placeholder() || 'Input field'"
-    />
+    <div class="relative flex-1 min-w-0">
+      <input
+        #inputElement
+        [type]="type()"
+        [value]="chip() !== null ? currentChipValue() : displayValue()"
+        [placeholder]="hasChips() && chip() !== null ? '' : placeholder()"
+        [disabled]="isDisabled()"
+        [class]="inputClasses()"
+        [class.pr-20]="showClear() && hasValue()"
+        [class.pl-0]="hasChips() && chip() !== null"
+        (input)="onInput($event)"
+        (keydown)="onKeyDown($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        [attr.aria-label]="placeholder() || 'Input field'"
+      />
 
-    <!-- Clear button -->
-    @if (showClear() && hasValue() && !isDisabled()) {
-      <button
-        type="button"
-        [attr.aria-label]="'Clear input'"
-        (click)="onClear($event)"
-        class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none transition-colors"
-      >
-        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    }
+      <!-- Clear button -->
+      @if (showClear() && hasValue() && !isDisabled()) {
+        <button
+          type="button"
+          [attr.aria-label]="'Clear input'"
+          (click)="onClear($event)"
+          class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none transition-colors"
+        >
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      }
+    </div>
   </div>
 </div>

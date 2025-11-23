@@ -53,6 +53,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   private _displayValue = signal<string>('');
   private _isFocused = signal(false);
   private _chips = signal<string[]>([]);
+  private _currentChipValue = signal<string>('');
 
   // ControlValueAccessor callbacks
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -68,12 +69,16 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   });
   hasChips = computed(() => this._chips().length > 0);
   chips = computed(() => this._chips());
+  currentChipValue = computed(() => this._currentChipValue());
   isNumberType = computed(() => this.type() === 'number');
   isCurrencyMode = computed(() => this.mode() === 'currency');
   isDecimalMode = computed(() => this.mode() === 'decimal');
 
   inputClasses = computed(() => {
-    const base = 'w-full border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+    const hasChipMode = this.hasChips() && this.chip() !== null;
+    const base = hasChipMode 
+      ? 'w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+      : 'w-full border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
     const sizeClasses = {
       sm: 'px-2.5 py-1.5 text-sm',
       md: 'px-3 py-2 text-base',
@@ -151,6 +156,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const val = this._value();
     if (!val) {
       this._chips.set([]);
+      this._currentChipValue.set('');
       return;
     }
 
@@ -159,29 +165,41 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     if (chipSeparator === null) {
       this._chips.set([]);
+      this._currentChipValue.set(stringValue);
       return;
     }
 
     let chips: string[] = [];
+    let currentValue = '';
+    
     if (typeof chipSeparator === 'string') {
       // Handle regex string like "/\\s+/"
       if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
         try {
           const regexPattern = chipSeparator.slice(1, -1);
           const regex = new RegExp(regexPattern);
-          chips = stringValue.split(regex).filter(c => c.trim() !== '');
+          const parts = stringValue.split(regex);
+          chips = parts.slice(0, -1).filter(c => c.trim() !== '');
+          currentValue = parts[parts.length - 1] || '';
         } catch {
           // Fallback to string split if regex is invalid
-          chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+          const parts = stringValue.split(chipSeparator);
+          chips = parts.slice(0, -1).filter(c => c.trim() !== '');
+          currentValue = parts[parts.length - 1] || '';
         }
       } else {
-        chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+        const parts = stringValue.split(chipSeparator);
+        chips = parts.slice(0, -1).filter(c => c.trim() !== '');
+        currentValue = parts[parts.length - 1] || '';
       }
     } else if (chipSeparator instanceof RegExp) {
-      chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+      const parts = stringValue.split(chipSeparator);
+      chips = parts.slice(0, -1).filter(c => c.trim() !== '');
+      currentValue = parts[parts.length - 1] || '';
     }
 
     this._chips.set(chips);
+    this._currentChipValue.set(currentValue);
   }
 
   private getModelValue(displayValue: string): string {
@@ -192,6 +210,17 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       return displayValue.replace(/[^\d]/g, '').slice(0, maskPattern.length);
     }
     return displayValue;
+  }
+
+  private buildChipModelValue(chips: string[], currentValue: string): string {
+    const chipFormat = this.chipFormat();
+    if (chips.length === 0) {
+      return currentValue;
+    }
+    if (!currentValue || currentValue.trim() === '') {
+      return chips.join(chipFormat);
+    }
+    return chips.join(chipFormat) + chipFormat + currentValue;
   }
 
   // Event handlers
@@ -205,22 +234,94 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       target.value = value;
     }
 
-    // Update display value
-    this._displayValue.set(value);
-
-    // Get model value (without mask formatting)
-    const modelValue = this.getModelValue(value);
-
-    // For number type, convert to number
-    if (this.type() === 'number') {
-      const numValue = this.parseNumber(modelValue);
-      this._value.set(numValue);
-      this.onChange(numValue);
-      this.valueChange.emit(numValue);
-    } else {
+    // Handle chip mode
+    if (this.chip() !== null && this.type() !== 'number') {
+      // Prevent space as first character in chip mode
+      if (value.startsWith(' ')) {
+        value = value.trimStart();
+        target.value = value;
+      }
+      
+      const chipSeparator = this.chip();
+      const chipFormat = this.chipFormat();
+      const existingChips = this._chips();
+      
+      // Check if the separator was just typed
+      let separatorTyped = false;
+      if (typeof chipSeparator === 'string') {
+        // Check if value ends with the separator
+        if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
+          // For regex separators, check if the value matches the pattern at the end
+          try {
+            const regexPattern = chipSeparator.slice(1, -1);
+            const regex = new RegExp(regexPattern);
+            separatorTyped = regex.test(value.slice(-1));
+          } catch {
+            separatorTyped = value.endsWith(chipSeparator);
+          }
+        } else {
+          separatorTyped = value.endsWith(chipFormat);
+        }
+      } else if (chipSeparator instanceof RegExp) {
+        separatorTyped = chipSeparator.test(value.slice(-1));
+      }
+      
+      // If separator was typed, create a chip from the value before it
+      if (separatorTyped && value.length > chipFormat.length) {
+        const valueBeforeSeparator = value.slice(0, -chipFormat.length).trim();
+        if (valueBeforeSeparator) {
+          const newChips = [...existingChips, valueBeforeSeparator];
+          const newValue = this.buildChipModelValue(newChips, '');
+          
+          this._value.set(newValue);
+          this._displayValue.set(newValue);
+          this._chips.set(newChips);
+          this._currentChipValue.set('');
+          this.onChange(newValue);
+          this.valueChange.emit(newValue);
+          
+          // Clear the input
+          target.value = '';
+          return;
+        }
+      }
+      
+      // Otherwise, just update the current value without creating chips
+      // Update the current chip value directly
+      this._currentChipValue.set(value);
+      
+      const fullValue = this.buildChipModelValue(existingChips, value);
+      
+      // Update display value (for non-chip mode display)
+      this._displayValue.set(fullValue);
+      
+      // Get model value (without mask formatting)
+      const modelValue = this.getModelValue(fullValue);
+      
       this._value.set(modelValue);
       this.onChange(modelValue);
       this.valueChange.emit(modelValue);
+      
+      // Don't call updateChips() here - it's handled by the effect when focus is lost
+    } else {
+      // Normal mode (no chips)
+      // Update display value
+      this._displayValue.set(value);
+
+      // Get model value (without mask formatting)
+      const modelValue = this.getModelValue(value);
+
+      // For number type, convert to number
+      if (this.type() === 'number') {
+        const numValue = this.parseNumber(modelValue);
+        this._value.set(numValue);
+        this.onChange(numValue);
+        this.valueChange.emit(numValue);
+      } else {
+        this._value.set(modelValue);
+        this.onChange(modelValue);
+        this.valueChange.emit(modelValue);
+      }
     }
   }
 
@@ -266,9 +367,52 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this._isFocused.set(true);
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    // If input is empty and backspace is pressed, delete the last chip
+    if (this.chip() !== null && this.type() !== 'number' && event.key === 'Backspace') {
+      const inputValue = this.inputElementRef?.nativeElement?.value || '';
+      if (inputValue === '' || inputValue.trim() === '') {
+        const chips = this._chips();
+        if (chips.length > 0) {
+          event.preventDefault();
+          const lastChip = chips[chips.length - 1];
+          this.removeChip(lastChip, event);
+        }
+      }
+    }
+  }
+
   onBlur(): void {
     this._isFocused.set(false);
     this.onTouched();
+
+    // Submit current chip value on blur if chip mode is enabled
+    if (this.chip() !== null && this.type() !== 'number') {
+      const currentValue = this._currentChipValue().trimStart().trim();
+      if (currentValue) {
+        // Add current value as a chip (trimmed of leading spaces)
+        const existingChips = this._chips();
+        const newChips = [...existingChips, currentValue];
+        const newValue = this.buildChipModelValue(newChips, '');
+        
+        this._value.set(newValue);
+        this._displayValue.set(newValue);
+        this._chips.set(newChips);
+        this._currentChipValue.set('');
+        this.onChange(newValue);
+        this.valueChange.emit(newValue);
+      } else {
+        // Even if no current value, update the model to remove any trailing separator
+        const existingChips = this._chips();
+        const newValue = this.buildChipModelValue(existingChips, '');
+        if (newValue !== String(this._value())) {
+          this._value.set(newValue);
+          this._displayValue.set(newValue);
+          this.onChange(newValue);
+          this.valueChange.emit(newValue);
+        }
+      }
+    }
 
     // Format number on blur if in currency or decimal mode
     if (this.type() === 'number' && this.mode() !== null) {
@@ -304,13 +448,37 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     const chips = this._chips();
     const newChips = chips.filter(c => c !== chip);
-    const newValue = newChips.join(this.chipFormat());
+    const currentValue = this._currentChipValue();
+    const newValue = this.buildChipModelValue(newChips, currentValue);
     
+    // Set chips and current value first to prevent effect from overwriting them
+    this._chips.set(newChips);
+    this._currentChipValue.set(currentValue);
+    
+    // Then update the value - this will trigger the effect, but chips are already set correctly
     this._value.set(newValue);
     this._displayValue.set(newValue);
-    this._chips.set(newChips);
     this.onChange(newValue);
     this.valueChange.emit(newValue);
+    
+    // Ensure input is cleared if there's no current value
+    if (!currentValue && this.inputElementRef?.nativeElement) {
+      this.inputElementRef.nativeElement.value = '';
+    }
+  }
+
+  getChipsWidth(): number {
+    // Calculate approximate width needed for chips
+    // Each chip is roughly 80-120px depending on content, plus gaps
+    const chips = this._chips();
+    if (chips.length === 0) return 0;
+    
+    // Base padding + gap between chips + estimated chip width
+    const basePadding = 12; // px-3 = 12px
+    const gap = 4; // gap-1 = 4px
+    const estimatedChipWidth = 80; // Average chip width
+    
+    return basePadding + (chips.length * (estimatedChipWidth + gap));
   }
 
   // ControlValueAccessor implementation
