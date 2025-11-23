@@ -110,7 +110,6 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   currentChipValue = computed(() => this._currentChipValue());
   isNumberType = computed(() => this.type() === 'number');
   isCurrencyMode = computed(() => this.mode() === 'currency');
-  isDecimalMode = computed(() => this.mode() === 'decimal');
   
   // Autocomplete computed
   hasAutocomplete = computed(() => this._completeMethod() !== null);
@@ -839,20 +838,6 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     if (!currentValue && this.inputElementRef?.nativeElement) {
       this.inputElementRef.nativeElement.value = '';
     }
-  }
-
-  getChipsWidth(): number {
-    // Calculate approximate width needed for chips
-    // Each chip is roughly 80-120px depending on content, plus gaps
-    const chips = this._chips();
-    if (chips.length === 0) return 0;
-    
-    // Base padding + gap between chips + estimated chip width
-    const basePadding = 12; // px-3 = 12px
-    const gap = 4; // gap-1 = 4px
-    const estimatedChipWidth = 80; // Average chip width
-    
-    return basePadding + (chips.length * (estimatedChipWidth + gap));
   }
 
   // ControlValueAccessor implementation
