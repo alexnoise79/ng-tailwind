@@ -1,4 +1,4 @@
-import { Directive, Input, ViewContainerRef, TemplateRef, inject, effect, OnInit, Injector, runInInjectionContext } from '@angular/core';
+import { Directive, Input, ViewContainerRef, inject, effect, OnInit, Injector, runInInjectionContext } from '@angular/core';
 import { NgtNav } from './nav.directive';
 
 @Directive({

@@ -77,7 +77,7 @@ export class NgtTooltip implements OnDestroy {
     this.tooltipElement = this.renderer.createElement('div');
     this.renderer.setAttribute(this.tooltipElement, 'role', 'tooltip');
     this.renderer.setStyle(this.tooltipElement, 'display', 'none');
-    
+
     this.updateTooltipContent();
     this.renderer.appendChild(hostElement, this.tooltipElement);
   }
@@ -187,4 +187,3 @@ export class NgtTooltip implements OnDestroy {
     this.hide();
   }
 }
-

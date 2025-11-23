@@ -78,14 +78,14 @@ export class NgtNavLink implements OnInit, OnDestroy {
       event.stopPropagation();
       return;
     }
-    
+
     // Handle routerLink if nav-item has it
     const routerLink = this.navItem?.routerLink();
     if (routerLink && this.router) {
       const linkValue = Array.isArray(routerLink) ? routerLink : [routerLink];
       this.router.navigate(linkValue);
     }
-    
+
     if (this.nav && this.navItem) {
       this.nav.selectItem(this.navItem.id);
     }

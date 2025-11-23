@@ -37,14 +37,14 @@
           @if (!isShowingCode('default')) {
             <!-- Showcase View -->
             <div class="mb-4">
-              <ul ngtNav #nav="ngtNav">
-                <li ngtNavItem [itemId]="'nav-home'">
+              <ul #nav="ngtNav" ngtNav>
+                <li [itemId]="'nav-home'" ngtNavItem>
                   <button ngtNavLink>Home</button>
                 </li>
-                <li ngtNavItem [itemId]="'nav-about'">
+                <li [itemId]="'nav-about'" ngtNavItem>
                   <button ngtNavLink>About</button>
                 </li>
-                <li ngtNavItem [itemId]="'nav-contact'">
+                <li [itemId]="'nav-contact'" ngtNavItem>
                   <button ngtNavLink>Contact</button>
                 </li>
               </ul>

@@ -1,8 +1,6 @@
 <div class="space-y-8">
   <!-- Custom tooltip template -->
-  <ng-template #customTooltipTemplate>
-    <span class="font-bold">Custom</span> HTML content with <span class="text-primary-400">color</span>
-  </ng-template>
+  <ng-template #customTooltipTemplate> <span class="font-bold">Custom</span> HTML content with <span class="text-primary-400">color</span> </ng-template>
 
   <div>
     <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Tooltip</h1>
@@ -97,33 +95,10 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           @if (!isShowingCode('delays')) {
             <div class="mb-4 flex flex-wrap gap-4">
-              <button 
-                [delay]="200"
-                ngtTooltip="Default delay (200ms)" 
-                class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
-                Default Delay
-              </button>
-              <button 
-                [showDelay]="100"
-                [hideDelay]="200"
-                ngtTooltip="Fast show delay (100ms)" 
-                class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">
-                Fast Show Delay
-              </button>
-              <button 
-                [showDelay]="200"
-                [hideDelay]="500"
-                ngtTooltip="Slow hide delay (500ms)" 
-                class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
-                Slow Hide Delay
-              </button>
-              <button 
-                [showDelay]="300"
-                [hideDelay]="400"
-                ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" 
-                class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">
-                Custom Delays
-              </button>
+              <button [delay]="200" ngtTooltip="Default delay (200ms)" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Default Delay</button>
+              <button [showDelay]="100" [hideDelay]="200" ngtTooltip="Fast show delay (100ms)" class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Fast Show Delay</button>
+              <button [showDelay]="200" [hideDelay]="500" ngtTooltip="Slow hide delay (500ms)" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Slow Hide Delay</button>
+              <button [showDelay]="300" [hideDelay]="400" ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Custom Delays</button>
             </div>
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -176,12 +151,7 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           @if (!isShowingCode('customContent')) {
             <div class="mb-4">
-              <button 
-                [content]="customTooltipTemplate"
-                ngtTooltip=""
-                class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
-                Custom Content
-              </button>
+              <button [content]="customTooltipTemplate" ngtTooltip="" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Custom Content</button>
             </div>
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -280,9 +250,7 @@
         <section>
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Usage</h3>
           <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-              The tooltip is a directive that can be applied to any DOM element. Apply it using the <code class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">ngtTooltip</code> attribute.
-            </p>
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">The tooltip is a directive that can be applied to any DOM element. Apply it using the <code class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">ngtTooltip</code> attribute.</p>
             <pre class="mt-2 p-3 bg-gray-900 dark:bg-black rounded text-sm text-gray-100 overflow-x-auto"><code>&lt;!-- Simple string tooltip --&gt;
 &lt;button ngtTooltip="Tooltip text" tooltipPosition="top"&gt;
   Hover me

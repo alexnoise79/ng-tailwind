@@ -1,4 +1,4 @@
-import { Directive, signal, computed, input, output, effect, AfterContentInit, ContentChild, inject, Optional, SkipSelf, Renderer2, OnInit, HostListener, Injector, runInInjectionContext } from '@angular/core';
+import { Directive, signal, computed, input, output, effect, AfterContentInit, ContentChild, inject, Renderer2, OnInit, Injector, runInInjectionContext } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgtNavLink } from './nav-link.directive';
 import { NgtNavContent } from './nav-content.directive';
@@ -71,42 +71,40 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     const nativeEl = this.elementRef.nativeElement;
     const labelValue = this.label();
     const routerLinkValue = this.routerLink();
-    
+
     if (labelValue && !this.navLink && nativeEl.tagName.toLowerCase() === 'ngt-nav-item') {
       // Create link element (anchor if routerLink, button otherwise)
-      const linkEl = routerLinkValue 
-        ? this.renderer.createElement('a')
-        : this.renderer.createElement('button');
-      
+      const linkEl = routerLinkValue ? this.renderer.createElement('a') : this.renderer.createElement('button');
+
       this.createdLinkElement = linkEl;
-      
+
       // Set attributes
       this.renderer.setAttribute(linkEl, 'id', this.buttonId());
       this.renderer.setAttribute(linkEl, 'type', routerLinkValue ? '' : 'button');
       if (routerLinkValue) {
         // For anchor, we'll handle navigation in click handler
       }
-      
+
       // Set text content
       const text = this.renderer.createText(labelValue);
       this.renderer.appendChild(linkEl, text);
-      
+
       // Add click handler
       this.renderer.listen(linkEl, 'click', (event: Event) => {
         this.handleLinkClick(event);
       });
-      
+
       // Apply classes and attributes reactively
       runInInjectionContext(this.injector, () => {
         effect(() => {
           this.updateLinkElement(linkEl);
         });
       });
-      
+
       // Clear existing content and add link
       this.renderer.setProperty(nativeEl, 'innerHTML', '');
       this.renderer.appendChild(nativeEl, linkEl);
-      
+
       // Initial update
       this.updateLinkElement(linkEl);
     }
@@ -114,17 +112,17 @@ export class NgtNavItem implements AfterContentInit, OnInit {
 
   private updateLinkElement(linkEl: HTMLElement): void {
     if (!this.nav) return;
-    
+
     // Apply classes
     const navClasses = this.nav.getNavButtonClasses(this);
     this.renderer.setAttribute(linkEl, 'class', navClasses);
-    
+
     // Apply ARIA attributes
     this.renderer.setAttribute(linkEl, 'aria-selected', this.isActive() ? 'true' : 'false');
     this.renderer.setAttribute(linkEl, 'aria-disabled', this.disabled() ? 'true' : 'false');
-    this.renderer.setAttribute(linkEl, 'tabindex', (this.isActive() && !this.disabled() ? '0' : '-1'));
+    this.renderer.setAttribute(linkEl, 'tabindex', this.isActive() && !this.disabled() ? '0' : '-1');
     this.renderer.setAttribute(linkEl, 'role', 'tab');
-    
+
     if (this.disabled()) {
       this.renderer.setAttribute(linkEl, 'disabled', 'true');
     } else {
@@ -138,14 +136,14 @@ export class NgtNavItem implements AfterContentInit, OnInit {
       event.stopPropagation();
       return;
     }
-    
+
     // Handle routerLink if present
     const routerLinkValue = this.routerLink();
     if (routerLinkValue && this.router) {
       const linkValue = Array.isArray(routerLinkValue) ? routerLinkValue : [routerLinkValue];
       this.router.navigate(linkValue);
     }
-    
+
     // Select this item
     if (this.nav) {
       this.nav.selectItem(this.id);

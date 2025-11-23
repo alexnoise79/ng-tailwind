@@ -1,4 +1,4 @@
-import { Directive, TemplateRef, inject, Optional } from '@angular/core';
+import { Directive, TemplateRef, inject } from '@angular/core';
 import { NgtNavItem } from './nav-item.directive';
 
 @Directive({
