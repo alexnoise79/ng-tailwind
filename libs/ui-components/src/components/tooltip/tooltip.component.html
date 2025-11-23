@@ -1,8 +1,0 @@
-<div (mouseenter)="show()" (mouseleave)="hide()" (focus)="show()" (blur)="hide()" class="relative inline-block">
-  <ng-content />
-  @if (isVisible()) {
-    <div [class]="tooltipClasses()" role="tooltip">
-      {{ text() }}
-    </div>
-  }
-</div>

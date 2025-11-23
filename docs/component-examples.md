@@ -250,20 +250,21 @@ import { NgtTooltip } from '@ng-tailwind/ui-components';
 ```
 
 ```html
-<ngt-tooltip text="This is a helpful tooltip" position="top">
-  <button class="px-4 py-2 bg-primary-600 text-white rounded-md">
-    Hover me
-  </button>
-</ngt-tooltip>
+<button 
+  ngtTooltip="This is a helpful tooltip" 
+  tooltipPosition="top"
+  class="px-4 py-2 bg-primary-600 text-white rounded-md">
+  Hover me
+</button>
 ```
 
 ### Tooltip Positions
 
 ```html
-<ngt-tooltip text="Top tooltip" position="top">...</ngt-tooltip>
-<ngt-tooltip text="Bottom tooltip" position="bottom">...</ngt-tooltip>
-<ngt-tooltip text="Left tooltip" position="left">...</ngt-tooltip>
-<ngt-tooltip text="Right tooltip" position="right">...</ngt-tooltip>
+<button ngtTooltip="Top tooltip" tooltipPosition="top">...</button>
+<button ngtTooltip="Bottom tooltip" tooltipPosition="bottom">...</button>
+<button ngtTooltip="Left tooltip" tooltipPosition="left">...</button>
+<button ngtTooltip="Right tooltip" tooltipPosition="right">...</button>
 ```
 
 ## Directives

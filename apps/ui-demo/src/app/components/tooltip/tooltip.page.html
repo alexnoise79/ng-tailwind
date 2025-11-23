@@ -36,18 +36,10 @@
         <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
           @if (!isShowingCode('positions')) {
             <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-tooltip text="This is a tooltip on top">
-                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Top Tooltip</button>
-              </ngt-tooltip>
-              <ngt-tooltip text="This is a tooltip on bottom" position="bottom">
-                <button class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Bottom Tooltip</button>
-              </ngt-tooltip>
-              <ngt-tooltip text="This is a tooltip on left" position="left">
-                <button class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Left Tooltip</button>
-              </ngt-tooltip>
-              <ngt-tooltip text="This is a tooltip on right" position="right">
-                <button class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Right Tooltip</button>
-              </ngt-tooltip>
+              <button ngtTooltip="This is a tooltip on top" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Top Tooltip</button>
+              <button ngtTooltip="This is a tooltip on bottom" tooltipPosition="bottom" class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Bottom Tooltip</button>
+              <button ngtTooltip="This is a tooltip on left" tooltipPosition="left" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">Left Tooltip</button>
+              <button ngtTooltip="This is a tooltip on right" tooltipPosition="right" class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">Right Tooltip</button>
             </div>
           } @else {
             <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -78,6 +70,85 @@
           }
         </div>
       </section>
+
+      <!-- Delays -->
+      <section class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Delays</h2>
+          <button
+            [class.bg-gray-100]="isShowingCode('delays')"
+            [class.dark:bg-gray-700]="isShowingCode('delays')"
+            (click)="toggleDemoView('delays')"
+            type="button"
+            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+            title="Toggle code view"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+            <span>Code</span>
+          </button>
+        </div>
+        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+          @if (!isShowingCode('delays')) {
+            <div class="mb-4 flex flex-wrap gap-4">
+              <button 
+                ngtTooltip="Default delay (200ms)" 
+                [tooltipDelay]="200"
+                class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                Default Delay
+              </button>
+              <button 
+                ngtTooltip="Fast show delay (100ms)" 
+                [tooltipShowDelay]="100"
+                [tooltipHideDelay]="200"
+                class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">
+                Fast Show Delay
+              </button>
+              <button 
+                ngtTooltip="Slow hide delay (500ms)" 
+                [tooltipShowDelay]="200"
+                [tooltipHideDelay]="500"
+                class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
+                Slow Hide Delay
+              </button>
+              <button 
+                ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" 
+                [tooltipShowDelay]="300"
+                [tooltipHideDelay]="400"
+                class="px-4 py-2 bg-secondary-600 text-white rounded-md hover:bg-secondary-700">
+                Custom Delays
+              </button>
+            </div>
+          } @else {
+            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <button
+                  [class.text-gray-900]="getActiveCodeTab('delays') === 'html'"
+                  [class.dark:text-white]="getActiveCodeTab('delays') === 'html'"
+                  [class.bg-white]="getActiveCodeTab('delays') === 'html'"
+                  [class.dark:bg-gray-800]="getActiveCodeTab('delays') === 'html'"
+                  [class.border-b-2]="getActiveCodeTab('delays') === 'html'"
+                  [class.border-primary-500]="getActiveCodeTab('delays') === 'html'"
+                  (click)="setActiveCodeTab('delays', 'html')"
+                  type="button"
+                  class="px-4 py-2 text-sm font-medium transition-colors"
+                >
+                  {{ getTabFileName('delays', 'html') }}
+                </button>
+              </div>
+              <div class="relative bg-gray-100 dark:bg-gray-900">
+                <button (click)="copyToClipboard(getCodeSnippet('delays', getActiveCodeTab('delays')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                </button>
+                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('delays', getActiveCodeTab('delays')) }}</code></pre>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
     </div>
   }
 
@@ -102,46 +173,50 @@
               </thead>
               <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">text</td>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ngtTooltip</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Required. The text content to display in the tooltip.</td>
                 </tr>
                 <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">position</td>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">tooltipPosition</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'top' | 'bottom' | 'left' | 'right'</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'top'</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The position of the tooltip relative to the trigger element.</td>
                 </tr>
                 <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">delay</td>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">tooltipDelay</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">200</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before showing the tooltip after hover/focus.</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Legacy delay in milliseconds before showing the tooltip. Use <code class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">tooltipShowDelay</code> for explicit show delay.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">tooltipShowDelay</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">200</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before showing the tooltip after hover/focus. Takes precedence over <code class="px-1 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">tooltipDelay</code>.</td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">tooltipHideDelay</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">200</td>
+                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before hiding the tooltip after mouseleave/blur.</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
 
-        <!-- Templates -->
+        <!-- Usage -->
         <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The element that triggers the tooltip. The tooltip will appear when hovering over or focusing this element.</td>
-                </tr>
-              </tbody>
-            </table>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Usage</h3>
+          <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-4">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+              The tooltip is a directive that can be applied to any DOM element. Apply it using the <code class="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded">ngtTooltip</code> attribute.
+            </p>
+            <pre class="mt-2 p-3 bg-gray-900 dark:bg-black rounded text-sm text-gray-100 overflow-x-auto"><code>&lt;button ngtTooltip="Tooltip text" tooltipPosition="top" tooltipDelay="200"&gt;
+  Hover me
+&lt;/button&gt;</code></pre>
           </div>
         </section>
       </div>

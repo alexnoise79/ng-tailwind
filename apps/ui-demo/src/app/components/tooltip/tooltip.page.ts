@@ -22,10 +22,12 @@ export class TooltipPage {
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {
-      positions: 'showcase'
+      positions: 'showcase',
+      delays: 'showcase'
     },
     {
-      positions: 'html'
+      positions: 'html',
+      delays: 'html'
     }
   );
 
@@ -42,18 +44,14 @@ export class TooltipPage {
 
   // Code snippets for each demo (HTML only)
   codeSnippets = {
-    positions: `<ngt-tooltip text="This is a tooltip on top">
-  <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Top Tooltip</button>
-</ngt-tooltip>
-<ngt-tooltip text="This is a tooltip on bottom" position="bottom">
-  <button class="px-4 py-2 bg-secondary-600 text-white rounded-md">Bottom Tooltip</button>
-</ngt-tooltip>
-<ngt-tooltip text="This is a tooltip on left" position="left">
-  <button class="px-4 py-2 bg-primary-600 text-white rounded-md">Left Tooltip</button>
-</ngt-tooltip>
-<ngt-tooltip text="This is a tooltip on right" position="right">
-  <button class="px-4 py-2 bg-secondary-600 text-white rounded-md">Right Tooltip</button>
-</ngt-tooltip>`
+    positions: `<button ngtTooltip="This is a tooltip on top" class="px-4 py-2 bg-primary-600 text-white rounded-md">Top Tooltip</button>
+<button ngtTooltip="This is a tooltip on bottom" tooltipPosition="bottom" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Bottom Tooltip</button>
+<button ngtTooltip="This is a tooltip on left" tooltipPosition="left" class="px-4 py-2 bg-primary-600 text-white rounded-md">Left Tooltip</button>
+<button ngtTooltip="This is a tooltip on right" tooltipPosition="right" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Right Tooltip</button>`,
+    delays: `<button ngtTooltip="Default delay (200ms)" tooltipDelay="200" class="px-4 py-2 bg-primary-600 text-white rounded-md">Default Delay</button>
+<button ngtTooltip="Fast show delay (100ms)" tooltipShowDelay="100" tooltipHideDelay="200" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Fast Show Delay</button>
+<button ngtTooltip="Slow hide delay (500ms)" tooltipShowDelay="200" tooltipHideDelay="500" class="px-4 py-2 bg-primary-600 text-white rounded-md">Slow Hide Delay</button>
+<button ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" tooltipShowDelay="300" tooltipHideDelay="400" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Custom Delays</button>`
   };
 
   // Helper to get code snippet for a specific tab
@@ -67,6 +65,10 @@ export class TooltipPage {
       positions: {
         html: 'tooltip-positions.html',
         ts: 'tooltip-positions.ts'
+      },
+      delays: {
+        html: 'tooltip-delays.html',
+        ts: 'tooltip-delays.ts'
       }
     };
     return this.codeViewUtil.getTabFileName('tooltip', demoKey, fileType, fileNames);
