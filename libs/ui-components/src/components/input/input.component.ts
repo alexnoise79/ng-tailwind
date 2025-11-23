@@ -147,15 +147,24 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   private applyMask(value: string, mask: string): string {
-    // Simple mask implementation - can be enhanced
+    // Apply mask: # represents a digit placeholder
     let masked = '';
     let valueIndex = 0;
     
-    for (let i = 0; i < mask.length && valueIndex < value.length; i++) {
+    // Extract only digits from the value
+    const digits = value.replace(/[^\d]/g, '');
+    
+    for (let i = 0; i < mask.length; i++) {
       if (mask[i] === '#') {
-        masked += value[valueIndex] || '';
-        valueIndex++;
+        if (valueIndex < digits.length) {
+          masked += digits[valueIndex];
+          valueIndex++;
+        } else {
+          // Stop if we've run out of digits
+          break;
+        }
       } else {
+        // Add the mask character (like /, -, etc.)
         masked += mask[i];
       }
     }
@@ -301,6 +310,16 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
         // Remove all plus signs if there's no plus at the beginning
         value = value.replace(/\+/g, '');
       }
+      target.value = value;
+    }
+
+    // Apply mask if provided (before filter, so mask format is respected)
+    if (this.mask() !== null && this.mask() && this.type() !== 'number') {
+      // Get raw value (digits only for mask)
+      const rawValue = value.replace(/[^\d]/g, '');
+      // Apply mask
+      const maskedValue = this.applyMask(rawValue, this.mask()!);
+      value = maskedValue;
       target.value = value;
     }
 
