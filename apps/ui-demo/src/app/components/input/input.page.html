@@ -427,16 +427,21 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('mask')) {
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number Mask</label>
-                      <ngt-input [(ngModel)]="maskValue1" type="text" mask="(###) ###-####" placeholder="Phone number" class="w-full md:w-64" />
+                      <ngt-input [(ngModel)]="maskValue1" type="text" mask="(999) 999-9999" placeholder="Phone number" class="w-full md:w-64" />
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ maskValue1() || 'Empty' }}</p>
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Date Mask</label>
-                      <ngt-input [(ngModel)]="maskValue2" type="text" mask="##/##/####" placeholder="Date" class="w-full md:w-64" />
+                      <ngt-input [(ngModel)]="maskValue2" type="text" mask="99-99-9999" placeholder="Date" class="w-full md:w-64" />
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ maskValue2() || 'Empty' }}</p>
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Mixed Format Mask</label>
+                      <ngt-input [(ngModel)]="maskValue3" type="text" mask="a*-999-a999" placeholder="Mixed format" class="w-full md:w-64" />
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ maskValue3() || 'Empty' }}</p>
                     </div>
                   </div>
                 } @else {
@@ -782,7 +787,7 @@
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">mask</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Mask pattern for formatting input display (use # for digits). Model value remains unformatted.</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Mask pattern for formatting input display. Use <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">9</code> for digits, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">a</code> for letters, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">*</code> for any character. Other characters are inserted as literals. Model value remains unformatted.</td>
                       </tr>
                       <tr>
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">chip</td>

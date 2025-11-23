@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, OnDestroy, effect } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, effect } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { classMerge } from '../../utils';
@@ -19,7 +19,7 @@ export type NumberMode = 'decimal' | 'currency';
     }
   ]
 })
-export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
+export class NgtInput implements ControlValueAccessor, OnInit {
   // Inputs
   readonly type = input<InputType>('text');
   readonly size = input<Size>('md');
@@ -124,10 +124,6 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    // Cleanup if needed
-  }
-
   // Value handling
   private updateDisplayValue(): void {
     const val = this._value();
@@ -147,25 +143,47 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   private applyMask(value: string, mask: string): string {
-    // Apply mask: # represents a digit placeholder
+    // Mask format:
+    // - 9 = digit (0-9)
+    // - a = alpha (a-z, A-Z)
+    // - * = any character
+    // - any other character = literal character to insert
+    
     let masked = '';
     let valueIndex = 0;
     
-    // Extract only digits from the value
-    const digits = value.replace(/[^\d]/g, '');
-    
-    for (let i = 0; i < mask.length; i++) {
-      if (mask[i] === '#') {
-        if (valueIndex < digits.length) {
-          masked += digits[valueIndex];
+    for (let i = 0; i < mask.length && valueIndex < value.length; i++) {
+      if (mask[i] === '9') {
+        // Match digit
+        if (/\d/.test(value[valueIndex])) {
+          masked += value[valueIndex];
           valueIndex++;
         } else {
-          // Stop if we've run out of digits
-          break;
+          // Skip non-digit characters
+          valueIndex++;
+          i--; // Stay on current mask position
         }
+      } else if (mask[i] === 'a') {
+        // Match alpha
+        if (/[a-zA-Z]/.test(value[valueIndex])) {
+          masked += value[valueIndex];
+          valueIndex++;
+        } else {
+          // Skip non-alpha characters
+          valueIndex++;
+          i--; // Stay on current mask position
+        }
+      } else if (mask[i] === '*') {
+        // Match any character
+        masked += value[valueIndex];
+        valueIndex++;
       } else {
-        // Add the mask character (like /, -, etc.)
+        // Literal character - insert it
         masked += mask[i];
+        // If the current value character matches the literal, consume it
+        if (valueIndex < value.length && value[valueIndex] === mask[i]) {
+          valueIndex++;
+        }
       }
     }
     
@@ -275,9 +293,27 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   private getModelValue(displayValue: string): string {
     // Remove mask characters for model
     if (this.mask() !== null && this.mask()) {
-      // Remove non-# characters from mask
-      const maskPattern = this.mask()!.replace(/[^#]/g, '');
-      return displayValue.replace(/[^\d]/g, '').slice(0, maskPattern.length);
+      const mask = this.mask()!;
+      // Extract only the characters that match mask placeholders (9, a, *)
+      let modelValue = '';
+      let displayIndex = 0;
+      
+      for (let i = 0; i < mask.length && displayIndex < displayValue.length; i++) {
+        if (mask[i] === '9' || mask[i] === 'a' || mask[i] === '*') {
+          // This is a placeholder, include the character in model
+          if (displayIndex < displayValue.length) {
+            modelValue += displayValue[displayIndex];
+            displayIndex++;
+          }
+        } else {
+          // This is a literal character, skip it in model
+          if (displayIndex < displayValue.length && displayValue[displayIndex] === mask[i]) {
+            displayIndex++;
+          }
+        }
+      }
+      
+      return modelValue;
     }
     return displayValue;
   }
@@ -315,10 +351,8 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     // Apply mask if provided (before filter, so mask format is respected)
     if (this.mask() !== null && this.mask() && this.type() !== 'number') {
-      // Get raw value (digits only for mask)
-      const rawValue = value.replace(/[^\d]/g, '');
-      // Apply mask
-      const maskedValue = this.applyMask(rawValue, this.mask()!);
+      // Apply mask to the current value
+      const maskedValue = this.applyMask(value, this.mask()!);
       value = maskedValue;
       target.value = value;
     }
@@ -593,8 +627,9 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    // This will be handled by the disabled input signal
+  setDisabledState(_isDisabled: boolean): void {
+    // Disabled state is handled by the disabled input signal
+    void _isDisabled; // Explicitly mark as intentionally unused
   }
 
 }

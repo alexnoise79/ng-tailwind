@@ -40,6 +40,7 @@ export class InputPage {
   // Mask
   maskValue1 = signal<string>('');
   maskValue2 = signal<string>('');
+  maskValue3 = signal<string>('');
 
   // Chips
   chipValue1 = signal<string>('');
@@ -223,7 +224,7 @@ export class InputPage {
     mask: {
       html: `<ngt-input
   type="text"
-  mask="(###) ###-####"
+  mask="(999) 999-9999"
   [(ngModel)]="maskValue1"
   placeholder="Phone number"
   class="w-full md:w-64"
@@ -231,9 +232,17 @@ export class InputPage {
 
 <ngt-input
   type="text"
-  mask="##/##/####"
+  mask="99-99-9999"
   [(ngModel)]="maskValue2"
   placeholder="Date"
+  class="w-full md:w-64"
+/>
+
+<ngt-input
+  type="text"
+  mask="a*-999-a999"
+  [(ngModel)]="maskValue3"
+  placeholder="Mixed format"
   class="w-full md:w-64"
 />`,
       ts: `import { signal } from '@angular/core';
@@ -241,6 +250,7 @@ export class InputPage {
 export class InputPage {
   maskValue1 = signal<string>('');
   maskValue2 = signal<string>('');
+  maskValue3 = signal<string>('');
 }`
     },
     chips: {
