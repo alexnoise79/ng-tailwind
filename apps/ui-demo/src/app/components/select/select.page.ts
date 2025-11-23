@@ -1,14 +1,14 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-import { NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { City, Country, DemoTab } from '../../models/demo.models';
+import { City, Country } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.select',
-  imports: [FormsModule, JsonPipe, NgtSelect, NgtButton, NgtNav, NgtNavItem],
+  imports: [FormsModule, JsonPipe, NgtSelect, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './select.page.html'
 })
 export class SelectPage {
@@ -98,12 +98,6 @@ export class SelectPage {
     return this.invalid() && (this.selectedCityReactive() === null || this.selectedCityReactive() === undefined);
   }
 
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

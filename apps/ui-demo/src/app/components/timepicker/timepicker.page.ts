@@ -1,12 +1,11 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtTimepicker, NgtTimeStruct, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtTimepicker, NgtTimeStruct, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.timepicker',
-  imports: [NgtTimepicker, NgtNav, NgtNavItem],
+  imports: [NgtTimepicker, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './timepicker.page.html'
 })
 export class TimepickerPage {
@@ -17,12 +16,6 @@ export class TimepickerPage {
   selectedTimeSmall = signal<NgtTimeStruct | null>(null);
   selectedTimeLarge = signal<NgtTimeStruct | null>(null);
 
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

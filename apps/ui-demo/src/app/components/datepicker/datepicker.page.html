@@ -6,14 +6,9 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
-    </ngt-nav>
-  </div>
-
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
     <div class="space-y-8">
       <!-- Basic Datepicker -->
       <section class="space-y-4">
@@ -330,10 +325,10 @@
         </div>
       </section>
     </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
     <div class="space-y-6">
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
         <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
@@ -467,5 +462,11 @@
         </section>
       </div>
     </div>
-  }
+        </ng-template>
+      </ngt-nav-item>
+    </ngt-nav>
+  </div>
+
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

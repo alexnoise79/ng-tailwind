@@ -1,12 +1,11 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtDatepicker, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtDatepicker, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.datepicker',
-  imports: [NgtDatepicker, NgtNav, NgtNavItem],
+  imports: [NgtDatepicker, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './datepicker.page.html'
 })
 export class DatepickerPage {
@@ -16,12 +15,6 @@ export class DatepickerPage {
   selectedDateCustomFormat = signal<string | null>(null);
   selectedFormat = signal<'iso' | 'iso-local' | 'date' | 'datetime'>('datetime');
 
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

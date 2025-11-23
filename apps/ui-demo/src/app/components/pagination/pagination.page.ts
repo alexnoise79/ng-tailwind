@@ -1,12 +1,11 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtPagination, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtPagination, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.pagination',
-  imports: [NgtPagination, NgtNav, NgtNavItem],
+  imports: [NgtPagination, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './pagination.page.html'
 })
 export class PaginationPage {
@@ -22,12 +21,6 @@ export class PaginationPage {
 
   Math = Math;
 
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
