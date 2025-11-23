@@ -37,11 +37,17 @@
           @if (!isShowingCode('default')) {
             <!-- Showcase View -->
             <div class="mb-4">
-              <ngt-nav>
-                <ngt-nav-item [itemId]="'nav-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-contact'" label="Contact"></ngt-nav-item>
-              </ngt-nav>
+              <ul ngtNav #nav="ngtNav">
+                <li ngtNavItem [itemId]="'nav-home'">
+                  <button ngtNavLink>Home</button>
+                </li>
+                <li ngtNavItem [itemId]="'nav-about'">
+                  <button ngtNavLink>About</button>
+                </li>
+                <li ngtNavItem [itemId]="'nav-contact'">
+                  <button ngtNavLink>Contact</button>
+                </li>
+              </ul>
             </div>
           } @else {
             <!-- Code View -->

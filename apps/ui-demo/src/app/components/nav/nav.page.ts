@@ -1,12 +1,12 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtNav, NgtNavItem, NgtNavLink, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.nav',
-  imports: [NgtNav, NgtNavItem],
+  imports: [NgtNav, NgtNavItem, NgtNavLink],
   templateUrl: './nav.page.html'
 })
 export class NavPage {
