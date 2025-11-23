@@ -65,17 +65,43 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     const labelValue = this.label();
 
     if (labelValue && !this.navLink && nativeEl.tagName.toLowerCase() === 'ngt-nav-item') {
-      // Clear existing content
-      nativeEl.innerHTML = '';
-
-      // Create the link component dynamically
+      // Create the link component dynamically first
+      // This will insert it into the directive element
       this.linkComponentRef = this.vcr.createComponent(NgtNavItemLink);
+      
+      // Set nav and navItem references immediately
+      const instance = this.linkComponentRef.instance;
+      instance.navItem = this;
+      instance.nav = this.nav || undefined;
+
+      // Get the component's host element
+      const componentHostElement = this.linkComponentRef.location.nativeElement;
+      const parent = nativeEl.parentNode;
+      
+      // Move the component to replace the directive element
+      if (parent) {
+        // Remove the component from the directive element
+        // It should be a child of nativeEl after createComponent
+        if (componentHostElement.parentNode === nativeEl) {
+          nativeEl.removeChild(componentHostElement);
+        }
+        
+        // Insert the component where the directive element is (replacing it)
+        parent.insertBefore(componentHostElement, nativeEl);
+        
+        // Remove all remaining children from directive element
+        while (nativeEl.firstChild) {
+          nativeEl.removeChild(nativeEl.firstChild);
+        }
+        
+        // Now remove the directive element from DOM completely
+        parent.removeChild(nativeEl);
+      }
 
       // Set up reactive inputs using signals
       runInInjectionContext(this.injector, () => {
         effect(() => {
           if (this.linkComponentRef) {
-            const instance = this.linkComponentRef.instance;
             const currentLabel = this.label();
             if (currentLabel) {
               instance.label.set(currentLabel);
@@ -84,6 +110,8 @@ export class NgtNavItem implements AfterContentInit, OnInit {
             instance.disabled.set(this.disabled());
             instance.isActive.set(this.isActive());
             instance.buttonId.set(this.buttonId());
+            // Ensure nav reference is up to date
+            instance.nav = this.nav || undefined;
           }
         });
       });
