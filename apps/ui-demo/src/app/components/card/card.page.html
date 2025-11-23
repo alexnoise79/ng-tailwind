@@ -1,0 +1,490 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Card</h1>
+    <p class="text-gray-600 dark:text-gray-400">A flexible card component with template loading for header, title, subtitle, and footer sections.</p>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic Card -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Card</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-card>
+                      <p class="p-6">This is a basic card with just content.</p>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.basic)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.basic }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Card with Header -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Card with Header</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withHeader')"
+                  [class.dark:bg-gray-700]="isShowingCode('withHeader')"
+                  (click)="toggleDemoView('withHeader')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withHeader')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-card>
+                      <div header class="p-6 border-b border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Card Header</h3>
+                      </div>
+                      <p class="p-6">Card content goes here.</p>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withHeader') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withHeader') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withHeader') !== 'html'"
+                        (click)="setActiveCodeTab('withHeader', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withHeader', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.withHeader)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withHeader }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Card with Footer -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Card with Footer</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withFooter')"
+                  [class.dark:bg-gray-700]="isShowingCode('withFooter')"
+                  (click)="toggleDemoView('withFooter')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withFooter')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-card>
+                      <p class="p-6">Card content goes here.</p>
+                      <div footer class="p-6 border-t border-gray-200 dark:border-gray-700 flex gap-2">
+                        <ngt-button variant="primary">Action</ngt-button>
+                      </div>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withFooter') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withFooter') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withFooter') !== 'html'"
+                        (click)="setActiveCodeTab('withFooter', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withFooter', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.withFooter)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withFooter }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Complete Card -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Complete Card</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('complete')"
+                  [class.dark:bg-gray-700]="isShowingCode('complete')"
+                  (click)="toggleDemoView('complete')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('complete')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-card>
+                      <div header class="p-6 border-b border-gray-200 dark:border-gray-700">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Card Title</h3>
+                      </div>
+                      <h2 title class="p-6 pb-2 text-xl font-bold text-gray-900 dark:text-white">Main Title</h2>
+                      <p subtitle class="p-6 pt-0 pb-4 text-sm text-gray-600 dark:text-gray-400">This is a subtitle</p>
+                      <p class="px-6 pb-6 text-gray-700 dark:text-gray-300">Card content goes here. You can add any content you want.</p>
+                      <div footer class="p-6 border-t border-gray-200 dark:border-gray-700 flex gap-2 justify-end">
+                        <ngt-button variant="outline">Cancel</ngt-button>
+                        <ngt-button variant="primary">Save</ngt-button>
+                      </div>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('complete') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('complete') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('complete') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('complete') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('complete') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('complete') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('complete') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('complete') !== 'html'"
+                        (click)="setActiveCodeTab('complete', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('complete', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.complete)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.complete }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Card with Image -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Card with Image</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withImage')"
+                  [class.dark:bg-gray-700]="isShowingCode('withImage')"
+                  (click)="toggleDemoView('withImage')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withImage')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-card>
+                      <div header class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&h=400&fit=crop" alt="Card image" class="w-full h-48 object-cover" />
+                      </div>
+                      <h2 title class="p-6 pb-2 text-xl font-bold text-gray-900 dark:text-white">Card with Image</h2>
+                      <p subtitle class="p-6 pt-0 pb-4 text-sm text-gray-600 dark:text-gray-400">A beautiful card example with an image header</p>
+                      <p class="px-6 pb-6 text-gray-700 dark:text-gray-300">
+                        This card demonstrates all the features: image header, title, subtitle, content, and action buttons in the footer.
+                      </p>
+                      <div footer class="p-6 border-t border-gray-200 dark:border-gray-700 flex gap-2 justify-end">
+                        <ngt-button variant="outline">Learn More</ngt-button>
+                        <ngt-button variant="primary">Get Started</ngt-button>
+                      </div>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withImage') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withImage') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withImage') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withImage') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withImage') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withImage') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withImage') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withImage') !== 'html'"
+                        (click)="setActiveCodeTab('withImage', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withImage', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.withImage)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withImage }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Variants -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Variants</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('variants')"
+                  [class.dark:bg-gray-700]="isShowingCode('variants')"
+                  (click)="toggleDemoView('variants')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('variants')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 space-y-4">
+                    <ngt-card variant="default">
+                      <p class="p-6">Default card with shadow-sm</p>
+                    </ngt-card>
+                    <ngt-card variant="bordered">
+                      <p class="p-6">Bordered card with border</p>
+                    </ngt-card>
+                    <ngt-card variant="elevated">
+                      <p class="p-6">Elevated card with shadow-lg</p>
+                    </ngt-card>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('variants') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('variants') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('variants') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('variants') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('variants') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('variants') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('variants') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('variants') !== 'html'"
+                        (click)="setActiveCodeTab('variants', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('variants', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.variants)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.variants }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">variant</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'default' | 'bordered' | 'elevated'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'default'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style variant of the card.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">[header]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Header content projected using <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">select="[header]"</code></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">[title]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Title content projected using <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">select="[title]"</code></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">[subtitle]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Subtitle content projected using <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">select="[subtitle]"</code></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">[footer]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Footer content projected using <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">select="[footer]"</code></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Main card content. Can contain any HTML or Angular components.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+    </ngt-nav>
+  </div>
+
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
+</div>
+

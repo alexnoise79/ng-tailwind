@@ -73,5 +73,9 @@ export const appRoutes: Routes = [
   {
     path: 'alert',
     loadComponent: () => import('./components/alert/alert.page').then(m => m.AlertPage)
+  },
+  {
+    path: 'card',
+    loadComponent: () => import('./components/card/card.page').then(m => m.CardPage)
   }
 ];

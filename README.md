@@ -35,21 +35,22 @@ nx storybook ui-components
 
 ## Components
 
-- **Button** - Variants, sizes, and loading states
-- **Modal** - Dialog with backdrop and animations
 - **Accordion** - Collapsible content sections
-- **Nav** - Navigation component with multiple styles (tabs, pills, underline)
-- **Dropdown** - Dropdown menu with positioning
-- **Tooltip** - Contextual information tooltips
+- **Alert** - Alert component with multiple variants and dismissible functionality
+- **Button** - Variants, sizes, and loading states
+- **Card** - Flexible card component with template loading for header, title, subtitle, and footer
 - **Collapse** - Expandable/collapsible content (horizontal or vertical)
 - **Datepicker** - Date selection component with calendar view
+- **Dropdown** - Dropdown menu with positioning
+- **Modal** - Dialog with backdrop and animations
+- **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
 - **Pagination** - Page navigation with customizable options
-- **Toggle Switch** - Form control for boolean values with sizes
-- **Toast** - Notification messages with severity levels and auto-dismiss
-- **Table** - Data table with sorting, pagination, grouping, and column reordering
 - **Select** - Dropdown select with form integration and option grouping
-- **Alert** - Alert component with multiple variants and dismissible functionality
+- **Table** - Data table with sorting, pagination, grouping, and column reordering
+- **Toast** - Notification messages with severity levels and auto-dismiss
+- **Toggle Switch** - Form control for boolean values with sizes
+- **Tooltip** - Contextual information tooltips
 
 ## Documentation
 

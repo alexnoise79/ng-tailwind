@@ -94,6 +94,106 @@ export class MyComponent {
 </ngt-modal>
 ```
 
+## Alert
+
+### Basic Usage
+
+```typescript
+import { NgtAlert } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  showAlert = signal(true);
+  
+  onAlertClose() {
+    this.showAlert.set(false);
+  }
+}
+```
+
+```html
+@if (showAlert()) {
+  <ngt-alert variant="success" [dismissible]="true" (close)="onAlertClose()">
+    <strong>Success!</strong> Operation completed successfully.
+  </ngt-alert>
+}
+```
+
+### Variants
+
+```html
+<!-- Success -->
+<ngt-alert variant="success" [dismissible]="true">
+  <strong>Success!</strong> Operation completed successfully.
+</ngt-alert>
+
+<!-- Info -->
+<ngt-alert variant="info" [dismissible]="true">
+  <strong>Info:</strong> This is an informational message.
+</ngt-alert>
+
+<!-- Warning -->
+<ngt-alert variant="warning" [dismissible]="true">
+  <strong>Warning:</strong> Please review this action carefully.
+</ngt-alert>
+
+<!-- Danger -->
+<ngt-alert variant="danger" [dismissible]="true">
+  <strong>Error:</strong> An error has occurred.
+</ngt-alert>
+
+<!-- Primary -->
+<ngt-alert variant="primary" [dismissible]="true">
+  <strong>Primary:</strong> This is a primary alert.
+</ngt-alert>
+
+<!-- Secondary -->
+<ngt-alert variant="secondary" [dismissible]="true">
+  <strong>Secondary:</strong> This is a secondary alert.
+</ngt-alert>
+
+<!-- Light -->
+<ngt-alert variant="light" [dismissible]="true">
+  <strong>Light:</strong> This is a light alert.
+</ngt-alert>
+
+<!-- Dark -->
+<ngt-alert variant="dark" [dismissible]="true">
+  <strong>Dark:</strong> This is a dark alert.
+</ngt-alert>
+```
+
+### Dismissible
+
+```html
+<!-- Dismissible alert -->
+<ngt-alert variant="info" [dismissible]="true" (close)="onClose()">
+  This alert can be dismissed by clicking the close button.
+</ngt-alert>
+
+<!-- Non-dismissible alert -->
+<ngt-alert variant="info" [dismissible]="false">
+  This alert cannot be dismissed.
+</ngt-alert>
+```
+
+### With Close Event
+
+```typescript
+export class MyComponent {
+  onClose() {
+    console.log('Alert was closed');
+    // Handle alert close event
+  }
+}
+```
+
+```html
+<ngt-alert variant="warning" [dismissible]="true" (close)="onClose()">
+  <strong>Warning:</strong> This alert will trigger a close event when dismissed.
+</ngt-alert>
+```
+
 ## Accordion
 
 ### Single Open Mode
@@ -389,6 +489,97 @@ export class MyComponent {
 ></ngt-datepicker>
 ```
 
+## Card
+
+### Basic Usage
+
+```typescript
+import { NgtCard } from '@ng-tailwind/ui-components';
+```
+
+```html
+<ngt-card>
+  <p class="p-6">This is a basic card with just content.</p>
+</ngt-card>
+```
+
+### Card with Header
+
+```html
+<ngt-card>
+  <div header class="p-6 border-b border-gray-200 dark:border-gray-700">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Card Header</h3>
+  </div>
+  <p class="p-6">Card content goes here.</p>
+</ngt-card>
+```
+
+### Card with Footer
+
+```html
+<ngt-card>
+  <p class="p-6">Card content goes here.</p>
+  <div footer class="p-6 border-t border-gray-200 dark:border-gray-700">
+    <ngt-button variant="primary">Action</ngt-button>
+  </div>
+</ngt-card>
+```
+
+### Complete Card with Title and Subtitle
+
+```html
+<ngt-card>
+  <div header class="p-6 border-b border-gray-200 dark:border-gray-700">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Card Title</h3>
+  </div>
+  <h2 title class="p-6 pb-2 text-xl font-bold text-gray-900 dark:text-white">Main Title</h2>
+  <p subtitle class="p-6 pt-0 pb-4 text-sm text-gray-600 dark:text-gray-400">This is a subtitle</p>
+  <p class="px-6 pb-6 text-gray-700 dark:text-gray-300">Card content goes here. You can add any content you want.</p>
+  <div footer class="p-6 border-t border-gray-200 dark:border-gray-700 flex gap-2 justify-end">
+    <ngt-button variant="outline">Cancel</ngt-button>
+    <ngt-button variant="primary">Save</ngt-button>
+  </div>
+</ngt-card>
+```
+
+### Card with Image Header
+
+```html
+<ngt-card>
+  <div header class="overflow-hidden">
+    <img src="https://example.com/image.jpg" alt="Card image" class="w-full h-48 object-cover" />
+  </div>
+  <h2 title class="p-6 pb-2 text-xl font-bold text-gray-900 dark:text-white">Card with Image</h2>
+  <p subtitle class="p-6 pt-0 pb-4 text-sm text-gray-600 dark:text-gray-400">A beautiful card example with an image header</p>
+  <p class="px-6 pb-6 text-gray-700 dark:text-gray-300">
+    This card demonstrates all the features: image header, title, subtitle, content, and action buttons in the footer.
+  </p>
+  <div footer class="p-6 border-t border-gray-200 dark:border-gray-700 flex gap-2 justify-end">
+    <ngt-button variant="outline">Learn More</ngt-button>
+    <ngt-button variant="primary">Get Started</ngt-button>
+  </div>
+</ngt-card>
+```
+
+### Variants
+
+```html
+<!-- Default variant with shadow-sm -->
+<ngt-card variant="default">
+  <p class="p-6">Default card with shadow-sm</p>
+</ngt-card>
+
+<!-- Bordered variant -->
+<ngt-card variant="bordered">
+  <p class="p-6">Bordered card with border</p>
+</ngt-card>
+
+<!-- Elevated variant with shadow-lg -->
+<ngt-card variant="elevated">
+  <p class="p-6">Elevated card with shadow-lg</p>
+</ngt-card>
+```
+
 ## Collapse
 
 ### Basic Usage
@@ -651,106 +842,6 @@ export class MyComponent {
   [sortOrder]="sortOrder()"
   (sort)="handleSort($event)"
 ></ngt-table>
-```
-
-## Alert
-
-### Basic Usage
-
-```typescript
-import { NgtAlert } from '@ng-tailwind/ui-components';
-import { signal } from '@angular/core';
-
-export class MyComponent {
-  showAlert = signal(true);
-  
-  onAlertClose() {
-    this.showAlert.set(false);
-  }
-}
-```
-
-```html
-@if (showAlert()) {
-  <ngt-alert variant="success" [dismissible]="true" (close)="onAlertClose()">
-    <strong>Success!</strong> Operation completed successfully.
-  </ngt-alert>
-}
-```
-
-### Variants
-
-```html
-<!-- Success -->
-<ngt-alert variant="success" [dismissible]="true">
-  <strong>Success!</strong> Operation completed successfully.
-</ngt-alert>
-
-<!-- Info -->
-<ngt-alert variant="info" [dismissible]="true">
-  <strong>Info:</strong> This is an informational message.
-</ngt-alert>
-
-<!-- Warning -->
-<ngt-alert variant="warning" [dismissible]="true">
-  <strong>Warning:</strong> Please review this action carefully.
-</ngt-alert>
-
-<!-- Danger -->
-<ngt-alert variant="danger" [dismissible]="true">
-  <strong>Error:</strong> An error has occurred.
-</ngt-alert>
-
-<!-- Primary -->
-<ngt-alert variant="primary" [dismissible]="true">
-  <strong>Primary:</strong> This is a primary alert.
-</ngt-alert>
-
-<!-- Secondary -->
-<ngt-alert variant="secondary" [dismissible]="true">
-  <strong>Secondary:</strong> This is a secondary alert.
-</ngt-alert>
-
-<!-- Light -->
-<ngt-alert variant="light" [dismissible]="true">
-  <strong>Light:</strong> This is a light alert.
-</ngt-alert>
-
-<!-- Dark -->
-<ngt-alert variant="dark" [dismissible]="true">
-  <strong>Dark:</strong> This is a dark alert.
-</ngt-alert>
-```
-
-### Dismissible
-
-```html
-<!-- Dismissible alert -->
-<ngt-alert variant="info" [dismissible]="true" (close)="onClose()">
-  This alert can be dismissed by clicking the close button.
-</ngt-alert>
-
-<!-- Non-dismissible alert -->
-<ngt-alert variant="info" [dismissible]="false">
-  This alert cannot be dismissed.
-</ngt-alert>
-```
-
-### With Close Event
-
-```typescript
-export class MyComponent {
-  onClose() {
-    console.log('Alert was closed');
-    // Handle alert close event
-  }
-}
-```
-
-```html
-<ngt-alert variant="warning" [dismissible]="true" (close)="onClose()">
-  <strong>Warning:</strong> This alert will trigger a close event when dismissed.
-</ngt-alert>
 ```
 
 ## Select

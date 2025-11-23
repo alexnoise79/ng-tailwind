@@ -18,6 +18,7 @@ export * from './components/toast';
 export * from './components/table';
 export * from './components/select';
 export * from './components/alert';
+export * from './components/card';
 
 // Directives
 export * from './directives';
