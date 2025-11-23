@@ -41,6 +41,9 @@ export class NgtTimepicker implements OnInit {
   readonly showSeconds = input(false);
   readonly meridian = input(false); // 12-hour format with AM/PM
   readonly size = input<Size>('md');
+  readonly hourStep = input(1);
+  readonly minuteStep = input(1);
+  readonly secondStep = input(1);
 
   readonly timeSelect = output<NgtTimeStruct>();
 
@@ -117,14 +120,23 @@ export class NgtTimepicker implements OnInit {
 
   incrementHour(): void {
     if (this.disabled()) return;
-    let newHour = this.currentHour() + 1;
+    const step = this.hourStep();
+    let newHour = this.currentHour() + step;
     if (this.meridian()) {
-      if (newHour >= 24) newHour = 0;
-      if (newHour === 12) {
+      if (newHour >= 24) {
+        newHour = newHour % 24;
+      }
+      // Check if we cross the 12 boundary
+      const currentHour = this.currentHour();
+      if (currentHour < 12 && newHour >= 12) {
+        this._meridian.set(this.currentMeridian() === 'AM' ? 'PM' : 'AM');
+      } else if (currentHour >= 12 && newHour < 12) {
         this._meridian.set(this.currentMeridian() === 'AM' ? 'PM' : 'AM');
       }
     } else {
-      if (newHour >= 24) newHour = 0;
+      if (newHour >= 24) {
+        newHour = newHour % 24;
+      }
     }
     this._currentHour.set(newHour);
     this.emitTime();
@@ -132,14 +144,25 @@ export class NgtTimepicker implements OnInit {
 
   decrementHour(): void {
     if (this.disabled()) return;
-    let newHour = this.currentHour() - 1;
+    const step = this.hourStep();
+    let newHour = this.currentHour() - step;
     if (this.meridian()) {
-      if (newHour < 0) newHour = 23;
-      if (newHour === 11) {
+      if (newHour < 0) {
+        newHour = 24 + (newHour % 24);
+        if (newHour === 24) newHour = 0;
+      }
+      // Check if we cross the 12 boundary
+      const currentHour = this.currentHour();
+      if (currentHour >= 12 && newHour < 12) {
+        this._meridian.set(this.currentMeridian() === 'AM' ? 'PM' : 'AM');
+      } else if (currentHour < 12 && newHour >= 12) {
         this._meridian.set(this.currentMeridian() === 'AM' ? 'PM' : 'AM');
       }
     } else {
-      if (newHour < 0) newHour = 23;
+      if (newHour < 0) {
+        newHour = 24 + (newHour % 24);
+        if (newHour === 24) newHour = 0;
+      }
     }
     this._currentHour.set(newHour);
     this.emitTime();
@@ -147,9 +170,10 @@ export class NgtTimepicker implements OnInit {
 
   incrementMinute(): void {
     if (this.disabled()) return;
-    let newMinute = this.currentMinute() + 1;
+    const step = this.minuteStep();
+    let newMinute = this.currentMinute() + step;
     if (newMinute >= 60) {
-      newMinute = 0;
+      newMinute = newMinute % 60;
     }
     this._currentMinute.set(newMinute);
     this.emitTime();
@@ -157,9 +181,11 @@ export class NgtTimepicker implements OnInit {
 
   decrementMinute(): void {
     if (this.disabled()) return;
-    let newMinute = this.currentMinute() - 1;
+    const step = this.minuteStep();
+    let newMinute = this.currentMinute() - step;
     if (newMinute < 0) {
-      newMinute = 59;
+      newMinute = 60 + (newMinute % 60);
+      if (newMinute === 60) newMinute = 0;
     }
     this._currentMinute.set(newMinute);
     this.emitTime();
@@ -167,9 +193,10 @@ export class NgtTimepicker implements OnInit {
 
   incrementSecond(): void {
     if (this.disabled()) return;
-    let newSecond = this.currentSecond() + 1;
+    const step = this.secondStep();
+    let newSecond = this.currentSecond() + step;
     if (newSecond >= 60) {
-      newSecond = 0;
+      newSecond = newSecond % 60;
     }
     this._currentSecond.set(newSecond);
     this.emitTime();
@@ -177,9 +204,11 @@ export class NgtTimepicker implements OnInit {
 
   decrementSecond(): void {
     if (this.disabled()) return;
-    let newSecond = this.currentSecond() - 1;
+    const step = this.secondStep();
+    let newSecond = this.currentSecond() - step;
     if (newSecond < 0) {
-      newSecond = 59;
+      newSecond = 60 + (newSecond % 60);
+      if (newSecond === 60) newSecond = 0;
     }
     this._currentSecond.set(newSecond);
     this.emitTime();
