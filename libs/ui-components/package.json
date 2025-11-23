@@ -1,5 +1,5 @@
 {
-  "name": "@alexnoise79/ngtailwind",
+  "name": "@ngtailwind/ngtailwind",
   "version": "1.0.1",
   "description": "A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK",
   "keywords": [
