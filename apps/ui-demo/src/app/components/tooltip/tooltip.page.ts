@@ -48,10 +48,10 @@ export class TooltipPage {
 <button ngtTooltip="This is a tooltip on bottom" tooltipPosition="bottom" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Bottom Tooltip</button>
 <button ngtTooltip="This is a tooltip on left" tooltipPosition="left" class="px-4 py-2 bg-primary-600 text-white rounded-md">Left Tooltip</button>
 <button ngtTooltip="This is a tooltip on right" tooltipPosition="right" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Right Tooltip</button>`,
-    delays: `<button ngtTooltip="Default delay (200ms)" tooltipDelay="200" class="px-4 py-2 bg-primary-600 text-white rounded-md">Default Delay</button>
-<button ngtTooltip="Fast show delay (100ms)" tooltipShowDelay="100" tooltipHideDelay="200" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Fast Show Delay</button>
-<button ngtTooltip="Slow hide delay (500ms)" tooltipShowDelay="200" tooltipHideDelay="500" class="px-4 py-2 bg-primary-600 text-white rounded-md">Slow Hide Delay</button>
-<button ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" tooltipShowDelay="300" tooltipHideDelay="400" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Custom Delays</button>`
+    delays: `<button ngtTooltip="Default delay (200ms)" [delay]="200" class="px-4 py-2 bg-primary-600 text-white rounded-md">Default Delay</button>
+<button ngtTooltip="Fast show delay (100ms)" [showDelay]="100" [hideDelay]="200" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Fast Show Delay</button>
+<button ngtTooltip="Slow hide delay (500ms)" [showDelay]="200" [hideDelay]="500" class="px-4 py-2 bg-primary-600 text-white rounded-md">Slow Hide Delay</button>
+<button ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" [showDelay]="300" [hideDelay]="400" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Custom Delays</button>`
   };
 
   // Helper to get code snippet for a specific tab

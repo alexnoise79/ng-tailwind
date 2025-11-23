@@ -15,15 +15,15 @@ const meta: Meta<NgtTooltip> = {
       options: ['top', 'bottom', 'left', 'right'],
       description: 'Tooltip position'
     },
-    tooltipDelay: {
+    delay: {
       control: 'number',
       description: 'Legacy delay in milliseconds before showing tooltip'
     },
-    tooltipShowDelay: {
+    showDelay: {
       control: 'number',
       description: 'Delay in milliseconds before showing tooltip'
     },
-    tooltipHideDelay: {
+    hideDelay: {
       control: 'number',
       description: 'Delay in milliseconds before hiding tooltip'
     }
@@ -37,7 +37,7 @@ export const Default: Story = {
   args: {
     ngtTooltip: 'This is a tooltip',
     tooltipPosition: 'top',
-    tooltipDelay: 200
+    delay: 200
   },
   render: args => ({
     props: args,
@@ -49,7 +49,7 @@ export const Default: Story = {
         <button 
           [ngtTooltip]="ngtTooltip" 
           [tooltipPosition]="tooltipPosition" 
-          [tooltipDelay]="tooltipDelay"
+          [delay]="delay"
           class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700">
           Hover me
         </button>

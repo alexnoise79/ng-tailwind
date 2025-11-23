@@ -7,7 +7,7 @@ import { Position } from '../../models';
 
 @Component({
   template: `
-    <button [ngtTooltip]="tooltipText" [tooltipPosition]="position" [tooltipDelay]="delay" [tooltipHideDelay]="hideDelay">
+    <button [ngtTooltip]="tooltipText" [tooltipPosition]="position" [delay]="delay" [hideDelay]="hideDelay">
       Hover me
     </button>
   `,

@@ -11,9 +11,9 @@ export class NgtTooltip implements OnDestroy {
 
   readonly ngtTooltip = input.required<string>();
   readonly tooltipPosition = input<Position>('top');
-  readonly tooltipDelay = input<number>(200);
-  readonly tooltipShowDelay = input<number>(200);
-  readonly tooltipHideDelay = input<number>(200);
+  readonly delay = input<number>(200);
+  readonly showDelay = input<number>(200);
+  readonly hideDelay = input<number>(200);
 
   private showTimeout?: number;
   private hideTimeout?: number;
@@ -100,15 +100,15 @@ export class NgtTooltip implements OnDestroy {
       this.hideTimeout = undefined;
     }
 
-    // Use tooltipShowDelay (preferred) - both have default 200, so behavior is consistent
-    const showDelay = this.tooltipShowDelay();
+    // Use showDelay (preferred) or fall back to delay for backward compatibility
+    const showDelayValue = this.showDelay() !== 200 ? this.showDelay() : this.delay();
     this.showTimeout = window.setTimeout(() => {
       this.createTooltipElement();
       if (this.tooltipElement) {
         this.renderer.setStyle(this.tooltipElement, 'display', 'block');
       }
       this.isVisible.set(true);
-    }, showDelay);
+    }, showDelayValue);
   }
 
   private hide(): void {
@@ -122,7 +122,7 @@ export class NgtTooltip implements OnDestroy {
         this.renderer.setStyle(this.tooltipElement, 'display', 'none');
       }
       this.isVisible.set(false);
-    }, this.tooltipHideDelay());
+    }, this.hideDelay());
   }
 
   // Host listeners for showing/hiding tooltip
