@@ -15,6 +15,7 @@ export class TimepickerPage {
   selectedTimeMeridian = signal<NgtTimeStruct | null>(null);
   selectedTimeSmall = signal<NgtTimeStruct | null>(null);
   selectedTimeLarge = signal<NgtTimeStruct | null>(null);
+  selectedTimeWithSteps = signal<NgtTimeStruct | null>(null);
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
@@ -22,6 +23,7 @@ export class TimepickerPage {
       basic: 'showcase',
       withSeconds: 'showcase',
       withMeridian: 'showcase',
+      withSteps: 'showcase',
       withStringInput: 'showcase',
       withDateInput: 'showcase',
       disabled: 'showcase',
@@ -32,6 +34,7 @@ export class TimepickerPage {
       basic: 'html',
       withSeconds: 'html',
       withMeridian: 'html',
+      withSteps: 'html',
       withStringInput: 'html',
       withDateInput: 'html',
       disabled: 'html',
@@ -126,6 +129,15 @@ import { NgtTimeStruct } from '@ng-tailwind/ui-components';
 export class TimepickerPage {
   selectedTimeLarge = signal<NgtTimeStruct | null>(null);
 }`
+    },
+    withSteps: {
+      html: `<ngt-timepicker [model]="selectedTimeWithSteps()" [hourStep]="2" [minuteStep]="5" [secondStep]="10" [showSeconds]="true" (timeSelect)="selectedTimeWithSteps.set($event)"></ngt-timepicker>`,
+      ts: `import { signal } from '@angular/core';
+import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+
+export class TimepickerPage {
+  selectedTimeWithSteps = signal<NgtTimeStruct | null>(null);
+}`
     }
   };
 
@@ -180,6 +192,10 @@ export class TimepickerPage {
       large: {
         html: 'timepicker-large.html',
         ts: 'timepicker-large.ts'
+      },
+      withSteps: {
+        html: 'timepicker-with-steps.html',
+        ts: 'timepicker-with-steps.ts'
       }
     };
     return this.codeViewUtil.getTabFileName('timepicker', demoKey, fileType, fileNames);
