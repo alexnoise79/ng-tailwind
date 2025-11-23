@@ -649,6 +649,128 @@
               </div>
             </section>
 
+            <!-- Autocomplete -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Autocomplete</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('autocomplete')"
+                  [class.dark:bg-gray-700]="isShowingCode('autocomplete')"
+                  (click)="toggleDemoView('autocomplete')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('autocomplete')) {
+                  <div class="space-y-6">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Basic Autocomplete</label>
+                      <ngt-input
+                        type="text"
+                        [(ngModel)]="autocompleteValue1"
+                        [completeMethod]="searchItems.bind(this)"
+                        optionLabel="name"
+                        optionValue="id"
+                        [minQueryLength]="2"
+                        [delay]="300"
+                        scrollHeight="200px"
+                        placeholder="Search items (min 2 chars)"
+                        class="w-full md:w-64"
+                        (onSelect)="onItemSelect($event)"
+                      />
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ autocompleteValue1() || 'Empty' }}</p>
+                      @if (selectedItem()) {
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedItem()?.name }} (ID: {{ selectedItem()?.id }})</p>
+                      }
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">With Custom Templates</label>
+                      <ngt-input
+                        type="text"
+                        [(ngModel)]="autocompleteValue2"
+                        [completeMethod]="searchItems.bind(this)"
+                        optionLabel="name"
+                        [minQueryLength]="1"
+                        [delay]="500"
+                        scrollHeight="250px"
+                        placeholder="Search with custom template"
+                        class="w-full md:w-64"
+                      >
+                        <ng-template #item let-item>
+                          <div class="flex items-center justify-between">
+                            <div>
+                              <div class="font-medium">{{ item.name }}</div>
+                              <div class="text-xs text-gray-500 dark:text-gray-400">{{ item.category }}</div>
+                            </div>
+                          </div>
+                        </ng-template>
+                        <ng-template #loader>
+                          <div class="flex items-center justify-center p-4">
+                            <svg class="animate-spin h-5 w-5 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span class="ml-2">Searching...</span>
+                          </div>
+                        </ng-template>
+                      </ngt-input>
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ autocompleteValue2() || 'Empty' }}</p>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('autocomplete') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('autocomplete') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('autocomplete') !== 'html'"
+                        (click)="setActiveCodeTab('autocomplete', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('autocomplete', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('autocomplete') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('autocomplete') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('autocomplete') !== 'ts'"
+                        (click)="setActiveCodeTab('autocomplete', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('autocomplete', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('autocomplete', getActiveCodeTab('autocomplete')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('autocomplete', getActiveCodeTab('autocomplete')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
             <!-- Forms -->
             <section class="space-y-4">
               <div class="flex items-center justify-between">
@@ -819,6 +941,42 @@
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'USD'</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Currency code when mode="currency".</td>
                       </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">completeMethod</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">((query: string) => Promise&lt;unknown[]&gt; | unknown[]) | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Function to call when querying for autocomplete suggestions. Can return a Promise or an array directly.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">minQueryLength</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">1</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Minimum number of characters required before triggering autocomplete search.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">delay</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">300</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before triggering autocomplete search (debounce).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">scrollHeight</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'200px'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Maximum height of the autocomplete suggestions panel.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionLabel</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | ((item: unknown) => string) | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name or getter function to use as the label of an option. If not provided, the item itself is used as the label.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionValue</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | ((item: unknown) => string) | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name or getter function to use as the value of an option. If not provided, the item itself is used as the value.</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -841,6 +999,39 @@
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">valueChange</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;string | number&gt;</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the input value changes.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">onSelect</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;AutoCompleteSelectEvent&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Callback to invoke when a suggestion is selected. Event contains <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">originalEvent</code> and <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">value</code>.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Context</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#item</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">let-item</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for each suggestion item in the autocomplete panel.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#loader</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the loading state displayed while fetching suggestions.</td>
                       </tr>
                     </tbody>
                   </table>

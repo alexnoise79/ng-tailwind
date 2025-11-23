@@ -1,15 +1,21 @@
-import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, effect } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, OnDestroy, effect, ContentChild, TemplateRef, HostListener } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { classMerge } from '../../utils';
 import { Size } from '../../models';
+import { OutsideClickDirective } from '../../directives';
+
+export interface AutoCompleteSelectEvent {
+  originalEvent: Event;
+  value: unknown;
+}
 
 export type InputType = 'text' | 'number' | 'email' | 'tel';
 export type NumberMode = 'decimal' | 'currency';
 
 @Component({
   selector: 'ngt-input',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgTemplateOutlet, OutsideClickDirective],
   templateUrl: './input.component.html',
   providers: [
     {
@@ -19,7 +25,7 @@ export type NumberMode = 'decimal' | 'currency';
     }
   ]
 })
-export class NgtInput implements ControlValueAccessor, OnInit {
+export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   // Inputs
   readonly type = input<InputType>('text');
   readonly size = input<Size>('md');
@@ -35,6 +41,28 @@ export class NgtInput implements ControlValueAccessor, OnInit {
   readonly mode = input<NumberMode | null>(null);
   readonly currency = input<string>('USD');
 
+  // Autocomplete inputs
+  @Input() set completeMethod(value: ((query: string) => Promise<unknown[]> | unknown[]) | null | undefined) {
+    this._completeMethod.set(value || null);
+  }
+  private _completeMethod = signal<((query: string) => Promise<unknown[]> | unknown[]) | null>(null);
+  readonly minQueryLength = input<number>(1);
+  readonly delay = input<number>(300);
+  readonly scrollHeight = input<string>('200px');
+  @Input() set optionLabel(value: string | ((item: unknown) => string) | null | undefined) {
+    this._optionLabel.set(value || null);
+  }
+  private _optionLabel = signal<string | ((item: unknown) => string) | null>(null);
+  @Input() set optionValue(value: string | ((item: unknown) => string) | null | undefined) {
+    this._optionValue.set(value || null);
+  }
+  private _optionValue = signal<string | ((item: unknown) => string) | null>(null);
+  readonly onSelect = output<AutoCompleteSelectEvent>();
+
+  // Content templates
+  @ContentChild('item') itemTemplate?: TemplateRef<unknown>;
+  @ContentChild('loader') loaderTemplate?: TemplateRef<unknown>;
+
   @Input() set value(val: string | number | null) {
     if (val !== this._value()) {
       this._value.set(val ?? '');
@@ -48,12 +76,22 @@ export class NgtInput implements ControlValueAccessor, OnInit {
 
   // ViewChild
   @ViewChild('inputElement') inputElementRef!: ElementRef<HTMLInputElement>;
+  @ViewChild('autocompletePanel') autocompletePanelRef?: ElementRef<HTMLElement>;
 
   // Internal state
   private _displayValue = signal<string>('');
   private _isFocused = signal(false);
   private _chips = signal<string[]>([]);
   private _currentChipValue = signal<string>('');
+
+  // Autocomplete state
+  private _suggestions = signal<unknown[]>([]);
+  private _isLoading = signal<boolean>(false);
+  private _showPanel = signal<boolean>(false);
+  private _focusedIndex = signal<number>(-1);
+  private _query = signal<string>('');
+  private _debounceTimer?: ReturnType<typeof setTimeout>;
+  private _escapeListener?: (event: KeyboardEvent) => void;
 
   // ControlValueAccessor callbacks
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -73,6 +111,13 @@ export class NgtInput implements ControlValueAccessor, OnInit {
   isNumberType = computed(() => this.type() === 'number');
   isCurrencyMode = computed(() => this.mode() === 'currency');
   isDecimalMode = computed(() => this.mode() === 'decimal');
+  
+  // Autocomplete computed
+  hasAutocomplete = computed(() => this._completeMethod() !== null);
+  suggestions = computed(() => this._suggestions());
+  isLoading = computed(() => this._isLoading());
+  showPanel = computed(() => this._showPanel() && this.hasAutocomplete() && (this.isLoading() || this.suggestions().length > 0));
+  focusedIndex = computed(() => this._focusedIndex());
 
   inputClasses = computed(() => {
     const hasChipMode = this.hasChips() && this.chip() !== null;
@@ -122,6 +167,29 @@ export class NgtInput implements ControlValueAccessor, OnInit {
         throw new Error('Currency is required when mode is "currency". Please provide a currency value.');
       }
     }
+
+    // Setup keyboard listeners for autocomplete
+    if (this.hasAutocomplete()) {
+      this.setupKeyboardListeners();
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._debounceTimer) {
+      clearTimeout(this._debounceTimer);
+    }
+    if (this._escapeListener) {
+      document.removeEventListener('keydown', this._escapeListener);
+    }
+  }
+
+  private setupKeyboardListeners(): void {
+    this._escapeListener = (event: KeyboardEvent) => {
+      if (this.showPanel() && event.key === 'Escape') {
+        this.hidePanel();
+      }
+    };
+    document.addEventListener('keydown', this._escapeListener);
   }
 
   // Value handling
@@ -451,7 +519,174 @@ export class NgtInput implements ControlValueAccessor, OnInit {
         this.onChange(modelValue);
         this.valueChange.emit(modelValue);
       }
+
+      // Handle autocomplete
+      if (this.hasAutocomplete() && this.type() !== 'number') {
+        this.handleAutocomplete(value);
+      }
     }
+  }
+
+  private handleAutocomplete(query: string): void {
+    // Clear previous timer
+    if (this._debounceTimer) {
+      clearTimeout(this._debounceTimer);
+    }
+
+    this._query.set(query);
+
+    // Check min query length
+    if (query.length < this.minQueryLength()) {
+      this._suggestions.set([]);
+      this._showPanel.set(false);
+      return;
+    }
+
+    // Debounce the search
+    this._debounceTimer = setTimeout(() => {
+      this.searchSuggestions(query);
+    }, this.delay());
+  }
+
+  private async searchSuggestions(query: string): Promise<void> {
+    const completeMethod = this._completeMethod();
+    if (!completeMethod) return;
+
+    this._isLoading.set(true);
+    this._showPanel.set(true);
+    this._focusedIndex.set(-1);
+
+    try {
+      const results = await completeMethod(query);
+      this._suggestions.set(Array.isArray(results) ? results : []);
+    } catch (error) {
+      console.error('Error in autocomplete search:', error);
+      this._suggestions.set([]);
+    } finally {
+      this._isLoading.set(false);
+    }
+  }
+
+  getOptionLabel(item: unknown): string {
+    const optionLabel = this._optionLabel();
+    if (!optionLabel) {
+      return String(item);
+    }
+    if (typeof optionLabel === 'function') {
+      return optionLabel(item);
+    }
+    if (typeof item === 'object' && item !== null) {
+      return String((item as Record<string, unknown>)[optionLabel] ?? item);
+    }
+    return String(item);
+  }
+
+  private getOptionValue(item: unknown): unknown {
+    const optionValue = this._optionValue();
+    if (!optionValue) {
+      return item;
+    }
+    if (typeof optionValue === 'function') {
+      return optionValue(item);
+    }
+    if (typeof item === 'object' && item !== null) {
+      return (item as Record<string, unknown>)[optionValue] ?? item;
+    }
+    return item;
+  }
+
+  selectSuggestion(item: unknown, event: Event): void {
+    const value = this.getOptionValue(item);
+    const label = this.getOptionLabel(item);
+
+    // Update input value
+    this._displayValue.set(label);
+    this._value.set(typeof value === 'string' || typeof value === 'number' ? value : label);
+    this.onChange(this._value());
+    this.valueChange.emit(this._value());
+
+    // Emit onSelect event
+    this.onSelect.emit({
+      originalEvent: event,
+      value: value
+    });
+
+    // Hide panel
+    this.hidePanel();
+
+    // Focus input
+    if (this.inputElementRef) {
+      this.inputElementRef.nativeElement.focus();
+    }
+  }
+
+  hidePanel(): void {
+    this._showPanel.set(false);
+    this._focusedIndex.set(-1);
+  }
+
+  onOutsideClick(): void {
+    if (this.showPanel()) {
+      this.hidePanel();
+    }
+  }
+
+  @HostListener('keydown', ['$event'])
+  onAutocompleteKeyDown(event: KeyboardEvent): void {
+    if (!this.hasAutocomplete() || !this.showPanel()) {
+      return;
+    }
+
+    const suggestions = this.suggestions();
+    if (suggestions.length === 0) return;
+
+    switch (event.key) {
+      case 'ArrowDown':
+        event.preventDefault();
+        this._focusedIndex.set(
+          this._focusedIndex() < suggestions.length - 1
+            ? this._focusedIndex() + 1
+            : 0
+        );
+        this.scrollToFocused();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this._focusedIndex.set(
+          this._focusedIndex() > 0
+            ? this._focusedIndex() - 1
+            : suggestions.length - 1
+        );
+        this.scrollToFocused();
+        break;
+      case 'Enter':
+        event.preventDefault();
+        const focused = this._focusedIndex();
+        if (focused >= 0 && focused < suggestions.length) {
+          this.selectSuggestion(suggestions[focused], event);
+        }
+        break;
+      case 'Escape':
+        event.preventDefault();
+        this.hidePanel();
+        break;
+    }
+  }
+
+  setFocusedIndex(index: number): void {
+    this._focusedIndex.set(index);
+  }
+
+  private scrollToFocused(): void {
+    setTimeout(() => {
+      if (this.autocompletePanelRef && this._focusedIndex() >= 0) {
+        const panel = this.autocompletePanelRef.nativeElement;
+        const focusedElement = panel.querySelector(`[data-suggestion-index="${this._focusedIndex()}"]`) as HTMLElement;
+        if (focusedElement) {
+          focusedElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+    }, 0);
   }
 
   private applyFilter(value: string): string {
@@ -494,6 +729,10 @@ export class NgtInput implements ControlValueAccessor, OnInit {
 
   onFocus(): void {
     this._isFocused.set(true);
+    // Show panel if we have suggestions and autocomplete is enabled
+    if (this.hasAutocomplete() && this.suggestions().length > 0) {
+      this._showPanel.set(true);
+    }
   }
 
   onKeyDown(event: KeyboardEvent): void {
@@ -514,6 +753,12 @@ export class NgtInput implements ControlValueAccessor, OnInit {
   onBlur(): void {
     this._isFocused.set(false);
     this.onTouched();
+    // Hide panel on blur (with slight delay to allow click events)
+    setTimeout(() => {
+      if (!this._isFocused()) {
+        this.hidePanel();
+      }
+    }, 200);
 
     // Submit current chip value on blur if chip mode is enabled
     if (this.chip() !== null && this.type() !== 'number') {

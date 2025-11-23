@@ -1,9 +1,10 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-import { NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
+import { AutocompleteService, AutocompleteItem } from '../../services/autocomplete.service';
 
 @Component({
   selector: 'section.input',
@@ -12,6 +13,7 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 })
 export class InputPage {
   private toastService = inject(NgtToastService);
+  private autocompleteService = inject(AutocompleteService);
 
   // Basic
   textValue1 = signal<string>('');
@@ -52,6 +54,11 @@ export class InputPage {
   filterValue2 = signal<string>('');
   filterRegex = /[a-zA-Z]/;
 
+  // Autocomplete
+  autocompleteValue1 = signal<string>('');
+  autocompleteValue2 = signal<string>('');
+  selectedItem = signal<AutocompleteItem | null>(null);
+
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {
@@ -63,6 +70,7 @@ export class InputPage {
       mask: 'showcase',
       chips: 'showcase',
       filter: 'showcase',
+      autocomplete: 'showcase',
       forms: 'showcase'
     },
     {
@@ -74,6 +82,7 @@ export class InputPage {
       mask: 'html',
       chips: 'html',
       filter: 'html',
+      autocomplete: 'html',
       forms: 'html'
     }
   );
@@ -303,6 +312,71 @@ export class InputPage {
   filterRegex = /[a-zA-Z]/;
 }`
     },
+    autocomplete: {
+      html: `<ngt-input
+  type="text"
+  [(ngModel)]="autocompleteValue1"
+  [completeMethod]="searchItems.bind(this)"
+  optionLabel="name"
+  optionValue="id"
+  [minQueryLength]="2"
+  [delay]="300"
+  scrollHeight="200px"
+  placeholder="Search items (min 2 chars)"
+  class="w-full md:w-64"
+  (onSelect)="onItemSelect($event)"
+/>
+
+<ngt-input
+  type="text"
+  [(ngModel)]="autocompleteValue2"
+  [completeMethod]="searchItems.bind(this)"
+  optionLabel="name"
+  [minQueryLength]="1"
+  [delay]="500"
+  scrollHeight="250px"
+  placeholder="Search with custom template"
+  class="w-full md:w-64"
+>
+  <ng-template #item let-item>
+    <div class="flex items-center justify-between">
+      <div>
+        <div class="font-medium">{{ item.name }}</div>
+        <div class="text-xs text-gray-500">{{ item.category }}</div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #loader>
+    <div class="flex items-center justify-center p-4">
+      <svg class="animate-spin h-5 w-5 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+      <span class="ml-2">Searching...</span>
+    </div>
+  </ng-template>
+</ngt-input>`,
+      ts: `import { Component, signal, inject } from '@angular/core';
+import { NgtInput, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { AutocompleteService, AutocompleteItem } from './services/autocomplete.service';
+
+export class InputPage {
+  private autocompleteService = inject(AutocompleteService);
+  
+  autocompleteValue1 = signal<string>('');
+  autocompleteValue2 = signal<string>('');
+  selectedItem = signal<AutocompleteItem | null>(null);
+
+  async searchItems(query: string): Promise<AutocompleteItem[]> {
+    return this.autocompleteService.search(query, 300);
+  }
+
+  onItemSelect(event: AutoCompleteSelectEvent): void {
+    console.log('Selected:', event.value);
+    // Handle selection
+  }
+}`
+    },
     forms: {
       html: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="flex flex-col gap-1 mb-4">
@@ -344,6 +418,20 @@ export class InputPage {
     console.log('Form submitted');
   }
 
+  // Autocomplete methods
+  async searchItems(query: string): Promise<AutocompleteItem[]> {
+    return this.autocompleteService.search(query, 800);
+  }
+
+  onItemSelect(event: AutoCompleteSelectEvent): void {
+    this.selectedItem.set(event.value as AutocompleteItem);
+    this.toastService.show({
+      severity: 'success',
+      summary: 'Item Selected',
+      detail: `Selected: ${(event.value as AutocompleteItem).name}`
+    });
+  }
+
   // Helper to get code snippet for a specific tab
   getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
     return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
@@ -383,6 +471,10 @@ export class InputPage {
       filter: {
         html: 'input-filter.html',
         ts: 'input-filter.ts'
+      },
+      autocomplete: {
+        html: 'input-autocomplete.html',
+        ts: 'input-autocomplete.ts'
       },
       forms: {
         html: 'input-forms.html',
