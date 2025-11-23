@@ -22,7 +22,7 @@
       </div>
     }
 
-    <div class="relative flex-1 min-w-0">
+    <div class="relative flex-1 min-w-0 flex rounded-md" [class.focus-within:ring-2]="isCurrencyMode()" [class.focus-within:ring-primary-500]="isCurrencyMode()">
       <input
         #inputElement
         [type]="type()"
@@ -30,8 +30,13 @@
         [placeholder]="hasChips() && chip() !== null ? '' : placeholder()"
         [disabled]="isDisabled()"
         [class]="inputClasses()"
-        [class.pr-20]="showClear() && hasValue()"
+        [class.pr-20]="showClear() && hasValue() && !isCurrencyMode()"
+        [class.pr-0]="isCurrencyMode()"
         [class.pl-0]="hasChips() && chip() !== null"
+        [class.rounded-r-none]="isCurrencyMode()"
+        [class.border-r-0]="isCurrencyMode()"
+        [class.focus:ring-0]="isCurrencyMode()"
+        [class.focus:border-transparent]="isCurrencyMode()"
         (input)="onInput($event)"
         (keydown)="onKeyDown($event)"
         (focus)="onFocus()"
@@ -39,8 +44,15 @@
         [attr.aria-label]="placeholder() || 'Input field'"
       />
 
+      <!-- Currency display (input group on the right) -->
+      @if (isCurrencyMode()) {
+        <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-sm whitespace-nowrap focus-within:border-transparent">
+          {{ currency() }}
+        </span>
+      }
+
       <!-- Clear button -->
-      @if (showClear() && hasValue() && !isDisabled()) {
+      @if (showClear() && hasValue() && !isDisabled() && !isCurrencyMode()) {
         <button
           type="button"
           [attr.aria-label]="'Clear input'"

@@ -78,7 +78,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const hasChipMode = this.hasChips() && this.chip() !== null;
     const base = hasChipMode 
       ? 'w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
-      : 'w-full border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+      : 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
     const sizeClasses = {
       sm: 'px-2.5 py-1.5 text-sm',
       md: 'px-3 py-2 text-base',
@@ -97,12 +97,30 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
         this.updateDisplayValue();
       }
     });
+
+    // Effect to validate currency is required when mode is currency
+    effect(() => {
+      if (this.mode() === 'currency') {
+        const currencyValue = this.currency();
+        if (!currencyValue || currencyValue.trim() === '') {
+          console.warn('Currency is required when mode is "currency". Defaulting to "USD".');
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
     this.updateDisplayValue();
     if (this.chip() !== null) {
       this.updateChips();
+    }
+    
+    // Validate currency is required when mode is currency
+    if (this.mode() === 'currency') {
+      const currencyValue = this.currency();
+      if (!currencyValue || currencyValue.trim() === '') {
+        throw new Error('Currency is required when mode is "currency". Please provide a currency value.');
+      }
     }
   }
 
