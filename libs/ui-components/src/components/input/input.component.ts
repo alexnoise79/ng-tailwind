@@ -220,35 +220,23 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     let valueIndex = 0;
     
     for (let i = 0; i < mask.length && valueIndex < value.length; i++) {
-      if (mask[i] === '9') {
-        // Match digit
-        if (/\d/.test(value[valueIndex])) {
+      const maskChar = mask[i];
+      
+      if (maskChar === '9' || maskChar === 'a' || maskChar === '*') {
+        const regex = maskChar === '9' ? /\d/ : maskChar === 'a' ? /[a-zA-Z]/ : /./;
+        if (regex.test(value[valueIndex])) {
           masked += value[valueIndex];
           valueIndex++;
         } else {
-          // Skip non-digit characters
+          // Skip non-matching characters
           valueIndex++;
           i--; // Stay on current mask position
         }
-      } else if (mask[i] === 'a') {
-        // Match alpha
-        if (/[a-zA-Z]/.test(value[valueIndex])) {
-          masked += value[valueIndex];
-          valueIndex++;
-        } else {
-          // Skip non-alpha characters
-          valueIndex++;
-          i--; // Stay on current mask position
-        }
-      } else if (mask[i] === '*') {
-        // Match any character
-        masked += value[valueIndex];
-        valueIndex++;
       } else {
         // Literal character - insert it
-        masked += mask[i];
+        masked += maskChar;
         // If the current value character matches the literal, consume it
-        if (valueIndex < value.length && value[valueIndex] === mask[i]) {
+        if (valueIndex < value.length && value[valueIndex] === maskChar) {
           valueIndex++;
         }
       }
@@ -275,86 +263,49 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       return;
     }
 
-    let chips: string[] = [];
-    let currentValue = '';
-    
     // Get the current input value and existing chips
     const inputValue = this.inputElementRef?.nativeElement?.value || '';
     const existingChips = this._chips();
     
-    if (typeof chipSeparator === 'string') {
-      // Handle regex string like "/\\s+/"
-      if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
-        try {
-          const regexPattern = chipSeparator.slice(1, -1);
-          const regex = new RegExp(regexPattern);
-          const parts = stringValue.split(regex);
-          chips = parts.slice(0, -1).filter(c => c.trim() !== '');
-          currentValue = parts[parts.length - 1] || '';
-        } catch {
-          // Fallback to string split if regex is invalid
-          const parts = stringValue.split(chipFormat);
-          if (parts.length === 1) {
-            // Only one part - check if it's an existing chip
-            const trimmedPart = parts[0].trim();
-            const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
-            if (isExistingChip && inputValue === '') {
-              // It's an existing chip and input is empty - keep it as a chip
-              chips = [trimmedPart];
-              currentValue = '';
-            } else {
-              // It's the current value being edited
-              chips = [];
-              currentValue = parts[0];
-            }
-          } else {
-            chips = parts.slice(0, -1).filter(c => c.trim() !== '');
-            currentValue = parts[parts.length - 1] || '';
-          }
-        }
-      } else {
-        const parts = stringValue.split(chipFormat);
-        if (parts.length === 1) {
-          // Only one part - check if it's an existing chip
-          const trimmedPart = parts[0].trim();
-          const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
-          if (isExistingChip && inputValue === '') {
-            // It's an existing chip and input is empty - keep it as a chip
-            chips = [trimmedPart];
-            currentValue = '';
-          } else {
-            // It's the current value being edited
-            chips = [];
-            currentValue = parts[0];
-          }
-        } else {
-          chips = parts.slice(0, -1).filter(c => c.trim() !== '');
-          currentValue = parts[parts.length - 1] || '';
-        }
+    // Determine the regex to use for splitting
+    let splitRegex: RegExp | string;
+    if (typeof chipSeparator === 'string' && chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
+      try {
+        const regexPattern = chipSeparator.slice(1, -1);
+        splitRegex = new RegExp(regexPattern);
+      } catch {
+        splitRegex = chipFormat;
       }
-    } else if (chipSeparator instanceof RegExp) {
-      const parts = stringValue.split(chipFormat);
-      if (parts.length === 1) {
-        // Only one part - check if it's an existing chip
-        const trimmedPart = parts[0].trim();
-        const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
-        if (isExistingChip && inputValue === '') {
-          // It's an existing chip and input is empty - keep it as a chip
-          chips = [trimmedPart];
-          currentValue = '';
-        } else {
-          // It's the current value being edited
-          chips = [];
-          currentValue = parts[0];
-        }
-      } else {
-        chips = parts.slice(0, -1).filter(c => c.trim() !== '');
-        currentValue = parts[parts.length - 1] || '';
-      }
+    } else {
+      splitRegex = chipFormat;
     }
+
+    const parts = stringValue.split(splitRegex);
+    const { chips, currentValue } = this.processChipParts(parts, existingChips, inputValue);
 
     this._chips.set(chips);
     this._currentChipValue.set(currentValue);
+  }
+
+  private processChipParts(parts: string[], existingChips: string[], inputValue: string): { chips: string[]; currentValue: string } {
+    if (parts.length === 1) {
+      // Only one part - check if it's an existing chip
+      const trimmedPart = parts[0].trim();
+      const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
+      if (isExistingChip && inputValue === '') {
+        // It's an existing chip and input is empty - keep it as a chip
+        return { chips: [trimmedPart], currentValue: '' };
+      } else {
+        // It's the current value being edited
+        return { chips: [], currentValue: parts[0] };
+      }
+    } else {
+      // Multiple parts - all but last are chips
+      return {
+        chips: parts.slice(0, -1).filter(c => c.trim() !== ''),
+        currentValue: parts[parts.length - 1] || ''
+      };
+    }
   }
 
   private getModelValue(displayValue: string): string {
@@ -401,26 +352,27 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const target = event.target as HTMLInputElement;
     let value = target.value;
 
+    // Process input value through filters
+    value = this.processInputValue(value, target);
+
+    // Handle chip mode or normal mode
+    if (this.chip() !== null && this.type() !== 'number') {
+      this.handleChipInput(value, target);
+    } else {
+      this.handleNormalInput(value);
+    }
+  }
+
+  private processInputValue(value: string, target: HTMLInputElement): string {
     // Auto-filter tel inputs to only allow numbers and common tel characters
     if (this.type() === 'tel') {
-      // Remove all invalid characters first
-      value = value.replace(/[^\d+\-()\s]/g, '');
-      // Remove plus signs that are not at the beginning
-      if (value.length > 0 && value[0] === '+') {
-        // Keep the first plus, remove all others
-        value = '+' + value.slice(1).replace(/\+/g, '');
-      } else {
-        // Remove all plus signs if there's no plus at the beginning
-        value = value.replace(/\+/g, '');
-      }
+      value = this.filterTelInput(value);
       target.value = value;
     }
 
     // Apply mask if provided (before filter, so mask format is respected)
     if (this.mask() !== null && this.mask() && this.type() !== 'number') {
-      // Apply mask to the current value
-      const maskedValue = this.applyMask(value, this.mask()!);
-      value = maskedValue;
+      value = this.applyMask(value, this.mask()!);
       target.value = value;
     }
 
@@ -430,99 +382,107 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       target.value = value;
     }
 
-    // Handle chip mode
-    if (this.chip() !== null && this.type() !== 'number') {
-      // Prevent space as first character in chip mode
-      if (value.startsWith(' ')) {
-        value = value.trimStart();
-        target.value = value;
+    return value;
+  }
+
+  private filterTelInput(value: string): string {
+    // Remove all invalid characters first
+    value = value.replace(/[^\d+\-()\s]/g, '');
+    // Remove plus signs that are not at the beginning
+    if (value.length > 0 && value[0] === '+') {
+      // Keep the first plus, remove all others
+      value = '+' + value.slice(1).replace(/\+/g, '');
+    } else {
+      // Remove all plus signs if there's no plus at the beginning
+      value = value.replace(/\+/g, '');
+    }
+    return value;
+  }
+
+  private handleChipInput(value: string, target: HTMLInputElement): void {
+    // Prevent space as first character in chip mode
+    if (value.startsWith(' ')) {
+      value = value.trimStart();
+      target.value = value;
+    }
+    
+    const chipFormat = this.chipFormat();
+    const existingChips = this._chips();
+    
+    // Check if the separator was just typed
+    if (this.isSeparatorTyped(value)) {
+      const valueBeforeSeparator = value.slice(0, -chipFormat.length).trim();
+      if (valueBeforeSeparator) {
+        this.createChipFromValue(valueBeforeSeparator, existingChips);
+        target.value = '';
+        return;
       }
-      
-      const chipSeparator = this.chip();
-      const chipFormat = this.chipFormat();
-      const existingChips = this._chips();
-      
-      // Check if the separator was just typed
-      let separatorTyped = false;
-      if (typeof chipSeparator === 'string') {
-        // Check if value ends with the separator
-        if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
-          // For regex separators, check if the value matches the pattern at the end
-          try {
-            const regexPattern = chipSeparator.slice(1, -1);
-            const regex = new RegExp(regexPattern);
-            separatorTyped = regex.test(value.slice(-1));
-          } catch {
-            separatorTyped = value.endsWith(chipSeparator);
-          }
-        } else {
-          separatorTyped = value.endsWith(chipFormat);
+    }
+    
+    // Update the current chip value
+    this._currentChipValue.set(value);
+    const fullValue = this.buildChipModelValue(existingChips, value);
+    this._displayValue.set(fullValue);
+    const modelValue = this.getModelValue(fullValue);
+    
+    this._value.set(modelValue);
+    this.onChange(modelValue);
+    this.valueChange.emit(modelValue);
+  }
+
+  private isSeparatorTyped(value: string): boolean {
+    const chipSeparator = this.chip();
+    const chipFormat = this.chipFormat();
+    
+    if (typeof chipSeparator === 'string') {
+      if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
+        try {
+          const regexPattern = chipSeparator.slice(1, -1);
+          const regex = new RegExp(regexPattern);
+          return regex.test(value.slice(-1));
+        } catch {
+          return value.endsWith(chipFormat);
         }
-      } else if (chipSeparator instanceof RegExp) {
-        separatorTyped = chipSeparator.test(value.slice(-1));
       }
-      
-      // If separator was typed, create a chip from the value before it
-      if (separatorTyped && value.length > chipFormat.length) {
-        const valueBeforeSeparator = value.slice(0, -chipFormat.length).trim();
-        if (valueBeforeSeparator) {
-          const newChips = [...existingChips, valueBeforeSeparator];
-          const newValue = this.buildChipModelValue(newChips, '');
-          
-          this._value.set(newValue);
-          this._displayValue.set(newValue);
-          this._chips.set(newChips);
-          this._currentChipValue.set('');
-          this.onChange(newValue);
-          this.valueChange.emit(newValue);
-          
-          // Clear the input
-          target.value = '';
-          return;
-        }
-      }
-      
-      // Otherwise, just update the current value without creating chips
-      // Update the current chip value directly
-      this._currentChipValue.set(value);
-      
-      const fullValue = this.buildChipModelValue(existingChips, value);
-      
-      // Update display value (for non-chip mode display)
-      this._displayValue.set(fullValue);
-      
-      // Get model value (without mask formatting)
-      const modelValue = this.getModelValue(fullValue);
-      
+      return value.endsWith(chipFormat);
+    } else if (chipSeparator instanceof RegExp) {
+      return chipSeparator.test(value.slice(-1));
+    }
+    return false;
+  }
+
+  private createChipFromValue(valueBeforeSeparator: string, existingChips: string[]): void {
+    const newChips = [...existingChips, valueBeforeSeparator];
+    const newValue = this.buildChipModelValue(newChips, '');
+    
+    this._value.set(newValue);
+    this._displayValue.set(newValue);
+    this._chips.set(newChips);
+    this._currentChipValue.set('');
+    this.onChange(newValue);
+    this.valueChange.emit(newValue);
+  }
+
+  private handleNormalInput(value: string): void {
+    // Update display value
+    this._displayValue.set(value);
+    const modelValue = this.getModelValue(value);
+
+    // For number type, convert to number
+    if (this.type() === 'number') {
+      const numValue = this.parseNumber(modelValue);
+      this._value.set(numValue);
+      this.onChange(numValue);
+      this.valueChange.emit(numValue);
+    } else {
       this._value.set(modelValue);
       this.onChange(modelValue);
       this.valueChange.emit(modelValue);
-      
-      // Don't call updateChips() here - it will be called on blur
-    } else {
-      // Normal mode (no chips)
-      // Update display value
-      this._displayValue.set(value);
+    }
 
-      // Get model value (without mask formatting)
-      const modelValue = this.getModelValue(value);
-
-      // For number type, convert to number
-      if (this.type() === 'number') {
-        const numValue = this.parseNumber(modelValue);
-        this._value.set(numValue);
-        this.onChange(numValue);
-        this.valueChange.emit(numValue);
-      } else {
-        this._value.set(modelValue);
-        this.onChange(modelValue);
-        this.valueChange.emit(modelValue);
-      }
-
-      // Handle autocomplete
-      if (this.hasAutocomplete() && this.type() !== 'number') {
-        this.handleAutocomplete(value);
-      }
+    // Handle autocomplete
+    if (this.hasAutocomplete() && this.type() !== 'number') {
+      this.handleAutocomplete(value);
     }
   }
 
@@ -567,31 +527,28 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   getOptionLabel(item: unknown): string {
-    const optionLabel = this._optionLabel();
-    if (!optionLabel) {
-      return String(item);
-    }
-    if (typeof optionLabel === 'function') {
-      return optionLabel(item);
-    }
-    if (typeof item === 'object' && item !== null) {
-      return String((item as Record<string, unknown>)[optionLabel] ?? item);
-    }
-    return String(item);
+    return this.extractOptionProperty(item, this._optionLabel(), String(item));
   }
 
   private getOptionValue(item: unknown): unknown {
-    const optionValue = this._optionValue();
-    if (!optionValue) {
-      return item;
+    return this.extractOptionProperty(item, this._optionValue(), item);
+  }
+
+  private extractOptionProperty<T>(
+    item: unknown,
+    property: string | ((item: unknown) => T) | null,
+    defaultValue: T
+  ): T {
+    if (!property) {
+      return defaultValue;
     }
-    if (typeof optionValue === 'function') {
-      return optionValue(item);
+    if (typeof property === 'function') {
+      return property(item);
     }
     if (typeof item === 'object' && item !== null) {
-      return (item as Record<string, unknown>)[optionValue] ?? item;
+      return ((item as Record<string, unknown>)[property] ?? defaultValue) as T;
     }
-    return item;
+    return defaultValue;
   }
 
   selectSuggestion(item: unknown, event: Event): void {
@@ -761,41 +718,49 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     // Submit current chip value on blur if chip mode is enabled
     if (this.chip() !== null && this.type() !== 'number') {
-      const currentValue = this._currentChipValue().trimStart().trim();
-      if (currentValue) {
-        // Add current value as a chip (trimmed of leading spaces)
-        const existingChips = this._chips();
-        const newChips = [...existingChips, currentValue];
-        const newValue = this.buildChipModelValue(newChips, '');
-        
-        this._value.set(newValue);
-        this._displayValue.set(newValue);
-        this._chips.set(newChips);
-        this._currentChipValue.set('');
-        this.onChange(newValue);
-        this.valueChange.emit(newValue);
-      } else {
-        // Even if no current value, update the model to remove any trailing separator
-        const existingChips = this._chips();
-        const newValue = this.buildChipModelValue(existingChips, '');
-        if (newValue !== String(this._value())) {
-          this._value.set(newValue);
-          this._displayValue.set(newValue);
-          this.onChange(newValue);
-          this.valueChange.emit(newValue);
-        }
-      }
+      this.submitChipOnBlur();
     }
 
     // Format number on blur if in currency or decimal mode
     if (this.type() === 'number' && this.mode() !== null) {
-      const numValue = this.parseNumber(this._displayValue());
-      if (!isNaN(numValue) && numValue !== 0) {
-        const formatted = this.formatNumber(numValue);
-        this._displayValue.set(formatted);
-        // Update the value to match formatted display
-        this._value.set(numValue);
+      this.formatNumberOnBlur();
+    }
+  }
+
+  private submitChipOnBlur(): void {
+    const currentValue = this._currentChipValue().trimStart().trim();
+    const existingChips = this._chips();
+    
+    if (currentValue) {
+      // Add current value as a chip (trimmed of leading spaces)
+      const newChips = [...existingChips, currentValue];
+      const newValue = this.buildChipModelValue(newChips, '');
+      
+      this._value.set(newValue);
+      this._displayValue.set(newValue);
+      this._chips.set(newChips);
+      this._currentChipValue.set('');
+      this.onChange(newValue);
+      this.valueChange.emit(newValue);
+    } else {
+      // Even if no current value, update the model to remove any trailing separator
+      const newValue = this.buildChipModelValue(existingChips, '');
+      if (newValue !== String(this._value())) {
+        this._value.set(newValue);
+        this._displayValue.set(newValue);
+        this.onChange(newValue);
+        this.valueChange.emit(newValue);
       }
+    }
+  }
+
+  private formatNumberOnBlur(): void {
+    const numValue = this.parseNumber(this._displayValue());
+    if (!isNaN(numValue) && numValue !== 0) {
+      const formatted = this.formatNumber(numValue);
+      this._displayValue.set(formatted);
+      // Update the value to match formatted display
+      this._value.set(numValue);
     }
   }
 
