@@ -22,54 +22,16 @@
           <ngt-nav-item [routerLink]="'/getting-started'" (click)="closeMobileMenu()" label="Getting Started"> </ngt-nav-item>
         </ngt-nav>
 
-        <!-- Panel Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Panel</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/accordion'" (click)="closeMobileMenu()" label="Accordion"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/nav'" (click)="closeMobileMenu()" label="Nav"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/card'" (click)="closeMobileMenu()" label="Card"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/collapse'" (click)="closeMobileMenu()" label="Collapse"> </ngt-nav-item>
-        </ngt-nav>
-
-        <!-- Overlay Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Overlay</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/tooltip'" (click)="closeMobileMenu()" label="Tooltip"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/modal'" (click)="closeMobileMenu()" label="Modal"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/offcanvas'" (click)="closeMobileMenu()" label="Offcanvas"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/dropdown'" (click)="closeMobileMenu()" label="Dropdown"> </ngt-nav-item>
-        </ngt-nav>
-
-        <!-- Form Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Form</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/input'" (click)="closeMobileMenu()" label="Input"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/password'" (click)="closeMobileMenu()" label="Password"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/select'" (click)="closeMobileMenu()" label="Select"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/datepicker'" (click)="closeMobileMenu()" label="Datepicker"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/toggle-switch'" (click)="closeMobileMenu()" label="Toggle Switch"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/timepicker'" (click)="closeMobileMenu()" label="Timepicker"> </ngt-nav-item>
-        </ngt-nav>
-
-        <!-- Data Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Data</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/table'" (click)="closeMobileMenu()" label="Table"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/pagination'" (click)="closeMobileMenu()" label="Pagination"> </ngt-nav-item>
-        </ngt-nav>
-
-        <!-- Messages Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Messages</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/toast'" (click)="closeMobileMenu()" label="Toast"> </ngt-nav-item>
-          <ngt-nav-item [routerLink]="'/alert'" (click)="closeMobileMenu()" label="Alert"> </ngt-nav-item>
-        </ngt-nav>
-
-        <!-- Buttons Group -->
-        <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Buttons</h3>
-        <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
-          <ngt-nav-item [routerLink]="'/button'" (click)="closeMobileMenu()" label="Button"> </ngt-nav-item>
-        </ngt-nav>
+        @for (group of sortedNavigationGroups; track group.name) {
+          <div>
+            <h3 class="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">{{ group.name }}</h3>
+            <ngt-nav [orientation]="'vertical'" [style]="'tabs'">
+              @for (item of group.items; track item.route) {
+                <ngt-nav-item [routerLink]="item.route" [label]="item.label" (click)="closeMobileMenu()"> </ngt-nav-item>
+              }
+            </ngt-nav>
+          </div>
+        }
       </div>
     </nav>
   </aside>

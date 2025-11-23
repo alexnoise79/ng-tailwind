@@ -7,6 +7,16 @@ import { Subscription } from 'rxjs';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
 
+interface NavItem {
+  label: string;
+  route: string;
+}
+
+interface NavGroup {
+  name: string;
+  items: NavItem[];
+}
+
 @Component({
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet, FormsModule, NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch, ThemeConfiguratorComponent],
@@ -17,6 +27,67 @@ export class AppComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
   private router = inject(Router);
   private routerSubscription?: Subscription;
+
+  navigationGroups: NavGroup[] = [
+    {
+      name: 'Panel',
+      items: [
+        { label: 'Accordion', route: '/accordion' },
+        { label: 'Card', route: '/card' },
+        { label: 'Collapse', route: '/collapse' },
+        { label: 'Nav', route: '/nav' }
+      ]
+    },
+    {
+      name: 'Overlay',
+      items: [
+        { label: 'Dropdown', route: '/dropdown' },
+        { label: 'Modal', route: '/modal' },
+        { label: 'Offcanvas', route: '/offcanvas' },
+        { label: 'Tooltip', route: '/tooltip' }
+      ]
+    },
+    {
+      name: 'Form',
+      items: [
+        { label: 'Datepicker', route: '/datepicker' },
+        { label: 'Input', route: '/input' },
+        { label: 'Password', route: '/password' },
+        { label: 'Select', route: '/select' },
+        { label: 'Timepicker', route: '/timepicker' },
+        { label: 'Toggle Switch', route: '/toggle-switch' }
+      ]
+    },
+    {
+      name: 'Data',
+      items: [
+        { label: 'Pagination', route: '/pagination' },
+        { label: 'Table', route: '/table' }
+      ]
+    },
+    {
+      name: 'Messages',
+      items: [
+        { label: 'Alert', route: '/alert' },
+        { label: 'Toast', route: '/toast' }
+      ]
+    },
+    {
+      name: 'Buttons',
+      items: [
+        { label: 'Button', route: '/button' }
+      ]
+    }
+  ];
+
+  get sortedNavigationGroups(): NavGroup[] {
+    return this.navigationGroups
+      .map(group => ({
+        ...group,
+        items: [...group.items].sort((a, b) => a.label.localeCompare(b.label))
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }
 
   ngOnInit(): void {
     // Load saved preference or default to system preference
