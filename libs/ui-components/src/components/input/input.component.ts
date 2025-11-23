@@ -1,0 +1,338 @@
+import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, OnDestroy, effect } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { classMerge } from '../../utils';
+import { Size } from '../../models';
+
+export type InputType = 'text' | 'number' | 'email' | 'tel';
+export type NumberMode = 'decimal' | 'currency';
+
+@Component({
+  selector: 'ngt-input',
+  imports: [CommonModule, FormsModule],
+  templateUrl: './input.component.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgtInput),
+      multi: true
+    }
+  ]
+})
+export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
+  // Inputs
+  readonly type = input<InputType>('text');
+  readonly size = input<Size>('md');
+  readonly disabled = input<boolean>(false);
+  readonly placeholder = input<string>('');
+  readonly showClear = input<boolean>(false);
+  readonly mask = input<string | null>(null);
+  readonly chip = input<string | RegExp | null>(null);
+  readonly chipFormat = input<string>(',');
+  readonly filter = input<string[] | RegExp | null>(null);
+  
+  // Number-specific inputs
+  readonly mode = input<NumberMode | null>(null);
+  readonly currency = input<string>('USD');
+
+  @Input() set value(val: string | number | null) {
+    if (val !== this._value()) {
+      this._value.set(val ?? '');
+      this.updateDisplayValue();
+    }
+  }
+  private _value = signal<string | number>('');
+
+  // Outputs
+  readonly valueChange = output<string | number>();
+
+  // ViewChild
+  @ViewChild('inputElement') inputElementRef!: ElementRef<HTMLInputElement>;
+
+  // Internal state
+  private _displayValue = signal<string>('');
+  private _isFocused = signal(false);
+  private _chips = signal<string[]>([]);
+
+  // ControlValueAccessor callbacks
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private onChange = (_value: string | number) => {};
+  private onTouched = () => {};
+
+  // Computed values
+  displayValue = computed(() => this._displayValue());
+  isDisabled = computed(() => this.disabled());
+  hasValue = computed(() => {
+    const val = this._value();
+    return val !== null && val !== undefined && val !== '';
+  });
+  hasChips = computed(() => this._chips().length > 0);
+  chips = computed(() => this._chips());
+  isNumberType = computed(() => this.type() === 'number');
+  isCurrencyMode = computed(() => this.mode() === 'currency');
+  isDecimalMode = computed(() => this.mode() === 'decimal');
+
+  inputClasses = computed(() => {
+    const base = 'w-full border rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+    const sizeClasses = {
+      sm: 'px-2.5 py-1.5 text-sm',
+      md: 'px-3 py-2 text-base',
+      lg: 'px-4 py-2.5 text-lg'
+    };
+    // Hide native number input spinners
+    const numberInputClasses = this.type() === 'number' ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' : '';
+    return classMerge(base, sizeClasses[this.size()], numberInputClasses);
+  });
+
+
+  constructor() {
+    // Effect to update chips when value changes
+    effect(() => {
+      if (this.chip() !== null) {
+        this.updateChips();
+      }
+    });
+
+    // Effect to apply mask
+    effect(() => {
+      if (this.mask() !== null) {
+        this.updateDisplayValue();
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.updateDisplayValue();
+    if (this.chip() !== null) {
+      this.updateChips();
+    }
+  }
+
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
+
+  // Value handling
+  private updateDisplayValue(): void {
+    const val = this._value();
+    if (val === null || val === undefined) {
+      this._displayValue.set('');
+      return;
+    }
+
+    const stringValue = String(val);
+
+    // Apply mask if provided
+    if (this.mask() !== null && this.mask()) {
+      this._displayValue.set(this.applyMask(stringValue, this.mask()!));
+    } else {
+      this._displayValue.set(stringValue);
+    }
+  }
+
+  private applyMask(value: string, mask: string): string {
+    // Simple mask implementation - can be enhanced
+    let masked = '';
+    let valueIndex = 0;
+    
+    for (let i = 0; i < mask.length && valueIndex < value.length; i++) {
+      if (mask[i] === '#') {
+        masked += value[valueIndex] || '';
+        valueIndex++;
+      } else {
+        masked += mask[i];
+      }
+    }
+    
+    return masked;
+  }
+
+  private updateChips(): void {
+    const val = this._value();
+    if (!val) {
+      this._chips.set([]);
+      return;
+    }
+
+    const stringValue = String(val);
+    const chipSeparator = this.chip();
+
+    if (chipSeparator === null) {
+      this._chips.set([]);
+      return;
+    }
+
+    let chips: string[] = [];
+    if (typeof chipSeparator === 'string') {
+      // Handle regex string like "/\\s+/"
+      if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
+        try {
+          const regexPattern = chipSeparator.slice(1, -1);
+          const regex = new RegExp(regexPattern);
+          chips = stringValue.split(regex).filter(c => c.trim() !== '');
+        } catch {
+          // Fallback to string split if regex is invalid
+          chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+        }
+      } else {
+        chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+      }
+    } else if (chipSeparator instanceof RegExp) {
+      chips = stringValue.split(chipSeparator).filter(c => c.trim() !== '');
+    }
+
+    this._chips.set(chips);
+  }
+
+  private getModelValue(displayValue: string): string {
+    // Remove mask characters for model
+    if (this.mask() !== null && this.mask()) {
+      // Remove non-# characters from mask
+      const maskPattern = this.mask()!.replace(/[^#]/g, '');
+      return displayValue.replace(/[^\d]/g, '').slice(0, maskPattern.length);
+    }
+    return displayValue;
+  }
+
+  // Event handlers
+  onInput(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    let value = target.value;
+
+    // Apply filter if provided
+    if (this.filter() !== null) {
+      value = this.applyFilter(value);
+      target.value = value;
+    }
+
+    // Update display value
+    this._displayValue.set(value);
+
+    // Get model value (without mask formatting)
+    const modelValue = this.getModelValue(value);
+
+    // For number type, convert to number
+    if (this.type() === 'number') {
+      const numValue = this.parseNumber(modelValue);
+      this._value.set(numValue);
+      this.onChange(numValue);
+      this.valueChange.emit(numValue);
+    } else {
+      this._value.set(modelValue);
+      this.onChange(modelValue);
+      this.valueChange.emit(modelValue);
+    }
+  }
+
+  private applyFilter(value: string): string {
+    const filter = this.filter();
+    if (filter === null) return value;
+
+    if (Array.isArray(filter)) {
+      // Array of allowed characters
+      return value.split('').filter(char => filter.includes(char)).join('');
+    } else if (filter instanceof RegExp) {
+      // Regex filter
+      return value.split('').filter(char => filter.test(char)).join('');
+    }
+
+    return value;
+  }
+
+  private parseNumber(value: string): number {
+    if (!value || value.trim() === '') return 0;
+    
+    // Remove currency symbols and formatting
+    const cleaned = value.replace(/[^\d.-]/g, '');
+    if (cleaned === '' || cleaned === '-') return 0;
+    const parsed = parseFloat(cleaned);
+    
+    return isNaN(parsed) ? 0 : parsed;
+  }
+
+  private formatNumber(value: number): string {
+    if (this.mode() === 'currency') {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: this.currency()
+      }).format(value);
+    } else if (this.mode() === 'decimal') {
+      return value.toFixed(2);
+    }
+    return String(value);
+  }
+
+  onFocus(): void {
+    this._isFocused.set(true);
+  }
+
+  onBlur(): void {
+    this._isFocused.set(false);
+    this.onTouched();
+
+    // Format number on blur if in currency or decimal mode
+    if (this.type() === 'number' && this.mode() !== null) {
+      const numValue = this.parseNumber(this._displayValue());
+      if (!isNaN(numValue) && numValue !== 0) {
+        const formatted = this.formatNumber(numValue);
+        this._displayValue.set(formatted);
+        // Update the value to match formatted display
+        this._value.set(numValue);
+      }
+    }
+  }
+
+  onClear(event: Event): void {
+    event.stopPropagation();
+    if (this.isDisabled()) return;
+
+    this._value.set('');
+    this._displayValue.set('');
+    this._chips.set([]);
+    this.onChange('');
+    this.valueChange.emit('');
+    
+    if (this.inputElementRef) {
+      this.inputElementRef.nativeElement.focus();
+    }
+  }
+
+
+  removeChip(chip: string, event: Event): void {
+    event.stopPropagation();
+    if (this.isDisabled()) return;
+
+    const chips = this._chips();
+    const newChips = chips.filter(c => c !== chip);
+    const newValue = newChips.join(this.chipFormat());
+    
+    this._value.set(newValue);
+    this._displayValue.set(newValue);
+    this._chips.set(newChips);
+    this.onChange(newValue);
+    this.valueChange.emit(newValue);
+  }
+
+  // ControlValueAccessor implementation
+  writeValue(value: string | number | null): void {
+    this._value.set(value ?? '');
+    this.updateDisplayValue();
+    if (this.chip() !== null) {
+      this.updateChips();
+    }
+  }
+
+  registerOnChange(fn: (value: string | number) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    // This will be handled by the disabled input signal
+  }
+
+}
+

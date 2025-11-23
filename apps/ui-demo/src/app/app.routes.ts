@@ -77,5 +77,9 @@ export const appRoutes: Routes = [
   {
     path: 'card',
     loadComponent: () => import('./components/card/card.page').then(m => m.CardPage)
+  },
+  {
+    path: 'input',
+    loadComponent: () => import('./components/input/input.page').then(m => m.InputPage)
   }
 ];
