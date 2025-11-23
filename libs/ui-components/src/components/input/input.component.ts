@@ -91,13 +91,6 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
 
   constructor() {
-    // Effect to update chips when value changes
-    effect(() => {
-      if (this.chip() !== null) {
-        this.updateChips();
-      }
-    });
-
     // Effect to apply mask
     effect(() => {
       if (this.mask() !== null) {
@@ -162,6 +155,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     const stringValue = String(val);
     const chipSeparator = this.chip();
+    const chipFormat = this.chipFormat();
 
     if (chipSeparator === null) {
       this._chips.set([]);
@@ -171,6 +165,10 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     let chips: string[] = [];
     let currentValue = '';
+    
+    // Get the current input value and existing chips
+    const inputValue = this.inputElementRef?.nativeElement?.value || '';
+    const existingChips = this._chips();
     
     if (typeof chipSeparator === 'string') {
       // Handle regex string like "/\\s+/"
@@ -183,19 +181,64 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
           currentValue = parts[parts.length - 1] || '';
         } catch {
           // Fallback to string split if regex is invalid
-          const parts = stringValue.split(chipSeparator);
+          const parts = stringValue.split(chipFormat);
+          if (parts.length === 1) {
+            // Only one part - check if it's an existing chip
+            const trimmedPart = parts[0].trim();
+            const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
+            if (isExistingChip && inputValue === '') {
+              // It's an existing chip and input is empty - keep it as a chip
+              chips = [trimmedPart];
+              currentValue = '';
+            } else {
+              // It's the current value being edited
+              chips = [];
+              currentValue = parts[0];
+            }
+          } else {
+            chips = parts.slice(0, -1).filter(c => c.trim() !== '');
+            currentValue = parts[parts.length - 1] || '';
+          }
+        }
+      } else {
+        const parts = stringValue.split(chipFormat);
+        if (parts.length === 1) {
+          // Only one part - check if it's an existing chip
+          const trimmedPart = parts[0].trim();
+          const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
+          if (isExistingChip && inputValue === '') {
+            // It's an existing chip and input is empty - keep it as a chip
+            chips = [trimmedPart];
+            currentValue = '';
+          } else {
+            // It's the current value being edited
+            chips = [];
+            currentValue = parts[0];
+          }
+        } else {
           chips = parts.slice(0, -1).filter(c => c.trim() !== '');
           currentValue = parts[parts.length - 1] || '';
         }
+      }
+    } else if (chipSeparator instanceof RegExp) {
+      const parts = stringValue.split(chipFormat);
+      if (parts.length === 1) {
+        // Only one part - check if it's an existing chip
+        const trimmedPart = parts[0].trim();
+        const isExistingChip = existingChips.some(c => c.trim() === trimmedPart);
+        if (isExistingChip && inputValue === '') {
+          // It's an existing chip and input is empty - keep it as a chip
+          chips = [trimmedPart];
+          currentValue = '';
+        } else {
+          // It's the current value being edited
+          chips = [];
+          currentValue = parts[0];
+        }
       } else {
-        const parts = stringValue.split(chipSeparator);
         chips = parts.slice(0, -1).filter(c => c.trim() !== '');
         currentValue = parts[parts.length - 1] || '';
       }
-    } else if (chipSeparator instanceof RegExp) {
-      const parts = stringValue.split(chipSeparator);
-      chips = parts.slice(0, -1).filter(c => c.trim() !== '');
-      currentValue = parts[parts.length - 1] || '';
     }
 
     this._chips.set(chips);
@@ -302,7 +345,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       this.onChange(modelValue);
       this.valueChange.emit(modelValue);
       
-      // Don't call updateChips() here - it's handled by the effect when focus is lost
+      // Don't call updateChips() here - it will be called on blur
     } else {
       // Normal mode (no chips)
       // Update display value
