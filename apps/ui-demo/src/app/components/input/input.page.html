@@ -202,7 +202,7 @@
                 @if (!isShowingCode('disabled')) {
                   <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Disabled Input</label>
-                      <ngt-input [(ngModel)]="disabledValue" [disabled]="true" type="text" class="w-full md:w-64" />
+                    <ngt-input [(ngModel)]="disabledValue" [disabled]="true" type="text" class="w-full md:w-64" />
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -672,19 +672,7 @@
                   <div class="space-y-6">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Basic Autocomplete</label>
-                      <ngt-input
-                        type="text"
-                        [(ngModel)]="autocompleteValue1"
-                        [completeMethod]="searchItems.bind(this)"
-                        optionLabel="name"
-                        optionValue="id"
-                        [minQueryLength]="2"
-                        [delay]="300"
-                        scrollHeight="200px"
-                        placeholder="Search items (min 2 chars)"
-                        class="w-full md:w-64"
-                        (onSelect)="onItemSelect($event)"
-                      />
+                      <ngt-input type="text" [(ngModel)]="autocompleteValue1" [completeMethod]="searchItems.bind(this)" optionLabel="name" optionValue="id" [minQueryLength]="2" [delay]="300" scrollHeight="200px" placeholder="Search items (min 2 chars)" class="w-full md:w-64" (onSelect)="onItemSelect($event)" />
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Value: {{ autocompleteValue1() || 'Empty' }}</p>
                       @if (selectedItem()) {
                         <p class="text-sm text-gray-600 dark:text-gray-400">Selected: {{ selectedItem()?.name }} (ID: {{ selectedItem()?.id }})</p>
@@ -692,17 +680,7 @@
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">With Custom Templates</label>
-                      <ngt-input
-                        type="text"
-                        [(ngModel)]="autocompleteValue2"
-                        [completeMethod]="searchItems.bind(this)"
-                        optionLabel="name"
-                        [minQueryLength]="1"
-                        [delay]="500"
-                        scrollHeight="250px"
-                        placeholder="Search with custom template"
-                        class="w-full md:w-64"
-                      >
+                      <ngt-input type="text" [(ngModel)]="autocompleteValue2" [completeMethod]="searchItems.bind(this)" optionLabel="name" [minQueryLength]="1" [delay]="500" scrollHeight="250px" placeholder="Search with custom template" class="w-full md:w-64">
                         <ng-template #item let-item>
                           <div class="flex items-center justify-between">
                             <div>
@@ -909,7 +887,10 @@
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">mask</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Mask pattern for formatting input display. Use <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">9</code> for digits, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">a</code> for letters, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">*</code> for any character. Other characters are inserted as literals. Model value remains unformatted.</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                          Mask pattern for formatting input display. Use <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">9</code> for digits, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">a</code> for letters, <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded">*</code> for any character. Other characters
+                          are inserted as literals. Model value remains unformatted.
+                        </td>
                       </tr>
                       <tr>
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">chip</td>
@@ -1054,4 +1035,3 @@
   <!-- Content Outlet -->
   <div [ngtNavOutlet]="mainNav"></div>
 </div>
-

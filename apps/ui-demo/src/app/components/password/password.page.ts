@@ -7,7 +7,7 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.password',
-  imports: [FormsModule, JsonPipe, NgtPassword, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
+  imports: [FormsModule, NgtPassword, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './password.page.html'
 })
 export class PasswordPage {
@@ -197,4 +197,3 @@ export class PasswordPage {
     return this.codeViewUtil.getTabFileName('password', demoKey, fileType, fileNames);
   }
 }
-

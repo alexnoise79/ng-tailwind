@@ -146,4 +146,3 @@ describe('Offcanvas Page E2E', () => {
     });
   });
 });
-

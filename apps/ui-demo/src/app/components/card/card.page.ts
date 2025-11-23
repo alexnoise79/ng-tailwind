@@ -129,4 +129,3 @@ export class CardPage {
     return this.codeViewUtil.getTabFileName('card', demoKey, fileType, fileNames);
   }
 }
-

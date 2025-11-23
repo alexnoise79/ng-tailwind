@@ -48,11 +48,6 @@ export class AutocompleteService {
     }
 
     const lowerQuery = query.toLowerCase();
-    return this.items.filter(item =>
-      item.name.toLowerCase().includes(lowerQuery) ||
-      item.category.toLowerCase().includes(lowerQuery) ||
-      (item.description && item.description.toLowerCase().includes(lowerQuery))
-    );
+    return this.items.filter(item => item.name.toLowerCase().includes(lowerQuery) || item.category.toLowerCase().includes(lowerQuery) || (item.description && item.description.toLowerCase().includes(lowerQuery)));
   }
 }
-

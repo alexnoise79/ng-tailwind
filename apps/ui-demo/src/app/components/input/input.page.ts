@@ -8,7 +8,7 @@ import { AutocompleteService, AutocompleteItem } from '../../services/autocomple
 
 @Component({
   selector: 'section.input',
-  imports: [FormsModule, JsonPipe, NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
+  imports: [FormsModule, NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './input.page.html'
 })
 export class InputPage {
@@ -33,7 +33,6 @@ export class InputPage {
   decimalValue = signal<number>(0);
   currencyValue = signal<number>(0);
   currencyType = signal<string>('USD');
-
 
   // Show clear
   clearValue1 = signal<string>('');
@@ -484,4 +483,3 @@ export class InputPage {
     return this.codeViewUtil.getTabFileName('input', demoKey, fileType, fileNames);
   }
 }
-

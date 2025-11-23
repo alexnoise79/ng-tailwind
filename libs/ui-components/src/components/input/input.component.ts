@@ -36,7 +36,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   readonly chip = input<string | RegExp | null>(null);
   readonly chipFormat = input<string>(',');
   readonly filter = input<string[] | RegExp | null>(null);
-  
+
   // Number-specific inputs
   readonly mode = input<NumberMode | null>(null);
   readonly currency = input<string>('USD');
@@ -110,7 +110,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   currentChipValue = computed(() => this._currentChipValue());
   isNumberType = computed(() => this.type() === 'number');
   isCurrencyMode = computed(() => this.mode() === 'currency');
-  
+
   // Autocomplete computed
   hasAutocomplete = computed(() => this._completeMethod() !== null);
   suggestions = computed(() => this._suggestions());
@@ -120,7 +120,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
   inputClasses = computed(() => {
     const hasChipMode = this.hasChips() && this.chip() !== null;
-    const base = hasChipMode 
+    const base = hasChipMode
       ? 'w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
       : 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
     const sizeClasses = {
@@ -132,7 +132,6 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const numberInputClasses = this.type() === 'number' ? '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none' : '';
     return classMerge(base, sizeClasses[this.size()], numberInputClasses);
   });
-
 
   constructor() {
     // Effect to apply mask
@@ -158,7 +157,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     if (this.chip() !== null) {
       this.updateChips();
     }
-    
+
     // Validate currency is required when mode is currency
     if (this.mode() === 'currency') {
       const currencyValue = this.currency();
@@ -215,13 +214,13 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     // - a = alpha (a-z, A-Z)
     // - * = any character
     // - any other character = literal character to insert
-    
+
     let masked = '';
     let valueIndex = 0;
-    
+
     for (let i = 0; i < mask.length && valueIndex < value.length; i++) {
       const maskChar = mask[i];
-      
+
       if (maskChar === '9' || maskChar === 'a' || maskChar === '*') {
         const regex = maskChar === '9' ? /\d/ : maskChar === 'a' ? /[a-zA-Z]/ : /./;
         if (regex.test(value[valueIndex])) {
@@ -241,7 +240,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
         }
       }
     }
-    
+
     return masked;
   }
 
@@ -266,7 +265,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     // Get the current input value and existing chips
     const inputValue = this.inputElementRef?.nativeElement?.value || '';
     const existingChips = this._chips();
-    
+
     // Determine the regex to use for splitting
     let splitRegex: RegExp | string;
     if (typeof chipSeparator === 'string' && chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
@@ -315,7 +314,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       // Extract only the characters that match mask placeholders (9, a, *)
       let modelValue = '';
       let displayIndex = 0;
-      
+
       for (let i = 0; i < mask.length && displayIndex < displayValue.length; i++) {
         if (mask[i] === '9' || mask[i] === 'a' || mask[i] === '*') {
           // This is a placeholder, include the character in model
@@ -330,7 +329,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
           }
         }
       }
-      
+
       return modelValue;
     }
     return displayValue;
@@ -405,10 +404,10 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       value = value.trimStart();
       target.value = value;
     }
-    
+
     const chipFormat = this.chipFormat();
     const existingChips = this._chips();
-    
+
     // Check if the separator was just typed
     if (this.isSeparatorTyped(value)) {
       const valueBeforeSeparator = value.slice(0, -chipFormat.length).trim();
@@ -418,13 +417,13 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
         return;
       }
     }
-    
+
     // Update the current chip value
     this._currentChipValue.set(value);
     const fullValue = this.buildChipModelValue(existingChips, value);
     this._displayValue.set(fullValue);
     const modelValue = this.getModelValue(fullValue);
-    
+
     this._value.set(modelValue);
     this.onChange(modelValue);
     this.valueChange.emit(modelValue);
@@ -433,7 +432,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   private isSeparatorTyped(value: string): boolean {
     const chipSeparator = this.chip();
     const chipFormat = this.chipFormat();
-    
+
     if (typeof chipSeparator === 'string') {
       if (chipSeparator.startsWith('/') && chipSeparator.endsWith('/')) {
         try {
@@ -454,7 +453,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   private createChipFromValue(valueBeforeSeparator: string, existingChips: string[]): void {
     const newChips = [...existingChips, valueBeforeSeparator];
     const newValue = this.buildChipModelValue(newChips, '');
-    
+
     this._value.set(newValue);
     this._displayValue.set(newValue);
     this._chips.set(newChips);
@@ -534,11 +533,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return this.extractOptionProperty(item, this._optionValue(), item);
   }
 
-  private extractOptionProperty<T>(
-    item: unknown,
-    property: string | ((item: unknown) => T) | null,
-    defaultValue: T
-  ): T {
+  private extractOptionProperty<T>(item: unknown, property: string | ((item: unknown) => T) | null, defaultValue: T): T {
     if (!property) {
       return defaultValue;
     }
@@ -599,20 +594,12 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     switch (event.key) {
       case 'ArrowDown':
         event.preventDefault();
-        this._focusedIndex.set(
-          this._focusedIndex() < suggestions.length - 1
-            ? this._focusedIndex() + 1
-            : 0
-        );
+        this._focusedIndex.set(this._focusedIndex() < suggestions.length - 1 ? this._focusedIndex() + 1 : 0);
         this.scrollToFocused();
         break;
       case 'ArrowUp':
         event.preventDefault();
-        this._focusedIndex.set(
-          this._focusedIndex() > 0
-            ? this._focusedIndex() - 1
-            : suggestions.length - 1
-        );
+        this._focusedIndex.set(this._focusedIndex() > 0 ? this._focusedIndex() - 1 : suggestions.length - 1);
         this.scrollToFocused();
         break;
       case 'Enter':
@@ -651,10 +638,16 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
     if (Array.isArray(filter)) {
       // Array of allowed characters
-      return value.split('').filter(char => filter.includes(char)).join('');
+      return value
+        .split('')
+        .filter(char => filter.includes(char))
+        .join('');
     } else if (filter instanceof RegExp) {
       // Regex filter
-      return value.split('').filter(char => filter.test(char)).join('');
+      return value
+        .split('')
+        .filter(char => filter.test(char))
+        .join('');
     }
 
     return value;
@@ -662,12 +655,12 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
 
   private parseNumber(value: string): number {
     if (!value || value.trim() === '') return 0;
-    
+
     // Remove currency symbols and formatting
     const cleaned = value.replace(/[^\d.-]/g, '');
     if (cleaned === '' || cleaned === '-') return 0;
     const parsed = parseFloat(cleaned);
-    
+
     return isNaN(parsed) ? 0 : parsed;
   }
 
@@ -730,12 +723,12 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   private submitChipOnBlur(): void {
     const currentValue = this._currentChipValue().trimStart().trim();
     const existingChips = this._chips();
-    
+
     if (currentValue) {
       // Add current value as a chip (trimmed of leading spaces)
       const newChips = [...existingChips, currentValue];
       const newValue = this.buildChipModelValue(newChips, '');
-      
+
       this._value.set(newValue);
       this._displayValue.set(newValue);
       this._chips.set(newChips);
@@ -773,12 +766,11 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this._chips.set([]);
     this.onChange('');
     this.valueChange.emit('');
-    
+
     if (this.inputElementRef) {
       this.inputElementRef.nativeElement.focus();
     }
   }
-
 
   removeChip(chip: string, event: Event): void {
     event.stopPropagation();
@@ -788,17 +780,17 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const newChips = chips.filter(c => c !== chip);
     const currentValue = this._currentChipValue();
     const newValue = this.buildChipModelValue(newChips, currentValue);
-    
+
     // Set chips and current value first to prevent effect from overwriting them
     this._chips.set(newChips);
     this._currentChipValue.set(currentValue);
-    
+
     // Then update the value - this will trigger the effect, but chips are already set correctly
     this._value.set(newValue);
     this._displayValue.set(newValue);
     this.onChange(newValue);
     this.valueChange.emit(newValue);
-    
+
     // Ensure input is cleared if there's no current value
     if (!currentValue && this.inputElementRef?.nativeElement) {
       this.inputElementRef.nativeElement.value = '';
@@ -826,6 +818,4 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     // Disabled state is handled by the disabled input signal
     void _isDisabled; // Explicitly mark as intentionally unused
   }
-
 }
-

@@ -34,15 +34,15 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     this.writeValue(value);
   }
   private _model = signal<NgtDateStruct | null>(null);
-  
+
   // ControlValueAccessor implementation
   private onChange = (value: string | null) => {};
   protected onTouched = () => {};
-  
+
   // Calendar visibility
   private _isOpen = signal(false);
   isOpen = computed(() => this._isOpen());
-  
+
   @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 
   readonly disabled = input(false);
@@ -315,7 +315,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     const formattedDate = this.formatDateOutput(dateWithTime);
     this.dateSelect.emit(formattedDate);
     this.onChange(formattedDate);
-    
+
     // Close calendar after selection
     this.closeCalendar();
   }
@@ -344,7 +344,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
       this.onChange(formattedDate);
     }
   }
-  
+
   // ControlValueAccessor methods
   writeValue(value: DateInput): void {
     const parsed = this.parseDateInput(value);
@@ -372,31 +372,31 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
       this._model.set(null);
     }
   }
-  
+
   registerOnChange(fn: (value: string | null) => void): void {
     this.onChange = fn;
   }
-  
+
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-  
+
   setDisabledState(isDisabled: boolean): void {
     // This will be handled by the disabled input
   }
-  
+
   // Calendar visibility methods
   openCalendar(): void {
     if (!this.disabled()) {
       this._isOpen.set(true);
     }
   }
-  
+
   closeCalendar(): void {
     this._isOpen.set(false);
     this.onTouched();
   }
-  
+
   toggleCalendar(): void {
     if (this.isOpen()) {
       this.closeCalendar();
@@ -404,24 +404,24 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
       this.openCalendar();
     }
   }
-  
+
   onInputFocus(): void {
     if (!this.showIcon() && !this.disabled()) {
       this.openCalendar();
     }
     this.onTouched();
   }
-  
+
   onIconClick(): void {
     if (!this.disabled()) {
       this.toggleCalendar();
     }
   }
-  
+
   onOutsideClick(): void {
     this.closeCalendar();
   }
-  
+
   // Get formatted date for display in input
   getFormattedDate(): string {
     const model = this.modelValue();
