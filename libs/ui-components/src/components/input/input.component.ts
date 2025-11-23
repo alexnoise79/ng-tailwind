@@ -271,6 +271,21 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     const target = event.target as HTMLInputElement;
     let value = target.value;
 
+    // Auto-filter tel inputs to only allow numbers and common tel characters
+    if (this.type() === 'tel') {
+      // Remove all invalid characters first
+      value = value.replace(/[^\d+\-()\s]/g, '');
+      // Remove plus signs that are not at the beginning
+      if (value.length > 0 && value[0] === '+') {
+        // Keep the first plus, remove all others
+        value = '+' + value.slice(1).replace(/\+/g, '');
+      } else {
+        // Remove all plus signs if there's no plus at the beginning
+        value = value.replace(/\+/g, '');
+      }
+      target.value = value;
+    }
+
     // Apply filter if provided
     if (this.filter() !== null) {
       value = this.applyFilter(value);
