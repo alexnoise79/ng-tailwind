@@ -20,7 +20,7 @@ export class NgtTooltip implements OnDestroy {
   private showTimeout?: number;
   private hideTimeout?: number;
   private tooltipElement: HTMLElement | null = null;
-  private embeddedViewRef: EmbeddedViewRef<any> | null = null;
+  private embeddedViewRef: EmbeddedViewRef<unknown> | null = null;
 
   isVisible = signal(false);
 
