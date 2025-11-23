@@ -6,564 +6,565 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic Timepicker -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Timepicker</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <div class="mb-4 space-y-4">
+                    <ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
+                    @if (selectedTime()) {
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTime()) }}</p>
+                    }
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                        (click)="setActiveCodeTab('basic', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Timepicker with Seconds -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Seconds</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withSeconds')"
+                  [class.dark:bg-gray-700]="isShowingCode('withSeconds')"
+                  (click)="toggleDemoView('withSeconds')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withSeconds')) {
+                  <div class="mb-4 space-y-4">
+                    <ngt-timepicker [model]="selectedTimeWithSeconds()" [showSeconds]="true" (timeSelect)="selectedTimeWithSeconds.set($event)"></ngt-timepicker>
+                    @if (selectedTimeWithSeconds()) {
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeWithSeconds()) }}</p>
+                    }
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withSeconds') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withSeconds') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withSeconds') !== 'html'"
+                        (click)="setActiveCodeTab('withSeconds', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withSeconds', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('withSeconds') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('withSeconds') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withSeconds') !== 'ts'"
+                        (click)="setActiveCodeTab('withSeconds', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withSeconds', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('withSeconds', getActiveCodeTab('withSeconds')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withSeconds', getActiveCodeTab('withSeconds')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Timepicker with Meridian (12-hour format) -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Meridian (12-hour format)</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withMeridian')"
+                  [class.dark:bg-gray-700]="isShowingCode('withMeridian')"
+                  (click)="toggleDemoView('withMeridian')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withMeridian')) {
+                  <div class="mb-4 space-y-4">
+                    <ngt-timepicker [model]="selectedTimeMeridian()" [meridian]="true" (timeSelect)="selectedTimeMeridian.set($event)"></ngt-timepicker>
+                    @if (selectedTimeMeridian()) {
+                      <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeMeridian()) }}</p>
+                    }
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withMeridian') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withMeridian') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withMeridian') !== 'html'"
+                        (click)="setActiveCodeTab('withMeridian', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withMeridian', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('withMeridian') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('withMeridian') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withMeridian') !== 'ts'"
+                        (click)="setActiveCodeTab('withMeridian', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withMeridian', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('withMeridian', getActiveCodeTab('withMeridian')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withMeridian', getActiveCodeTab('withMeridian')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Timepicker with String Input -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with String Input</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withStringInput')"
+                  [class.dark:bg-gray-700]="isShowingCode('withStringInput')"
+                  (click)="toggleDemoView('withStringInput')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withStringInput')) {
+                  <div class="mb-4 space-y-4">
+                    <ngt-timepicker [model]="'14:30:00'" [showSeconds]="true" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">The timepicker accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct as input.</p>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'html'"
+                        (click)="setActiveCodeTab('withStringInput', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withStringInput', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'ts'"
+                        (click)="setActiveCodeTab('withStringInput', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withStringInput', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('withStringInput', getActiveCodeTab('withStringInput')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withStringInput', getActiveCodeTab('withStringInput')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Timepicker Sizes -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker Sizes</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('small')"
+                  [class.dark:bg-gray-700]="isShowingCode('small')"
+                  (click)="toggleDemoView('small')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('small')) {
+                  <div class="mb-4 flex flex-col md:flex-row md:items-center md:gap-8 space-y-6 md:space-y-0">
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small (sm):</p>
+                      <ngt-timepicker [model]="selectedTimeSmall()" [size]="'sm'" (timeSelect)="selectedTimeSmall.set($event)"></ngt-timepicker>
+                    </div>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (md) - Default:</p>
+                      <ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
+                    </div>
+                    <div class="flex-1">
+                      <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large (lg):</p>
+                      <ngt-timepicker [model]="selectedTimeLarge()" [size]="'lg'" (timeSelect)="selectedTimeLarge.set($event)"></ngt-timepicker>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('small') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('small') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('small') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('small') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('small') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('small') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('small') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('small') !== 'html'"
+                        (click)="setActiveCodeTab('small', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('small', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('small') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('small') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('small') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('small') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('small') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('small') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('small') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('small') !== 'ts'"
+                        (click)="setActiveCodeTab('small', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('small', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('small', getActiveCodeTab('small')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('small', getActiveCodeTab('small')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Disabled Timepicker -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled Timepicker</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('disabled')"
+                  [class.dark:bg-gray-700]="isShowingCode('disabled')"
+                  (click)="toggleDemoView('disabled')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('disabled')) {
+                  <div class="mb-4 space-y-4">
+                    <ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('disabled') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('disabled') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('disabled') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('disabled') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('disabled') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('disabled') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('disabled') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'html'"
+                        (click)="setActiveCodeTab('disabled', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('disabled', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('disabled') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('disabled') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'ts'"
+                        (click)="setActiveCodeTab('disabled', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('disabled', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('disabled', getActiveCodeTab('disabled')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('disabled', getActiveCodeTab('disabled')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">model</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">TimeInput</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The selected time value. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the timepicker is disabled.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showSeconds</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show the second input field.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">meridian</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to use 12-hour format with AM/PM toggle.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the timepicker. Controls the size of inputs, buttons, and icons.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Outputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">timeSelect</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;NgtTimeStruct&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the time is changed (via buttons or input fields).</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Interfaces -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Interfaces</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Interface</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Properties</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtTimeStruct</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">hour: number<br />minute: number<br />second?: number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Structure representing a time with hour, minute, and optional second.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">TimeInput</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | Date | NgtTimeStruct | null | undefined</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Type for time input. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Basic Timepicker -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Timepicker</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
-            (click)="toggleDemoView('basic')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('basic')) {
-            <div class="mb-4 space-y-4">
-              <ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
-              @if (selectedTime()) {
-                <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTime()) }}</p>
-              }
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('basic', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('basic', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Timepicker with Seconds -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Seconds</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('withSeconds')"
-            [class.dark:bg-gray-700]="isShowingCode('withSeconds')"
-            (click)="toggleDemoView('withSeconds')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('withSeconds')) {
-            <div class="mb-4 space-y-4">
-              <ngt-timepicker [model]="selectedTimeWithSeconds()" [showSeconds]="true" (timeSelect)="selectedTimeWithSeconds.set($event)"></ngt-timepicker>
-              @if (selectedTimeWithSeconds()) {
-                <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeWithSeconds()) }}</p>
-              }
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('withSeconds') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('withSeconds') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withSeconds') !== 'html'"
-                  (click)="setActiveCodeTab('withSeconds', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withSeconds', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('withSeconds') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('withSeconds') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withSeconds') !== 'ts'"
-                  (click)="setActiveCodeTab('withSeconds', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withSeconds', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('withSeconds', getActiveCodeTab('withSeconds')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withSeconds', getActiveCodeTab('withSeconds')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Timepicker with Meridian (12-hour format) -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with Meridian (12-hour format)</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('withMeridian')"
-            [class.dark:bg-gray-700]="isShowingCode('withMeridian')"
-            (click)="toggleDemoView('withMeridian')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('withMeridian')) {
-            <div class="mb-4 space-y-4">
-              <ngt-timepicker [model]="selectedTimeMeridian()" [meridian]="true" (timeSelect)="selectedTimeMeridian.set($event)"></ngt-timepicker>
-              @if (selectedTimeMeridian()) {
-                <p class="text-sm text-gray-600 dark:text-gray-400">Selected time: {{ formatTime(selectedTimeMeridian()) }}</p>
-              }
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('withMeridian') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('withMeridian') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withMeridian') !== 'html'"
-                  (click)="setActiveCodeTab('withMeridian', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withMeridian', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('withMeridian') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('withMeridian') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withMeridian') !== 'ts'"
-                  (click)="setActiveCodeTab('withMeridian', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withMeridian', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('withMeridian', getActiveCodeTab('withMeridian')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withMeridian', getActiveCodeTab('withMeridian')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Timepicker with String Input -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker with String Input</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('withStringInput')"
-            [class.dark:bg-gray-700]="isShowingCode('withStringInput')"
-            (click)="toggleDemoView('withStringInput')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('withStringInput')) {
-            <div class="mb-4 space-y-4">
-              <ngt-timepicker [model]="'14:30:00'" [showSeconds]="true" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>
-              <p class="text-sm text-gray-600 dark:text-gray-400">The timepicker accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct as input.</p>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'html'"
-                  (click)="setActiveCodeTab('withStringInput', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withStringInput', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('withStringInput') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('withStringInput') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withStringInput') !== 'ts'"
-                  (click)="setActiveCodeTab('withStringInput', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('withStringInput', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('withStringInput', getActiveCodeTab('withStringInput')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withStringInput', getActiveCodeTab('withStringInput')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Timepicker Sizes -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Timepicker Sizes</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('small')"
-            [class.dark:bg-gray-700]="isShowingCode('small')"
-            (click)="toggleDemoView('small')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('small')) {
-            <div class="mb-4 flex flex-col md:flex-row md:items-center md:gap-8 space-y-6 md:space-y-0">
-              <div class="flex-1">
-                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small (sm):</p>
-                <ngt-timepicker [model]="selectedTimeSmall()" [size]="'sm'" (timeSelect)="selectedTimeSmall.set($event)"></ngt-timepicker>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (md) - Default:</p>
-                <ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large (lg):</p>
-                <ngt-timepicker [model]="selectedTimeLarge()" [size]="'lg'" (timeSelect)="selectedTimeLarge.set($event)"></ngt-timepicker>
-              </div>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('small') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('small') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('small') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('small') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('small') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('small') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('small') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('small') !== 'html'"
-                  (click)="setActiveCodeTab('small', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('small', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('small') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('small') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('small') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('small') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('small') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('small') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('small') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('small') !== 'ts'"
-                  (click)="setActiveCodeTab('small', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('small', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('small', getActiveCodeTab('small')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('small', getActiveCodeTab('small')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Disabled Timepicker -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled Timepicker</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('disabled')"
-            [class.dark:bg-gray-700]="isShowingCode('disabled')"
-            (click)="toggleDemoView('disabled')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('disabled')) {
-            <div class="mb-4 space-y-4">
-              <ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('disabled') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('disabled') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('disabled') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('disabled') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('disabled') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('disabled') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('disabled') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'html'"
-                  (click)="setActiveCodeTab('disabled', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('disabled', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('disabled') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('disabled') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('disabled') !== 'ts'"
-                  (click)="setActiveCodeTab('disabled', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('disabled', 'ts') }}
-                </button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('disabled', getActiveCodeTab('disabled')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('disabled', getActiveCodeTab('disabled')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">model</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">TimeInput</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The selected time value. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the timepicker is disabled.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showSeconds</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show the second input field.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">meridian</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to use 12-hour format with AM/PM toggle.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the timepicker. Controls the size of inputs, buttons, and icons.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Outputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">timeSelect</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;NgtTimeStruct&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the time is changed (via buttons or input fields).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Interfaces -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Interfaces</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Interface</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Properties</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtTimeStruct</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">hour: number<br />minute: number<br />second?: number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Structure representing a time with hour, minute, and optional second.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">TimeInput</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | Date | NgtTimeStruct | null | undefined</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Type for time input. Accepts string (HH:mm or HH:mm:ss), Date object, or NgtTimeStruct.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

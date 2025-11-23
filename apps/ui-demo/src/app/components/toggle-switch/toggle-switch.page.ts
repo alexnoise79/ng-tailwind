@@ -1,13 +1,12 @@
-import { Component, signal, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtToggleSwitch, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtToggleSwitch, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.toggle-switch',
-  imports: [NgtToggleSwitch, FormsModule, NgtNav, NgtNavItem],
+  imports: [NgtToggleSwitch, FormsModule, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './toggle-switch.page.html'
 })
 export class ToggleSwitchPage {
@@ -17,13 +16,6 @@ export class ToggleSwitchPage {
   pushNotifications = false;
   smsNotifications = true;
   disabledToggle = true;
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

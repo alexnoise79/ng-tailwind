@@ -1,23 +1,15 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtAlert, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtAlert, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.alert',
-  imports: [NgtAlert, NgtNav, NgtNavItem],
+  imports: [NgtAlert, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './alert.page.html'
 })
 export class AlertPage {
   private toastService = inject(NgtToastService);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

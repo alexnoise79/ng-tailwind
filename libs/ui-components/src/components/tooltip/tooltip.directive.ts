@@ -20,7 +20,7 @@ export class NgtTooltip implements OnDestroy {
   private showTimeout?: number;
   private hideTimeout?: number;
   private tooltipElement: HTMLElement | null = null;
-  private embeddedViewRef: EmbeddedViewRef<any> | null = null;
+  private embeddedViewRef: EmbeddedViewRef<unknown> | null = null;
 
   isVisible = signal(false);
 
@@ -77,7 +77,7 @@ export class NgtTooltip implements OnDestroy {
     this.tooltipElement = this.renderer.createElement('div');
     this.renderer.setAttribute(this.tooltipElement, 'role', 'tooltip');
     this.renderer.setStyle(this.tooltipElement, 'display', 'none');
-    
+
     this.updateTooltipContent();
     this.renderer.appendChild(hostElement, this.tooltipElement);
   }
@@ -187,4 +187,3 @@ export class NgtTooltip implements OnDestroy {
     this.hide();
   }
 }
-

@@ -6,273 +6,274 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic Dropdown -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Dropdown</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <ngt-dropdown [align]="'left'" [isOpen]="basicDropdownOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Open Dropdown</button>
+                      <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
+                      </div>
+                    </ngt-dropdown>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                        (click)="setActiveCodeTab('basic', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Right Aligned -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Right Aligned</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('rightAligned')"
+                  [class.dark:bg-gray-700]="isShowingCode('rightAligned')"
+                  (click)="toggleDemoView('rightAligned')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('rightAligned')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex justify-end">
+                    <ngt-dropdown [align]="'right'" [isOpen]="rightAlignedDropdownOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Right Aligned Dropdown</button>
+                      <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
+                      </div>
+                    </ngt-dropdown>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'html'"
+                        (click)="setActiveCodeTab('rightAligned', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('rightAligned', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'ts'"
+                        (click)="setActiveCodeTab('rightAligned', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('rightAligned', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- NgtDropdown Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtDropdown - Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left' | 'right'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of the dropdown content relative to the trigger.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">isOpen</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">WritableSignal&lt;boolean&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">signal(false)</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">A signal that controls whether the dropdown is open or closed.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Directives -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Directives</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Directive</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Selector</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtDropdownTrigger</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[ngt-dropdown-trigger]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Applied to the element that triggers the dropdown. Clicking this element will toggle the dropdown.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtDropdownContent</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[ngt-dropdown-content]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Applied to the element that contains the dropdown content. This element will be positioned relative to the trigger.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Methods -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Methods</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Method</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">toggle()</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Toggles the dropdown open/closed state.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">open()</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Opens the dropdown.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">close()</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Closes the dropdown.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Basic Dropdown -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Dropdown</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
-            (click)="toggleDemoView('basic')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('basic')) {
-            <!-- Showcase View -->
-            <div class="mb-4">
-              <ngt-dropdown [align]="'left'" [isOpen]="basicDropdownOpen">
-                <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Open Dropdown</button>
-                <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
-                </div>
-              </ngt-dropdown>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('basic', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('basic', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Right Aligned -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Right Aligned</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('rightAligned')"
-            [class.dark:bg-gray-700]="isShowingCode('rightAligned')"
-            (click)="toggleDemoView('rightAligned')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('rightAligned')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex justify-end">
-              <ngt-dropdown [align]="'right'" [isOpen]="rightAlignedDropdownOpen">
-                <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Right Aligned Dropdown</button>
-                <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
-                </div>
-              </ngt-dropdown>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'html'"
-                  (click)="setActiveCodeTab('rightAligned', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('rightAligned', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'ts'"
-                  (click)="setActiveCodeTab('rightAligned', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('rightAligned', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- NgtDropdown Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtDropdown - Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left' | 'right'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of the dropdown content relative to the trigger.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">isOpen</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">WritableSignal&lt;boolean&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">signal(false)</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">A signal that controls whether the dropdown is open or closed.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Directives -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Directives</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Directive</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Selector</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtDropdownTrigger</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[ngt-dropdown-trigger]</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Applied to the element that triggers the dropdown. Clicking this element will toggle the dropdown.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">NgtDropdownContent</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[ngt-dropdown-content]</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Applied to the element that contains the dropdown content. This element will be positioned relative to the trigger.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Methods -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Methods</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Method</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">toggle()</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Toggles the dropdown open/closed state.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">open()</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Opens the dropdown.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">close()</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Closes the dropdown.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

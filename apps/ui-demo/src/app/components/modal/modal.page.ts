@@ -1,25 +1,17 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtButton, NgtModal, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtModal, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.modal',
-  imports: [NgtButton, NgtModal, NgtNav, NgtNavItem],
+  imports: [NgtButton, NgtModal, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './modal.page.html'
 })
 export class ModalPage {
   private toastService = inject(NgtToastService);
   showModal = signal(false);
   showModalWithFooter = signal(false);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

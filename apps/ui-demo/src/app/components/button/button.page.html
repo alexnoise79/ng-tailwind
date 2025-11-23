@@ -6,298 +6,299 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Variants -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Variants</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('variants')"
+                  [class.dark:bg-gray-700]="isShowingCode('variants')"
+                  (click)="toggleDemoView('variants')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('variants')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button variant="primary">Primary</ngt-button>
+                    <ngt-button variant="outline">Outline</ngt-button>
+                    <ngt-button variant="ghost">Ghost</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('variants') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('variants') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('variants') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('variants') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('variants') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('variants') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('variants') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('variants') !== 'html'"
+                        (click)="setActiveCodeTab('variants', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('variants', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.variants)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.variants }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Sizes -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('sizes')"
+                  [class.dark:bg-gray-700]="isShowingCode('sizes')"
+                  (click)="toggleDemoView('sizes')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('sizes')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex flex-wrap gap-4 items-center">
+                    <ngt-button variant="primary" size="sm">Small</ngt-button>
+                    <ngt-button variant="primary" size="md">Medium</ngt-button>
+                    <ngt-button variant="primary" size="lg">Large</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'"
+                        (click)="setActiveCodeTab('sizes', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.sizes)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sizes }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- States -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">States</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('states')"
+                  [class.dark:bg-gray-700]="isShowingCode('states')"
+                  (click)="toggleDemoView('states')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('states')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button [loading]="true" variant="primary">Loading</ngt-button>
+                    <ngt-button [disabled]="true" variant="primary">Disabled</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('states') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('states') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('states') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('states') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('states') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('states') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('states') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('states') !== 'html'"
+                        (click)="setActiveCodeTab('states', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('states', 'html') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.states)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.states }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">variant</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'primary' | 'outline' | 'ghost'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'primary'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style variant of the button.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the button.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">type</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'button' | 'submit' | 'reset'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'button'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The HTML button type attribute.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the button is disabled.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">loading</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the button is in a loading state. Shows a spinner and prevents clicks.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Outputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">click</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;Event&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the button is clicked. Note: clicks are prevented when the button is disabled or loading.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The button label text. Can contain any HTML or Angular components.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Variants -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Variants</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('variants')"
-            [class.dark:bg-gray-700]="isShowingCode('variants')"
-            (click)="toggleDemoView('variants')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('variants')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button variant="primary">Primary</ngt-button>
-              <ngt-button variant="outline">Outline</ngt-button>
-              <ngt-button variant="ghost">Ghost</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('variants') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('variants') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('variants') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('variants') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('variants') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('variants') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('variants') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('variants') !== 'html'"
-                  (click)="setActiveCodeTab('variants', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('variants', 'html') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.variants)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.variants }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Sizes -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('sizes')"
-            [class.dark:bg-gray-700]="isShowingCode('sizes')"
-            (click)="toggleDemoView('sizes')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('sizes')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex flex-wrap gap-4 items-center">
-              <ngt-button variant="primary" size="sm">Small</ngt-button>
-              <ngt-button variant="primary" size="md">Medium</ngt-button>
-              <ngt-button variant="primary" size="lg">Large</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'"
-                  (click)="setActiveCodeTab('sizes', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('sizes', 'html') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.sizes)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sizes }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- States -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">States</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('states')"
-            [class.dark:bg-gray-700]="isShowingCode('states')"
-            (click)="toggleDemoView('states')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('states')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button [loading]="true" variant="primary">Loading</ngt-button>
-              <ngt-button [disabled]="true" variant="primary">Disabled</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('states') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('states') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('states') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('states') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('states') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('states') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('states') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('states') !== 'html'"
-                  (click)="setActiveCodeTab('states', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('states', 'html') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.states)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.states }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">variant</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'primary' | 'outline' | 'ghost'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'primary'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The visual style variant of the button.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the button.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">type</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'button' | 'submit' | 'reset'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'button'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The HTML button type attribute.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the button is disabled.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">loading</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the button is in a loading state. Shows a spinner and prevents clicks.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Outputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">click</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;Event&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the button is clicked. Note: clicks are prevented when the button is disabled or loading.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Templates -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The button label text. Can contain any HTML or Angular components.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

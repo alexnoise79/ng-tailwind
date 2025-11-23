@@ -1,25 +1,17 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtDropdown, NgtDropdownTrigger, NgtDropdownContent, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtDropdown, NgtDropdownTrigger, NgtDropdownContent, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.dropdown',
-  imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent, NgtNav, NgtNavItem],
+  imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './dropdown.page.html'
 })
 export class DropdownPage {
   private toastService = inject(NgtToastService);
   basicDropdownOpen = signal(false);
   rightAlignedDropdownOpen = signal(false);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

@@ -1,23 +1,16 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtToastService, Size, SortOrder } from '@ng-tailwind/ui-components';
+import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, Size, SortOrder } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { Product, DemoTab } from '../../models/demo.models';
+import { Product } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.table-page',
-  imports: [NgtTable, NgtNav, NgtNavItem],
+  imports: [NgtTable, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './table.page.html'
 })
 export class TablePage {
   private toastService = inject(NgtToastService);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

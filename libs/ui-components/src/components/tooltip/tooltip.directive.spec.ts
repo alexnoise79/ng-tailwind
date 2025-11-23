@@ -6,11 +6,7 @@ import { NgtTooltip } from './tooltip.directive';
 import { Position } from '../../models';
 
 @Component({
-  template: `
-    <button [ngtTooltip]="tooltipText" [tooltipPosition]="position" [delay]="delay" [hideDelay]="hideDelay">
-      Hover me
-    </button>
-  `,
+  template: ` <button [ngtTooltip]="tooltipText" [tooltipPosition]="position" [delay]="delay" [hideDelay]="hideDelay">Hover me</button> `,
   standalone: true,
   imports: [NgtTooltip]
 })
@@ -66,7 +62,7 @@ describe('NgtTooltip', () => {
       vi.advanceTimersByTime(200);
       fixture.detectChanges();
       expect(directive.isVisible()).toBe(true);
-      
+
       const tooltipElement = fixture.nativeElement.querySelector('[role="tooltip"]');
       expect(tooltipElement).toBeTruthy();
       expect(tooltipElement.style.display).toBe('block');
@@ -226,4 +222,3 @@ describe('NgtTooltip', () => {
     });
   });
 });
-

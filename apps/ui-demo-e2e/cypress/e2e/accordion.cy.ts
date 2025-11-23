@@ -79,7 +79,7 @@ describe('Accordion Page E2E', () => {
           cy.contains('First Item').click();
           cy.wait(200);
           cy.contains('This is the content of the first accordion item.').should('be.visible');
-          
+
           // Open second item - first should close
           cy.contains('Second Item').click();
           cy.wait(200);
@@ -96,11 +96,11 @@ describe('Accordion Page E2E', () => {
           // Open first item
           cy.contains('First Item').click();
           cy.wait(200);
-          
+
           // Open third item
           cy.contains('Third Item').click();
           cy.wait(200);
-          
+
           // Only third item should be visible
           cy.contains('This is the content of the first accordion item.').should('not.be.visible');
           cy.contains('This is the content of the third accordion item.').should('be.visible');
@@ -134,13 +134,13 @@ describe('Accordion Page E2E', () => {
           cy.contains('First Item').click();
           cy.wait(200);
           cy.contains('This is the content of the first accordion item.').should('be.visible');
-          
+
           // Open second item - first should remain open
           cy.contains('Second Item').click();
           cy.wait(200);
           cy.contains('This is the content of the first accordion item.').should('be.visible');
           cy.contains('This is the content of the second accordion item.').should('be.visible');
-          
+
           // Open third item - first and second should remain open
           cy.contains('Third Item').click();
           cy.wait(200);
@@ -162,7 +162,7 @@ describe('Accordion Page E2E', () => {
           cy.wait(200);
           cy.contains('Third Item').click();
           cy.wait(200);
-          
+
           // Close second item - first and third should remain open
           cy.contains('Second Item').click();
           cy.wait(200);
@@ -196,13 +196,10 @@ describe('Accordion Page E2E', () => {
         .within(() => {
           // Verify disabled item content is not visible initially
           cy.contains('This accordion item is disabled and cannot be toggled.').should('not.be.visible');
-          
+
           // Find the button containing "Disabled Item" and verify it's disabled
-          cy.contains('Disabled Item')
-            .closest('button')
-            .should('be.disabled')
-            .should('have.attr', 'aria-disabled', 'true');
-          
+          cy.contains('Disabled Item').closest('button').should('be.disabled').should('have.attr', 'aria-disabled', 'true');
+
           // Content should remain not visible (disabled items cannot be toggled)
           cy.contains('This accordion item is disabled and cannot be toggled.').should('not.be.visible');
         });
@@ -232,5 +229,4 @@ describe('Accordion Page E2E', () => {
         });
     });
   });
-
 });
