@@ -1,6 +1,6 @@
 /// <reference types="vitest/globals" />
-import { NgtNav, NavOrientation, NavStyle, NavAlign } from './nav.component';
-import { runInInjectionContext, Injector, ElementRef } from '@angular/core';
+import { NgtNav, NavOrientation, NavStyle, NavAlign } from './nav.directive';
+import { runInInjectionContext, Injector, ElementRef, Renderer2 } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { signal } from '@angular/core';
 
@@ -17,7 +17,10 @@ describe('NgtNav', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [{ provide: ElementRef, useValue: mockElementRef }]
+      providers: [
+        { provide: ElementRef, useValue: mockElementRef },
+        { provide: Renderer2, useValue: {} }
+      ]
     });
     injector = TestBed.inject(Injector);
 
