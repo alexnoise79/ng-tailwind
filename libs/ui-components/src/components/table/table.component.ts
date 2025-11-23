@@ -139,12 +139,12 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
       lg: 'px-6 py-4 text-base'
     };
     const gridlineClasses = this.showGridlines() ? 'border border-gray-200 dark:border-gray-700' : '';
-    const stripedColumnClasses = this.stripedColumns() ? 'even:bg-gray-50 dark:even:bg-gray-800/50' : '';
+    const stripedColumnClasses = this.stripedColumns() ? 'even:bg-gray-100 dark:even:bg-gray-700' : '';
     return `${baseClasses} ${sizeClasses[this.size()]} ${gridlineClasses} ${stripedColumnClasses}`;
   });
 
   readonly trClasses = computed(() => {
-    const stripedRowClasses = this.striped() ? 'even:bg-gray-50 dark:even:bg-gray-800/50' : '';
+    const stripedRowClasses = this.striped() ? 'even:bg-gray-100 dark:even:bg-gray-700' : '';
     return stripedRowClasses;
   });
 
