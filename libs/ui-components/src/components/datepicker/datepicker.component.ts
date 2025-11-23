@@ -1,6 +1,8 @@
-import { Component, Input, signal, computed, input, output, OnInit, effect } from '@angular/core';
+import { Component, Input, signal, computed, input, output, OnInit, effect, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { classMerge } from '../../utils';
 import { NgtTimepicker, NgtTimeStruct } from '../timepicker';
+import { OutsideClickDirective } from '../../directives';
 
 export interface NgtDateStruct {
   year: number;
@@ -16,37 +18,31 @@ export type DateFormat = 'iso' | 'iso-local' | 'date' | 'datetime';
 
 @Component({
   selector: 'ngt-datepicker',
-  imports: [NgtTimepicker],
-  templateUrl: './datepicker.component.html'
-})
-export class NgtDatepicker implements OnInit {
-  @Input() set model(value: DateInput) {
-    const parsed = this.parseDateInput(value);
-    if (parsed) {
-      const currentModel = this._model();
-      // Preserve current time when model is updated from dateSelect output (circular update)
-      // Only update time if:
-      // 1. There's no current model (initial load)
-      // 2. The date part changed (year, month, or day) - in this case, reset time to parsed time
-      const dateChanged = !currentModel || currentModel.year !== parsed.year || currentModel.month !== parsed.month || currentModel.day !== parsed.day;
-
-      this._model.set(parsed);
-      this._currentMonth.set(parsed.month);
-      this._currentYear.set(parsed.year);
-
-      // Only update time if date changed (new date selected) or if there's no current model
-      // This prevents time from being reset when model is updated from our own dateSelect output
-      if (dateChanged) {
-        if (parsed.hour !== undefined) this._currentHour.set(parsed.hour);
-        if (parsed.minute !== undefined) this._currentMinute.set(parsed.minute);
-        if (parsed.second !== undefined) this._currentSecond.set(parsed.second);
-      }
-      // If date didn't change, preserve the current time signals (they're already correct)
-    } else {
-      this._model.set(null);
+  imports: [NgtTimepicker, OutsideClickDirective],
+  templateUrl: './datepicker.component.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NgtDatepicker),
+      multi: true
     }
+  ]
+})
+export class NgtDatepicker implements OnInit, ControlValueAccessor {
+  @Input() set model(value: DateInput) {
+    this.writeValue(value);
   }
   private _model = signal<NgtDateStruct | null>(null);
+  
+  // ControlValueAccessor implementation
+  private onChange = (value: string | null) => {};
+  protected onTouched = () => {};
+  
+  // Calendar visibility
+  private _isOpen = signal(false);
+  isOpen = computed(() => this._isOpen());
+  
+  @ViewChild('inputElement') inputElement!: ElementRef<HTMLInputElement>;
 
   readonly disabled = input(false);
   readonly minDate = input<DateInput>(null);
@@ -55,6 +51,8 @@ export class NgtDatepicker implements OnInit {
   readonly markDisabled = input<((date: NgtDateStruct) => boolean) | undefined>(undefined);
   readonly showTime = input(false);
   readonly format = input<DateFormat>('iso');
+  readonly showIcon = input(false);
+  readonly position = input<'top' | 'bottom'>('top');
 
   readonly dateSelect = output<string>();
   readonly navigate = output<{ current: { year: number; month: number }; prev: { year: number; month: number } }>();
@@ -309,7 +307,12 @@ export class NgtDatepicker implements OnInit {
     };
 
     this._model.set(dateWithTime);
-    this.dateSelect.emit(this.formatDateOutput(dateWithTime));
+    const formattedDate = this.formatDateOutput(dateWithTime);
+    this.dateSelect.emit(formattedDate);
+    this.onChange(formattedDate);
+    
+    // Close calendar after selection
+    this.closeCalendar();
   }
 
   onTimeChange(time: NgtTimeStruct): void {
@@ -331,8 +334,94 @@ export class NgtDatepicker implements OnInit {
         second: this.currentSecond()
       };
       this._model.set(dateWithTime);
-      this.dateSelect.emit(this.formatDateOutput(dateWithTime));
+      const formattedDate = this.formatDateOutput(dateWithTime);
+      this.dateSelect.emit(formattedDate);
+      this.onChange(formattedDate);
     }
+  }
+  
+  // ControlValueAccessor methods
+  writeValue(value: DateInput): void {
+    const parsed = this.parseDateInput(value);
+    if (parsed) {
+      const currentModel = this._model();
+      // Preserve current time when model is updated from dateSelect output (circular update)
+      // Only update time if:
+      // 1. There's no current model (initial load)
+      // 2. The date part changed (year, month, or day) - in this case, reset time to parsed time
+      const dateChanged = !currentModel || currentModel.year !== parsed.year || currentModel.month !== parsed.month || currentModel.day !== parsed.day;
+
+      this._model.set(parsed);
+      this._currentMonth.set(parsed.month);
+      this._currentYear.set(parsed.year);
+
+      // Only update time if date changed (new date selected) or if there's no current model
+      // This prevents time from being reset when model is updated from our own dateSelect output
+      if (dateChanged) {
+        if (parsed.hour !== undefined) this._currentHour.set(parsed.hour);
+        if (parsed.minute !== undefined) this._currentMinute.set(parsed.minute);
+        if (parsed.second !== undefined) this._currentSecond.set(parsed.second);
+      }
+      // If date didn't change, preserve the current time signals (they're already correct)
+    } else {
+      this._model.set(null);
+    }
+  }
+  
+  registerOnChange(fn: (value: string | null) => void): void {
+    this.onChange = fn;
+  }
+  
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+  
+  setDisabledState(isDisabled: boolean): void {
+    // This will be handled by the disabled input
+  }
+  
+  // Calendar visibility methods
+  openCalendar(): void {
+    if (!this.disabled()) {
+      this._isOpen.set(true);
+    }
+  }
+  
+  closeCalendar(): void {
+    this._isOpen.set(false);
+    this.onTouched();
+  }
+  
+  toggleCalendar(): void {
+    if (this.isOpen()) {
+      this.closeCalendar();
+    } else {
+      this.openCalendar();
+    }
+  }
+  
+  onInputFocus(): void {
+    if (!this.showIcon() && !this.disabled()) {
+      this.openCalendar();
+    }
+    this.onTouched();
+  }
+  
+  onIconClick(): void {
+    if (!this.disabled()) {
+      this.toggleCalendar();
+    }
+  }
+  
+  onOutsideClick(): void {
+    this.closeCalendar();
+  }
+  
+  // Get formatted date for display in input
+  getFormattedDate(): string {
+    const model = this.modelValue();
+    if (!model) return '';
+    return this.formatDateOutput(model);
   }
 
   previousMonth(): void {
