@@ -1,5 +1,7 @@
-import { Component, Input, computed, effect, inject, Injector, runInInjectionContext, signal, OnInit, OnDestroy, EffectRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, Input, computed, effect, inject, Injector, runInInjectionContext, signal, OnInit, OnDestroy, EffectRef, AfterViewInit } from '@angular/core';
+import { RouterLink, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
 
@@ -36,7 +38,7 @@ import { NgtNav } from './nav.directive';
     }
   `
 })
-export class NgtNavItemLink implements OnInit, OnDestroy {
+export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
   @Input() label = signal('');
   @Input() routerLink = signal<string | string[] | null>(null);
   @Input() disabled = signal(false);
@@ -46,7 +48,9 @@ export class NgtNavItemLink implements OnInit, OnDestroy {
   @Input() nav?: NgtNav;
 
   private injector = inject(Injector);
+  private router = inject(Router);
   private effectRef?: EffectRef;
+  private routerSubscription?: Subscription;
 
   navClasses = computed(() => {
     const nav = this.nav;
@@ -85,8 +89,38 @@ export class NgtNavItemLink implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewInit(): void {
+    // Sync router active state with nav component selection
+    if (this.routerLink() && this.nav && this.navItem) {
+      const checkActive = () => {
+        const currentUrl = this.router.url;
+        const linkValue = this.routerLink();
+        if (linkValue) {
+          const linkPath = Array.isArray(linkValue) ? linkValue[0] : linkValue;
+          const normalizedLink = linkPath.startsWith('/') ? linkPath : `/${linkPath}`;
+          const isActive = currentUrl === normalizedLink || currentUrl.startsWith(normalizedLink + '/');
+          
+          if (isActive && this.nav && this.navItem) {
+            this.nav.selectItem(this.navItem.id);
+          }
+        }
+      };
+      
+      // Check on initial load
+      checkActive();
+      
+      // Subscribe to router events to update on navigation
+      this.routerSubscription = this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+          checkActive();
+        });
+    }
+  }
+
   ngOnDestroy(): void {
     this.effectRef?.destroy();
+    this.routerSubscription?.unsubscribe();
   }
 
   handleClick(event: Event): void {

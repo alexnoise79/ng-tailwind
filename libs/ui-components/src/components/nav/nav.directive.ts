@@ -57,8 +57,13 @@ export class NgtNav implements AfterContentInit, OnInit {
     if (activeIdValue) {
       this.selectItem(activeIdValue);
     } else if (this.items().length > 0) {
-      // Select first item by default
-      this.selectItem(this.items()[0].id);
+      // Check if any nav item has routerLink - if so, don't auto-select
+      // The router will handle active state via RouterLinkActive
+      const hasRouterLink = this.items().some(item => item.routerLink() !== null);
+      if (!hasRouterLink) {
+        // Only auto-select first item if not using routerLink
+        this.selectItem(this.items()[0].id);
+      }
     }
   }
 
