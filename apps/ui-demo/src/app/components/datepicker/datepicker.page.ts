@@ -15,7 +15,6 @@ export class DatepickerPage {
   selectedDateCustomFormat = signal<string | null>(null);
   selectedFormat = signal<'iso' | 'iso-local' | 'date' | 'datetime'>('datetime');
 
-
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {

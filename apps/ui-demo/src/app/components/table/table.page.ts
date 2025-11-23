@@ -12,7 +12,6 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 export class TablePage {
   private toastService = inject(NgtToastService);
 
-
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {

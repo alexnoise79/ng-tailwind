@@ -16,7 +16,6 @@ export class TimepickerPage {
   selectedTimeSmall = signal<NgtTimeStruct | null>(null);
   selectedTimeLarge = signal<NgtTimeStruct | null>(null);
 
-
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {

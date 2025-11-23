@@ -9,411 +9,411 @@
     <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
       <ngt-nav-item label="Showcase">
         <ng-template ngtNavContent>
-    <div class="space-y-8">
-      <!-- Basic Usage -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Usage</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
-            (click)="toggleDemoView('basic')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('basic')) {
-            <!-- Showcase View -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Add <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">&lt;ngt-toast-container&gt;&lt;/ngt-toast-container&gt;</code> to your app component, then inject NgtToastService to show toasts.</p>
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>
-              <ngt-button (click)="showInfo()" variant="primary">Info Toast</ngt-button>
-              <ngt-button (click)="showWarning()" variant="primary">Warning Toast</ngt-button>
-              <ngt-button (click)="showDanger()" variant="primary">Danger Toast</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+          <div class="space-y-8">
+            <!-- Basic Usage -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Usage</h2>
                 <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
-                  (click)="setActiveCodeTab('basic', 'html')"
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
                 >
-                  {{ getTabFileName('basic', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('basic', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
+                  <span>Code</span>
                 </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
               </div>
-            </div>
-          }
-        </div>
-      </section>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <!-- Showcase View -->
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Add <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">&lt;ngt-toast-container&gt;&lt;/ngt-toast-container&gt;</code> to your app component, then inject NgtToastService to show toasts.</p>
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showSuccess()" variant="primary">Success Toast</ngt-button>
+                    <ngt-button (click)="showInfo()" variant="primary">Info Toast</ngt-button>
+                    <ngt-button (click)="showWarning()" variant="primary">Warning Toast</ngt-button>
+                    <ngt-button (click)="showDanger()" variant="primary">Danger Toast</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                        (click)="setActiveCodeTab('basic', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
 
-      <!-- With Summary and Detail -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Summary and Detail</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('withSummary')"
-            [class.dark:bg-gray-700]="isShowingCode('withSummary')"
-            (click)="toggleDemoView('withSummary')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('withSummary')) {
-            <!-- Showcase View -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can display both a summary (title) and detail (description) text.</p>
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showWithSummary()" variant="outline">Show Toast with Summary</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <!-- With Summary and Detail -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Summary and Detail</h2>
                 <button
-                  [class.text-gray-900]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('withSummary') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('withSummary') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withSummary') !== 'ts'"
-                  (click)="setActiveCodeTab('withSummary', 'ts')"
+                  [class.bg-gray-100]="isShowingCode('withSummary')"
+                  [class.dark:bg-gray-700]="isShowingCode('withSummary')"
+                  (click)="toggleDemoView('withSummary')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
                 >
-                  {{ getTabFileName('withSummary', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.withSummary)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
+                  <span>Code</span>
                 </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withSummary }}</code></pre>
               </div>
-            </div>
-          }
-        </div>
-      </section>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withSummary')) {
+                  <!-- Showcase View -->
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can display both a summary (title) and detail (description) text.</p>
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showWithSummary()" variant="outline">Show Toast with Summary</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('withSummary') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('withSummary') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withSummary') !== 'ts'"
+                        (click)="setActiveCodeTab('withSummary', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withSummary', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.withSummary)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.withSummary }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
 
-      <!-- Text Only -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Text Only</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('textOnly')"
-            [class.dark:bg-gray-700]="isShowingCode('textOnly')"
-            (click)="toggleDemoView('textOnly')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('textOnly')) {
-            <!-- Showcase View -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can display just text without summary or detail.</p>
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showTextOnly()" variant="outline">Show Text Only Toast</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <!-- Text Only -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Text Only</h2>
                 <button
-                  [class.text-gray-900]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('textOnly') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('textOnly') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('textOnly') !== 'ts'"
-                  (click)="setActiveCodeTab('textOnly', 'ts')"
+                  [class.bg-gray-100]="isShowingCode('textOnly')"
+                  [class.dark:bg-gray-700]="isShowingCode('textOnly')"
+                  (click)="toggleDemoView('textOnly')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
                 >
-                  {{ getTabFileName('textOnly', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.textOnly)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
+                  <span>Code</span>
                 </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.textOnly }}</code></pre>
               </div>
-            </div>
-          }
-        </div>
-      </section>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('textOnly')) {
+                  <!-- Showcase View -->
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can display just text without summary or detail.</p>
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showTextOnly()" variant="outline">Show Text Only Toast</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('textOnly') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('textOnly') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('textOnly') !== 'ts'"
+                        (click)="setActiveCodeTab('textOnly', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('textOnly', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.textOnly)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.textOnly }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
 
-      <!-- Sticky Toasts -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sticky Toasts</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('sticky')"
-            [class.dark:bg-gray-700]="isShowingCode('sticky')"
-            (click)="toggleDemoView('sticky')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('sticky')) {
-            <!-- Showcase View -->
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Sticky toasts will not auto-close and must be closed manually.</p>
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showSticky()" variant="outline">Show Sticky Toast</ngt-button>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+            <!-- Sticky Toasts -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sticky Toasts</h2>
                 <button
-                  [class.text-gray-900]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('sticky') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('sticky') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sticky') !== 'ts'"
-                  (click)="setActiveCodeTab('sticky', 'ts')"
+                  [class.bg-gray-100]="isShowingCode('sticky')"
+                  [class.dark:bg-gray-700]="isShowingCode('sticky')"
+                  (click)="toggleDemoView('sticky')"
                   type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
                 >
-                  {{ getTabFileName('sticky', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(codeSnippets.sticky)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
+                  <span>Code</span>
                 </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sticky }}</code></pre>
               </div>
-            </div>
-          }
-        </div>
-      </section>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('sticky')) {
+                  <!-- Showcase View -->
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Sticky toasts will not auto-close and must be closed manually.</p>
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showSticky()" variant="outline">Show Sticky Toast</ngt-button>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('sticky') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('sticky') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sticky') !== 'ts'"
+                        (click)="setActiveCodeTab('sticky', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sticky', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.sticky)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.sticky }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
 
-      <!-- Other Examples -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Other Examples</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow space-y-4">
-          <div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can be configured to not show a close button.</p>
-            <ngt-button (click)="showNotClosable()" variant="outline">Show Not Closable Toast</ngt-button>
+            <!-- Other Examples -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Other Examples</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow space-y-4">
+                <div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can be configured to not show a close button.</p>
+                  <ngt-button (click)="showNotClosable()" variant="outline">Show Not Closable Toast</ngt-button>
+                </div>
+                <div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Control how long a toast stays visible before auto-closing.</p>
+                  <ngt-button (click)="showCustomDelay()" variant="outline">Show Toast (10s delay)</ngt-button>
+                </div>
+                <div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can use custom icons via SVG path data.</p>
+                  <ngt-button (click)="showWithIcon()" variant="outline">Show Toast with Custom Icon</ngt-button>
+                </div>
+                <div>
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Remove all currently visible toasts.</p>
+                  <ngt-button (click)="clearAll()" variant="ghost">Clear All Toasts</ngt-button>
+                </div>
+              </div>
+            </section>
           </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Control how long a toast stays visible before auto-closing.</p>
-            <ngt-button (click)="showCustomDelay()" variant="outline">Show Toast (10s delay)</ngt-button>
-          </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Toasts can use custom icons via SVG path data.</p>
-            <ngt-button (click)="showWithIcon()" variant="outline">Show Toast with Custom Icon</ngt-button>
-          </div>
-          <div>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Remove all currently visible toasts.</p>
-            <ngt-button (click)="clearAll()" variant="ghost">Clear All Toasts</ngt-button>
-          </div>
-        </div>
-      </section>
-    </div>
         </ng-template>
       </ngt-nav-item>
       <ngt-nav-item label="API">
         <ng-template ngtNavContent>
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
 
-        <!-- NgtToastService Methods -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtToastService - Methods</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Method</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Parameters</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Returns</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">show</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">message: NgtToastMessage</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Displays a toast notification. Returns the toast ID.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">remove</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">toastId: string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">void</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Removes a specific toast by ID.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">clear</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">void</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Removes all currently visible toasts.</td>
-                </tr>
-              </tbody>
-            </table>
+              <!-- NgtToastService Methods -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtToastService - Methods</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Method</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Parameters</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Returns</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">show</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">message: NgtToastMessage</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Displays a toast notification. Returns the toast ID.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">remove</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">toastId: string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">void</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Removes a specific toast by ID.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">clear</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">void</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Removes all currently visible toasts.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- NgtToastMessage Interface -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtToastMessage Interface</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Required</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">severity</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'success' | 'info' | 'warning' | 'danger'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The severity/type of the toast. Defaults to 'info'.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">summary</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The title/summary text of the toast.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">detail</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The detail/description text of the toast.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">text</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Simple text message (alternative to summary/detail).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">sticky</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the toast should not auto-close. Defaults to false.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">delay</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before auto-closing. Defaults to 3000. Ignored if sticky is true.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closable</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show a close button. Defaults to true.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">icon</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom SVG path data for the icon.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Setup -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Setup</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                  Add <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">&lt;ngt-toast-container&gt;&lt;/ngt-toast-container&gt;</code>
+                  to your app component template (typically in app.component.html).
+                </p>
+                <p class="text-gray-600 dark:text-gray-400">Then inject <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">NgtToastService</code> in any component where you want to show toasts.</p>
+              </section>
+            </div>
           </div>
-        </section>
-
-        <!-- NgtToastMessage Interface -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">NgtToastMessage Interface</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Required</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">severity</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'success' | 'info' | 'warning' | 'danger'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The severity/type of the toast. Defaults to 'info'.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">summary</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The title/summary text of the toast.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">detail</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The detail/description text of the toast.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">text</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Simple text message (alternative to summary/detail).</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">sticky</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the toast should not auto-close. Defaults to false.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">delay</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Delay in milliseconds before auto-closing. Defaults to 3000. Ignored if sticky is true.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closable</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show a close button. Defaults to true.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">icon</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">No</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom SVG path data for the icon.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Setup -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Setup</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">
-            Add <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">&lt;ngt-toast-container&gt;&lt;/ngt-toast-container&gt;</code>
-            to your app component template (typically in app.component.html).
-          </p>
-          <p class="text-gray-600 dark:text-gray-400">Then inject <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">NgtToastService</code> in any component where you want to show toasts.</p>
-        </section>
-      </div>
-    </div>
         </ng-template>
       </ngt-nav-item>
     </ngt-nav>

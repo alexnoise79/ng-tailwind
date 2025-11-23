@@ -9,415 +9,415 @@
     <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
       <ngt-nav-item label="Showcase">
         <ng-template ngtNavContent>
-    <div class="space-y-8">
-      <!-- Basic Examples -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Positions</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('positions')"
-            [class.dark:bg-gray-700]="isShowingCode('positions')"
-            (click)="toggleDemoView('positions')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('positions')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showStart.set(true)" variant="primary">Open from Start</ngt-button>
-              <ngt-button (click)="showEnd.set(true)" variant="primary">Open from End</ngt-button>
-              <ngt-button (click)="showTop.set(true)" variant="primary">Open from Top</ngt-button>
-              <ngt-button (click)="showBottom.set(true)" variant="primary">Open from Bottom</ngt-button>
-            </div>
+          <div class="space-y-8">
+            <!-- Basic Examples -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Positions</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('positions')"
+                  [class.dark:bg-gray-700]="isShowingCode('positions')"
+                  (click)="toggleDemoView('positions')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('positions')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showStart.set(true)" variant="primary">Open from Start</ngt-button>
+                    <ngt-button (click)="showEnd.set(true)" variant="primary">Open from End</ngt-button>
+                    <ngt-button (click)="showTop.set(true)" variant="primary">Open from Top</ngt-button>
+                    <ngt-button (click)="showBottom.set(true)" variant="primary">Open from Bottom</ngt-button>
+                  </div>
+                  @if (showStart()) {
+                    <ngt-offcanvas [isOpen]="showStart()" [position]="'start'" (closed)="showStart.set(false)" title="Offcanvas from Start">
+                      <p>Content from start position</p>
+                    </ngt-offcanvas>
+                  }
+                  @if (showEnd()) {
+                    <ngt-offcanvas [isOpen]="showEnd()" [position]="'end'" (closed)="showEnd.set(false)" title="Offcanvas from End">
+                      <p>Content from end position</p>
+                    </ngt-offcanvas>
+                  }
+                  @if (showTop()) {
+                    <ngt-offcanvas [isOpen]="showTop()" [position]="'top'" (closed)="showTop.set(false)" title="Offcanvas from Top">
+                      <p>Content from top position</p>
+                    </ngt-offcanvas>
+                  }
+                  @if (showBottom()) {
+                    <ngt-offcanvas [isOpen]="showBottom()" [position]="'bottom'" (closed)="showBottom.set(false)" title="Offcanvas from Bottom">
+                      <p>Content from bottom position</p>
+                    </ngt-offcanvas>
+                  }
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('positions') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('positions') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('positions') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('positions') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('positions') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('positions') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'html'"
+                        (click)="setActiveCodeTab('positions', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('positions', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('positions') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('positions') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('positions') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('positions') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('positions') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('positions') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'ts'"
+                        (click)="setActiveCodeTab('positions', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('positions', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('positions', getActiveCodeTab('positions')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('positions', getActiveCodeTab('positions')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- With Title -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Title</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <div class="mb-4">
+                  <ngt-button (click)="showWithTitle.set(true)" variant="primary">Open with Title</ngt-button>
+                </div>
+              </div>
+            </section>
+
+            <!-- Backdrop Options -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Backdrop Options</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('backdrop')"
+                  [class.dark:bg-gray-700]="isShowingCode('backdrop')"
+                  (click)="toggleDemoView('backdrop')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('backdrop')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 flex flex-wrap gap-4">
+                    <ngt-button (click)="showWithBackdrop.set(true)" variant="primary">With Backdrop</ngt-button>
+                    <ngt-button (click)="showWithoutBackdrop.set(true)" variant="primary">Without Backdrop</ngt-button>
+                  </div>
+                  @if (showWithBackdrop()) {
+                    <ngt-offcanvas [isOpen]="showWithBackdrop()" [backdrop]="true" (closed)="showWithBackdrop.set(false)" title="With Backdrop">
+                      <p>This offcanvas has a backdrop</p>
+                    </ngt-offcanvas>
+                  }
+                  @if (showWithoutBackdrop()) {
+                    <ngt-offcanvas [isOpen]="showWithoutBackdrop()" [backdrop]="false" (closed)="showWithoutBackdrop.set(false)" title="Without Backdrop">
+                      <p>This offcanvas has no backdrop</p>
+                    </ngt-offcanvas>
+                  }
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('backdrop') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'html'"
+                        (click)="setActiveCodeTab('backdrop', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('backdrop', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('backdrop') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'ts'"
+                        (click)="setActiveCodeTab('backdrop', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('backdrop', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('backdrop', getActiveCodeTab('backdrop')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('backdrop', getActiveCodeTab('backdrop')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Offcanvas Instances (kept inside showcase for functionality) -->
+            <!-- Offcanvas from Start -->
             @if (showStart()) {
               <ngt-offcanvas [isOpen]="showStart()" [position]="'start'" (closed)="showStart.set(false)" title="Offcanvas from Start">
-                <p>Content from start position</p>
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the left side.</p>
+                  <p class="text-gray-600 dark:text-gray-400">You can place any content here.</p>
+                  <div class="flex gap-2 mt-6">
+                    <ngt-button (click)="showStart.set(false)" variant="outline">Close</ngt-button>
+                    <ngt-button (click)="showStart.set(false)" variant="primary">Save Changes</ngt-button>
+                  </div>
+                </div>
               </ngt-offcanvas>
             }
+
+            <!-- Offcanvas from End -->
             @if (showEnd()) {
               <ngt-offcanvas [isOpen]="showEnd()" [position]="'end'" (closed)="showEnd.set(false)" title="Offcanvas from End">
-                <p>Content from end position</p>
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the right side.</p>
+                  <p class="text-gray-600 dark:text-gray-400">This is the default position for offcanvas components.</p>
+                  <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                    <li>Feature 1</li>
+                    <li>Feature 2</li>
+                    <li>Feature 3</li>
+                  </ul>
+                  <div class="flex gap-2 mt-6">
+                    <ngt-button (click)="showEnd.set(false)" variant="outline">Cancel</ngt-button>
+                    <ngt-button (click)="showEnd.set(false)" variant="primary">Apply</ngt-button>
+                  </div>
+                </div>
               </ngt-offcanvas>
             }
+
+            <!-- Offcanvas from Top -->
             @if (showTop()) {
               <ngt-offcanvas [isOpen]="showTop()" [position]="'top'" (closed)="showTop.set(false)" title="Offcanvas from Top">
-                <p>Content from top position</p>
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the top of the screen.</p>
+                  <p class="text-gray-600 dark:text-gray-400">Perfect for notifications or action bars.</p>
+                </div>
               </ngt-offcanvas>
             }
+
+            <!-- Offcanvas from Bottom -->
             @if (showBottom()) {
               <ngt-offcanvas [isOpen]="showBottom()" [position]="'bottom'" (closed)="showBottom.set(false)" title="Offcanvas from Bottom">
-                <p>Content from bottom position</p>
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the bottom of the screen.</p>
+                  <p class="text-gray-600 dark:text-gray-400">Commonly used for mobile navigation menus.</p>
+                </div>
               </ngt-offcanvas>
             }
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('positions') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('positions') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('positions') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('positions') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('positions') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('positions') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'html'"
-                  (click)="setActiveCodeTab('positions', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('positions', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('positions') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('positions') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('positions') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('positions') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('positions') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('positions') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('positions') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('positions') !== 'ts'"
-                  (click)="setActiveCodeTab('positions', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('positions', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('positions', getActiveCodeTab('positions')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('positions', getActiveCodeTab('positions')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
 
-      <!-- With Title -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Title</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <ngt-button (click)="showWithTitle.set(true)" variant="primary">Open with Title</ngt-button>
-          </div>
-        </div>
-      </section>
+            <!-- Offcanvas with Title -->
+            @if (showWithTitle()) {
+              <ngt-offcanvas [isOpen]="showWithTitle()" [position]="'end'" (closed)="showWithTitle.set(false)" title="Settings">
+                <div class="space-y-6">
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2">General Settings</h4>
+                    <p class="text-gray-600 dark:text-gray-400">Configure your general preferences here.</p>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Privacy</h4>
+                    <p class="text-gray-600 dark:text-gray-400">Manage your privacy settings.</p>
+                  </div>
+                  <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Notifications</h4>
+                    <p class="text-gray-600 dark:text-gray-400">Control how you receive notifications.</p>
+                  </div>
+                </div>
+              </ngt-offcanvas>
+            }
 
-      <!-- Backdrop Options -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Backdrop Options</h2>
-          <button
-            [class.bg-gray-100]="isShowingCode('backdrop')"
-            [class.dark:bg-gray-700]="isShowingCode('backdrop')"
-            (click)="toggleDemoView('backdrop')"
-            type="button"
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            title="Toggle code view"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('backdrop')) {
-            <!-- Showcase View -->
-            <div class="mb-4 flex flex-wrap gap-4">
-              <ngt-button (click)="showWithBackdrop.set(true)" variant="primary">With Backdrop</ngt-button>
-              <ngt-button (click)="showWithoutBackdrop.set(true)" variant="primary">Without Backdrop</ngt-button>
-            </div>
+            <!-- Offcanvas with Backdrop -->
             @if (showWithBackdrop()) {
-              <ngt-offcanvas [isOpen]="showWithBackdrop()" [backdrop]="true" (closed)="showWithBackdrop.set(false)" title="With Backdrop">
-                <p>This offcanvas has a backdrop</p>
+              <ngt-offcanvas [isOpen]="showWithBackdrop()" [position]="'end'" [backdrop]="true" (closed)="showWithBackdrop.set(false)" title="With Backdrop">
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas has a backdrop that dims the background.</p>
+                  <p class="text-gray-600 dark:text-gray-400">Clicking the backdrop will close the offcanvas.</p>
+                </div>
               </ngt-offcanvas>
             }
+
+            <!-- Offcanvas without Backdrop -->
             @if (showWithoutBackdrop()) {
-              <ngt-offcanvas [isOpen]="showWithoutBackdrop()" [backdrop]="false" (closed)="showWithoutBackdrop.set(false)" title="Without Backdrop">
-                <p>This offcanvas has no backdrop</p>
+              <ngt-offcanvas [isOpen]="showWithoutBackdrop()" [position]="'end'" [backdrop]="false" (closed)="showWithoutBackdrop.set(false)" title="Without Backdrop">
+                <div class="space-y-4">
+                  <p class="text-gray-600 dark:text-gray-400">This offcanvas has no backdrop.</p>
+                  <p class="text-gray-600 dark:text-gray-400">The background remains fully visible and interactive.</p>
+                </div>
               </ngt-offcanvas>
             }
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('backdrop') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'html'"
-                  (click)="setActiveCodeTab('backdrop', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('backdrop', 'html') }}
-                </button>
-                <button
-                  [class.text-gray-900]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('backdrop') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('backdrop') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('backdrop') !== 'ts'"
-                  (click)="setActiveCodeTab('backdrop', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                >
-                  {{ getTabFileName('backdrop', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('backdrop', getActiveCodeTab('backdrop')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('backdrop', getActiveCodeTab('backdrop')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Offcanvas Instances (kept inside showcase for functionality) -->
-      <!-- Offcanvas from Start -->
-      @if (showStart()) {
-        <ngt-offcanvas [isOpen]="showStart()" [position]="'start'" (closed)="showStart.set(false)" title="Offcanvas from Start">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the left side.</p>
-            <p class="text-gray-600 dark:text-gray-400">You can place any content here.</p>
-            <div class="flex gap-2 mt-6">
-              <ngt-button (click)="showStart.set(false)" variant="outline">Close</ngt-button>
-              <ngt-button (click)="showStart.set(false)" variant="primary">Save Changes</ngt-button>
-            </div>
           </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas from End -->
-      @if (showEnd()) {
-        <ngt-offcanvas [isOpen]="showEnd()" [position]="'end'" (closed)="showEnd.set(false)" title="Offcanvas from End">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the right side.</p>
-            <p class="text-gray-600 dark:text-gray-400">This is the default position for offcanvas components.</p>
-            <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-              <li>Feature 1</li>
-              <li>Feature 2</li>
-              <li>Feature 3</li>
-            </ul>
-            <div class="flex gap-2 mt-6">
-              <ngt-button (click)="showEnd.set(false)" variant="outline">Cancel</ngt-button>
-              <ngt-button (click)="showEnd.set(false)" variant="primary">Apply</ngt-button>
-            </div>
-          </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas from Top -->
-      @if (showTop()) {
-        <ngt-offcanvas [isOpen]="showTop()" [position]="'top'" (closed)="showTop.set(false)" title="Offcanvas from Top">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the top of the screen.</p>
-            <p class="text-gray-600 dark:text-gray-400">Perfect for notifications or action bars.</p>
-          </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas from Bottom -->
-      @if (showBottom()) {
-        <ngt-offcanvas [isOpen]="showBottom()" [position]="'bottom'" (closed)="showBottom.set(false)" title="Offcanvas from Bottom">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas slides in from the bottom of the screen.</p>
-            <p class="text-gray-600 dark:text-gray-400">Commonly used for mobile navigation menus.</p>
-          </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas with Title -->
-      @if (showWithTitle()) {
-        <ngt-offcanvas [isOpen]="showWithTitle()" [position]="'end'" (closed)="showWithTitle.set(false)" title="Settings">
-          <div class="space-y-6">
-            <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-2">General Settings</h4>
-              <p class="text-gray-600 dark:text-gray-400">Configure your general preferences here.</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Privacy</h4>
-              <p class="text-gray-600 dark:text-gray-400">Manage your privacy settings.</p>
-            </div>
-            <div>
-              <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Notifications</h4>
-              <p class="text-gray-600 dark:text-gray-400">Control how you receive notifications.</p>
-            </div>
-          </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas with Backdrop -->
-      @if (showWithBackdrop()) {
-        <ngt-offcanvas [isOpen]="showWithBackdrop()" [position]="'end'" [backdrop]="true" (closed)="showWithBackdrop.set(false)" title="With Backdrop">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas has a backdrop that dims the background.</p>
-            <p class="text-gray-600 dark:text-gray-400">Clicking the backdrop will close the offcanvas.</p>
-          </div>
-        </ngt-offcanvas>
-      }
-
-      <!-- Offcanvas without Backdrop -->
-      @if (showWithoutBackdrop()) {
-        <ngt-offcanvas [isOpen]="showWithoutBackdrop()" [position]="'end'" [backdrop]="false" (closed)="showWithoutBackdrop.set(false)" title="Without Backdrop">
-          <div class="space-y-4">
-            <p class="text-gray-600 dark:text-gray-400">This offcanvas has no backdrop.</p>
-            <p class="text-gray-600 dark:text-gray-400">The background remains fully visible and interactive.</p>
-          </div>
-        </ngt-offcanvas>
-      }
-    </div>
         </ng-template>
       </ngt-nav-item>
       <ngt-nav-item label="API">
         <ng-template ngtNavContent>
           <div class="space-y-6">
             <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
 
-        <!-- Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">isOpen</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean | WritableSignal&lt;boolean&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Controls whether the offcanvas is open or closed.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">title</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional title text displayed in the offcanvas header.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">position</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start' | 'end' | 'top' | 'bottom'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'end'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The position from which the offcanvas slides in.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showHeader</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show the header with title and close button.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">backdrop</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show a backdrop that dims the background.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closeOnBackdropClick</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether clicking the backdrop closes the offcanvas.</td>
-                </tr>
-              </tbody>
-            </table>
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">isOpen</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean | WritableSignal&lt;boolean&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Controls whether the offcanvas is open or closed.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">title</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional title text displayed in the offcanvas header.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">position</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'start' | 'end' | 'top' | 'bottom'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'end'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The position from which the offcanvas slides in.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showHeader</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show the header with title and close button.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">backdrop</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show a backdrop that dims the background.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closeOnBackdropClick</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether clicking the backdrop closes the offcanvas.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Outputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closed</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;void&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the offcanvas is closed (via backdrop click, escape key, or close button).</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The main offcanvas body content. Can contain any HTML or Angular components.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Features -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Features</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                  <li>Four position options: start, end, top, bottom</li>
+                  <li>Focus trapping using Angular CDK</li>
+                  <li>Keyboard navigation (Escape key to close)</li>
+                  <li>Backdrop click to close (configurable)</li>
+                  <li>Body scroll prevention when open</li>
+                  <li>Smooth slide animations</li>
+                  <li>ARIA attributes for accessibility</li>
+                </ul>
+              </section>
+            </div>
           </div>
-        </section>
-
-        <!-- Outputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">closed</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;void&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the offcanvas is closed (via backdrop click, escape key, or close button).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Templates -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Content Projection</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ng-content</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The main offcanvas body content. Can contain any HTML or Angular components.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Features -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Features</h3>
-          <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
-            <li>Four position options: start, end, top, bottom</li>
-            <li>Focus trapping using Angular CDK</li>
-            <li>Keyboard navigation (Escape key to close)</li>
-            <li>Backdrop click to close (configurable)</li>
-            <li>Body scroll prevention when open</li>
-            <li>Smooth slide animations</li>
-            <li>ARIA attributes for accessibility</li>
-          </ul>
-        </section>
-      </div>
-    </div>
         </ng-template>
       </ngt-nav-item>
     </ngt-nav>

@@ -98,7 +98,6 @@ export class SelectPage {
     return this.invalid() && (this.selectedCityReactive() === null || this.selectedCityReactive() === undefined);
   }
 
-
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {

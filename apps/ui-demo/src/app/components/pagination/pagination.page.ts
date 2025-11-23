@@ -21,7 +21,6 @@ export class PaginationPage {
 
   Math = Math;
 
-
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {
