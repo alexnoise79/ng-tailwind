@@ -134,6 +134,9 @@
             [model]="currentTime()"
             [disabled]="disabled()"
             [showSeconds]="true"
+            [hourStep]="hourStep()"
+            [minuteStep]="minuteStep()"
+            [secondStep]="secondStep()"
             (timeSelect)="onTimeChange($event)"
           ></ngt-timepicker>
         </div>

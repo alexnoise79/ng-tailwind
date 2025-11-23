@@ -53,6 +53,9 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   readonly format = input<DateFormat>('iso');
   readonly showIcon = input(false);
   readonly position = input<'top' | 'bottom'>('top');
+  readonly hourStep = input(1);
+  readonly minuteStep = input(1);
+  readonly secondStep = input(1);
 
   readonly dateSelect = output<string>();
   readonly navigate = output<{ current: { year: number; month: number }; prev: { year: number; month: number } }>();
