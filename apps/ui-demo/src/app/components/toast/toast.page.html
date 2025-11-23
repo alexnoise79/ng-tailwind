@@ -7,8 +7,8 @@
   <!-- Tabs Navigation -->
   <div class="mb-6">
     <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+      <ngt-nav-item (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
+      <ngt-nav-item (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
     </ngt-nav>
   </div>
 

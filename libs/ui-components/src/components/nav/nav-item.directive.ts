@@ -12,7 +12,6 @@ let navItemIdCounter = 0;
   standalone: true
 })
 export class NgtNavItem implements AfterContentInit, OnInit {
-  readonly itemId = input<string | null>(null);
   readonly disabled = input<boolean>(false);
   readonly label = input<string | null>(null);
   readonly routerLink = input<string | string[] | null>(null);
@@ -61,11 +60,6 @@ export class NgtNavItem implements AfterContentInit, OnInit {
   }
 
   ngAfterContentInit(): void {
-    const itemIdValue = this.itemId();
-    if (itemIdValue) {
-      this.id = itemIdValue;
-    }
-
     // If used as an element (<ngt-nav-item>) with label but no ngtNavLink child,
     // create a link element and apply nav-link behavior manually
     const nativeEl = this.elementRef.nativeElement;

@@ -55,40 +55,40 @@ export class NavPage {
   // Code snippets for each demo
   codeSnippets = {
     default: `<ngt-nav>
-  <ngt-nav-item label="Home" [itemId]="'nav-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     pills: `<ngt-nav [style]="'pills'">
-  <ngt-nav-item label="Home" [itemId]="'nav-pills-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-pills-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-pills-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     underline: `<ngt-nav [style]="'underline'">
-  <ngt-nav-item label="Home" [itemId]="'nav-underline-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-underline-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-underline-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     center: `<ngt-nav [align]="'center'">
-  <ngt-nav-item label="Home" [itemId]="'nav-center-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-center-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-center-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     justified: `<ngt-nav [align]="'justified'">
-  <ngt-nav-item label="Home" [itemId]="'nav-justified-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-justified-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-justified-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     disabled: `<ngt-nav>
-  <ngt-nav-item label="Home" [itemId]="'nav-disabled-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-disabled-about'"></ngt-nav-item>
-  <ngt-nav-item label="Disabled" [itemId]="'nav-disabled-disabled'" [disabled]="true"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-disabled-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Disabled" [disabled]="true"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`,
     vertical: `<ngt-nav [orientation]="'vertical'">
-  <ngt-nav-item label="Home" [itemId]="'nav-vertical-home'"></ngt-nav-item>
-  <ngt-nav-item label="About" [itemId]="'nav-vertical-about'"></ngt-nav-item>
-  <ngt-nav-item label="Contact" [itemId]="'nav-vertical-contact'"></ngt-nav-item>
+  <ngt-nav-item label="Home"></ngt-nav-item>
+  <ngt-nav-item label="About"></ngt-nav-item>
+  <ngt-nav-item label="Contact"></ngt-nav-item>
 </ngt-nav>`
   };
 

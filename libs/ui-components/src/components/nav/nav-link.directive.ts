@@ -27,8 +27,8 @@ export class NgtNavLink implements OnInit, OnDestroy {
       // Watch for changes in active state and update classes
       runInInjectionContext(this.injector, () => {
         this.effectRef = effect(() => {
-          // Track the active state signal
-          const isActive = this.navItem!.isActive();
+          // Track the active state signal to trigger updates
+          this.navItem!.isActive();
           const navClasses = this.nav!.getNavButtonClasses(this.navItem!);
           // Merge with original classes
           this.renderer.setAttribute(nativeEl, 'class', `${this.currentClasses} ${navClasses}`.trim());

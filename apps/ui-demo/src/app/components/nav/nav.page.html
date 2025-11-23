@@ -7,8 +7,8 @@
   <!-- Tabs Navigation -->
   <div class="mb-6">
     <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+      <ngt-nav-item (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
+      <ngt-nav-item (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
     </ngt-nav>
   </div>
 
@@ -90,9 +90,9 @@
           @if (!isShowingCode('pills')) {
             <div class="mb-4">
               <ngt-nav [style]="'pills'">
-                <ngt-nav-item [itemId]="'nav-pills-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-pills-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-pills-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -132,9 +132,9 @@
           @if (!isShowingCode('underline')) {
             <div class="mb-4">
               <ngt-nav [style]="'underline'">
-                <ngt-nav-item [itemId]="'nav-underline-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-underline-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-underline-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -174,9 +174,9 @@
           @if (!isShowingCode('center')) {
             <div class="mb-4">
               <ngt-nav [align]="'center'">
-                <ngt-nav-item [itemId]="'nav-center-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-center-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-center-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -216,9 +216,9 @@
           @if (!isShowingCode('justified')) {
             <div class="mb-4">
               <ngt-nav [align]="'justified'">
-                <ngt-nav-item [itemId]="'nav-justified-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-justified-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-justified-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -258,10 +258,10 @@
           @if (!isShowingCode('disabled')) {
             <div class="mb-4">
               <ngt-nav>
-                <ngt-nav-item [itemId]="'nav-disabled-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-disabled-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-disabled-disabled'" [disabled]="true" label="Disabled"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-disabled-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item [disabled]="true" label="Disabled"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -301,9 +301,9 @@
           @if (!isShowingCode('vertical')) {
             <div class="mb-4 max-w-xs">
               <ngt-nav [orientation]="'vertical'">
-                <ngt-nav-item [itemId]="'nav-vertical-home'" label="Home"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-vertical-about'" label="About"></ngt-nav-item>
-                <ngt-nav-item [itemId]="'nav-vertical-contact'" label="Contact"></ngt-nav-item>
+                <ngt-nav-item label="Home"></ngt-nav-item>
+                <ngt-nav-item label="About"></ngt-nav-item>
+                <ngt-nav-item label="Contact"></ngt-nav-item>
               </ngt-nav>
             </div>
           } @else {
@@ -386,12 +386,6 @@
                 </tr>
               </thead>
               <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">itemId</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string | null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional unique identifier for the navigation item. If not provided, an auto-generated ID will be used.</td>
-                </tr>
                 <tr>
                   <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
                   <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
