@@ -283,7 +283,7 @@ export class NgtTimepicker implements OnInit {
     const sizeClasses = {
       sm: 'w-10 px-1.5 py-0.5 text-xs',
       md: 'w-12 px-2 py-1 text-sm',
-      lg: 'w-14 px-2.5 py-1.5 text-base'
+      lg: 'w-14 px-2.5 py-1.5 text-sm'
     };
     const base =
       'text-center font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]';
@@ -322,7 +322,7 @@ export class NgtTimepicker implements OnInit {
     const sizeClasses = {
       sm: 'px-2 py-0.5 text-xs',
       md: 'px-3 py-1 text-sm',
-      lg: 'px-4 py-1.5 text-base'
+      lg: 'px-4 py-1.5 text-sm'
     };
     const base = 'font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
     return `${base} ${sizeClasses[this.size()]}`;

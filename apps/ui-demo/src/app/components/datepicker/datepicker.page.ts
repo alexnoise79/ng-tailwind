@@ -23,6 +23,7 @@ export class DatepickerPage {
       withFormat: 'showcase',
       withIcon: 'showcase',
       withPosition: 'showcase',
+      withSize: 'showcase',
       withStringInput: 'showcase'
     },
     {
@@ -31,6 +32,7 @@ export class DatepickerPage {
       withFormat: 'html',
       withIcon: 'html',
       withPosition: 'html',
+      withSize: 'html',
       withStringInput: 'html'
     }
   );
@@ -96,6 +98,16 @@ export class DatepickerPage {
   selectedDate = signal<string | null>(null);
 }`
       },
+      withSize: {
+        html: `<ngt-datepicker [model]="selectedDateWithTime()" [showTime]="true" [size]="'sm'" (dateSelect)="selectedDateWithTime.set($event)"></ngt-datepicker>
+<ngt-datepicker [model]="selectedDateWithTime()" [showTime]="true" [size]="'md'" (dateSelect)="selectedDateWithTime.set($event)"></ngt-datepicker>
+<ngt-datepicker [model]="selectedDateWithTime()" [showTime]="true" [size]="'lg'" (dateSelect)="selectedDateWithTime.set($event)"></ngt-datepicker>`,
+        ts: `import { signal } from '@angular/core';
+
+export class DatepickerPage {
+  selectedDateWithTime = signal<string | null>(null);
+}`
+      },
       withStringInput: {
         html: `<ngt-datepicker [model]="'2024-03-15T10:30:00'" [showTime]="true" (dateSelect)="onDateSelect($event)"></ngt-datepicker>`,
         ts: `export class DatepickerPage {
@@ -143,6 +155,10 @@ export class DatepickerPage {
       withPosition: {
         html: 'datepicker-with-position.html',
         ts: 'datepicker-with-position.ts'
+      },
+      withSize: {
+        html: 'datepicker-with-size.html',
+        ts: 'datepicker-with-size.ts'
       },
       withStringInput: {
         html: 'datepicker-with-string-input.html',

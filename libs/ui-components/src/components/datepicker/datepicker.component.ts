@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { classMerge } from '../../utils';
 import { NgtTimepicker, NgtTimeStruct } from '../timepicker';
 import { OutsideClickDirective } from '../../directives';
+import { Size } from '../../models';
 
 export interface NgtDateStruct {
   year: number;
@@ -56,6 +57,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   readonly hourStep = input(1);
   readonly minuteStep = input(1);
   readonly secondStep = input(1);
+  readonly size = input<Size>('md');
 
   readonly dateSelect = output<string>();
   readonly navigate = output<{ current: { year: number; month: number }; prev: { year: number; month: number } }>();
@@ -512,7 +514,14 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   getDateClasses(date: NgtDateStruct | null): string {
     if (!date) return '';
 
-    const base = 'w-10 h-10 flex items-center justify-center text-sm rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1';
+    const size = this.size();
+    const sizeClasses = {
+      sm: 'w-7 h-7 text-xs',
+      md: 'w-10 h-10 text-sm',
+      lg: 'w-11 h-11 text-sm'
+    };
+
+    const base = `${sizeClasses[size]} flex items-center justify-center rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-1`;
 
     if (this.isDisabled(date)) {
       return classMerge(base, 'text-gray-300 dark:text-gray-600 cursor-not-allowed');
@@ -528,4 +537,47 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
 
     return classMerge(base, 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700');
   }
+
+  // Size-based spacing classes
+  calendarPaddingClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'p-2';
+    if (size === 'lg') return 'p-5';
+    return 'p-4'; // md
+  });
+
+  headerMarginClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'mb-2';
+    if (size === 'lg') return 'mb-5';
+    return 'mb-4'; // md
+  });
+
+  dayNamesMarginClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'mb-1';
+    if (size === 'lg') return 'mb-2';
+    return 'mb-2'; // md
+  });
+
+  timeSectionMarginClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'mt-2 pt-2';
+    if (size === 'lg') return 'mt-4 pt-4';
+    return 'mt-4 pt-4'; // md
+  });
+
+  dayNameCellClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'w-7 h-7 text-xs';
+    if (size === 'lg') return 'w-11 h-11 text-xs';
+    return 'w-10 h-10 text-xs'; // md
+  });
+
+  emptyCellClasses = computed(() => {
+    const size = this.size();
+    if (size === 'sm') return 'w-7 h-7';
+    if (size === 'lg') return 'w-11 h-11';
+    return 'w-10 h-10'; // md
+  });
 }
