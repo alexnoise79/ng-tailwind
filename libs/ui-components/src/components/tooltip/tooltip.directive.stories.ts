@@ -8,7 +8,11 @@ const meta: Meta<NgtTooltip> = {
   argTypes: {
     ngtTooltip: {
       control: 'text',
-      description: 'Tooltip text content'
+      description: 'Simple string tooltip content. Can be used as ngtTooltip="text"'
+    },
+    content: {
+      control: false,
+      description: 'Content of the tooltip. Can be a string or TemplateRef for custom content. Takes precedence over ngtTooltip'
     },
     tooltipPosition: {
       control: 'select',

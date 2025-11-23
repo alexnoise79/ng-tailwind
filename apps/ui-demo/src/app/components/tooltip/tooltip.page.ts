@@ -23,11 +23,13 @@ export class TooltipPage {
   codeViewUtil = new DemoCodeViewUtil(
     {
       positions: 'showcase',
-      delays: 'showcase'
+      delays: 'showcase',
+      customContent: 'showcase'
     },
     {
       positions: 'html',
-      delays: 'html'
+      delays: 'html',
+      customContent: 'html'
     }
   );
 
@@ -51,7 +53,19 @@ export class TooltipPage {
     delays: `<button ngtTooltip="Default delay (200ms)" [delay]="200" class="px-4 py-2 bg-primary-600 text-white rounded-md">Default Delay</button>
 <button ngtTooltip="Fast show delay (100ms)" [showDelay]="100" [hideDelay]="200" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Fast Show Delay</button>
 <button ngtTooltip="Slow hide delay (500ms)" [showDelay]="200" [hideDelay]="500" class="px-4 py-2 bg-primary-600 text-white rounded-md">Slow Hide Delay</button>
-<button ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" [showDelay]="300" [hideDelay]="400" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Custom Delays</button>`
+<button ngtTooltip="Custom delays (show: 300ms, hide: 400ms)" [showDelay]="300" [hideDelay]="400" class="px-4 py-2 bg-secondary-600 text-white rounded-md">Custom Delays</button>`,
+    customContent: `<!-- Define template -->
+<ng-template #customTooltipTemplate>
+  <span class="font-bold text-primary-400">Custom</span> HTML content with <span class="font-bold text-primary-400">primary color</span>
+</ng-template>
+
+<!-- Use in tooltip -->
+<button 
+  [content]="customTooltipTemplate"
+  ngtTooltip=""
+  class="px-4 py-2 bg-primary-600 text-white rounded-md">
+  Hover for Custom Content
+</button>`
   };
 
   // Helper to get code snippet for a specific tab
@@ -69,6 +83,10 @@ export class TooltipPage {
       delays: {
         html: 'tooltip-delays.html',
         ts: 'tooltip-delays.ts'
+      },
+      customContent: {
+        html: 'tooltip-custom-content.html',
+        ts: 'tooltip-custom-content.ts'
       }
     };
     return this.codeViewUtil.getTabFileName('tooltip', demoKey, fileType, fileNames);

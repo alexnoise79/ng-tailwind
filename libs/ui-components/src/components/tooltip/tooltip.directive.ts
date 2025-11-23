@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer2, OnDestroy, input, signal, computed, inject, HostListener, effect } from '@angular/core';
+import { Directive, ElementRef, Renderer2, OnDestroy, input, signal, computed, inject, HostListener, effect, ViewContainerRef, TemplateRef, EmbeddedViewRef } from '@angular/core';
 import { Position } from '../../models';
 
 @Directive({
@@ -8,8 +8,10 @@ import { Position } from '../../models';
 export class NgtTooltip implements OnDestroy {
   private elementRef = inject(ElementRef<HTMLElement>);
   private renderer = inject(Renderer2);
+  private viewContainerRef = inject(ViewContainerRef);
 
-  readonly ngtTooltip = input.required<string>();
+  readonly ngtTooltip = input<string>('');
+  readonly content = input<string | TemplateRef<HTMLElement> | null>(null);
   readonly tooltipPosition = input<Position>('top');
   readonly delay = input<number>(200);
   readonly showDelay = input<number>(200);
@@ -18,6 +20,7 @@ export class NgtTooltip implements OnDestroy {
   private showTimeout?: number;
   private hideTimeout?: number;
   private tooltipElement: HTMLElement | null = null;
+  private embeddedViewRef: EmbeddedViewRef<any> | null = null;
 
   isVisible = signal(false);
 
@@ -40,8 +43,12 @@ export class NgtTooltip implements OnDestroy {
       this.renderer.setStyle(hostElement, 'position', 'relative');
     }
 
-    // Effect to update tooltip when text or position changes
+    // Effect to update tooltip when content, text or position changes
     effect(() => {
+      // Access both inputs to track changes
+      this.content();
+      this.ngtTooltip();
+      this.tooltipPosition();
       if (this.tooltipElement && this.isVisible()) {
         this.updateTooltipContent();
       }
@@ -80,14 +87,48 @@ export class NgtTooltip implements OnDestroy {
       return;
     }
 
-    // Update text content
-    this.renderer.setProperty(this.tooltipElement, 'textContent', this.ngtTooltip());
+    // Get content: prefer content input, otherwise use ngtTooltip
+    const contentValue = this.content();
+    const tooltipValue = this.ngtTooltip();
+
+    // Clear existing embedded view if any
+    if (this.embeddedViewRef) {
+      this.embeddedViewRef.destroy();
+      this.embeddedViewRef = null;
+    }
+
+    // Clear tooltip element content
+    while (this.tooltipElement.firstChild) {
+      this.renderer.removeChild(this.tooltipElement, this.tooltipElement.firstChild);
+    }
 
     // Update classes
     this.renderer.setAttribute(this.tooltipElement, 'class', this.tooltipClasses());
+
+    // Handle TemplateRef or string content
+    if (contentValue instanceof TemplateRef) {
+      // Create embedded view from TemplateRef
+      this.embeddedViewRef = this.viewContainerRef.createEmbeddedView(contentValue);
+      // Attach root nodes to tooltip element
+      this.embeddedViewRef.rootNodes.forEach(node => {
+        this.renderer.appendChild(this.tooltipElement, node);
+      });
+      // Detect changes to ensure bindings are applied
+      this.embeddedViewRef.detectChanges();
+    } else if (contentValue !== null && typeof contentValue === 'string') {
+      // Use content string if provided
+      this.renderer.setProperty(this.tooltipElement, 'textContent', contentValue);
+    } else if (tooltipValue) {
+      // Fall back to ngtTooltip
+      this.renderer.setProperty(this.tooltipElement, 'textContent', tooltipValue);
+    }
   }
 
   private removeTooltipElement(): void {
+    if (this.embeddedViewRef) {
+      this.embeddedViewRef.destroy();
+      this.embeddedViewRef = null;
+    }
     if (this.tooltipElement && this.tooltipElement.parentElement) {
       this.renderer.removeChild(this.tooltipElement.parentElement, this.tooltipElement);
       this.tooltipElement = null;
