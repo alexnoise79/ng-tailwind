@@ -11,7 +11,7 @@ export class NgtAlert {
   readonly variant = input<AlertVariant>('info');
   readonly dismissible = input(false);
 
-  readonly close = output<void>();
+  readonly closed = output<void>();
 
   private isVisible = signal(true);
 
@@ -66,9 +66,8 @@ export class NgtAlert {
     if (this.dismissible()) {
       this.isVisible.set(false);
       setTimeout(() => {
-        this.close.emit();
+        this.closed.emit();
       }, 300);
     }
   }
 }
-

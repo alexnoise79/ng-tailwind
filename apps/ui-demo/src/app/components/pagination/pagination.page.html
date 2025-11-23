@@ -6,480 +6,477 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic Example -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Example</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 space-y-4">
+                    <p class="text-gray-600 dark:text-gray-400">Simple pagination with 10 pages.</p>
+                    <ngt-pagination [currentPage]="currentPage1()" [totalPages]="10" (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"></ngt-pagination>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage1() }}</p>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                        (click)="setActiveCodeTab('basic', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- With Total Items -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Total Items</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('withTotalItems')"
+                  [class.dark:bg-gray-700]="isShowingCode('withTotalItems')"
+                  (click)="toggleDemoView('withTotalItems')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('withTotalItems')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 space-y-4">
+                    <p class="text-gray-600 dark:text-gray-400">Pagination calculated from total items and page size.</p>
+                    <ngt-pagination [currentPage]="currentPage2()" [totalItems]="100" [pageSize]="10" (pageChanged)="currentPage2.set($event); onPageChange($event, 'currentPage2')"></ngt-pagination>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage2() }} of {{ Math.ceil(100 / 10) }}</p>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'html'"
+                        (click)="setActiveCodeTab('withTotalItems', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withTotalItems', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'ts'"
+                        (click)="setActiveCodeTab('withTotalItems', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('withTotalItems', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('withTotalItems', getActiveCodeTab('withTotalItems')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withTotalItems', getActiveCodeTab('withTotalItems')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Sizes -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('sizes')"
+                  [class.dark:bg-gray-700]="isShowingCode('sizes')"
+                  (click)="toggleDemoView('sizes')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('sizes')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 space-y-4">
+                    <div>
+                      <p class="text-gray-600 dark:text-gray-400 mb-2">Small:</p>
+                      <ngt-pagination [currentPage]="currentPage3()" [totalPages]="20" [size]="'sm'" (pageChanged)="currentPage3.set($event); onPageChange($event, 'currentPage3')"></ngt-pagination>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 dark:text-gray-400 mb-2">Medium (default):</p>
+                      <ngt-pagination [currentPage]="currentPage4()" [totalPages]="20" [size]="'md'" (pageChanged)="currentPage4.set($event); onPageChange($event, 'currentPage4')"></ngt-pagination>
+                    </div>
+                    <div>
+                      <p class="text-gray-600 dark:text-gray-400 mb-2">Large:</p>
+                      <ngt-pagination [currentPage]="currentPage5()" [totalPages]="20" [size]="'lg'" (pageChanged)="currentPage5.set($event); onPageChange($event, 'currentPage5')"></ngt-pagination>
+                    </div>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'"
+                        (click)="setActiveCodeTab('sizes', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('sizes') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'"
+                        (click)="setActiveCodeTab('sizes', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('sizes', getActiveCodeTab('sizes')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('sizes', getActiveCodeTab('sizes')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Many Pages with Ellipsis -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Many Pages with Ellipsis</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('ellipsis')"
+                  [class.dark:bg-gray-700]="isShowingCode('ellipsis')"
+                  (click)="toggleDemoView('ellipsis')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('ellipsis')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4 space-y-4">
+                    <p class="text-gray-600 dark:text-gray-400">Pagination with many pages shows ellipsis for better navigation.</p>
+                    <ngt-pagination [currentPage]="currentPage6()" [totalPages]="100" [maxVisiblePages]="7" (pageChanged)="currentPage6.set($event); onPageChange($event, 'currentPage6')"></ngt-pagination>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage6() }}</p>
+                  </div>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'html'"
+                        (click)="setActiveCodeTab('ellipsis', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('ellipsis', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'ts'"
+                        (click)="setActiveCodeTab('ellipsis', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('ellipsis', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('ellipsis', getActiveCodeTab('ellipsis')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('ellipsis', getActiveCodeTab('ellipsis')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Without First/Last Buttons -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Without First/Last Buttons</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <div class="mb-4">
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination without first and last page buttons.</p>
+                  <ngt-pagination [currentPage]="currentPage6()" [totalPages]="20" [showFirstLast]="false" (pageChanged)="currentPage6.set($event); onPageChange($event, 'currentPage6')"></ngt-pagination>
+                </div>
+              </div>
+            </section>
+
+            <!-- Without Previous/Next Buttons -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Without Previous/Next Buttons</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <div class="mb-4">
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination without previous and next buttons.</p>
+                  <ngt-pagination [currentPage]="currentPage7()" [totalPages]="20" [showPrevNext]="false" (pageChanged)="currentPage7.set($event); onPageChange($event, 'currentPage7')"></ngt-pagination>
+                </div>
+              </div>
+            </section>
+
+            <!-- Disabled -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <div class="mb-4">
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Disabled pagination component.</p>
+                  <ngt-pagination [currentPage]="currentPage8()" [totalPages]="20" [disabled]="true"></ngt-pagination>
+                </div>
+              </div>
+            </section>
+
+            <!-- Few Pages -->
+            <section class="space-y-4">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Few Pages</h2>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                <div class="mb-4">
+                  <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination with only a few pages shows all page numbers.</p>
+                  <ngt-pagination [currentPage]="currentPage1()" [totalPages]="3" (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"></ngt-pagination>
+                </div>
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">currentPage</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">1</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The current active page number.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">totalPages</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The total number of pages. If null, will be calculated from totalItems and pageSize.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">totalItems</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number | null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The total number of items. Used to calculate totalPages when totalPages is not provided.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">pageSize</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">10</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The number of items per page. Used with totalItems to calculate totalPages.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">maxVisiblePages</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">5</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The maximum number of visible page buttons before showing ellipsis.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showFirstLast</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show first and last page buttons.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showPrevNext</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show previous and next page buttons.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the pagination buttons.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the pagination is disabled.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Outputs -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">pageChanged</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;number&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the current page changes. Emits the new page number.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Basic Example -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Example</h2>
-          <button 
-            (click)="toggleDemoView('basic')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('basic')) {
-            <!-- Showcase View -->
-            <div class="mb-4 space-y-4">
-              <p class="text-gray-600 dark:text-gray-400">Simple pagination with 10 pages.</p>
-              <ngt-pagination [currentPage]="currentPage1()" [totalPages]="10" (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"></ngt-pagination>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage1() }}</p>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">
-                  {{ getTabFileName('basic', 'html') }}
-                </button>
-                <button
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">
-                  {{ getTabFileName('basic', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- With Total Items -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With Total Items</h2>
-          <button 
-            (click)="toggleDemoView('withTotalItems')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('withTotalItems')"
-            [class.dark:bg-gray-700]="isShowingCode('withTotalItems')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('withTotalItems')) {
-            <!-- Showcase View -->
-            <div class="mb-4 space-y-4">
-              <p class="text-gray-600 dark:text-gray-400">Pagination calculated from total items and page size.</p>
-              <ngt-pagination [currentPage]="currentPage2()" [totalItems]="100" [pageSize]="10" (pageChanged)="currentPage2.set($event); onPageChange($event, 'currentPage2')"></ngt-pagination>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage2() }} of {{ Math.ceil(100 / 10) }}</p>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  (click)="setActiveCodeTab('withTotalItems', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'html'">
-                  {{ getTabFileName('withTotalItems', 'html') }}
-                </button>
-                <button
-                  (click)="setActiveCodeTab('withTotalItems', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('withTotalItems') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('withTotalItems') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('withTotalItems') !== 'ts'">
-                  {{ getTabFileName('withTotalItems', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(getCodeSnippet('withTotalItems', getActiveCodeTab('withTotalItems')))" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('withTotalItems', getActiveCodeTab('withTotalItems')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Sizes -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
-          <button 
-            (click)="toggleDemoView('sizes')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('sizes')"
-            [class.dark:bg-gray-700]="isShowingCode('sizes')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('sizes')) {
-            <!-- Showcase View -->
-            <div class="mb-4 space-y-4">
-              <div>
-                <p class="text-gray-600 dark:text-gray-400 mb-2">Small:</p>
-                <ngt-pagination [currentPage]="currentPage3()" [totalPages]="20" [size]="'sm'" (pageChanged)="currentPage3.set($event); onPageChange($event, 'currentPage3')"></ngt-pagination>
-              </div>
-              <div>
-                <p class="text-gray-600 dark:text-gray-400 mb-2">Medium (default):</p>
-                <ngt-pagination [currentPage]="currentPage4()" [totalPages]="20" [size]="'md'" (pageChanged)="currentPage4.set($event); onPageChange($event, 'currentPage4')"></ngt-pagination>
-              </div>
-              <div>
-                <p class="text-gray-600 dark:text-gray-400 mb-2">Large:</p>
-                <ngt-pagination [currentPage]="currentPage5()" [totalPages]="20" [size]="'lg'" (pageChanged)="currentPage5.set($event); onPageChange($event, 'currentPage5')"></ngt-pagination>
-              </div>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  (click)="setActiveCodeTab('sizes', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'">
-                  {{ getTabFileName('sizes', 'html') }}
-                </button>
-                <button
-                  (click)="setActiveCodeTab('sizes', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('sizes') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('sizes') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'">
-                  {{ getTabFileName('sizes', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(getCodeSnippet('sizes', getActiveCodeTab('sizes')))" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('sizes', getActiveCodeTab('sizes')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Many Pages with Ellipsis -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Many Pages with Ellipsis</h2>
-          <button 
-            (click)="toggleDemoView('ellipsis')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('ellipsis')"
-            [class.dark:bg-gray-700]="isShowingCode('ellipsis')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('ellipsis')) {
-            <!-- Showcase View -->
-            <div class="mb-4 space-y-4">
-              <p class="text-gray-600 dark:text-gray-400">Pagination with many pages shows ellipsis for better navigation.</p>
-              <ngt-pagination [currentPage]="currentPage6()" [totalPages]="100" [maxVisiblePages]="7" (pageChanged)="currentPage6.set($event); onPageChange($event, 'currentPage6')"></ngt-pagination>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Current page: {{ currentPage6() }}</p>
-            </div>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  (click)="setActiveCodeTab('ellipsis', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'html'">
-                  {{ getTabFileName('ellipsis', 'html') }}
-                </button>
-                <button
-                  (click)="setActiveCodeTab('ellipsis', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('ellipsis') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('ellipsis') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('ellipsis') !== 'ts'">
-                  {{ getTabFileName('ellipsis', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(getCodeSnippet('ellipsis', getActiveCodeTab('ellipsis')))" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('ellipsis', getActiveCodeTab('ellipsis')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Without First/Last Buttons -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Without First/Last Buttons</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination without first and last page buttons.</p>
-            <ngt-pagination [currentPage]="currentPage6()" [totalPages]="20" [showFirstLast]="false" (pageChanged)="currentPage6.set($event); onPageChange($event, 'currentPage6')"></ngt-pagination>
-          </div>
-        </div>
-      </section>
-
-      <!-- Without Previous/Next Buttons -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Without Previous/Next Buttons</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination without previous and next buttons.</p>
-            <ngt-pagination [currentPage]="currentPage7()" [totalPages]="20" [showPrevNext]="false" (pageChanged)="currentPage7.set($event); onPageChange($event, 'currentPage7')"></ngt-pagination>
-          </div>
-        </div>
-      </section>
-
-      <!-- Disabled -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Disabled pagination component.</p>
-            <ngt-pagination [currentPage]="currentPage8()" [totalPages]="20" [disabled]="true"></ngt-pagination>
-          </div>
-        </div>
-      </section>
-
-      <!-- Few Pages -->
-      <section class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Few Pages</h2>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <div class="mb-4">
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Pagination with only a few pages shows all page numbers.</p>
-            <ngt-pagination [currentPage]="currentPage1()" [totalPages]="3" (pageChanged)="currentPage1.set($event); onPageChange($event, 'currentPage1')"></ngt-pagination>
-          </div>
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">currentPage</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">1</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The current active page number.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">totalPages</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number | null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The total number of pages. If null, will be calculated from totalItems and pageSize.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">totalItems</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number | null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">null</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The total number of items. Used to calculate totalPages when totalPages is not provided.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">pageSize</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">10</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The number of items per page. Used with totalItems to calculate totalPages.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">maxVisiblePages</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">5</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The maximum number of visible page buttons before showing ellipsis.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showFirstLast</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show first and last page buttons.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showPrevNext</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether to show previous and next page buttons.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the pagination buttons.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the pagination is disabled.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Outputs -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">pageChanged</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;number&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the current page changes. Emits the new page number.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

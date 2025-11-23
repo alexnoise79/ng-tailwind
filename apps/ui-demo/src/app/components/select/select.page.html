@@ -6,732 +6,993 @@
 
   <!-- Tabs Navigation -->
   <div class="mb-6">
-    <ngt-nav [style]="'tabs'" [activeId]="activeTab()">
-      <ngt-nav-item [itemId]="'showcase'" (activated)="setActiveTab('showcase')" label="Showcase"></ngt-nav-item>
-      <ngt-nav-item [itemId]="'api'" (activated)="setActiveTab('api')" label="API"></ngt-nav-item>
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <!-- Showcase View -->
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+                    <ngt-select [(ngModel)]="selectedCity1" [options]="cities()" placeholder="Select a City" class="w-full md:w-56" />
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity1() || 'None' }}</p>
+                } @else {
+                  <!-- Code View -->
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <!-- Code Tabs -->
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'"
+                        (click)="setActiveCodeTab('basic', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'ts') }}
+                      </button>
+                    </div>
+                    <!-- Code Content -->
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Object Options -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Object Options</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('objectOptions')"
+                  [class.dark:bg-gray-700]="isShowingCode('objectOptions')"
+                  (click)="toggleDemoView('objectOptions')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('objectOptions')) {
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+                    <ngt-select [(ngModel)]="selectedCity2" [options]="cityObjects()" (selectionChange)="onSelectChange($event)" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}</p>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('objectOptions') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('objectOptions') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('objectOptions') !== 'html'"
+                        (click)="setActiveCodeTab('objectOptions', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('objectOptions', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('objectOptions') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('objectOptions') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('objectOptions') !== 'ts'"
+                        (click)="setActiveCodeTab('objectOptions', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('objectOptions', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('objectOptions', getActiveCodeTab('objectOptions')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('objectOptions', getActiveCodeTab('objectOptions')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Key-Value Pairs -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Key-Value Pairs</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('keyValue')"
+                  [class.dark:bg-gray-700]="isShowingCode('keyValue')"
+                  (click)="toggleDemoView('keyValue')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('keyValue')) {
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+                    <ngt-select [(ngModel)]="selectedCity3" [options]="cityKeyValue()" placeholder="Select a City" class="w-full md:w-56" />
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity3() || 'None' }}</p>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('keyValue') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('keyValue') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('keyValue') !== 'html'"
+                        (click)="setActiveCodeTab('keyValue', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('keyValue', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('keyValue') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('keyValue') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('keyValue') !== 'ts'"
+                        (click)="setActiveCodeTab('keyValue', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('keyValue', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('keyValue', getActiveCodeTab('keyValue')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('keyValue', getActiveCodeTab('keyValue')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Sizes -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('sizes')"
+                  [class.dark:bg-gray-700]="isShowingCode('sizes')"
+                  (click)="toggleDemoView('sizes')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('sizes')) {
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
+                      <ngt-select [(ngModel)]="selectedCity4" [options]="cities()" size="sm" placeholder="Select a City" class="w-full md:w-56" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
+                      <ngt-select [(ngModel)]="selectedCity5" [options]="cities()" size="md" placeholder="Select a City" class="w-full md:w-56" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
+                      <ngt-select [(ngModel)]="selectedCity6" [options]="cities()" size="lg" placeholder="Select a City" class="w-full md:w-56" />
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'"
+                        (click)="setActiveCodeTab('sizes', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('sizes') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'"
+                        (click)="setActiveCodeTab('sizes', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('sizes', getActiveCodeTab('sizes')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('sizes', getActiveCodeTab('sizes')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Checkmark -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Checkmark</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('checkmark')"
+                  [class.dark:bg-gray-700]="isShowingCode('checkmark')"
+                  (click)="toggleDemoView('checkmark')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('checkmark')) {
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+                    <ngt-select [(ngModel)]="selectedCity7" [options]="cityObjects()" [checkmark]="true" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('checkmark') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('checkmark') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('checkmark') !== 'html'"
+                        (click)="setActiveCodeTab('checkmark', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('checkmark', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('checkmark') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('checkmark') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('checkmark') !== 'ts'"
+                        (click)="setActiveCodeTab('checkmark', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('checkmark', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('checkmark', getActiveCodeTab('checkmark')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('checkmark', getActiveCodeTab('checkmark')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Clear Icon -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Clear Icon</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('clear')"
+                  [class.dark:bg-gray-700]="isShowingCode('clear')"
+                  (click)="toggleDemoView('clear')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('clear')) {
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
+                      <ngt-select [(ngModel)]="selectedCity8" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
+                      <ngt-select [(ngModel)]="selectedCity9" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('clear') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('clear') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('clear') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('clear') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('clear') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('clear') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('clear') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('clear') !== 'html'"
+                        (click)="setActiveCodeTab('clear', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('clear', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('clear') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('clear') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('clear') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('clear') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('clear') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('clear') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('clear') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('clear') !== 'ts'"
+                        (click)="setActiveCodeTab('clear', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('clear', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('clear', getActiveCodeTab('clear')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('clear', getActiveCodeTab('clear')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Filter -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Filter</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('filter')"
+                  [class.dark:bg-gray-700]="isShowingCode('filter')"
+                  (click)="toggleDemoView('filter')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('filter')) {
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
+                    <ngt-select [(ngModel)]="selectedCountry1" [options]="countries()" [filter]="true" [showClear]="true" filterBy="name" optionLabel="name" optionValue="code" placeholder="Select a Country" class="w-full md:w-56" />
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}</p>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('filter') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('filter') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('filter') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('filter') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('filter') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('filter') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('filter') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('filter') !== 'html'"
+                        (click)="setActiveCodeTab('filter', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('filter', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('filter') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('filter') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('filter') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('filter') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('filter') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('filter') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('filter') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('filter') !== 'ts'"
+                        (click)="setActiveCodeTab('filter', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('filter', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('filter', getActiveCodeTab('filter')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('filter', getActiveCodeTab('filter')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Multiselect -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiselect</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('multiselect')"
+                  [class.dark:bg-gray-700]="isShowingCode('multiselect')"
+                  (click)="toggleDemoView('multiselect')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('multiselect')) {
+                  <div class="space-y-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
+                      <ngt-select [(ngModel)]="selectedCities1" [options]="cities()" [multiselect]="true" placeholder="Select Cities" class="w-full md:w-56" />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
+                      <ngt-select [(ngModel)]="selectedCities2" [options]="cityObjects()" [multiselect]="true" optionLabel="name" optionValue="code" placeholder="Select Cities" class="w-full md:w-56" />
+                    </div>
+                  </div>
+                  <div class="mt-4 space-y-2">
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}</p>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('multiselect') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('multiselect') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('multiselect') !== 'html'"
+                        (click)="setActiveCodeTab('multiselect', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('multiselect', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('multiselect') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('multiselect') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('multiselect') !== 'ts'"
+                        (click)="setActiveCodeTab('multiselect', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('multiselect', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('multiselect', getActiveCodeTab('multiselect')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('multiselect', getActiveCodeTab('multiselect')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Grouped Options -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Grouped Options</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('grouped')"
+                  [class.dark:bg-gray-700]="isShowingCode('grouped')"
+                  (click)="toggleDemoView('grouped')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('grouped')) {
+                  <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
+                    <ngt-select [(ngModel)]="selectedCity10" [options]="groupedCities()" [group]="true" optionLabel="name" optionValue="code" optionGroup="country" placeholder="Select a City" class="w-full md:w-56">
+                      <ng-template #group let-group>
+                        <div class="font-semibold">{{ group.label }}</div>
+                      </ng-template>
+                    </ngt-select>
+                  </div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}</p>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('grouped') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('grouped') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('grouped') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('grouped') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('grouped') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('grouped') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('grouped') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('grouped') !== 'html'"
+                        (click)="setActiveCodeTab('grouped', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('grouped', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('grouped') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('grouped') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('grouped') !== 'ts'"
+                        (click)="setActiveCodeTab('grouped', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('grouped', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('grouped', getActiveCodeTab('grouped')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('grouped', getActiveCodeTab('grouped')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Forms -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('forms')"
+                  [class.dark:bg-gray-700]="isShowingCode('forms')"
+                  (click)="toggleDemoView('forms')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('forms')) {
+                  <div class="space-y-4">
+                    <div>
+                      <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Template Driven Form</h3>
+                      <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
+                        <div class="flex flex-col gap-1">
+                          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
+                          <ngt-select #city="ngModel" [(ngModel)]="selectedCityForm" [options]="cities()" [invalid]="!!(city.invalid && (city.touched || formSubmitted()))" name="city" placeholder="Select a City" class="w-full md:w-56" required />
+                          @if (city.invalid && (city.touched || formSubmitted())) {
+                            <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
+                          }
+                        </div>
+                        <ngt-button type="submit" variant="primary" size="md">Submit</ngt-button>
+                      </form>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('forms') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('forms') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('forms') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('forms') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('forms') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('forms') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'html'"
+                        (click)="setActiveCodeTab('forms', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('forms', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('forms') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('forms') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('forms') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('forms') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('forms') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('forms') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'ts'"
+                        (click)="setActiveCodeTab('forms', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('forms', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('forms', getActiveCodeTab('forms')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('forms', getActiveCodeTab('forms')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">options</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Record&lt;string, unknown&gt;[] | unknown[]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[]</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Array of options to display. Can be primitives, objects, or key-value pairs.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionLabel</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'label'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as label for object options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionValue</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'value'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as value for object options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionDisabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'disabled'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to check for disabled state in object options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionGroup</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'group'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use for grouping options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Disables the select component.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">placeholder</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Placeholder text displayed when no option is selected.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Size of the select component.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">checkmark</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a checkmark next to the selected option in single-select mode.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showClear</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a clear button to reset the selection.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">multiselect</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables multiple selection mode.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">group</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables grouping of options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filter</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables filtering/searching of options.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterBy</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to filter by when using object options. If not specified, filters by the label.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">fluid</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select component take full width of its container.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">invalid</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Marks the select as invalid (useful for form validation).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">editable</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select editable (allows typing to filter).</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Outputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">selectionChange</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;unknown&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the selection changes. Emits the selected value(s).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterChange</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;string&gt;</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the filter text changes (only when filter is enabled).</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Templates -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Context</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#item</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering each option in the dropdown.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#selectedItem</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering the selected item in the trigger.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#group</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">group: SelectGroup</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering group headers (only when group is enabled).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#header</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown header.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#footer</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown footer.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#emptyMessage</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the empty state message when no options are found.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#dropdownicon</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown arrow icon.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- ControlValueAccessor -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">The NgtSelect component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, making it compatible with Angular forms (both template-driven and reactive forms).</p>
+                <p class="text-gray-600 dark:text-gray-400">You can use it with <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ngModel</code>, <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControl</code>, or <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControlName</code>.</p>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
     </ngt-nav>
   </div>
 
-  <!-- Showcase Tab -->
-  @if (activeTab() === 'showcase') {
-    <div class="space-y-8">
-      <!-- Basic -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic</h2>
-          <button 
-            (click)="toggleDemoView('basic')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('basic')"
-            [class.dark:bg-gray-700]="isShowingCode('basic')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('basic')) {
-            <!-- Showcase View -->
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-              <ngt-select [(ngModel)]="selectedCity1" [options]="cities()" placeholder="Select a City" class="w-full md:w-56" />
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity1() || 'None' }}</p>
-          } @else {
-            <!-- Code View -->
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <!-- Code Tabs -->
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button
-                  (click)="setActiveCodeTab('basic', 'html')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'html'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'html'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'html'">
-                  {{ getTabFileName('basic', 'html') }}
-                </button>
-                <button
-                  (click)="setActiveCodeTab('basic', 'ts')"
-                  type="button"
-                  class="px-4 py-2 text-sm font-medium transition-colors"
-                  [class.text-gray-900]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:text-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.bg-white]="getActiveCodeTab('basic') === 'ts'"
-                  [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-b-2]="getActiveCodeTab('basic') === 'ts'"
-                  [class.border-primary-500]="getActiveCodeTab('basic') === 'ts'"
-                  [class.text-gray-500]="getActiveCodeTab('basic') !== 'ts'"
-                  [class.dark:text-gray-400]="getActiveCodeTab('basic') !== 'ts'">
-                  {{ getTabFileName('basic', 'ts') }}
-                </button>
-              </div>
-              <!-- Code Content -->
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button 
-                  (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" 
-                  type="button" 
-                  class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" 
-                  title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Object Options -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Object Options</h2>
-          <button 
-            (click)="toggleDemoView('objectOptions')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('objectOptions')"
-            [class.dark:bg-gray-700]="isShowingCode('objectOptions')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('objectOptions')) {
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-              <ngt-select [(ngModel)]="selectedCity2" [options]="cityObjects()" (selectionChange)="onSelectChange($event)" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity2() ? (selectedCity2() | json) : 'None' }}</p>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('objectOptions', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('objectOptions') === 'html'" [class.dark:text-white]="getActiveCodeTab('objectOptions') === 'html'" [class.bg-white]="getActiveCodeTab('objectOptions') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('objectOptions') === 'html'" [class.border-b-2]="getActiveCodeTab('objectOptions') === 'html'" [class.border-primary-500]="getActiveCodeTab('objectOptions') === 'html'" [class.text-gray-500]="getActiveCodeTab('objectOptions') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('objectOptions') !== 'html'">{{ getTabFileName('objectOptions', 'html') }}</button>
-                <button (click)="setActiveCodeTab('objectOptions', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('objectOptions') === 'ts'" [class.dark:text-white]="getActiveCodeTab('objectOptions') === 'ts'" [class.bg-white]="getActiveCodeTab('objectOptions') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('objectOptions') === 'ts'" [class.border-b-2]="getActiveCodeTab('objectOptions') === 'ts'" [class.border-primary-500]="getActiveCodeTab('objectOptions') === 'ts'" [class.text-gray-500]="getActiveCodeTab('objectOptions') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('objectOptions') !== 'ts'">{{ getTabFileName('objectOptions', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('objectOptions', getActiveCodeTab('objectOptions')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('objectOptions', getActiveCodeTab('objectOptions')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Key-Value Pairs -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Key-Value Pairs</h2>
-          <button 
-            (click)="toggleDemoView('keyValue')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('keyValue')"
-            [class.dark:bg-gray-700]="isShowingCode('keyValue')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('keyValue')) {
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-              <ngt-select [(ngModel)]="selectedCity3" [options]="cityKeyValue()" placeholder="Select a City" class="w-full md:w-56" />
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity3() || 'None' }}</p>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('keyValue', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('keyValue') === 'html'" [class.dark:text-white]="getActiveCodeTab('keyValue') === 'html'" [class.bg-white]="getActiveCodeTab('keyValue') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('keyValue') === 'html'" [class.border-b-2]="getActiveCodeTab('keyValue') === 'html'" [class.border-primary-500]="getActiveCodeTab('keyValue') === 'html'" [class.text-gray-500]="getActiveCodeTab('keyValue') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('keyValue') !== 'html'">{{ getTabFileName('keyValue', 'html') }}</button>
-                <button (click)="setActiveCodeTab('keyValue', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('keyValue') === 'ts'" [class.dark:text-white]="getActiveCodeTab('keyValue') === 'ts'" [class.bg-white]="getActiveCodeTab('keyValue') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('keyValue') === 'ts'" [class.border-b-2]="getActiveCodeTab('keyValue') === 'ts'" [class.border-primary-500]="getActiveCodeTab('keyValue') === 'ts'" [class.text-gray-500]="getActiveCodeTab('keyValue') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('keyValue') !== 'ts'">{{ getTabFileName('keyValue', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('keyValue', getActiveCodeTab('keyValue')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('keyValue', getActiveCodeTab('keyValue')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Sizes -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
-          <button 
-            (click)="toggleDemoView('sizes')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('sizes')"
-            [class.dark:bg-gray-700]="isShowingCode('sizes')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('sizes')) {
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
-                <ngt-select [(ngModel)]="selectedCity4" [options]="cities()" size="sm" placeholder="Select a City" class="w-full md:w-56" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
-                <ngt-select [(ngModel)]="selectedCity5" [options]="cities()" size="md" placeholder="Select a City" class="w-full md:w-56" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
-                <ngt-select [(ngModel)]="selectedCity6" [options]="cities()" size="lg" placeholder="Select a City" class="w-full md:w-56" />
-              </div>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('sizes', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'" [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'" [class.bg-white]="getActiveCodeTab('sizes') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'" [class.border-b-2]="getActiveCodeTab('sizes') === 'html'" [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'" [class.text-gray-500]="getActiveCodeTab('sizes') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'html'">{{ getTabFileName('sizes', 'html') }}</button>
-                <button (click)="setActiveCodeTab('sizes', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('sizes') === 'ts'" [class.dark:text-white]="getActiveCodeTab('sizes') === 'ts'" [class.bg-white]="getActiveCodeTab('sizes') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'ts'" [class.border-b-2]="getActiveCodeTab('sizes') === 'ts'" [class.border-primary-500]="getActiveCodeTab('sizes') === 'ts'" [class.text-gray-500]="getActiveCodeTab('sizes') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('sizes') !== 'ts'">{{ getTabFileName('sizes', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('sizes', getActiveCodeTab('sizes')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('sizes', getActiveCodeTab('sizes')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Checkmark -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Checkmark</h2>
-          <button 
-            (click)="toggleDemoView('checkmark')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('checkmark')"
-            [class.dark:bg-gray-700]="isShowingCode('checkmark')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('checkmark')) {
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-              <ngt-select [(ngModel)]="selectedCity7" [options]="cityObjects()" [checkmark]="true" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('checkmark', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('checkmark') === 'html'" [class.dark:text-white]="getActiveCodeTab('checkmark') === 'html'" [class.bg-white]="getActiveCodeTab('checkmark') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('checkmark') === 'html'" [class.border-b-2]="getActiveCodeTab('checkmark') === 'html'" [class.border-primary-500]="getActiveCodeTab('checkmark') === 'html'" [class.text-gray-500]="getActiveCodeTab('checkmark') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('checkmark') !== 'html'">{{ getTabFileName('checkmark', 'html') }}</button>
-                <button (click)="setActiveCodeTab('checkmark', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('checkmark') === 'ts'" [class.dark:text-white]="getActiveCodeTab('checkmark') === 'ts'" [class.bg-white]="getActiveCodeTab('checkmark') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('checkmark') === 'ts'" [class.border-b-2]="getActiveCodeTab('checkmark') === 'ts'" [class.border-primary-500]="getActiveCodeTab('checkmark') === 'ts'" [class.text-gray-500]="getActiveCodeTab('checkmark') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('checkmark') !== 'ts'">{{ getTabFileName('checkmark', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('checkmark', getActiveCodeTab('checkmark')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('checkmark', getActiveCodeTab('checkmark')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Clear Icon -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Clear Icon</h2>
-          <button 
-            (click)="toggleDemoView('clear')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('clear')"
-            [class.dark:bg-gray-700]="isShowingCode('clear')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('clear')) {
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
-                <ngt-select [(ngModel)]="selectedCity8" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
-                <ngt-select [(ngModel)]="selectedCity9" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
-              </div>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('clear', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('clear') === 'html'" [class.dark:text-white]="getActiveCodeTab('clear') === 'html'" [class.bg-white]="getActiveCodeTab('clear') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('clear') === 'html'" [class.border-b-2]="getActiveCodeTab('clear') === 'html'" [class.border-primary-500]="getActiveCodeTab('clear') === 'html'" [class.text-gray-500]="getActiveCodeTab('clear') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('clear') !== 'html'">{{ getTabFileName('clear', 'html') }}</button>
-                <button (click)="setActiveCodeTab('clear', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('clear') === 'ts'" [class.dark:text-white]="getActiveCodeTab('clear') === 'ts'" [class.bg-white]="getActiveCodeTab('clear') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('clear') === 'ts'" [class.border-b-2]="getActiveCodeTab('clear') === 'ts'" [class.border-primary-500]="getActiveCodeTab('clear') === 'ts'" [class.text-gray-500]="getActiveCodeTab('clear') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('clear') !== 'ts'">{{ getTabFileName('clear', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('clear', getActiveCodeTab('clear')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('clear', getActiveCodeTab('clear')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Filter -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Filter</h2>
-          <button 
-            (click)="toggleDemoView('filter')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('filter')"
-            [class.dark:bg-gray-700]="isShowingCode('filter')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('filter')) {
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a Country</label>
-              <ngt-select [(ngModel)]="selectedCountry1" [options]="countries()" [filter]="true" [showClear]="true" filterBy="name" optionLabel="name" optionValue="code" placeholder="Select a Country" class="w-full md:w-56" />
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCountry1() ? (selectedCountry1() | json) : 'None' }}</p>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('filter', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('filter') === 'html'" [class.dark:text-white]="getActiveCodeTab('filter') === 'html'" [class.bg-white]="getActiveCodeTab('filter') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('filter') === 'html'" [class.border-b-2]="getActiveCodeTab('filter') === 'html'" [class.border-primary-500]="getActiveCodeTab('filter') === 'html'" [class.text-gray-500]="getActiveCodeTab('filter') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('filter') !== 'html'">{{ getTabFileName('filter', 'html') }}</button>
-                <button (click)="setActiveCodeTab('filter', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('filter') === 'ts'" [class.dark:text-white]="getActiveCodeTab('filter') === 'ts'" [class.bg-white]="getActiveCodeTab('filter') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('filter') === 'ts'" [class.border-b-2]="getActiveCodeTab('filter') === 'ts'" [class.border-primary-500]="getActiveCodeTab('filter') === 'ts'" [class.text-gray-500]="getActiveCodeTab('filter') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('filter') !== 'ts'">{{ getTabFileName('filter', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('filter', getActiveCodeTab('filter')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('filter', getActiveCodeTab('filter')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Multiselect -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Multiselect</h2>
-          <button 
-            (click)="toggleDemoView('multiselect')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('multiselect')"
-            [class.dark:bg-gray-700]="isShowingCode('multiselect')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('multiselect')) {
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
-                <ngt-select [(ngModel)]="selectedCities1" [options]="cities()" [multiselect]="true" placeholder="Select Cities" class="w-full md:w-56" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
-                <ngt-select [(ngModel)]="selectedCities2" [options]="cityObjects()" [multiselect]="true" optionLabel="name" optionValue="code" placeholder="Select Cities" class="w-full md:w-56" />
-              </div>
-            </div>
-            <div class="mt-4 space-y-2">
-              <p class="text-sm text-gray-600 dark:text-gray-400">Simple Selected: {{ selectedCities1().length > 0 ? selectedCities1().join(', ') : 'None' }}</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400">Object Selected: {{ selectedCities2().length > 0 ? selectedCities2().join(', ') : 'None' }}</p>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('multiselect', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('multiselect') === 'html'" [class.dark:text-white]="getActiveCodeTab('multiselect') === 'html'" [class.bg-white]="getActiveCodeTab('multiselect') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('multiselect') === 'html'" [class.border-b-2]="getActiveCodeTab('multiselect') === 'html'" [class.border-primary-500]="getActiveCodeTab('multiselect') === 'html'" [class.text-gray-500]="getActiveCodeTab('multiselect') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('multiselect') !== 'html'">{{ getTabFileName('multiselect', 'html') }}</button>
-                <button (click)="setActiveCodeTab('multiselect', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('multiselect') === 'ts'" [class.dark:text-white]="getActiveCodeTab('multiselect') === 'ts'" [class.bg-white]="getActiveCodeTab('multiselect') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('multiselect') === 'ts'" [class.border-b-2]="getActiveCodeTab('multiselect') === 'ts'" [class.border-primary-500]="getActiveCodeTab('multiselect') === 'ts'" [class.text-gray-500]="getActiveCodeTab('multiselect') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('multiselect') !== 'ts'">{{ getTabFileName('multiselect', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('multiselect', getActiveCodeTab('multiselect')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('multiselect', getActiveCodeTab('multiselect')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Grouped Options -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Grouped Options</h2>
-          <button 
-            (click)="toggleDemoView('grouped')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('grouped')"
-            [class.dark:bg-gray-700]="isShowingCode('grouped')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('grouped')) {
-            <div class="mb-4">
-              <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Select a City</label>
-              <ngt-select [(ngModel)]="selectedCity10" [options]="groupedCities()" [group]="true" optionLabel="name" optionValue="code" optionGroup="country" placeholder="Select a City" class="w-full md:w-56">
-                <ng-template #group let-group>
-                  <div class="font-semibold">{{ group.label }}</div>
-                </ng-template>
-              </ngt-select>
-            </div>
-            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Selected: {{ selectedCity10() ? (selectedCity10() | json) : 'None' }}</p>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('grouped', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('grouped') === 'html'" [class.dark:text-white]="getActiveCodeTab('grouped') === 'html'" [class.bg-white]="getActiveCodeTab('grouped') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('grouped') === 'html'" [class.border-b-2]="getActiveCodeTab('grouped') === 'html'" [class.border-primary-500]="getActiveCodeTab('grouped') === 'html'" [class.text-gray-500]="getActiveCodeTab('grouped') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('grouped') !== 'html'">{{ getTabFileName('grouped', 'html') }}</button>
-                <button (click)="setActiveCodeTab('grouped', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('grouped') === 'ts'" [class.dark:text-white]="getActiveCodeTab('grouped') === 'ts'" [class.bg-white]="getActiveCodeTab('grouped') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('grouped') === 'ts'" [class.border-b-2]="getActiveCodeTab('grouped') === 'ts'" [class.border-primary-500]="getActiveCodeTab('grouped') === 'ts'" [class.text-gray-500]="getActiveCodeTab('grouped') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('grouped') !== 'ts'">{{ getTabFileName('grouped', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('grouped', getActiveCodeTab('grouped')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('grouped', getActiveCodeTab('grouped')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-
-      <!-- Forms -->
-      <section class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
-          <button 
-            (click)="toggleDemoView('forms')" 
-            type="button" 
-            class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
-            [class.bg-gray-100]="isShowingCode('forms')"
-            [class.dark:bg-gray-700]="isShowingCode('forms')"
-            title="Toggle code view">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-            </svg>
-            <span>Code</span>
-          </button>
-        </div>
-        <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-          @if (!isShowingCode('forms')) {
-            <div class="space-y-4">
-              <div>
-                <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Template Driven Form</h3>
-                <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-56">
-                  <div class="flex flex-col gap-1">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">City</label>
-                    <ngt-select #city="ngModel" [(ngModel)]="selectedCityForm" [options]="cities()" [invalid]="!!(city.invalid && (city.touched || formSubmitted()))" name="city" placeholder="Select a City" class="w-full md:w-56" required />
-                    @if (city.invalid && (city.touched || formSubmitted())) {
-                      <p class="text-sm text-red-600 dark:text-red-400">City is required.</p>
-                    }
-                  </div>
-                  <ngt-button type="submit" variant="primary" size="md">Submit</ngt-button>
-                </form>
-              </div>
-            </div>
-          } @else {
-            <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
-              <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
-                <button (click)="setActiveCodeTab('forms', 'html')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('forms') === 'html'" [class.dark:text-white]="getActiveCodeTab('forms') === 'html'" [class.bg-white]="getActiveCodeTab('forms') === 'html'" [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'html'" [class.border-b-2]="getActiveCodeTab('forms') === 'html'" [class.border-primary-500]="getActiveCodeTab('forms') === 'html'" [class.text-gray-500]="getActiveCodeTab('forms') !== 'html'" [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'html'">{{ getTabFileName('forms', 'html') }}</button>
-                <button (click)="setActiveCodeTab('forms', 'ts')" type="button" class="px-4 py-2 text-sm font-medium transition-colors" [class.text-gray-900]="getActiveCodeTab('forms') === 'ts'" [class.dark:text-white]="getActiveCodeTab('forms') === 'ts'" [class.bg-white]="getActiveCodeTab('forms') === 'ts'" [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'ts'" [class.border-b-2]="getActiveCodeTab('forms') === 'ts'" [class.border-primary-500]="getActiveCodeTab('forms') === 'ts'" [class.text-gray-500]="getActiveCodeTab('forms') !== 'ts'" [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'ts'">{{ getTabFileName('forms', 'ts') }}</button>
-              </div>
-              <div class="relative bg-gray-100 dark:bg-gray-900">
-                <button (click)="copyToClipboard(getCodeSnippet('forms', getActiveCodeTab('forms')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                  </svg>
-                </button>
-                <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('forms', getActiveCodeTab('forms')) }}</code></pre>
-              </div>
-            </div>
-          }
-        </div>
-      </section>
-    </div>
-  }
-
-  <!-- API Tab -->
-  @if (activeTab() === 'api') {
-    <div class="space-y-6">
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
-
-        <!-- Inputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">options</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Record&lt;string, unknown&gt;[] | unknown[]</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">[]</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Array of options to display. Can be primitives, objects, or key-value pairs.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionLabel</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'label'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as label for object options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionValue</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'value'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use as value for object options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionDisabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'disabled'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to check for disabled state in object options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">optionGroup</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'group'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to use for grouping options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Disables the select component.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">placeholder</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Placeholder text displayed when no option is selected.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Size of the select component.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">checkmark</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a checkmark next to the selected option in single-select mode.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">showClear</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Shows a clear button to reset the selection.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">multiselect</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables multiple selection mode.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">group</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables grouping of options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filter</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Enables filtering/searching of options.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterBy</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">''</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Property name to filter by when using object options. If not specified, filters by the label.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">fluid</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select component take full width of its container.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">invalid</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Marks the select as invalid (useful for form validation).</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">editable</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Makes the select editable (allows typing to filter).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Outputs -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Outputs</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Event</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">selectionChange</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;unknown&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the selection changes. Emits the selected value(s).</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">filterChange</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">EventEmitter&lt;string&gt;</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Emitted when the filter text changes (only when filter is enabled).</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Templates -->
-        <section class="mb-8">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Templates</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-              <thead class="bg-gray-50 dark:bg-gray-900">
-                <tr>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Context</th>
-                  <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
-                </tr>
-              </thead>
-              <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#item</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering each option in the dropdown.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#selectedItem</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">option: SelectOption</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering the selected item in the trigger.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#group</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">group: SelectGroup</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for rendering group headers (only when group is enabled).</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#header</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown header.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#footer</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown footer.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#emptyMessage</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the empty state message when no options are found.</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#dropdownicon</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
-                  <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template for the dropdown arrow icon.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- ControlValueAccessor -->
-        <section>
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-4">The NgtSelect component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, making it compatible with Angular forms (both template-driven and reactive forms).</p>
-          <p class="text-gray-600 dark:text-gray-400">You can use it with <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ngModel</code>, <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControl</code>, or <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">formControlName</code>.</p>
-        </section>
-      </div>
-    </div>
-  }
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
 </div>

@@ -1,4 +1,4 @@
-<div [class]="alertClasses()" role="alert" [attr.aria-live]="variant() === 'danger' || variant() === 'warning' ? 'assertive' : 'polite'">
+<div [class]="alertClasses()" [attr.aria-live]="variant() === 'danger' || variant() === 'warning' ? 'assertive' : 'polite'" role="alert">
   <div [class]="iconClasses()">
     <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path [attr.d]="defaultIcon()" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
@@ -10,16 +10,10 @@
   </div>
 
   @if (dismissible()) {
-    <button
-      type="button"
-      [attr.aria-label]="'Close alert'"
-      (click)="handleClose()"
-      class="shrink-0 text-current opacity-60 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-current rounded p-1 transition-opacity"
-    >
+    <button [attr.aria-label]="'Close alert'" (click)="handleClose()" type="button" class="shrink-0 text-current opacity-60 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-current rounded p-1 transition-opacity">
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   }
 </div>
-

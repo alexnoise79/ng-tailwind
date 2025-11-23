@@ -7,11 +7,6 @@
     "allowJs": true,
     "sourceMap": true
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.cy.ts",
-    "cypress/**/*.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.cy.ts", "cypress/**/*.ts"],
   "exclude": []
 }
-

@@ -1,12 +1,11 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtButton, NgtOffCanvas, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtOffCanvas, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.offcanvas',
-  imports: [NgtButton, NgtOffCanvas, NgtNav, NgtNavItem],
+  imports: [NgtButton, NgtOffCanvas, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './offcanvas.page.html'
 })
 export class OffcanvasPage {
@@ -18,13 +17,6 @@ export class OffcanvasPage {
   showWithBackdrop = signal(false);
   showWithoutBackdrop = signal(false);
   showWithTitle = signal(false);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

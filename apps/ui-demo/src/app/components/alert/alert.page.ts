@@ -1,23 +1,15 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtAlert, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtAlert, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.alert',
-  imports: [NgtAlert, NgtNav, NgtNavItem],
+  imports: [NgtAlert, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './alert.page.html'
 })
 export class AlertPage {
   private toastService = inject(NgtToastService);
-  
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
@@ -74,7 +66,7 @@ export class AlertPage {
 <ngt-alert variant="secondary" [dismissible]="false">Secondary alert</ngt-alert>
 <ngt-alert variant="light" [dismissible]="false">Light alert</ngt-alert>
 <ngt-alert variant="dark" [dismissible]="false">Dark alert</ngt-alert>`,
-    dismissible: `<ngt-alert variant="info" [dismissible]="true" (close)="onClose()">
+    dismissible: `<ngt-alert variant="info" [dismissible]="true" (closed)="onClose()">
   This alert can be dismissed by clicking the close button.
 </ngt-alert>`,
     notDismissible: `<ngt-alert variant="info" [dismissible]="false">
@@ -101,4 +93,3 @@ export class AlertPage {
     return this.codeViewUtil.getTabFileName('alert', demoKey, fileType, fileNames);
   }
 }
-

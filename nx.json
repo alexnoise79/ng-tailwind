@@ -17,8 +17,8 @@
       "cache": true
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
-      "cache": true
+      "inputs": ["default", "^production"],
+      "cache": false
     },
     "e2e": {
       "cache": true,
@@ -42,5 +42,6 @@
         "targetName": "lint"
       }
     }
-  ]
+  ],
+  "nxCloudId": "69224a0316207b568b985738"
 }

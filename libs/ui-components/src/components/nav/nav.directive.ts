@@ -1,18 +1,16 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, AfterViewChecked, signal, computed, input, inject, ElementRef } from '@angular/core';
-import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
-import { NgtNavItem } from './nav-item.component';
+import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostBinding, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext } from '@angular/core';
+import { NgtNavItem } from './nav-item.directive';
 
 export type NavOrientation = 'horizontal' | 'vertical';
 export type NavStyle = 'tabs' | 'pills' | 'underline';
 export type NavAlign = 'start' | 'center' | 'end' | 'justified';
 
-@Component({
-  selector: 'ngt-nav',
-  imports: [RouterLink, RouterLinkActive],
-  templateUrl: './nav.component.html'
+@Directive({
+  selector: 'ngt-nav, [ngtNav]',
+  exportAs: 'ngtNav',
+  standalone: true
 })
-export class NgtNav implements AfterContentInit, AfterViewChecked {
+export class NgtNav implements AfterContentInit, OnInit {
   readonly orientation = input<NavOrientation>('horizontal');
   readonly style = input<NavStyle>('tabs');
   readonly align = input<NavAlign>('start');
@@ -22,47 +20,45 @@ export class NgtNav implements AfterContentInit, AfterViewChecked {
 
   items = signal<NgtNavItem[]>([]);
   selectedId = signal<string | null>(null);
-  private router = inject(Router);
   private elementRef = inject(ElementRef);
+  private renderer = inject(Renderer2);
+  private injector = inject(Injector);
+  private originalClasses = '';
+
+  @HostBinding('attr.role')
+  get role(): string {
+    return 'tablist';
+  }
+
+  @HostListener('keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    this.handleKeyDown(event);
+  }
+
+  ngOnInit(): void {
+    // Store original classes
+    const nativeEl = this.elementRef.nativeElement;
+    this.originalClasses = nativeEl.className || '';
+
+    // Use effect to reactively update classes
+    runInInjectionContext(this.injector, () => {
+      effect(() => {
+        const navClasses = this.navClasses();
+        this.renderer.setAttribute(nativeEl, 'class', `${this.originalClasses} ${navClasses}`.trim());
+      });
+    });
+  }
 
   ngAfterContentInit(): void {
     this.items.set(this.navItems.toArray());
 
-    // Set initial active item only if activeId is provided
-    // If using routerLink, RouterLinkActive will handle the active state
+    // Set initial active item if activeId is provided
     const activeIdValue = this.activeId();
     if (activeIdValue) {
       this.selectItem(activeIdValue);
-    } else {
-      // Sync with router if using routerLink
-      this.syncWithRouter();
-    }
-
-    // Listen to router events to sync active state
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.syncWithRouter();
-    });
-  }
-
-  ngAfterViewChecked(): void {
-    // Sync with router after view check to catch RouterLinkActive changes
-    this.syncWithRouter();
-  }
-
-  private syncWithRouter(): void {
-    // Find the active item by checking for RouterLinkActive class
-    const activeElement = this.elementRef.nativeElement.querySelector('a.active') as HTMLElement;
-    if (activeElement) {
-      const activeButtonId = activeElement.getAttribute('id');
-      if (activeButtonId) {
-        const item = this.items().find(i => i.buttonId() === activeButtonId);
-        if (item && this.selectedId() !== item.id) {
-          this.selectedId.set(item.id);
-          this.items().forEach(navItem => {
-            navItem.isActive.set(navItem.id === item.id);
-          });
-        }
-      }
+    } else if (this.items().length > 0) {
+      // Select first item by default
+      this.selectItem(this.items()[0].id);
     }
   }
 

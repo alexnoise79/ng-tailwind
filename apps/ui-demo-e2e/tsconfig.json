@@ -12,9 +12,14 @@
     "esModuleInterop": true,
     "types": ["cypress", "node"]
   },
+<<<<<<< HEAD
   "include": [
     "cypress/**/*.ts",
     "cypress.config.js"
   ]
 }
 
+=======
+  "include": ["cypress/**/*.ts", "cypress.config.js"]
+}
+>>>>>>> main

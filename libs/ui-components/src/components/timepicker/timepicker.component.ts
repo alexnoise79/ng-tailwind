@@ -19,11 +19,8 @@ export class NgtTimepicker implements OnInit {
     if (parsed) {
       // Only update if the values actually changed to avoid circular updates
       const currentModel = this._model();
-      const hasChanged = !currentModel || 
-          currentModel.hour !== parsed.hour || 
-          currentModel.minute !== parsed.minute || 
-          (currentModel.second ?? undefined) !== (parsed.second ?? undefined);
-      
+      const hasChanged = !currentModel || currentModel.hour !== parsed.hour || currentModel.minute !== parsed.minute || (currentModel.second ?? undefined) !== (parsed.second ?? undefined);
+
       if (hasChanged) {
         this._model.set(parsed);
         this._currentHour.set(parsed.hour);
@@ -193,7 +190,7 @@ export class NgtTimepicker implements OnInit {
     const target = event.target as HTMLInputElement;
     let value = parseInt(target.value, 10);
     if (isNaN(value)) value = 0;
-    
+
     if (this.meridian()) {
       const meridian = this.currentMeridian();
       if (value > 12) value = 12;
@@ -237,7 +234,7 @@ export class NgtTimepicker implements OnInit {
     if (this.disabled()) return;
     const newMeridian = this.currentMeridian() === 'AM' ? 'PM' : 'AM';
     this._meridian.set(newMeridian);
-    
+
     let hour = this.currentHour();
     if (newMeridian === 'PM' && hour < 12) {
       hour = hour + 12;
@@ -259,7 +256,8 @@ export class NgtTimepicker implements OnInit {
       md: 'w-12 px-2 py-1 text-sm',
       lg: 'w-14 px-2.5 py-1.5 text-base'
     };
-    const base = 'text-center font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]';
+    const base =
+      'text-center font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]';
     return `${base} ${sizeClasses[this.size()]}`;
   });
 
@@ -311,4 +309,3 @@ export class NgtTimepicker implements OnInit {
     this.timeSelect.emit(time);
   }
 }
-

@@ -6,30 +6,14 @@ import { Component, signal } from '@angular/core';
   selector: 'alert-story-wrapper',
   template: `
     <div class="p-8 space-y-4">
-      <ngt-alert variant="success" [dismissible]="true" (close)="onClose('success')">
-        <strong>Success!</strong> This is a success alert with dismissible functionality.
-      </ngt-alert>
-      <ngt-alert variant="info" [dismissible]="true" (close)="onClose('info')">
-        <strong>Info:</strong> This is an informational alert.
-      </ngt-alert>
-      <ngt-alert variant="warning" [dismissible]="true" (close)="onClose('warning')">
-        <strong>Warning:</strong> Please review this action carefully.
-      </ngt-alert>
-      <ngt-alert variant="danger" [dismissible]="true" (close)="onClose('danger')">
-        <strong>Error:</strong> An error has occurred.
-      </ngt-alert>
-      <ngt-alert variant="primary" [dismissible]="true" (close)="onClose('primary')">
-        <strong>Primary:</strong> This is a primary alert.
-      </ngt-alert>
-      <ngt-alert variant="secondary" [dismissible]="true" (close)="onClose('secondary')">
-        <strong>Secondary:</strong> This is a secondary alert.
-      </ngt-alert>
-      <ngt-alert variant="light" [dismissible]="true" (close)="onClose('light')">
-        <strong>Light:</strong> This is a light alert.
-      </ngt-alert>
-      <ngt-alert variant="dark" [dismissible]="true" (close)="onClose('dark')">
-        <strong>Dark:</strong> This is a dark alert.
-      </ngt-alert>
+      <ngt-alert variant="success" [dismissible]="true" (close)="onClose('success')"> <strong>Success!</strong> This is a success alert with dismissible functionality. </ngt-alert>
+      <ngt-alert variant="info" [dismissible]="true" (close)="onClose('info')"> <strong>Info:</strong> This is an informational alert. </ngt-alert>
+      <ngt-alert variant="warning" [dismissible]="true" (close)="onClose('warning')"> <strong>Warning:</strong> Please review this action carefully. </ngt-alert>
+      <ngt-alert variant="danger" [dismissible]="true" (close)="onClose('danger')"> <strong>Error:</strong> An error has occurred. </ngt-alert>
+      <ngt-alert variant="primary" [dismissible]="true" (close)="onClose('primary')"> <strong>Primary:</strong> This is a primary alert. </ngt-alert>
+      <ngt-alert variant="secondary" [dismissible]="true" (close)="onClose('secondary')"> <strong>Secondary:</strong> This is a secondary alert. </ngt-alert>
+      <ngt-alert variant="light" [dismissible]="true" (close)="onClose('light')"> <strong>Light:</strong> This is a light alert. </ngt-alert>
+      <ngt-alert variant="dark" [dismissible]="true" (close)="onClose('dark')"> <strong>Dark:</strong> This is a dark alert. </ngt-alert>
     </div>
   `,
   imports: [NgtAlert]
@@ -306,4 +290,3 @@ export const NotDismissible: Story = {
     `
   })
 };
-

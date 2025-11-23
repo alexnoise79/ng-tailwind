@@ -1,25 +1,17 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtButton, NgtCollapse, NgtNav, NgtNavItem, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtCollapse, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
-import { DemoTab } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.collapse-demo',
-  imports: [NgtButton, NgtCollapse, NgtNav, NgtNavItem],
+  imports: [NgtButton, NgtCollapse, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './collapse.page.html'
 })
 export class CollapsePage {
   private toastService = inject(NgtToastService);
   collapseOpen = signal(false);
   horizontalCollapseOpen = signal(false);
-
-  // Tab management
-  activeTab = signal<DemoTab>('showcase');
-
-  setActiveTab(tab: DemoTab): void {
-    this.activeTab.set(tab);
-  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
