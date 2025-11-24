@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.0...ngtailwind-v1.1.1) (2025-11-24)
+
+
+### Bug Fixes
+
+* non ce la posso fare ([778742e](https://github.com/alexnoise79/ng-tailwind/commit/778742e4e27a3ec7ac70f6a61df7f99af08010b3))
+* non ce la posso fare ([778742e](https://github.com/alexnoise79/ng-tailwind/commit/778742e4e27a3ec7ac70f6a61df7f99af08010b3))
+
 ## [1.1.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.0.1...ngtailwind-v1.1.0) (2025-11-24)
 
 
