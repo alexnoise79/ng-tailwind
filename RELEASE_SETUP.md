@@ -9,6 +9,7 @@ The setup includes:
 - **GitHub Actions**: Creates releases and tags when pushing to `main`
 - **NPM Publishing**: Automatically publishes to npmjs when a new tag is created
 
+
 ## Step-by-Step Setup
 
 ### Part 1: GitHub Repository Setup
