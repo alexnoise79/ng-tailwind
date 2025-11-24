@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.6](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.5...ngtailwind-v1.1.6) (2025-11-24)
+
+
+### Bug Fixes
+
+* simplify messy release ([de4de1b](https://github.com/alexnoise79/ng-tailwind/commit/de4de1bb622a43bde1e950d78ca5892be8cc3dab))
+* simplify messy release ([de4de1b](https://github.com/alexnoise79/ng-tailwind/commit/de4de1bb622a43bde1e950d78ca5892be8cc3dab))
+* simplify messy release ([fcbf98c](https://github.com/alexnoise79/ng-tailwind/commit/fcbf98ccc945e2d8e2b433cf515cdeb3fb0961f6))
+
 ## [1.1.5](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.4...ngtailwind-v1.1.5) (2025-11-24)
 
 
