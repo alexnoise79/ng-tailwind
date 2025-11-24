@@ -49,8 +49,8 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check if release already exists
-        id: check-release
+      - name: Check tag and release status
+        id: check-status
         run: |
           # Get version from package.json (updated in the merged PR)
           VERSION=$(node -p "require('./libs/ui-components/package.json').version")
@@ -58,18 +58,72 @@ jobs:
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           
-          # Check if tag already exists
+          # Check if tag exists
+          TAG_EXISTS=false
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
-            echo "⚠️ Tag $TAG_NAME already exists - release may have been created already"
-            echo "exists=true" >> $GITHUB_OUTPUT
+            TAG_EXISTS=true
+            echo "✓ Tag $TAG_NAME exists"
           else
-            echo "Tag $TAG_NAME does not exist - will create release"
-            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Tag $TAG_NAME does not exist"
+          fi
+          
+          # Check if GitHub release exists using API
+          RELEASE_EXISTS=false
+          RELEASE_RESPONSE=$(curl -s -w "\n%{http_code}" -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/tags/$TAG_NAME" 2>/dev/null || echo -e "\n404")
+          HTTP_CODE=$(echo "$RELEASE_RESPONSE" | tail -n1)
+          
+          if [ "$HTTP_CODE" = "200" ]; then
+            RELEASE_EXISTS=true
+            echo "✓ Release for tag $TAG_NAME already exists"
+          else
+            echo "Release for tag $TAG_NAME does not exist (HTTP $HTTP_CODE)"
+          fi
+          
+          echo "tag_exists=$TAG_EXISTS" >> $GITHUB_OUTPUT
+          echo "release_exists=$RELEASE_EXISTS" >> $GITHUB_OUTPUT
+          
+          # Create release if tag exists but release doesn't (manual creation via API)
+          if [ "$TAG_EXISTS" = "true" ] && [ "$RELEASE_EXISTS" != "true" ]; then
+            echo "Will create release manually since tag exists but release doesn't"
+            echo "needs_manual_release=true" >> $GITHUB_OUTPUT
+          else
+            echo "needs_manual_release=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Release Please (create release)
+      - name: Create release manually (if tag exists but release doesn't)
+        if: steps.check-status.outputs.needs_manual_release == 'true'
+        run: |
+          VERSION="${{ steps.check-status.outputs.version }}"
+          TAG_NAME="${{ steps.check-status.outputs.tag_name }}"
+          
+          # Read changelog to get release notes
+          CHANGELOG_FILE="libs/ui-components/CHANGELOG.md"
+          if [ -f "$CHANGELOG_FILE" ]; then
+            # Extract release notes for this version from changelog
+            RELEASE_NOTES=$(awk "/^## \[$VERSION\]/,/^## /" "$CHANGELOG_FILE" | sed '/^## /d' || echo "Release $VERSION")
+          else
+            RELEASE_NOTES="Release $VERSION"
+          fi
+          
+          # Create release via GitHub API
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/releases" \
+            -d "{\"tag_name\":\"$TAG_NAME\",\"name\":\"$TAG_NAME\",\"body\":$(echo "$RELEASE_NOTES" | jq -Rs .),\"draft\":false,\"prerelease\":false}" 2>/dev/null || echo -e "\n400")
+          
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          if [ "$HTTP_CODE" = "201" ]; then
+            echo "✅ Created release $TAG_NAME manually"
+          else
+            echo "⚠️ Failed to create release manually (HTTP $HTTP_CODE)"
+            echo "$RESPONSE" | head -n -1
+          fi
+
+      - name: Release Please (create release if needed)
         id: release
-        if: steps.check-release.outputs.exists != 'true'
+        if: steps.check-status.outputs.tag_exists != 'true'
         continue-on-error: true
         uses: googleapis/release-please-action@v4
         with:
@@ -80,12 +134,13 @@ jobs:
       - name: Release output summary
         if: always()
         run: |
-          if [ "${{ steps.check-release.outputs.exists }}" = "true" ]; then
-            echo "✅ Release ${{ steps.check-release.outputs.tag_name }} already exists - skipping creation"
-            echo "The publish workflow will use the existing tag."
+          if [ "${{ steps.check-status.outputs.release_exists }}" = "true" ]; then
+            echo "✅ Release ${{ steps.check-status.outputs.tag_name }} already exists"
+          elif [ "${{ steps.check-status.outputs.needs_manual_release }}" = "true" ]; then
+            echo "✅ Created release ${{ steps.check-status.outputs.tag_name }} manually (tag existed but release didn't)"
           elif [ "${{ steps.release.outputs.release_created }}" = "true" ]; then
-            echo "🎉 Release ${{ steps.release.outputs.tag_name }} was created!"
+            echo "🎉 Release ${{ steps.release.outputs.tag_name }} was created by release-please!"
           else
-            echo "No new release was created"
+            echo "ℹ️ No release action needed"
           fi
 
