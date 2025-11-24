@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.1.2](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.1...ngtailwind-v1.1.2) (2025-11-24)
+
+
+### Bug Fixes
+
+* add space to trigger release ([fb15c2d](https://github.com/alexnoise79/ng-tailwind/commit/fb15c2d19656901dc8cb62d350249b1615986456))
+* add space to trigger release ([fb15c2d](https://github.com/alexnoise79/ng-tailwind/commit/fb15c2d19656901dc8cb62d350249b1615986456))
+* incompetent ai ([617d928](https://github.com/alexnoise79/ng-tailwind/commit/617d9286f47aaeaff0e2080b8d342629df6166f1))
+* incompetent ai ([617d928](https://github.com/alexnoise79/ng-tailwind/commit/617d9286f47aaeaff0e2080b8d342629df6166f1))
+* incompetent ai ([ea3242e](https://github.com/alexnoise79/ng-tailwind/commit/ea3242e403d9eb3e5ea02f3ed9390f676a8424bb))
+* incompetent AI ([98b7475](https://github.com/alexnoise79/ng-tailwind/commit/98b74751fecc6cad5e82e5de5cb08f6e7edeb8be))
+* incompetent AI ([98b7475](https://github.com/alexnoise79/ng-tailwind/commit/98b74751fecc6cad5e82e5de5cb08f6e7edeb8be))
+* incompetent AI ([b3bc343](https://github.com/alexnoise79/ng-tailwind/commit/b3bc343fada5488c3dcd69fd71fcf71fc40723a7))
+* stupid AI ([147e65d](https://github.com/alexnoise79/ng-tailwind/commit/147e65dcb7873b154cfaca441e7dda2549b5f89b))
+* stupid AI ([246eecc](https://github.com/alexnoise79/ng-tailwind/commit/246eeccf0cfaa903d6a4e29b386b281b613cfbe1))
+* stupid AI ([c3e4c66](https://github.com/alexnoise79/ng-tailwind/commit/c3e4c662ad5d09faeca442ac36a5663354a3ed67))
+* stupid AI ([02f2cc9](https://github.com/alexnoise79/ng-tailwind/commit/02f2cc975e173ca52def7ba90f45e5f496a91a92))
+* trigger ([c3e4c66](https://github.com/alexnoise79/ng-tailwind/commit/c3e4c662ad5d09faeca442ac36a5663354a3ed67))
+* trigger release ([147e65d](https://github.com/alexnoise79/ng-tailwind/commit/147e65dcb7873b154cfaca441e7dda2549b5f89b))
+
 ## [1.1.1](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.0...ngtailwind-v1.1.1) (2025-11-24)
 
 
