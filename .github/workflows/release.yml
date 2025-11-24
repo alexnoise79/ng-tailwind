@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # Create/update release PR
+  release-pr:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release Please
+        id: release-please
+        uses: google-github-actions/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check Release Please output
+        run: |
+          echo "PR created/updated: ${{ steps.release-please.outputs.pr_created || steps.release-please.outputs.pr_updated }}"
+          echo "PR number: ${{ steps.release-please.outputs.pr }}"
+          if [ "${{ steps.release-please.outputs.pr_created }}" == "true" ]; then
+            echo "✅ Created new release PR: #${{ steps.release-please.outputs.pr }}"
+          elif [ "${{ steps.release-please.outputs.pr_updated }}" == "true" ]; then
+            echo "🔄 Updated existing release PR: #${{ steps.release-please.outputs.pr }}"
+          else
+            echo "No PR created/updated (no changes detected or PR already exists)"
+          fi
+
+  # Create release when release PR is merged
+  release-on-pr-merge:
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.merged == true &&
+      (contains(github.event.pull_request.title, 'chore') && contains(github.event.pull_request.title, 'release')) ||
+      contains(github.event.pull_request.head.ref, 'release-please') ||
+      startsWith(github.event.pull_request.head.ref, 'release-please')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release Please (create release)
+        id: release
+        uses: google-github-actions/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync version to root package.json
+        if: steps.release.outputs.release_created == 'true'
+        run: |
+          NEW_VERSION="${{ steps.release.outputs.version }}"
+          if [ -n "$NEW_VERSION" ]; then
+            echo "Syncing version $NEW_VERSION to root package.json"
+            node -e "const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json'));pkg.version='$NEW_VERSION';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');"
+            
+            git config user.name github-actions[bot]
+            git config user.email github-actions[bot]@users.noreply.github.com
+            git checkout main
+            git pull
+            git add package.json
+            git commit -m "chore: sync root package.json version to $NEW_VERSION" || echo "No changes to commit"
+            git push || echo "Nothing to push"
+          fi
+
+      - name: Check Release output
+        run: |
+          if [ "${{ steps.release.outputs.release_created }}" == "true" ]; then
+            echo "🎉 Release ${{ steps.release.outputs.tag_name }} was created!"
+            echo "Tag: ${{ steps.release.outputs.tag_name }}"
+            echo "Version: ${{ steps.release.outputs.version }}"
+          else
+            echo "No release created"
+          fi
+
