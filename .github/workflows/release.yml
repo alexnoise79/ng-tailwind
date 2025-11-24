@@ -36,10 +36,14 @@ jobs:
 
       - name: Check Release Please output
         run: |
-          if [ "${{ steps.release-please.outputs.pr_created }}" = "true" ]; then
-            echo "✅ Created new release PR: #${{ steps.release-please.outputs.pr }}"
-          elif [ "${{ steps.release-please.outputs.pr_updated }}" = "true" ]; then
-            echo "🔄 Updated existing release PR: #${{ steps.release-please.outputs.pr }}"
+          PR_CREATED="${{ steps.release-please.outputs.pr_created }}"
+          PR_UPDATED="${{ steps.release-please.outputs.pr_updated }}"
+          PR_NUMBER="${{ steps.release-please.outputs.pr }}"
+          
+          if [ "x$PR_CREATED" = "xtrue" ]; then
+            echo "✅ Created new release PR: #$PR_NUMBER"
+          elif [ "x$PR_UPDATED" = "xtrue" ]; then
+            echo "🔄 Updated existing release PR: #$PR_NUMBER"
           else
             echo "No PR created/updated (no changes detected or PR already exists)"
           fi
@@ -75,10 +79,14 @@ jobs:
 
       - name: Check Release output
         run: |
-          if [ "${{ steps.release.outputs.release_created }}" == "true" ]; then
-            echo "🎉 Release ${{ steps.release.outputs.tag_name }} was created!"
-            echo "Tag: ${{ steps.release.outputs.tag_name }}"
-            echo "Version: ${{ steps.release.outputs.version }}"
+          RELEASE_CREATED="${{ steps.release.outputs.release_created }}"
+          TAG_NAME="${{ steps.release.outputs.tag_name }}"
+          VERSION="${{ steps.release.outputs.version }}"
+          
+          if [ "x$RELEASE_CREATED" = "xtrue" ]; then
+            echo "🎉 Release $TAG_NAME was created!"
+            echo "Tag: $TAG_NAME"
+            echo "Version: $VERSION"
           else
             echo "No release created"
           fi
