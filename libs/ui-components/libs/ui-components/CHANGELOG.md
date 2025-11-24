@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.5](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.4...ngtailwind-v1.1.5) (2025-11-24)
+
+
+### Bug Fixes
+
+* ai ci ([72bfca6](https://github.com/alexnoise79/ng-tailwind/commit/72bfca6260e32247fb51736ab27377a1172c6c80))
+* ai ci ([72bfca6](https://github.com/alexnoise79/ng-tailwind/commit/72bfca6260e32247fb51736ab27377a1172c6c80))
+* ai ci ([9b4587e](https://github.com/alexnoise79/ng-tailwind/commit/9b4587e1a1f737d1f711b597c329b4cd501ba96a))
+
 ## [1.1.4](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.3...ngtailwind-v1.1.4) (2025-11-24)
 
 
