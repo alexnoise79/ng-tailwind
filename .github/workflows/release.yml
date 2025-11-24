@@ -36,23 +36,10 @@ jobs:
 
       - name: Check Release Please output
         run: |
-          PR_CREATED="${{ steps.release-please.outputs.pr_created }}"
-          PR_UPDATED="${{ steps.release-please.outputs.pr_updated }}"
-          PR_NUMBER="${{ steps.release-please.outputs.pr }}"
-          
-          # Use bash default values if empty
-          PR_CREATED="${PR_CREATED:-false}"
-          PR_UPDATED="${PR_UPDATED:-false}"
-          PR_NUMBER="${PR_NUMBER:-N/A}"
-          
-          echo "PR created: $PR_CREATED"
-          echo "PR updated: $PR_UPDATED"
-          echo "PR number: $PR_NUMBER"
-          
-          if [ "$PR_CREATED" = "true" ]; then
-            echo "✅ Created new release PR: #$PR_NUMBER"
-          elif [ "$PR_UPDATED" = "true" ]; then
-            echo "🔄 Updated existing release PR: #$PR_NUMBER"
+          if [ "${{ steps.release-please.outputs.pr_created }}" = "true" ]; then
+            echo "✅ Created new release PR: #${{ steps.release-please.outputs.pr }}"
+          elif [ "${{ steps.release-please.outputs.pr_updated }}" = "true" ]; then
+            echo "🔄 Updated existing release PR: #${{ steps.release-please.outputs.pr }}"
           else
             echo "No PR created/updated (no changes detected or PR already exists)"
           fi
