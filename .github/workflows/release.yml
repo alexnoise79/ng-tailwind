@@ -28,7 +28,7 @@ jobs:
 
       - name: Release Please
         id: release-please
-        uses: google-github-actions/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
@@ -64,7 +64,8 @@ jobs:
 
       - name: Release Please (create release)
         id: release
-        uses: google-github-actions/release-please-action@v4
+        continue-on-error: true
+        uses: googleapis/release-please-action@v4
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
