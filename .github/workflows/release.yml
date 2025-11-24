@@ -70,23 +70,10 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Sync version to root package.json
-        if: steps.release.outputs.release_created == 'true'
-        run: |
-          NEW_VERSION="${{ steps.release.outputs.version }}"
-          if [ -n "$NEW_VERSION" ]; then
-            echo "Syncing version $NEW_VERSION to root package.json"
-            node -e "const fs=require('fs');const pkg=JSON.parse(fs.readFileSync('package.json'));pkg.version='$NEW_VERSION';fs.writeFileSync('package.json',JSON.stringify(pkg,null,2)+'\n');"
-            
-            git config user.name github-actions[bot]
-            git config user.email github-actions[bot]@users.noreply.github.com
-            git checkout main
-            git pull
-            git add package.json
-            git commit -m "chore: sync root package.json version to $NEW_VERSION" || echo "No changes to commit"
-            git push || echo "Nothing to push"
-          fi
+        
+        # Note: Root package.json version sync is handled automatically via
+        # "extra-files" in release-please-config.json, so it's already included
+        # in the release PR. No need to push separately after release creation.
 
       - name: Check Release output
         run: |
