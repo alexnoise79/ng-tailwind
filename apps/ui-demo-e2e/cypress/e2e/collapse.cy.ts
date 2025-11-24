@@ -46,7 +46,7 @@ describe('Collapse Page E2E', () => {
           cy.contains('Show Content').click();
           cy.wait(300);
           cy.contains('This is collapsible content with smooth animations').should('be.visible');
-          
+
           // Then collapse
           cy.contains('Hide Content').click();
           cy.wait(300);
@@ -90,7 +90,7 @@ describe('Collapse Page E2E', () => {
           cy.contains('Show Horizontal').click();
           cy.wait(300);
           cy.contains('Horizontal collapse content').should('be.visible');
-          
+
           // Then collapse
           cy.contains('Hide Horizontal').click();
           cy.wait(300);
@@ -99,4 +99,3 @@ describe('Collapse Page E2E', () => {
     });
   });
 });
-

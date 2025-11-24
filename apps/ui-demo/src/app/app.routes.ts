@@ -81,5 +81,9 @@ export const appRoutes: Routes = [
   {
     path: 'input',
     loadComponent: () => import('./components/input/input.page').then(m => m.InputPage)
+  },
+  {
+    path: 'password',
+    loadComponent: () => import('./components/password/password.page').then(m => m.PasswordPage)
   }
 ];

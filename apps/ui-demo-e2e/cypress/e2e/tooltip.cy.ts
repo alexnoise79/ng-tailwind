@@ -148,4 +148,3 @@ describe('Tooltip Page E2E', () => {
     });
   });
 });
-

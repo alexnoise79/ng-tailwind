@@ -46,7 +46,7 @@ describe('Dropdown Page E2E', () => {
           cy.contains('Open Dropdown').click();
           cy.wait(300);
           cy.contains('Option 1').should('be.visible');
-          
+
           // Click outside
           cy.get('body').click(0, 0);
           cy.wait(300);
@@ -82,4 +82,3 @@ describe('Dropdown Page E2E', () => {
     });
   });
 });
-

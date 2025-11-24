@@ -77,4 +77,3 @@ describe('Timepicker Page E2E', () => {
     });
   });
 });
-

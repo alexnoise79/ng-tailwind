@@ -62,7 +62,7 @@ describe('Pagination Page E2E', () => {
             cy.get('button').last().click();
           });
           cy.wait(300);
-          
+
           // Then go back
           cy.get('ngt-pagination').within(() => {
             cy.get('button').first().click();
@@ -99,4 +99,3 @@ describe('Pagination Page E2E', () => {
     });
   });
 });
-

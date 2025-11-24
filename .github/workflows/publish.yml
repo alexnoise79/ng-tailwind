@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,24 +29,25 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Extract version from tag or release
+      - name: Extract version from tag
         id: version
         run: |
-          if [ "${{ github.event_name }}" == "release" ]; then
-            VERSION="${{ github.event.release.tag_name }}"
-          else
-            VERSION="${GITHUB_REF#refs/tags/}"
-          fi
+          VERSION="${GITHUB_REF#refs/tags/}"
           # Remove 'v' prefix if present
           VERSION=${VERSION#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Extracted version: $VERSION"
-
-      - name: Update package version in source
+          
+      - name: Verify version matches package.json
         run: |
-          cd libs/ui-components
-          npm version ${{ steps.version.outputs.version }} --no-git-tag-version
-          echo "Updated package.json version to ${{ steps.version.outputs.version }}"
+          TAG_VERSION="${{ steps.version.outputs.version }}"
+          PKG_VERSION=$(node -p "require('./libs/ui-components/package.json').version")
+          echo "Tag version: $TAG_VERSION"
+          echo "Package.json version: $PKG_VERSION"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "⚠️ Warning: Tag version ($TAG_VERSION) doesn't match package.json version ($PKG_VERSION)"
+            echo "This might happen if release-please hasn't updated the version yet."
+          fi
 
       - name: Build library
         run: npm run build:lib
@@ -68,4 +69,3 @@ jobs:
         run: npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-

@@ -18,4 +18,3 @@ export class NgtCard {
     return classMerge(baseClasses, variantClasses[this.variant()]);
   });
 }
-

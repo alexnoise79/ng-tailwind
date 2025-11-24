@@ -11,28 +11,11 @@ import { NgtNav } from './nav.directive';
   imports: [RouterLink],
   template: `
     @if (routerLink(); as link) {
-      <a
-        [routerLink]="link"
-        [id]="buttonId()"
-        [class]="navClasses()"
-        [attr.aria-selected]="isActive() ? 'true' : 'false'"
-        [attr.aria-disabled]="disabled() ? 'true' : 'false'"
-        [attr.tabindex]="isActive() && !disabled() ? '0' : '-1'"
-        role="tab"
-        (click)="handleClick($event)">
+      <a [routerLink]="link" [id]="buttonId()" [class]="navClasses()" [attr.aria-selected]="isActive() ? 'true' : 'false'" [attr.aria-disabled]="disabled() ? 'true' : 'false'" [attr.tabindex]="isActive() && !disabled() ? '0' : '-1'" role="tab" (click)="handleClick($event)">
         {{ label() }}
       </a>
     } @else {
-      <button
-        [id]="buttonId()"
-        [type]="'button'"
-        [class]="navClasses()"
-        [attr.aria-selected]="isActive() ? 'true' : 'false'"
-        [attr.aria-disabled]="disabled() ? 'true' : 'false'"
-        [attr.tabindex]="isActive() && !disabled() ? '0' : '-1'"
-        [disabled]="disabled()"
-        role="tab"
-        (click)="handleClick($event)">
+      <button [id]="buttonId()" [type]="'button'" [class]="navClasses()" [attr.aria-selected]="isActive() ? 'true' : 'false'" [attr.aria-disabled]="disabled() ? 'true' : 'false'" [attr.tabindex]="isActive() && !disabled() ? '0' : '-1'" [disabled]="disabled()" role="tab" (click)="handleClick($event)">
         {{ label() }}
       </button>
     }
@@ -56,7 +39,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     const nav = this.nav;
     const navItem = this.navItem;
     if (!nav || !navItem) return '';
-    
+
     // Access signals that getNavButtonClasses uses to ensure proper tracking
     // This ensures the computed recalculates when these signals change
     // The values are intentionally not used - we're accessing for reactivity tracking
@@ -64,7 +47,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     void nav.style();
     void nav.orientation();
     void navItem.isActive();
-    
+
     // Now call the method - it will use the signals we just accessed
     return nav.getNavButtonClasses(navItem);
   });
@@ -99,22 +82,20 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
           const linkPath = Array.isArray(linkValue) ? linkValue[0] : linkValue;
           const normalizedLink = linkPath.startsWith('/') ? linkPath : `/${linkPath}`;
           const isActive = currentUrl === normalizedLink || currentUrl.startsWith(normalizedLink + '/');
-          
+
           if (isActive && this.nav && this.navItem) {
             this.nav.selectItem(this.navItem.id);
           }
         }
       };
-      
+
       // Check on initial load
       checkActive();
-      
+
       // Subscribe to router events to update on navigation
-      this.routerSubscription = this.router.events
-        .pipe(filter(event => event instanceof NavigationEnd))
-        .subscribe(() => {
-          checkActive();
-        });
+      this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+        checkActive();
+      });
     }
   }
 
@@ -136,4 +117,3 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 }
-

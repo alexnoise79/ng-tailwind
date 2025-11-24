@@ -68,7 +68,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
       // Create the link component dynamically first
       // This will insert it into the directive element
       this.linkComponentRef = this.vcr.createComponent(NgtNavItemLink);
-      
+
       // Set nav and navItem references immediately
       const instance = this.linkComponentRef.instance;
       instance.navItem = this;
@@ -77,7 +77,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
       // Get the component's host element
       const componentHostElement = this.linkComponentRef.location.nativeElement;
       const parent = nativeEl.parentNode;
-      
+
       // Move the component to replace the directive element
       if (parent) {
         // Remove the component from the directive element
@@ -85,15 +85,15 @@ export class NgtNavItem implements AfterContentInit, OnInit {
         if (componentHostElement.parentNode === nativeEl) {
           nativeEl.removeChild(componentHostElement);
         }
-        
+
         // Insert the component where the directive element is (replacing it)
         parent.insertBefore(componentHostElement, nativeEl);
-        
+
         // Remove all remaining children from directive element
         while (nativeEl.firstChild) {
           nativeEl.removeChild(nativeEl.firstChild);
         }
-        
+
         // Now remove the directive element from DOM completely
         parent.removeChild(nativeEl);
       }
@@ -117,7 +117,6 @@ export class NgtNavItem implements AfterContentInit, OnInit {
       });
     }
   }
-
 
   buttonId = computed(() => `${this.id}-button`);
 }

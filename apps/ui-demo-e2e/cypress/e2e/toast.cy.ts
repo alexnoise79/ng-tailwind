@@ -101,4 +101,3 @@ describe('Toast Page E2E', () => {
     });
   });
 });
-

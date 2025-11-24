@@ -30,12 +30,14 @@ describe('Toggle Switch Page E2E', () => {
         .parent()
         .parent()
         .within(() => {
-          cy.get('ngt-toggle-switch').first().within(() => {
-            cy.get('input[type="checkbox"]').should('exist');
-            cy.get('input[type="checkbox"]').check();
-            cy.wait(200);
-            cy.get('input[type="checkbox"]').should('be.checked');
-          });
+          cy.get('ngt-toggle-switch')
+            .first()
+            .within(() => {
+              cy.get('input[type="checkbox"]').should('exist');
+              cy.get('input[type="checkbox"]').check();
+              cy.wait(200);
+              cy.get('input[type="checkbox"]').should('be.checked');
+            });
         });
     });
 
@@ -107,4 +109,3 @@ describe('Toggle Switch Page E2E', () => {
     });
   });
 });
-

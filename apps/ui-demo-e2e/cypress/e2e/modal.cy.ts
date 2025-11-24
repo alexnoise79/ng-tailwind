@@ -122,4 +122,3 @@ describe('Modal Page E2E', () => {
     });
   });
 });
-

@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/nx/schemas/project-schema.json",
+  "name": "ng-tailwind",
+  "targets": {
+    "delete-local-branches": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git branch --merged | grep -E -v '(^\\*|main)' | xargs git branch -d"
+      }
+    }
+  }
+}

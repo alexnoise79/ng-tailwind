@@ -1,69 +1,115 @@
-<div class="relative flex rounded-md shadow-sm" [class.border]="hasChips() && chip() !== null" [class.border-gray-300]="hasChips() && chip() !== null" [class.dark:border-gray-600]="hasChips() && chip() !== null" [class.focus-within:ring-2]="hasChips() && chip() !== null" [class.focus-within:ring-primary-500]="hasChips() && chip() !== null" [class.focus-within:border-transparent]="hasChips() && chip() !== null">
-  <div class="relative flex-1 flex items-center gap-1 min-h-0">
-    <!-- Chips display -->
-    @if (hasChips() && chip() !== null) {
-      <div class="flex items-center gap-1 flex-wrap px-3 py-2 shrink-0">
-        @for (chipValue of chips(); track chipValue) {
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs whitespace-nowrap">
-            <span>{{ chipValue }}</span>
-            <button
-              [attr.aria-label]="'Remove ' + chipValue"
-              (click)="removeChip(chipValue, $event)"
-              type="button"
-              class="hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none"
-              [disabled]="isDisabled()"
-            >
-              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+<div (uiOutsideClick)="onOutsideClick()" uiOutsideClick class="relative w-full">
+  <div
+    [class.border]="hasChips() && chip() !== null"
+    [class.border-gray-300]="hasChips() && chip() !== null"
+    [class.dark:border-gray-600]="hasChips() && chip() !== null"
+    [class.focus-within:ring-2]="hasChips() && chip() !== null"
+    [class.focus-within:ring-primary-500]="hasChips() && chip() !== null"
+    [class.focus-within:border-transparent]="hasChips() && chip() !== null"
+    class="relative flex rounded-md shadow-sm"
+  >
+    <div class="relative flex-1 flex items-center gap-1 min-h-0">
+      <!-- Chips display -->
+      @if (hasChips() && chip() !== null) {
+        <div class="flex items-center gap-1 flex-wrap px-3 py-2 shrink-0">
+          @for (chipValue of chips(); track chipValue) {
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs whitespace-nowrap">
+              <span>{{ chipValue }}</span>
+              <button [attr.aria-label]="'Remove ' + chipValue" [disabled]="isDisabled()" (click)="removeChip(chipValue, $event)" type="button" class="hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </span>
+          }
+        </div>
+      }
+
+      <div [class.focus-within:ring-2]="isCurrencyMode()" [class.focus-within:ring-primary-500]="isCurrencyMode()" class="relative flex-1 min-w-0 flex rounded-md">
+        <input
+          #inputElement
+          [type]="type()"
+          [value]="chip() !== null ? currentChipValue() : displayValue()"
+          [placeholder]="hasChips() && chip() !== null ? '' : placeholder()"
+          [disabled]="isDisabled()"
+          [class]="inputClasses()"
+          [class.pr-20]="showClear() && hasValue() && !isCurrencyMode()"
+          [class.pr-0]="isCurrencyMode()"
+          [class.pl-0]="hasChips() && chip() !== null"
+          [class.rounded-r-none]="isCurrencyMode()"
+          [class.border-r-0]="isCurrencyMode()"
+          [class.focus:ring-0]="isCurrencyMode()"
+          [class.focus:border-transparent]="isCurrencyMode()"
+          [attr.aria-label]="placeholder() || 'Input field'"
+          [attr.aria-autocomplete]="hasAutocomplete() ? 'list' : null"
+          [attr.aria-expanded]="hasAutocomplete() ? showPanel() : null"
+          (input)="onInput($event)"
+          (keydown)="onKeyDown($event)"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+        />
+
+        <!-- Currency display (input group on the right) -->
+        @if (isCurrencyMode()) {
+          <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-sm whitespace-nowrap focus-within:border-transparent">
+            {{ currency() }}
           </span>
         }
+
+        <!-- Clear button -->
+        @if (showClear() && hasValue() && !isDisabled() && !isCurrencyMode()) {
+          <button [attr.aria-label]="'Clear input'" (click)="onClear($event)" type="button" class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none transition-colors">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        }
       </div>
-    }
-
-    <div class="relative flex-1 min-w-0 flex rounded-md" [class.focus-within:ring-2]="isCurrencyMode()" [class.focus-within:ring-primary-500]="isCurrencyMode()">
-      <input
-        #inputElement
-        [type]="type()"
-        [value]="chip() !== null ? currentChipValue() : displayValue()"
-        [placeholder]="hasChips() && chip() !== null ? '' : placeholder()"
-        [disabled]="isDisabled()"
-        [class]="inputClasses()"
-        [class.pr-20]="showClear() && hasValue() && !isCurrencyMode()"
-        [class.pr-0]="isCurrencyMode()"
-        [class.pl-0]="hasChips() && chip() !== null"
-        [class.rounded-r-none]="isCurrencyMode()"
-        [class.border-r-0]="isCurrencyMode()"
-        [class.focus:ring-0]="isCurrencyMode()"
-        [class.focus:border-transparent]="isCurrencyMode()"
-        (input)="onInput($event)"
-        (keydown)="onKeyDown($event)"
-        (focus)="onFocus()"
-        (blur)="onBlur()"
-        [attr.aria-label]="placeholder() || 'Input field'"
-      />
-
-      <!-- Currency display (input group on the right) -->
-      @if (isCurrencyMode()) {
-        <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-sm whitespace-nowrap focus-within:border-transparent">
-          {{ currency() }}
-        </span>
-      }
-
-      <!-- Clear button -->
-      @if (showClear() && hasValue() && !isDisabled() && !isCurrencyMode()) {
-        <button
-          type="button"
-          [attr.aria-label]="'Clear input'"
-          (click)="onClear($event)"
-          class="absolute right-2 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded focus:outline-none transition-colors"
-        >
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      }
     </div>
   </div>
+
+  <!-- Autocomplete Panel -->
+  @if (showPanel()) {
+    <div #autocompletePanel [style.max-height]="scrollHeight()" class="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg overflow-auto" role="listbox">
+      <!-- Loading State -->
+      @if (isLoading()) {
+        <div class="p-4 text-center">
+          @if (loaderTemplate) {
+            <ng-container *ngTemplateOutlet="loaderTemplate" />
+          } @else {
+            <div class="flex items-center justify-center">
+              <svg class="animate-spin h-5 w-5 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Loading...</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <!-- Suggestions List -->
+        <div class="py-1">
+          @for (item of suggestions(); track $index; let idx = $index) {
+            <div
+              [attr.data-suggestion-index]="idx"
+              [class.bg-primary-50]="focusedIndex() === idx"
+              [class.bg-primary-100]="focusedIndex() === idx"
+              [class.text-primary-900]="focusedIndex() === idx"
+              [attr.aria-selected]="focusedIndex() === idx"
+              (click)="selectSuggestion(item, $event)"
+              (mouseenter)="setFocusedIndex(idx)"
+              class="px-3 py-2 text-sm text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+              role="option"
+            >
+              @if (itemTemplate) {
+                <ng-container *ngTemplateOutlet="itemTemplate; context: { $implicit: item }" />
+              } @else {
+                <span>{{ getOptionLabel(item) }}</span>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
 </div>
