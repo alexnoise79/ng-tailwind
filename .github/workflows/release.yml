@@ -27,26 +27,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release Please
-        id: release-please
         uses: googleapis/release-please-action@v4
         with:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check Release Please output
-        run: |
-          PR_CREATED="${{ steps.release-please.outputs.pr_created }}"
-          PR_UPDATED="${{ steps.release-please.outputs.pr_updated }}"
-          PR_NUMBER="${{ steps.release-please.outputs.pr }}"
-          
-          if [ "x$PR_CREATED" = "xtrue" ]; then
-            echo "✅ Created new release PR: #$PR_NUMBER"
-          elif [ "x$PR_UPDATED" = "xtrue" ]; then
-            echo "🔄 Updated existing release PR: #$PR_NUMBER"
-          else
-            echo "No PR created/updated (no changes detected or PR already exists)"
-          fi
 
   # Create release when release PR is merged
   release-on-pr-merge:
