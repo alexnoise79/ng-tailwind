@@ -1,5 +1,5 @@
 /// <reference types="vitest/globals" />
-import { NgtDropdown, DropdownAlign } from './dropdown.component';
+import { NgtDropdown } from './dropdown.component';
 import { runInInjectionContext, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { signal } from '@angular/core';
@@ -23,19 +23,24 @@ describe('NgtDropdown', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Align', () => {
-    it('should default to left', () => {
-      expect(component.alignValue()).toBe('left');
+  describe('Placement', () => {
+    it('should default to bottom-start', () => {
+      expect(component.placementValue()).toBe('bottom-start');
     });
 
-    it('should set align to right', () => {
-      component.align = 'right';
-      expect(component.alignValue()).toBe('right');
+    it('should set placement to bottom-end', () => {
+      component.placement = 'bottom-end';
+      expect(component.placementValue()).toBe('bottom-end');
     });
 
-    it('should set align to left', () => {
-      component.align = 'left';
-      expect(component.alignValue()).toBe('left');
+    it('should set placement to top-start', () => {
+      component.placement = 'top-start';
+      expect(component.placementValue()).toBe('top-start');
+    });
+
+    it('should set placement to top-end', () => {
+      component.placement = 'top-end';
+      expect(component.placementValue()).toBe('top-end');
     });
   });
 

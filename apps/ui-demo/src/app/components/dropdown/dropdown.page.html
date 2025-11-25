@@ -32,9 +32,9 @@
                 @if (!isShowingCode('basic')) {
                   <!-- Showcase View -->
                   <div class="mb-4">
-                    <ngt-dropdown [align]="'left'" [isOpen]="basicDropdownOpen">
+                    <ngt-dropdown [placement]="'bottom-start'" [isOpen]="basicDropdownOpen">
                       <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Open Dropdown</button>
-                      <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                      <div ngt-dropdown-content class="w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
@@ -91,14 +91,14 @@
               </div>
             </section>
 
-            <!-- Right Aligned -->
+            <!-- Placement -->
             <section class="space-y-4">
               <div class="flex items-center justify-between">
-                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Right Aligned</h2>
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Placement</h2>
                 <button
-                  [class.bg-gray-100]="isShowingCode('rightAligned')"
-                  [class.dark:bg-gray-700]="isShowingCode('rightAligned')"
-                  (click)="toggleDemoView('rightAligned')"
+                  [class.bg-gray-100]="isShowingCode('placement')"
+                  [class.dark:bg-gray-700]="isShowingCode('placement')"
+                  (click)="toggleDemoView('placement')"
                   type="button"
                   class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
                   title="Toggle code view"
@@ -110,12 +110,39 @@
                 </button>
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
-                @if (!isShowingCode('rightAligned')) {
+                @if (!isShowingCode('placement')) {
                   <!-- Showcase View -->
-                  <div class="mb-4 flex justify-end">
-                    <ngt-dropdown [align]="'right'" [isOpen]="rightAlignedDropdownOpen">
-                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Right Aligned Dropdown</button>
-                      <div ngt-dropdown-content class="mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                  <div class="mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <ngt-dropdown [placement]="'bottom-start'" [isOpen]="placementBottomStartOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Bottom Start</button>
+                      <div ngt-dropdown-content class="w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
+                      </div>
+                    </ngt-dropdown>
+
+                    <ngt-dropdown [placement]="'bottom-end'" [isOpen]="placementBottomEndOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Bottom End</button>
+                      <div ngt-dropdown-content class="w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
+                      </div>
+                    </ngt-dropdown>
+
+                    <ngt-dropdown [placement]="'top-start'" [isOpen]="placementTopStartOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Top Start</button>
+                      <div ngt-dropdown-content class="w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
+                      </div>
+                    </ngt-dropdown>
+
+                    <ngt-dropdown [placement]="'top-end'" [isOpen]="placementTopEndOpen">
+                      <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 dark:bg-primary-600 dark:hover:bg-primary-700">Top End</button>
+                      <div ngt-dropdown-content class="w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 1</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 2</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Option 3</a>
@@ -128,44 +155,44 @@
                     <!-- Code Tabs -->
                     <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                       <button
-                        [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.bg-white]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.border-b-2]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'html'"
-                        [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'html'"
-                        [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'html'"
-                        (click)="setActiveCodeTab('rightAligned', 'html')"
+                        [class.text-gray-900]="getActiveCodeTab('placement') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('placement') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('placement') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('placement') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('placement') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('placement') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('placement') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('placement') !== 'html'"
+                        (click)="setActiveCodeTab('placement', 'html')"
                         type="button"
                         class="px-4 py-2 text-sm font-medium transition-colors"
                       >
-                        {{ getTabFileName('rightAligned', 'html') }}
+                        {{ getTabFileName('placement', 'html') }}
                       </button>
                       <button
-                        [class.text-gray-900]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.dark:text-white]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.bg-white]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.dark:bg-gray-800]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.border-b-2]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.border-primary-500]="getActiveCodeTab('rightAligned') === 'ts'"
-                        [class.text-gray-500]="getActiveCodeTab('rightAligned') !== 'ts'"
-                        [class.dark:text-gray-400]="getActiveCodeTab('rightAligned') !== 'ts'"
-                        (click)="setActiveCodeTab('rightAligned', 'ts')"
+                        [class.text-gray-900]="getActiveCodeTab('placement') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('placement') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('placement') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('placement') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('placement') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('placement') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('placement') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('placement') !== 'ts'"
+                        (click)="setActiveCodeTab('placement', 'ts')"
                         type="button"
                         class="px-4 py-2 text-sm font-medium transition-colors"
                       >
-                        {{ getTabFileName('rightAligned', 'ts') }}
+                        {{ getTabFileName('placement', 'ts') }}
                       </button>
                     </div>
                     <!-- Code Content -->
                     <div class="relative bg-gray-100 dark:bg-gray-900">
-                      <button (click)="copyToClipboard(getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                      <button (click)="copyToClipboard(getCodeSnippet('placement', getActiveCodeTab('placement')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                       </button>
-                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('rightAligned', getActiveCodeTab('rightAligned')) }}</code></pre>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('placement', getActiveCodeTab('placement')) }}</code></pre>
                     </div>
                   </div>
                 }
@@ -195,10 +222,10 @@
                     </thead>
                     <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                       <tr>
-                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">align</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left' | 'right'</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'left'</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The alignment of the dropdown content relative to the trigger.</td>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">placement</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'bottom-start' | 'bottom-end' | 'top-start' | 'top-end'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'bottom-start'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The placement of the dropdown content relative to the trigger. Controls both vertical (top/bottom) and horizontal (start/end) positioning.</td>
                       </tr>
                       <tr>
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">isOpen</td>

@@ -9,10 +9,10 @@ const meta: Meta<NgtDropdown> = {
   component: NgtDropdown,
   tags: ['autodocs'],
   argTypes: {
-    align: {
+    placement: {
       control: 'select',
-      options: ['left', 'right'],
-      description: 'Alignment of dropdown content'
+      options: ['bottom-start', 'bottom-end', 'top-start', 'top-end'],
+      description: 'Placement of dropdown content relative to trigger'
     }
   }
 };
@@ -22,7 +22,7 @@ type Story = StoryObj<NgtDropdown>;
 
 export const Default: Story = {
   args: {
-    align: 'left'
+    placement: 'bottom-start'
   },
   render: args => {
     const isOpen = signal(false);
@@ -32,14 +32,14 @@ export const Default: Story = {
         imports: [NgtDropdown, NgtDropdownTrigger, NgtDropdownContent]
       },
       template: `
-        <ngt-dropdown [align]="align" [isOpen]="isOpen">
+        <ngt-dropdown [placement]="placement" [isOpen]="isOpen">
           <button
             ngt-dropdown-trigger
             class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
           >
             Open Dropdown
           </button>
-          <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+          <div ngt-dropdown-content class="w-48 bg-white rounded-md shadow-lg border border-gray-200">
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>
@@ -50,9 +50,9 @@ export const Default: Story = {
   }
 };
 
-export const RightAligned: Story = {
+export const BottomEnd: Story = {
   args: {
-    align: 'right'
+    placement: 'bottom-end'
   },
   render: args => {
     const isOpen = signal(false);
@@ -63,14 +63,14 @@ export const RightAligned: Story = {
       },
       template: `
         <div class="flex justify-end">
-          <ngt-dropdown [align]="align" [isOpen]="isOpen">
+          <ngt-dropdown [placement]="placement" [isOpen]="isOpen">
             <button
               ngt-dropdown-trigger
               class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
             >
-              Right Aligned
+              Bottom End
             </button>
-            <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg border border-gray-200">
+            <div ngt-dropdown-content class="w-48 bg-white rounded-md shadow-lg border border-gray-200">
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 1</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 2</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Option 3</a>

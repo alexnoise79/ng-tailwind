@@ -1,7 +1,18 @@
 <div class="relative inline-block">
   <ng-content select="[ngt-dropdown-trigger]" />
   @if (isOpen()()) {
-    <div #dropdownContent [class.left-0]="alignValue() === 'left'" [class.right-0]="alignValue() === 'right'" (uiOutsideClick)="close()" uiOutsideClick class="absolute z-50 mt-1">
+    <div 
+      #dropdownContent 
+      [class.left-0]="placementValue().endsWith('start')" 
+      [class.right-0]="placementValue().endsWith('end')"
+      [class.top-full]="placementValue().startsWith('bottom')"
+      [class.bottom-full]="placementValue().startsWith('top')"
+      [class.mt-1]="placementValue().startsWith('bottom')"
+      [class.mb-1]="placementValue().startsWith('top')"
+      (uiOutsideClick)="close()" 
+      uiOutsideClick 
+      class="absolute z-50"
+    >
       <ng-content select="[ngt-dropdown-content]" />
     </div>
   }
