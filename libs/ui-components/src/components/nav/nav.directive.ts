@@ -1,4 +1,7 @@
-import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostBinding, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext } from '@angular/core';
+import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostBinding, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { NgtNavItem } from './nav-item.directive';
 
 export type NavOrientation = 'horizontal' | 'vertical';
@@ -10,7 +13,7 @@ export type NavAlign = 'start' | 'center' | 'end' | 'justified';
   exportAs: 'ngtNav',
   standalone: true
 })
-export class NgtNav implements AfterContentInit, OnInit {
+export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   readonly orientation = input<NavOrientation>('horizontal');
   readonly style = input<NavStyle>('tabs');
   readonly align = input<NavAlign>('start');
@@ -20,9 +23,12 @@ export class NgtNav implements AfterContentInit, OnInit {
 
   items = signal<NgtNavItem[]>([]);
   selectedId = signal<string | null>(null);
+  private routerLinkItems = new Map<string, string | string[]>();
   private elementRef = inject(ElementRef);
   private renderer = inject(Renderer2);
   private injector = inject(Injector);
+  private router = inject(Router, { optional: true });
+  private routerSubscription?: Subscription;
   private originalClasses = '';
 
   @HostBinding('attr.role')
@@ -56,15 +62,70 @@ export class NgtNav implements AfterContentInit, OnInit {
     const activeIdValue = this.activeId();
     if (activeIdValue) {
       this.selectItem(activeIdValue);
-    } else if (this.items().length > 0) {
-      // Check if any nav item has routerLink - if so, don't auto-select
-      // The router will handle active state via RouterLinkActive
+    } else {
+      // Check if any nav item has routerLink - if so, sync with router
       const hasRouterLink = this.items().some(item => item.routerLink() !== null);
-      if (!hasRouterLink) {
+      if (hasRouterLink && this.router) {
+        // Wait a bit for routerLink items to register, then check active state
+        setTimeout(() => {
+          this.checkRouterActiveState();
+        }, 0);
+        
+        // Subscribe to router events to update on navigation
+        this.routerSubscription = this.router.events
+          .pipe(filter(event => event instanceof NavigationEnd))
+          .subscribe(() => {
+            this.checkRouterActiveState();
+          });
+      } else if (this.items().length > 0) {
         // Only auto-select first item if not using routerLink
         this.selectItem(this.items()[0].id);
       }
     }
+  }
+
+  registerRouterLinkItem(itemId: string, routerLink: string | string[]): void {
+    this.routerLinkItems.set(itemId, routerLink);
+    // Check active state after registration
+    if (this.router) {
+      setTimeout(() => {
+        this.checkRouterActiveState();
+      }, 0);
+    }
+  }
+
+  private checkRouterActiveState(): void {
+    if (!this.router) return;
+    
+    const currentUrl = this.router.url;
+    let activeItemId: string | null = null;
+
+    // Check each routerLink item to see if it matches current URL
+    for (const [itemId, routerLink] of this.routerLinkItems.entries()) {
+      const linkPath = Array.isArray(routerLink) ? routerLink[0] : routerLink;
+      const normalizedLink = linkPath.startsWith('/') ? linkPath : `/${linkPath}`;
+      
+      // Exact match or starts with the link path followed by /
+      if (currentUrl === normalizedLink || currentUrl.startsWith(normalizedLink + '/')) {
+        activeItemId = itemId;
+        break; // Use first match
+      }
+    }
+
+    // Only select if we found a matching item
+    if (activeItemId) {
+      this.selectItem(activeItemId);
+    } else {
+      // Deselect all items if no match
+      this.selectedId.set(null);
+      this.items().forEach(item => {
+        item.isActive.set(false);
+      });
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
   }
 
   selectItem(id: string): void {
