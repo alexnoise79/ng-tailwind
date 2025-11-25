@@ -12,4 +12,4 @@ alwaysApply: true
 
 - Always use host and not @HostBinding
 
-- Commit message max length 100 chars
+- Commit message max length 100 chars (total for all lines)

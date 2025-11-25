@@ -1,4 +1,4 @@
-import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostBinding, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext, OnDestroy } from '@angular/core';
+import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,10 @@ export type NavAlign = 'start' | 'center' | 'end' | 'justified';
 
 @Directive({
   selector: 'ngt-nav, [ngtNav]',
-  exportAs: 'ngtNav'
+  exportAs: 'ngtNav',
+  host: {
+    '[attr.role]': '"tablist"'
+  }
 })
 export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   readonly orientation = input<NavOrientation>('horizontal');
@@ -29,11 +32,6 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   private router = inject(Router, { optional: true });
   private routerSubscription?: Subscription;
   private originalClasses = '';
-
-  @HostBinding('attr.role')
-  get role(): string {
-    return 'tablist';
-  }
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
