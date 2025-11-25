@@ -2,8 +2,7 @@ import { Directive, ElementRef, Renderer2, OnDestroy, input, signal, computed, i
 import { Position } from '../../models';
 
 @Directive({
-  selector: '[ngtTooltip]',
-  standalone: true
+  selector: '[ngtTooltip]'
 })
 export class NgtTooltip implements OnDestroy {
   private elementRef = inject(ElementRef<HTMLElement>);

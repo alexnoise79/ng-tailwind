@@ -2,8 +2,7 @@ import { Directive, Input, ViewContainerRef, inject, effect, OnInit, Injector, r
 import { NgtNav } from './nav.directive';
 
 @Directive({
-  selector: '[ngtNavOutlet]',
-  standalone: true
+  selector: '[ngtNavOutlet]'
 })
 export class NgtNavOutlet implements OnInit {
   private viewContainer = inject(ViewContainerRef);

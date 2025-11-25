@@ -5,7 +5,6 @@ import { NgtNav } from './nav.directive';
 
 @Component({
   selector: 'ngt-nav-item-link',
-  standalone: true,
   imports: [RouterLink],
   template: `
     @if (routerLink(); as link) {

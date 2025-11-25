@@ -4,8 +4,7 @@ import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
 
 @Directive({
-  selector: '[ngtNavLink]',
-  standalone: true
+  selector: '[ngtNavLink]'
 })
 export class NgtNavLink implements OnInit, OnDestroy {
   private navItem = inject(NgtNavItem, { optional: true });

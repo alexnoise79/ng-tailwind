@@ -8,8 +8,7 @@ import { NgtNavItemLink } from './nav-item-link.component';
 let navItemIdCounter = 0;
 
 @Directive({
-  selector: 'ngt-nav-item, [ngtNavItem]',
-  standalone: true
+  selector: 'ngt-nav-item, [ngtNavItem]'
 })
 export class NgtNavItem implements AfterContentInit, OnInit {
   readonly disabled = input<boolean>(false);

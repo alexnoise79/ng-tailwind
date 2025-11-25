@@ -10,8 +10,7 @@ export type NavAlign = 'start' | 'center' | 'end' | 'justified';
 
 @Directive({
   selector: 'ngt-nav, [ngtNav]',
-  exportAs: 'ngtNav',
-  standalone: true
+  exportAs: 'ngtNav'
 })
 export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   readonly orientation = input<NavOrientation>('horizontal');

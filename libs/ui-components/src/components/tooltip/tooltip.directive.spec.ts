@@ -7,7 +7,6 @@ import { Position } from '../../models';
 
 @Component({
   template: ` <button [ngtTooltip]="tooltipText" [tooltipPosition]="position" [delay]="delay" [hideDelay]="hideDelay">Hover me</button> `,
-  standalone: true,
   imports: [NgtTooltip]
 })
 class TestHostComponent {

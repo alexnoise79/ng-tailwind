@@ -3,7 +3,6 @@ import { NgtAccordionItem } from './accordion-item.directive';
 
 @Directive({
   selector: '[ngtAccordionButton]',
-  standalone: true,
   host: {
     '[class.w-full]': 'true',
     '[class.flex]': 'true',
