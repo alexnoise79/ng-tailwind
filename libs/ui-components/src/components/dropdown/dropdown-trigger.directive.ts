@@ -7,10 +7,9 @@ import { NgtDropdown } from './dropdown.component';
 export class NgtDropdownTrigger {
   private dropdown = inject(NgtDropdown);
 
-  @HostListener('click', ['$event'])
-  onClick(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
+  @HostListener('click')
+  onClick(): void {
     this.dropdown.toggle();
   }
 }
+
