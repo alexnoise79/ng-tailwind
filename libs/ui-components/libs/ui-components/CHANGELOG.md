@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.2](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.1...ngtailwind-v1.1.2) (2025-11-25)
+
+
+### Bug Fixes
+
+* to publish ([c0b40a7](https://github.com/alexnoise79/ng-tailwind/commit/c0b40a72a635d524d9466b1d2a88b8181dbf62e5))
+* to publish ([c0b40a7](https://github.com/alexnoise79/ng-tailwind/commit/c0b40a72a635d524d9466b1d2a88b8181dbf62e5))
+* to publish ([f68f51c](https://github.com/alexnoise79/ng-tailwind/commit/f68f51cdae709c897eb732e8fcffbd32f3418b2a))
+
 ## [1.1.1](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.1.0...ngtailwind-v1.1.1) (2025-11-24)
 
 
