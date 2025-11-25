@@ -1,0 +1,15 @@
+---
+alwaysApply: true
+---
+
+# Project Rules
+
+- Always use Angular 20
+
+- Standalone is true by default, so have to be omitted
+
+- Never use CommonComponent
+
+- Always use host and not @HostBinding
+
+- Commit message max length 100 chars
