@@ -1,5 +1,4 @@
 import { Component, forwardRef, effect, OnInit, computed, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputType } from './input-base.component';
 import { NgtInputNumberBase } from './input-number-base.component';
@@ -8,7 +7,7 @@ import { Size } from '../../models';
 
 @Component({
   selector: 'ngt-input[currency], ngt-input[mode="currency"]',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './input-currency.component.html',
   providers: [
     {

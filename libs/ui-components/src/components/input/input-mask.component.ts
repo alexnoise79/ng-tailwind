@@ -1,12 +1,11 @@
 import { Component, forwardRef, effect, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase, InputType } from './input-base.component';
 import { Size } from '../../models';
 
 @Component({
   selector: 'ngt-input[mask]',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './input-base.component.html',
   providers: [
     {

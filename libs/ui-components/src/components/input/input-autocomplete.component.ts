@@ -1,5 +1,5 @@
 import { Component, Input, forwardRef, OnInit, OnDestroy, computed, signal, ViewChild, ElementRef, ContentChild, TemplateRef, HostListener, inject, input, output } from '@angular/core';
-import { CommonModule, NgTemplateOutlet, DOCUMENT } from '@angular/common';
+import { NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase, InputType } from './input-base.component';
 import { OutsideClickDirective } from '../../directives';
@@ -12,7 +12,7 @@ export interface AutoCompleteSelectEvent {
 
 @Component({
   selector: 'ngt-input[autocomplete], ngt-input[completeMethod]',
-  imports: [CommonModule, FormsModule, NgTemplateOutlet, OutsideClickDirective],
+  imports: [FormsModule, NgTemplateOutlet, OutsideClickDirective],
   templateUrl: './input-autocomplete.component.html',
   providers: [
     {

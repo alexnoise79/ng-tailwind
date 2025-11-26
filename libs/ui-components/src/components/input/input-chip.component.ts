@@ -1,5 +1,4 @@
 import { Component, forwardRef, computed, HostListener, input, output, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase, InputType } from './input-base.component';
 import { classMerge } from '../../utils';
@@ -7,7 +6,7 @@ import { Size } from '../../models';
 
 @Component({
   selector: 'ngt-input[chip]',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './input-chip.component.html',
   providers: [
     {

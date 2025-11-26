@@ -1,5 +1,4 @@
 import { Component, forwardRef, computed, input, output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase } from './input-base.component';
 import { Size } from '../../models';
@@ -7,7 +6,7 @@ import { InputType } from './input-base.component';
 
 @Component({
   selector: 'ngt-input:not([currency]):not([mode]):not([mask]):not([chip]):not([autocomplete]):not([completeMethod])',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './input-base.component.html',
   providers: [
     {
