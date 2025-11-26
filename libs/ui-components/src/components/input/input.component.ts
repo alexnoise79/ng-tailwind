@@ -1,6 +1,6 @@
-import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, OnDestroy, effect, ContentChild, TemplateRef, HostListener } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, OnInit, OnDestroy, effect, ContentChild, TemplateRef, HostListener, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CommonModule, NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import { classMerge } from '../../utils';
 import { Size } from '../../models';
 import { OutsideClickDirective } from '../../directives';
@@ -97,6 +97,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: string | number) => {};
   private onTouched = () => {};
+  private document = inject(DOCUMENT);
 
   // Computed values
   displayValue = computed(() => this._displayValue());
@@ -177,7 +178,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
       clearTimeout(this._debounceTimer);
     }
     if (this._escapeListener) {
-      document.removeEventListener('keydown', this._escapeListener);
+      this.document.removeEventListener('keydown', this._escapeListener);
     }
   }
 
@@ -187,7 +188,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
         this.hidePanel();
       }
     };
-    document.addEventListener('keydown', this._escapeListener);
+    this.document.addEventListener('keydown', this._escapeListener);
   }
 
   // Value handling

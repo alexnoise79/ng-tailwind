@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isDarkMode = false;
   isMobileMenuOpen = false;
   private router = inject(Router);
+  private document = inject(DOCUMENT);
   private routerSubscription?: Subscription;
 
   navigationGroups: Array<NavGroup> = [
@@ -98,9 +99,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.updateTheme();
 
     // Set default theme if not already set
-    if (!document.documentElement.getAttribute('data-theme')) {
+    if (!this.document.documentElement.getAttribute('data-theme')) {
       const savedTheme = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      this.document.documentElement.setAttribute('data-theme', savedTheme);
     }
 
     // Close mobile menu on navigation
@@ -131,24 +132,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private updateBodyScroll(): void {
     if (this.isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      this.document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = '';
+      this.document.body.style.overflow = '';
     }
   }
 
   ngOnDestroy(): void {
     // Restore body scroll on component destroy
-    document.body.style.overflow = '';
+    this.document.body.style.overflow = '';
     // Unsubscribe from router events
     this.routerSubscription?.unsubscribe();
   }
 
   private updateTheme(): void {
     if (this.isDarkMode) {
-      document.documentElement.classList.add('dark');
+      this.document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark');
+      this.document.documentElement.classList.remove('dark');
     }
   }
 }

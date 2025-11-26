@@ -13,3 +13,5 @@ alwaysApply: true
 - Always use host and not @HostBinding
 
 - Commit message max length 100 chars (total for all lines)
+
+- Do not use window and document directly for SSR issues

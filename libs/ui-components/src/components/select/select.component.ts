@@ -1,6 +1,6 @@
-import { Component, Input, signal, computed, input, output, forwardRef, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, HostListener, ContentChild, effect } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, HostListener, ContentChild, effect, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import { OutsideClickDirective } from '../../directives';
 import { classMerge } from '../../utils';
 import { Size, SelectOption, SelectGroup } from '../../models';
@@ -108,6 +108,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
 
   // Keyboard event listeners
   private escapeListener?: (event: KeyboardEvent) => void;
+  private document = inject(DOCUMENT);
 
   // Computed values
   isOpen = computed(() => this._isOpen());
@@ -221,12 +222,12 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
         this.close();
       }
     };
-    document.addEventListener('keydown', this.escapeListener);
+    this.document.addEventListener('keydown', this.escapeListener);
   }
 
   private cleanupKeyboardListeners(): void {
     if (this.escapeListener) {
-      document.removeEventListener('keydown', this.escapeListener);
+      this.document.removeEventListener('keydown', this.escapeListener);
     }
   }
 

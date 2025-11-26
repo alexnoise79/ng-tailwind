@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
 
@@ -11,6 +12,7 @@ export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tec
 export class ThemeConfiguratorComponent implements OnInit {
   isOpen = signal(false);
   currentTheme = signal<ThemeName>('default');
+  private document = inject(DOCUMENT);
 
   themes: Array<{ name: ThemeName; label: string; description: string }> = [
     { name: 'default', label: 'Default', description: 'Original blue theme' },
@@ -40,6 +42,6 @@ export class ThemeConfiguratorComponent implements OnInit {
   }
 
   private applyTheme(theme: ThemeName): void {
-    document.documentElement.setAttribute('data-theme', theme);
+    this.document.documentElement.setAttribute('data-theme', theme);
   }
 }

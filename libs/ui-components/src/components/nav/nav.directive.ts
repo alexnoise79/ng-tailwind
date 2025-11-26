@@ -1,5 +1,6 @@
 import { Directive, ContentChildren, QueryList, AfterContentInit, signal, computed, input, ElementRef, inject, HostListener, Renderer2, OnInit, effect, Injector, runInInjectionContext, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { NgtNavItem } from './nav-item.directive';
@@ -30,6 +31,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   private renderer = inject(Renderer2);
   private injector = inject(Injector);
   private router = inject(Router, { optional: true });
+  private document = inject(DOCUMENT);
   private routerSubscription?: Subscription;
   private originalClasses = '';
 
@@ -184,7 +186,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     if (newIndex !== currentIndex && newIndex >= 0 && newIndex < this.items().length) {
       this.selectItem(this.items()[newIndex].id);
       // Focus the new nav item button
-      const button = document.getElementById(this.items()[newIndex].buttonId());
+      const button = this.document.getElementById(this.items()[newIndex].buttonId());
       button?.focus();
     }
   }
