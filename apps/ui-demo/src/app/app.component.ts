@@ -6,6 +6,7 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
+import { WINDOW } from '@universal/index';
 
 interface NavItem {
   label: string;
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isMobileMenuOpen = false;
   private router = inject(Router);
   private document = inject(DOCUMENT);
+  private window = inject(WINDOW);
   private routerSubscription?: Subscription;
 
   navigationGroups: Array<NavGroup> = [
@@ -93,8 +95,8 @@ export class AppComponent implements OnInit, OnDestroy {
     const saved = localStorage.getItem('darkMode');
     if (saved !== null) {
       this.isDarkMode = saved === 'true';
-    } else {
-      this.isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    } else if (this.window) {
+      this.isDarkMode = this.window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     this.updateTheme();
 
@@ -108,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe({
       next: () => {
         // Close menu if in mobile mode (screen width < 1024px, which is the lg breakpoint)
-        if (window.innerWidth < 1024 && this.isMobileMenuOpen) {
+        if (this.window && this.window.innerWidth < 1024 && this.isMobileMenuOpen) {
           this.closeMobileMenu();
         }
       }

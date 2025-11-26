@@ -4,10 +4,11 @@ import { BehaviorSubject } from 'rxjs';
 
 /* Create a new injection token for injecting the window into a component. */
 export const WINDOW = new InjectionToken<Window | null>('WindowToken', {
+  providedIn: 'root',
   factory: () => {
     const platformId = inject(PLATFORM_ID);
 
-    if (isPlatformBrowser(platformId)) {
+    if (isPlatformBrowser(platformId) && typeof window !== 'undefined') {
       const ua = window.navigator.userAgent;
       window.isMobile = /Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dol(fin|phin)|Skyfire|Zune/.test(ua);
       window.isTablet = /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(ua.toLowerCase());
