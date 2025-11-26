@@ -8,7 +8,7 @@ export class AutofocusDirective implements AfterViewInit {
 
   readonly uiAutofocus = input<boolean | string>(true);
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     const uiAutofocus = this.uiAutofocus();
     if (uiAutofocus !== false && uiAutofocus !== 'false') {
       setTimeout(() => {

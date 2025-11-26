@@ -204,7 +204,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // Column reorder setup is handled in ngAfterViewChecked to ensure DOM is ready
     // This method is required by the AfterViewInit interface
     if (this.reorderableColumns() && this.thead) {
@@ -213,7 +213,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterViewChecked() {
     const reorderable = this.reorderableColumns();
     const columnsLength = this._columns().length;
 
@@ -245,11 +245,11 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.dragListeners.forEach(cleanup => cleanup());
   }
 
-  private setupColumnReorder(): void {
+  private setupColumnReorder() {
     if (!this.thead || !this.reorderableColumns()) {
       this.isColumnReorderSetup = false;
       return;
@@ -339,7 +339,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     this.isColumnReorderSetup = true;
   }
 
-  sort(event: Event, field: string): void {
+  sort(event: Event, field: string) {
     event.preventDefault();
     const column = this._columns().find(col => col.field === field);
     if (!column || !column.sortable) return;
@@ -411,7 +411,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     return 0;
   }
 
-  onPageChangeHandler(page: number): void {
+  onPageChangeHandler(page: number) {
     const rows = this.rows();
     const first = (page - 1) * rows;
     this._first.set(first);
@@ -419,7 +419,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     this.pageChange.emit({ page, first, rows });
   }
 
-  reorderColumn(dragIndex: number, dropIndex: number): void {
+  reorderColumn(dragIndex: number, dropIndex: number) {
     // Create a new array to avoid mutating the original
     const columns = [...this._columns()];
     const draggedColumn = { ...columns[dragIndex] }; // Deep copy the column object

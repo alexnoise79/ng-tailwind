@@ -8,7 +8,7 @@ export class NgtDropdownTrigger {
   private dropdown = inject(NgtDropdown);
 
   @HostListener('click')
-  onClick(): void {
+  onClick() {
     this.dropdown.toggle();
   }
 }

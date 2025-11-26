@@ -26,7 +26,7 @@ import { Component, inject } from '@angular/core';
 class ToastStoryWrapper {
   private readonly toastService = inject(NgtToastService);
 
-  showSuccess(): void {
+  showSuccess() {
     this.toastService.show({
       severity: 'success',
       summary: 'Success',
@@ -34,7 +34,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showInfo(): void {
+  showInfo() {
     this.toastService.show({
       severity: 'info',
       summary: 'Information',
@@ -42,7 +42,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showWarning(): void {
+  showWarning() {
     this.toastService.show({
       severity: 'warning',
       summary: 'Warning',
@@ -50,7 +50,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showDanger(): void {
+  showDanger() {
     this.toastService.show({
       severity: 'danger',
       summary: 'Error',
@@ -58,7 +58,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showWithSummary(): void {
+  showWithSummary() {
     this.toastService.show({
       severity: 'info',
       summary: 'Update Available',
@@ -66,7 +66,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showSticky(): void {
+  showSticky() {
     this.toastService.show({
       severity: 'warning',
       summary: 'Sticky Toast',
@@ -75,7 +75,7 @@ class ToastStoryWrapper {
     });
   }
 
-  showNotClosable(): void {
+  showNotClosable() {
     this.toastService.show({
       severity: 'info',
       summary: 'Processing',
@@ -85,7 +85,7 @@ class ToastStoryWrapper {
     });
   }
 
-  clearAll(): void {
+  clearAll() {
     this.toastService.clear();
   }
 }

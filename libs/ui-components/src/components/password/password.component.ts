@@ -117,7 +117,7 @@ export class NgtPassword implements ControlValueAccessor {
     return classMerge(base, colors[strength as keyof typeof colors] || colors[0]);
   });
 
-  private updateStrength(): void {
+  private updateStrength() {
     if (!this.showStrength()) {
       this._strength.set(0);
       return;
@@ -145,12 +145,12 @@ export class NgtPassword implements ControlValueAccessor {
     this._strength.set(Math.min(score, 5) as PasswordStrength);
   }
 
-  togglePasswordVisibility(): void {
+  togglePasswordVisibility() {
     if (this.isDisabled()) return;
     this._showPassword.update(val => !val);
   }
 
-  onInput(event: Event): void {
+  onInput(event: Event) {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this._value.set(value);
@@ -159,25 +159,25 @@ export class NgtPassword implements ControlValueAccessor {
     this.valueChange.emit(value);
   }
 
-  onBlur(): void {
+  onBlur() {
     this.onTouched();
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: string | null): void {
+  writeValue(value: string | null) {
     this._value.set(value ?? '');
     this.updateStrength();
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: string) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
-  setDisabledState(_isDisabled: boolean): void {
+  setDisabledState(_isDisabled: boolean) {
     // Disabled state is handled by the disabled input signal
     void _isDisabled; // Explicitly mark as intentionally unused
   }

@@ -24,7 +24,7 @@ export class NgtNavLink implements OnInit, OnDestroy {
   private currentClasses = '';
   private effectRef?: EffectRef;
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Store original classes
     const nativeEl = this.elementRef.nativeElement;
     this.currentClasses = nativeEl.className || '';
@@ -44,7 +44,7 @@ export class NgtNavLink implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.effectRef?.destroy();
   }
 
@@ -69,7 +69,7 @@ export class NgtNavLink implements OnInit, OnDestroy {
   }
 
   @HostListener('click', ['$event'])
-  onClick(event: Event): void {
+  onClick(event: Event) {
     if (this.navItem?.disabled()) {
       event.preventDefault();
       event.stopPropagation();

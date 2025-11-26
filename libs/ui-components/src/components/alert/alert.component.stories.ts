@@ -19,7 +19,7 @@ import { Component, signal } from '@angular/core';
   imports: [NgtAlert]
 })
 class AlertStoryWrapper {
-  onClose(variant: string): void {
+  onClose(variant: string) {
     console.log(`${variant} alert closed`);
   }
 }

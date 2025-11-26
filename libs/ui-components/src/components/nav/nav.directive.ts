@@ -36,11 +36,11 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
   private originalClasses = '';
 
   @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent): void {
+  onKeyDown(event: KeyboardEvent) {
     this.handleKeyDown(event);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Store original classes
     const nativeEl = this.elementRef.nativeElement;
     this.originalClasses = nativeEl.className || '';
@@ -54,7 +54,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     });
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     this.items.set(this.navItems.toArray());
 
     // Set initial active item if activeId is provided
@@ -83,7 +83,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     }
   }
 
-  registerRouterLinkItem(itemId: string, routerLink: string | Array<string>): void {
+  registerRouterLinkItem(itemId: string, routerLink: string | Array<string>) {
     this.routerLinkItems.set(itemId, routerLink);
     // Check active state after registration
     if (this.router) {
@@ -93,7 +93,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     }
   }
 
-  private checkRouterActiveState(): void {
+  private checkRouterActiveState() {
     if (!this.router) return;
 
     const currentUrl = this.router.url;
@@ -123,18 +123,18 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.routerSubscription?.unsubscribe();
   }
 
-  selectItem(id: string): void {
+  selectItem(id: string) {
     this.selectedId.set(id);
     this.items().forEach(item => {
       item.isActive.set(item.id === id);
     });
   }
 
-  handleKeyDown(event: KeyboardEvent): void {
+  handleKeyDown(event: KeyboardEvent) {
     const currentIndex = this.items().findIndex(item => item.id === this.selectedId());
     let newIndex = currentIndex;
 

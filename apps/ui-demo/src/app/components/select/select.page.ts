@@ -85,12 +85,12 @@ export class SelectPage {
   selectedCityReactive = signal<string | null>(null);
   invalid = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted with value:', this.selectedCityForm());
   }
 
-  onSelectChange(value: unknown): void {
+  onSelectChange(value: unknown) {
     console.log('Selection changed:', value);
   }
 
@@ -133,7 +133,7 @@ export class SelectPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -173,7 +173,7 @@ export class SelectPage {
     { name: 'Paris', code: 'PRS' }
   ]);
 
-  onSelectChange(value: unknown): void {
+  onSelectChange(value: unknown) {
     console.log('Selection changed:', value);
   }
 }`
@@ -342,7 +342,7 @@ export class SelectPage {
   formSubmitted = signal(false);
   cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted with value:', this.selectedCityForm());
   }

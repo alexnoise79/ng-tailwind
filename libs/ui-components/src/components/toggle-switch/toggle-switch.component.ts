@@ -73,7 +73,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
     return classMerge('inline-flex items-center gap-2', this.isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer');
   });
 
-  toggle(event?: Event): void {
+  toggle(event?: Event) {
     if (this.isDisabled()) {
       return;
     }
@@ -91,7 +91,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
     this.onTouched();
   }
 
-  onCheckboxChange(event: Event): void {
+  onCheckboxChange(event: Event) {
     const target = event.target as HTMLInputElement;
     const newValue = target.checked;
     this._value.set(newValue);
@@ -100,22 +100,22 @@ export class NgtToggleSwitch implements ControlValueAccessor {
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: boolean): void {
+  writeValue(value: boolean) {
     this._value.set(value ?? false);
     if (this.checkboxRef?.nativeElement) {
       this.checkboxRef.nativeElement.checked = value ?? false;
     }
   }
 
-  registerOnChange(fn: (value: boolean) => void): void {
+  registerOnChange(fn: (value: boolean) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean) {
     this._disabled.set(isDisabled);
   }
 }

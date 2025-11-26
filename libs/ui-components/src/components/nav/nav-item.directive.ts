@@ -41,7 +41,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Store original classes
     const nativeEl = this.elementRef.nativeElement;
     this.originalClasses = nativeEl.className || '';
@@ -57,7 +57,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     }
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     // If used as an element (<ngt-nav-item>) with label but no ngtNavLink child,
     // create a link component dynamically using Angular's component system
     const nativeEl = this.elementRef.nativeElement;

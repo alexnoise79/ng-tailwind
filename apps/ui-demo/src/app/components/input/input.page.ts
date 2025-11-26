@@ -92,7 +92,7 @@ export class InputPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -369,7 +369,7 @@ export class InputPage {
     return this.autocompleteService.search(query, 300);
   }
 
-  onItemSelect(event: AutoCompleteSelectEvent): void {
+  onItemSelect(event: AutoCompleteSelectEvent) {
     console.log('Selected:', event.value);
     // Handle selection
   }
@@ -401,7 +401,7 @@ export class InputPage {
   emailValue1 = signal<string>('');
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }
@@ -411,7 +411,7 @@ export class InputPage {
 
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }
@@ -421,7 +421,7 @@ export class InputPage {
     return this.autocompleteService.search(query, 800);
   }
 
-  onItemSelect(event: AutoCompleteSelectEvent): void {
+  onItemSelect(event: AutoCompleteSelectEvent) {
     this.selectedItem.set(event.value as AutocompleteItem);
     this.toastService.show({
       severity: 'success',

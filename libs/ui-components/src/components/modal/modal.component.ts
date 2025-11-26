@@ -48,7 +48,7 @@ export class NgtModal implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.escapeListener = (event: KeyboardEvent) => {
       if (this.isOpen() && event.key === 'Escape') {
         this.handleClose();
@@ -57,7 +57,7 @@ export class NgtModal implements OnInit, OnDestroy {
     this.document.addEventListener('keydown', this.escapeListener as EventListener);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.escapeListener) {
       this.document.removeEventListener('keydown', this.escapeListener);
     }
@@ -67,13 +67,13 @@ export class NgtModal implements OnInit, OnDestroy {
     this.document.body.style.overflow = '';
   }
 
-  onBackdropClick(): void {
+  onBackdropClick() {
     if (this.closeOnBackdropClick()) {
       this.handleClose();
     }
   }
 
-  handleClose(): void {
+  handleClose() {
     // TODO: The 'emit' function requires a mandatory void argument
     this.closed.emit();
   }

@@ -19,7 +19,7 @@ export class DemoCodeViewUtil {
   /**
    * Toggle between showcase and code view for a specific demo
    */
-  toggleDemoView(demoKey: string): void {
+  toggleDemoView(demoKey: string) {
     const current = this.demoViewMode();
     this.demoViewMode.set({
       ...current,
@@ -30,7 +30,7 @@ export class DemoCodeViewUtil {
   /**
    * Set the active code tab (html or ts) for a specific demo
    */
-  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts'): void {
+  setActiveCodeTab(demoKey: string, tab: 'html' | 'ts') {
     const current = this.activeCodeTab();
     this.activeCodeTab.set({
       ...current,

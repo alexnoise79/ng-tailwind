@@ -33,7 +33,7 @@ export class NgtAccordionButton {
   isOpen = computed(() => this.accordionItem?.isOpen() || false);
 
   @HostListener('click', ['$event'])
-  onClick(event: Event): void {
+  onClick(event: Event) {
     if (this.isDisabled()) {
       event.preventDefault();
       event.stopPropagation();

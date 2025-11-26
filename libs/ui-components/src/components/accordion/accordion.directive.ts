@@ -17,7 +17,7 @@ export class NgtAccordion {
   readonly multiOpen = input<boolean>(false);
   openItems = signal<Set<string>>(new Set());
 
-  toggleItem(id: string): void {
+  toggleItem(id: string) {
     this.openItems.update(current => {
       const newSet = new Set(current);
       if (this.multiOpen()) {

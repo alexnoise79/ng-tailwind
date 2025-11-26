@@ -32,7 +32,7 @@ export class AlertPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -49,7 +49,7 @@ export class AlertPage {
     notDismissible: true
   });
 
-  onAlertClose(variant: string): void {
+  onAlertClose(variant: string) {
     this.visibleAlerts.update(alerts => ({
       ...alerts,
       [variant]: false

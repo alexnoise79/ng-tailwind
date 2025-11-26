@@ -153,7 +153,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.updateDisplayValue();
     if (this.chip() !== null) {
       this.updateChips();
@@ -173,7 +173,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this._debounceTimer) {
       clearTimeout(this._debounceTimer);
     }
@@ -182,7 +182,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private setupKeyboardListeners(): void {
+  private setupKeyboardListeners() {
     this._escapeListener = (event: KeyboardEvent) => {
       if (this.showPanel() && event.key === 'Escape') {
         this.hidePanel();
@@ -192,7 +192,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   // Value handling
-  private updateDisplayValue(): void {
+  private updateDisplayValue() {
     const val = this._value();
     if (val === null || val === undefined) {
       this._displayValue.set('');
@@ -245,7 +245,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return masked;
   }
 
-  private updateChips(): void {
+  private updateChips() {
     const val = this._value();
     if (!val) {
       this._chips.set([]);
@@ -348,7 +348,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   // Event handlers
-  onInput(event: Event): void {
+  onInput(event: Event) {
     const target = event.target as HTMLInputElement;
     let value = target.value;
 
@@ -399,7 +399,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return value;
   }
 
-  private handleChipInput(value: string, target: HTMLInputElement): void {
+  private handleChipInput(value: string, target: HTMLInputElement) {
     // Prevent space as first character in chip mode
     if (value.startsWith(' ')) {
       value = value.trimStart();
@@ -451,7 +451,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return false;
   }
 
-  private createChipFromValue(valueBeforeSeparator: string, existingChips: Array<string>): void {
+  private createChipFromValue(valueBeforeSeparator: string, existingChips: Array<string>) {
     const newChips = [...existingChips, valueBeforeSeparator];
     const newValue = this.buildChipModelValue(newChips, '');
 
@@ -463,7 +463,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this.valueChange.emit(newValue);
   }
 
-  private handleNormalInput(value: string): void {
+  private handleNormalInput(value: string) {
     // Update display value
     this._displayValue.set(value);
     const modelValue = this.getModelValue(value);
@@ -486,7 +486,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private handleAutocomplete(query: string): void {
+  private handleAutocomplete(query: string) {
     // Clear previous timer
     if (this._debounceTimer) {
       clearTimeout(this._debounceTimer);
@@ -547,7 +547,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return defaultValue;
   }
 
-  selectSuggestion(item: unknown, event: Event): void {
+  selectSuggestion(item: unknown, event: Event) {
     const value = this.getOptionValue(item);
     const label = this.getOptionLabel(item);
 
@@ -572,19 +572,19 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  hidePanel(): void {
+  hidePanel() {
     this._showPanel.set(false);
     this._focusedIndex.set(-1);
   }
 
-  onOutsideClick(): void {
+  onOutsideClick() {
     if (this.showPanel()) {
       this.hidePanel();
     }
   }
 
   @HostListener('keydown', ['$event'])
-  onAutocompleteKeyDown(event: KeyboardEvent): void {
+  onAutocompleteKeyDown(event: KeyboardEvent) {
     if (!this.hasAutocomplete() || !this.showPanel()) {
       return;
     }
@@ -617,11 +617,11 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  setFocusedIndex(index: number): void {
+  setFocusedIndex(index: number) {
     this._focusedIndex.set(index);
   }
 
-  private scrollToFocused(): void {
+  private scrollToFocused() {
     setTimeout(() => {
       if (this.autocompletePanelRef && this._focusedIndex() >= 0) {
         const panel = this.autocompletePanelRef.nativeElement;
@@ -677,7 +677,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return String(value);
   }
 
-  onFocus(): void {
+  onFocus() {
     this._isFocused.set(true);
     // Show panel if we have suggestions and autocomplete is enabled
     if (this.hasAutocomplete() && this.suggestions().length > 0) {
@@ -685,7 +685,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  onKeyDown(event: KeyboardEvent): void {
+  onKeyDown(event: KeyboardEvent) {
     // If input is empty and backspace is pressed, delete the last chip
     if (this.chip() !== null && this.type() !== 'number' && event.key === 'Backspace') {
       const inputValue = this.inputElementRef?.nativeElement?.value || '';
@@ -700,7 +700,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  onBlur(): void {
+  onBlur() {
     this._isFocused.set(false);
     this.onTouched();
     // Hide panel on blur (with slight delay to allow click events)
@@ -721,7 +721,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private submitChipOnBlur(): void {
+  private submitChipOnBlur() {
     const currentValue = this._currentChipValue().trimStart().trim();
     const existingChips = this._chips();
 
@@ -748,7 +748,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private formatNumberOnBlur(): void {
+  private formatNumberOnBlur() {
     const numValue = this.parseNumber(this._displayValue());
     if (!isNaN(numValue) && numValue !== 0) {
       const formatted = this.formatNumber(numValue);
@@ -758,7 +758,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  onClear(event: Event): void {
+  onClear(event: Event) {
     event.stopPropagation();
     if (this.isDisabled()) return;
 
@@ -773,7 +773,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  removeChip(chip: string, event: Event): void {
+  removeChip(chip: string, event: Event) {
     event.stopPropagation();
     if (this.isDisabled()) return;
 
@@ -799,7 +799,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: string | number | null): void {
+  writeValue(value: string | number | null) {
     this._value.set(value ?? '');
     this.updateDisplayValue();
     if (this.chip() !== null) {
@@ -807,15 +807,15 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  registerOnChange(fn: (value: string | number) => void): void {
+  registerOnChange(fn: (value: string | number) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
-  setDisabledState(_isDisabled: boolean): void {
+  setDisabledState(_isDisabled: boolean) {
     // Disabled state is handled by the disabled input signal
     void _isDisabled; // Explicitly mark as intentionally unused
   }

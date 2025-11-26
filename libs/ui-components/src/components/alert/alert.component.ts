@@ -61,7 +61,7 @@ export class NgtAlert {
     return icons[this.variant()];
   });
 
-  handleClose(): void {
+  handleClose() {
     if (this.dismissible()) {
       this.isVisible.set(false);
       setTimeout(() => {

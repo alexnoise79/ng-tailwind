@@ -37,7 +37,7 @@ export class TablePage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
   products = signal<Array<Product>>([
@@ -83,15 +83,15 @@ export class TablePage {
   multipleSortTableSize = signal<Size>('md');
   combinedTableSize = signal<Size>('md');
 
-  onSort(event: { field: string; order: SortOrder }): void {
+  onSort(event: { field: string; order: SortOrder }) {
     console.log('Sort event:', event);
   }
 
-  onPageChange(event: { page: number; first: number; rows: number }): void {
+  onPageChange(event: { page: number; first: number; rows: number }) {
     console.log('Page change event:', event);
   }
 
-  onColumnReorder(event: { columns: Array<TableColumn>; dragIndex: number; dropIndex: number }): void {
+  onColumnReorder(event: { columns: Array<TableColumn>; dragIndex: number; dropIndex: number }) {
     console.log('Column reorder event:', event);
     // Don't update the shared column arrays - each table maintains its own state
     // The table component handles the reordering internally, so we don't need to update the input
@@ -179,7 +179,7 @@ export class TablePage {
   products = signal<Product[]>([...]);
   basicColumns: TableColumn[] = [...];
 
-  onPageChange(event: { page: number; first: number; rows: number }): void {
+  onPageChange(event: { page: number; first: number; rows: number }) {
     console.log('Page change event:', event);
   }
 }`
@@ -198,7 +198,7 @@ export class TablePage {
   products = signal<Product[]>([...]);
   basicColumns: TableColumn[] = [...];
 
-  onColumnReorder(event: { columns: TableColumn[]; dragIndex: number; dropIndex: number }): void {
+  onColumnReorder(event: { columns: TableColumn[]; dragIndex: number; dropIndex: number }) {
     console.log('Column reorder event:', event);
   }
 }`

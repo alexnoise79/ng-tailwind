@@ -207,16 +207,16 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.processOptions();
     this.setupKeyboardListeners();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.cleanupKeyboardListeners();
   }
 
-  private setupKeyboardListeners(): void {
+  private setupKeyboardListeners() {
     this.escapeListener = (event: KeyboardEvent) => {
       if (this.isOpen() && event.key === 'Escape') {
         this.close();
@@ -225,13 +225,13 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.document.addEventListener('keydown', this.escapeListener);
   }
 
-  private cleanupKeyboardListeners(): void {
+  private cleanupKeyboardListeners() {
     if (this.escapeListener) {
       this.document.removeEventListener('keydown', this.escapeListener);
     }
   }
 
-  private processOptions(): void {
+  private processOptions() {
     const options = this._options();
     const processed: Array<SelectOption> = [];
 
@@ -278,7 +278,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private processGroupedOptions(): void {
+  private processGroupedOptions() {
     if (!this.group()) {
       return;
     }
@@ -309,7 +309,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this._groupedOptions.set(grouped);
   }
 
-  private updateFilteredOptions(): void {
+  private updateFilteredOptions() {
     const text = this.filterText().toLowerCase();
     const filterBy = this._filterBy() || this.getOptionLabelKey();
     const processed = this.processedOptions();
@@ -410,7 +410,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     return opt[groupKey] ? String(opt[groupKey]) : opt.group ? String(opt.group) : undefined;
   }
 
-  toggle(): void {
+  toggle() {
     if (this.isDisabled()) return;
     if (this.isOpen()) {
       this.close();
@@ -419,7 +419,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  open(): void {
+  open() {
     if (this.isDisabled()) return;
     this._isOpening = true;
     this._isOpen.set(true);
@@ -434,7 +434,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }, 0);
   }
 
-  close(): void {
+  close() {
     this._isOpen.set(false);
     this._focusedIndex.set(-1);
     if (this.filter()) {
@@ -443,7 +443,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.onTouched();
   }
 
-  selectOption(option: SelectOption): void {
+  selectOption(option: SelectOption) {
     if (this.getOptionDisabled(option)) return;
 
     const value = this.getOptionValue(option);
@@ -470,7 +470,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  removeChip(value: unknown, event: Event): void {
+  removeChip(value: unknown, event: Event) {
     event.stopPropagation();
     if (!this.isMulti()) return;
 
@@ -483,7 +483,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.selectionChange.emit(newValue);
   }
 
-  clear(event: Event): void {
+  clear(event: Event) {
     event.stopPropagation();
     if (this.isDisabled()) return;
 
@@ -526,7 +526,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     return false;
   }
 
-  onFilterChange(event: Event): void {
+  onFilterChange(event: Event) {
     const target = event.target as HTMLInputElement;
     this._filterText.set(target.value);
     this.filterChange.emit(target.value);
@@ -538,7 +538,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
 
   // Keyboard navigation
   @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent): void {
+  onKeyDown(event: KeyboardEvent) {
     if (!this.isOpen()) {
       if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown' || event.key === 'ArrowUp') {
         event.preventDefault();
@@ -574,7 +574,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private focusNext(options: Array<SelectOption>): void {
+  private focusNext(options: Array<SelectOption>) {
     let index = this.focusedIndex();
     index = index < options.length - 1 ? index + 1 : 0;
 
@@ -594,7 +594,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.scrollToFocused();
   }
 
-  private focusPrevious(options: Array<SelectOption>): void {
+  private focusPrevious(options: Array<SelectOption>) {
     let index = this.focusedIndex();
     index = index > 0 ? index - 1 : options.length - 1;
 
@@ -614,7 +614,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.scrollToFocused();
   }
 
-  private scrollToFocused(): void {
+  private scrollToFocused() {
     setTimeout(() => {
       if (this.panelRef && this.focusedIndex() >= 0) {
         const panel = this.panelRef.nativeElement;
@@ -627,24 +627,24 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: unknown): void {
+  writeValue(value: unknown) {
     this._value.set(value ?? (this.isMulti() ? [] : null));
   }
 
-  registerOnChange(fn: (value: unknown) => void): void {
+  registerOnChange(fn: (value: unknown) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean) {
     this._disabled.set(isDisabled);
   }
 
   // Handle outside click
-  onOutsideClick(): void {
+  onOutsideClick() {
     // Don't close if we're in the process of opening
     if (this._isOpening) {
       return;

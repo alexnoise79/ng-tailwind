@@ -21,7 +21,7 @@ export class NgtAccordionItem {
     return this._isOpen();
   });
 
-  toggle(): void {
+  toggle() {
     if (this.disabled()) {
       return;
     }

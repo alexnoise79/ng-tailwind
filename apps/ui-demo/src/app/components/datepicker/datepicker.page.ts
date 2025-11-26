@@ -44,7 +44,7 @@ export class DatepickerPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -75,7 +75,7 @@ export class DatepickerPage {
   selectedDateCustomFormat = signal<string | null>(null);
   selectedFormat = signal<'iso' | 'iso-local' | 'date' | 'datetime'>('datetime');
 
-  onFormatChange(event: Event): void {
+  onFormatChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.selectedFormat.set(target.value as 'iso' | 'iso-local' | 'date' | 'datetime');
   }
@@ -111,7 +111,7 @@ export class DatepickerPage {
       withStringInput: {
         html: `<ngt-datepicker [model]="'2024-03-15T10:30:00'" [showTime]="true" (dateSelect)="onDateSelect($event)"></ngt-datepicker>`,
         ts: `export class DatepickerPage {
-  onDateSelect(date: string): void {
+  onDateSelect(date: string) {
     console.log('Date selected:', date);
   }
 }`
@@ -119,11 +119,11 @@ export class DatepickerPage {
     };
   }
 
-  onDateSelect(date: string): void {
+  onDateSelect(date: string) {
     console.log('Date selected:', date);
   }
 
-  onFormatChange(event: Event): void {
+  onFormatChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.selectedFormat.set(target.value as 'iso' | 'iso-local' | 'date' | 'datetime');
   }

@@ -47,7 +47,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     return nav.getNavButtonClasses(navItem);
   });
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Update classes reactively when active state or nav changes
     // This runs after inputs are set
     runInInjectionContext(this.injector, () => {
@@ -67,7 +67,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // Sync router active state with nav component selection
     // This is now handled centrally by the nav component
     if (this.routerLink() && this.nav && this.navItem) {
@@ -76,11 +76,11 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.effectRef?.destroy();
   }
 
-  handleClick(event: Event): void {
+  handleClick(event: Event) {
     if (this.disabled()) {
       event.preventDefault();
       event.stopPropagation();

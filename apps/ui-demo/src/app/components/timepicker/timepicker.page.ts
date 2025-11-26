@@ -50,7 +50,7 @@ export class TimepickerPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -88,7 +88,7 @@ export class TimepickerPage {
       ts: `import { NgtTimeStruct } from '@ng-tailwind/ui-components';
 
 export class TimepickerPage {
-  onTimeSelect(time: NgtTimeStruct): void {
+  onTimeSelect(time: NgtTimeStruct) {
     console.log('Time selected:', time);
   }
 }`
@@ -98,7 +98,7 @@ export class TimepickerPage {
       ts: `import { NgtTimeStruct } from '@ng-tailwind/ui-components';
 
 export class TimepickerPage {
-  onTimeSelect(time: NgtTimeStruct): void {
+  onTimeSelect(time: NgtTimeStruct) {
     console.log('Time selected:', time);
   }
 }`
@@ -141,7 +141,7 @@ export class TimepickerPage {
     }
   };
 
-  onTimeSelect(time: NgtTimeStruct): void {
+  onTimeSelect(time: NgtTimeStruct) {
     console.log('Time selected:', time);
   }
 

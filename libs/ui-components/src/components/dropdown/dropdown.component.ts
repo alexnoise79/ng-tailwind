@@ -17,15 +17,15 @@ export class NgtDropdown {
 
   readonly isOpen = input(signal(false));
 
-  toggle(): void {
+  toggle() {
     this.isOpen().update(val => !val);
   }
 
-  close(): void {
+  close() {
     this.isOpen().set(false);
   }
 
-  open(): void {
+  open() {
     this.isOpen().set(true);
   }
 }

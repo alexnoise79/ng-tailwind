@@ -146,27 +146,27 @@ export class NgtToast implements OnInit, OnDestroy {
     return icons[this.severityValue()];
   });
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Trigger entrance animation
     setTimeout(() => {
       this.isVisible.set(true);
     }, 10);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     // Lifecycle hook - cleanup handled automatically by Angular
     this.isRemoving.set(false);
     this.isVisible.set(false);
   }
 
-  close(): void {
+  close() {
     this.isRemoving.set(true);
     setTimeout(() => {
       this.closed.emit();
     }, 300);
   }
 
-  handleClose(): void {
+  handleClose() {
     if (this.closableValue()) {
       this.close();
     }

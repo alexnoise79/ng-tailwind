@@ -4,18 +4,26 @@ alwaysApply: true
 
 # Project Rules
 
+## Angular Version & Configuration
+
 - Always use Angular 20
 
 - Standalone is true by default, so have to be omitted
+
+## Code Style
 
 - Never use CommonComponent
 
 - Always use host and not @HostBinding
 
-- Commit message max length 100 chars (total for all lines)
+- Never use :void as a return type - omit the return type annotation instead
+
+- Never use "as unknown as" for type conversion
+
+## SSR Compliance
 
 - Do not use window and document directly for SSR issues
 
-- Never use void as a return type for a function
+## Git
 
-- Never use "as unknown as" for type conversion
+- Commit message max length 100 chars (total for all lines)
