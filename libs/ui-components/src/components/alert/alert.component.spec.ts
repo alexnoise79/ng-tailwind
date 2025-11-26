@@ -1,5 +1,6 @@
 /// <reference types="vitest/globals" />
-import { NgtAlert, AlertVariant } from './alert.component';
+import { NgtAlert } from './alert.component';
+import { Variant } from '../../models';
 import { runInInjectionContext, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { signal } from '@angular/core';
@@ -17,7 +18,7 @@ describe('NgtAlert', () => {
       return new NgtAlert();
     });
 
-    (component as any).variant = signal<AlertVariant>('info');
+    (component as any).variant = signal<Variant>('info');
     (component as any).dismissible = signal(false);
   });
 
@@ -61,7 +62,7 @@ describe('NgtAlert', () => {
   });
 
   describe('Variants', () => {
-    const variants: AlertVariant[] = ['success', 'info', 'warning', 'danger', 'primary', 'secondary', 'light', 'dark'];
+    const variants: Variant[] = ['success', 'info', 'warning', 'danger', 'primary', 'secondary', 'light', 'dark'];
 
     variants.forEach(variant => {
       it(`should apply correct classes for ${variant} variant`, () => {
