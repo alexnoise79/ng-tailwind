@@ -12,7 +12,7 @@ alwaysApply: true
 
 ## Code Style
 
-- Never use CommonComponent
+- Never use CommonModule
 
 - Always use host and not @HostBinding
 
