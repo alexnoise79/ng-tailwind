@@ -6,7 +6,9 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
-import { WINDOW, LocalStorage } from '@universal/index';
+import { WINDOW } from '@universal/window.service';
+import { LocalStorage } from '@universal/universal.providers';
+
 
 interface NavItem {
   label: string;

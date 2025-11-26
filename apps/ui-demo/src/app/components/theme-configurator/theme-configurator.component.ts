@@ -1,6 +1,6 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { LocalStorage } from '@universal/index';
+import { LocalStorage } from '@universal/universal.providers';
 
 export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
 

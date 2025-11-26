@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Renderer2, OnDestroy, input, signal, computed, inject, HostListener, effect, ViewContainerRef, TemplateRef, EmbeddedViewRef } from '@angular/core';
 import { Position } from '../../models';
-import { WINDOW } from '@universal/index';
+import { WINDOW } from '@universal/window.service';
 
 @Directive({
   selector: '[ngtTooltip]'
