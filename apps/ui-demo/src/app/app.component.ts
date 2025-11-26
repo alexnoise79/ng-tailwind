@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
-import { WINDOW } from '@universal/index';
+import { WINDOW, LocalStorage } from '@universal/index';
 
 interface NavItem {
   label: string;
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private document = inject(DOCUMENT);
   private window = inject(WINDOW);
+  private localStorage = inject(LocalStorage);
   private routerSubscription?: Subscription;
 
   navigationGroups: Array<NavGroup> = [
@@ -92,7 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Load saved preference or default to system preference
-    const saved = localStorage.getItem('darkMode');
+    const saved = this.localStorage.getItem('darkMode');
     if (saved !== null) {
       this.isDarkMode = saved === 'true';
     } else if (this.window) {
@@ -102,7 +103,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Set default theme if not already set
     if (!this.document.documentElement.getAttribute('data-theme')) {
-      const savedTheme = localStorage.getItem('theme') || 'default';
+      const savedTheme = this.localStorage.getItem('theme') || 'default';
       this.document.documentElement.setAttribute('data-theme', savedTheme);
     }
 
@@ -119,7 +120,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onToggleChange(): void {
     this.updateTheme();
-    localStorage.setItem('darkMode', this.isDarkMode.toString());
+    this.localStorage.setItem('darkMode', this.isDarkMode.toString());
   }
 
   toggleMobileMenu(): void {

@@ -1,5 +1,6 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { LocalStorage } from '@universal/index';
 
 export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
 
@@ -13,6 +14,7 @@ export class ThemeConfiguratorComponent implements OnInit {
   isOpen = signal(false);
   currentTheme = signal<ThemeName>('default');
   private document = inject(DOCUMENT);
+  private localStorage = inject(LocalStorage);
 
   themes: Array<{ name: ThemeName; label: string; description: string }> = [
     { name: 'default', label: 'Default', description: 'Original blue theme' },
@@ -24,7 +26,7 @@ export class ThemeConfiguratorComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    const saved = localStorage.getItem('theme');
+    const saved = this.localStorage.getItem('theme');
     if (saved && this.themes.some(t => t.name === saved)) {
       this.currentTheme.set(saved as ThemeName);
     }
@@ -38,7 +40,7 @@ export class ThemeConfiguratorComponent implements OnInit {
   selectTheme(theme: ThemeName): void {
     this.currentTheme.set(theme);
     this.applyTheme(theme);
-    localStorage.setItem('theme', theme);
+    this.localStorage.setItem('theme', theme);
   }
 
   private applyTheme(theme: ThemeName): void {
