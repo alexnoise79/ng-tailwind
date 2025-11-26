@@ -1,0 +1,29 @@
+<div class="relative w-full">
+  <div class="relative flex rounded-md shadow-sm">
+    <div class="relative flex-1 flex items-center gap-1 min-h-0">
+      <div [class.focus-within:ring-2]="isCurrencyMode()" [class.focus-within:ring-primary-500]="isCurrencyMode()" class="relative flex-1 min-w-0 flex rounded-md">
+        <input
+          #inputElement
+          [type]="type()"
+          [value]="displayValue()"
+          [placeholder]="placeholder()"
+          [disabled]="isDisabled()"
+          [class]="inputClasses()"
+          [attr.aria-label]="placeholder() || 'Input field'"
+          (input)="onInput($event)"
+          (keydown)="onKeyDown($event)"
+          (focus)="onFocus()"
+          (blur)="onBlur()"
+        />
+
+        <!-- Currency display (input group on the right) -->
+        @if (isCurrencyMode()) {
+          <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-sm whitespace-nowrap focus-within:border-transparent">
+            {{ currency() }}
+          </span>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
