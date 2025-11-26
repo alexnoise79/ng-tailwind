@@ -15,5 +15,5 @@ export interface SelectOption {
 export interface SelectGroup {
   label: string;
   value: string;
-  items: SelectOption[];
+  items: Array<SelectOption>;
 }

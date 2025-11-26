@@ -12,7 +12,7 @@ export class ThemeConfiguratorComponent implements OnInit {
   isOpen = signal(false);
   currentTheme = signal<ThemeName>('default');
 
-  themes: { name: ThemeName; label: string; description: string }[] = [
+  themes: Array<{ name: ThemeName; label: string; description: string }> = [
     { name: 'default', label: 'Default', description: 'Original blue theme' },
     { name: 'cyberpunk', label: 'Cyberpunk', description: 'Neon purple and pink' },
     { name: 'minimalist', label: 'Minimalist', description: 'Clean black and white' },

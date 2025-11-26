@@ -20,7 +20,7 @@ import { NgtNav } from './nav.directive';
 })
 export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
   @Input() label = signal('');
-  @Input() routerLink = signal<string | string[] | null>(null);
+  @Input() routerLink = signal<string | Array<string> | null>(null);
   @Input() disabled = signal(false);
   @Input() isActive = signal(false);
   @Input() buttonId = signal('');

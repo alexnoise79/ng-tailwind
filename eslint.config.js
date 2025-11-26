@@ -25,7 +25,13 @@ export default [
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
-      ...angularPlugin.configs.recommended.rules
+      ...angularPlugin.configs.recommended.rules,
+      '@typescript-eslint/array-type': [
+        'error',
+        {
+          default: 'generic'
+        }
+      ]
     }
   },
   {

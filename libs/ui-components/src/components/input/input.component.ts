@@ -35,17 +35,17 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   readonly mask = input<string | null>(null);
   readonly chip = input<string | RegExp | null>(null);
   readonly chipFormat = input<string>(',');
-  readonly filter = input<string[] | RegExp | null>(null);
+  readonly filter = input<Array<string> | RegExp | null>(null);
 
   // Number-specific inputs
   readonly mode = input<NumberMode | null>(null);
   readonly currency = input<string>('USD');
 
   // Autocomplete inputs
-  @Input() set completeMethod(value: ((query: string) => Promise<unknown[]> | unknown[]) | null | undefined) {
+  @Input() set completeMethod(value: ((query: string) => Promise<Array<unknown>> | Array<unknown>) | null | undefined) {
     this._completeMethod.set(value || null);
   }
-  private _completeMethod = signal<((query: string) => Promise<unknown[]> | unknown[]) | null>(null);
+  private _completeMethod = signal<((query: string) => Promise<Array<unknown>> | Array<unknown>) | null>(null);
   readonly minQueryLength = input<number>(1);
   readonly delay = input<number>(300);
   readonly scrollHeight = input<string>('200px');
@@ -81,11 +81,11 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
   // Internal state
   private _displayValue = signal<string>('');
   private _isFocused = signal(false);
-  private _chips = signal<string[]>([]);
+  private _chips = signal<Array<string>>([]);
   private _currentChipValue = signal<string>('');
 
   // Autocomplete state
-  private _suggestions = signal<unknown[]>([]);
+  private _suggestions = signal<Array<unknown>>([]);
   private _isLoading = signal<boolean>(false);
   private _showPanel = signal<boolean>(false);
   private _focusedIndex = signal<number>(-1);
@@ -286,7 +286,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     this._currentChipValue.set(currentValue);
   }
 
-  private processChipParts(parts: string[], existingChips: string[], inputValue: string): { chips: string[]; currentValue: string } {
+  private processChipParts(parts: Array<string>, existingChips: Array<string>, inputValue: string): { chips: Array<string>; currentValue: string } {
     if (parts.length === 1) {
       // Only one part - check if it's an existing chip
       const trimmedPart = parts[0].trim();
@@ -335,7 +335,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return displayValue;
   }
 
-  private buildChipModelValue(chips: string[], currentValue: string): string {
+  private buildChipModelValue(chips: Array<string>, currentValue: string): string {
     const chipFormat = this.chipFormat();
     if (chips.length === 0) {
       return currentValue;
@@ -450,7 +450,7 @@ export class NgtInput implements ControlValueAccessor, OnInit, OnDestroy {
     return false;
   }
 
-  private createChipFromValue(valueBeforeSeparator: string, existingChips: string[]): void {
+  private createChipFromValue(valueBeforeSeparator: string, existingChips: Array<string>): void {
     const newChips = [...existingChips, valueBeforeSeparator];
     const newValue = this.buildChipModelValue(newChips, '');
 

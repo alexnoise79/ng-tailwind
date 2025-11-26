@@ -13,7 +13,7 @@ let navItemIdCounter = 0;
 export class NgtNavItem implements AfterContentInit, OnInit {
   readonly disabled = input<boolean>(false);
   readonly label = input<string | null>(null);
-  readonly routerLink = input<string | string[] | null>(null);
+  readonly routerLink = input<string | Array<string> | null>(null);
 
   activated = output<void>();
 

@@ -10,8 +10,8 @@ import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
 })
 export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   // Inputs
-  readonly value = input<unknown[]>([]);
-  readonly columns = input<TableColumn[]>([]);
+  readonly value = input<Array<unknown>>([]);
+  readonly columns = input<Array<TableColumn>>([]);
   readonly size = input<Size>('md');
   readonly showGridlines = input<boolean>(false);
   readonly striped = input<boolean>(false);
@@ -22,9 +22,9 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   readonly sortMode = input<'single' | 'multiple'>('single');
   readonly sortField = input<string | null>(null);
   readonly sortOrder = input<SortOrder>(null);
-  readonly multiSortMeta = input<SortMeta[]>([]);
+  readonly multiSortMeta = input<Array<SortMeta>>([]);
   readonly reorderableColumns = input<boolean>(false);
-  readonly columnGroups = input<TableColumn[][]>([]);
+  readonly columnGroups = input<Array<Array<TableColumn>>>([]);
   readonly rowGroupMode = input<'subheader' | 'rowspan' | null>(null);
   readonly groupRowsBy = input<string | null>(null);
   readonly scrollable = input<boolean>(false);
@@ -34,12 +34,12 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   // Outputs
   readonly sortChange = output<{ field: string; order: SortOrder }>();
   readonly pageChange = output<{ page: number; first: number; rows: number }>();
-  readonly columnReorder = output<{ columns: TableColumn[]; dragIndex: number; dropIndex: number }>();
+  readonly columnReorder = output<{ columns: Array<TableColumn>; dragIndex: number; dropIndex: number }>();
 
   // Template references
-  @ContentChild('header') headerTemplate?: TemplateRef<{ $implicit: TableColumn[]; columns: TableColumn[] }>;
-  @ContentChild('body') bodyTemplate?: TemplateRef<{ $implicit: unknown; rowIndex: number; columns: TableColumn[]; trClasses: string }>;
-  @ContentChild('footer') footerTemplate?: TemplateRef<{ $implicit: TableColumn[]; columns: TableColumn[] }>;
+  @ContentChild('header') headerTemplate?: TemplateRef<{ $implicit: Array<TableColumn>; columns: Array<TableColumn> }>;
+  @ContentChild('body') bodyTemplate?: TemplateRef<{ $implicit: unknown; rowIndex: number; columns: Array<TableColumn>; trClasses: string }>;
+  @ContentChild('footer') footerTemplate?: TemplateRef<{ $implicit: Array<TableColumn>; columns: Array<TableColumn> }>;
   @ContentChild('caption') captionTemplate?: TemplateRef<unknown>;
   @ContentChild('groupheader') groupHeaderTemplate?: TemplateRef<unknown>;
   @ContentChild('groupfooter') groupFooterTemplate?: TemplateRef<unknown>;
@@ -57,8 +57,8 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   protected readonly _currentPage = signal(1);
   protected readonly _sortField = signal<string | null>(null);
   protected readonly _sortOrder = signal<SortOrder>(null);
-  protected readonly _multiSortMeta = signal<SortMeta[]>([]);
-  protected readonly _columns = signal<TableColumn[]>([]);
+  protected readonly _multiSortMeta = signal<Array<SortMeta>>([]);
+  protected readonly _columns = signal<Array<TableColumn>>([]);
   protected readonly _draggedColumnIndex = signal<number | null>(null);
 
   // Computed values
@@ -154,7 +154,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
     return Math.ceil(total / rows);
   });
 
-  private dragListeners: (() => void)[] = [];
+  private dragListeners: Array<() => void> = [];
   private isColumnReorderSetup = false;
   private lastReorderableState = false;
   private lastColumnsLength = 0;

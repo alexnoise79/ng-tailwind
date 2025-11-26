@@ -40,7 +40,7 @@ export class TablePage {
   copyToClipboard(code: string): void {
     copyToClipboard(code, this.toastService);
   }
-  products = signal<Product[]>([
+  products = signal<Array<Product>>([
     { code: '001', name: 'Product 1', category: 'Electronics', quantity: 10, price: 99.99, rating: 4, inventoryStatus: 'INSTOCK' },
     { code: '002', name: 'Product 2', category: 'Clothing', quantity: 25, price: 49.99, rating: 3, inventoryStatus: 'INSTOCK' },
     { code: '003', name: 'Product 3', category: 'Electronics', quantity: 5, price: 199.99, rating: 5, inventoryStatus: 'LOWSTOCK' },
@@ -55,14 +55,14 @@ export class TablePage {
     { code: '012', name: 'Product 12', category: 'Electronics', quantity: 7, price: 179.99, rating: 4, inventoryStatus: 'INSTOCK' }
   ]);
 
-  basicColumns: TableColumn[] = [
+  basicColumns: Array<TableColumn> = [
     { field: 'code', header: 'Code', sortable: true },
     { field: 'name', header: 'Name', sortable: true },
     { field: 'category', header: 'Category', sortable: true },
     { field: 'quantity', header: 'Quantity', sortable: true }
   ];
 
-  extendedColumns: TableColumn[] = [
+  extendedColumns: Array<TableColumn> = [
     { field: 'code', header: 'Code', sortable: true },
     { field: 'name', header: 'Name', sortable: true },
     { field: 'category', header: 'Category', sortable: true },
@@ -91,7 +91,7 @@ export class TablePage {
     console.log('Page change event:', event);
   }
 
-  onColumnReorder(event: { columns: TableColumn[]; dragIndex: number; dropIndex: number }): void {
+  onColumnReorder(event: { columns: Array<TableColumn>; dragIndex: number; dropIndex: number }): void {
     console.log('Column reorder event:', event);
     // Don't update the shared column arrays - each table maintains its own state
     // The table component handles the reordering internally, so we don't need to update the input

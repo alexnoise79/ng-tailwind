@@ -23,9 +23,9 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
 
   @ContentChildren(NgtNavItem) navItems!: QueryList<NgtNavItem>;
 
-  items = signal<NgtNavItem[]>([]);
+  items = signal<Array<NgtNavItem>>([]);
   selectedId = signal<string | null>(null);
-  private routerLinkItems = new Map<string, string | string[]>();
+  private routerLinkItems = new Map<string, string | Array<string>>();
   private elementRef = inject(ElementRef);
   private renderer = inject(Renderer2);
   private injector = inject(Injector);
@@ -81,7 +81,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     }
   }
 
-  registerRouterLinkItem(itemId: string, routerLink: string | string[]): void {
+  registerRouterLinkItem(itemId: string, routerLink: string | Array<string>): void {
     this.routerLinkItems.set(itemId, routerLink);
     // Check active state after registration
     if (this.router) {

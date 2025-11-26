@@ -14,7 +14,7 @@ interface NavItem {
 
 interface NavGroup {
   name: string;
-  items: NavItem[];
+  items: Array<NavItem>;
 }
 
 @Component({
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private routerSubscription?: Subscription;
 
-  navigationGroups: NavGroup[] = [
+  navigationGroups: Array<NavGroup> = [
     {
       name: 'Panel',
       items: [
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   ];
 
-  get sortedNavigationGroups(): NavGroup[] {
+  get sortedNavigationGroups(): Array<NavGroup> {
     return this.navigationGroups
       .map(group => ({
         ...group,

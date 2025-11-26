@@ -417,7 +417,7 @@ export class InputPage {
   }
 
   // Autocomplete methods
-  async searchItems(query: string): Promise<AutocompleteItem[]> {
+  async searchItems(query: string): Promise<Array<AutocompleteItem>> {
     return this.autocompleteService.search(query, 800);
   }
 

@@ -96,7 +96,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   // Generate years list (100 years range: 50 years before and 50 years after current year)
   availableYears = computed(() => {
     const currentYear = new Date().getFullYear();
-    const years: number[] = [];
+    const years: Array<number> = [];
     for (let i = currentYear - 50; i <= currentYear + 50; i++) {
       years.push(i);
     }
@@ -246,7 +246,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     const year = this.currentYear();
     const daysInMonth = this.getDaysInMonth(month, year);
     const firstDay = this.getFirstDayOfMonth(month, year);
-    const days: (NgtDateStruct | null)[] = [];
+    const days: Array<NgtDateStruct | null> = [];
 
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {

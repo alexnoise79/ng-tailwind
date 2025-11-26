@@ -19,13 +19,13 @@ import { Size, SelectOption, SelectGroup } from '../../models';
 })
 export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   // Inputs
-  @Input() set options(value: Record<string, unknown>[] | unknown[] | null | undefined) {
+  @Input() set options(value: Array<Record<string, unknown>> | Array<unknown> | null | undefined) {
     if (value) {
       this._options.set(value);
       this.processOptions();
     }
   }
-  private _options = signal<Record<string, unknown>[] | unknown[]>([]);
+  private _options = signal<Array<Record<string, unknown>> | Array<unknown>>([]);
 
   @Input() set optionLabel(value: string | null | undefined) {
     this._optionLabel.set(value || 'label');
@@ -96,9 +96,9 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   private _isOpen = signal(false);
   private _filterText = signal<string>('');
   private _focusedIndex = signal<number>(-1);
-  private _filteredOptions = signal<SelectOption[]>([]);
-  private _groupedOptions = signal<SelectGroup[]>([]);
-  private _processedOptions = signal<SelectOption[]>([]);
+  private _filteredOptions = signal<Array<SelectOption>>([]);
+  private _groupedOptions = signal<Array<SelectGroup>>([]);
+  private _processedOptions = signal<Array<SelectOption>>([]);
   private _isOpening = false;
 
   // ControlValueAccessor callbacks
@@ -232,7 +232,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
 
   private processOptions(): void {
     const options = this._options();
-    const processed: SelectOption[] = [];
+    const processed: Array<SelectOption> = [];
 
     for (const option of options) {
       if (this.isPrimitive(option)) {
@@ -283,7 +283,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
 
     const processed = this.processedOptions();
-    const groups = new Map<string, SelectOption[]>();
+    const groups = new Map<string, Array<SelectOption>>();
 
     for (const option of processed) {
       const groupKey = this.getOptionGroup(option) || '';
@@ -296,7 +296,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
       }
     }
 
-    const grouped: SelectGroup[] = [];
+    const grouped: Array<SelectGroup> = [];
     for (const [key, items] of groups.entries()) {
       grouped.push({
         label: key,
@@ -573,7 +573,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  private focusNext(options: SelectOption[]): void {
+  private focusNext(options: Array<SelectOption>): void {
     let index = this.focusedIndex();
     index = index < options.length - 1 ? index + 1 : 0;
 
@@ -593,7 +593,7 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     this.scrollToFocused();
   }
 
-  private focusPrevious(options: SelectOption[]): void {
+  private focusPrevious(options: Array<SelectOption>): void {
     let index = this.focusedIndex();
     index = index > 0 ? index - 1 : options.length - 1;
 
@@ -664,10 +664,10 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     return classMerge(base, sizeClasses[this.size()]);
   }
 
-  getFlatOptions(): SelectOption[] {
+  getFlatOptions(): Array<SelectOption> {
     if (this.group()) {
       const groups = this.groupedOptions();
-      const flat: SelectOption[] = [];
+      const flat: Array<SelectOption> = [];
       for (const group of groups) {
         flat.push(...group.items);
       }

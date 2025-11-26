@@ -48,7 +48,7 @@ export class NgtPagination {
     const total = this.totalPagesValue();
     const current = this._currentPage();
     const maxVisible = this.maxVisiblePages();
-    const pages: number[] = [];
+    const pages: Array<number> = [];
 
     if (total <= maxVisible) {
       // Show all pages if total is less than max visible
