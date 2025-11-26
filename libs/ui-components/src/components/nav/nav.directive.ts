@@ -67,13 +67,13 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
         setTimeout(() => {
           this.checkRouterActiveState();
         }, 0);
-        
+
         // Subscribe to router events to update on navigation
-        this.routerSubscription = this.router.events
-          .pipe(filter(event => event instanceof NavigationEnd))
-          .subscribe(() => {
+        this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe({
+          next: () => {
             this.checkRouterActiveState();
-          });
+          }
+        });
       } else if (this.items().length > 0) {
         // Only auto-select first item if not using routerLink
         this.selectItem(this.items()[0].id);
@@ -93,7 +93,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
 
   private checkRouterActiveState(): void {
     if (!this.router) return;
-    
+
     const currentUrl = this.router.url;
     let activeItemId: string | null = null;
 
@@ -101,7 +101,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     for (const [itemId, routerLink] of this.routerLinkItems.entries()) {
       const linkPath = Array.isArray(routerLink) ? routerLink[0] : routerLink;
       const normalizedLink = linkPath.startsWith('/') ? linkPath : `/${linkPath}`;
-      
+
       // Exact match or starts with the link path followed by /
       if (currentUrl === normalizedLink || currentUrl.startsWith(normalizedLink + '/')) {
         activeItemId = itemId;

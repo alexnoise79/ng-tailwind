@@ -5,11 +5,8 @@
       "package-name": "@ngtailwind/ngtailwind",
       "version-file": "libs/ui-components/package.json",
       "changelog-path": "libs/ui-components/CHANGELOG.md",
-      "extra-files": [
-        "package.json"
-      ]
+      "extra-files": ["package.json"]
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
-

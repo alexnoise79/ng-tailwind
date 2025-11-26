@@ -104,10 +104,12 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     // Close mobile menu on navigation
-    this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      // Close menu if in mobile mode (screen width < 1024px, which is the lg breakpoint)
-      if (window.innerWidth < 1024 && this.isMobileMenuOpen) {
-        this.closeMobileMenu();
+    this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe({
+      next: () => {
+        // Close menu if in mobile mode (screen width < 1024px, which is the lg breakpoint)
+        if (window.innerWidth < 1024 && this.isMobileMenuOpen) {
+          this.closeMobileMenu();
+        }
       }
     });
   }

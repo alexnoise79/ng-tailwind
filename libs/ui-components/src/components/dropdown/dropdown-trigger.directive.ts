@@ -12,4 +12,3 @@ export class NgtDropdownTrigger {
     this.dropdown.toggle();
   }
 }
-
