@@ -1,13 +1,13 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 import { AutocompleteService, AutocompleteItem } from '../../services/autocomplete.service';
 
 @Component({
   selector: 'section.input',
-  imports: [FormsModule, NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
+  imports: [FormsModule, NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './input.page.html'
 })
 export class InputPage {
@@ -355,7 +355,7 @@ export class InputPage {
   </ng-template>
 </ngt-input>`,
       ts: `import { Component, signal, inject } from '@angular/core';
-import { NgtInput, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { NgtInputAutocomplete, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
 import { AutocompleteService, AutocompleteItem } from './services/autocomplete.service';
 
 export class InputPage {
