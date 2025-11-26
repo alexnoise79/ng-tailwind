@@ -15,3 +15,7 @@ alwaysApply: true
 - Commit message max length 100 chars (total for all lines)
 
 - Do not use window and document directly for SSR issues
+
+- Never use :void as a type on a return function
+
+- Never use "as unknown as" for type conversion
