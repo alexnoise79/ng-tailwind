@@ -1,5 +1,6 @@
 /// <reference types="vitest/globals" />
-import { NgtToast, ToastSeverity } from './toast.component';
+import { NgtToast } from './toast.component';
+import { Variant } from '../../models';
 import { runInInjectionContext, Injector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { signal } from '@angular/core';
@@ -71,7 +72,7 @@ describe('NgtToast', () => {
   });
 
   describe('Severity', () => {
-    const severities: ToastSeverity[] = ['success', 'info', 'warning', 'danger'];
+    const severities: Variant[] = ['success', 'info', 'warning', 'danger', 'primary', 'secondary', 'light', 'dark'];
 
     severities.forEach(severity => {
       it(`should apply correct classes for ${severity} severity`, () => {
