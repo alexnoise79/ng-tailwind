@@ -52,7 +52,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.escapeListener = (event: KeyboardEvent) => {
       if (this.isOpen() && event.key === 'Escape') {
         this.handleClose();
@@ -61,7 +61,7 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     this.document.addEventListener('keydown', this.escapeListener as EventListener);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.escapeListener) {
       this.document.removeEventListener('keydown', this.escapeListener);
     }
@@ -71,13 +71,13 @@ export class NgtOffCanvas implements OnInit, OnDestroy {
     this.document.body.style.overflow = '';
   }
 
-  onBackdropClick(): void {
+  onBackdropClick() {
     if (this.closeOnBackdropClick()) {
       this.handleClose();
     }
   }
 
-  handleClose(): void {
+  handleClose() {
     this.closed.emit();
   }
 

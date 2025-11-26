@@ -9,12 +9,12 @@ export class TrapFocusDirective implements AfterViewInit, OnDestroy {
   private elementRef = inject(ElementRef);
   private focusTrap: FocusTrap | null = null;
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.focusTrap = this.focusTrapFactory.create(this.elementRef.nativeElement);
     this.focusTrap.focusInitialElement();
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     if (this.focusTrap) {
       this.focusTrap.destroy();
     }

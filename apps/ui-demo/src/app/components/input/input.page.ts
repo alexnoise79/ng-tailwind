@@ -1,13 +1,13 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 import { AutocompleteService, AutocompleteItem } from '../../services/autocomplete.service';
 
 @Component({
   selector: 'section.input',
-  imports: [FormsModule, NgtInput, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
+  imports: [FormsModule, NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './input.page.html'
 })
 export class InputPage {
@@ -92,7 +92,7 @@ export class InputPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -126,8 +126,15 @@ export class InputPage {
   placeholder="Enter phone"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   textValue1 = signal<string>('');
   numberValue1 = signal<number>(0);
@@ -159,8 +166,15 @@ export class InputPage {
   placeholder="Large input"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   textValue2 = signal<string>('');
   textValue3 = signal<string>('');
@@ -174,8 +188,15 @@ export class InputPage {
   [disabled]="true"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   disabledValue = signal<string>('Disabled input');
 }`
@@ -197,8 +218,15 @@ export class InputPage {
   placeholder="Enter amount"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputDecimal, NgtInputCurrency } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputDecimal, NgtInputCurrency],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   decimalValue = signal<number>(0);
   currencyValue = signal<number>(0);
@@ -221,8 +249,15 @@ export class InputPage {
   placeholder="Pre-filled with clear"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   clearValue1 = signal<string>('');
   clearValue2 = signal<string>('Pre-filled value');
@@ -252,8 +287,15 @@ export class InputPage {
   placeholder="Mixed format"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputMask } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputMask],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   maskValue1 = signal<string>('');
   maskValue2 = signal<string>('');
@@ -278,8 +320,15 @@ export class InputPage {
   placeholder="Enter words separated by space"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputChip } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputChip],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   chipValue1 = signal<string>('');
   chipValue2 = signal<string>('');
@@ -302,8 +351,15 @@ export class InputPage {
   placeholder="Letters only"
   class="w-full md:w-64"
 />`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   filterValue1 = signal<string>('');
   filterValue2 = signal<string>('');
@@ -355,9 +411,15 @@ export class InputPage {
   </ng-template>
 </ngt-input>`,
       ts: `import { Component, signal, inject } from '@angular/core';
-import { NgtInput, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { FormsModule } from '@angular/forms';
+import { NgtInputAutocomplete, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
 import { AutocompleteService, AutocompleteItem } from './services/autocomplete.service';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputAutocomplete],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   private autocompleteService = inject(AutocompleteService);
   
@@ -369,7 +431,7 @@ export class InputPage {
     return this.autocompleteService.search(query, 300);
   }
 
-  onItemSelect(event: AutoCompleteSelectEvent): void {
+  onItemSelect(event: AutoCompleteSelectEvent) {
     console.log('Selected:', event.value);
     // Handle selection
   }
@@ -395,13 +457,20 @@ export class InputPage {
   </div>
   <ngt-button type="submit" variant="primary">Submit</ngt-button>
 </form>`,
-      ts: `import { signal } from '@angular/core';
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtInputBasic, NgtButton } from '@ng-tailwind/ui-components';
 
+@Component({
+  selector: 'app-input',
+  imports: [FormsModule, NgtInputBasic, NgtButton],
+  template: \`<!-- template here -->\`
+})
 export class InputPage {
   emailValue1 = signal<string>('');
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }
@@ -411,17 +480,17 @@ export class InputPage {
 
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }
 
   // Autocomplete methods
-  async searchItems(query: string): Promise<AutocompleteItem[]> {
+  async searchItems(query: string): Promise<Array<AutocompleteItem>> {
     return this.autocompleteService.search(query, 800);
   }
 
-  onItemSelect(event: AutoCompleteSelectEvent): void {
+  onItemSelect(event: AutoCompleteSelectEvent) {
     this.selectedItem.set(event.value as AutocompleteItem);
     this.toastService.show({
       severity: 'success',

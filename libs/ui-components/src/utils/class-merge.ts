@@ -1,7 +1,7 @@
 /**
  * Merges multiple class strings, removing duplicates and empty values
  */
-export function classMerge(...classes: (string | undefined | null | false)[]): string {
+export function classMerge(...classes: Array<string | undefined | null | false>): string {
   return classes
     .filter(Boolean)
     .join(' ')

@@ -331,11 +331,11 @@ export class MyComponent {
 ```
 
 ```html
-<ngt-dropdown [align]="'left'" [isOpen]="dropdownOpen">
+<ngt-dropdown [placement]="'bottom-start'" [isOpen]="dropdownOpen">
   <button ngt-dropdown-trigger class="px-4 py-2 bg-primary-600 text-white rounded-md">
     Open Menu
   </button>
-  <div ngt-dropdown-content class="mt-2 w-48 bg-white rounded-md shadow-lg">
+  <div ngt-dropdown-content class="w-48 bg-white rounded-md shadow-lg border border-gray-200">
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 1</a>
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 2</a>
     <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100">Option 3</a>

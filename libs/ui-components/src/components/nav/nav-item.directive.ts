@@ -8,13 +8,12 @@ import { NgtNavItemLink } from './nav-item-link.component';
 let navItemIdCounter = 0;
 
 @Directive({
-  selector: 'ngt-nav-item, [ngtNavItem]',
-  standalone: true
+  selector: 'ngt-nav-item, [ngtNavItem]'
 })
 export class NgtNavItem implements AfterContentInit, OnInit {
   readonly disabled = input<boolean>(false);
   readonly label = input<string | null>(null);
-  readonly routerLink = input<string | string[] | null>(null);
+  readonly routerLink = input<string | Array<string> | null>(null);
 
   activated = output<void>();
 
@@ -42,7 +41,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Store original classes
     const nativeEl = this.elementRef.nativeElement;
     this.originalClasses = nativeEl.className || '';
@@ -58,7 +57,7 @@ export class NgtNavItem implements AfterContentInit, OnInit {
     }
   }
 
-  ngAfterContentInit(): void {
+  ngAfterContentInit() {
     // If used as an element (<ngt-nav-item>) with label but no ngtNavLink child,
     // create a link component dynamically using Angular's component system
     const nativeEl = this.elementRef.nativeElement;

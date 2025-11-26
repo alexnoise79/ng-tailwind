@@ -96,7 +96,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   // Generate years list (100 years range: 50 years before and 50 years after current year)
   availableYears = computed(() => {
     const currentYear = new Date().getFullYear();
-    const years: number[] = [];
+    const years: Array<number> = [];
     for (let i = currentYear - 50; i <= currentYear + 50; i++) {
       years.push(i);
     }
@@ -131,7 +131,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     const startDate = this.parseDateInput(this.startDate());
     if (startDate) {
       this._currentMonth.set(startDate.month);
@@ -246,7 +246,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     const year = this.currentYear();
     const daysInMonth = this.getDaysInMonth(month, year);
     const firstDay = this.getFirstDayOfMonth(month, year);
-    const days: (NgtDateStruct | null)[] = [];
+    const days: Array<NgtDateStruct | null> = [];
 
     // Add empty cells for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
@@ -302,7 +302,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     return false;
   }
 
-  selectDate(date: NgtDateStruct): void {
+  selectDate(date: NgtDateStruct) {
     if (this.isDisabled(date)) return;
 
     const dateWithTime: NgtDateStruct = {
@@ -321,7 +321,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     this.closeCalendar();
   }
 
-  onTimeChange(time: NgtTimeStruct): void {
+  onTimeChange(time: NgtTimeStruct) {
     this._currentHour.set(time.hour);
     this._currentMinute.set(time.minute);
     if (time.second !== undefined) {
@@ -330,7 +330,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     this.emitDateIfSelected();
   }
 
-  private emitDateIfSelected(): void {
+  private emitDateIfSelected() {
     const model = this.modelValue();
     if (model) {
       const dateWithTime: NgtDateStruct = {
@@ -347,7 +347,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   }
 
   // ControlValueAccessor methods
-  writeValue(value: DateInput): void {
+  writeValue(value: DateInput) {
     const parsed = this.parseDateInput(value);
     if (parsed) {
       const currentModel = this._model();
@@ -374,32 +374,32 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     }
   }
 
-  registerOnChange(fn: (value: string | null) => void): void {
+  registerOnChange(fn: (value: string | null) => void) {
     this.onChange = fn;
   }
 
-  registerOnTouched(fn: () => void): void {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
-  setDisabledState(_isDisabled: boolean): void {
+  setDisabledState(_isDisabled: boolean) {
     // This will be handled by the disabled input
     void _isDisabled; // Explicitly mark as intentionally unused
   }
 
   // Calendar visibility methods
-  openCalendar(): void {
+  openCalendar() {
     if (!this.disabled()) {
       this._isOpen.set(true);
     }
   }
 
-  closeCalendar(): void {
+  closeCalendar() {
     this._isOpen.set(false);
     this.onTouched();
   }
 
-  toggleCalendar(): void {
+  toggleCalendar() {
     if (this.isOpen()) {
       this.closeCalendar();
     } else {
@@ -407,20 +407,20 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     }
   }
 
-  onInputFocus(): void {
+  onInputFocus() {
     if (!this.showIcon() && !this.disabled()) {
       this.openCalendar();
     }
     this.onTouched();
   }
 
-  onIconClick(): void {
+  onIconClick() {
     if (!this.disabled()) {
       this.toggleCalendar();
     }
   }
 
-  onOutsideClick(): void {
+  onOutsideClick() {
     this.closeCalendar();
   }
 
@@ -431,7 +431,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     return this.formatDateOutput(model);
   }
 
-  previousMonth(): void {
+  previousMonth() {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
 
@@ -448,7 +448,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  nextMonth(): void {
+  nextMonth() {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
 
@@ -465,7 +465,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  previousYear(): void {
+  previousYear() {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
     this._currentYear.set(this.currentYear() - 1);
@@ -476,7 +476,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  nextYear(): void {
+  nextYear() {
     const prevMonth = this.currentMonth();
     const prevYear = this.currentYear();
     this._currentYear.set(this.currentYear() + 1);
@@ -487,7 +487,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  onYearChange(event: Event): void {
+  onYearChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     const newYear = parseInt(target.value, 10);
     const prevMonth = this.currentMonth();
@@ -500,7 +500,7 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
     });
   }
 
-  onMonthChange(event: Event): void {
+  onMonthChange(event: Event) {
     const target = event.target as HTMLSelectElement;
     const newMonth = parseInt(target.value, 10);
     const prevMonth = this.currentMonth();

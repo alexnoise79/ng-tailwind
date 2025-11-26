@@ -3,7 +3,6 @@ import { NgtAccordionItem } from './accordion-item.directive';
 
 @Directive({
   selector: '[ngtAccordionButton]',
-  standalone: true,
   host: {
     '[class.w-full]': 'true',
     '[class.flex]': 'true',
@@ -34,7 +33,7 @@ export class NgtAccordionButton {
   isOpen = computed(() => this.accordionItem?.isOpen() || false);
 
   @HostListener('click', ['$event'])
-  onClick(event: Event): void {
+  onClick(event: Event) {
     if (this.isDisabled()) {
       event.preventDefault();
       event.stopPropagation();

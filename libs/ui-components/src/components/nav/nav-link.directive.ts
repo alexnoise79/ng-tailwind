@@ -1,11 +1,18 @@
-import { Directive, HostListener, inject, ElementRef, HostBinding, effect, Renderer2, OnInit, OnDestroy, EffectRef, Injector, runInInjectionContext } from '@angular/core';
+import { Directive, HostListener, inject, ElementRef, effect, Renderer2, OnInit, OnDestroy, EffectRef, Injector, runInInjectionContext } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
 
 @Directive({
   selector: '[ngtNavLink]',
-  standalone: true
+  host: {
+    '[attr.id]': 'buttonId()',
+    '[attr.aria-selected]': 'ariaSelected()',
+    '[attr.aria-disabled]': 'ariaDisabled()',
+    '[attr.tabindex]': 'tabindex()',
+    '[attr.role]': '"tab"',
+    '[attr.disabled]': 'disabled()'
+  }
 })
 export class NgtNavLink implements OnInit, OnDestroy {
   private navItem = inject(NgtNavItem, { optional: true });
@@ -17,7 +24,7 @@ export class NgtNavLink implements OnInit, OnDestroy {
   private currentClasses = '';
   private effectRef?: EffectRef;
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Store original classes
     const nativeEl = this.elementRef.nativeElement;
     this.currentClasses = nativeEl.className || '';
@@ -37,42 +44,32 @@ export class NgtNavLink implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.effectRef?.destroy();
   }
 
-  @HostBinding('attr.id')
   get buttonId(): string {
     return this.navItem?.buttonId() || '';
   }
 
-  @HostBinding('attr.aria-selected')
   get ariaSelected(): string | null {
     return this.navItem?.isActive() ? 'true' : null;
   }
 
-  @HostBinding('attr.aria-disabled')
   get ariaDisabled(): string | null {
     return this.navItem?.disabled() ? 'true' : null;
   }
 
-  @HostBinding('attr.tabindex')
   get tabindex(): number {
     return this.navItem?.isActive() && !this.navItem?.disabled() ? 0 : -1;
   }
 
-  @HostBinding('attr.role')
-  get role(): string {
-    return 'tab';
-  }
-
-  @HostBinding('attr.disabled')
   get disabled(): boolean | null {
     return this.navItem?.disabled() ? true : null;
   }
 
   @HostListener('click', ['$event'])
-  onClick(event: Event): void {
+  onClick(event: Event) {
     if (this.navItem?.disabled()) {
       event.preventDefault();
       event.stopPropagation();

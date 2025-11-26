@@ -11,7 +11,7 @@ export class NgtToastContainer implements AfterViewInit {
 
   private readonly toastService = inject(NgtToastService);
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.toastService.setContainer(this.containerRef);
   }
 }

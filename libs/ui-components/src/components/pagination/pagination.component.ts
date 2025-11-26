@@ -48,7 +48,7 @@ export class NgtPagination {
     const total = this.totalPagesValue();
     const current = this._currentPage();
     const maxVisible = this.maxVisiblePages();
-    const pages: number[] = [];
+    const pages: Array<number> = [];
 
     if (total <= maxVisible) {
       // Show all pages if total is less than max visible
@@ -92,7 +92,7 @@ export class NgtPagination {
 
   isLastPage = computed(() => this._currentPage() === this.totalPagesValue());
 
-  goToPage(page: number): void {
+  goToPage(page: number) {
     if (this.disabled()) {
       return;
     }
@@ -103,25 +103,25 @@ export class NgtPagination {
     }
   }
 
-  goToFirst(): void {
+  goToFirst() {
     if (!this.isFirstPage()) {
       this.goToPage(1);
     }
   }
 
-  goToLast(): void {
+  goToLast() {
     if (!this.isLastPage()) {
       this.goToPage(this.totalPagesValue());
     }
   }
 
-  goToPrevious(): void {
+  goToPrevious() {
     if (!this.isFirstPage()) {
       this.goToPage(this._currentPage() - 1);
     }
   }
 
-  goToNext(): void {
+  goToNext() {
     if (!this.isLastPage()) {
       this.goToPage(this._currentPage() + 1);
     }

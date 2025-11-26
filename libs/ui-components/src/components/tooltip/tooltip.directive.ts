@@ -1,14 +1,15 @@
 import { Directive, ElementRef, Renderer2, OnDestroy, input, signal, computed, inject, HostListener, effect, ViewContainerRef, TemplateRef, EmbeddedViewRef } from '@angular/core';
 import { Position } from '../../models';
+import { WINDOW } from '@universal/window.service';
 
 @Directive({
-  selector: '[ngtTooltip]',
-  standalone: true
+  selector: '[ngtTooltip]'
 })
 export class NgtTooltip implements OnDestroy {
   private elementRef = inject(ElementRef<HTMLElement>);
   private renderer = inject(Renderer2);
   private viewContainerRef = inject(ViewContainerRef);
+  private window = inject(WINDOW);
 
   readonly ngtTooltip = input<string>('');
   readonly content = input<string | TemplateRef<HTMLElement> | null>(null);
@@ -37,10 +38,12 @@ export class NgtTooltip implements OnDestroy {
 
   constructor() {
     // Ensure host element has relative positioning for tooltip absolute positioning
-    const hostElement = this.elementRef.nativeElement;
-    const currentPosition = window.getComputedStyle(hostElement).position;
-    if (currentPosition === 'static' || !currentPosition) {
-      this.renderer.setStyle(hostElement, 'position', 'relative');
+    if (this.window) {
+      const hostElement = this.elementRef.nativeElement;
+      const currentPosition = this.window.getComputedStyle(hostElement).position;
+      if (currentPosition === 'static' || !currentPosition) {
+        this.renderer.setStyle(hostElement, 'position', 'relative');
+      }
     }
 
     // Effect to update tooltip when content, text or position changes
@@ -142,8 +145,9 @@ export class NgtTooltip implements OnDestroy {
     }
 
     // Use showDelay (preferred) or fall back to delay for backward compatibility
+    if (!this.window) return;
     const showDelayValue = this.showDelay() !== 200 ? this.showDelay() : this.delay();
-    this.showTimeout = window.setTimeout(() => {
+    this.showTimeout = this.window.setTimeout(() => {
       this.createTooltipElement();
       if (this.tooltipElement) {
         this.renderer.setStyle(this.tooltipElement, 'display', 'block');
@@ -158,7 +162,8 @@ export class NgtTooltip implements OnDestroy {
       this.showTimeout = undefined;
     }
 
-    this.hideTimeout = window.setTimeout(() => {
+    if (!this.window) return;
+    this.hideTimeout = this.window.setTimeout(() => {
       if (this.tooltipElement) {
         this.renderer.setStyle(this.tooltipElement, 'display', 'none');
       }

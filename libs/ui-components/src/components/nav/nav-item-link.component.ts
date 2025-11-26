@@ -1,13 +1,10 @@
 import { Component, Input, computed, effect, inject, Injector, runInInjectionContext, signal, OnInit, OnDestroy, EffectRef, AfterViewInit } from '@angular/core';
-import { RouterLink, Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { RouterLink } from '@angular/router';
 import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
 
 @Component({
   selector: 'ngt-nav-item-link',
-  standalone: true,
   imports: [RouterLink],
   template: `
     @if (routerLink(); as link) {
@@ -23,7 +20,7 @@ import { NgtNav } from './nav.directive';
 })
 export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
   @Input() label = signal('');
-  @Input() routerLink = signal<string | string[] | null>(null);
+  @Input() routerLink = signal<string | Array<string> | null>(null);
   @Input() disabled = signal(false);
   @Input() isActive = signal(false);
   @Input() buttonId = signal('');
@@ -31,9 +28,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
   @Input() nav?: NgtNav;
 
   private injector = inject(Injector);
-  private router = inject(Router);
   private effectRef?: EffectRef;
-  private routerSubscription?: Subscription;
 
   navClasses = computed(() => {
     const nav = this.nav;
@@ -52,7 +47,7 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     return nav.getNavButtonClasses(navItem);
   });
 
-  ngOnInit(): void {
+  ngOnInit() {
     // Update classes reactively when active state or nav changes
     // This runs after inputs are set
     runInInjectionContext(this.injector, () => {
@@ -72,47 +67,30 @@ export class NgtNavItemLink implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // Sync router active state with nav component selection
+    // This is now handled centrally by the nav component
     if (this.routerLink() && this.nav && this.navItem) {
-      const checkActive = () => {
-        const currentUrl = this.router.url;
-        const linkValue = this.routerLink();
-        if (linkValue) {
-          const linkPath = Array.isArray(linkValue) ? linkValue[0] : linkValue;
-          const normalizedLink = linkPath.startsWith('/') ? linkPath : `/${linkPath}`;
-          const isActive = currentUrl === normalizedLink || currentUrl.startsWith(normalizedLink + '/');
-
-          if (isActive && this.nav && this.navItem) {
-            this.nav.selectItem(this.navItem.id);
-          }
-        }
-      };
-
-      // Check on initial load
-      checkActive();
-
-      // Subscribe to router events to update on navigation
-      this.routerSubscription = this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-        checkActive();
-      });
+      // Notify nav component about this routerLink item
+      this.nav.registerRouterLinkItem(this.navItem.id, this.routerLink()!);
     }
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.effectRef?.destroy();
-    this.routerSubscription?.unsubscribe();
   }
 
-  handleClick(event: Event): void {
+  handleClick(event: Event) {
     if (this.disabled()) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
 
-    // Select this item
-    if (this.nav && this.navItem) {
+    // Only select immediately if there's no routerLink
+    // For routerLinks, selection will happen after navigation completes
+    // via the NavigationEnd event handler in ngAfterViewInit
+    if (!this.routerLink() && this.nav && this.navItem) {
       this.nav.selectItem(this.navItem.id);
     }
   }

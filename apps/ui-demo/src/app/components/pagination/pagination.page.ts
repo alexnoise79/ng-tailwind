@@ -44,11 +44,11 @@ export class PaginationPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
-  onPageChange(page: number, signalName: string): void {
+  onPageChange(page: number, signalName: string) {
     console.log(`${signalName} changed to page:`, page);
   }
 

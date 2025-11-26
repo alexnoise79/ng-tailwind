@@ -33,7 +33,7 @@ export class ButtonPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 

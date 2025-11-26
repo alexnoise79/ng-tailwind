@@ -1,8 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[ngtAccordionHeader]',
-  standalone: true
+  selector: '[ngtAccordionHeader]'
 })
 export class NgtAccordionHeader {
   constructor() {}

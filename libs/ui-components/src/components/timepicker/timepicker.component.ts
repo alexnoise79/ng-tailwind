@@ -58,7 +58,7 @@ export class NgtTimepicker implements OnInit {
   currentSecond = computed(() => this._currentSecond());
   currentMeridian = computed(() => this._meridian());
 
-  ngOnInit(): void {
+  ngOnInit() {
     if (this.modelValue()) {
       const model = this.modelValue()!;
       this._currentHour.set(model.hour);
@@ -101,7 +101,7 @@ export class NgtTimepicker implements OnInit {
     return null;
   }
 
-  updateMeridian(): void {
+  updateMeridian() {
     if (this.meridian()) {
       const hour = this.currentHour();
       this._meridian.set(hour >= 12 ? 'PM' : 'AM');
@@ -118,7 +118,7 @@ export class NgtTimepicker implements OnInit {
     return hour;
   }
 
-  incrementHour(): void {
+  incrementHour() {
     if (this.disabled()) return;
     const step = this.hourStep();
     let newHour = this.currentHour() + step;
@@ -142,7 +142,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  decrementHour(): void {
+  decrementHour() {
     if (this.disabled()) return;
     const step = this.hourStep();
     let newHour = this.currentHour() - step;
@@ -168,7 +168,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  incrementMinute(): void {
+  incrementMinute() {
     if (this.disabled()) return;
     const step = this.minuteStep();
     let newMinute = this.currentMinute() + step;
@@ -179,7 +179,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  decrementMinute(): void {
+  decrementMinute() {
     if (this.disabled()) return;
     const step = this.minuteStep();
     let newMinute = this.currentMinute() - step;
@@ -191,7 +191,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  incrementSecond(): void {
+  incrementSecond() {
     if (this.disabled()) return;
     const step = this.secondStep();
     let newSecond = this.currentSecond() + step;
@@ -202,7 +202,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  decrementSecond(): void {
+  decrementSecond() {
     if (this.disabled()) return;
     const step = this.secondStep();
     let newSecond = this.currentSecond() - step;
@@ -214,7 +214,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  onHourChange(event: Event): void {
+  onHourChange(event: Event) {
     if (this.disabled()) return;
     const target = event.target as HTMLInputElement;
     let value = parseInt(target.value, 10);
@@ -237,7 +237,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  onMinuteChange(event: Event): void {
+  onMinuteChange(event: Event) {
     if (this.disabled()) return;
     const target = event.target as HTMLInputElement;
     let value = parseInt(target.value, 10);
@@ -248,7 +248,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  onSecondChange(event: Event): void {
+  onSecondChange(event: Event) {
     if (this.disabled()) return;
     const target = event.target as HTMLInputElement;
     let value = parseInt(target.value, 10);
@@ -259,7 +259,7 @@ export class NgtTimepicker implements OnInit {
     this.emitTime();
   }
 
-  toggleMeridian(): void {
+  toggleMeridian() {
     if (this.disabled()) return;
     const newMeridian = this.currentMeridian() === 'AM' ? 'PM' : 'AM';
     this._meridian.set(newMeridian);
@@ -328,7 +328,7 @@ export class NgtTimepicker implements OnInit {
     return `${base} ${sizeClasses[this.size()]}`;
   });
 
-  private emitTime(): void {
+  private emitTime() {
     const time: NgtTimeStruct = {
       hour: this.currentHour(),
       minute: this.currentMinute(),

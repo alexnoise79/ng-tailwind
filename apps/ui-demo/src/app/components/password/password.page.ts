@@ -52,7 +52,7 @@ export class PasswordPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -149,7 +149,7 @@ export class PasswordPage {
   passwordValue1 = signal<string>('');
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }
@@ -159,7 +159,7 @@ export class PasswordPage {
 
   formSubmitted = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted');
   }

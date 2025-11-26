@@ -3,7 +3,6 @@ import { Directive, input, signal } from '@angular/core';
 @Directive({
   selector: '[ngtAccordion]',
   exportAs: 'NgtAccordion',
-  standalone: true,
   host: {
     '[class.border]': 'true',
     '[class.border-gray-200]': 'true',
@@ -18,7 +17,7 @@ export class NgtAccordion {
   readonly multiOpen = input<boolean>(false);
   openItems = signal<Set<string>>(new Set());
 
-  toggleItem(id: string): void {
+  toggleItem(id: string) {
     this.openItems.update(current => {
       const newSet = new Set(current);
       if (this.multiOpen()) {

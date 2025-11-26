@@ -1,7 +1,7 @@
 import { Component, Input, signal, computed, input } from '@angular/core';
 import { OutsideClickDirective } from '../../directives';
 
-export type DropdownAlign = 'left' | 'right';
+export type DropdownPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
 
 @Component({
   selector: 'ngt-dropdown',
@@ -9,23 +9,23 @@ export type DropdownAlign = 'left' | 'right';
   templateUrl: './dropdown.component.html'
 })
 export class NgtDropdown {
-  @Input() set align(value: DropdownAlign) {
-    this._align.set(value);
+  @Input() set placement(value: DropdownPlacement) {
+    this._placement.set(value);
   }
-  private _align = signal<DropdownAlign>('left');
-  alignValue = computed(() => this._align());
+  private _placement = signal<DropdownPlacement>('bottom-start');
+  placementValue = computed(() => this._placement());
 
   readonly isOpen = input(signal(false));
 
-  toggle(): void {
+  toggle() {
     this.isOpen().update(val => !val);
   }
 
-  close(): void {
+  close() {
     this.isOpen().set(false);
   }
 
-  open(): void {
+  open() {
     this.isOpen().set(true);
   }
 }

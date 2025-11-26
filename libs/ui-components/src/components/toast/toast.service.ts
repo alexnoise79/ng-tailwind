@@ -10,7 +10,7 @@ export class NgtToastService {
   private toasts: Map<string, ComponentRef<NgtToast>> = new Map();
   private toastCounter = 0;
 
-  setContainer(containerRef: ViewContainerRef): void {
+  setContainer(containerRef: ViewContainerRef) {
     this.containerRef = containerRef;
   }
 
@@ -59,7 +59,7 @@ export class NgtToastService {
     return toastId;
   }
 
-  remove(toastId: string): void {
+  remove(toastId: string) {
     const toastRef = this.toasts.get(toastId);
     if (toastRef) {
       toastRef.instance.close();
@@ -70,7 +70,7 @@ export class NgtToastService {
     }
   }
 
-  clear(): void {
+  clear() {
     this.toasts.forEach((_, toastId) => {
       this.remove(toastId);
     });

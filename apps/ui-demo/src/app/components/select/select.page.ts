@@ -16,11 +16,11 @@ export class SelectPage {
 
   // Basic
   selectedCity1 = signal<string | null>(null);
-  cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
+  cities = signal<Array<string>>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
 
   // Object options
   selectedCity2 = signal<City | null>(null);
-  cityObjects = signal<City[]>([
+  cityObjects = signal<Array<City>>([
     { name: 'New York', code: 'NY' },
     { name: 'London', code: 'LDN' },
     { name: 'Paris', code: 'PRS' },
@@ -30,7 +30,7 @@ export class SelectPage {
 
   // Key-Value pairs
   selectedCity3 = signal<string | null>(null);
-  cityKeyValue = signal<Record<string, string>[]>([{ NY: 'New York' }, { LDN: 'London' }, { PRS: 'Paris' }]);
+  cityKeyValue = signal<Array<Record<string, string>>>([{ NY: 'New York' }, { LDN: 'London' }, { PRS: 'Paris' }]);
 
   // Sizes
   selectedCity4 = signal<string | null>(null);
@@ -46,7 +46,7 @@ export class SelectPage {
 
   // With filter
   selectedCountry1 = signal<Country | null>(null);
-  countries = signal<Country[]>([
+  countries = signal<Array<Country>>([
     { name: 'United States', code: 'US' },
     { name: 'United Kingdom', code: 'UK' },
     { name: 'France', code: 'FR' },
@@ -60,12 +60,12 @@ export class SelectPage {
   ]);
 
   // Multiselect
-  selectedCities1 = signal<string[]>([]);
-  selectedCities2 = signal<City[]>([]);
+  selectedCities1 = signal<Array<string>>([]);
+  selectedCities2 = signal<Array<City>>([]);
 
   // Grouped options
   selectedCity10 = signal<City | null>(null);
-  groupedCities = signal<City[]>([
+  groupedCities = signal<Array<City>>([
     { name: 'New York', code: 'NY', country: 'USA' },
     { name: 'Los Angeles', code: 'LA', country: 'USA' },
     { name: 'Chicago', code: 'CHI', country: 'USA' },
@@ -85,12 +85,12 @@ export class SelectPage {
   selectedCityReactive = signal<string | null>(null);
   invalid = signal(false);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted with value:', this.selectedCityForm());
   }
 
-  onSelectChange(value: unknown): void {
+  onSelectChange(value: unknown) {
     console.log('Selection changed:', value);
   }
 
@@ -133,7 +133,7 @@ export class SelectPage {
   getActiveCodeTab = (demoKey: string) => this.codeViewUtil.getActiveCodeTab(demoKey, 'html');
 
   // Copy to clipboard functionality
-  copyToClipboard(code: string): void {
+  copyToClipboard(code: string) {
     copyToClipboard(code, this.toastService);
   }
 
@@ -173,7 +173,7 @@ export class SelectPage {
     { name: 'Paris', code: 'PRS' }
   ]);
 
-  onSelectChange(value: unknown): void {
+  onSelectChange(value: unknown) {
     console.log('Selection changed:', value);
   }
 }`
@@ -342,7 +342,7 @@ export class SelectPage {
   formSubmitted = signal(false);
   cities = signal<string[]>(['New York', 'London', 'Paris', 'Tokyo', 'Berlin']);
 
-  onSubmit(): void {
+  onSubmit() {
     this.formSubmitted.set(true);
     console.log('Form submitted with value:', this.selectedCityForm());
   }

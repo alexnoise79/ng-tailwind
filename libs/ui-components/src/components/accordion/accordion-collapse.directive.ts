@@ -3,7 +3,6 @@ import { NgtAccordionItem } from './accordion-item.directive';
 
 @Directive({
   selector: '[ngtAccordionCollapse]',
-  standalone: true,
   host: {
     '[class.overflow-hidden]': 'true',
     '[class.transition-all]': 'true',

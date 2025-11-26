@@ -5,8 +5,7 @@ let itemIdCounter = 0;
 
 @Directive({
   selector: '[ngtAccordionItem]',
-  exportAs: 'NgtAccordionItem',
-  standalone: true
+  exportAs: 'NgtAccordionItem'
 })
 export class NgtAccordionItem {
   readonly disabled = input<boolean>(false);
@@ -22,7 +21,7 @@ export class NgtAccordionItem {
     return this._isOpen();
   });
 
-  toggle(): void {
+  toggle() {
     if (this.disabled()) {
       return;
     }

@@ -2,8 +2,7 @@ import { Directive, Input, ViewContainerRef, inject, effect, OnInit, Injector, r
 import { NgtNav } from './nav.directive';
 
 @Directive({
-  selector: '[ngtNavOutlet]',
-  standalone: true
+  selector: '[ngtNavOutlet]'
 })
 export class NgtNavOutlet implements OnInit {
   private viewContainer = inject(ViewContainerRef);
@@ -11,7 +10,7 @@ export class NgtNavOutlet implements OnInit {
 
   @Input({ required: true }) ngtNavOutlet!: NgtNav;
 
-  ngOnInit(): void {
+  ngOnInit() {
     runInInjectionContext(this.injector, () => {
       effect(() => {
         const selectedId = this.ngtNavOutlet?.selectedId();
@@ -22,7 +21,7 @@ export class NgtNavOutlet implements OnInit {
     });
   }
 
-  private updateContent(selectedId: string): void {
+  private updateContent(selectedId: string) {
     this.viewContainer.clear();
 
     const selectedItem = this.ngtNavOutlet.items().find(item => item.id === selectedId);

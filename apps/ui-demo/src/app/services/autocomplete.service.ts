@@ -11,7 +11,7 @@ export interface AutocompleteItem {
   providedIn: 'root'
 })
 export class AutocompleteService {
-  private readonly items: AutocompleteItem[] = [
+  private readonly items: Array<AutocompleteItem> = [
     { id: 1, name: 'Apple', category: 'Fruit', description: 'A red or green fruit' },
     { id: 2, name: 'Banana', category: 'Fruit', description: 'A yellow tropical fruit' },
     { id: 3, name: 'Orange', category: 'Fruit', description: 'A citrus fruit' },
@@ -39,7 +39,7 @@ export class AutocompleteService {
     { id: 25, name: 'Quinoa', category: 'Grain', description: 'A superfood grain' }
   ];
 
-  async search(query: string, delay: number = 500): Promise<AutocompleteItem[]> {
+  async search(query: string, delay: number = 500): Promise<Array<AutocompleteItem>> {
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, delay));
 

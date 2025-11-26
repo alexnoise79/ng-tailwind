@@ -3,6 +3,7 @@ import tsParser from '@typescript-eslint/parser';
 import angularPlugin from '@angular-eslint/eslint-plugin';
 import angularTemplatePlugin from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
+import rxjsXPlugin from 'eslint-plugin-rxjs-x';
 
 export default [
   {
@@ -12,7 +13,8 @@ export default [
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       '@typescript-eslint': typescriptEslint,
-      '@angular-eslint': angularPlugin
+      '@angular-eslint': angularPlugin,
+      'rxjs-x': rxjsXPlugin
     },
     languageOptions: {
       parser: tsParser,
@@ -25,7 +27,20 @@ export default [
     },
     rules: {
       ...typescriptEslint.configs.recommended.rules,
-      ...angularPlugin.configs.recommended.rules
+      ...angularPlugin.configs.recommended.rules,
+      '@typescript-eslint/array-type': [
+        'error',
+        {
+          default: 'generic'
+        }
+      ],
+      'rxjs-x/prefer-observer': [
+        'error',
+        {
+          allowNext: false
+        }
+      ],
+      'rxjs-x/no-nested-subscribe': 'error'
     }
   },
   {

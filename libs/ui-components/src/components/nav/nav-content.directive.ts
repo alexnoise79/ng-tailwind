@@ -1,8 +1,7 @@
 import { Directive, TemplateRef, inject } from '@angular/core';
 
 @Directive({
-  selector: '[ngtNavContent]',
-  standalone: true
+  selector: '[ngtNavContent]'
 })
 export class NgtNavContent {
   templateRef = inject(TemplateRef<unknown>);

@@ -1,10 +1,9 @@
 import { TemplateRef } from '@angular/core';
-
-export type ToastSeverity = 'success' | 'info' | 'warning' | 'danger';
+import { Variant } from '../../models';
 
 export interface NgtToastMessage {
   text?: string | TemplateRef<unknown>;
-  severity?: ToastSeverity;
+  severity?: Variant;
   summary?: string;
   detail?: string;
   delay?: number;

@@ -9,7 +9,7 @@ export class OutsideClickDirective {
   private elementRef = inject(ElementRef);
 
   @HostListener('document:click', ['$event.target'])
-  onClick(target: HTMLElement): void {
+  onClick(target: HTMLElement) {
     if (!this.elementRef.nativeElement.contains(target)) {
       // TODO: The 'emit' function requires a mandatory void argument
       this.uiOutsideClick.emit();
