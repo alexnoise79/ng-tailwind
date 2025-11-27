@@ -35,7 +35,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build ui-demo
-        run: npx nx build ui-demo --configuration=production
+        run: npx nx run ui-demo:build:production
 
       - name: Verify build output
         run: |
