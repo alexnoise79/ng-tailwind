@@ -1,17 +1,17 @@
 export interface IPrefix {
   id: number;
   name: string;
-  prefix: string;
+  dialCode: string;
   code?: string;
 }
 
 
 export class IMobilePrefix {
   phone: string;
-  prefix: IPrefix;
+  country: IPrefix;
 
-  constructor(phone: string, prefix: IPrefix) {
+  constructor(phone: string, country: IPrefix) {
     this.phone = phone;
-    this.prefix = prefix;
+    this.country = country;
   }
 }

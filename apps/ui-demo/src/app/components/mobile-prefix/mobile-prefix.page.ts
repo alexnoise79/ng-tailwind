@@ -14,16 +14,16 @@ export class MobilePrefixPage {
 
   // Sample country prefixes
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
-    { id: 2, name: 'United Kingdom', prefix: '44', code: 'GB' },
-    { id: 3, name: 'Canada', prefix: '1', code: 'CA' },
-    { id: 4, name: 'Germany', prefix: '49', code: 'DE' },
-    { id: 5, name: 'France', prefix: '33', code: 'FR' },
-    { id: 6, name: 'Italy', prefix: '39', code: 'IT' },
-    { id: 7, name: 'Spain', prefix: '34', code: 'ES' },
-    { id: 8, name: 'Australia', prefix: '61', code: 'AU' },
-    { id: 9, name: 'Japan', prefix: '81', code: 'JP' },
-    { id: 10, name: 'China', prefix: '86', code: 'CN' }
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
+    { id: 2, name: 'United Kingdom', dialCode: '44', code: 'GB' },
+    { id: 3, name: 'Canada', dialCode: '1', code: 'CA' },
+    { id: 4, name: 'Germany', dialCode: '49', code: 'DE' },
+    { id: 5, name: 'France', dialCode: '33', code: 'FR' },
+    { id: 6, name: 'Italy', dialCode: '39', code: 'IT' },
+    { id: 7, name: 'Spain', dialCode: '34', code: 'ES' },
+    { id: 8, name: 'Australia', dialCode: '61', code: 'AU' },
+    { id: 9, name: 'Japan', dialCode: '81', code: 'JP' },
+    { id: 10, name: 'China', dialCode: '86', code: 'CN' }
   ];
 
   // Basic usage
@@ -87,8 +87,8 @@ import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-c
 })
 export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
-    { id: 2, name: 'United Kingdom', prefix: '44', code: 'GB' },
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
+    { id: 2, name: 'United Kingdom', dialCode: '44', code: 'GB' },
     // ... more prefixes
   ];
 

@@ -34,8 +34,8 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
                     <mobile-prefix [(ngModel)]="mobileValue1" [values]="prefixes" class="w-full md:w-96" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                      @if (mobileValue1() && mobileValue1()?.prefix) {
-                        Value: {{ '+' + (mobileValue1()?.prefix?.prefix || '') + (mobileValue1()?.phone || '') }}
+                      @if (mobileValue1() && mobileValue1()?.country) {
+                        Value: {{ '+' + (mobileValue1()?.country?.dialCode || '') + (mobileValue1()?.phone || '') }}
                       } @else {
                         Value: Empty
                       }
@@ -459,7 +459,7 @@
               <section>
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-4">The MobilePrefix component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, making it compatible with Angular forms (both template-driven and reactive forms).</p>
-                <p class="text-gray-600 dark:text-gray-400">The component accepts and returns an <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">IMobilePrefix</code> object containing the phone number and selected prefix, or a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">+&#123;prefix&#125;&#123;phone&#125;</code>.</p>
+                <p class="text-gray-600 dark:text-gray-400">The component accepts and returns an <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">IMobilePrefix</code> object containing the phone number and selected country, or a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">+&#123;dialCode&#125;&#123;phone&#125;</code>.</p>
               </section>
             </div>
           </div>

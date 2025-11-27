@@ -9,6 +9,7 @@ import { Params } from '@angular/router';
   selector: 'mobile-prefix',
   standalone: true,
   templateUrl: './mobile-prefix.component.html',
+  styleUrl: './flags.css',
   host: {
     class: 'block w-full'
   },
@@ -109,7 +110,7 @@ export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
      this.onTouched();
      this.propagateChange(model);*/
     this.model = model;
-    if (model.phone !== '' && model.prefix) {
+    if (model.phone !== '' && model.country) {
       this.propagateChange(model);
     } else {
       this.propagateChange(null);
@@ -123,20 +124,20 @@ export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
   writeValue(model: Partial<IMobilePrefix> | string) {
     if (this.prefixes) {
       if (model && model !== '') {
-        const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.prefix?.prefix}${model.phone}`;
+        const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.country?.dialCode}${model.phone}`;
 
         for (let i = 1; i <= 4; i++) {
-          const target = this.prefixes.find(x => x.prefix === phoneNumber.substring(1, i));
+          const target = this.prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
           if (target) {
             this.model = new IMobilePrefix(phoneNumber.substr(i), target);
-            this.update({ phone: phoneNumber.substr(i), prefix: target });
+            this.update({ phone: phoneNumber.substr(i), country: target });
             break;
           } else {
             // if not matched take first as fallback
             this.model = new IMobilePrefix('', this.prefixes[0]);
             this.update({
               phone: phoneNumber.substr(i),
-              prefix: this.prefixes[0]
+              country: this.prefixes[0]
             });
           }
         }
