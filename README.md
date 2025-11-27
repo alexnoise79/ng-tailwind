@@ -11,6 +11,7 @@ A modern Angular component library built with TailwindCSS, Angular standalone co
 
 - 🎨 **TailwindCSS** - Utility-first CSS framework
 - 🚀 **Angular 20** - Latest Angular features with standalone components
+- 🌐 **SSR Compliant** - Server-side rendering compliant
 - ♿ **Accessible** - WCAG 2.1 AA compliant components
 - 📦 **CDK Integration** - Uses Angular CDK for overlays, portals, and focus management
 - 📚 **Storybook** - Interactive component documentation
