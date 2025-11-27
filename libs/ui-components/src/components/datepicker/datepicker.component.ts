@@ -36,7 +36,6 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   private _model = signal<NgtDateStruct | null>(null);
 
   // ControlValueAccessor implementation
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: string | null) => {};
   protected onTouched = () => {};
 

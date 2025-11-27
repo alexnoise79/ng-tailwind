@@ -44,7 +44,6 @@ export class NgtPassword implements ControlValueAccessor {
   private _strength = signal<PasswordStrength>(0);
 
   // ControlValueAccessor callbacks
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: string) => {};
   private onTouched = () => {};
 
