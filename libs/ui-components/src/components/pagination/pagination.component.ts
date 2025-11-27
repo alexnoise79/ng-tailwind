@@ -85,7 +85,7 @@ export class NgtPagination {
       return false;
     }
     const lastVisible = pages[pages.length - 1];
-    return lastVisible < total - 1;
+    return lastVisible < total;
   });
 
   isFirstPage = computed(() => this._currentPage() === 1);
