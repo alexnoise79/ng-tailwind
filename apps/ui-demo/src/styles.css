@@ -100,6 +100,9 @@
   --scrollbar-thumb: var(--color-primary-500); /* primary-500 */
   --scrollbar-track: rgb(241 245 249); /* gray-100 */
   --scrollbar-thumb-hover: var(--color-primary-600); /* primary-600 */
+
+  /* Font Family - Default theme uses system fonts */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Theme Overrides - Using CSS variables that override @theme values */
@@ -132,6 +135,9 @@
   --shadow-lg: 0 10px 15px -3px rgb(217 70 239 / 0.4), 0 4px 6px -4px rgb(217 70 239 / 0.3);
   --shadow-xl: 0 20px 25px -5px rgb(217 70 239 / 0.4), 0 8px 10px -6px rgb(217 70 239 / 0.3);
   --shadow-2xl: 0 25px 50px -12px rgb(217 70 239 / 0.5);
+
+  /* Futuristic font */
+  --font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Minimalist Theme - Clean black and white, subtle shadows, rounded */
@@ -162,6 +168,9 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
+
+  /* Clean, minimal font */
+  --font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Nature Theme - Green and earth tones, organic curves, soft shadows */
@@ -192,6 +201,9 @@
   --shadow-lg: 0 10px 15px -3px rgb(34 197 94 / 0.12), 0 4px 6px -4px rgb(34 197 94 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(34 197 94 / 0.12), 0 8px 10px -6px rgb(34 197 94 / 0.1);
   --shadow-2xl: 0 25px 50px -12px rgb(34 197 94 / 0.15);
+
+  /* Friendly, organic font */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Tech Theme - Blue and cyan, modern crisp edges, tech shadows */
@@ -222,6 +234,9 @@
   --shadow-lg: 0 10px 15px -3px rgb(6 182 212 / 0.2), 0 4px 6px -4px rgb(6 182 212 / 0.15);
   --shadow-xl: 0 20px 25px -5px rgb(6 182 212 / 0.25), 0 8px 10px -6px rgb(6 182 212 / 0.2);
   --shadow-2xl: 0 25px 50px -12px rgb(6 182 212 / 0.3);
+
+  /* Modern tech font */
+  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Elegant Theme - Gold/amber, refined curves, sophisticated shadows */
@@ -252,16 +267,20 @@
   --shadow-lg: 0 10px 15px -3px rgb(245 158 11 / 0.2), 0 4px 6px -4px rgb(245 158 11 / 0.15);
   --shadow-xl: 0 20px 25px -5px rgb(245 158 11 / 0.25), 0 8px 10px -6px rgb(245 158 11 / 0.2);
   --shadow-2xl: 0 25px 50px -12px rgb(245 158 11 / 0.3);
+
+  /* Elegant, refined font */
+  --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
     background-color 1s cubic-bezier(0.4, 0, 0.2, 1),
-    color 1s cubic-bezier(0.4, 0, 0.2, 1);
+    color 1s cubic-bezier(0.4, 0, 0.2, 1),
+    font-family 0.3s ease;
 }
 
 * {
