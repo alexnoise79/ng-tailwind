@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - '.release-please-manifest.json'
       - 'libs/ui-components/CHANGELOG.md'
+      - 'libs/ui-components/package.json'
   workflow_dispatch:
 
 permissions:
