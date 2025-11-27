@@ -14,7 +14,7 @@ export class PaginationPage {
   currentPage2 = signal(1);
   currentPage3 = signal(5);
   currentPage4 = signal(1);
-  currentPage5 = signal(50);
+  currentPage5 = signal(1);
   currentPage6 = signal(1);
   currentPage7 = signal(1);
   currentPage8 = signal(1);

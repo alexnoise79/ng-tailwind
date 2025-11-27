@@ -21,9 +21,17 @@ export class NgtPagination {
   protected readonly _currentPage = signal(this.currentPage());
 
   constructor() {
-    // Sync currentPage input with internal signal
+    // Sync currentPage input with internal signal and validate it
     effect(() => {
-      this._currentPage.set(this.currentPage());
+      const inputPage = this.currentPage();
+      const total = this.totalPagesValue();
+      // Clamp the page to valid range
+      const validPage = Math.max(1, Math.min(inputPage, total));
+      this._currentPage.set(validPage);
+      // If the input page was invalid, emit the corrected page
+      if (inputPage !== validPage) {
+        this.pageChanged.emit(validPage);
+      }
     });
   }
 
@@ -136,9 +144,16 @@ export class NgtPagination {
     return slots.some(slot => typeof slot === 'object' && slot.type === 'last-with-ellipsis');
   });
 
-  isFirstPage = computed(() => this._currentPage() === 1);
+  isFirstPage = computed(() => {
+    const current = this._currentPage();
+    return current <= 1;
+  });
 
-  isLastPage = computed(() => this._currentPage() === this.totalPagesValue());
+  isLastPage = computed(() => {
+    const current = this._currentPage();
+    const total = this.totalPagesValue();
+    return current >= total;
+  });
 
   goToPage(page: number) {
     if (this.disabled()) {
