@@ -35,6 +35,8 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build ui-demo
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
         run: npx nx run ui-demo:build:production
 
       - name: Verify build output
