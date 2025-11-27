@@ -1,0 +1,188 @@
+import { LowerCasePipe, SlicePipe } from '@angular/common';
+import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { IMobilePrefix, IPrefix } from './mobile-prefix';
+import { Params } from '@angular/router';
+
+
+@Component({
+  selector: 'mobile-prefix',
+  standalone: true,
+  templateUrl: './mobile-prefix.component.html',
+  host: {
+    class: 'block w-full'
+  },
+  styles: [
+    `
+      @layer components {
+        :host.ng-touched.ng-invalid input,
+        :host.ng-touched.ng-invalid select {
+          border-color: var(--color-secondary-600);
+        }
+      }
+    `
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MobilePrefixComponent),
+      multi: true
+    }
+  ],
+  imports: [
+    LowerCasePipe,
+    SlicePipe,
+    ReactiveFormsModule,
+    FormsModule
+  ]
+})
+export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
+  /**
+   * responsible for disabling a field
+   */
+  isDisabled!: boolean;
+  /**
+   * keeps track of value and user interaction of the control and keep the view synced with the model
+   *
+   * see {@link IMobilePrefix} for the model information
+   */
+  model!: IMobilePrefix;
+  /**
+   * placeholder for the input field that we can set from parent component
+   */
+  @Input()
+  placeholder = '';
+  /**
+   * the readonly input option that we can pass from parent component
+   */
+  @Input()
+  readonly!: boolean;
+  /**
+   * Additional options for the input fields, passed from the JSON form.
+   */
+  @Input()
+  options!: Params | undefined;
+  /**
+   * outputs the blur effect flow from the child to the parent
+   */
+  @Output()
+  blurEvent = new EventEmitter<Event>(undefined);
+  /**
+   * local reference of Array<IPrefix>
+   */
+  prefixes!: Array<IPrefix>;
+
+
+  @Input()
+  values!: Array<IPrefix>;
+
+
+  /**
+   * The constructor sets us the placeholder value
+   */
+  constructor() {
+    this.placeholder = this.placeholder || '';
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.values?.currentValue) {
+      this.prefixes = changes.values.currentValue;
+      this.model = new IMobilePrefix('', this.prefixes[0]);
+    }
+  }
+
+  /**
+   * emits the blur event to the parent element, and it invokes registerOnTouched method
+   * @param event
+   */
+  onBlurEvent(event: Event) {
+    this.onTouched();
+    this.blurEvent.emit(event);
+  }
+
+  /**
+   * on change of prefix or mobile input value, we update the model value, and register those changes
+   * @param model
+   */
+  update(model: IMobilePrefix) {
+    /* this.model = model;
+     this.onTouched();
+     this.propagateChange(model);*/
+    this.model = model;
+    if (model.phone !== '' && model.prefix) {
+      this.propagateChange(model);
+    } else {
+      this.propagateChange(null);
+    }
+  }
+
+  /**
+   * function when it has countries values, it will find and update the model values, otherwise it will fetch the prefixes updates the countries, and call method again the recursive way
+   * @param model
+   */
+  writeValue(model: Partial<IMobilePrefix> | string) {
+    if (this.prefixes) {
+      if (model && model !== '') {
+        const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.prefix?.prefix}${model.phone}`;
+
+        for (let i = 1; i <= 4; i++) {
+          const target = this.prefixes.find(x => x.prefix === phoneNumber.substring(1, i));
+          if (target) {
+            this.model = new IMobilePrefix(phoneNumber.substr(i), target);
+            this.update({ phone: phoneNumber.substr(i), prefix: target });
+            break;
+          } else {
+            // if not matched take first as fallback
+            this.model = new IMobilePrefix('', this.prefixes[0]);
+            this.update({
+              phone: phoneNumber.substr(i),
+              prefix: this.prefixes[0]
+            });
+          }
+        }
+      } else {
+        // if not defined take first as default
+        this.model = new IMobilePrefix('', this.prefixes[0]);
+      }
+    } else {
+      this.prefixes = [];
+    }
+  }
+
+  /**
+   * Registers a callback function that is called when the control's value changes in the UI
+   * @param fn
+   */
+  registerOnChange(fn: () => void) {
+    this.propagateChange = fn;
+  }
+
+  /**
+   * Registers a callback function that is called by the forms API on initialization to update the form model on blur
+   * @param fn
+   */
+  registerOnTouched(fn: () => void) {
+    this.onTouched = fn;
+  }
+
+  /**
+   * function that is called by the forms API when the control status changes to or from 'DISABLED'.
+   * @param isDisabled
+   */
+  setDisabledState(isDisabled: boolean) {
+    this.isDisabled = isDisabled;
+  }
+
+  /**
+   * we save the given function of registerOnTouched, so that our class calls it when the control should be considered blurred or "touched".
+   * @private
+   */
+  private onTouched() {}
+
+  /**
+   * we save the given function from registerOnChange, so our class calls is at the appropriate time.
+   * @param _model
+   * @private
+   */
+  private propagateChange(_model: IMobilePrefix | null) {}
+}

@@ -57,6 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
       items: [
         { label: 'Datepicker', route: '/datepicker' },
         { label: 'Input', route: '/input' },
+        { label: 'Mobile Prefix', route: '/mobile-prefix' },
         { label: 'Password', route: '/password' },
         { label: 'Select', route: '/select' },
         { label: 'Timepicker', route: '/timepicker' },
