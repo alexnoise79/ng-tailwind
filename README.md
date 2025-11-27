@@ -2,6 +2,12 @@
 
 A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK.
 
+## 🚀 Live Demo
+
+### **[👉 View Live Demo →](https://alexnoise79.github.io/ng-tailwind/getting-started)**
+
+> **Explore all components in action!** See the full component library with interactive examples and theme customization.
+
 ## Versions
 
 - **Angular**: 20.0.0
