@@ -9,7 +9,6 @@ import { Directive, inject, Input, OnInit, PLATFORM_ID, TemplateRef, ViewContain
   selector: '[ssrRender]'
 })
 export class SsrRenderDirective<T> implements OnInit {
-
   /**
    * Specifies the platform on which the content should be rendered.
    * @param {'browser' | 'server'} ssrRender - The target platform for rendering.
@@ -23,8 +22,8 @@ export class SsrRenderDirective<T> implements OnInit {
    * @param viewContainer - The view container to manage the rendered content.
    * @param templateRef - The template reference containing the content to be conditionally rendered.
    */
-    //*constructor(@Inject(PLATFORM_ID) private platformId: 'browser' | 'server', private viewContainer: ViewContainerRef, private templateRef: TemplateRef<T>) {
-    //}*/
+  //*constructor(@Inject(PLATFORM_ID) private platformId: 'browser' | 'server', private viewContainer: ViewContainerRef, private templateRef: TemplateRef<T>) {
+  //}*/
   private platformId: 'browser' | 'server' = inject<'browser' | 'server'>(PLATFORM_ID);
   private viewContainer = inject(ViewContainerRef);
   private templateRef = inject(TemplateRef<T>);
@@ -39,5 +38,4 @@ export class SsrRenderDirective<T> implements OnInit {
       this.viewContainer.clear();
     }
   }
-
 }

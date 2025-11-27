@@ -2,20 +2,7 @@
   <div class="relative flex rounded-md shadow-sm">
     <div class="relative flex-1 flex items-center gap-1 min-h-0">
       <div class="relative flex-1 min-w-0 flex rounded-md">
-        <input
-          #inputElement
-          [type]="type()"
-          [value]="displayValue()"
-          [placeholder]="placeholder()"
-          [disabled]="isDisabled()"
-          [class]="inputClasses()"
-          [class.pr-20]="showClear() && hasValue()"
-          [attr.aria-label]="placeholder() || 'Input field'"
-          (input)="onInput($event)"
-          (keydown)="onKeyDown($event)"
-          (focus)="onFocus()"
-          (blur)="onBlur()"
-        />
+        <input #inputElement [type]="type()" [value]="displayValue()" [placeholder]="placeholder()" [disabled]="isDisabled()" [class]="inputClasses()" [class.pr-20]="showClear() && hasValue()" [attr.aria-label]="placeholder() || 'Input field'" (input)="onInput($event)" (keydown)="onKeyDown($event)" (focus)="onFocus()" (blur)="onBlur()" />
 
         <!-- Clear button -->
         @if (showClear() && hasValue() && !isDisabled()) {
@@ -29,4 +16,3 @@
     </div>
   </div>
 </div>
-

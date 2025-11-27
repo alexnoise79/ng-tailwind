@@ -1,0 +1,9 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // In Tailwind v4:
+  // - Theme is defined in CSS using @theme directive
+  // - Dark mode is configured in CSS using @custom-variant directive
+  // - Content paths are still needed for automatic content detection
+  content: ['./src/**/*.{html,ts}', '../../libs/**/*.{html,ts}', '../../.storybook/**/*.{js,ts}'],
+  plugins: []
+};

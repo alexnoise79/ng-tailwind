@@ -25,7 +25,7 @@ export class NgtInputCurrency extends NgtInputNumberBase implements OnInit {
   readonly placeholder = input<string>('');
   readonly showClear = input<boolean>(false);
   readonly filter = input<Array<string> | RegExp | null>(null);
-  
+
   // Currency-specific inputs
   readonly currency = input<string>('USD');
   readonly mode = input<'currency'>('currency');
@@ -37,13 +37,13 @@ export class NgtInputCurrency extends NgtInputNumberBase implements OnInit {
 
   override get inputClasses() {
     return computed(() => {
-    const base = 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
-    const sizeClasses = {
-      sm: 'px-2.5 py-1.5 text-sm',
-      md: 'px-3 py-2 text-base',
-      lg: 'px-4 py-2.5 text-lg'
-    };
-    const numberInputClasses = '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
+      const base = 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+      const sizeClasses = {
+        sm: 'px-2.5 py-1.5 text-sm',
+        md: 'px-3 py-2 text-base',
+        lg: 'px-4 py-2.5 text-lg'
+      };
+      const numberInputClasses = '[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
       return classMerge(base, sizeClasses[this.size()], numberInputClasses, 'rounded-r-none border-r-0 focus:ring-0 focus:border-transparent');
     });
   }
@@ -63,7 +63,7 @@ export class NgtInputCurrency extends NgtInputNumberBase implements OnInit {
 
   override ngOnInit() {
     super.ngOnInit();
-    
+
     // Validate currency is required when mode is currency
     if (this.mode() === 'currency') {
       const currencyValue = this.currency();
@@ -92,4 +92,3 @@ export class NgtInputCurrency extends NgtInputNumberBase implements OnInit {
     this.valueChange.emit(numValue);
   }
 }
-

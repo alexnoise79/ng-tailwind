@@ -233,4 +233,3 @@ export abstract class NgtInputBase implements ControlValueAccessor, OnInit, OnDe
     void _isDisabled; // Explicitly mark as intentionally unused
   }
 }
-

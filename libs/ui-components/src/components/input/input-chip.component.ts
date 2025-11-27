@@ -24,7 +24,7 @@ export class NgtInputChip extends NgtInputBase {
   readonly placeholder = input<string>('');
   readonly showClear = input<boolean>(false);
   readonly filter = input<Array<string> | RegExp | null>(null);
-  
+
   // Chip-specific inputs
   readonly chip = input<string | RegExp | null>(null);
   readonly chipFormat = input<string>(',');
@@ -41,15 +41,15 @@ export class NgtInputChip extends NgtInputBase {
 
   override get inputClasses() {
     return computed(() => {
-    const hasChipMode = this.hasChips() && this.chip() !== null;
-    const base = hasChipMode
-      ? 'w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
-      : 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
-    const sizeClasses = {
-      sm: 'px-2.5 py-1.5 text-sm',
-      md: 'px-3 py-2 text-base',
-      lg: 'px-4 py-2.5 text-lg'
-    };
+      const hasChipMode = this.hasChips() && this.chip() !== null;
+      const base = hasChipMode
+        ? 'w-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+        : 'w-full border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+      const sizeClasses = {
+        sm: 'px-2.5 py-1.5 text-sm',
+        md: 'px-3 py-2 text-base',
+        lg: 'px-4 py-2.5 text-lg'
+      };
       return classMerge(base, sizeClasses[this.size()]);
     });
   }
@@ -155,7 +155,7 @@ export class NgtInputChip extends NgtInputBase {
 
   private handleChipInput(value: string, target?: HTMLInputElement) {
     const inputTarget = target || this.inputElementRef?.nativeElement;
-    
+
     // Prevent space as first character in chip mode
     if (value.startsWith(' ')) {
       value = value.trimStart();
@@ -311,4 +311,3 @@ export class NgtInputChip extends NgtInputBase {
     }
   }
 }
-

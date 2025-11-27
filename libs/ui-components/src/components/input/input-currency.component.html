@@ -2,19 +2,7 @@
   <div class="relative flex rounded-md shadow-sm">
     <div class="relative flex-1 flex items-center gap-1 min-h-0">
       <div [class.focus-within:ring-2]="isCurrencyMode()" [class.focus-within:ring-primary-500]="isCurrencyMode()" class="relative flex-1 min-w-0 flex rounded-md">
-        <input
-          #inputElement
-          [type]="type()"
-          [value]="displayValue()"
-          [placeholder]="placeholder()"
-          [disabled]="isDisabled()"
-          [class]="inputClasses()"
-          [attr.aria-label]="placeholder() || 'Input field'"
-          (input)="onInput($event)"
-          (keydown)="onKeyDown($event)"
-          (focus)="onFocus()"
-          (blur)="onBlur()"
-        />
+        <input #inputElement [type]="type()" [value]="displayValue()" [placeholder]="placeholder()" [disabled]="isDisabled()" [class]="inputClasses()" [attr.aria-label]="placeholder() || 'Input field'" (input)="onInput($event)" (keydown)="onKeyDown($event)" (focus)="onFocus()" (blur)="onBlur()" />
 
         <!-- Currency display (input group on the right) -->
         @if (isCurrencyMode()) {
@@ -26,4 +14,3 @@
     </div>
   </div>
 </div>
-

@@ -42,11 +42,10 @@ export abstract class NgtInputNumberBase extends NgtInputBase {
 
   override ngOnInit() {
     super.ngOnInit();
-    
+
     // Ensure type is number for number mode inputs
     if (this.type() !== 'number') {
       console.warn(`${this.constructor.name} requires type="number". Setting type to number.`);
     }
   }
 }
-

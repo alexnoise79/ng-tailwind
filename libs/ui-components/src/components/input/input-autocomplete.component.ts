@@ -30,7 +30,7 @@ export class NgtInputAutocomplete extends NgtInputBase implements OnInit, OnDest
   readonly placeholder = input<string>('');
   readonly showClear = input<boolean>(false);
   readonly filter = input<Array<string> | RegExp | null>(null);
-  
+
   // Autocomplete inputs
   @Input() set completeMethod(value: ((query: string) => Promise<Array<unknown>> | Array<unknown>) | null | undefined) {
     this._completeMethod.set(value || null);
@@ -82,7 +82,7 @@ export class NgtInputAutocomplete extends NgtInputBase implements OnInit, OnDest
 
   override ngOnInit() {
     super.ngOnInit();
-    
+
     // Autocomplete doesn't work with number type
     if (this.type() === 'number') {
       console.warn('Autocomplete input does not work with type="number". Consider using type="text".');
@@ -115,7 +115,7 @@ export class NgtInputAutocomplete extends NgtInputBase implements OnInit, OnDest
 
   protected override handleNormalInput(value: string) {
     super.handleNormalInput(value);
-    
+
     // Handle autocomplete
     if (this.hasAutocomplete() && this.type() !== 'number') {
       this.handleAutocomplete(value);
@@ -289,4 +289,3 @@ export class NgtInputAutocomplete extends NgtInputBase implements OnInit, OnDest
     }, 200);
   }
 }
-

@@ -30,7 +30,7 @@ describe('Input Components', () => {
       (component as any).placeholder = signal('');
       (component as any).showClear = signal(false);
       (component as any).filter = signal(null);
-      
+
       // Mock ViewChild
       (component as any).inputElementRef = { nativeElement: document.createElement('input') };
     });
@@ -54,11 +54,11 @@ describe('Input Components', () => {
       it('should register onChange callback', () => {
         const onChangeFn = vi.fn();
         component.registerOnChange(onChangeFn);
-        
+
         (component as any).onChange = onChangeFn;
         (component as any)._value.set('new value');
         (component as any).onChange('new value');
-        
+
         expect(onChangeFn).toHaveBeenCalledWith('new value');
       });
 
@@ -74,7 +74,7 @@ describe('Input Components', () => {
         const event = {
           target: { value: 'test input' }
         } as any;
-        
+
         component.onInput(event);
         expect((component as any)._displayValue()).toBe('test input');
       });
@@ -82,10 +82,10 @@ describe('Input Components', () => {
       it('should handle clear', () => {
         (component as any)._value.set('test');
         (component as any)._displayValue.set('test');
-        
+
         const event = new Event('click');
         component.onClear(event);
-        
+
         expect((component as any)._value()).toBe('');
         expect((component as any)._displayValue()).toBe('');
       });
@@ -107,7 +107,7 @@ describe('Input Components', () => {
       (component as any).placeholder = signal('');
       (component as any).showClear = signal(false);
       (component as any).filter = signal(null);
-      
+
       (component as any).inputElementRef = { nativeElement: document.createElement('input') };
     });
 
@@ -142,7 +142,7 @@ describe('Input Components', () => {
       (component as any).placeholder = signal('');
       (component as any).showClear = signal(false);
       (component as any).filter = signal(null);
-      
+
       (component as any).inputElementRef = { nativeElement: document.createElement('input') };
     });
 
@@ -175,7 +175,7 @@ describe('Input Components', () => {
       (component as any).placeholder = signal('');
       (component as any).showClear = signal(false);
       (component as any).filter = signal(null);
-      
+
       (component as any).inputElementRef = { nativeElement: document.createElement('input') };
     });
 
@@ -219,7 +219,7 @@ describe('Input Components', () => {
       (component as any).placeholder = signal('');
       (component as any).showClear = signal(false);
       (component as any).filter = signal(null);
-      
+
       (component as any).inputElementRef = { nativeElement: document.createElement('input') };
     });
 
@@ -230,7 +230,7 @@ describe('Input Components', () => {
     it('should create chips from comma-separated values', () => {
       (component as any).writeValue('tag1,tag2,tag3');
       (component as any).updateChips();
-      
+
       const chips = (component as any).chips();
       expect(chips.length).toBeGreaterThan(0);
     });
@@ -238,10 +238,10 @@ describe('Input Components', () => {
     it('should remove chip', () => {
       (component as any)._chips.set(['tag1', 'tag2']);
       (component as any)._currentChipValue.set('');
-      
+
       const event = new Event('click');
       component.removeChip('tag1', event);
-      
+
       const chips = (component as any).chips();
       expect(chips).not.toContain('tag1');
       expect(chips).toContain('tag2');
@@ -251,12 +251,11 @@ describe('Input Components', () => {
       const inputElement = document.createElement('input');
       inputElement.value = 'new tag,';
       (component as any).inputElementRef = { nativeElement: inputElement };
-      
+
       (component as any).handleChipInput('new tag,');
-      
+
       const chips = (component as any).chips();
       expect(chips.length).toBeGreaterThan(0);
     });
   });
 });
-
