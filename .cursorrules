@@ -1,7 +1,3 @@
----
-alwaysApply: true
----
-
 # Project Rules
 
 ## Angular Version & Configuration
@@ -16,11 +12,10 @@ alwaysApply: true
 
 - Always use host and not @HostBinding
 
-- Never use :void as a return type - omit the return type annotation instead
+- Never use ":void" as a return type - omit the return type annotation instead
+  - **Exception**: Abstract methods that require explicit return types for TypeScript strict mode compliance may use `: void`
 
 - Never use "as unknown as" for type conversion
-
-- Before adding an override, always ask
 
 ## SSR Compliance
 
@@ -29,3 +24,4 @@ alwaysApply: true
 ## Git
 
 - Commit message max length 100 chars (total for all lines)
+
