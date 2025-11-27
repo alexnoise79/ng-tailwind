@@ -129,6 +129,19 @@
   --radius-2xl: 0.75rem;
   --radius-3xl: 1rem;
 
+  /* Secondary Colors - Cyan neon accents */
+  --color-secondary-50: #ecfeff;
+  --color-secondary-100: #cffafe;
+  --color-secondary-200: #a5f3fc;
+  --color-secondary-300: #67e8f9;
+  --color-secondary-400: #22d3ee;
+  --color-secondary-500: #06b6d4;
+  --color-secondary-600: #0891b2;
+  --color-secondary-700: #0e7490;
+  --color-secondary-800: #155e75;
+  --color-secondary-900: #164e63;
+  --color-secondary-950: #083344;
+
   /* Vibrant, glowing shadows */
   --shadow-sm: 0 1px 2px 0 rgb(217 70 239 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(217 70 239 / 0.4), 0 2px 4px -2px rgb(217 70 239 / 0.3);
@@ -194,6 +207,19 @@
   --radius-xl: 1.125rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
+
+  /* Secondary Colors - Earth tones */
+  --color-secondary-50: #fefce8;
+  --color-secondary-100: #fef9c3;
+  --color-secondary-200: #fef08a;
+  --color-secondary-300: #fde047;
+  --color-secondary-400: #facc15;
+  --color-secondary-500: #eab308;
+  --color-secondary-600: #ca8a04;
+  --color-secondary-700: #a16207;
+  --color-secondary-800: #854d0e;
+  --color-secondary-900: #713f12;
+  --color-secondary-950: #422006;
 
   /* Soft, natural shadows */
   --shadow-sm: 0 1px 2px 0 rgb(34 197 94 / 0.1);
@@ -261,6 +287,19 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
 
+  /* Secondary Colors - Deep purple accents */
+  --color-secondary-50: #faf5ff;
+  --color-secondary-100: #f3e8ff;
+  --color-secondary-200: #e9d5ff;
+  --color-secondary-300: #d8b4fe;
+  --color-secondary-400: #c084fc;
+  --color-secondary-500: #a855f7;
+  --color-secondary-600: #9333ea;
+  --color-secondary-700: #7e22ce;
+  --color-secondary-800: #6b21a8;
+  --color-secondary-900: #581c87;
+  --color-secondary-950: #3b0764;
+
   /* Sophisticated, warm shadows */
   --shadow-sm: 0 1px 2px 0 rgb(245 158 11 / 0.15);
   --shadow-md: 0 4px 6px -1px rgb(245 158 11 / 0.2), 0 2px 4px -2px rgb(245 158 11 / 0.15);
@@ -293,6 +332,19 @@
   --radius-xl: 2rem;
   --radius-2xl: 2.5rem;
   --radius-3xl: 3rem;
+
+  /* Secondary Colors - Deep space blues */
+  --color-secondary-50: #0f172a;
+  --color-secondary-100: #1e293b;
+  --color-secondary-200: #334155;
+  --color-secondary-300: #475569;
+  --color-secondary-400: #64748b;
+  --color-secondary-500: #94a3b8;
+  --color-secondary-600: #cbd5e1;
+  --color-secondary-700: #e2e8f0;
+  --color-secondary-800: #f1f5f9;
+  --color-secondary-900: #f8fafc;
+  --color-secondary-950: #ffffff;
 
   /* Stellar, glowing shadows */
   --shadow-sm: 0 1px 2px 0 rgb(167 139 250 / 0.3);
@@ -327,6 +379,19 @@
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
 
+  /* Secondary Colors - Soft grays */
+  --color-secondary-50: #f9fafb;
+  --color-secondary-100: #f3f4f6;
+  --color-secondary-200: #e5e7eb;
+  --color-secondary-300: #d1d5db;
+  --color-secondary-400: #9ca3af;
+  --color-secondary-500: #6b7280;
+  --color-secondary-600: #4b5563;
+  --color-secondary-700: #374151;
+  --color-secondary-800: #1f2937;
+  --color-secondary-900: #111827;
+  --color-secondary-950: #030712;
+
   /* Clean, modern shadows with rose tint */
   --shadow-sm: 0 1px 2px 0 rgb(244 63 94 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(244 63 94 / 0.15), 0 2px 4px -2px rgb(244 63 94 / 0.1);
@@ -360,6 +425,19 @@
   --radius-2xl: 0.75rem;
   --radius-3xl: 1rem;
 
+  /* Secondary Colors - Clean whites and light grays */
+  --color-secondary-50: #ffffff;
+  --color-secondary-100: #f8fafc;
+  --color-secondary-200: #f1f5f9;
+  --color-secondary-300: #e2e8f0;
+  --color-secondary-400: #cbd5e1;
+  --color-secondary-500: #94a3b8;
+  --color-secondary-600: #64748b;
+  --color-secondary-700: #475569;
+  --color-secondary-800: #334155;
+  --color-secondary-900: #1e293b;
+  --color-secondary-950: #0f172a;
+
   /* Clean, precise shadows */
   --shadow-sm: 0 1px 2px 0 rgb(20 184 166 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(20 184 166 / 0.15), 0 2px 4px -2px rgb(20 184 166 / 0.1);
@@ -392,6 +470,19 @@
   --radius-xl: 1.125rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
+
+  /* Secondary Colors - Emerald and gold accents */
+  --color-secondary-50: #ecfdf5;
+  --color-secondary-100: #d1fae5;
+  --color-secondary-200: #a7f3d0;
+  --color-secondary-300: #6ee7b7;
+  --color-secondary-400: #34d399;
+  --color-secondary-500: #10b981;
+  --color-secondary-600: #059669;
+  --color-secondary-700: #047857;
+  --color-secondary-800: #065f46;
+  --color-secondary-900: #064e3b;
+  --color-secondary-950: #022c22;
 
   /* Mystical, enchanting shadows */
   --shadow-sm: 0 1px 2px 0 rgb(168 85 247 / 0.2);
