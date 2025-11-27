@@ -23,7 +23,7 @@ export class NgtInputMask extends NgtInputBase {
   readonly placeholder = input<string>('');
   readonly showClear = input<boolean>(false);
   readonly filter = input<Array<string> | RegExp | null>(null);
-  
+
   // Mask-specific inputs
   readonly mask = input<string | null>(null);
 
@@ -42,7 +42,7 @@ export class NgtInputMask extends NgtInputBase {
 
   override ngOnInit() {
     super.ngOnInit();
-    
+
     // Mask doesn't work with number type
     if (this.type() === 'number' && this.mask() !== null) {
       console.warn('Mask input does not work with type="number". Consider using type="text".');
@@ -142,4 +142,3 @@ export class NgtInputMask extends NgtInputBase {
     super.handleNormalInput(value);
   }
 }
-

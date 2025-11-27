@@ -32,4 +32,3 @@ export class NgtInputBasic extends NgtInputBase {
     return computed(() => this.getInputClasses());
   }
 }
-

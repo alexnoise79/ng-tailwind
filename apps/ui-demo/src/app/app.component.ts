@@ -9,7 +9,6 @@ import { ThemeConfiguratorComponent } from './components/theme-configurator/them
 import { WINDOW } from '@universal/window.service';
 import { LocalStorage } from '@universal/universal.providers';
 
-
 interface NavItem {
   label: string;
   route: string;

@@ -74,9 +74,13 @@ describe('Input Page Component Tests', () => {
       cy.get('ngt-input[currency], ngt-input[mode="currency"]').first().find('input').blur();
       // Currency should be formatted - wait a bit for formatting to apply
       cy.wait(100);
-      cy.get('ngt-input[currency], ngt-input[mode="currency"]').first().find('input').invoke('val').then((val) => {
-        expect(val).to.exist;
-      });
+      cy.get('ngt-input[currency], ngt-input[mode="currency"]')
+        .first()
+        .find('input')
+        .invoke('val')
+        .then(val => {
+          expect(val).to.exist;
+        });
     });
   });
 
@@ -88,12 +92,16 @@ describe('Input Page Component Tests', () => {
     it('should apply phone mask', () => {
       cy.get('ngt-input[mask]').first().find('input').type('1234567890');
       // Should apply mask format - check that value contains mask characters like parentheses or dashes
-      cy.get('ngt-input[mask]').first().find('input').invoke('val').then((val) => {
-        expect(val).to.be.a('string');
-        if (typeof val === 'string') {
-          expect(val.length).to.be.greaterThan(0);
-        }
-      });
+      cy.get('ngt-input[mask]')
+        .first()
+        .find('input')
+        .invoke('val')
+        .then(val => {
+          expect(val).to.be.a('string');
+          if (typeof val === 'string') {
+            expect(val.length).to.be.greaterThan(0);
+          }
+        });
     });
   });
 
@@ -230,7 +238,7 @@ describe('Input Page Component Tests', () => {
       cy.wait(800);
       // Check if autocomplete panel appears - it has role="listbox"
       // The panel might not appear if no suggestions match, so we check if it exists or if input is working
-      cy.get('body').then(($body) => {
+      cy.get('body').then($body => {
         const panel = $body.find('[role="listbox"]');
         if (panel.length > 0) {
           cy.get('[role="listbox"]').should('exist');
@@ -248,15 +256,18 @@ describe('Input Page Component Tests', () => {
       cy.get('@autocompleteInput').find('input').type('te');
       cy.wait(800); // Wait for suggestions
       // Check if panel appears
-      cy.get('body').then(($body) => {
+      cy.get('body').then($body => {
         const panel = $body.find('[role="listbox"]');
         if (panel.length > 0 && $body.find('[role="option"]').length > 0) {
           // Find and click a suggestion
           cy.get('[role="option"]').first().click();
           // Verify input value was set
-          cy.get('@autocompleteInput').find('input').invoke('val').then((val) => {
-            expect(val).to.exist;
-          });
+          cy.get('@autocompleteInput')
+            .find('input')
+            .invoke('val')
+            .then(val => {
+              expect(val).to.exist;
+            });
         } else {
           // If no suggestions appear, just verify input is working
           cy.get('@autocompleteInput').find('input').should('have.value', 'te');
@@ -271,7 +282,7 @@ describe('Input Page Component Tests', () => {
       cy.get('@autocompleteInput').find('input').type('te');
       cy.wait(800);
       // Check if panel appeared
-      cy.get('body').then(($body) => {
+      cy.get('body').then($body => {
         const panel = $body.find('[role="listbox"]');
         if (panel.length > 0) {
           // Panel is visible, click outside
@@ -287,4 +298,3 @@ describe('Input Page Component Tests', () => {
     });
   });
 });
-

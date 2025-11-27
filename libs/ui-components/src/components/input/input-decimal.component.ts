@@ -24,11 +24,10 @@ export class NgtInputDecimal extends NgtInputNumberBase {
   readonly placeholder = input<string>('');
   readonly showClear = input<boolean>(false);
   readonly filter = input<Array<string> | RegExp | null>(null);
-  
+
   // Decimal-specific inputs
   readonly mode = input<'decimal'>('decimal');
 
   // Outputs
   readonly valueChange = output<string | number>();
 }
-
