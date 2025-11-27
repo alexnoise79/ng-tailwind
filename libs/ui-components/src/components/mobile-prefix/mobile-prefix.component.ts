@@ -1,5 +1,5 @@
 import { LowerCasePipe, SlicePipe } from '@angular/common';
-import { Component, EventEmitter, forwardRef, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, effect, EventEmitter, forwardRef, input, Output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { IMobilePrefix, IPrefix } from './mobile-prefix';
 import { Params } from '@angular/router';
@@ -37,7 +37,7 @@ import { Params } from '@angular/router';
     FormsModule
   ]
 })
-export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
+export class MobilePrefixComponent implements ControlValueAccessor {
   /**
    * responsible for disabling a field
    */
@@ -51,18 +51,15 @@ export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
   /**
    * placeholder for the input field that we can set from parent component
    */
-  @Input()
-  placeholder = '';
+  placeholder = input<string>('');
   /**
    * the readonly input option that we can pass from parent component
    */
-  @Input()
-  readonly!: boolean;
+  readonly = input<boolean>(false);
   /**
    * Additional options for the input fields, passed from the JSON form.
    */
-  @Input()
-  options!: Params | undefined;
+  options = input<Params | undefined>(undefined);
   /**
    * outputs the blur effect flow from the child to the parent
    */
@@ -73,23 +70,24 @@ export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
    */
   prefixes!: Array<IPrefix>;
 
-
-  @Input()
-  values!: Array<IPrefix>;
-
-
   /**
-   * The constructor sets us the placeholder value
+   * Array of country prefixes
    */
-  constructor() {
-    this.placeholder = this.placeholder || '';
-  }
+  values = input.required<Array<IPrefix>>();
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.values?.currentValue) {
-      this.prefixes = changes.values.currentValue;
-      this.model = new IMobilePrefix('', this.prefixes[0]);
-    }
+  constructor() {
+    // Watch for changes to values input and update prefixes and model
+    effect(() => {
+      const values = this.values();
+      if (values && values.length > 0) {
+        this.prefixes = values;
+        if (!this.model || !this.model.country) {
+          this.model = new IMobilePrefix('', this.prefixes[0]);
+        }
+      } else {
+        this.prefixes = [];
+      }
+    });
   }
 
   /**
@@ -106,9 +104,6 @@ export class MobilePrefixComponent implements ControlValueAccessor, OnChanges {
    * @param model
    */
   update(model: IMobilePrefix) {
-    /* this.model = model;
-     this.onTouched();
-     this.propagateChange(model);*/
     this.model = model;
     if (model.phone !== '' && model.country) {
       this.propagateChange(model);
