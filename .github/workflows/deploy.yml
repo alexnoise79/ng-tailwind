@@ -35,17 +35,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build ui-components library (required dependency)
-        run: |
-          # Temporarily move tailwind.config.js as it can cause issues during library build
-          if [ -f tailwind.config.js ]; then
-            mv tailwind.config.js tailwind.config.js.bak
-          fi
-          # Build the library - this is required as a dependency for ui-demo
-          npx nx build ui-components
-          # Restore tailwind.config.js
-          if [ -f tailwind.config.js.bak ]; then
-            mv tailwind.config.js.bak tailwind.config.js
-          fi
+        run: npx nx build ui-components
 
       - name: Build ui-demo
         run: npx nx build ui-demo --configuration=production
