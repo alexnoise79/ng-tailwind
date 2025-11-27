@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { NgtNav } from './nav.component';
-import { NgtNavItem } from './nav-item.component';
+import { NgtNav } from './nav.directive';
+import { NgtNavItem } from './nav-item.directive';
 
 const meta: Meta<NgtNav> = {
   title: 'Components/Nav',

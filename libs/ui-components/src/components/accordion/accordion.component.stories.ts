@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { NgtAccordion, NgtAccordionItem, NgtAccordionHeader, NgtAccordionButton, NgtAccordionCollapse, NgtAccordionBody } from './index';
-import { signal } from '@angular/core';
 
 const meta: Meta<NgtAccordion> = {
   title: 'Components/Accordion',
@@ -18,7 +17,7 @@ type Story = StoryObj<NgtAccordion>;
 
 export const SingleOpen: Story = {
   args: {
-    multiOpen: signal(false)
+    multiOpen: false
   },
   render: args => ({
     props: args,
@@ -85,7 +84,7 @@ export const SingleOpen: Story = {
 
 export const MultiOpen: Story = {
   args: {
-    multiOpen: signal(true)
+    multiOpen: true
   },
   render: args => ({
     props: args,
@@ -152,7 +151,7 @@ export const MultiOpen: Story = {
 
 export const Disabled: Story = {
   args: {
-    multiOpen: signal(false)
+    multiOpen: false
   },
   render: args => ({
     props: args,
