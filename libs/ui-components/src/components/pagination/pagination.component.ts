@@ -44,48 +44,96 @@ export class NgtPagination {
     return this.calculateTotalPages();
   });
 
-  visiblePages = computed(() => {
+  // Slots represent what to display in each <li> element
+  // Always returns exactly maxVisiblePages + 2 number of <li> elements
+  // Each slot can be: a page number, 'ellipsis', or a special marker for first/last with ellipsis
+  paginationSlots = computed(() => {
     const total = this.totalPagesValue();
     const current = this._currentPage();
     const maxVisible = this.maxVisiblePages();
-    const pages: Array<number> = [];
+    const totalSlots = maxVisible + 2; // Add 2 extra slots
+    const slots: Array<number | 'ellipsis' | { type: 'first-with-ellipsis' } | { type: 'last-with-ellipsis' }> = [];
 
-    if (total <= maxVisible) {
-      // Show all pages if total is less than max visible
+    if (total <= totalSlots) {
+      // Show all pages if total is less than total slots
       for (let i = 1; i <= total; i++) {
-        pages.push(i);
+        slots.push(i);
       }
     } else {
-      // Calculate which pages to show
-      let start = Math.max(1, current - Math.floor(maxVisible / 2));
-      let end = Math.min(total, start + maxVisible - 1);
+      // We need exactly totalSlots slots
+      // Determine if we need start ellipsis, end ellipsis, or both
+      const needsStartEllipsis = current > Math.floor(totalSlots / 2) + 1;
+      const needsEndEllipsis = current < total - Math.floor(totalSlots / 2);
 
-      // Adjust start if we're near the end
-      if (end - start < maxVisible - 1) {
-        start = Math.max(1, end - maxVisible + 1);
-      }
-
-      for (let i = start; i <= end; i++) {
-        pages.push(i);
+      if (needsStartEllipsis && needsEndEllipsis) {
+        // Both ellipses: [1+ellipsis] [pages] [ellipsis+last]
+        // Structure: [1 button] [ellipsis] [middle pages] [ellipsis] [last button] = exactly totalSlots slots
+        slots.push({ type: 'first-with-ellipsis' });
+        slots.push('ellipsis');
+        const middleCount = totalSlots - 4; // first-with-ellipsis + ellipsis + ellipsis + last-with-ellipsis
+        if (middleCount > 0) {
+          const startPage = Math.max(2, current - Math.floor(middleCount / 2));
+          const endPage = Math.min(total - 1, startPage + middleCount - 1);
+          // Adjust if near boundaries
+          if (endPage >= total - 1) {
+            const adjustedStart = Math.max(2, total - middleCount);
+            for (let i = adjustedStart; i < total; i++) {
+              slots.push(i);
+            }
+          } else if (startPage <= 2) {
+            for (let i = 2; i < 2 + middleCount; i++) {
+              slots.push(i);
+            }
+          } else {
+            for (let i = startPage; i <= endPage; i++) {
+              slots.push(i);
+            }
+          }
+        }
+        slots.push('ellipsis');
+        slots.push({ type: 'last-with-ellipsis' });
+      } else if (needsStartEllipsis) {
+        // Only start ellipsis: [1+ellipsis] [pages]
+        // Structure: [1 button] [ellipsis] [pages] = exactly totalSlots slots
+        slots.push({ type: 'first-with-ellipsis' });
+        slots.push('ellipsis');
+        const pageCount = totalSlots - 2; // first-with-ellipsis + ellipsis
+        const startPage = Math.max(2, total - pageCount + 1);
+        for (let i = startPage; i <= total; i++) {
+          slots.push(i);
+        }
+      } else if (needsEndEllipsis) {
+        // Only end ellipsis: [pages] [ellipsis+last]
+        // Structure: [pages] [ellipsis] [last button] = exactly totalSlots slots
+        const pageCount = totalSlots - 2; // ellipsis + last-with-ellipsis
+        for (let i = 1; i <= pageCount; i++) {
+          slots.push(i);
+        }
+        slots.push('ellipsis');
+        slots.push({ type: 'last-with-ellipsis' });
+      } else {
+        // No ellipses needed (shouldn't happen with total > totalSlots, but handle it)
+        for (let i = 1; i <= totalSlots; i++) {
+          slots.push(i);
+        }
       }
     }
 
-    return pages;
+    return slots;
+  });
+
+  visiblePages = computed(() => {
+    return this.paginationSlots().filter((slot): slot is number => typeof slot === 'number');
   });
 
   showStartEllipsis = computed(() => {
-    const pages = this.visiblePages();
-    return pages.length > 0 && pages[0] > 2;
+    const slots = this.paginationSlots();
+    return slots.some(slot => typeof slot === 'object' && slot.type === 'first-with-ellipsis');
   });
 
   showEndEllipsis = computed(() => {
-    const total = this.totalPagesValue();
-    const pages = this.visiblePages();
-    if (pages.length === 0) {
-      return false;
-    }
-    const lastVisible = pages[pages.length - 1];
-    return lastVisible < total;
+    const slots = this.paginationSlots();
+    return slots.some(slot => typeof slot === 'object' && slot.type === 'last-with-ellipsis');
   });
 
   isFirstPage = computed(() => this._currentPage() === 1);
@@ -151,11 +199,12 @@ export class NgtPagination {
   }
 
   getEllipsisClasses(): string {
+    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md';
     const sizeClasses = {
-      sm: 'px-2 py-1',
-      md: 'px-3 py-2',
-      lg: 'px-4 py-2.5'
+      sm: 'px-2 py-1 min-w-8',
+      md: 'px-3 py-2 min-w-10',
+      lg: 'px-4 py-2.5 min-w-12'
     };
-    return `inline-flex items-center justify-center text-gray-500 dark:text-gray-400 ${sizeClasses[this.size()]}`;
+    return `${baseClasses} ${sizeClasses[this.size()]} text-gray-500 dark:text-gray-400`;
   }
 }

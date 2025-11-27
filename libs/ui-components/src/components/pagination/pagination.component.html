@@ -18,35 +18,29 @@
       </li>
     }
 
-    <!-- Start Ellipsis -->
-    @if (showStartEllipsis()) {
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" (click)="goToPage(1)" type="button" aria-label="Go to page 1">1</button>
-      </li>
-      <li>
-        <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
-      </li>
-    }
-
-    <!-- Page Numbers -->
-    @for (page of visiblePages(); track page) {
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses(page === _currentPage(), disabled())" [attr.aria-current]="page === _currentPage() ? 'page' : null" [attr.aria-label]="'Go to page ' + page" (click)="goToPage(page)" type="button">
-          {{ page }}
-        </button>
-      </li>
-    }
-
-    <!-- End Ellipsis -->
-    @if (showEndEllipsis()) {
-      <li>
-        <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
-      </li>
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" [attr.aria-label]="'Go to page ' + totalPagesValue()" (click)="goToPage(totalPagesValue())" type="button">
-          {{ totalPagesValue() }}
-        </button>
-      </li>
+    <!-- Pagination Slots (always exactly maxVisiblePages + 2 <li> elements) -->
+    @for (slot of paginationSlots(); track $index) {
+      @if (slot === 'ellipsis') {
+        <li>
+          <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
+        </li>
+      } @else if (typeof slot === 'object' && slot.type === 'first-with-ellipsis') {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" (click)="goToPage(1)" type="button" aria-label="Go to page 1">1</button>
+        </li>
+      } @else if (typeof slot === 'object' && slot.type === 'last-with-ellipsis') {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" [attr.aria-label]="'Go to page ' + totalPagesValue()" (click)="goToPage(totalPagesValue())" type="button">
+            {{ totalPagesValue() }}
+          </button>
+        </li>
+      } @else {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(slot === _currentPage(), disabled())" [attr.aria-current]="slot === _currentPage() ? 'page' : null" [attr.aria-label]="'Go to page ' + slot" (click)="goToPage(slot)" type="button">
+            {{ slot }}
+          </button>
+        </li>
+      }
     }
 
     <!-- Next Button -->
