@@ -99,14 +99,14 @@ export class NgtToast implements OnInit, OnDestroy {
   toastClasses = computed(() => {
     const baseClasses = 'flex items-start gap-3 p-4 rounded-lg shadow-lg border transition-all duration-300 transform relative pointer-events-auto';
     const severityClasses: Record<Variant, string> = {
-      success: 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200',
-      info: 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-200',
-      warning: 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-200',
-      danger: 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200',
-      primary: 'bg-primary-50 border-primary-200 text-primary-800 dark:bg-primary-900/20 dark:border-primary-800 dark:text-primary-200',
-      secondary: 'bg-gray-50 border-gray-200 text-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200',
-      light: 'bg-gray-100 border-gray-300 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100',
-      dark: 'bg-gray-900 border-gray-700 text-gray-100 dark:bg-gray-950 dark:border-gray-800 dark:text-gray-50'
+      success: 'bg-white/90 border-green-200 text-green-800 dark:bg-gray-900/90 dark:border-green-800 dark:text-green-200',
+      info: 'bg-white/90 border-blue-200 text-blue-800 dark:bg-gray-900/90 dark:border-blue-800 dark:text-blue-200',
+      warning: 'bg-white/90 border-yellow-200 text-yellow-800 dark:bg-gray-900/90 dark:border-yellow-800 dark:text-yellow-200',
+      danger: 'bg-white/90 border-red-200 text-red-800 dark:bg-gray-900/90 dark:border-red-800 dark:text-red-200',
+      primary: 'bg-white/90 border-primary-200 text-primary-800 dark:bg-gray-900/90 dark:border-primary-800 dark:text-primary-200',
+      secondary: 'bg-white/90 border-gray-200 text-gray-800 dark:bg-gray-800/90 dark:border-gray-700 dark:text-gray-200',
+      light: 'bg-white/90 border-gray-300 text-gray-900 dark:bg-gray-700/90 dark:border-gray-600 dark:text-gray-100',
+      dark: 'bg-gray-900/90 border-gray-700 text-gray-100 dark:bg-gray-950/90 dark:border-gray-800 dark:text-gray-50'
     };
     const visibilityClasses = this.isRemoving() ? 'opacity-0 translate-x-full' : this.isVisible() ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full';
 
