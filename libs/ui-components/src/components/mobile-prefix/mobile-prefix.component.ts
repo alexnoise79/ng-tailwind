@@ -70,6 +70,20 @@ export class MobilePrefixComponent implements ControlValueAccessor {
    */
   values = input.required<Array<IPrefix>>();
 
+  /**
+   * Calculates the maximum length for the phone number input
+   * Longest phone number in the world is 17 digits (including prefix)
+   * Max length = 17 - prefix length
+   */
+  get maxLength(): number {
+    if (this.model?.country?.dialCode) {
+      const prefixLength = this.model.country.dialCode.length;
+      return 17 - prefixLength;
+    }
+    // Default to 15 if no prefix is selected (assuming 2-digit prefix)
+    return 15;
+  }
+
   constructor() {
     // Watch for changes to values input and initialize model if needed
     effect(() => {
