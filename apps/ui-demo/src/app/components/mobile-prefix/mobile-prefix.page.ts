@@ -23,7 +23,17 @@ export class MobilePrefixPage {
     { id: 7, name: 'Spain', dialCode: '34', code: 'ES' },
     { id: 8, name: 'Australia', dialCode: '61', code: 'AU' },
     { id: 9, name: 'Japan', dialCode: '81', code: 'JP' },
-    { id: 10, name: 'China', dialCode: '86', code: 'CN' }
+    { id: 10, name: 'China', dialCode: '86', code: 'CN' },
+    { id: 11, name: 'Kazakhstan', dialCode: '7', code: 'KZ' },
+    { id: 12, name: 'South Korea', dialCode: '82', code: 'KR' },
+    { id: 13, name: 'Brazil', dialCode: '55', code: 'BR' },
+    { id: 14, name: 'India', dialCode: '91', code: 'IN' },
+    { id: 15, name: 'Russia', dialCode: '7', code: 'RU' },
+    { id: 16, name: 'Mexico', dialCode: '52', code: 'MX' },
+    { id: 17, name: 'Indonesia', dialCode: '62', code: 'ID' },
+    { id: 18, name: 'Turkey', dialCode: '90', code: 'TR' },
+    { id: 19, name: 'Saudi Arabia', dialCode: '966', code: 'SA' },
+    { id: 20, name: 'United Arab Emirates', dialCode: '971', code: 'AE' }
   ];
 
   // Basic usage
@@ -89,6 +99,8 @@ export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
     { id: 1, name: 'United States', dialCode: '1', code: 'US' },
     { id: 2, name: 'United Kingdom', dialCode: '44', code: 'GB' },
+    { id: 19, name: 'Saudi Arabia', dialCode: '966', code: 'SA' },
+    { id: 20, name: 'United Arab Emirates', dialCode: '971', code: 'AE' },
     // ... more prefixes
   ];
 
@@ -113,7 +125,7 @@ import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-c
 })
 export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
     // ... more prefixes
   ];
 
@@ -139,7 +151,7 @@ import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-c
 })
 export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
     // ... more prefixes
   ];
 
@@ -164,7 +176,7 @@ import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-c
 })
 export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
     // ... more prefixes
   ];
 
@@ -201,7 +213,7 @@ import { MobilePrefixComponent, NgtButton, IPrefix, IMobilePrefix } from '@ng-ta
 })
 export class MobilePrefixPage {
   prefixes: Array<IPrefix> = [
-    { id: 1, name: 'United States', prefix: '1', code: 'US' },
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
     // ... more prefixes
   ];
 
