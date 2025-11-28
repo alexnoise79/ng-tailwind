@@ -66,26 +66,16 @@ export class MobilePrefixComponent implements ControlValueAccessor {
   @Output()
   blurEvent = new EventEmitter<Event>(undefined);
   /**
-   * local reference of Array<IPrefix>
-   */
-  prefixes!: Array<IPrefix>;
-
-  /**
    * Array of country prefixes
    */
   values = input.required<Array<IPrefix>>();
 
   constructor() {
-    // Watch for changes to values input and update prefixes and model
+    // Watch for changes to values input and initialize model if needed
     effect(() => {
       const values = this.values();
-      if (values && values.length > 0) {
-        this.prefixes = values;
-        if (!this.model || !this.model.country) {
-          this.model = new IMobilePrefix('', this.prefixes[0]);
-        }
-      } else {
-        this.prefixes = [];
+      if (values && values.length > 0 && (!this.model || !this.model.country)) {
+        this.model = new IMobilePrefix('', values[0]);
       }
     });
   }
@@ -117,10 +107,12 @@ export class MobilePrefixComponent implements ControlValueAccessor {
    * @param model
    */
   writeValue(model: Partial<IMobilePrefix> | string | null) {
+    const prefixes = this.values();
+    
     // Check if the value is the same as what we already have to prevent infinite loops
     if (model === null || model === '') {
-      if (this.prefixes && this.prefixes.length > 0) {
-        const newModel = new IMobilePrefix('', this.prefixes[0]);
+      if (prefixes && prefixes.length > 0) {
+        const newModel = new IMobilePrefix('', prefixes[0]);
         // Only update if different
         if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
           this.model = newModel;
@@ -129,7 +121,7 @@ export class MobilePrefixComponent implements ControlValueAccessor {
       return;
     }
 
-    if (!this.prefixes || this.prefixes.length === 0) {
+    if (!prefixes || prefixes.length === 0) {
       return;
     }
 
@@ -143,7 +135,7 @@ export class MobilePrefixComponent implements ControlValueAccessor {
 
     // Find matching prefix
     for (let i = 1; i <= 4; i++) {
-      const target = this.prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
+      const target = prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
       if (target) {
         const newModel = new IMobilePrefix(phoneNumber.substr(i), target);
         // Only update if different
