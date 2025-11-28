@@ -116,32 +116,42 @@ export class MobilePrefixComponent implements ControlValueAccessor {
    * function when it has countries values, it will find and update the model values, otherwise it will fetch the prefixes updates the countries, and call method again the recursive way
    * @param model
    */
-  writeValue(model: Partial<IMobilePrefix> | string) {
-    if (this.prefixes) {
-      if (model && model !== '') {
-        const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.country?.dialCode}${model.phone}`;
-
-        for (let i = 1; i <= 4; i++) {
-          const target = this.prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
-          if (target) {
-            this.model = new IMobilePrefix(phoneNumber.substr(i), target);
-            this.update({ phone: phoneNumber.substr(i), country: target });
-            break;
-          } else {
-            // if not matched take first as fallback
-            this.model = new IMobilePrefix('', this.prefixes[0]);
-            this.update({
-              phone: phoneNumber.substr(i),
-              country: this.prefixes[0]
-            });
-          }
+  writeValue(model: Partial<IMobilePrefix> | string | null) {
+    // Check if the value is the same as what we already have to prevent infinite loops
+    if (model === null || model === '') {
+      if (this.prefixes && this.prefixes.length > 0) {
+        const newModel = new IMobilePrefix('', this.prefixes[0]);
+        // Only update if different
+        if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
+          this.model = newModel;
         }
-      } else {
-        // if not defined take first as default
-        this.model = new IMobilePrefix('', this.prefixes[0]);
       }
-    } else {
-      this.prefixes = [];
+      return;
+    }
+
+    if (!this.prefixes || this.prefixes.length === 0) {
+      return;
+    }
+
+    const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.country?.dialCode}${model.phone}`;
+    const currentValue = this.model ? `+${this.model.country?.dialCode}${this.model.phone}` : '';
+
+    // Only update if the value is actually different
+    if (phoneNumber === currentValue) {
+      return;
+    }
+
+    // Find matching prefix
+    for (let i = 1; i <= 4; i++) {
+      const target = this.prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
+      if (target) {
+        const newModel = new IMobilePrefix(phoneNumber.substr(i), target);
+        // Only update if different
+        if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
+          this.model = newModel;
+        }
+        break;
+      }
     }
   }
 
