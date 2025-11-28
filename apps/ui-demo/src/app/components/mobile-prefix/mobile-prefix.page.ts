@@ -47,7 +47,7 @@ export class MobilePrefixPage {
   mobileValue3 = signal<IMobilePrefix | null>(null);
 
   // Readonly
-  mobileValue4 = signal<IMobilePrefix | null>(null);
+  mobileValue4 = signal<IMobilePrefix | null>(new IMobilePrefix('3451234567', this.prefixes.find(p => p.code === 'IT') || this.prefixes[5]));
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(

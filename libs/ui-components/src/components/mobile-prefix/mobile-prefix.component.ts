@@ -13,16 +13,6 @@ import { Params } from '@angular/router';
   host: {
     class: 'block w-full'
   },
-  styles: [
-    `
-      @layer components {
-        :host.ng-touched.ng-invalid input,
-        :host.ng-touched.ng-invalid select {
-          border-color: var(--color-secondary-600);
-        }
-      }
-    `
-  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
