@@ -4,5 +4,8 @@
   "lib": {
     "entryFile": "src/index.ts"
   },
-  "allowedNonPeerDependencies": ["tslib"]
+  "allowedNonPeerDependencies": ["tslib"],
+  "assets": [
+    "src/components/mobile-prefix/flags_responsive.png"
+  ]
 }

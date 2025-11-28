@@ -83,6 +83,10 @@ export const appRoutes: Routes = [
     loadComponent: () => import('./components/input/input.page').then(m => m.InputPage)
   },
   {
+    path: 'mobile-prefix',
+    loadComponent: () => import('./components/mobile-prefix/mobile-prefix.page').then(m => m.MobilePrefixPage)
+  },
+  {
     path: 'password',
     loadComponent: () => import('./components/password/password.page').then(m => m.PasswordPage)
   }
