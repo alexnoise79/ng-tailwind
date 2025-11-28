@@ -1,7 +1,7 @@
 import { LowerCasePipe, SlicePipe } from '@angular/common';
 import { Component, effect, EventEmitter, forwardRef, input, Output } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { IMobilePrefix, IPrefix } from './mobile-prefix';
+import { IMobilePrefix, IPrefix } from '../../models';
 import { Params } from '@angular/router';
 
 

@@ -5,7 +5,6 @@ export interface IPrefix {
   code?: string;
 }
 
-
 export class IMobilePrefix {
   phone: string;
   country: IPrefix;
@@ -15,3 +14,4 @@ export class IMobilePrefix {
     this.country = country;
   }
 }
+
