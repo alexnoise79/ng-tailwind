@@ -60,20 +60,6 @@ export class MobilePrefixComponent implements ControlValueAccessor {
    */
   values = input.required<Array<IPrefix>>();
 
-  /**
-   * Calculates the maximum length for the phone number input
-   * Longest phone number in the world is 17 digits (including prefix)
-   * Max length = 17 - prefix length
-   */
-  get maxLength(): number {
-    if (this.model?.country?.dialCode) {
-      const prefixLength = this.model.country.dialCode.length;
-      return 17 - prefixLength;
-    }
-    // Default to 15 if no prefix is selected (assuming 2-digit prefix)
-    return 15;
-  }
-
   constructor() {
     // Watch for changes to values input and initialize model if needed
     effect(() => {
@@ -91,6 +77,32 @@ export class MobilePrefixComponent implements ControlValueAccessor {
   onBlurEvent(event: Event) {
     this.onTouched();
     this.blurEvent.emit(event);
+  }
+
+  /**
+   * Handles input event to enforce maxLength on number input
+   * Longest phone number in the world is 17 digits (including prefix)
+   * Max length = 17 - prefix length
+   * @param event
+   */
+  onInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    
+    // Calculate max length: 17 digits total minus prefix length
+    let maxLen = 15; // Default if no prefix is selected (assuming 2-digit prefix)
+    if (this.model?.country?.dialCode) {
+      const prefixLength = this.model.country.dialCode.length;
+      maxLen = 17 - prefixLength;
+    }
+    
+    if (value.length > maxLen) {
+      input.value = value.slice(0, maxLen);
+      // Update model with truncated value
+      if (this.model) {
+        this.update({ phone: input.value, country: this.model.country });
+      }
+    }
   }
 
   /**
