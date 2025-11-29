@@ -1,8 +1,8 @@
 # Getting Started
 
-Welcome to **ng-tailwind UI Components** - a comprehensive, modern Angular component library that seamlessly combines the power of TailwindCSS with Angular's latest features. Built with Angular 20 standalone components and Angular CDK, this library provides a complete set of accessible, customizable, and production-ready UI components for your Angular applications.
+Welcome to **ngtailwind UI Components** - a comprehensive, modern Angular component library that seamlessly combines the power of TailwindCSS with Angular's latest features. Built with Angular 20 standalone components and Angular CDK, this library provides a complete set of accessible, customizable, and production-ready UI components for your Angular applications.
 
-Whether you're building a simple dashboard or a complex enterprise application, ng-tailwind UI Components offers everything you need to create beautiful, responsive, and accessible user interfaces with minimal setup and maximum flexibility.
+Whether you're building a simple dashboard or a complex enterprise application, ngtailwind UI Components offers everything you need to create beautiful, responsive, and accessible user interfaces with minimal setup and maximum flexibility.
 
 ## Installation
 
@@ -89,7 +89,7 @@ import { NgtButton, NgtModal, NgtAlert } from '@ngtailwind/ui-components';
         [dismissible]="true"
         (dismiss)="onAlertDismiss()"
       >
-        Welcome to ng-tailwind UI Components!
+        Welcome to ngtailwind UI Components!
       </ngt-alert>
 
       <!-- Button Component -->

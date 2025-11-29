@@ -5,7 +5,7 @@
 ### Basic Usage
 
 ```typescript
-import { NgtButton } from '@ng-tailwind/ui-components';
+import { NgtButton } from '@ngtailwind/ui-components';
 
 @Component({
   imports: [NgtButton],
@@ -53,7 +53,7 @@ export class MyComponent {
 ### Basic Modal
 
 ```typescript
-import { NgtModal, NgtButton } from '@ng-tailwind/ui-components';
+import { NgtModal, NgtButton } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -99,7 +99,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtAlert } from '@ng-tailwind/ui-components';
+import { NgtAlert } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -199,7 +199,7 @@ export class MyComponent {
 ### Single Open Mode
 
 ```typescript
-import { NgtAccordion, NgtAccordionItem } from '@ng-tailwind/ui-components';
+import { NgtAccordion, NgtAccordionItem } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -231,7 +231,7 @@ import { NgtAccordion, NgtAccordionItem } from '@ng-tailwind/ui-components';
 ### Basic Navigation
 
 ```typescript
-import { NgtNav, NgtNavItem } from '@ng-tailwind/ui-components';
+import { NgtNav, NgtNavItem } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -322,7 +322,7 @@ import {
   NgtDropdown,
   NgtDropdownTrigger,
   NgtDropdownContent 
-} from '@ng-tailwind/ui-components';
+} from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -346,7 +346,7 @@ export class MyComponent {
 ## Tooltip
 
 ```typescript
-import { NgtTooltip } from '@ng-tailwind/ui-components';
+import { NgtTooltip } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -372,7 +372,7 @@ import { NgtTooltip } from '@ng-tailwind/ui-components';
 ### Autofocus
 
 ```typescript
-import { NgtAutofocus } from '@ng-tailwind/ui-components';
+import { NgtAutofocus } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -382,7 +382,7 @@ import { NgtAutofocus } from '@ng-tailwind/ui-components';
 ### Outside Click
 
 ```typescript
-import { NgtOutsideClick } from '@ng-tailwind/ui-components';
+import { NgtOutsideClick } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -394,7 +394,7 @@ import { NgtOutsideClick } from '@ng-tailwind/ui-components';
 ### Trap Focus
 
 ```typescript
-import { NgtTrapFocus } from '@ng-tailwind/ui-components';
+import { NgtTrapFocus } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -408,7 +408,7 @@ import { NgtTrapFocus } from '@ng-tailwind/ui-components';
 ### Basic Usage
 
 ```typescript
-import { NgtDatepicker, NgtDateStruct } from '@ng-tailwind/ui-components';
+import { NgtDatepicker, NgtDateStruct } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -494,7 +494,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtCard } from '@ng-tailwind/ui-components';
+import { NgtCard } from '@ngtailwind/ui-components';
 ```
 
 ```html
@@ -585,7 +585,7 @@ import { NgtCard } from '@ng-tailwind/ui-components';
 ### Basic Usage
 
 ```typescript
-import { NgtCollapse } from '@ng-tailwind/ui-components';
+import { NgtCollapse } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -617,7 +617,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtOffCanvas } from '@ng-tailwind/ui-components';
+import { NgtOffCanvas } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -659,7 +659,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtPagination } from '@ng-tailwind/ui-components';
+import { NgtPagination } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -701,7 +701,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtToggleSwitch } from '@ng-tailwind/ui-components';
+import { NgtToggleSwitch } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -747,7 +747,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtToastService, NgtToastContainer } from '@ng-tailwind/ui-components';
+import { NgtToastService, NgtToastContainer } from '@ngtailwind/ui-components';
 
 export class MyComponent {
   constructor(private toastService: NgtToastService) {}
@@ -790,7 +790,7 @@ this.toastService.show({
 ### Basic Usage
 
 ```typescript
-import { NgtTable } from '@ng-tailwind/ui-components';
+import { NgtTable } from '@ngtailwind/ui-components';
 
 export class MyComponent {
   data = [
@@ -849,7 +849,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtSelect } from '@ng-tailwind/ui-components';
+import { NgtSelect } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 
 export class MyComponent {
@@ -930,7 +930,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -1032,7 +1032,7 @@ export class MyComponent {
 ### Basic Usage
 
 ```typescript
-import { NgtPassword } from '@ng-tailwind/ui-components';
+import { NgtPassword } from '@ngtailwind/ui-components';
 import { signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 

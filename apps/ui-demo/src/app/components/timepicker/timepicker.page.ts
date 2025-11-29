@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtTimepicker, NgtTimeStruct, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtTimepicker, NgtTimeStruct, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
@@ -59,7 +59,7 @@ export class TimepickerPage {
     basic: {
       html: `<ngt-timepicker [model]="selectedTime()" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTime = signal<NgtTimeStruct | null>(null);
@@ -68,7 +68,7 @@ export class TimepickerPage {
     withSeconds: {
       html: `<ngt-timepicker [model]="selectedTimeWithSeconds()" [showSeconds]="true" (timeSelect)="selectedTimeWithSeconds.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTimeWithSeconds = signal<NgtTimeStruct | null>(null);
@@ -77,7 +77,7 @@ export class TimepickerPage {
     withMeridian: {
       html: `<ngt-timepicker [model]="selectedTimeMeridian()" [meridian]="true" (timeSelect)="selectedTimeMeridian.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTimeMeridian = signal<NgtTimeStruct | null>(null);
@@ -85,7 +85,7 @@ export class TimepickerPage {
     },
     withStringInput: {
       html: `<ngt-timepicker [model]="'14:30:00'" [showSeconds]="true" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>`,
-      ts: `import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+      ts: `import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   onTimeSelect(time: NgtTimeStruct) {
@@ -95,7 +95,7 @@ export class TimepickerPage {
     },
     withDateInput: {
       html: `<ngt-timepicker [model]="new Date()" (timeSelect)="onTimeSelect($event)"></ngt-timepicker>`,
-      ts: `import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+      ts: `import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   onTimeSelect(time: NgtTimeStruct) {
@@ -106,7 +106,7 @@ export class TimepickerPage {
     disabled: {
       html: `<ngt-timepicker [model]="selectedTime()" [disabled]="true" (timeSelect)="selectedTime.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTime = signal<NgtTimeStruct | null>(null);
@@ -115,7 +115,7 @@ export class TimepickerPage {
     small: {
       html: `<ngt-timepicker [model]="selectedTimeSmall()" [size]="'sm'" (timeSelect)="selectedTimeSmall.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTimeSmall = signal<NgtTimeStruct | null>(null);
@@ -124,7 +124,7 @@ export class TimepickerPage {
     large: {
       html: `<ngt-timepicker [model]="selectedTimeLarge()" [size]="'lg'" (timeSelect)="selectedTimeLarge.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTimeLarge = signal<NgtTimeStruct | null>(null);
@@ -133,7 +133,7 @@ export class TimepickerPage {
     withSteps: {
       html: `<ngt-timepicker [model]="selectedTimeWithSteps()" [hourStep]="2" [minuteStep]="5" [secondStep]="10" [showSeconds]="true" (timeSelect)="selectedTimeWithSteps.set($event)"></ngt-timepicker>`,
       ts: `import { signal } from '@angular/core';
-import { NgtTimeStruct } from '@ng-tailwind/ui-components';
+import { NgtTimeStruct } from '@ngtailwind/ui-components';
 
 export class TimepickerPage {
   selectedTimeWithSteps = signal<NgtTimeStruct | null>(null);

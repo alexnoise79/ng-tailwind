@@ -1,6 +1,6 @@
 # Roadmap
 
-This document outlines planned features and components for the ng-tailwind UI Components library.
+This document outlines planned features and components for the ngtailwind UI Components library.
 
 ## Form Components
 

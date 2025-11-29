@@ -1,6 +1,6 @@
 # Accessibility Guarantees
 
-All components in ng-tailwind UI are built with accessibility (a11y) as a core requirement. This document outlines the accessibility features and guarantees for each component.
+All components in ngtailwind UI are built with accessibility (a11y) as a core requirement. This document outlines the accessibility features and guarantees for each component.
 
 ## General Principles
 

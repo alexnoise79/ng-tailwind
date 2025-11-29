@@ -1,6 +1,6 @@
 # Theme Customization Guide
 
-The ng-tailwind UI library uses **Tailwind CSS 4.1.17** with the `@theme` directive for theme configuration. This modern approach allows you to define all design tokens directly in CSS, making customization straightforward and powerful.
+The ngtailwind UI library uses **Tailwind CSS 4.1.17** with the `@theme` directive for theme configuration. This modern approach allows you to define all design tokens directly in CSS, making customization straightforward and powerful.
 
 ## Understanding Tailwind CSS v4 Theming
 

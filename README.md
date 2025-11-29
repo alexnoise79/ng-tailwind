@@ -1,4 +1,4 @@
-# ng-tailwind UI Components
+# ngtailwind UI Components
 
 A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK.
 

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 
 @Component({
@@ -31,7 +31,7 @@ pnpm add @ngtailwind/ngtailwind`;
 @tailwind components;
 @tailwind utilities;`;
   readonly usageExample = `import { Component, signal } from '@angular/core';
-import { NgtButton, NgtModal, NgtAlert } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtModal, NgtAlert } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-example',
@@ -44,7 +44,7 @@ import { NgtButton, NgtModal, NgtAlert } from '@ng-tailwind/ui-components';
         [dismissible]="true"
         (dismiss)="onAlertDismiss()"
       >
-        Welcome to ng-tailwind UI Components!
+        Welcome to ngtailwind UI Components!
       </ngt-alert>
 
       <!-- Button Component -->

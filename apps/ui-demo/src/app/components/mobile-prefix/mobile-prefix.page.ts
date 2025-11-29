@@ -1,6 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
@@ -88,7 +88,7 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
@@ -116,7 +116,7 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
@@ -142,7 +142,7 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
@@ -167,7 +167,7 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
@@ -204,7 +204,7 @@ export class MobilePrefixPage {
 </form>`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, NgtButton, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, NgtButton, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',

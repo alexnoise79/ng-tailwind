@@ -1,6 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { NgtInputBasic, NgtInputCurrency, NgtInputDecimal, NgtInputMask, NgtInputChip, NgtInputAutocomplete, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, AutoCompleteSelectEvent } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 import { AutocompleteService, AutocompleteItem } from '../../services/autocomplete.service';
@@ -128,7 +128,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic } from '@ng-tailwind/ui-components';
+import { NgtInputBasic } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -168,7 +168,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic } from '@ng-tailwind/ui-components';
+import { NgtInputBasic } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -190,7 +190,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic } from '@ng-tailwind/ui-components';
+import { NgtInputBasic } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -220,7 +220,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputDecimal, NgtInputCurrency } from '@ng-tailwind/ui-components';
+import { NgtInputDecimal, NgtInputCurrency } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -251,7 +251,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic } from '@ng-tailwind/ui-components';
+import { NgtInputBasic } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -289,7 +289,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputMask } from '@ng-tailwind/ui-components';
+import { NgtInputMask } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -322,7 +322,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputChip } from '@ng-tailwind/ui-components';
+import { NgtInputChip } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -353,7 +353,7 @@ export class InputPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic } from '@ng-tailwind/ui-components';
+import { NgtInputBasic } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
@@ -412,7 +412,7 @@ export class InputPage {
 </ngt-input>`,
       ts: `import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputAutocomplete, AutoCompleteSelectEvent } from '@ng-tailwind/ui-components';
+import { NgtInputAutocomplete, AutoCompleteSelectEvent } from '@ngtailwind/ui-components';
 import { AutocompleteService, AutocompleteItem } from './services/autocomplete.service';
 
 @Component({
@@ -459,7 +459,7 @@ export class InputPage {
 </form>`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtInputBasic, NgtButton } from '@ng-tailwind/ui-components';
+import { NgtInputBasic, NgtButton } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-input',
