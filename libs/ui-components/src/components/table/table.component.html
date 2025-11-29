@@ -97,10 +97,10 @@
           <ng-container *ngTemplateOutlet="footerTemplate; context: { $implicit: _columns(), columns: _columns() }"></ng-container>
         </tfoot>
       } @else if (_columns().length > 0) {
-        <tfoot [class]="theadClasses()">
-          <tr>
+        <tfoot [class]="theadClasses()" class="block md:table-row-group">
+          <tr class="flex flex-col w-full md:table-row ">
             @for (col of _columns(); track col.field) {
-              <th [class]="thClasses()" [style]="getColumnStyle(col)"></th>
+              <th [class]="thClasses()" [style]="getColumnStyle(col)" class="flex md:table-cell px-4 py-3 md:py-3"></th>
             }
           </tr>
         </tfoot>
