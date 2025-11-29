@@ -36,8 +36,8 @@ export class MobilePrefixPage {
     { id: 20, name: 'United Arab Emirates', dialCode: '971', code: 'AE' }
   ];
 
-  // Basic usage
-  mobileValue1 = signal<IMobilePrefix | null>(null);
+  // Basic usage (returns string by default)
+  mobileValue1 = signal<string | null>(null);
 
   // With placeholder
   mobileValue2 = signal<IMobilePrefix | null>(null);
@@ -49,6 +49,12 @@ export class MobilePrefixPage {
   // Readonly
   mobileValue4 = signal<IMobilePrefix | null>(new IMobilePrefix('3451234567', this.prefixes.find(p => p.code === 'IT') || this.prefixes[5]));
 
+  // Return as String (default behavior)
+  mobileValue5 = signal<string | null>(null);
+
+  // Return as Object
+  mobileValue6 = signal<IMobilePrefix | null>(null);
+
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {
@@ -56,6 +62,7 @@ export class MobilePrefixPage {
       placeholder: 'showcase',
       disabled: 'showcase',
       readonly: 'showcase',
+      returnAsString: 'showcase',
       forms: 'showcase'
     },
     {
@@ -63,6 +70,7 @@ export class MobilePrefixPage {
       placeholder: 'html',
       disabled: 'html',
       readonly: 'html',
+      returnAsString: 'html',
       forms: 'html'
     }
   );
@@ -88,7 +96,7 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
+import { NgtMobilePrefix, IPrefix } from '@ngtailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
@@ -104,7 +112,8 @@ export class MobilePrefixPage {
     // ... more prefixes
   ];
 
-  mobileValue1 = signal<IMobilePrefix | null>(null);
+  // Returns string by default (returnAsString is true by default)
+  mobileValue1 = signal<string | null>(null);
 }`
     },
     placeholder: {
@@ -158,7 +167,7 @@ export class MobilePrefixPage {
   mobileValue3 = signal<IMobilePrefix | null>(null);
 }`
     },
-    readonly: {
+      readonly: {
       html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue4"
   [values]="prefixes"
@@ -181,6 +190,76 @@ export class MobilePrefixPage {
   ];
 
   mobileValue4 = signal<IMobilePrefix | null>(null);
+}`
+    },
+    returnAsString: {
+      html: `<div class="space-y-4">
+  <!-- Returns string (default) -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">String Mode (Default)</label>
+    <ngt-mobile-prefix
+      [(ngModel)]="mobileValue5"
+      [values]="prefixes"
+      class="w-full md:w-96"
+    />
+    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+      Value: {{ mobileValue5() || 'Empty' }}
+    </p>
+  </div>
+
+  <!-- Returns object -->
+  <div>
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Mode</label>
+    <ngt-mobile-prefix
+      [(ngModel)]="mobileValue6"
+      [values]="prefixes"
+      [returnAsObject]="true"
+      class="w-full md:w-96"
+    />
+    <div class="mt-2">
+      <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Value:</p>
+      @if (mobileValue6()) {
+        <pre class="bg-gray-100 dark:bg-gray-900 p-3 rounded text-xs"><code>{{ formatObjectValue(mobileValue6()) }}</code></pre>
+      } @else {
+        <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded text-sm">null</code>
+      }
+    </div>
+  </div>
+</div>`,
+      ts: `import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ngtailwind/ui-components';
+
+@Component({
+  selector: 'app-mobile-prefix',
+  imports: [FormsModule, NgtMobilePrefix],
+  template: \`<!-- template here -->\`
+})
+export class MobilePrefixPage {
+  prefixes: Array<IPrefix> = [
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
+    { id: 2, name: 'United Kingdom', dialCode: '44', code: 'GB' },
+    // ... more prefixes
+  ];
+
+  // String mode (default - returnAsObject is false by default)
+  mobileValue5 = signal<string | null>(null);
+
+  // Object mode (returnAsObject is true)
+  mobileValue6 = signal<IMobilePrefix | null>(null);
+
+  formatObjectValue(value: IMobilePrefix | null): string {
+    if (!value) return 'null';
+    return JSON.stringify({
+      phone: value.phone,
+      country: {
+        id: value.country.id,
+        name: value.country.name,
+        dialCode: value.country.dialCode,
+        code: value.country.code
+      }
+    }, null, 2);
+  }
 }`
     },
     forms: {
@@ -235,6 +314,19 @@ export class MobilePrefixPage {
     console.log('Form submitted', this.mobileValue1());
   }
 
+  formatObjectValue(value: IMobilePrefix | null): string {
+    if (!value) return 'null';
+    return JSON.stringify({
+      phone: value.phone,
+      country: {
+        id: value.country.id,
+        name: value.country.name,
+        dialCode: value.country.dialCode,
+        code: value.country.code
+      }
+    }, null, 2);
+  }
+
   // Helper to get code snippet for a specific tab
   getCodeSnippet(demoKey: string, fileType: 'html' | 'ts'): string {
     return this.codeViewUtil.getCodeSnippet(this.codeSnippets, demoKey, fileType);
@@ -258,6 +350,10 @@ export class MobilePrefixPage {
       readonly: {
         html: 'mobile-prefix-readonly.html',
         ts: 'mobile-prefix-readonly.ts'
+      },
+      returnAsString: {
+        html: 'mobile-prefix-return-as-string.html',
+        ts: 'mobile-prefix-return-as-string.ts'
       },
       forms: {
         html: 'mobile-prefix-forms.html',

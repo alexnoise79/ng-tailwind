@@ -47,6 +47,12 @@ export class NgtMobilePrefix implements ControlValueAccessor {
    */
   readonly = input<boolean>(false);
   /**
+   * When true, the component returns an IMobilePrefix object instead of a string.
+   * When false (default), the component returns a string in the format +{dialCode}{phone}.
+   * Note: writeValue accepts both string and object formats regardless of this setting.
+   */
+  returnAsObject = input<boolean>(false);
+  /**
    * Additional options for the input fields, passed from the JSON form.
    */
   options = input<Params | undefined>(undefined);
@@ -98,8 +104,9 @@ export class NgtMobilePrefix implements ControlValueAccessor {
     
     if (value.length > maxLen) {
       input.value = value.slice(0, maxLen);
-      // Update model with truncated value
+      // Update model with truncated value (ensure it's stored as string)
       if (this.model) {
+        this.model.phone = input.value;
         this.update({ phone: input.value, country: this.model.country });
       }
     }
@@ -110,17 +117,34 @@ export class NgtMobilePrefix implements ControlValueAccessor {
    * @param model
    */
   update(model: IMobilePrefix) {
-    this.model = model;
-    if (model.phone !== '' && model.country) {
-      this.propagateChange(model);
-    } else {
+    // Convert phone to string and trim (handles both string and number types from number input)
+    const phoneStr = model.phone != null ? String(model.phone) : '';
+    const phoneValue = phoneStr.trim();
+    
+    // Update model with string phone value
+    this.model = new IMobilePrefix(phoneValue, model.country);
+    
+    // Return null if phone is empty, null, undefined, or only whitespace (for validation purposes)
+    if (phoneValue === '' || !model.country) {
       this.propagateChange(null);
+      return;
+    }
+    
+    // Phone has a value, return the appropriate format
+    if (this.returnAsObject()) {
+      // Return object with trimmed phone value
+      this.propagateChange(this.model);
+    } else {
+      // Return string (default behavior)
+      const stringValue = `+${model.country.dialCode}${phoneValue}`;
+      this.propagateChange(stringValue);
     }
   }
 
   /**
-   * function when it has countries values, it will find and update the model values, otherwise it will fetch the prefixes updates the countries, and call method again the recursive way
-   * @param model
+   * Accepts both string format (+{dialCode}{phone}) and IMobilePrefix object (or partial object).
+   * When receiving an object, it can be a full IMobilePrefix or a partial object with phone and/or country.
+   * @param model - Can be a string, IMobilePrefix object, partial object, or null
    */
   writeValue(model: Partial<IMobilePrefix> | string | null) {
     const prefixes = this.values();
@@ -141,25 +165,64 @@ export class NgtMobilePrefix implements ControlValueAccessor {
       return;
     }
 
-    const phoneNumber = typeof model === 'string' ? (model as string) : `+${model.country?.dialCode}${model.phone}`;
-    const currentValue = this.model ? `+${this.model.country?.dialCode}${this.model.phone}` : '';
+    // Handle string input
+    if (typeof model === 'string') {
+      const phoneNumber = model;
+      const currentValue = this.model ? `+${this.model.country?.dialCode}${this.model.phone}` : '';
 
-    // Only update if the value is actually different
-    if (phoneNumber === currentValue) {
+      // Only update if the value is actually different
+      if (phoneNumber === currentValue) {
+        return;
+      }
+
+      // Find matching prefix
+      for (let i = 1; i <= 4; i++) {
+        const target = prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
+        if (target) {
+          const newModel = new IMobilePrefix(phoneNumber.substr(i), target);
+          // Only update if different
+          if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
+            this.model = newModel;
+          }
+          break;
+        }
+      }
       return;
     }
 
-    // Find matching prefix
-    for (let i = 1; i <= 4; i++) {
-      const target = prefixes.find(x => x.dialCode === phoneNumber.substring(1, i));
-      if (target) {
-        const newModel = new IMobilePrefix(phoneNumber.substr(i), target);
-        // Only update if different
-        if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
-          this.model = newModel;
-        }
-        break;
+    // Handle object input (full or partial IMobilePrefix)
+    const objectModel = model as Partial<IMobilePrefix>;
+    
+    // If we have both phone and country, use them directly
+    if (objectModel.phone !== undefined && objectModel.country) {
+      const newModel = new IMobilePrefix(objectModel.phone, objectModel.country);
+      // Only update if different
+      if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
+        this.model = newModel;
       }
+      return;
+    }
+
+    // If we only have phone, use current country or default to first prefix
+    if (objectModel.phone !== undefined && !objectModel.country) {
+      const country = this.model?.country || prefixes[0];
+      const newModel = new IMobilePrefix(objectModel.phone, country);
+      // Only update if different
+      if (!this.model || this.model.phone !== newModel.phone || this.model.country?.dialCode !== newModel.country?.dialCode) {
+        this.model = newModel;
+      }
+      return;
+    }
+
+    // If we only have country, update country but keep existing phone
+    if (objectModel.country && !objectModel.phone) {
+      const phone = this.model?.phone || '';
+      const newModel = new IMobilePrefix(phone, objectModel.country);
+      // Only update if different
+      if (!this.model || this.model.country?.dialCode !== newModel.country?.dialCode) {
+        this.model = newModel;
+      }
+      return;
     }
   }
 
@@ -195,8 +258,8 @@ export class NgtMobilePrefix implements ControlValueAccessor {
 
   /**
    * we save the given function from registerOnChange, so our class calls is at the appropriate time.
-   * @param _model
+   * @param _value - Can be IMobilePrefix object, string, or null depending on returnAsString setting
    * @private
    */
-  private propagateChange(_model: IMobilePrefix | null) {}
+  private propagateChange(_value: IMobilePrefix | string | null) {}
 }

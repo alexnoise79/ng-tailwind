@@ -34,12 +34,13 @@
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
                     <ngt-mobile-prefix [(ngModel)]="mobileValue1" [values]="prefixes" class="w-full md:w-96" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                      @if (mobileValue1() && mobileValue1()?.country) {
-                        Value: {{ '+' + (mobileValue1()?.country?.dialCode || '') + (mobileValue1()?.phone || '') }}
+                      @if (mobileValue1()) {
+                        Value: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">{{ mobileValue1() }}</code>
                       } @else {
-                        Value: Empty
+                        Value: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">Empty</code>
                       }
                     </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">By default, returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code></p>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -301,6 +302,105 @@
               </div>
             </section>
 
+            <!-- Return As Object -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Return As Object</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('returnAsString')"
+                  [class.dark:bg-gray-700]="isShowingCode('returnAsString')"
+                  (click)="toggleDemoView('returnAsString')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('returnAsString')) {
+                  <div class="space-y-6">
+                    <!-- String Mode (Default) -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">String Mode (Default - returnAsObject is false)</label>
+                      <ngt-mobile-prefix [(ngModel)]="mobileValue5" [values]="prefixes" class="w-full md:w-96" />
+                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                        Value: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">{{ mobileValue5() || 'Empty' }}</code>
+                      </p>
+                      <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code></p>
+                    </div>
+
+                    <!-- Object Mode -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Mode (returnAsObject is true)</label>
+                      <ngt-mobile-prefix [(ngModel)]="mobileValue6" [values]="prefixes" [returnAsObject]="true" class="w-full md:w-96" />
+                      <div class="mt-2">
+                        <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Value:</p>
+                        @if (mobileValue6()) {
+                          <pre class="bg-gray-100 dark:bg-gray-900 p-3 rounded text-xs text-gray-800 dark:text-gray-200 overflow-x-auto"><code>{{ formatObjectValue(mobileValue6()) }}</code></pre>
+                        } @else {
+                          <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded text-sm">null</code>
+                        }
+                      </div>
+                      <p class="text-xs text-gray-500 dark:text-gray-500 mt-2">Returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object</p>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
+                      <p class="text-sm text-blue-800 dark:text-blue-200">
+                        <strong>Note:</strong> The component accepts both string and object formats when writing values (e.g., when patching forms), regardless of the <code class="bg-blue-100 dark:bg-blue-900/40 px-1 py-0.5 rounded">returnAsObject</code> setting.
+                      </p>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('returnAsString') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('returnAsString') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('returnAsString') !== 'html'"
+                        (click)="setActiveCodeTab('returnAsString', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('returnAsString', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('returnAsString') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('returnAsString') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('returnAsString') !== 'ts'"
+                        (click)="setActiveCodeTab('returnAsString', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('returnAsString', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('returnAsString', getActiveCodeTab('returnAsString')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('returnAsString', getActiveCodeTab('returnAsString')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
             <!-- Forms -->
             <section class="space-y-4">
               <div class="flex items-center justify-between">
@@ -427,6 +527,12 @@
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">undefined</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Additional options for the input fields, passed from JSON form.</td>
                       </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">returnAsObject</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">When true, the component returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object. When false (default), it returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code>. Note: writeValue accepts both string and object formats regardless of this setting.</td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -459,7 +565,19 @@
               <section>
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">ControlValueAccessor</h3>
                 <p class="text-gray-600 dark:text-gray-400 mb-4">The MobilePrefix component implements <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">ControlValueAccessor</code>, making it compatible with Angular forms (both template-driven and reactive forms).</p>
-                <p class="text-gray-600 dark:text-gray-400">The component accepts and returns an <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">IMobilePrefix</code> object containing the phone number and selected country, or a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">+&#123;dialCode&#125;&#123;phone&#125;</code>.</p>
+                <div class="space-y-3">
+                  <p class="text-gray-600 dark:text-gray-400"><strong>Input Format:</strong> The component accepts both formats when writing values (e.g., when patching forms):</p>
+                  <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>String format: <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code> (e.g., <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+1234567890"</code>)</li>
+                    <li>Object format: <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object with <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">phone</code> and <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">country</code> properties</li>
+                    <li>Partial object: Can accept partial objects with only <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">phone</code> or only <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">country</code></li>
+                  </ul>
+                  <p class="text-gray-600 dark:text-gray-400"><strong>Output Format:</strong> The output format is controlled by the <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> input:</p>
+                  <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 ml-4">
+                    <li>When <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> is <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">false</code> (default): Returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code></li>
+                    <li>When <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> is <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">true</code>: Returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object</li>
+                  </ul>
+                </div>
               </section>
             </div>
           </div>
