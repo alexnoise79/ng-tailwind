@@ -35,16 +35,33 @@
                     <ul #nav="ngtNav" ngtNav>
                       <li ngtNavItem>
                         <button ngtNavLink>Home</button>
-                        <ng-template ngtNavContent>First content</ng-template>
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
                       </li>
                       <li ngtNavItem>
                         <button ngtNavLink>About</button>
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
                       </li>
                       <li ngtNavItem>
                         <button ngtNavLink>Contact</button>
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
                       </li>
                     </ul>
-                    <div [ngtNavOutlet]="nav"></div>
+                    <div [ngtNavOutlet]="nav" class="mt-4"></div>
                   </div>
                 } @else {
                   <!-- Code View -->
@@ -84,11 +101,33 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('pills')) {
                   <div class="mb-4">
-                    <ngt-nav [style]="'pills'">
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    <ngt-nav #pillsNav="ngtNav" [style]="'pills'">
+                      <ngt-nav-item label="Home">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="About">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="Contact">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
                     </ngt-nav>
+                    <div [ngtNavOutlet]="pillsNav" class="mt-4"></div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -126,11 +165,33 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('underline')) {
                   <div class="mb-4">
-                    <ngt-nav [style]="'underline'">
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    <ngt-nav #underlineNav="ngtNav" [style]="'underline'">
+                      <ngt-nav-item label="Home">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="About">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="Contact">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
                     </ngt-nav>
+                    <div [ngtNavOutlet]="underlineNav" class="mt-4"></div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -168,11 +229,33 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('center')) {
                   <div class="mb-4">
-                    <ngt-nav [align]="'center'">
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    <ngt-nav #centerNav="ngtNav" [align]="'center'">
+                      <ngt-nav-item label="Home">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="About">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="Contact">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
                     </ngt-nav>
+                    <div [ngtNavOutlet]="centerNav" class="mt-4"></div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -210,11 +293,33 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('justified')) {
                   <div class="mb-4">
-                    <ngt-nav [align]="'justified'">
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    <ngt-nav #justifiedNav="ngtNav" [align]="'justified'">
+                      <ngt-nav-item label="Home">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="About">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="Contact">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
                     </ngt-nav>
+                    <div [ngtNavOutlet]="justifiedNav" class="mt-4"></div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -252,12 +357,41 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('disabled')) {
                   <div class="mb-4">
-                    <ngt-nav>
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item [disabled]="true" label="Disabled"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
+                    <ngt-nav #disabledNav="ngtNav">
+                      <ngt-nav-item label="Home">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                            <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                            <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="About">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                            <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                            <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item [disabled]="true" label="Disabled">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-gray-50 dark:bg-gray-900/20 rounded-lg border border-gray-200 dark:border-gray-800">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Disabled Content</h3>
+                            <p class="text-gray-800 dark:text-gray-200">This tab is disabled and cannot be activated.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
+                      <ngt-nav-item label="Contact">
+                        <ng-template ngtNavContent>
+                          <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                            <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                            <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                          </div>
+                        </ng-template>
+                      </ngt-nav-item>
                     </ngt-nav>
+                    <div [ngtNavOutlet]="disabledNav" class="mt-4"></div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -294,12 +428,40 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('vertical')) {
-                  <div class="mb-4 max-w-xs">
-                    <ngt-nav [orientation]="'vertical'">
-                      <ngt-nav-item label="Home"></ngt-nav-item>
-                      <ngt-nav-item label="About"></ngt-nav-item>
-                      <ngt-nav-item label="Contact"></ngt-nav-item>
-                    </ngt-nav>
+                  <div class="mb-4">
+                    <div class="flex gap-4">
+                      <div class="max-w-xs">
+                        <ngt-nav #verticalNav="ngtNav" [orientation]="'vertical'">
+                          <ngt-nav-item label="Home">
+                            <ng-template ngtNavContent>
+                              <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+                                <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Home Content</h3>
+                                <p class="text-blue-800 dark:text-blue-200">Welcome to the home section! This is the content displayed when the Home tab is active.</p>
+                              </div>
+                            </ng-template>
+                          </ngt-nav-item>
+                          <ngt-nav-item label="About">
+                            <ng-template ngtNavContent>
+                              <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                                <h3 class="text-lg font-semibold text-green-900 dark:text-green-100 mb-2">About Content</h3>
+                                <p class="text-green-800 dark:text-green-200">This is the about section content. Learn more about our project and mission.</p>
+                              </div>
+                            </ng-template>
+                          </ngt-nav-item>
+                          <ngt-nav-item label="Contact">
+                            <ng-template ngtNavContent>
+                              <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+                                <h3 class="text-lg font-semibold text-purple-900 dark:text-purple-100 mb-2">Contact Content</h3>
+                                <p class="text-purple-800 dark:text-purple-200">Get in touch with us! This section contains contact information and ways to reach out.</p>
+                              </div>
+                            </ng-template>
+                          </ngt-nav-item>
+                        </ngt-nav>
+                      </div>
+                      <div class="flex-1">
+                        <div [ngtNavOutlet]="verticalNav" class="mt-0"></div>
+                      </div>
+                    </div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -310,6 +472,54 @@
                         </svg>
                       </button>
                       <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.vertical }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- With RouterLink -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">With RouterLink</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('routerlink')"
+                  [class.dark:bg-gray-700]="isShowingCode('routerlink')"
+                  (click)="toggleDemoView('routerlink')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('routerlink')) {
+                  <div class="mb-4">
+                    <ngt-nav #routerNav="ngtNav">
+                      <ngt-nav-item [routerLink]="'/getting-started'" label="Getting Started"></ngt-nav-item>
+                      <ngt-nav-item [routerLink]="'/button'" label="Button"></ngt-nav-item>
+                      <ngt-nav-item [routerLink]="'/modal'" label="Modal"></ngt-nav-item>
+                      <ngt-nav-item [routerLink]="'/table'" label="Table"></ngt-nav-item>
+                    </ngt-nav>
+                    <div class="mt-4 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        <strong>Note:</strong> This nav uses RouterLink to navigate between routes. Click on any tab to navigate to that route. The active state will automatically sync with the current route.
+                      </p>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(codeSnippets.routerlink)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.routerlink }}</code></pre>
                     </div>
                   </div>
                 }
