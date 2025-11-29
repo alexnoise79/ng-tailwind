@@ -199,7 +199,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     };
     const styleClasses = {
       tabs: this.orientation() === 'horizontal' ? 'border-b border-gray-200' : '',
-      pills: '',
+      pills: this.orientation() === 'horizontal' ? 'gap-x-1' : 'gap-y-1',
       underline: ''
     };
     const alignClasses = {
