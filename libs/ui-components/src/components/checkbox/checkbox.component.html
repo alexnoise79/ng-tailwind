@@ -11,7 +11,7 @@
     [disabled]="isDisabled()" 
     [attr.aria-label]="label() || undefined" 
     [attr.aria-checked]="isIndeterminate() ? 'mixed' : isChecked()"
-    [class]="checkboxClasses()" 
+    [class]="hasTemplates() ? 'sr-only' : checkboxClasses()" 
     (change)="onCheckboxChange($event)" 
     type="checkbox"
   />

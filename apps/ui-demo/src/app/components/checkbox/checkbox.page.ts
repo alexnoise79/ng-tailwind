@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgtCheckbox, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
@@ -20,6 +20,35 @@ export class CheckboxPage {
   disabledChecked = true;
   disabledUnchecked = false;
   formCheckbox = false;
+  templateCheckbox1 = false;
+  templateCheckbox2 = signal(false);
+  
+  // Indeterminate example - master and child checkboxes
+  childCheckbox1 = signal(false);
+  childCheckbox2 = signal(false);
+  childCheckbox3 = signal(false);
+  
+  // Computed properties for indeterminate example
+  allChildrenChecked = computed(() => 
+    this.childCheckbox1() && this.childCheckbox2() && this.childCheckbox3()
+  );
+  
+  someChildrenChecked = computed(() => 
+    this.childCheckbox1() || this.childCheckbox2() || this.childCheckbox3()
+  );
+  
+  isMasterIndeterminate = computed(() => 
+    this.someChildrenChecked() && !this.allChildrenChecked()
+  );
+  
+  masterChecked = computed(() => this.allChildrenChecked());
+  
+  toggleMaster() {
+    const newValue = !this.allChildrenChecked();
+    this.childCheckbox1.set(newValue);
+    this.childCheckbox2.set(newValue);
+    this.childCheckbox3.set(newValue);
+  }
 
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
@@ -81,24 +110,72 @@ export class CheckboxPage {
     },
     indeterminate: {
       html: `<ngt-checkbox 
-  [(ngModel)]="indeterminateCheckbox" 
-  [indeterminate]="true" 
-  label="Indeterminate checkbox">
-</ngt-checkbox>`,
-      ts: `indeterminateCheckbox = signal(false);`
+  [ngModel]="masterChecked()" 
+  [indeterminate]="isMasterIndeterminate()" 
+  (ngModelChange)="toggleMaster()"
+  label="Select all">
+</ngt-checkbox>
+<div class="ml-6 mt-2 flex flex-col gap-3">
+  <ngt-checkbox 
+    [(ngModel)]="childCheckbox1" 
+    label="Option 1">
+  </ngt-checkbox>
+  <ngt-checkbox 
+    [(ngModel)]="childCheckbox2" 
+    label="Option 2">
+  </ngt-checkbox>
+  <ngt-checkbox 
+    [(ngModel)]="childCheckbox3" 
+    label="Option 3">
+  </ngt-checkbox>
+</div>`,
+      ts: `childCheckbox1 = signal(false);
+childCheckbox2 = signal(false);
+childCheckbox3 = signal(false);
+
+allChildrenChecked = computed(() => 
+  this.childCheckbox1() && this.childCheckbox2() && this.childCheckbox3()
+);
+
+someChildrenChecked = computed(() => 
+  this.childCheckbox1() || this.childCheckbox2() || this.childCheckbox3()
+);
+
+isMasterIndeterminate = computed(() => 
+  this.someChildrenChecked() && !this.allChildrenChecked()
+);
+
+masterChecked = computed(() => this.allChildrenChecked());
+
+toggleMaster() {
+  const newValue = !this.allChildrenChecked();
+  this.childCheckbox1.set(newValue);
+  this.childCheckbox2.set(newValue);
+  this.childCheckbox3.set(newValue);
+}`
     },
     disabled: `<ngt-checkbox [disabled]="true" label="Disabled (unchecked)"></ngt-checkbox>
 <ngt-checkbox [(ngModel)]="disabledChecked" [disabled]="true" label="Disabled (checked)"></ngt-checkbox>`,
     templates: {
-      html: `<ngt-checkbox [(ngModel)]="basicCheckbox" label="Custom templates">
+      html: `<ngt-checkbox [(ngModel)]="templateCheckbox1" label="Custom templates">
   <ng-template #trueTemplate>
     <span class="text-green-600 dark:text-green-400 ml-2">✓ Active</span>
   </ng-template>
   <ng-template #falseTemplate>
     <span class="text-gray-500 ml-2">○ Inactive</span>
   </ng-template>
+</ngt-checkbox>
+
+<ngt-checkbox [(ngModel)]="templateCheckbox2" label="Icon templates">
+  <ng-template #trueTemplate>
+    <span class="ml-2 text-blue-600 dark:text-blue-400">🔵</span>
+  </ng-template>
+  <ng-template #falseTemplate>
+    <span class="ml-2 text-gray-400">⚪</span>
+  </ng-template>
 </ngt-checkbox>`,
-      ts: `basicCheckbox = false;`
+      ts: `templateCheckbox1 = false;
+templateCheckbox2 = signal(false);`
     },
     forms: {
       html: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">

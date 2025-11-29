@@ -325,10 +325,25 @@
                 @if (!isShowingCode('indeterminate')) {
                   <div class="mb-4 flex flex-col gap-4">
                     <ngt-checkbox 
-                      [(ngModel)]="indeterminateCheckbox" 
-                      [indeterminate]="true" 
-                      label="Indeterminate checkbox">
+                      [ngModel]="masterChecked()" 
+                      [indeterminate]="isMasterIndeterminate()" 
+                      (ngModelChange)="toggleMaster()"
+                      label="Select all">
                     </ngt-checkbox>
+                    <div class="ml-6 mt-2 flex flex-col gap-3">
+                      <ngt-checkbox 
+                        [(ngModel)]="childCheckbox1" 
+                        label="Option 1">
+                      </ngt-checkbox>
+                      <ngt-checkbox 
+                        [(ngModel)]="childCheckbox2" 
+                        label="Option 2">
+                      </ngt-checkbox>
+                      <ngt-checkbox 
+                        [(ngModel)]="childCheckbox3" 
+                        label="Option 3">
+                      </ngt-checkbox>
+                    </div>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -451,13 +466,21 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('templates')) {
-                  <div class="mb-4 flex flex-col gap-4">
-                    <ngt-checkbox [(ngModel)]="basicCheckbox" label="Custom templates">
+                  <div class="mb-4 flex flex-row gap-4 flex-wrap">
+                    <ngt-checkbox [(ngModel)]="templateCheckbox1" label="Custom templates">
                       <ng-template #trueTemplate>
                         <span class="text-green-600 dark:text-green-400 ml-2">✓ Active</span>
                       </ng-template>
                       <ng-template #falseTemplate>
                         <span class="text-gray-500 ml-2">○ Inactive</span>
+                      </ng-template>
+                    </ngt-checkbox>
+                    <ngt-checkbox [(ngModel)]="templateCheckbox2" label="Icon templates">
+                      <ng-template #trueTemplate>
+                        <span class="ml-2 text-blue-600 dark:text-blue-400">🔵</span>
+                      </ng-template>
+                      <ng-template #falseTemplate>
+                        <span class="ml-2 text-gray-400">⚪</span>
                       </ng-template>
                     </ngt-checkbox>
                   </div>
@@ -532,9 +555,9 @@
                     <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
                       <div>
                         <ngt-checkbox 
-                          name="agree" 
-                          [(ngModel)]="formCheckbox" 
                           #agree="ngModel"
+                          [(ngModel)]="formCheckbox" 
+                          name="agree" 
                           label="I agree to the terms and conditions"
                           required>
                         </ngt-checkbox>
@@ -542,7 +565,7 @@
                           <p class="text-red-600 dark:text-red-400 text-sm mt-1">This field is required</p>
                         }
                       </div>
-                      <button type="submit" [disabled]="exampleForm.invalid" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
+                      <button [disabled]="exampleForm.invalid" type="submit" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
                     </form>
                   </div>
                 } @else {

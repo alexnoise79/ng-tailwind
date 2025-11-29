@@ -51,6 +51,7 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
     return val === trueVal;
   });
   isIndeterminate = computed(() => this.indeterminate());
+  hasTemplates = computed(() => !!(this.trueTemplate || this.falseTemplate));
 
   checkboxClasses = computed(() => {
     const baseClasses = 'rounded border-gray-300 text-primary-600 focus:ring-primary-500 focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors';
