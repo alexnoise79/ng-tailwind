@@ -466,7 +466,7 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('templates')) {
-                  <div class="mb-4 flex flex-row gap-4 flex-wrap">
+                  <div class="mb-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <ngt-checkbox [(ngModel)]="templateCheckbox1" label="Custom templates">
                       <ng-template #trueTemplate>
                         <span class="text-green-600 dark:text-green-400 ml-2">✓ Active</span>
@@ -481,6 +481,14 @@
                       </ng-template>
                       <ng-template #falseTemplate>
                         <span class="ml-2 text-gray-400">⚪</span>
+                      </ng-template>
+                    </ngt-checkbox>
+                    <ngt-checkbox [(ngModel)]="templateCheckbox3" label="Badge templates">
+                      <ng-template #trueTemplate>
+                        <span class="ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">Enabled</span>
+                      </ng-template>
+                      <ng-template #falseTemplate>
+                        <span class="ml-2 px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs">Disabled</span>
                       </ng-template>
                     </ngt-checkbox>
                   </div>

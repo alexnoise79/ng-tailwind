@@ -22,6 +22,7 @@ export class CheckboxPage {
   formCheckbox = false;
   templateCheckbox1 = false;
   templateCheckbox2 = signal(false);
+  templateCheckbox3 = signal(false);
   
   // Indeterminate example - master and child checkboxes
   childCheckbox1 = signal(false);
@@ -173,9 +174,19 @@ toggleMaster() {
   <ng-template #falseTemplate>
     <span class="ml-2 text-gray-400">⚪</span>
   </ng-template>
+</ngt-checkbox>
+
+<ngt-checkbox [(ngModel)]="templateCheckbox3" label="Badge templates">
+  <ng-template #trueTemplate>
+    <span class="ml-2 px-2 py-0.5 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">Enabled</span>
+  </ng-template>
+  <ng-template #falseTemplate>
+    <span class="ml-2 px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs">Disabled</span>
+  </ng-template>
 </ngt-checkbox>`,
       ts: `templateCheckbox1 = false;
-templateCheckbox2 = signal(false);`
+templateCheckbox2 = signal(false);
+templateCheckbox3 = signal(false);`
     },
     forms: {
       html: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">

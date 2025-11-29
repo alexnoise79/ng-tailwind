@@ -68,7 +68,7 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
   });
 
   containerClasses = computed(() => {
-    return classMerge('inline-flex items-center gap-2', this.isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer');
+    return classMerge('flex items-center gap-2', this.isDisabled() ? 'cursor-not-allowed' : 'cursor-pointer');
   });
 
   constructor() {
