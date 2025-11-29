@@ -61,6 +61,16 @@ All components in ngtailwind UI are built with accessibility (a11y) as a core re
 ### Tooltip
 
 - ✅ `role="tooltip"` on tooltip element
+
+### Checkbox
+
+- ✅ Proper `input[type="checkbox"]` element semantics
+- ✅ `disabled` state properly communicated
+- ✅ `indeterminate` state with `aria-checked="mixed"` support
+- ✅ Keyboard accessible (Space to toggle)
+- ✅ Focus indicators with visible outline
+- ✅ Label association for screen readers
+- ✅ Custom templates maintain accessibility when checkbox is hidden
 - ✅ Keyboard accessible (focus triggers tooltip)
 - ✅ Screen reader compatible
 - ✅ Proper timing for show/hide
