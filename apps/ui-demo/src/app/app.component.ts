@@ -55,6 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       name: 'Form',
       items: [
+        { label: 'Checkbox', route: '/checkbox' },
         { label: 'Datepicker', route: '/datepicker' },
         { label: 'Input', route: '/input' },
         { label: 'Mobile Prefix', route: '/mobile-prefix' },

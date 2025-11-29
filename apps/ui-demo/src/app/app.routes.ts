@@ -89,5 +89,9 @@ export const appRoutes: Routes = [
   {
     path: 'password',
     loadComponent: () => import('./components/password/password.page').then(m => m.PasswordPage)
+  },
+  {
+    path: 'checkbox',
+    loadComponent: () => import('./components/checkbox/checkbox.page').then(m => m.CheckboxPage)
   }
 ];

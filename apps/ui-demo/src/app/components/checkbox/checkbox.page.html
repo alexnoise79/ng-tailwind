@@ -1,0 +1,721 @@
+<div class="space-y-8">
+  <div>
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Checkbox</h1>
+    <p class="text-gray-600 dark:text-gray-400">A checkbox component that supports ngModel, custom values, indeterminate state, and can be used in forms.</p>
+  </div>
+
+  <!-- Tabs Navigation -->
+  <div class="mb-6">
+    <ngt-nav #mainNav="ngtNav" [style]="'tabs'">
+      <ngt-nav-item label="Showcase">
+        <ng-template ngtNavContent>
+          <div class="space-y-8">
+            <!-- Basic Usage -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Basic Usage</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('basic')"
+                  [class.dark:bg-gray-700]="isShowingCode('basic')"
+                  (click)="toggleDemoView('basic')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('basic')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox></ngt-checkbox>
+                    <ngt-checkbox [(ngModel)]="basicCheckbox"></ngt-checkbox>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">Value: {{ basicCheckbox }}</p>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('basic') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('basic') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('basic') === 'html'"
+                        (click)="setActiveCodeTab('basic', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('basic', 'html') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('basic', getActiveCodeTab('basic')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('basic', getActiveCodeTab('basic')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Label -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Label</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('label')"
+                  [class.dark:bg-gray-700]="isShowingCode('label')"
+                  (click)="toggleDemoView('label')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('label')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox label="Accept terms and conditions"></ngt-checkbox>
+                    <ngt-checkbox [(ngModel)]="labeledCheckbox" label="Enable notifications"></ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('label') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('label') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('label') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('label') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('label') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('label') === 'html'"
+                        (click)="setActiveCodeTab('label', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('label', 'html') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('label', getActiveCodeTab('label')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('label', getActiveCodeTab('label')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Label Before -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Label Before</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('labelBefore')"
+                  [class.dark:bg-gray-700]="isShowingCode('labelBefore')"
+                  (click)="toggleDemoView('labelBefore')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('labelBefore')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox [labelBefore]="true" label="Label before checkbox"></ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('labelBefore') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('labelBefore') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('labelBefore') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('labelBefore') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('labelBefore') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('labelBefore') === 'html'"
+                        (click)="setActiveCodeTab('labelBefore', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('labelBefore', 'html') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('labelBefore', getActiveCodeTab('labelBefore')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('labelBefore', getActiveCodeTab('labelBefore')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Sizes -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Sizes</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('sizes')"
+                  [class.dark:bg-gray-700]="isShowingCode('sizes')"
+                  (click)="toggleDemoView('sizes')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('sizes')) {
+                  <div class="my-2 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <ngt-checkbox size="sm" label="Small checkbox"></ngt-checkbox>
+                    <ngt-checkbox size="md" label="Medium checkbox"></ngt-checkbox>
+                    <ngt-checkbox size="lg" label="Large checkbox"></ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('sizes') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('sizes') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('sizes') === 'html'"
+                        (click)="setActiveCodeTab('sizes', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('sizes', 'html') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('sizes', getActiveCodeTab('sizes')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('sizes', getActiveCodeTab('sizes')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Custom Values -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Custom Values</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('customValues')"
+                  [class.dark:bg-gray-700]="isShowingCode('customValues')"
+                  (click)="toggleDemoView('customValues')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('customValues')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox 
+                      [(ngModel)]="customValues" 
+                      [trueValue]="'yes'" 
+                      [falseValue]="'no'" 
+                      label="Custom values (yes/no)">
+                    </ngt-checkbox>
+                    <p class="text-sm text-gray-700 dark:text-gray-300">Value: {{ customValues() }}</p>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('customValues') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('customValues') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('customValues') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('customValues') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('customValues') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('customValues') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('customValues') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('customValues') !== 'html'"
+                        (click)="setActiveCodeTab('customValues', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('customValues', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('customValues') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('customValues') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('customValues') !== 'ts'"
+                        (click)="setActiveCodeTab('customValues', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('customValues', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('customValues', getActiveCodeTab('customValues')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('customValues', getActiveCodeTab('customValues')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Indeterminate -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Indeterminate</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('indeterminate')"
+                  [class.dark:bg-gray-700]="isShowingCode('indeterminate')"
+                  (click)="toggleDemoView('indeterminate')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('indeterminate')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox 
+                      [(ngModel)]="indeterminateCheckbox" 
+                      [indeterminate]="true" 
+                      label="Indeterminate checkbox">
+                    </ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('indeterminate') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('indeterminate') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('indeterminate') !== 'html'"
+                        (click)="setActiveCodeTab('indeterminate', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('indeterminate', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('indeterminate') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('indeterminate') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('indeterminate') !== 'ts'"
+                        (click)="setActiveCodeTab('indeterminate', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('indeterminate', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('indeterminate', getActiveCodeTab('indeterminate')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('indeterminate', getActiveCodeTab('indeterminate')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Disabled State -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Disabled State</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('disabled')"
+                  [class.dark:bg-gray-700]="isShowingCode('disabled')"
+                  (click)="toggleDemoView('disabled')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('disabled')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox [disabled]="true" label="Disabled (unchecked)"></ngt-checkbox>
+                    <ngt-checkbox [(ngModel)]="disabledChecked" [disabled]="true" label="Disabled (checked)"></ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('disabled') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('disabled') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('disabled') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('disabled') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('disabled') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('disabled') === 'html'"
+                        (click)="setActiveCodeTab('disabled', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('disabled', 'html') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('disabled', getActiveCodeTab('disabled')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('disabled', getActiveCodeTab('disabled')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Templates -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Custom Templates</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('templates')"
+                  [class.dark:bg-gray-700]="isShowingCode('templates')"
+                  (click)="toggleDemoView('templates')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('templates')) {
+                  <div class="mb-4 flex flex-col gap-4">
+                    <ngt-checkbox [(ngModel)]="basicCheckbox" label="Custom templates">
+                      <ng-template #trueTemplate>
+                        <span class="text-green-600 dark:text-green-400 ml-2">✓ Active</span>
+                      </ng-template>
+                      <ng-template #falseTemplate>
+                        <span class="text-gray-500 ml-2">○ Inactive</span>
+                      </ng-template>
+                    </ngt-checkbox>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('templates') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('templates') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('templates') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('templates') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('templates') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('templates') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('templates') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('templates') !== 'html'"
+                        (click)="setActiveCodeTab('templates', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('templates', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('templates') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('templates') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('templates') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('templates') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('templates') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('templates') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('templates') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('templates') !== 'ts'"
+                        (click)="setActiveCodeTab('templates', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('templates', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('templates', getActiveCodeTab('templates')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('templates', getActiveCodeTab('templates')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+
+            <!-- Forms -->
+            <section class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Forms</h2>
+                <button
+                  [class.bg-gray-100]="isShowingCode('forms')"
+                  [class.dark:bg-gray-700]="isShowingCode('forms')"
+                  (click)="toggleDemoView('forms')"
+                  type="button"
+                  class="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors"
+                  title="Toggle code view"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                  </svg>
+                  <span>Code</span>
+                </button>
+              </div>
+              <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                @if (!isShowingCode('forms')) {
+                  <div class="mb-4">
+                    <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
+                      <div>
+                        <ngt-checkbox 
+                          name="agree" 
+                          [(ngModel)]="formCheckbox" 
+                          #agree="ngModel"
+                          label="I agree to the terms and conditions"
+                          required>
+                        </ngt-checkbox>
+                        @if (agree.invalid && (agree.touched || formSubmitted())) {
+                          <p class="text-red-600 dark:text-red-400 text-sm mt-1">This field is required</p>
+                        }
+                      </div>
+                      <button type="submit" [disabled]="exampleForm.invalid" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
+                    </form>
+                  </div>
+                } @else {
+                  <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                    <div class="flex border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('forms') === 'html'"
+                        [class.dark:text-white]="getActiveCodeTab('forms') === 'html'"
+                        [class.bg-white]="getActiveCodeTab('forms') === 'html'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'html'"
+                        [class.border-b-2]="getActiveCodeTab('forms') === 'html'"
+                        [class.border-primary-500]="getActiveCodeTab('forms') === 'html'"
+                        [class.text-gray-500]="getActiveCodeTab('forms') !== 'html'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'html'"
+                        (click)="setActiveCodeTab('forms', 'html')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('forms', 'html') }}
+                      </button>
+                      <button
+                        [class.text-gray-900]="getActiveCodeTab('forms') === 'ts'"
+                        [class.dark:text-white]="getActiveCodeTab('forms') === 'ts'"
+                        [class.bg-white]="getActiveCodeTab('forms') === 'ts'"
+                        [class.dark:bg-gray-800]="getActiveCodeTab('forms') === 'ts'"
+                        [class.border-b-2]="getActiveCodeTab('forms') === 'ts'"
+                        [class.border-primary-500]="getActiveCodeTab('forms') === 'ts'"
+                        [class.text-gray-500]="getActiveCodeTab('forms') !== 'ts'"
+                        [class.dark:text-gray-400]="getActiveCodeTab('forms') !== 'ts'"
+                        (click)="setActiveCodeTab('forms', 'ts')"
+                        type="button"
+                        class="px-4 py-2 text-sm font-medium transition-colors"
+                      >
+                        {{ getTabFileName('forms', 'ts') }}
+                      </button>
+                    </div>
+                    <div class="relative bg-gray-100 dark:bg-gray-900">
+                      <button (click)="copyToClipboard(getCodeSnippet('forms', getActiveCodeTab('forms')))" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                      </button>
+                      <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ getCodeSnippet('forms', getActiveCodeTab('forms')) }}</code></pre>
+                    </div>
+                  </div>
+                }
+              </div>
+            </section>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+      <ngt-nav-item label="API">
+        <ng-template ngtNavContent>
+          <div class="space-y-6">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+              <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">API Reference</h2>
+
+              <!-- Inputs -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Inputs</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Property</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Default</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">ngModel</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">any</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Two-way binding for the checkbox value. Supports Angular Forms integration via ControlValueAccessor.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">label</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">string</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">-</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Optional label text displayed next to the checkbox (after by default).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">labelBefore</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">When true, displays the label before the checkbox instead of after.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">size</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'sm' | 'md' | 'lg'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">'md'</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The size of the checkbox.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">trueValue</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">any</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">true</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The value to use when the checkbox is checked. Allows custom values instead of boolean true.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">falseValue</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">any</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">The value to use when the checkbox is unchecked. Allows custom values instead of boolean false.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">indeterminate</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">When true, displays the checkbox in an indeterminate state (neither checked nor unchecked).</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">disabled</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Whether the checkbox is disabled.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Content Projection -->
+              <section class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Content Projection</h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                      <tr>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Template</th>
+                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#trueTemplate</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template to display when the checkbox is checked. Use <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">ng-template #trueTemplate</code>.</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">#falseTemplate</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">Custom template to display when the checkbox is unchecked. Use <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">ng-template #falseTemplate</code>.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <!-- Features -->
+              <section>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Features</h3>
+                <ul class="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
+                  <li>Full Angular Forms integration (ControlValueAccessor)</li>
+                  <li>Three size options: sm, md, lg</li>
+                  <li>Optional label support with flexible positioning (before or after)</li>
+                  <li>Custom true/false values support</li>
+                  <li>Indeterminate state support</li>
+                  <li>Disabled state support</li>
+                  <li>Custom templates for checked/unchecked states</li>
+                  <li>Accessible with proper ARIA attributes</li>
+                  <li>Keyboard navigation support</li>
+                  <li>Two-way data binding with ngModel</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </ng-template>
+      </ngt-nav-item>
+    </ngt-nav>
+  </div>
+
+  <!-- Content Outlet -->
+  <div [ngtNavOutlet]="mainNav"></div>
+</div>
+

@@ -1,0 +1,31 @@
+<label [class]="containerClasses()">
+  @if (labelBefore()) {
+    @if (label()) {
+      <span [class]="labelClasses()">{{ label() }}</span>
+    }
+  }
+  
+  <input 
+    #checkbox 
+    [checked]="isChecked()" 
+    [disabled]="isDisabled()" 
+    [attr.aria-label]="label() || undefined" 
+    [attr.aria-checked]="isIndeterminate() ? 'mixed' : isChecked()"
+    [class]="checkboxClasses()" 
+    (change)="onCheckboxChange($event)" 
+    type="checkbox"
+  />
+  
+  @if (!labelBefore()) {
+    @if (label()) {
+      <span [class]="labelClasses()">{{ label() }}</span>
+    }
+  }
+  
+  @if (isChecked() && trueTemplate) {
+    <ng-container *ngTemplateOutlet="trueTemplate" />
+  } @else if (!isChecked() && falseTemplate) {
+    <ng-container *ngTemplateOutlet="falseTemplate" />
+  }
+</label>
+
