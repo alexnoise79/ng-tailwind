@@ -250,18 +250,18 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('sizes')) {
-                  <div class="space-y-4">
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Small</label>
-                      <ngt-select [(ngModel)]="selectedCity4" [options]="cities()" size="sm" placeholder="Select a City" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCity4" [options]="cities()" size="sm" placeholder="Select a City" class="w-full" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Medium (Default)</label>
-                      <ngt-select [(ngModel)]="selectedCity5" [options]="cities()" size="md" placeholder="Select a City" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCity5" [options]="cities()" size="md" placeholder="Select a City" class="w-full" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Large</label>
-                      <ngt-select [(ngModel)]="selectedCity6" [options]="cities()" size="lg" placeholder="Select a City" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCity6" [options]="cities()" size="lg" placeholder="Select a City" class="w-full" />
                     </div>
                   </div>
                 } @else {
@@ -402,14 +402,14 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('clear')) {
-                  <div class="space-y-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Empty Select</label>
-                      <ngt-select [(ngModel)]="selectedCity8" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCity8" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Pre-selected</label>
-                      <ngt-select [(ngModel)]="selectedCity9" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCity9" [options]="cityObjects()" [showClear]="true" optionLabel="name" optionValue="code" placeholder="Select a City" class="w-full" />
                     </div>
                   </div>
                 } @else {
@@ -551,14 +551,14 @@
               </div>
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('multiselect')) {
-                  <div class="space-y-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Simple Array</label>
-                      <ngt-select [(ngModel)]="selectedCities1" [options]="cities()" [multiselect]="true" placeholder="Select Cities" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCities1" [options]="cities()" [multiselect]="true" placeholder="Select Cities" class="w-full" />
                     </div>
                     <div>
                       <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Object Array</label>
-                      <ngt-select [(ngModel)]="selectedCities2" [options]="cityObjects()" [multiselect]="true" optionLabel="name" optionValue="code" placeholder="Select Cities" class="w-full md:w-56" />
+                      <ngt-select [(ngModel)]="selectedCities2" [options]="cityObjects()" [multiselect]="true" optionLabel="name" optionValue="code" placeholder="Select Cities" class="w-full" />
                     </div>
                   </div>
                   <div class="mt-4 space-y-2">
