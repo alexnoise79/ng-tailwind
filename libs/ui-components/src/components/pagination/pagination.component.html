@@ -1,7 +1,7 @@
 <nav [class]="paginationClasses()" aria-label="Pagination Navigation">
   <ul class="flex items-center gap-1 list-none p-0 m-0">
     <!-- First Button -->
-    @if (showFirstLast()) {
+    @if (effectiveShowFirstLast()) {
       <li>
         <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses(false, isFirstPage() || disabled())" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToFirst()" type="button" aria-label="Go to first page">
           <span aria-hidden="true">«</span>
@@ -53,7 +53,7 @@
     }
 
     <!-- Last Button -->
-    @if (showFirstLast()) {
+    @if (effectiveShowFirstLast()) {
       <li>
         <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses(false, isLastPage() || disabled())" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToLast()" type="button" aria-label="Go to last page">
           <span aria-hidden="true">»</span>

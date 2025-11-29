@@ -1,17 +1,20 @@
-import { Component, signal, computed, input, output, effect } from '@angular/core';
+import { Component, signal, computed, input, output, effect, inject } from '@angular/core';
 import { Size } from '../../models';
+import { WINDOW } from '../../utils';
 
 @Component({
   selector: 'ngt-pagination',
   templateUrl: './pagination.component.html'
 })
 export class NgtPagination {
+  private window = inject(WINDOW);
+
   readonly currentPage = input<number>(1);
   readonly totalPages = input<number | null>(null);
   readonly totalItems = input<number | null>(null);
   readonly pageSize = input<number>(10);
   readonly maxVisiblePages = input<number>(5);
-  readonly showFirstLast = input<boolean>(true);
+  readonly showFirstLast = input<boolean>(false);
   readonly showPrevNext = input<boolean>(true);
   readonly size = input<Size>('md');
   readonly disabled = input<boolean>(false);
@@ -52,13 +55,31 @@ export class NgtPagination {
     return this.calculateTotalPages();
   });
 
+  // Reduce maxVisiblePages on mobile devices
+  effectiveMaxVisiblePages = computed(() => {
+    const requested = this.maxVisiblePages();
+    if (this.window?.isMobile) {
+      // Reduce to 3 pages on mobile for better UX
+      return Math.min(3, requested);
+    }
+    return requested;
+  });
+
+  // Force showFirstLast to false on mobile devices
+  effectiveShowFirstLast = computed(() => {
+    if (this.window?.isMobile) {
+      return false;
+    }
+    return this.showFirstLast();
+  });
+
   // Slots represent what to display in each <li> element
   // Always returns exactly maxVisiblePages + 2 number of <li> elements
   // Each slot can be: a page number, 'ellipsis', or a special marker for first/last with ellipsis
   paginationSlots = computed(() => {
     const total = this.totalPagesValue();
     const current = this._currentPage();
-    const maxVisible = this.maxVisiblePages();
+    const maxVisible = this.effectiveMaxVisiblePages();
     const totalSlots = maxVisible + 2; // Add 2 extra slots
     const slots: Array<number | 'ellipsis' | { type: 'first-with-ellipsis' } | { type: 'last-with-ellipsis' }> = [];
 
