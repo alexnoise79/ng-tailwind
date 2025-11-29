@@ -32,7 +32,7 @@
                 @if (!isShowingCode('basic')) {
                   <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
-                    <mobile-prefix [(ngModel)]="mobileValue1" [values]="prefixes" class="w-full md:w-96" />
+                    <ngt-mobile-prefix [(ngModel)]="mobileValue1" [values]="prefixes" class="w-full md:w-96" />
                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                       @if (mobileValue1() && mobileValue1()?.country) {
                         Value: {{ '+' + (mobileValue1()?.country?.dialCode || '') + (mobileValue1()?.phone || '') }}
@@ -110,7 +110,7 @@
                 @if (!isShowingCode('placeholder')) {
                   <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number with Placeholder</label>
-                    <mobile-prefix [(ngModel)]="mobileValue2" [values]="prefixes" [placeholder]="placeholder()" class="w-full md:w-96" />
+                    <ngt-mobile-prefix [(ngModel)]="mobileValue2" [values]="prefixes" [placeholder]="placeholder()" class="w-full md:w-96" />
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -181,7 +181,7 @@
                 @if (!isShowingCode('disabled')) {
                   <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Disabled Phone Number</label>
-                    <mobile-prefix [(ngModel)]="mobileValue3" [values]="prefixes" [disabled]="true" class="w-full md:w-96" />
+                    <ngt-mobile-prefix [(ngModel)]="mobileValue3" [values]="prefixes" [disabled]="true" class="w-full md:w-96" />
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -252,7 +252,7 @@
                 @if (!isShowingCode('readonly')) {
                   <div>
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Readonly Phone Number</label>
-                    <mobile-prefix [(ngModel)]="mobileValue4" [values]="prefixes" [readonly]="true" class="w-full md:w-96" />
+                    <ngt-mobile-prefix [(ngModel)]="mobileValue4" [values]="prefixes" [readonly]="true" class="w-full md:w-96" />
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -326,7 +326,7 @@
                     <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
                       <div class="flex flex-col gap-1">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
-                        <mobile-prefix #phone="ngModel" [(ngModel)]="mobileValue1" [values]="prefixes" name="phone" placeholder="Enter phone number" class="w-full md:w-96" required />
+                        <ngt-mobile-prefix #phone="ngModel" [(ngModel)]="mobileValue1" [values]="prefixes" name="phone" placeholder="Enter phone number" class="w-full md:w-96" required />
                         @if (phone.invalid && (phone.touched || formSubmitted())) {
                           <p class="text-sm text-red-600 dark:text-red-400">Phone number is required.</p>
                         }

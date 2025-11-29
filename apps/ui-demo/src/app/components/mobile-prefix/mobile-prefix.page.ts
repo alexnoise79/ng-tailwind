@@ -1,12 +1,12 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, IPrefix, IMobilePrefix, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
 @Component({
   selector: 'section.mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
+  imports: [FormsModule, NgtMobilePrefix, NgtButton, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet],
   templateUrl: './mobile-prefix.page.html'
 })
 export class MobilePrefixPage {
@@ -81,18 +81,18 @@ export class MobilePrefixPage {
   // Code snippets for each demo
   codeSnippets = {
     basic: {
-      html: `<mobile-prefix
+      html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue1"
   [values]="prefixes"
   class="w-full md:w-96"
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent],
+  imports: [FormsModule, NgtMobilePrefix],
   template: \`<!-- template here -->\`
 })
 export class MobilePrefixPage {
@@ -108,7 +108,7 @@ export class MobilePrefixPage {
 }`
     },
     placeholder: {
-      html: `<mobile-prefix
+      html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue2"
   [values]="prefixes"
   [placeholder]="'Enter phone number'"
@@ -116,11 +116,11 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent],
+  imports: [FormsModule, NgtMobilePrefix],
   template: \`<!-- template here -->\`
 })
 export class MobilePrefixPage {
@@ -134,7 +134,7 @@ export class MobilePrefixPage {
 }`
     },
     disabled: {
-      html: `<mobile-prefix
+      html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue3"
   [values]="prefixes"
   [disabled]="true"
@@ -142,11 +142,11 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent],
+  imports: [FormsModule, NgtMobilePrefix],
   template: \`<!-- template here -->\`
 })
 export class MobilePrefixPage {
@@ -159,7 +159,7 @@ export class MobilePrefixPage {
 }`
     },
     readonly: {
-      html: `<mobile-prefix
+      html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue4"
   [values]="prefixes"
   [readonly]="true"
@@ -167,11 +167,11 @@ export class MobilePrefixPage {
 />`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent],
+  imports: [FormsModule, NgtMobilePrefix],
   template: \`<!-- template here -->\`
 })
 export class MobilePrefixPage {
@@ -187,7 +187,7 @@ export class MobilePrefixPage {
       html: `<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="flex flex-col gap-1 mb-4">
     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone Number</label>
-    <mobile-prefix
+    <ngt-mobile-prefix
       #phone="ngModel"
       [(ngModel)]="mobileValue1"
       [values]="prefixes"
@@ -204,11 +204,11 @@ export class MobilePrefixPage {
 </form>`,
       ts: `import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MobilePrefixComponent, NgtButton, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { NgtMobilePrefix, NgtButton, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
 
 @Component({
   selector: 'app-mobile-prefix',
-  imports: [FormsModule, MobilePrefixComponent, NgtButton],
+  imports: [FormsModule, NgtMobilePrefix, NgtButton],
   template: \`<!-- template here -->\`
 })
 export class MobilePrefixPage {

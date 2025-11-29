@@ -925,3 +925,266 @@ export class MyComponent {
 ></ngt-select>
 ```
 
+## Mobile Prefix
+
+### Basic Usage
+
+```typescript
+import { NgtMobilePrefix, IPrefix, IMobilePrefix } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+export class MyComponent {
+  prefixes: Array<IPrefix> = [
+    { id: 1, name: 'United States', dialCode: '1', code: 'US' },
+    { id: 2, name: 'United Kingdom', dialCode: '44', code: 'GB' },
+    { id: 3, name: 'Canada', dialCode: '1', code: 'CA' }
+  ];
+
+  mobileValue = signal<IMobilePrefix | null>(null);
+}
+```
+
+```html
+<ngt-mobile-prefix
+  [(ngModel)]="mobileValue"
+  [values]="prefixes"
+  class="w-full md:w-96"
+/>
+```
+
+### With Placeholder
+
+```html
+<ngt-mobile-prefix
+  [(ngModel)]="mobileValue"
+  [values]="prefixes"
+  [placeholder]="'Enter phone number'"
+  class="w-full md:w-96"
+/>
+```
+
+### Disabled State
+
+```html
+<ngt-mobile-prefix
+  [(ngModel)]="mobileValue"
+  [values]="prefixes"
+  [disabled]="true"
+  class="w-full md:w-96"
+/>
+```
+
+### Readonly State
+
+```html
+<ngt-mobile-prefix
+  [(ngModel)]="mobileValue"
+  [values]="prefixes"
+  [readonly]="true"
+  class="w-full md:w-96"
+/>
+```
+
+### With Form Integration
+
+```typescript
+import { FormsModule } from '@angular/forms';
+
+export class MyComponent {
+  mobileValue = signal<IMobilePrefix | null>(null);
+  formSubmitted = signal(false);
+
+  onSubmit() {
+    this.formSubmitted.set(true);
+    console.log('Form submitted', this.mobileValue());
+  }
+}
+```
+
+```html
+<form #exampleForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="flex flex-col gap-1 mb-4">
+    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      Phone Number
+    </label>
+    <ngt-mobile-prefix
+      #phone="ngModel"
+      [(ngModel)]="mobileValue"
+      [values]="prefixes"
+      name="phone"
+      placeholder="Enter phone number"
+      class="w-full md:w-96"
+      required
+    />
+    @if (phone.invalid && (phone.touched || formSubmitted())) {
+      <p class="text-sm text-red-600 dark:text-red-400">
+        Phone number is required.
+      </p>
+    }
+  </div>
+  <ngt-button type="submit" variant="primary">Submit</ngt-button>
+</form>
+```
+
+## Password
+
+### Basic Usage
+
+```typescript
+import { NgtPassword } from '@ng-tailwind/ui-components';
+import { signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+export class MyComponent {
+  password = signal('');
+}
+```
+
+```html
+<ngt-password
+  [(ngModel)]="password"
+  [placeholder]="'Enter password'"
+  class="w-full md:w-96"
+/>
+```
+
+### With Strength Indicator
+
+```html
+<ngt-password
+  [(ngModel)]="password"
+  [placeholder]="'Enter password'"
+  [showStrength]="true"
+  class="w-full md:w-96"
+/>
+```
+
+### Sizes
+
+```html
+<ngt-password [size]="'sm'" [placeholder]="'Small'"></ngt-password>
+<ngt-password [size]="'md'" [placeholder]="'Medium'"></ngt-password>
+<ngt-password [size]="'lg'" [placeholder]="'Large'"></ngt-password>
+```
+
+### With Form Control
+
+```typescript
+import { FormControl } from '@angular/forms';
+
+export class MyComponent {
+  passwordControl = new FormControl('');
+}
+```
+
+```html
+<ngt-password
+  [formControl]="passwordControl"
+  [placeholder]="'Enter password'"
+  [showStrength]="true"
+  class="w-full md:w-96"
+/>
+```
+
+### Disabled State
+
+```html
+<ngt-password
+  [(ngModel)]="password"
+  [placeholder]="'Enter password'"
+  [disabled]="true"
+  class="w-full md:w-96"
+/>
+```
+
+## Timepicker
+
+### Basic Usage
+
+```typescript
+import { NgtTimepicker, NgtTimeStruct } from './timepicker.component';
+import { signal } from '@angular/core';
+
+export class MyComponent {
+  selectedTime = signal<NgtTimeStruct | null>(null);
+}
+```
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+
+@if (selectedTime()) {
+  <p>Selected: {{ selectedTime()!.hour }}:{{ selectedTime()!.minute }}</p>
+}
+```
+
+### With Seconds
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  [showSeconds]="true"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+```
+
+### 12-Hour Format (AM/PM)
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  [meridian]="true"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+```
+
+### With Initial Time
+
+```typescript
+export class MyComponent {
+  selectedTime = signal<NgtTimeStruct>({ hour: 14, minute: 30 });
+}
+```
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+```
+
+### Disabled State
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  [disabled]="true"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+```
+
+### Custom Step Values
+
+```html
+<ngt-timepicker
+  [model]="selectedTime()"
+  [hourStep]="2"
+  [minuteStep]="15"
+  [secondStep]="10"
+  [showSeconds]="true"
+  (timeSelect)="selectedTime.set($event)"
+></ngt-timepicker>
+```
+
+### Sizes
+
+```html
+<ngt-timepicker [model]="selectedTime()" [size]="'sm'"></ngt-timepicker>
+<ngt-timepicker [model]="selectedTime()" [size]="'md'"></ngt-timepicker>
+<ngt-timepicker [model]="selectedTime()" [size]="'lg'"></ngt-timepicker>
+```
+

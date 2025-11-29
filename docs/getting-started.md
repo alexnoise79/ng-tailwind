@@ -67,6 +67,9 @@ export class ExampleComponent {}
 - **Toast** - Notification messages with severity levels and auto-dismiss
 - **Toggle Switch** - Form control for boolean values with sizes
 - **Tooltip** - Contextual information tooltips
+- **Mobile Prefix** - Phone number input with country code selector
+- **Password** - Password input with visibility toggle
+- **Timepicker** - Time selection component
 
 ## Storybook
 

@@ -6,7 +6,7 @@ import { Params } from '@angular/router';
 
 
 @Component({
-  selector: 'mobile-prefix',
+  selector: 'ngt-mobile-prefix',
   standalone: true,
   templateUrl: './mobile-prefix.component.html',
   styleUrl: './flags.css',
@@ -16,7 +16,7 @@ import { Params } from '@angular/router';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MobilePrefixComponent),
+      useExisting: forwardRef(() => NgtMobilePrefix),
       multi: true
     }
   ],
@@ -27,7 +27,7 @@ import { Params } from '@angular/router';
     FormsModule
   ]
 })
-export class MobilePrefixComponent implements ControlValueAccessor {
+export class NgtMobilePrefix implements ControlValueAccessor {
   /**
    * responsible for disabling a field
    */
