@@ -22,15 +22,11 @@ This document outlines planned features and components for the ng-tailwind UI Co
 - [ ] **Empty State** - Empty data states
 - [ ] **Timeline** - Event timeline display
 - [ ] **List** - Structured list component
-- [ ] **Divider** - Visual separators
 
 ## Navigation & Layout
 
 - [ ] **Breadcrumb** - Navigation breadcrumbs
 - [ ] **Stepper/Wizard** - Multi-step forms
-- [ ] **Tabs** - Tab navigation (separate from Nav)
-- [ ] **Sidebar** - Collapsible sidebar navigation
-- [ ] **Drawer** - Slide-out drawer component
 
 ## Feedback & Overlays
 
@@ -58,12 +54,6 @@ This document outlines planned features and components for the ng-tailwind UI Co
 - [ ] **Resizable** - Resizable containers
 - [ ] **Draggable** - Drag and drop functionality
 
-## Theme & Styling
-
-- [ ] **Theme Switcher** - Built-in theme toggle component
-- [ ] **Dark Mode Toggle** - Dark mode switcher
-- [ ] **CSS Variables Helper** - Utility for theme customization
-
 ## Accessibility Enhancements
 
 - [ ] **Skip Link** - Skip to main content link
@@ -79,6 +69,4 @@ This document outlines planned features and components for the ng-tailwind UI Co
 ## Developer Experience
 
 - [ ] **Form Builder** - Dynamic form generation
-- [ ] **Component Playground** - Interactive component tester
 - [ ] **Theme Generator** - Visual theme customization tool
-
