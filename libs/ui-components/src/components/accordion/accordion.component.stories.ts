@@ -31,7 +31,7 @@ export const SingleOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">First Item</span>
               <svg [class.rotate-180]="firstItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -48,7 +48,7 @@ export const SingleOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
               <svg [class.rotate-180]="secondItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -65,7 +65,7 @@ export const SingleOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
               <svg [class.rotate-180]="thirdItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -98,7 +98,7 @@ export const MultiOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">First Item</span>
               <svg [class.rotate-180]="firstItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -115,7 +115,7 @@ export const MultiOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
               <svg [class.rotate-180]="secondItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -132,7 +132,7 @@ export const MultiOpen: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
               <svg [class.rotate-180]="thirdItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -165,7 +165,7 @@ export const Disabled: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Disabled Item</span>
               <svg class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
@@ -182,7 +182,7 @@ export const Disabled: Story = {
             <button ngtAccordionButton>
               <span class="font-medium text-gray-900 dark:text-white">Enabled Item</span>
               <svg [class.rotate-180]="enabledItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                <path d="M19 9l-7 7-7-7" />
               </svg>
             </button>
           </h2>
