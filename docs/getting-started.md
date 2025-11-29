@@ -42,13 +42,13 @@ After installing the package, ensure your project has Tailwind CSS configured. I
 npm install -D tailwindcss postcss autoprefixer
 ```
 
-2. **Initialize Tailwind CSS configuration:**
+1. **Initialize Tailwind CSS configuration:**
 
 ```bash
 npx tailwindcss init
 ```
 
-3. **Update your `tailwind.config.js` to scan your component files:**
+1. **Update your `tailwind.config.js` to scan your component files:**
 
 ```javascript
 module.exports = {
@@ -62,7 +62,7 @@ module.exports = {
 }
 ```
 
-4. **Add Tailwind directives to your global styles file** (e.g., `src/styles.css`):
+1. **Add Tailwind directives to your global styles file** (e.g., `src/styles.css`):
 
 ```css
 @tailwind base;
