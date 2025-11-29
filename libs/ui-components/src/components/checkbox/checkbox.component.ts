@@ -64,7 +64,7 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
   });
 
   labelClasses = computed(() => {
-    return classMerge('text-sm font-medium text-gray-700 dark:text-gray-300', this.isDisabled() ? 'opacity-50' : '');
+    return classMerge('text-sm font-medium text-gray-700 dark:text-gray-300 select-none', this.isDisabled() ? 'opacity-50' : '');
   });
 
   containerClasses = computed(() => {

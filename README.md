@@ -46,6 +46,7 @@ nx storybook ui-components
 - **Alert** - Alert component with multiple variants and dismissible functionality
 - **Button** - Variants, sizes, and loading states
 - **Card** - Flexible card component with template loading for header, title, subtitle, and footer
+- **Checkbox** - Form control with custom values, indeterminate state, and template support
 - **Collapse** - Expandable/collapsible content (horizontal or vertical)
 - **Datepicker** - Date selection component with calendar view
 - **Dropdown** - Dropdown menu with positioning

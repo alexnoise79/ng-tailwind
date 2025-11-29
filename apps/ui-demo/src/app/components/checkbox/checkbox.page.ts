@@ -12,10 +12,10 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 export class CheckboxPage {
   private toastService = inject(NgtToastService);
   
-  basicCheckbox = false;
   labeledCheckbox = true;
   labelBeforeCheckbox = false;
   customValues = signal<'yes' | 'no'>('no');
+  foodPreference = signal<'pizza' | 'pasta'>('pasta');
   indeterminateCheckbox = signal(false);
   disabledChecked = true;
   disabledUnchecked = false;
@@ -54,7 +54,6 @@ export class CheckboxPage {
   // Demo code view utility
   codeViewUtil = new DemoCodeViewUtil(
     {
-      basic: 'showcase',
       label: 'showcase',
       labelBefore: 'showcase',
       sizes: 'showcase',
@@ -65,7 +64,6 @@ export class CheckboxPage {
       forms: 'showcase'
     },
     {
-      basic: 'html',
       label: 'html',
       labelBefore: 'html',
       sizes: 'html',
@@ -90,9 +88,6 @@ export class CheckboxPage {
 
   // Code snippets for each demo
   codeSnippets = {
-    basic: `<ngt-checkbox></ngt-checkbox>
-<ngt-checkbox [(ngModel)]="basicCheckbox"></ngt-checkbox>
-<p>Value: {{ basicCheckbox }}</p>`,
     label: `<ngt-checkbox label="Accept terms and conditions"></ngt-checkbox>
 <ngt-checkbox [(ngModel)]="labeledCheckbox" label="Enable notifications"></ngt-checkbox>`,
     labelBefore: `<ngt-checkbox [labelBefore]="true" label="Label before checkbox"></ngt-checkbox>`,
@@ -106,8 +101,17 @@ export class CheckboxPage {
   [falseValue]="'no'" 
   label="Custom values (yes/no)">
 </ngt-checkbox>
-<p>Value: {{ customValues() }}</p>`,
-      ts: `customValues = signal<'yes' | 'no'>('no');`
+<p>Value: {{ customValues() }}</p>
+
+<ngt-checkbox 
+  [(ngModel)]="foodPreference" 
+  [trueValue]="'pizza'" 
+  [falseValue]="'pasta'" 
+  label="Food preference">
+</ngt-checkbox>
+<p>Value: {{ foodPreference() }}</p>`,
+      ts: `customValues = signal<'yes' | 'no'>('no');
+foodPreference = signal<'pizza' | 'pasta'>('pasta');`
     },
     indeterminate: {
       html: `<ngt-checkbox 
@@ -233,10 +237,6 @@ onSubmit() {
   // Helper to get tab file name based on demo key
   getTabFileName(demoKey: string, fileType: 'html' | 'ts'): string {
     const fileNames: Record<string, Record<'html' | 'ts', string>> = {
-      basic: {
-        html: 'checkbox-basic.html',
-        ts: 'checkbox-basic.ts'
-      },
       label: {
         html: 'checkbox-label.html',
         ts: 'checkbox-label.ts'
