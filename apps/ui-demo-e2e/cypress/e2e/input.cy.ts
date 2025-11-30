@@ -173,31 +173,42 @@ describe('Input E2E', () => {
 
     it('should display clear button when input has value', () => {
       // Find the section containing "Clear Button" heading, then find the content area
-      cy.contains('Clear Button').closest('section').within(() => {
-        // Find the input with pre-filled value - wait for it to have the value
-        cy.contains('Pre-filled').parent().find('ngt-input').find('input').should('have.value', 'Pre-filled value');
-        cy.wait(500);
-        // Clear button should be visible in the pre-filled input - look within the ngt-input component
-        cy.contains('Pre-filled').parent().find('ngt-input').should('exist').within(() => {
-          cy.get('button[aria-label="Clear input"]', { timeout: 5000 }).should('exist');
+      cy.contains('Clear Button')
+        .closest('section')
+        .within(() => {
+          // Find the input with pre-filled value - wait for it to have the value
+          cy.contains('Pre-filled').parent().find('ngt-input').find('input').should('have.value', 'Pre-filled value');
+          cy.wait(500);
+          // Clear button should be visible in the pre-filled input - look within the ngt-input component
+          cy.contains('Pre-filled')
+            .parent()
+            .find('ngt-input')
+            .should('exist')
+            .within(() => {
+              cy.get('button[aria-label="Clear input"]', { timeout: 5000 }).should('exist');
+            });
         });
-      });
     });
 
     it('should clear input when clear button is clicked', () => {
       // Find the section containing "Clear Button" heading, then find the content area
-      cy.contains('Clear Button').closest('section').within(() => {
-        // Find the first input (Empty Input)
-        cy.contains('Empty Input').parent().find('ngt-input').find('input').type('Test value');
-        cy.wait(500);
-        // Click clear button - wait for it to appear
-        cy.contains('Empty Input').parent().find('ngt-input').within(() => {
-          cy.get('button[aria-label="Clear input"]', { timeout: 5000 }).should('exist').click();
+      cy.contains('Clear Button')
+        .closest('section')
+        .within(() => {
+          // Find the first input (Empty Input)
+          cy.contains('Empty Input').parent().find('ngt-input').find('input').type('Test value');
+          cy.wait(500);
+          // Click clear button - wait for it to appear
+          cy.contains('Empty Input')
+            .parent()
+            .find('ngt-input')
+            .within(() => {
+              cy.get('button[aria-label="Clear input"]', { timeout: 5000 }).should('exist').click();
+            });
+          cy.wait(300);
+          // Input should be cleared
+          cy.contains('Empty Input').parent().find('ngt-input').find('input').should('have.value', '');
         });
-        cy.wait(300);
-        // Input should be cleared
-        cy.contains('Empty Input').parent().find('ngt-input').find('input').should('have.value', '');
-      });
     });
   });
 
@@ -238,25 +249,32 @@ describe('Input E2E', () => {
     });
 
     it('should display chip inputs', () => {
-      cy.contains('Chips').closest('section').within(() => {
-        // Input components use the same selector with chip attribute
-        cy.get('ngt-input[chip]', { timeout: 5000 }).should('have.length.at.least', 1);
-      });
+      cy.contains('Chips')
+        .closest('section')
+        .within(() => {
+          // Input components use the same selector with chip attribute
+          cy.get('ngt-input[chip]', { timeout: 5000 }).should('have.length.at.least', 1);
+        });
     });
 
     it('should create chips when typing and pressing space', () => {
-      cy.contains('Chips').closest('section').within(() => {
-        // Find the space-separated input - label and input are both in the same parent div
-        cy.contains('Space Separated (Regex)').parent().find('ngt-input').find('input').type('chip1 chip2');
-        cy.wait(800);
-        // Chips should be created - look for chip spans with remove buttons
-        cy.contains('Space Separated (Regex)').parent().find('ngt-input').within(() => {
-          // Chips are rendered as spans, and each has a remove button
-          cy.get('span.inline-flex', { timeout: 5000 }).should('have.length.at.least', 1);
-          // Each chip span contains a button for removal
-          cy.get('span.inline-flex button').should('have.length.at.least', 1);
+      cy.contains('Chips')
+        .closest('section')
+        .within(() => {
+          // Find the space-separated input - label and input are both in the same parent div
+          cy.contains('Space Separated (Regex)').parent().find('ngt-input').find('input').type('chip1 chip2');
+          cy.wait(800);
+          // Chips should be created - look for chip spans with remove buttons
+          cy.contains('Space Separated (Regex)')
+            .parent()
+            .find('ngt-input')
+            .within(() => {
+              // Chips are rendered as spans, and each has a remove button
+              cy.get('span.inline-flex', { timeout: 5000 }).should('have.length.at.least', 1);
+              // Each chip span contains a button for removal
+              cy.get('span.inline-flex button').should('have.length.at.least', 1);
+            });
         });
-      });
     });
   });
 
@@ -298,43 +316,49 @@ describe('Input E2E', () => {
       // Ensure we're on the Showcase tab first
       cy.contains('Showcase').click();
       cy.wait(300);
-      cy.contains('Autocomplete').closest('section').within(() => {
-        // Input components use completeMethod property binding, so we find them by placeholder or label
-        // Look for inputs with autocomplete placeholders
-        cy.contains('Basic Autocomplete').parent().find('ngt-input').should('exist');
-        cy.contains('With Custom Templates').parent().find('ngt-input').should('exist');
-      });
+      cy.contains('Autocomplete')
+        .closest('section')
+        .within(() => {
+          // Input components use completeMethod property binding, so we find them by placeholder or label
+          // Look for inputs with autocomplete placeholders
+          cy.contains('Basic Autocomplete').parent().find('ngt-input').should('exist');
+          cy.contains('With Custom Templates').parent().find('ngt-input').should('exist');
+        });
     });
 
     it('should show suggestions when typing', () => {
       // Ensure we're on the Showcase tab first
       cy.contains('Showcase').click();
       cy.wait(300);
-      cy.contains('Autocomplete').closest('section').within(() => {
-        // Find the Basic Autocomplete input and type at least 2 characters (minQueryLength is 2)
-        cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').type('ab');
-        cy.wait(800);
-        // Suggestions dropdown should appear
-        cy.get('[role="listbox"]', { timeout: 3000 }).should('be.visible');
-      });
+      cy.contains('Autocomplete')
+        .closest('section')
+        .within(() => {
+          // Find the Basic Autocomplete input and type at least 2 characters (minQueryLength is 2)
+          cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').type('ab');
+          cy.wait(800);
+          // Suggestions dropdown should appear
+          cy.get('[role="listbox"]', { timeout: 3000 }).should('be.visible');
+        });
     });
 
     it('should select a suggestion from dropdown', () => {
       // Ensure we're on the Showcase tab first
       cy.contains('Showcase').click();
       cy.wait(300);
-      cy.contains('Autocomplete').closest('section').within(() => {
-        // Find the Basic Autocomplete input and type at least 2 characters (minQueryLength is 2)
-        cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').type('ab');
-        cy.wait(800);
-        // Click on first suggestion
-        cy.get('[role="listbox"]', { timeout: 3000 }).within(() => {
-          cy.get('[role="option"]').first().click();
+      cy.contains('Autocomplete')
+        .closest('section')
+        .within(() => {
+          // Find the Basic Autocomplete input and type at least 2 characters (minQueryLength is 2)
+          cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').type('ab');
+          cy.wait(800);
+          // Click on first suggestion
+          cy.get('[role="listbox"]', { timeout: 3000 }).within(() => {
+            cy.get('[role="option"]').first().click();
+          });
+          cy.wait(300);
+          // Input should be filled with selected value
+          cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').should('not.have.value', '');
         });
-        cy.wait(300);
-        // Input should be filled with selected value
-        cy.contains('Basic Autocomplete').parent().find('ngt-input').find('input').should('not.have.value', '');
-      });
     });
   });
 
@@ -379,4 +403,3 @@ describe('Input E2E', () => {
     });
   });
 });
-

@@ -29,40 +29,48 @@ describe('Toast Page E2E', () => {
     });
 
     it('should show success toast when clicked', () => {
-      cy.contains('Basic Usage').closest('section').within(() => {
-        cy.contains('Success Toast').click();
-        // Toast should appear immediately - check for toast element in the toast container
-        cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
-          cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+      cy.contains('Basic Usage')
+        .closest('section')
+        .within(() => {
+          cy.contains('Success Toast').click();
+          // Toast should appear immediately - check for toast element in the toast container
+          cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
+            cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+          });
         });
-      });
     });
 
     it('should show info toast when clicked', () => {
-      cy.contains('Basic Usage').closest('section').within(() => {
-        cy.contains('Info Toast').click();
-        cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
-          cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+      cy.contains('Basic Usage')
+        .closest('section')
+        .within(() => {
+          cy.contains('Info Toast').click();
+          cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
+            cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+          });
         });
-      });
     });
 
     it('should show warning toast when clicked', () => {
-      cy.contains('Basic Usage').closest('section').within(() => {
-        cy.contains('Warning Toast').click();
-        cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
-          cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+      cy.contains('Basic Usage')
+        .closest('section')
+        .within(() => {
+          cy.contains('Warning Toast').click();
+          cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
+            cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+          });
         });
-      });
     });
 
     it('should show danger toast when clicked', () => {
-      cy.contains('Basic Usage').closest('section').within(() => {
-        cy.contains('Danger Toast').click();
-        cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
-          cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+      cy.contains('Basic Usage')
+        .closest('section')
+        .within(() => {
+          cy.contains('Danger Toast').click();
+          cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
+            cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+          });
         });
-      });
     });
   });
 
@@ -82,12 +90,14 @@ describe('Toast Page E2E', () => {
     });
 
     it('should show toast with summary and detail', () => {
-      cy.contains('With Summary and Detail').closest('section').within(() => {
-        cy.contains('Show Toast with Summary').click();
-        cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
-          cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+      cy.contains('With Summary and Detail')
+        .closest('section')
+        .within(() => {
+          cy.contains('Show Toast with Summary').click();
+          cy.get('ngt-toast-container', { timeout: 3000 }).within(() => {
+            cy.get('[role="alert"], [role="status"]', { timeout: 2000 }).should('exist');
+          });
         });
-      });
     });
   });
 });
