@@ -57,7 +57,7 @@
             aria-label="Select month"
           >
             @for (month of availableMonths(); track month.value) {
-              <option [value]="month.value">{{ month.name }}</option>
+              <option [value]="month.value" [selected]="month.value === currentMonth()">{{ month.name }}</option>
             }
           </select>
           <select
@@ -68,7 +68,7 @@
             aria-label="Select year"
           >
             @for (year of availableYears(); track year) {
-              <option [value]="year">{{ year }}</option>
+              <option [value]="year" [selected]="year === currentYear()">{{ year }}</option>
             }
           </select>
         </div>

@@ -389,6 +389,12 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   // Calendar visibility methods
   openCalendar() {
     if (!this.disabled()) {
+      // Sync current month/year with model when opening calendar
+      const model = this.modelValue();
+      if (model) {
+        this._currentMonth.set(model.month);
+        this._currentYear.set(model.year);
+      }
       this._isOpen.set(true);
     }
   }
