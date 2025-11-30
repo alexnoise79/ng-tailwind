@@ -82,10 +82,6 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       name: 'Buttons',
       items: [{ label: 'Button', route: '/button' }]
-    },
-    {
-      name: 'Misc',
-      items: [{ label: 'Carousel', route: '/carousel' }]
     }
   ];
 
