@@ -123,6 +123,9 @@ describe('Tooltip Page E2E', () => {
 
   describe('Custom Content', () => {
     beforeEach(() => {
+      // Ensure we're on the Showcase tab
+      cy.contains('Showcase').click();
+      cy.wait(200);
       cy.contains('Custom Content').scrollIntoView();
       cy.wait(200);
     });
@@ -137,14 +140,16 @@ describe('Tooltip Page E2E', () => {
     });
 
     it('should show tooltip with custom content on hover', () => {
-      cy.contains('Custom Content')
-        .parent()
-        .parent()
-        .within(() => {
-          cy.contains('Custom Content').trigger('mouseenter');
-          cy.wait(300);
-          cy.get('[role="tooltip"]').should('be.visible');
-        });
+      cy.contains('Custom Content').closest('section').within(() => {
+        // Find the button with custom content tooltip
+        cy.contains('Custom Content').parent().find('button').first().trigger('mouseenter');
+        cy.wait(1000);
+        // Tooltip should appear with role="tooltip" - custom content uses TemplateRef
+        cy.get('[role="tooltip"]', { timeout: 5000 }).should('be.visible');
+        // Check for custom content text - the text is split across spans: "Custom" and "HTML content with color"
+        cy.get('[role="tooltip"]').should('contain', 'Custom');
+        cy.get('[role="tooltip"]').should('contain', 'HTML content with');
+      });
     });
   });
 });

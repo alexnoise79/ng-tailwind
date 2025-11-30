@@ -34,7 +34,8 @@ describe('Toggle Switch Page E2E', () => {
             .first()
             .within(() => {
               cy.get('input[type="checkbox"]').should('exist');
-              cy.get('input[type="checkbox"]').check();
+              // Click the toggle switch element (span with role="switch") instead of the checkbox
+              cy.get('span[role="switch"]').click();
               cy.wait(200);
               cy.get('input[type="checkbox"]').should('be.checked');
             });
@@ -74,7 +75,8 @@ describe('Toggle Switch Page E2E', () => {
         .parent()
         .parent()
         .within(() => {
-          cy.contains('Small toggle').parent().find('input[type="checkbox"]').check();
+          // Click the toggle switch element instead of the checkbox
+          cy.contains('Small toggle').parent().find('span[role="switch"]').click();
           cy.wait(200);
           cy.contains('Small toggle').parent().find('input[type="checkbox"]').should('be.checked');
         });
@@ -102,7 +104,8 @@ describe('Toggle Switch Page E2E', () => {
         .parent()
         .parent()
         .within(() => {
-          cy.contains('Basic toggle').parent().find('input[type="checkbox"]').check();
+          // Click the toggle switch element instead of the checkbox
+          cy.contains('Basic toggle').parent().find('span[role="switch"]').click();
           cy.wait(300);
           cy.contains('Current value: true').should('be.visible');
         });

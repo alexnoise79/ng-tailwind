@@ -71,8 +71,12 @@ describe('Modal Page E2E', () => {
         .within(() => {
           cy.contains('Open Modal').click();
           cy.wait(300);
-          cy.get('body').type('{esc}');
-          cy.wait(300);
+          cy.get('[role="dialog"]').should('be.visible');
+          // Press escape key on the document/body - use document directly
+          cy.document().then((doc) => {
+            cy.wrap(doc.body).type('{esc}', { force: true });
+          });
+          cy.wait(500);
           cy.get('[role="dialog"]').should('not.exist');
         });
     });

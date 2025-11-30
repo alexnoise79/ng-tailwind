@@ -1,4 +1,4 @@
-<div #toastElement [class]="toastClasses()" [attr.aria-live]="severityValue() === 'danger' ? 'assertive' : 'polite'" role="alert">
+<div #toastElement [class]="toastClasses()" [attr.aria-live]="severityValue() === 'danger' ? 'assertive' : 'polite'" [attr.role]="severityValue() === 'danger' ? 'alert' : 'status'">
   @if (iconValue() || defaultIcon()) {
     <div [class]="iconClasses()">
       <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
