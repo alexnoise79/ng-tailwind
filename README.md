@@ -50,6 +50,7 @@ nx storybook ui-components
 - **Collapse** - Expandable/collapsible content (horizontal or vertical)
 - **Datepicker** - Date selection component with calendar view
 - **Dropdown** - Dropdown menu with positioning
+- **Input** - Text input with multiple types (text, number, email, tel), validation, and advanced features
 - **Modal** - Dialog with backdrop and animations
 - **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
@@ -72,7 +73,7 @@ nx storybook ui-components
 
 ## Project Structure
 
-```
+```text
 ng-tailwind/
 ├── apps/
 │   └── ui-demo/          # Demo application
@@ -111,4 +112,3 @@ nx lint ui-components
 ## License
 
 MIT
-
