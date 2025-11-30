@@ -104,8 +104,8 @@ describe('NgtMobilePrefix', () => {
       const model = new IMobilePrefix('1234567890', samplePrefixes[0]);
       component.update(model);
 
-      expect((component as any).model).toBe(model);
-      expect(onChangeFn).toHaveBeenCalledWith(model);
+      expect((component as any).model).toStrictEqual(model);
+      expect(onChangeFn).toHaveBeenCalledWith('+11234567890');
     });
 
     it('should propagate null when phone is empty', () => {
