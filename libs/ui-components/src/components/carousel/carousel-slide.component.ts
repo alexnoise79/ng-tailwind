@@ -17,7 +17,12 @@ export class NgtCarouselSlide implements OnInit, OnDestroy {
   readonly id = input.required<string>();
 
   private carousel = inject(NgtCarousel, { optional: true });
-  readonly isActive = computed(() => this.carousel?.activeId() === this.id());
+  readonly isActive = computed(() => {
+    if (!this.carousel) {
+      return false;
+    }
+    return this.carousel.activeId() === this.id();
+  });
 
   ngOnInit() {
     if (this.carousel) {

@@ -45,7 +45,9 @@ export class NgtCarousel implements OnInit, OnDestroy, AfterContentInit {
   private isPaused = signal(false);
   private slidesSet = new Set<string>();
 
-  readonly activeId = computed(() => this._activeId());
+  get activeId(): Signal<string> {
+    return this._activeId;
+  }
   readonly isAnimating = signal(false);
 
   readonly configAnimation = computed(() => this.animation() ?? this.config.animation);
