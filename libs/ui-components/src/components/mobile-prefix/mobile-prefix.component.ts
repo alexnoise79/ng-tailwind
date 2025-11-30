@@ -4,7 +4,6 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModu
 import { IMobilePrefix, IPrefix } from '../../models';
 import { Params } from '@angular/router';
 
-
 @Component({
   selector: 'ngt-mobile-prefix',
   standalone: true,
@@ -20,12 +19,7 @@ import { Params } from '@angular/router';
       multi: true
     }
   ],
-  imports: [
-    LowerCasePipe,
-    SlicePipe,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+  imports: [LowerCasePipe, SlicePipe, ReactiveFormsModule, FormsModule]
 })
 export class NgtMobilePrefix implements ControlValueAccessor {
   /**
@@ -94,14 +88,14 @@ export class NgtMobilePrefix implements ControlValueAccessor {
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    
+
     // Calculate max length: 17 digits total minus prefix length
     let maxLen = 15; // Default if no prefix is selected (assuming 2-digit prefix)
     if (this.model?.country?.dialCode) {
       const prefixLength = this.model.country.dialCode.length;
       maxLen = 17 - prefixLength;
     }
-    
+
     if (value.length > maxLen) {
       input.value = value.slice(0, maxLen);
       // Update model with truncated value (ensure it's stored as string)
@@ -120,16 +114,16 @@ export class NgtMobilePrefix implements ControlValueAccessor {
     // Convert phone to string and trim (handles both string and number types from number input)
     const phoneStr = model.phone != null ? String(model.phone) : '';
     const phoneValue = phoneStr.trim();
-    
+
     // Update model with string phone value
     this.model = new IMobilePrefix(phoneValue, model.country);
-    
+
     // Return null if phone is empty, null, undefined, or only whitespace (for validation purposes)
     if (phoneValue === '' || !model.country) {
       this.propagateChange(null);
       return;
     }
-    
+
     // Phone has a value, return the appropriate format
     if (this.returnAsObject()) {
       // Return object with trimmed phone value
@@ -148,7 +142,7 @@ export class NgtMobilePrefix implements ControlValueAccessor {
    */
   writeValue(model: Partial<IMobilePrefix> | string | null) {
     const prefixes = this.values();
-    
+
     // Check if the value is the same as what we already have to prevent infinite loops
     if (model === null || model === '') {
       if (prefixes && prefixes.length > 0) {
@@ -192,7 +186,7 @@ export class NgtMobilePrefix implements ControlValueAccessor {
 
     // Handle object input (full or partial IMobilePrefix)
     const objectModel = model as Partial<IMobilePrefix>;
-    
+
     // If we have both phone and country, use them directly
     if (objectModel.phone !== undefined && objectModel.country) {
       const newModel = new IMobilePrefix(objectModel.phone, objectModel.country);

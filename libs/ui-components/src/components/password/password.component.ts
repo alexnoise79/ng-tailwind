@@ -78,8 +78,7 @@ export class NgtPassword implements ControlValueAccessor {
   });
 
   toggleButtonClasses = computed(() => {
-    const base =
-      'inline-flex items-center px-3 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:z-10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+    const base = 'inline-flex items-center px-3 border border-l-0 border-gray-300 dark:border-gray-600 rounded-r-md text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:z-10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
     const sizeClasses = {
       sm: 'text-sm',
       md: 'text-base',

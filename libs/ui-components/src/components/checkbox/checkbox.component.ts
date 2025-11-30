@@ -97,12 +97,12 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
       event.preventDefault();
       event.stopPropagation();
     }
-    
+
     const currentValue = this._value();
     const trueVal = this.trueValue();
     const falseVal = this.falseValue();
     const newValue = currentValue === trueVal ? falseVal : trueVal;
-    
+
     this._value.set(newValue);
     if (this.checkboxRef?.nativeElement) {
       this.checkboxRef.nativeElement.checked = newValue === trueVal;
@@ -117,7 +117,7 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
     const trueVal = this.trueValue();
     const falseVal = this.falseValue();
     const newValue = target.checked ? trueVal : falseVal;
-    
+
     this._value.set(newValue);
     if (this.checkboxRef?.nativeElement) {
       this.checkboxRef.nativeElement.indeterminate = false;
@@ -133,7 +133,7 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
     } else {
       this._value.set(value);
     }
-    
+
     if (this.checkboxRef?.nativeElement) {
       const trueVal = this.trueValue();
       const isChecked = this._value() === trueVal;
@@ -154,4 +154,3 @@ export class NgtCheckbox implements ControlValueAccessor, AfterViewInit {
     this._disabled.set(isDisabled);
   }
 }
-

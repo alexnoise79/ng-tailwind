@@ -11,7 +11,7 @@ import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 })
 export class CheckboxPage {
   private toastService = inject(NgtToastService);
-  
+
   labeledCheckbox = true;
   labelBeforeCheckbox = false;
   customValues = signal<'yes' | 'no'>('no');
@@ -23,27 +23,21 @@ export class CheckboxPage {
   templateCheckbox1 = false;
   templateCheckbox2 = signal(false);
   templateCheckbox3 = signal(false);
-  
+
   // Indeterminate example - master and child checkboxes
   childCheckbox1 = signal(false);
   childCheckbox2 = signal(false);
   childCheckbox3 = signal(false);
-  
+
   // Computed properties for indeterminate example
-  allChildrenChecked = computed(() => 
-    this.childCheckbox1() && this.childCheckbox2() && this.childCheckbox3()
-  );
-  
-  someChildrenChecked = computed(() => 
-    this.childCheckbox1() || this.childCheckbox2() || this.childCheckbox3()
-  );
-  
-  isMasterIndeterminate = computed(() => 
-    this.someChildrenChecked() && !this.allChildrenChecked()
-  );
-  
+  allChildrenChecked = computed(() => this.childCheckbox1() && this.childCheckbox2() && this.childCheckbox3());
+
+  someChildrenChecked = computed(() => this.childCheckbox1() || this.childCheckbox2() || this.childCheckbox3());
+
+  isMasterIndeterminate = computed(() => this.someChildrenChecked() && !this.allChildrenChecked());
+
   masterChecked = computed(() => this.allChildrenChecked());
-  
+
   toggleMaster() {
     const newValue = !this.allChildrenChecked();
     this.childCheckbox1.set(newValue);
@@ -273,4 +267,3 @@ onSubmit() {
     return this.codeViewUtil.getTabFileName('checkbox', demoKey, fileType, fileNames);
   }
 }
-

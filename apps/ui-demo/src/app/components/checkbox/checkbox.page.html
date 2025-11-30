@@ -194,21 +194,11 @@
                 @if (!isShowingCode('customValues')) {
                   <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <ngt-checkbox 
-                        [(ngModel)]="customValues" 
-                        [trueValue]="'yes'" 
-                        [falseValue]="'no'" 
-                        label="Custom values (yes/no)">
-                      </ngt-checkbox>
+                      <ngt-checkbox [(ngModel)]="customValues" [trueValue]="'yes'" [falseValue]="'no'" label="Custom values (yes/no)"> </ngt-checkbox>
                       <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Value: {{ customValues() }}</p>
                     </div>
                     <div>
-                      <ngt-checkbox 
-                        [(ngModel)]="foodPreference" 
-                        [trueValue]="'pizza'" 
-                        [falseValue]="'pasta'" 
-                        label="Food preference">
-                      </ngt-checkbox>
+                      <ngt-checkbox [(ngModel)]="foodPreference" [trueValue]="'pizza'" [falseValue]="'pasta'" label="Food preference"> </ngt-checkbox>
                       <p class="text-sm text-gray-700 dark:text-gray-300 mt-1">Value: {{ foodPreference() }}</p>
                     </div>
                   </div>
@@ -280,25 +270,11 @@
               <div class="p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
                 @if (!isShowingCode('indeterminate')) {
                   <div class="mb-4 flex flex-col gap-4">
-                    <ngt-checkbox 
-                      [ngModel]="masterChecked()" 
-                      [indeterminate]="isMasterIndeterminate()" 
-                      (ngModelChange)="toggleMaster()"
-                      label="Select all">
-                    </ngt-checkbox>
+                    <ngt-checkbox [ngModel]="masterChecked()" [indeterminate]="isMasterIndeterminate()" (ngModelChange)="toggleMaster()" label="Select all"> </ngt-checkbox>
                     <div class="ml-6 mt-2 flex flex-col gap-3">
-                      <ngt-checkbox 
-                        [(ngModel)]="childCheckbox1" 
-                        label="Option 1">
-                      </ngt-checkbox>
-                      <ngt-checkbox 
-                        [(ngModel)]="childCheckbox2" 
-                        label="Option 2">
-                      </ngt-checkbox>
-                      <ngt-checkbox 
-                        [(ngModel)]="childCheckbox3" 
-                        label="Option 3">
-                      </ngt-checkbox>
+                      <ngt-checkbox [(ngModel)]="childCheckbox1" label="Option 1"> </ngt-checkbox>
+                      <ngt-checkbox [(ngModel)]="childCheckbox2" label="Option 2"> </ngt-checkbox>
+                      <ngt-checkbox [(ngModel)]="childCheckbox3" label="Option 3"> </ngt-checkbox>
                     </div>
                   </div>
                 } @else {
@@ -518,13 +494,7 @@
                   <div class="mb-4">
                     <form #exampleForm="ngForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4 w-full sm:w-96">
                       <div>
-                        <ngt-checkbox 
-                          #agree="ngModel"
-                          [(ngModel)]="formCheckbox" 
-                          name="agree" 
-                          label="I agree to the terms and conditions"
-                          required>
-                        </ngt-checkbox>
+                        <ngt-checkbox #agree="ngModel" [(ngModel)]="formCheckbox" name="agree" label="I agree to the terms and conditions" required> </ngt-checkbox>
                         @if (agree.invalid && (agree.touched || formSubmitted())) {
                           <p class="text-red-600 dark:text-red-400 text-sm mt-1">This field is required</p>
                         }
@@ -705,4 +675,3 @@
   <!-- Content Outlet -->
   <div [ngtNavOutlet]="mainNav"></div>
 </div>
-

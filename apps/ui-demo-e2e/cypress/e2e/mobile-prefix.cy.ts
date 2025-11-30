@@ -175,7 +175,7 @@ describe('Mobile Prefix E2E', () => {
           cy.get('select[id="mobile-prefix"]').select('United Kingdom (44)');
           cy.wait(200);
           cy.contains('(+44)').should('be.visible');
-          
+
           cy.get('select[id="mobile-prefix"]').select('France (33)');
           cy.wait(200);
           cy.contains('(+33)').should('be.visible');
@@ -183,4 +183,3 @@ describe('Mobile Prefix E2E', () => {
     });
   });
 });
-

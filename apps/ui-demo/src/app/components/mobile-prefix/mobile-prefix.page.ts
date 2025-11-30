@@ -167,7 +167,7 @@ export class MobilePrefixPage {
   mobileValue3 = signal<IMobilePrefix | null>(null);
 }`
     },
-      readonly: {
+    readonly: {
       html: `<ngt-mobile-prefix
   [(ngModel)]="mobileValue4"
   [values]="prefixes"
@@ -316,15 +316,19 @@ export class MobilePrefixPage {
 
   formatObjectValue(value: IMobilePrefix | null): string {
     if (!value) return 'null';
-    return JSON.stringify({
-      phone: value.phone,
-      country: {
-        id: value.country.id,
-        name: value.country.name,
-        dialCode: value.country.dialCode,
-        code: value.country.code
-      }
-    }, null, 2);
+    return JSON.stringify(
+      {
+        phone: value.phone,
+        country: {
+          id: value.country.id,
+          name: value.country.name,
+          dialCode: value.country.dialCode,
+          code: value.country.code
+        }
+      },
+      null,
+      2
+    );
   }
 
   // Helper to get code snippet for a specific tab
@@ -363,4 +367,3 @@ export class MobilePrefixPage {
     return this.codeViewUtil.getTabFileName('mobile-prefix', demoKey, fileType, fileNames);
   }
 }
-

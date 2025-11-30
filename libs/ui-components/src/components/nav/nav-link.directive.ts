@@ -33,10 +33,10 @@ export class NgtNavLink implements OnInit, OnDestroy {
   constructor() {
     runInInjectionContext(this.injector, () => {
       this.buttonId = computed(() => this.navItem?.buttonId() || '');
-      this.ariaSelected = computed(() => this.navItem?.isActive() ? 'true' : null);
-      this.ariaDisabled = computed(() => this.navItem?.disabled() ? 'true' : null);
-      this.tabindex = computed(() => this.navItem?.isActive() && !this.navItem?.disabled() ? 0 : -1);
-      this.disabled = computed(() => this.navItem?.disabled() ? true : null);
+      this.ariaSelected = computed(() => (this.navItem?.isActive() ? 'true' : null));
+      this.ariaDisabled = computed(() => (this.navItem?.disabled() ? 'true' : null));
+      this.tabindex = computed(() => (this.navItem?.isActive() && !this.navItem?.disabled() ? 0 : -1));
+      this.disabled = computed(() => (this.navItem?.disabled() ? true : null));
     });
   }
 

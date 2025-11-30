@@ -40,7 +40,9 @@
                         Value: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">Empty</code>
                       }
                     </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">By default, returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code></p>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                      By default, returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code>
+                    </p>
                   </div>
                 } @else {
                   <div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
@@ -330,7 +332,9 @@
                       <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
                         Value: <code class="bg-gray-100 dark:bg-gray-900 px-2 py-1 rounded">{{ mobileValue5() || 'Empty' }}</code>
                       </p>
-                      <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code></p>
+                      <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                        Returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code>
+                      </p>
                     </div>
 
                     <!-- Object Mode -->
@@ -349,9 +353,7 @@
                     </div>
 
                     <div class="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-md">
-                      <p class="text-sm text-blue-800 dark:text-blue-200">
-                        <strong>Note:</strong> The component accepts both string and object formats when writing values (e.g., when patching forms), regardless of the <code class="bg-blue-100 dark:bg-blue-900/40 px-1 py-0.5 rounded">returnAsObject</code> setting.
-                      </p>
+                      <p class="text-sm text-blue-800 dark:text-blue-200"><strong>Note:</strong> The component accepts both string and object formats when writing values (e.g., when patching forms), regardless of the <code class="bg-blue-100 dark:bg-blue-900/40 px-1 py-0.5 rounded">returnAsObject</code> setting.</p>
                     </div>
                   </div>
                 } @else {
@@ -531,7 +533,10 @@
                         <td class="px-4 py-3 text-sm font-mono text-gray-900 dark:text-white">returnAsObject</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">boolean</td>
                         <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">false</td>
-                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">When true, the component returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object. When false (default), it returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code>. Note: writeValue accepts both string and object formats regardless of this setting.</td>
+                        <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-400">
+                          When true, the component returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object. When false (default), it returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}</code
+                          >. Note: writeValue accepts both string and object formats regardless of this setting.
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -568,13 +573,18 @@
                 <div class="space-y-3">
                   <p class="text-gray-600 dark:text-gray-400"><strong>Input Format:</strong> The component accepts both formats when writing values (e.g., when patching forms):</p>
                   <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 ml-4">
-                    <li>String format: <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code> (e.g., <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+1234567890"</code>)</li>
+                    <li>
+                      String format: <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code> (e.g., <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+1234567890"</code>)
+                    </li>
                     <li>Object format: <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object with <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">phone</code> and <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">country</code> properties</li>
                     <li>Partial object: Can accept partial objects with only <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">phone</code> or only <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">country</code></li>
                   </ul>
                   <p class="text-gray-600 dark:text-gray-400"><strong>Output Format:</strong> The output format is controlled by the <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> input:</p>
                   <ul class="list-disc list-inside space-y-1 text-gray-600 dark:text-gray-400 ml-4">
-                    <li>When <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> is <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">false</code> (default): Returns a string in the format <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code></li>
+                    <li>
+                      When <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> is <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">false</code> (default): Returns a string in the format
+                      <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">"+{{ '{' }}dialCode{{ '}' }}{{ '{' }}phone{{ '}' }}"</code>
+                    </li>
                     <li>When <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">returnAsObject</code> is <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">true</code>: Returns an <code class="bg-gray-100 dark:bg-gray-900 px-1 py-0.5 rounded">IMobilePrefix</code> object</li>
                   </ul>
                 </div>
@@ -589,4 +599,3 @@
   <!-- Content Outlet -->
   <div [ngtNavOutlet]="mainNav"></div>
 </div>
-

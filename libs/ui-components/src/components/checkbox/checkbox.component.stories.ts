@@ -156,12 +156,12 @@ export const Indeterminate: Story = {
     const child1 = signal(false);
     const child2 = signal(false);
     const child3 = signal(false);
-    
+
     const allChildrenChecked = computed(() => child1() && child2() && child3());
     const someChildrenChecked = computed(() => child1() || child2() || child3());
     const isMasterIndeterminate = computed(() => someChildrenChecked() && !allChildrenChecked());
     const masterChecked = computed(() => allChildrenChecked());
-    
+
     const toggleMaster = () => {
       const newValue = !allChildrenChecked();
       child1.set(newValue);
@@ -222,4 +222,3 @@ export const CustomTemplates: Story = {
     }
   })
 };
-

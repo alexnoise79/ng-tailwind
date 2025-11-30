@@ -101,7 +101,7 @@ describe('NgtCheckbox', () => {
       (component as any).indeterminate.set(true);
       component.writeValue(false);
       component.toggle();
-      
+
       const checkboxElement = (component as any).checkboxRef.nativeElement;
       expect(checkboxElement.indeterminate).toBe(false);
     });
@@ -229,4 +229,3 @@ describe('NgtCheckbox', () => {
     });
   });
 });
-

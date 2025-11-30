@@ -14,4 +14,3 @@ export class IMobilePrefix {
     this.country = country;
   }
 }
-

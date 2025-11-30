@@ -15,4 +15,3 @@ describe(MobilePrefixPage.name, () => {
     cy.mount(MobilePrefixPage);
   });
 });
-

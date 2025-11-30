@@ -2,16 +2,15 @@
   <section>
     <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Getting Started</h2>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6">
-      Welcome to <strong class="text-gray-900 dark:text-white">ngtailwind UI Components</strong> - a comprehensive, modern Angular component library that seamlessly combines the power of TailwindCSS with Angular's latest features. Built with Angular 20 standalone components and Angular CDK, this library provides a complete set of accessible, customizable, and production-ready UI components for your Angular applications.
+      Welcome to <strong class="text-gray-900 dark:text-white">ngtailwind UI Components</strong> - a comprehensive, modern Angular component library that seamlessly combines the power of TailwindCSS with Angular's latest features. Built with Angular 20 standalone components and Angular CDK, this library provides a complete set of accessible,
+      customizable, and production-ready UI components for your Angular applications.
     </p>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6">
-      Whether you're building a simple dashboard or a complex enterprise application, ngtailwind UI Components offers everything you need to create beautiful, responsive, and accessible user interfaces with minimal setup and maximum flexibility.
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-6">Whether you're building a simple dashboard or a complex enterprise application, ngtailwind UI Components offers everything you need to create beautiful, responsive, and accessible user interfaces with minimal setup and maximum flexibility.</p>
   </section>
 
   <section>
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Installation</h3>
-    
+
     <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Prerequisites</h4>
     <ul class="list-disc list-inside space-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
       <li>Node.js 18+ and npm/yarn/pnpm</li>
@@ -20,20 +19,16 @@
     </ul>
 
     <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Install the Package</h4>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      Install the <code class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono">@ngtailwind/ngtailwind</code> package from npm:
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">Install the <code class="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded text-sm font-mono">&#64;ngtailwind/ngtailwind</code> package from npm:</p>
     <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-4 overflow-x-auto">
       <button (click)="copyToClipboard(installNpm)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
       </button>
-      <pre class="text-sm text-gray-100 font-mono"><code>npm install @ngtailwind/ngtailwind</code></pre>
+      <pre class="text-sm text-gray-100 font-mono"><code>npm install &#64;ngtailwind/ngtailwind</code></pre>
     </div>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      You can also use yarn or pnpm:
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">You can also use yarn or pnpm:</p>
     <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-6 overflow-x-auto">
       <button (click)="copyToClipboard(installYarn)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -41,19 +36,15 @@
         </svg>
       </button>
       <pre class="text-sm text-gray-100 font-mono"><code># Using yarn
-yarn add @ngtailwind/ngtailwind
+yarn add &#64;ngtailwind/ngtailwind
 
 # Using pnpm
-pnpm add @ngtailwind/ngtailwind</code></pre>
+pnpm add &#64;ngtailwind/ngtailwind</code></pre>
     </div>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
-      For more information, visit the <a href="https://www.npmjs.com/package/@ngtailwind/ngtailwind" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline">npm package page</a>.
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">For more information, visit the <a href="https://www.npmjs.com/package/&#64;ngtailwind/ngtailwind" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline">npm package page</a>.</p>
 
     <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Configure Tailwind CSS</h4>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      After installing the package, ensure your project has Tailwind CSS configured. If you haven't set up Tailwind CSS yet:
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">After installing the package, ensure your project has Tailwind CSS configured. If you haven't set up Tailwind CSS yet:</p>
     <ol class="list-decimal list-inside space-y-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
       <li class="mb-2">
         <strong class="text-gray-900 dark:text-white">Install Tailwind CSS and its dependencies:</strong>
@@ -104,9 +95,9 @@ pnpm add @ngtailwind/ngtailwind</code></pre>
               <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
           </button>
-          <pre class="text-sm text-gray-100 font-mono"><code>@tailwind base;
-@tailwind components;
-@tailwind utilities;</code></pre>
+          <pre class="text-sm text-gray-100 font-mono"><code>&#64;tailwind base;
+&#64;tailwind components;
+&#64;tailwind utilities;</code></pre>
         </div>
       </li>
     </ol>
@@ -114,19 +105,17 @@ pnpm add @ngtailwind/ngtailwind</code></pre>
 
   <section>
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Usage Example</h3>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      All components are standalone and can be imported directly into your Angular components. Here's a complete example:
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">All components are standalone and can be imported directly into your Angular components. Here's a complete example:</p>
     <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mb-6 overflow-x-auto">
       <button (click)="copyToClipboard(usageExample)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
       </button>
-      <pre class="text-sm text-gray-100 font-mono"><code>import &#123; Component, signal &#125; from '@angular/core';
-import &#123; NgtButton, NgtModal, NgtAlert &#125; from '@ngtailwind/ui-components';
+      <pre class="text-sm text-gray-100 font-mono"><code>import &#123; Component, signal &#125; from '&#64;angular/core';
+import &#123; NgtButton, NgtModal, NgtAlert &#125; from '&#64;ngtailwind/ui-components';
 
-@Component(&#123;
+&#64;Component(&#123;
   selector: 'app-example',
   imports: [NgtButton, NgtModal, NgtAlert],
   template: `
@@ -190,9 +179,7 @@ export class ExampleComponent &#123;
   &#125;
 &#125;</code></pre>
     </div>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      This example demonstrates:
-    </p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">This example demonstrates:</p>
     <ul class="list-disc list-inside space-y-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
       <li><strong class="text-gray-900 dark:text-white">Alert component</strong> with dismissible functionality</li>
       <li><strong class="text-gray-900 dark:text-white">Button components</strong> with different variants, sizes, and loading states</li>
@@ -204,7 +191,9 @@ export class ExampleComponent &#123;
   <section>
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Acknowledgments</h3>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
-      This library has been inspired by the excellent work and design principles of <a href="https://ng-bootstrap.github.io/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline font-semibold">ng-bootstrap</a> and <a href="https://www.primefaces.org/primeng/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline font-semibold">PrimeNG</a>. Their contributions to the Angular ecosystem have been invaluable in shaping modern Angular component libraries, and we extend our sincere thanks to both projects for their innovation and dedication to creating high-quality, accessible UI components for Angular developers worldwide.
+      This library has been inspired by the excellent work and design principles of <a href="https://ng-bootstrap.github.io/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline font-semibold">ng-bootstrap</a> and
+      <a href="https://www.primefaces.org/primeng/" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline font-semibold">PrimeNG</a>. Their contributions to the Angular ecosystem have been invaluable in shaping modern Angular component libraries, and we extend our sincere thanks to both projects for
+      their innovation and dedication to creating high-quality, accessible UI components for Angular developers worldwide.
     </p>
   </section>
 </div>

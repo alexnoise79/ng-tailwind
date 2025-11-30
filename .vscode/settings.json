@@ -1,11 +1,5 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "cSpell.words": [
-    "Datepicker",
-    "Gridlines",
-    "ngtailwind",
-    "Offcanvas",
-    "Timepicker"
-  ]
+  "cSpell.words": ["Datepicker", "Gridlines", "ngtailwind", "Offcanvas", "Timepicker"]
 }

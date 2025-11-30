@@ -70,27 +70,27 @@ describe('NgtMobilePrefix', () => {
     it('should register onChange callback', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       const model = new IMobilePrefix('1234567890', samplePrefixes[0]);
       (component as any).update(model);
-      
+
       expect(onChangeFn).toHaveBeenCalled();
     });
 
     it('should register onTouched callback', () => {
       const onTouchedFn = vi.fn();
       component.registerOnTouched(onTouchedFn);
-      
+
       const event = new Event('blur');
       component.onBlurEvent(event);
-      
+
       expect(onTouchedFn).toHaveBeenCalled();
     });
 
     it('should set disabled state', () => {
       component.setDisabledState(true);
       expect((component as any).isDisabled).toBe(true);
-      
+
       component.setDisabledState(false);
       expect((component as any).isDisabled).toBe(false);
     });
@@ -100,10 +100,10 @@ describe('NgtMobilePrefix', () => {
     it('should update model and propagate change when phone and country are provided', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       const model = new IMobilePrefix('1234567890', samplePrefixes[0]);
       component.update(model);
-      
+
       expect((component as any).model).toBe(model);
       expect(onChangeFn).toHaveBeenCalledWith(model);
     });
@@ -111,20 +111,20 @@ describe('NgtMobilePrefix', () => {
     it('should propagate null when phone is empty', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       const model = new IMobilePrefix('', samplePrefixes[0]);
       component.update(model);
-      
+
       expect(onChangeFn).toHaveBeenCalledWith(null);
     });
 
     it('should propagate null when country is not provided', () => {
       const onChangeFn = vi.fn();
       component.registerOnChange(onChangeFn);
-      
+
       const model = { phone: '1234567890', country: null } as any;
       component.update(model);
-      
+
       expect(onChangeFn).toHaveBeenCalledWith(null);
     });
   });
@@ -133,13 +133,13 @@ describe('NgtMobilePrefix', () => {
     it('should handle input event and enforce max length', () => {
       const model = new IMobilePrefix('123456789012345678', samplePrefixes[0]);
       (component as any).model = model;
-      
+
       const input = document.createElement('input');
       input.value = '12345678901234567890';
       const event = { target: input } as any;
-      
+
       component.onInput(event);
-      
+
       // Max length should be 17 - prefix length (1) = 16
       expect(input.value.length).toBeLessThanOrEqual(16);
     });
@@ -147,12 +147,12 @@ describe('NgtMobilePrefix', () => {
     it('should handle blur event', () => {
       const onTouchedFn = vi.fn();
       component.registerOnTouched(onTouchedFn);
-      
+
       const blurSpy = vi.spyOn((component as any).blurEvent, 'emit');
       const event = new Event('blur');
-      
+
       component.onBlurEvent(event);
-      
+
       expect(onTouchedFn).toHaveBeenCalled();
       expect(blurSpy).toHaveBeenCalledWith(event);
     });
@@ -162,7 +162,7 @@ describe('NgtMobilePrefix', () => {
     it('should handle partial IMobilePrefix', () => {
       const partialModel = { phone: '1234567890', country: samplePrefixes[0] };
       component.writeValue(partialModel);
-      
+
       expect((component as any).model).toBeDefined();
     });
 
@@ -195,4 +195,3 @@ describe('NgtMobilePrefix', () => {
     });
   });
 });
-

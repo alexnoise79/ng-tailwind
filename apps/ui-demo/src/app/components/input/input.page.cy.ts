@@ -79,7 +79,7 @@ describe('Input Page Component Tests', () => {
         .find('input')
         .invoke('val')
         .then(val => {
-          expect(val).to.exist;
+          expect(val).to.not.be.undefined;
         });
     });
   });
@@ -266,7 +266,7 @@ describe('Input Page Component Tests', () => {
             .find('input')
             .invoke('val')
             .then(val => {
-              expect(val).to.exist;
+              expect(val).to.not.be.undefined;
             });
         } else {
           // If no suggestions appear, just verify input is working
