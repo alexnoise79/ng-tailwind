@@ -93,5 +93,9 @@ export const appRoutes: Routes = [
   {
     path: 'checkbox',
     loadComponent: () => import('./components/checkbox/checkbox.page').then(m => m.CheckboxPage)
+  },
+  {
+    path: 'progressbar',
+    loadComponent: () => import('./components/progressbar/progressbar.page').then(m => m.ProgressbarPage)
   }
 ];

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { classMerge } from '../../utils';
 import { Variant } from '../../models';
 import { NgtProgressbarConfig } from './progressbar-config.service';
@@ -56,7 +56,7 @@ export class NgtProgressbar {
 
   readonly progressbarClasses = computed(() => {
     const baseClasses = 'w-full bg-gray-200 rounded-full overflow-hidden';
-    const heightClass = this.heightValue() ? '' : 'h-2';
+    const heightClass = this.heightValue() ? '' : 'h-3';
     return classMerge(baseClasses, heightClass);
   });
 
