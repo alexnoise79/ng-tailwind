@@ -93,5 +93,9 @@ export const appRoutes: Routes = [
   {
     path: 'checkbox',
     loadComponent: () => import('./components/checkbox/checkbox.page').then(m => m.CheckboxPage)
+  },
+  {
+    path: 'carousel',
+    loadComponent: () => import('./components/carousel/carousel.page').then(m => m.CarouselPage)
   }
 ];
