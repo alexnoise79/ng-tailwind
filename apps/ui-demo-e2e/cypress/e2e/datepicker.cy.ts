@@ -12,6 +12,9 @@ describe('Datepicker E2E', () => {
         .parent()
         .within(() => {
           cy.get('ngt-datepicker').should('be.visible');
+          // Open the calendar by clicking the input
+          cy.get('ngt-datepicker').find('input').click();
+          cy.wait(200);
           cy.get('button[aria-label="Previous month"]').should('be.visible');
           cy.get('button[aria-label="Next month"]').should('be.visible');
           cy.contains('Mon').should('be.visible');
