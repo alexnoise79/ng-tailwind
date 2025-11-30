@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.5.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.4.0...ngtailwind-v1.5.0) (2025-11-30)
+
+
+### Features
+
+* **checkbox:** add badge template checkbox and improve layout responsiveness ([cec37ff](https://github.com/alexnoise79/ng-tailwind/commit/cec37ffef169d7967e73d34dc0389337308da1c7))
+* **checkbox:** add checkbox component with various features and examples ([3bca1c6](https://github.com/alexnoise79/ng-tailwind/commit/3bca1c6383547132e74675f3b03d11dd038f2c29))
+* **checkbox:** add food preference checkbox and improve layout for custom values ([f388f43](https://github.com/alexnoise79/ng-tailwind/commit/f388f432d8b381575f509278d581f9897ad7022a))
+* **checkbox:** enhance accessibility and add unit tests for checkbox component ([85fa292](https://github.com/alexnoise79/ng-tailwind/commit/85fa2929e1c3c57487a29f370d3af2012cb43eb8))
+* **checkbox:** enhance checkbox component with indeterminate state and template options ([09aa33b](https://github.com/alexnoise79/ng-tailwind/commit/09aa33b05bc179e095e0c8b9b331fdf270a2938d))
+* **mobile-prefix:** add additional country prefixes and update dialCode references ([a52f612](https://github.com/alexnoise79/ng-tailwind/commit/a52f612b65ed4e601b6707fb39181b399fd894af))
+* **mobile-prefix:** add maxLength calculation for phone number input based on country dial code ([a07bd1d](https://github.com/alexnoise79/ng-tailwind/commit/a07bd1d62e9c5be68b2851344bebc17fedd710c6))
+* **ui-demo:** add Mobile Prefix component with routing and demo implementation ([e242d1c](https://github.com/alexnoise79/ng-tailwind/commit/e242d1c0b6d217eb3f524f824b55b9a42d98e31a))
+
+
+### Bug Fixes
+
+* **mobile-prefix:** implement maxLength enforcement on input event for phone number ([d4e2eb7](https://github.com/alexnoise79/ng-tailwind/commit/d4e2eb72dbe8da22c7e3cb17b4f7aab34d473e99))
+* **mobile-prefix:** initialize mobileValue4 with a default IMobilePrefix instance and change input type to number ([e32afbf](https://github.com/alexnoise79/ng-tailwind/commit/e32afbf0a1a55dcf4fb70654e3efcb6f56a4195c))
+* **mobile-prefix:** update input styling to hide spin buttons for number input ([d892241](https://github.com/alexnoise79/ng-tailwind/commit/d8922417e0e68f07d694eb88a55c9071b795699a))
+* **pagination:** correct lastVisible condition to include total pages ([8e87b77](https://github.com/alexnoise79/ng-tailwind/commit/8e87b77ce8a3b38f78640847267aafe0fd77fbfc))
+* **pagination:** enhance button class handling for disabled and active states ([5d85f39](https://github.com/alexnoise79/ng-tailwind/commit/5d85f39d8142bda80bd39970c970032115628898))
+* **pagination:** reset default current page to 1 and enhance input validation for page changes ([d8e4f0d](https://github.com/alexnoise79/ng-tailwind/commit/d8e4f0dee1fefdb16a359ca1264df8d1844209bb))
+* **toast:** update toast component styles for improved visibility and consistency across themes ([5e07f9e](https://github.com/alexnoise79/ng-tailwind/commit/5e07f9ee3091d830531a7b84e1818ad6a48e736d))
+
 ## [1.4.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.3.0...ngtailwind-v1.4.0) (2025-11-27)
 
 
