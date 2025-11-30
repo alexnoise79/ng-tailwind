@@ -2,7 +2,7 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { LocalStorage } from '@universal/universal.providers';
 
-export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant';
+export type ThemeName = 'default' | 'cyberpunk' | 'minimalist' | 'nature' | 'tech' | 'elegant' | 'space' | 'modern' | 'science' | 'fantasy';
 
 @Component({
   selector: 'app-theme-configurator',
@@ -22,7 +22,11 @@ export class ThemeConfiguratorComponent implements OnInit {
     { name: 'minimalist', label: 'Minimalist', description: 'Clean black and white' },
     { name: 'nature', label: 'Nature', description: 'Green and earth tones' },
     { name: 'tech', label: 'Tech', description: 'Blue and cyan' },
-    { name: 'elegant', label: 'Elegant', description: 'Purple and gold' }
+    { name: 'elegant', label: 'Elegant', description: 'Purple and gold' },
+    { name: 'space', label: 'Space', description: 'Cosmic deep space' },
+    { name: 'modern', label: 'Modern', description: 'Contemporary design' },
+    { name: 'science', label: 'Science', description: 'Lab and research' },
+    { name: 'fantasy', label: 'Fantasy', description: 'Magical and mystical' }
   ];
 
   ngOnInit(): void {

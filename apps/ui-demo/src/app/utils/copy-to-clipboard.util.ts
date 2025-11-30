@@ -1,4 +1,4 @@
-import { NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtToastService } from '@ngtailwind/ui-components';
 
 /**
  * Copies text to clipboard and shows a success toast notification

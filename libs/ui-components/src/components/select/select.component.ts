@@ -102,7 +102,6 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
   private _isOpening = false;
 
   // ControlValueAccessor callbacks
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: unknown) => {};
   private onTouched = () => {};
 
@@ -654,7 +653,6 @@ export class NgtSelect implements ControlValueAccessor, OnInit, OnDestroy {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getOptionClasses(_option?: SelectOption): string {
     const base = 'flex items-center px-3 py-2 text-sm hover:bg-gray-100 hover:text-primary-900 transition-colors';
     const sizeClasses = {

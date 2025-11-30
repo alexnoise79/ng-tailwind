@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, Size, SortOrder } from '@ng-tailwind/ui-components';
+import { NgtTable, TableColumn, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService, Size, SortOrder } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { Product } from '../../models/demo.models';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
@@ -120,7 +120,7 @@ export class TablePage {
   [size]="'md'">
 </ngt-table>`,
       ts: `import { signal } from '@angular/core';
-import { TableColumn } from '@ng-tailwind/ui-components';
+import { TableColumn } from '@ngtailwind/ui-components';
 
 export class TablePage {
   products = signal<Product[]>([
@@ -143,7 +143,7 @@ export class TablePage {
   [showGridlines]="true">
 </ngt-table>`,
       ts: `import { signal } from '@angular/core';
-import { TableColumn } from '@ng-tailwind/ui-components';
+import { TableColumn } from '@ngtailwind/ui-components';
 
 export class TablePage {
   products = signal<Product[]>([...]);
@@ -157,7 +157,7 @@ export class TablePage {
   [striped]="true">
 </ngt-table>`,
       ts: `import { signal } from '@angular/core';
-import { TableColumn } from '@ng-tailwind/ui-components';
+import { TableColumn } from '@ngtailwind/ui-components';
 
 export class TablePage {
   products = signal<Product[]>([...]);
@@ -173,7 +173,7 @@ export class TablePage {
   (pageChange)="onPageChange($event)">
 </ngt-table>`,
       ts: `import { signal } from '@angular/core';
-import { TableColumn } from '@ng-tailwind/ui-components';
+import { TableColumn } from '@ngtailwind/ui-components';
 
 export class TablePage {
   products = signal<Product[]>([...]);
@@ -192,7 +192,7 @@ export class TablePage {
   (columnReorder)="onColumnReorder($event)">
 </ngt-table>`,
       ts: `import { signal } from '@angular/core';
-import { TableColumn } from '@ng-tailwind/ui-components';
+import { TableColumn } from '@ngtailwind/ui-components';
 
 export class TablePage {
   products = signal<Product[]>([...]);

@@ -108,7 +108,7 @@ export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
       md: 'text-base',
       lg: 'text-lg'
     };
-    const gridlineClasses = this.showGridlines() ? 'border border-gray-200 dark:border-gray-700' : '';
+    const gridlineClasses = this.showGridlines() ? 'md:border md:border-gray-200 md:dark:border-gray-700' : '';
     return `${baseClasses} ${sizeClasses[this.size()]} ${gridlineClasses}`;
   });
 

@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-tailwind/ui-components": ["libs/ui-components/src/index.ts"],
+      "@ngtailwind/ui-components": ["libs/ui-components/src/index.ts"],
       "@universal/*": ["libs/universal/*"]
     },
     "strict": true,

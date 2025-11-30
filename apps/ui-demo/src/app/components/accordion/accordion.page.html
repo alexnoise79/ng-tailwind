@@ -23,7 +23,7 @@
                   title="Toggle code view"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                   <span>Code</span>
                 </button>
@@ -37,7 +37,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">First Item</span>
                           <svg [class.rotate-180]="firstItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -52,7 +52,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
                           <svg [class.rotate-180]="secondItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -67,7 +67,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
                           <svg [class.rotate-180]="thirdItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -103,7 +103,7 @@
                     <div class="relative bg-gray-100 dark:bg-gray-900">
                       <button (click)="copyToClipboard(codeSnippets.singleOpen)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                       </button>
                       <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.singleOpen }}</code></pre>
@@ -126,7 +126,7 @@
                   title="Toggle code view"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                   <span>Code</span>
                 </button>
@@ -140,7 +140,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">First Item</span>
                           <svg [class.rotate-180]="firstItemMulti.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -155,7 +155,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Second Item</span>
                           <svg [class.rotate-180]="secondItemMulti.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -170,7 +170,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Third Item</span>
                           <svg [class.rotate-180]="thirdItemMulti.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -206,7 +206,7 @@
                     <div class="relative bg-gray-100 dark:bg-gray-900">
                       <button (click)="copyToClipboard(codeSnippets.multipleOpen)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                       </button>
                       <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.multipleOpen }}</code></pre>
@@ -229,7 +229,7 @@
                   title="Toggle code view"
                 >
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                   <span>Code</span>
                 </button>
@@ -243,7 +243,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Disabled Item</span>
                           <svg class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -258,7 +258,7 @@
                         <button ngtAccordionButton>
                           <span class="font-medium text-gray-900 dark:text-white">Enabled Item</span>
                           <svg [class.rotate-180]="enabledItem.isOpen()" class="h-5 w-5 text-gray-500 dark:text-gray-400 transform transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            <path d="M19 9l-7 7-7-7" />
                           </svg>
                         </button>
                       </h2>
@@ -294,7 +294,7 @@
                     <div class="relative bg-gray-100 dark:bg-gray-900">
                       <button (click)="copyToClipboard(codeSnippets.disabled)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                         </svg>
                       </button>
                       <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-800 dark:text-gray-100">{{ codeSnippets.disabled }}</code></pre>

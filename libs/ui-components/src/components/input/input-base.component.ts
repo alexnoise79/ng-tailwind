@@ -34,7 +34,6 @@ export abstract class NgtInputBase implements ControlValueAccessor, OnInit, OnDe
   protected _displayValue = signal<string>('');
 
   // ControlValueAccessor callbacks
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected onChange = (_value: string | number) => {};
   protected onTouched = () => {};
 
@@ -190,7 +189,6 @@ export abstract class NgtInputBase implements ControlValueAccessor, OnInit, OnDe
   }
 
   @HostListener('keydown', ['$event'])
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onKeyDown(_event: KeyboardEvent) {
     // Override in subclasses if needed
   }

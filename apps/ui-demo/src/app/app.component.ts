@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ng-tailwind/ui-components';
+import { NgtButton, NgtNav, NgtNavItem, NgtToastContainer, NgtToggleSwitch } from '@ngtailwind/ui-components';
 import { ThemeConfiguratorComponent } from './components/theme-configurator/theme-configurator.component';
 import { WINDOW } from '@universal/window.service';
 import { LocalStorage } from '@universal/universal.providers';
@@ -55,8 +55,10 @@ export class AppComponent implements OnInit, OnDestroy {
     {
       name: 'Form',
       items: [
+        { label: 'Checkbox', route: '/checkbox' },
         { label: 'Datepicker', route: '/datepicker' },
         { label: 'Input', route: '/input' },
+        { label: 'Mobile Prefix', route: '/mobile-prefix' },
         { label: 'Password', route: '/password' },
         { label: 'Select', route: '/select' },
         { label: 'Timepicker', route: '/timepicker' },

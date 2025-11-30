@@ -26,7 +26,7 @@ export class NgtToggleSwitch implements ControlValueAccessor {
   @ViewChild('checkbox', { static: true }) checkboxRef!: ElementRef<HTMLInputElement>;
 
   private _value = signal(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   private onChange = (_value: boolean) => {
     // Default implementation - will be replaced by registerOnChange
   };

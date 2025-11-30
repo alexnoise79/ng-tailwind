@@ -4,3 +4,4 @@ export * from './table.model';
 export * from './select.model';
 export * from './position.model';
 export * from './variant.model';
+export * from './mobile-prefix.model';

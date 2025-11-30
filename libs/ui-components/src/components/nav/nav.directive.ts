@@ -199,7 +199,7 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
     };
     const styleClasses = {
       tabs: this.orientation() === 'horizontal' ? 'border-b border-gray-200' : '',
-      pills: '',
+      pills: this.orientation() === 'horizontal' ? 'gap-x-1' : 'gap-y-1',
       underline: ''
     };
     const alignClasses = {
@@ -228,9 +228,9 @@ export class NgtNav implements AfterContentInit, OnInit, OnDestroy {
 
     if (this.style() === 'tabs') {
       if (this.orientation() === 'horizontal') {
-        classes += ' px-4 py-2 border-b-2';
+        classes += ' px-4 py-2 border-b-2 relative bottom-[-2px]';
         if (isActive) {
-          classes += ' border-primary-600 text-primary-600';
+          classes += ' border-primary-600 text-primary-600 z-10';
         } else {
           classes += ' border-transparent text-gray-500 hover:text-gray-700';
         }

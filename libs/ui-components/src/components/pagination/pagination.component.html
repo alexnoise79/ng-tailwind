@@ -1,9 +1,9 @@
 <nav [class]="paginationClasses()" aria-label="Pagination Navigation">
   <ul class="flex items-center gap-1 list-none p-0 m-0">
     <!-- First Button -->
-    @if (showFirstLast()) {
+    @if (effectiveShowFirstLast()) {
       <li>
-        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToFirst()" type="button" aria-label="Go to first page">
+        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses(false, isFirstPage() || disabled())" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToFirst()" type="button" aria-label="Go to first page">
           <span aria-hidden="true">«</span>
         </button>
       </li>
@@ -12,56 +12,50 @@
     <!-- Previous Button -->
     @if (showPrevNext()) {
       <li>
-        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToPrevious()" type="button" aria-label="Go to previous page">
+        <button [disabled]="isFirstPage() || disabled()" [class]="getButtonClasses(false, isFirstPage() || disabled())" [attr.aria-disabled]="isFirstPage() || disabled() ? 'true' : null" (click)="goToPrevious()" type="button" aria-label="Go to previous page">
           <span aria-hidden="true">‹</span>
         </button>
       </li>
     }
 
-    <!-- Start Ellipsis -->
-    @if (showStartEllipsis()) {
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses()" (click)="goToPage(1)" type="button" aria-label="Go to page 1">1</button>
-      </li>
-      <li>
-        <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
-      </li>
-    }
-
-    <!-- Page Numbers -->
-    @for (page of visiblePages(); track page) {
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses(page === _currentPage())" [attr.aria-current]="page === _currentPage() ? 'page' : null" [attr.aria-label]="'Go to page ' + page" (click)="goToPage(page)" type="button">
-          {{ page }}
-        </button>
-      </li>
-    }
-
-    <!-- End Ellipsis -->
-    @if (showEndEllipsis()) {
-      <li>
-        <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
-      </li>
-      <li>
-        <button [disabled]="disabled()" [class]="getButtonClasses()" [attr.aria-label]="'Go to page ' + totalPagesValue()" (click)="goToPage(totalPagesValue())" type="button">
-          {{ totalPagesValue() }}
-        </button>
-      </li>
+    <!-- Pagination Slots (always exactly maxVisiblePages + 2 <li> elements) -->
+    @for (slot of paginationSlots(); track $index) {
+      @if (slot === 'ellipsis') {
+        <li>
+          <span [class]="getEllipsisClasses()" aria-hidden="true">…</span>
+        </li>
+      } @else if (typeof slot === 'object' && slot.type === 'first-with-ellipsis') {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" (click)="goToPage(1)" type="button" aria-label="Go to page 1">1</button>
+        </li>
+      } @else if (typeof slot === 'object' && slot.type === 'last-with-ellipsis') {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(false, disabled())" [attr.aria-label]="'Go to page ' + totalPagesValue()" (click)="goToPage(totalPagesValue())" type="button">
+            {{ totalPagesValue() }}
+          </button>
+        </li>
+      } @else {
+        <li>
+          <button [disabled]="disabled()" [class]="getButtonClasses(slot === _currentPage(), disabled())" [attr.aria-current]="slot === _currentPage() ? 'page' : null" [attr.aria-label]="'Go to page ' + slot" (click)="goToPage(slot)" type="button">
+            {{ slot }}
+          </button>
+        </li>
+      }
     }
 
     <!-- Next Button -->
     @if (showPrevNext()) {
       <li>
-        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToNext()" type="button" aria-label="Go to next page">
+        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses(false, isLastPage() || disabled())" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToNext()" type="button" aria-label="Go to next page">
           <span aria-hidden="true">›</span>
         </button>
       </li>
     }
 
     <!-- Last Button -->
-    @if (showFirstLast()) {
+    @if (effectiveShowFirstLast()) {
       <li>
-        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses()" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToLast()" type="button" aria-label="Go to last page">
+        <button [disabled]="isLastPage() || disabled()" [class]="getButtonClasses(false, isLastPage() || disabled())" [attr.aria-disabled]="isLastPage() || disabled() ? 'true' : null" (click)="goToLast()" type="button" aria-label="Go to last page">
           <span aria-hidden="true">»</span>
         </button>
       </li>

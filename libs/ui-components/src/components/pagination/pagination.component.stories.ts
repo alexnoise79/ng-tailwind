@@ -29,7 +29,7 @@ const meta: Meta<NgtPagination> = {
     },
     showFirstLast: {
       control: 'boolean',
-      description: 'Whether to show first and last page buttons'
+      description: 'Whether to show first and last page buttons. Defaults to false. Note: On mobile devices, this is always false regardless of the input value.'
     },
     showPrevNext: {
       control: 'boolean',
@@ -54,7 +54,7 @@ export const Default: Story = {
   args: {
     currentPage: 1,
     totalPages: 10,
-    showFirstLast: true,
+    showFirstLast: false,
     showPrevNext: true,
     size: 'md'
   },

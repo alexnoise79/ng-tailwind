@@ -99,14 +99,14 @@ export class NgtToast implements OnInit, OnDestroy {
   toastClasses = computed(() => {
     const baseClasses = 'flex items-start gap-3 p-4 rounded-lg shadow-lg border transition-all duration-300 transform relative pointer-events-auto';
     const severityClasses: Record<Variant, string> = {
-      success: 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200',
-      info: 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-200',
-      warning: 'bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-200',
-      danger: 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200',
-      primary: 'bg-primary-50 border-primary-200 text-primary-800 dark:bg-primary-900/20 dark:border-primary-800 dark:text-primary-200',
-      secondary: 'bg-gray-50 border-gray-200 text-gray-800 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200',
-      light: 'bg-gray-100 border-gray-300 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100',
-      dark: 'bg-gray-900 border-gray-700 text-gray-100 dark:bg-gray-950 dark:border-gray-800 dark:text-gray-50'
+      success: 'bg-white/90 border-green-200 text-green-800 dark:bg-gray-900/90 dark:border-green-800 dark:text-green-200',
+      info: 'bg-white/90 border-blue-200 text-blue-800 dark:bg-gray-900/90 dark:border-blue-800 dark:text-blue-200',
+      warning: 'bg-white/90 border-yellow-200 text-yellow-800 dark:bg-gray-900/90 dark:border-yellow-800 dark:text-yellow-200',
+      danger: 'bg-white/90 border-red-200 text-red-800 dark:bg-gray-900/90 dark:border-red-800 dark:text-red-200',
+      primary: 'bg-white/90 border-primary-200 text-primary-800 dark:bg-gray-900/90 dark:border-primary-800 dark:text-primary-200',
+      secondary: 'bg-white/90 border-gray-200 text-gray-800 dark:bg-gray-800/90 dark:border-gray-700 dark:text-gray-200',
+      light: 'bg-white/90 border-gray-300 text-gray-900 dark:bg-gray-700/90 dark:border-gray-600 dark:text-gray-100',
+      dark: 'bg-gray-900/90 border-gray-700 text-gray-100 dark:bg-gray-950/90 dark:border-gray-800 dark:text-gray-50'
     };
     const visibilityClasses = this.isRemoving() ? 'opacity-0 translate-x-full' : this.isVisible() ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full';
 
@@ -134,14 +134,14 @@ export class NgtToast implements OnInit, OnDestroy {
       return this.iconValue();
     }
     const icons: Record<Variant, string> = {
-      success: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      info: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      success: 'M19 5l-8 8.254-3.729-3.509-2.771 2.773 6.5 6.482 11-11.228z',
+      info: 'M12 16h-2v-4h2M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
       warning: 'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
-      danger: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      primary: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      secondary: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      light: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
-      dark: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+      danger: 'M8 5L12 9L16 5L19 9L16 12L19 15L16 19L12 15L8 19L5 15L8 12L5 9Z',
+      primary: 'M12 16h-2v-4h2M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      secondary: 'M12 16h-2v-4h2M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      light: 'M12 16h-2v-4h2M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+      dark: 'M12 16h-2v-4h2M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
     };
     return icons[this.severityValue()];
   });

@@ -1,6 +1,12 @@
-# ng-tailwind UI Components
+# ngtailwind UI Components
 
 A modern Angular component library built with TailwindCSS, Angular standalone components, and Angular CDK.
+
+## 🚀 Live Demo
+
+### **[👉 View Live Demo →](https://alexnoise79.github.io/ng-tailwind/getting-started)**
+
+> **Explore all components in action!** See the full component library with interactive examples and theme customization.
 
 ## Versions
 
@@ -40,9 +46,11 @@ nx storybook ui-components
 - **Alert** - Alert component with multiple variants and dismissible functionality
 - **Button** - Variants, sizes, and loading states
 - **Card** - Flexible card component with template loading for header, title, subtitle, and footer
+- **Checkbox** - Form control with custom values, indeterminate state, and template support
 - **Collapse** - Expandable/collapsible content (horizontal or vertical)
 - **Datepicker** - Date selection component with calendar view
 - **Dropdown** - Dropdown menu with positioning
+- **Input** - Text input with multiple types (text, number, email, tel), validation, and advanced features
 - **Modal** - Dialog with backdrop and animations
 - **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
@@ -52,6 +60,9 @@ nx storybook ui-components
 - **Toast** - Notification messages with severity levels and auto-dismiss
 - **Toggle Switch** - Form control for boolean values with sizes
 - **Tooltip** - Contextual information tooltips
+- **Mobile Prefix** - Phone number input with country code selector
+- **Password** - Password input with visibility toggle
+- **Timepicker** - Time selection component
 
 ## Documentation
 
@@ -62,7 +73,7 @@ nx storybook ui-components
 
 ## Project Structure
 
-```
+```text
 ng-tailwind/
 ├── apps/
 │   └── ui-demo/          # Demo application
@@ -101,4 +112,3 @@ nx lint ui-components
 ## License
 
 MIT
-

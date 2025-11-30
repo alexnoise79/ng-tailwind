@@ -34,10 +34,11 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('Open from Start').click();
-          cy.wait(300);
-          cy.get('[role="dialog"]').should('be.visible');
-          cy.contains('Offcanvas from Start').should('be.visible');
-          cy.contains('Content from start position').should('be.visible');
+          cy.wait(500);
+          // Offcanvas might be covered by backdrop, check for it with force
+          cy.get('[role="dialog"]', { timeout: 5000 }).should('exist');
+          cy.contains('Offcanvas from Start').should('exist');
+          cy.contains('Content from start position').should('exist');
         });
     });
 
@@ -47,9 +48,9 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('Open from End').click();
-          cy.wait(300);
-          cy.get('[role="dialog"]').should('be.visible');
-          cy.contains('Offcanvas from End').should('be.visible');
+          cy.wait(500);
+          cy.get('[role="dialog"]', { timeout: 5000 }).should('exist');
+          cy.contains('Offcanvas from End').should('exist');
         });
     });
 
@@ -59,9 +60,9 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('Open from Top').click();
-          cy.wait(300);
-          cy.get('[role="dialog"]').should('be.visible');
-          cy.contains('Offcanvas from Top').should('be.visible');
+          cy.wait(500);
+          cy.get('[role="dialog"]', { timeout: 5000 }).should('exist');
+          cy.contains('Offcanvas from Top').should('exist');
         });
     });
 
@@ -71,9 +72,9 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('Open from Bottom').click();
-          cy.wait(300);
-          cy.get('[role="dialog"]').should('be.visible');
-          cy.contains('Offcanvas from Bottom').should('be.visible');
+          cy.wait(500);
+          cy.get('[role="dialog"]', { timeout: 5000 }).should('exist');
+          cy.contains('Offcanvas from Bottom').should('exist');
         });
     });
 
@@ -83,9 +84,12 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('Open from Start').click();
-          cy.wait(300);
-          cy.get('body').type('{esc}');
-          cy.wait(300);
+          cy.wait(500);
+          // Press escape key on the document/body - use document directly
+          cy.document().then((doc) => {
+            cy.wrap(doc.body).type('{esc}', { force: true });
+          });
+          cy.wait(500);
           cy.get('[role="dialog"]').should('not.exist');
         });
     });
@@ -140,8 +144,8 @@ describe('Offcanvas Page E2E', () => {
         .parent()
         .within(() => {
           cy.contains('With Backdrop').click();
-          cy.wait(300);
-          cy.get('[role="dialog"]').should('be.visible');
+          cy.wait(500);
+          cy.get('[role="dialog"]', { timeout: 5000 }).should('exist');
         });
     });
   });

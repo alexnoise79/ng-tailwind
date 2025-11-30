@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { NgtNav, NgtNavItem, NgtNavLink, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtNav, NgtNavItem, NgtNavLink, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
@@ -20,7 +20,8 @@ export class NavPage {
       center: 'showcase',
       justified: 'showcase',
       disabled: 'showcase',
-      vertical: 'showcase'
+      vertical: 'showcase',
+      routerlink: 'showcase'
     },
     {
       default: 'html',
@@ -29,7 +30,8 @@ export class NavPage {
       center: 'html',
       justified: 'html',
       disabled: 'html',
-      vertical: 'html'
+      vertical: 'html',
+      routerlink: 'html'
     }
   );
 
@@ -81,6 +83,12 @@ export class NavPage {
   <ngt-nav-item label="Home"></ngt-nav-item>
   <ngt-nav-item label="About"></ngt-nav-item>
   <ngt-nav-item label="Contact"></ngt-nav-item>
+</ngt-nav>`,
+    routerlink: `<ngt-nav>
+  <ngt-nav-item [routerLink]="'/getting-started'" label="Getting Started"></ngt-nav-item>
+  <ngt-nav-item [routerLink]="'/button'" label="Button"></ngt-nav-item>
+  <ngt-nav-item [routerLink]="'/modal'" label="Modal"></ngt-nav-item>
+  <ngt-nav-item [routerLink]="'/table'" label="Table"></ngt-nav-item>
 </ngt-nav>`
   };
 
@@ -114,6 +122,10 @@ export class NavPage {
       vertical: {
         html: 'nav-vertical.html',
         ts: 'nav-vertical.ts'
+      },
+      routerlink: {
+        html: 'nav-routerlink.html',
+        ts: 'nav-routerlink.ts'
       }
     };
     return this.codeViewUtil.getTabFileName('nav', demoKey, fileType, fileNames);

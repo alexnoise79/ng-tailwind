@@ -20,6 +20,8 @@ alwaysApply: true
 
 - Never use "as unknown as" for type conversion
 
+- Before adding an override, always ask
+
 ## SSR Compliance
 
 - Do not use window and document directly for SSR issues

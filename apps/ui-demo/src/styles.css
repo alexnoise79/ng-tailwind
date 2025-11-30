@@ -100,6 +100,9 @@
   --scrollbar-thumb: var(--color-primary-500); /* primary-500 */
   --scrollbar-track: rgb(241 245 249); /* gray-100 */
   --scrollbar-thumb-hover: var(--color-primary-600); /* primary-600 */
+
+  /* Font Family - Default theme uses system fonts */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Theme Overrides - Using CSS variables that override @theme values */
@@ -126,12 +129,28 @@
   --radius-2xl: 0.75rem;
   --radius-3xl: 1rem;
 
+  /* Secondary Colors - Cyan neon accents */
+  --color-secondary-50: #ecfeff;
+  --color-secondary-100: #cffafe;
+  --color-secondary-200: #a5f3fc;
+  --color-secondary-300: #67e8f9;
+  --color-secondary-400: #22d3ee;
+  --color-secondary-500: #06b6d4;
+  --color-secondary-600: #0891b2;
+  --color-secondary-700: #0e7490;
+  --color-secondary-800: #155e75;
+  --color-secondary-900: #164e63;
+  --color-secondary-950: #083344;
+
   /* Vibrant, glowing shadows */
   --shadow-sm: 0 1px 2px 0 rgb(217 70 239 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(217 70 239 / 0.4), 0 2px 4px -2px rgb(217 70 239 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(217 70 239 / 0.4), 0 4px 6px -4px rgb(217 70 239 / 0.3);
   --shadow-xl: 0 20px 25px -5px rgb(217 70 239 / 0.4), 0 8px 10px -6px rgb(217 70 239 / 0.3);
   --shadow-2xl: 0 25px 50px -12px rgb(217 70 239 / 0.5);
+
+  /* Futuristic font */
+  --font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Minimalist Theme - Clean black and white, subtle shadows, rounded */
@@ -162,6 +181,9 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
+
+  /* Clean, minimal font */
+  --font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Nature Theme - Green and earth tones, organic curves, soft shadows */
@@ -186,12 +208,28 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
 
+  /* Secondary Colors - Earth tones */
+  --color-secondary-50: #fefce8;
+  --color-secondary-100: #fef9c3;
+  --color-secondary-200: #fef08a;
+  --color-secondary-300: #fde047;
+  --color-secondary-400: #facc15;
+  --color-secondary-500: #eab308;
+  --color-secondary-600: #ca8a04;
+  --color-secondary-700: #a16207;
+  --color-secondary-800: #854d0e;
+  --color-secondary-900: #713f12;
+  --color-secondary-950: #422006;
+
   /* Soft, natural shadows */
   --shadow-sm: 0 1px 2px 0 rgb(34 197 94 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(34 197 94 / 0.1), 0 2px 4px -2px rgb(34 197 94 / 0.08);
   --shadow-lg: 0 10px 15px -3px rgb(34 197 94 / 0.12), 0 4px 6px -4px rgb(34 197 94 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(34 197 94 / 0.12), 0 8px 10px -6px rgb(34 197 94 / 0.1);
   --shadow-2xl: 0 25px 50px -12px rgb(34 197 94 / 0.15);
+
+  /* Friendly, organic font */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Tech Theme - Blue and cyan, modern crisp edges, tech shadows */
@@ -222,6 +260,9 @@
   --shadow-lg: 0 10px 15px -3px rgb(6 182 212 / 0.2), 0 4px 6px -4px rgb(6 182 212 / 0.15);
   --shadow-xl: 0 20px 25px -5px rgb(6 182 212 / 0.25), 0 8px 10px -6px rgb(6 182 212 / 0.2);
   --shadow-2xl: 0 25px 50px -12px rgb(6 182 212 / 0.3);
+
+  /* Modern tech font */
+  --font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Elegant Theme - Gold/amber, refined curves, sophisticated shadows */
@@ -246,22 +287,223 @@
   --radius-2xl: 1.5rem;
   --radius-3xl: 2rem;
 
+  /* Secondary Colors - Deep purple accents */
+  --color-secondary-50: #faf5ff;
+  --color-secondary-100: #f3e8ff;
+  --color-secondary-200: #e9d5ff;
+  --color-secondary-300: #d8b4fe;
+  --color-secondary-400: #c084fc;
+  --color-secondary-500: #a855f7;
+  --color-secondary-600: #9333ea;
+  --color-secondary-700: #7e22ce;
+  --color-secondary-800: #6b21a8;
+  --color-secondary-900: #581c87;
+  --color-secondary-950: #3b0764;
+
   /* Sophisticated, warm shadows */
   --shadow-sm: 0 1px 2px 0 rgb(245 158 11 / 0.15);
   --shadow-md: 0 4px 6px -1px rgb(245 158 11 / 0.2), 0 2px 4px -2px rgb(245 158 11 / 0.15);
   --shadow-lg: 0 10px 15px -3px rgb(245 158 11 / 0.2), 0 4px 6px -4px rgb(245 158 11 / 0.15);
   --shadow-xl: 0 20px 25px -5px rgb(245 158 11 / 0.25), 0 8px 10px -6px rgb(245 158 11 / 0.2);
   --shadow-2xl: 0 25px 50px -12px rgb(245 158 11 / 0.3);
+
+  /* Elegant, refined font */
+  --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Space Theme - Cosmic deep space, dark purples and blues, stellar glow */
+[data-theme='space'] {
+  --color-primary-50: #1e1b4b;
+  --color-primary-100: #312e81;
+  --color-primary-200: #4338ca;
+  --color-primary-300: #6366f1;
+  --color-primary-400: #818cf8;
+  --color-primary-500: #a78bfa;
+  --color-primary-600: #c084fc;
+  --color-primary-700: #d946ef;
+  --color-primary-800: #e879f9;
+  --color-primary-900: #f0abfc;
+  --color-primary-950: #fae8ff;
+
+  /* Cosmic, very rounded shapes */
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+  --radius-2xl: 2.5rem;
+  --radius-3xl: 3rem;
+
+  /* Secondary Colors - Deep space blues */
+  --color-secondary-50: #0f172a;
+  --color-secondary-100: #1e293b;
+  --color-secondary-200: #334155;
+  --color-secondary-300: #475569;
+  --color-secondary-400: #64748b;
+  --color-secondary-500: #94a3b8;
+  --color-secondary-600: #cbd5e1;
+  --color-secondary-700: #e2e8f0;
+  --color-secondary-800: #f1f5f9;
+  --color-secondary-900: #f8fafc;
+  --color-secondary-950: #ffffff;
+
+  /* Stellar, glowing shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(167 139 250 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(167 139 250 / 0.4), 0 2px 4px -2px rgb(167 139 250 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(167 139 250 / 0.4), 0 4px 6px -4px rgb(167 139 250 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(167 139 250 / 0.5), 0 8px 10px -6px rgb(167 139 250 / 0.4);
+  --shadow-2xl: 0 25px 50px -12px rgb(167 139 250 / 0.6);
+
+  /* Space-themed font */
+  --font-family: 'Exo 2', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Modern Theme - Contemporary design, vibrant coral and rose, clean lines */
+[data-theme='modern'] {
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-200: #fecdd3;
+  --color-primary-300: #fda4af;
+  --color-primary-400: #fb7185;
+  --color-primary-500: #f43f5e;
+  --color-primary-600: #e11d48;
+  --color-primary-700: #be123c;
+  --color-primary-800: #9f1239;
+  --color-primary-900: #881337;
+  --color-primary-950: #4c0519;
+
+  /* Modern, crisp corners */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* Secondary Colors - Soft grays */
+  --color-secondary-50: #f9fafb;
+  --color-secondary-100: #f3f4f6;
+  --color-secondary-200: #e5e7eb;
+  --color-secondary-300: #d1d5db;
+  --color-secondary-400: #9ca3af;
+  --color-secondary-500: #6b7280;
+  --color-secondary-600: #4b5563;
+  --color-secondary-700: #374151;
+  --color-secondary-800: #1f2937;
+  --color-secondary-900: #111827;
+  --color-secondary-950: #030712;
+
+  /* Clean, modern shadows with rose tint */
+  --shadow-sm: 0 1px 2px 0 rgb(244 63 94 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(244 63 94 / 0.15), 0 2px 4px -2px rgb(244 63 94 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(244 63 94 / 0.15), 0 4px 6px -4px rgb(244 63 94 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(244 63 94 / 0.2), 0 8px 10px -6px rgb(244 63 94 / 0.15);
+  --shadow-2xl: 0 25px 50px -12px rgb(244 63 94 / 0.25);
+
+  /* Modern, contemporary font */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Science Theme - Lab and research, clean teal and cyan, precise */
+[data-theme='science'] {
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
+
+  /* Precise, scientific corners */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+  --radius-3xl: 1rem;
+
+  /* Secondary Colors - Clean whites and light grays */
+  --color-secondary-50: #ffffff;
+  --color-secondary-100: #f8fafc;
+  --color-secondary-200: #f1f5f9;
+  --color-secondary-300: #e2e8f0;
+  --color-secondary-400: #cbd5e1;
+  --color-secondary-500: #94a3b8;
+  --color-secondary-600: #64748b;
+  --color-secondary-700: #475569;
+  --color-secondary-800: #334155;
+  --color-secondary-900: #1e293b;
+  --color-secondary-950: #0f172a;
+
+  /* Clean, precise shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(20 184 166 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(20 184 166 / 0.15), 0 2px 4px -2px rgb(20 184 166 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(20 184 166 / 0.15), 0 4px 6px -4px rgb(20 184 166 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(20 184 166 / 0.2), 0 8px 10px -6px rgb(20 184 166 / 0.15);
+  --shadow-2xl: 0 25px 50px -12px rgb(20 184 166 / 0.25);
+
+  /* Scientific, clean font */
+  --font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Fantasy Theme - Magical and mystical, rich purples and emerald, elegant curves */
+[data-theme='fantasy'] {
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #a855f7;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7e22ce;
+  --color-primary-800: #6b21a8;
+  --color-primary-900: #581c87;
+  --color-primary-950: #3b0764;
+
+  /* Elegant, magical curves */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Secondary Colors - Emerald and gold accents */
+  --color-secondary-50: #ecfdf5;
+  --color-secondary-100: #d1fae5;
+  --color-secondary-200: #a7f3d0;
+  --color-secondary-300: #6ee7b7;
+  --color-secondary-400: #34d399;
+  --color-secondary-500: #10b981;
+  --color-secondary-600: #059669;
+  --color-secondary-700: #047857;
+  --color-secondary-800: #065f46;
+  --color-secondary-900: #064e3b;
+  --color-secondary-950: #022c22;
+
+  /* Mystical, enchanting shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(168 85 247 / 0.2);
+  --shadow-md: 0 4px 6px -1px rgb(168 85 247 / 0.25), 0 2px 4px -2px rgb(168 85 247 / 0.2);
+  --shadow-lg: 0 10px 15px -3px rgb(168 85 247 / 0.25), 0 4px 6px -4px rgb(168 85 247 / 0.2);
+  --shadow-xl: 0 20px 25px -5px rgb(168 85 247 / 0.3), 0 8px 10px -6px rgb(168 85 247 / 0.25);
+  --shadow-2xl: 0 25px 50px -12px rgb(168 85 247 / 0.35);
+
+  /* Fantasy, elegant font */
+  --font-family: 'Cinzel', -apple-system, BlinkMacSystemFont, 'Segoe UI', serif;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition:
     background-color 1s cubic-bezier(0.4, 0, 0.2, 1),
-    color 1s cubic-bezier(0.4, 0, 0.2, 1);
+    color 1s cubic-bezier(0.4, 0, 0.2, 1),
+    font-family 0.3s ease;
 }
 
 * {

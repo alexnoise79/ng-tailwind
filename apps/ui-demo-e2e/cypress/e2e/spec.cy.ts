@@ -6,7 +6,7 @@ describe('ui-demo e2e', () => {
   });
 
   it('should display the app title', () => {
-    cy.contains('ng-tailwind UI');
+    cy.contains('ngtailwind UI');
   });
 
   it('should have navigation elements', () => {

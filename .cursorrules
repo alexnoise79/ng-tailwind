@@ -1,0 +1,27 @@
+# Project Rules
+
+## Angular Version & Configuration
+
+- Always use Angular 20
+
+- Standalone is true by default, so have to be omitted
+
+## Code Style
+
+- Never use CommonModule
+
+- Always use host and not @HostBinding
+
+- Never use ":void" as a return type - omit the return type annotation instead
+  - **Exception**: Abstract methods that require explicit return types for TypeScript strict mode compliance may use `: void`
+
+- Never use "as unknown as" for type conversion
+
+## SSR Compliance
+
+- Do not use window and document directly for SSR issues
+
+## Git
+
+- Commit message max length 100 chars (total for all lines)
+

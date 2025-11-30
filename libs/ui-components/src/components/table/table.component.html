@@ -7,7 +7,7 @@
   }
 
   <div [style.max-height]="scrollable() && scrollHeight() ? scrollHeight() : null" class="overflow-x-auto">
-    <table #tableElement [class]="tableClasses()" [style]="tableStyle()">
+    <table #tableElement [class]="tableClasses()" [style]="tableStyle()" class="block md:table w-full">
       <!-- Column Groups -->
       @if (columnGroups().length > 0) {
         <colgroup>
@@ -15,7 +15,7 @@
             <col [style.width]="col.width || 'auto'" />
           }
         </colgroup>
-        <thead [class]="theadClasses()">
+        <thead [class]="theadClasses()" class="hidden md:table-header-group">
           @for (group of columnGroups(); track $index) {
             <tr>
               @for (col of group; track col.field) {
@@ -30,11 +30,11 @@
 
       <!-- Header Template -->
       @if (headerTemplate) {
-        <thead #thead [class]="theadClasses()">
+        <thead #thead [class]="theadClasses()" class="hidden md:table-header-group">
           <ng-container *ngTemplateOutlet="headerTemplate; context: { $implicit: _columns(), columns: _columns() }"></ng-container>
         </thead>
       } @else if (_columns().length > 0) {
-        <thead #thead [class]="theadClasses()">
+        <thead #thead [class]="theadClasses()" class="hidden md:table-header-group">
           <tr>
             @for (col of _columns(); track col.field; let i = $index) {
               <th
@@ -70,12 +70,13 @@
           }
         </tbody>
       } @else if (_columns().length > 0) {
-        <tbody [class]="tbodyClasses()">
+        <tbody [class]="tbodyClasses()" class="block md:table-row-group">
           @for (row of groupedValue(); track $index) {
-            <tr [class]="trClasses()">
-              @for (col of _columns(); track col.field) {
-                <td [class]="tdClasses()" [style]="getColumnStyle(col)">
-                  {{ resolveFieldData(row, col.field) }}
+            <tr [class]="trClasses()" class="flex flex-col w-full md:table-row mb-4 md:mb-0 border border-gray-200 dark:border-gray-700 rounded-lg md:border-0 md:rounded-none bg-white dark:bg-gray-800 md:bg-transparent">
+              @for (col of _columns(); track col.field; let isFirst = $first; let isLast = $last) {
+                <td [class]="tdClasses()" [style]="getColumnStyle(col)" [class.rounded-t-lg]="isFirst" [class.rounded-b-lg]="isLast" [class.md:rounded-t-none]="isFirst" [class.md:rounded-b-none]="isLast" class="flex md:table-cell px-4 py-3 md:py-3">
+                  <span class="md:hidden mr-2 text-left font-semibold text-gray-900 dark:text-white"> {{ col.header }}: </span>
+                  <span class="flex-1">{{ resolveFieldData(row, col.field) }}</span>
                 </td>
               }
             </tr>
@@ -94,10 +95,10 @@
           <ng-container *ngTemplateOutlet="footerTemplate; context: { $implicit: _columns(), columns: _columns() }"></ng-container>
         </tfoot>
       } @else if (_columns().length > 0) {
-        <tfoot [class]="theadClasses()">
-          <tr>
+        <tfoot [class]="theadClasses()" class="block md:table-row-group">
+          <tr class="flex flex-col w-full md:table-row">
             @for (col of _columns(); track col.field) {
-              <th [class]="thClasses()" [style]="getColumnStyle(col)"></th>
+              <th [class]="thClasses()" [style]="getColumnStyle(col)" [class.rounded-t-lg]="$first" [class.rounded-b-lg]="$last" class="flex md:table-cell px-4 py-3 md:py-3"></th>
             }
           </tr>
         </tfoot>

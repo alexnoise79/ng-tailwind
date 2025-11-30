@@ -36,7 +36,6 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   private _model = signal<NgtDateStruct | null>(null);
 
   // ControlValueAccessor implementation
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private onChange = (_value: string | null) => {};
   protected onTouched = () => {};
 
@@ -543,9 +542,9 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   // Size-based spacing classes
   calendarPaddingClasses = computed(() => {
     const size = this.size();
-    if (size === 'sm') return 'p-2';
-    if (size === 'lg') return 'p-5';
-    return 'p-4'; // md
+    if (size === 'sm') return 'p-1 sm:p-2';
+    if (size === 'lg') return 'p-2 sm:p-3';
+    return 'p-1 sm:p-2'; // md
   });
 
   headerMarginClasses = computed(() => {

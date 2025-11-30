@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { NgtPagination, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ng-tailwind/ui-components';
+import { NgtPagination, NgtNav, NgtNavItem, NgtNavContent, NgtNavOutlet, NgtToastService } from '@ngtailwind/ui-components';
 import { copyToClipboard } from '../../utils/copy-to-clipboard.util';
 import { DemoCodeViewUtil } from '../../utils/demo-code-view.util';
 
@@ -14,7 +14,7 @@ export class PaginationPage {
   currentPage2 = signal(1);
   currentPage3 = signal(5);
   currentPage4 = signal(1);
-  currentPage5 = signal(50);
+  currentPage5 = signal(1);
   currentPage6 = signal(1);
   currentPage7 = signal(1);
   currentPage8 = signal(1);

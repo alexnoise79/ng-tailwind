@@ -40,7 +40,16 @@ export default [
           allowNext: false
         }
       ],
-      'rxjs-x/no-nested-subscribe': 'error'
+      'rxjs-x/no-nested-subscribe': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          args: 'after-used',
+          ignoreRestSiblings: false,
+          argsIgnorePattern: '^_'
+        }
+      ]
     }
   },
   {
