@@ -4,4 +4,7 @@ dist
 coverage
 *.md
 package-lock.json
+*.yml
+*.yaml
+*.css
 
