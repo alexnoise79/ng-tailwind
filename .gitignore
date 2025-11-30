@@ -41,6 +41,7 @@ Thumbs.db
 # Nx
 .nx/cache
 .nx/workspace-data
+.nx/nx-cloud.env
 
 # NPM configuration (contains sensitive tokens)
 .npmrc
