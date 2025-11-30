@@ -1,0 +1,7 @@
+<div [class]="progressbarClasses()" [style.height]="heightValue() || null">
+  <div [class]="progressbarInnerClasses()" [style.width.%]="percentage()">
+    @if (showValueValue()) {
+      <span [class]="textClasses()">{{ percentage() }}%</span>
+    }
+  </div>
+</div>
