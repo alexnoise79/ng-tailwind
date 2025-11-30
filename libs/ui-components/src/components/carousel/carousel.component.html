@@ -1,0 +1,58 @@
+@if (hasSlides()) {
+  <div class="relative w-full">
+    <!-- Slide Container -->
+    <div #slideContainer class="relative w-full overflow-hidden h-96">
+      @for (slide of slidesList(); track slide.id()) {
+        <div [class]="getSlideClasses(slide)">
+          <ng-container *ngTemplateOutlet="slide.template"></ng-container>
+        </div>
+      }
+    </div>
+
+    <!-- Navigation Arrows -->
+    @if (showNavigationArrowsValue()) {
+      <!-- Previous Arrow -->
+      <button
+        [disabled]="!canGoPrev()"
+        [attr.aria-label]="'Previous slide'"
+        (click)="prev('arrowLeft')"
+        type="button"
+        class="absolute left-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Next Arrow -->
+      <button
+        [disabled]="!canGoNext()"
+        [attr.aria-label]="'Next slide'"
+        (click)="next('arrowRight')"
+        type="button"
+        class="absolute right-0 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center w-10 h-10 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    }
+
+    <!-- Navigation Indicators -->
+    @if (showNavigationIndicatorsValue()) {
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        @for (slide of slidesList(); track slide.id(); let i = $index) {
+          <button
+            [attr.aria-label]="'Go to slide ' + (i + 1)"
+            [class.bg-white]="activeSlideId() === slide.id()"
+            [class.bg-white/50]="activeSlideId() !== slide.id()"
+            (click)="select(slide.id(), 'indicator')"
+            type="button"
+            class="w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+          ></button>
+        }
+      </div>
+    }
+  </div>
+}
+

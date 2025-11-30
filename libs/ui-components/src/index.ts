@@ -19,6 +19,7 @@ export * from './components/table';
 export * from './components/select';
 export * from './components/alert';
 export * from './components/card';
+export * from './components/carousel';
 export * from './components/input';
 export * from './components/mobile-prefix';
 export * from './components/password';
