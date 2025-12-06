@@ -324,6 +324,31 @@ describe('Input E2E', () => {
           currencyInput.should('have.value', '10.10');
         });
     });
+
+    it('should handle partial decimal editing in decimal input', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const decimalInput = cy.contains('Decimal').parent().find('ngt-input[mode="decimal"]').find('input');
+          
+          // Type initial value
+          decimalInput.type('100.25');
+          cy.wait(200);
+          decimalInput.should('have.value', '100.25');
+          
+          // Press backspace twice to remove "25"
+          decimalInput.type('{backspace}{backspace}');
+          cy.wait(200);
+          
+          // Type "30" to replace the deleted part
+          decimalInput.type('30');
+          cy.wait(200);
+          
+          // Expected value should be "100.30"
+          decimalInput.should('have.value', '100.30');
+        });
+    });
   });
 
   describe('Show Clear', () => {

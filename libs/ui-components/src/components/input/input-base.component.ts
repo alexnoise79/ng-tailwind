@@ -214,6 +214,14 @@ export abstract class NgtInputBase implements ControlValueAccessor, OnInit, OnDe
 
   // ControlValueAccessor implementation
   writeValue(value: string | number | null) {
+    // For number inputs with mode, don't update if input is focused to prevent cursor reset
+    const input = this.inputElementRef?.nativeElement;
+    if (input && document.activeElement === input && this.type() === 'number') {
+      // During typing, don't let writeValue interfere
+      // The handleNormalInput method handles updates during typing
+      return;
+    }
+    
     this._value.set(value ?? '');
     this.updateDisplayValue();
   }
