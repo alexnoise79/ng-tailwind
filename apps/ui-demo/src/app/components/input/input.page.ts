@@ -16,7 +16,7 @@ export class InputPage {
 
   // Basic
   textValue1 = signal<string>('');
-  numberValue1 = signal<number>(0);
+  numberValue1 = signal<number | null>(null);
   emailValue1 = signal<string>('');
   telValue1 = signal<string>('');
 
@@ -29,8 +29,8 @@ export class InputPage {
   disabledValue = signal<string>('Disabled input');
 
   // Number modes
-  decimalValue = signal<number>(0);
-  currencyValue = signal<number>(0);
+  decimalValue = signal<number | null>(null);
+  currencyValue = signal<number | null>(null);
   currencyType = signal<string>('USD');
 
   // Show clear
@@ -137,7 +137,7 @@ import { NgtInputBasic } from '@ngtailwind/ui-components';
 })
 export class InputPage {
   textValue1 = signal<string>('');
-  numberValue1 = signal<number>(0);
+  numberValue1 = signal<number | null>(null);
   emailValue1 = signal<string>('');
   telValue1 = signal<string>('');
 }`
@@ -228,8 +228,8 @@ import { NgtInputDecimal, NgtInputCurrency } from '@ngtailwind/ui-components';
   template: \`<!-- template here -->\`
 })
 export class InputPage {
-  decimalValue = signal<number>(0);
-  currencyValue = signal<number>(0);
+  decimalValue = signal<number | null>(null);
+  currencyValue = signal<number | null>(null);
   currencyType = signal<string>('USD');
 }`
     },
