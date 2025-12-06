@@ -163,6 +163,167 @@ describe('Input E2E', () => {
           cy.wait(200);
         });
     });
+
+    it('should not show default value (0) in currency input on initial load', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          cy.contains('Currency')
+            .parent()
+            .find('ngt-input[currency], ngt-input[mode="currency"]')
+            .find('input')
+            .should('have.value', '')
+            .should('not.have.value', '0')
+            .should('not.have.value', '0.00');
+        });
+    });
+
+    it('should not show default value (0) in decimal input on initial load', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          cy.contains('Decimal')
+            .parent()
+            .find('ngt-input[mode="decimal"]')
+            .find('input')
+            .should('have.value', '')
+            .should('not.have.value', '0')
+            .should('not.have.value', '0.00');
+        });
+    });
+
+    it('should preserve currency input value on blur', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const currencyInput = cy.contains('Currency').parent().find('ngt-input[currency], ngt-input[mode="currency"]').find('input');
+          
+          // Type a value
+          currencyInput.type('200');
+          cy.wait(200);
+          
+          // Blur the input (click outside or press Tab)
+          currencyInput.blur();
+          cy.wait(300);
+          
+          // Value should still be present (formatted)
+          currencyInput.should('not.have.value', '');
+          currencyInput.should('have.value', '200.00');
+        });
+    });
+
+    it('should format currency input value on blur', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const currencyInput = cy.contains('Currency').parent().find('ngt-input[currency], ngt-input[mode="currency"]').find('input');
+          
+          // Type a value without decimals
+          currencyInput.type('1234');
+          cy.wait(200);
+          
+          // Blur the input
+          currencyInput.blur();
+          cy.wait(300);
+          
+          // Value should be formatted with 2 decimals
+          currencyInput.should('have.value', '1234.00');
+        });
+    });
+
+    it('should format decimal input value on blur', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const decimalInput = cy.contains('Decimal').parent().find('ngt-input[mode="decimal"]').find('input');
+          
+          // Type a value
+          decimalInput.type('567');
+          cy.wait(200);
+          
+          // Blur the input
+          decimalInput.blur();
+          cy.wait(300);
+          
+          // Value should be formatted with 2 decimals
+          decimalInput.should('have.value', '567.00');
+        });
+    });
+
+    it('should keep currency input empty when blurred without value', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const currencyInput = cy.contains('Currency').parent().find('ngt-input[currency], ngt-input[mode="currency"]').find('input');
+          
+          // Ensure input is empty
+          currencyInput.clear();
+          cy.wait(200);
+          currencyInput.should('have.value', '');
+          
+          // Focus and blur without typing
+          currencyInput.focus();
+          cy.wait(100);
+          currencyInput.blur();
+          cy.wait(300);
+          
+          // Input should remain empty (not show 0 or 0.00)
+          currencyInput.should('have.value', '');
+          currencyInput.should('not.have.value', '0');
+          currencyInput.should('not.have.value', '0.00');
+        });
+    });
+
+    it('should keep decimal input empty when blurred without value', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const decimalInput = cy.contains('Decimal').parent().find('ngt-input[mode="decimal"]').find('input');
+          
+          // Ensure input is empty
+          decimalInput.clear();
+          cy.wait(200);
+          decimalInput.should('have.value', '');
+          
+          // Focus and blur without typing
+          decimalInput.focus();
+          cy.wait(100);
+          decimalInput.blur();
+          cy.wait(300);
+          
+          // Input should remain empty (not show 0 or 0.00)
+          decimalInput.should('have.value', '');
+          decimalInput.should('not.have.value', '0');
+          decimalInput.should('not.have.value', '0.00');
+        });
+    });
+
+    it('should handle decimal values correctly in currency input', () => {
+      cy.contains('Number Modes')
+        .parent()
+        .parent()
+        .within(() => {
+          const currencyInput = cy.contains('Currency').parent().find('ngt-input[currency], ngt-input[mode="currency"]').find('input');
+          
+          // Type a decimal value
+          currencyInput.type('10.10');
+          cy.wait(200);
+          
+          // Blur the input
+          currencyInput.blur();
+          cy.wait(300);
+          
+          // Value should be formatted with 2 decimals
+          currencyInput.should('have.value', '10.10');
+        });
+    });
   });
 
   describe('Show Clear', () => {
