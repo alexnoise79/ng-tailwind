@@ -1,9 +1,8 @@
-import { Component, Input, signal, Signal, WritableSignal, input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, signal, Signal, WritableSignal, input } from '@angular/core';
 
 @Component({
   selector: 'ngt-collapse',
   templateUrl: './collapse.component.html',
-  encapsulation: ViewEncapsulation.None,
   host: {
     '[attr.aria-expanded]': 'isOpen()',
     '[class.show]': 'isOpen()'

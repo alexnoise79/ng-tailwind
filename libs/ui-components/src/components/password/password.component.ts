@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { classMerge } from '../../utils';
@@ -10,7 +10,6 @@ export type PasswordStrength = 0 | 1 | 2 | 3 | 4 | 5;
   selector: 'ngt-password',
   imports: [CommonModule, FormsModule],
   templateUrl: './password.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

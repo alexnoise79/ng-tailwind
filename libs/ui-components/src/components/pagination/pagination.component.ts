@@ -1,11 +1,10 @@
-import { Component, signal, computed, input, output, effect, inject, ViewEncapsulation } from '@angular/core';
+import { Component, signal, computed, input, output, effect, inject } from '@angular/core';
 import { Size } from '../../models';
 import { WINDOW } from '../../utils';
 
 @Component({
   selector: 'ngt-pagination',
-  templateUrl: './pagination.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './pagination.component.html'
 })
 export class NgtPagination {
   private window = inject(WINDOW);

@@ -1,4 +1,4 @@
-import { Component, forwardRef, effect, OnInit, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, forwardRef, effect, OnInit, computed, input, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputType } from './input-base.component';
 import { NgtInputNumberBase } from './input-number-base.component';
@@ -9,7 +9,6 @@ import { Size } from '../../models';
   selector: 'ngt-input[currency], ngt-input[mode="currency"]',
   imports: [FormsModule],
   templateUrl: './input-currency.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

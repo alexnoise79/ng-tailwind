@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, forwardRef, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, signal, computed, input, forwardRef, ElementRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { classMerge } from '../../utils';
 import { Size } from '../../models';
@@ -6,7 +6,6 @@ import { Size } from '../../models';
 @Component({
   selector: 'ngt-toggle-switch',
   templateUrl: './toggle-switch.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

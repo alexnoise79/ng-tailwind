@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input, output } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
@@ -7,8 +7,7 @@ export type OffcanvasPosition = 'start' | 'end' | 'top' | 'bottom';
 @Component({
   selector: 'ngt-offcanvas',
   imports: [TrapFocusDirective],
-  templateUrl: './offcanvas.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './offcanvas.component.html'
 })
 export class NgtOffCanvas implements OnInit, OnDestroy {
   @Input() set isOpen(value: boolean | WritableSignal<boolean>) {

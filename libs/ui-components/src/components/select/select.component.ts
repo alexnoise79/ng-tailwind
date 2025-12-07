@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, forwardRef, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, HostListener, ContentChild, effect, inject, ViewEncapsulation } from '@angular/core';
+import { Component, Input, signal, computed, input, output, forwardRef, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, HostListener, ContentChild, effect, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormsModule } from '@angular/forms';
 import { NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import { OutsideClickDirective } from '../../directives';
@@ -9,7 +9,6 @@ import { Size, SelectOption, SelectGroup } from '../../models';
   selector: 'ngt-select',
   imports: [NgTemplateOutlet, FormsModule, OutsideClickDirective],
   templateUrl: './select.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
