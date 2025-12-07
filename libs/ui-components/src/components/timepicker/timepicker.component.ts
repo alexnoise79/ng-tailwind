@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, OnInit } from '@angular/core';
+import { Component, Input, signal, computed, input, output, OnInit, ViewEncapsulation } from '@angular/core';
 import { Size } from '../../models';
 
 export interface NgtTimeStruct {
@@ -11,7 +11,8 @@ export type TimeInput = string | Date | NgtTimeStruct | null | undefined;
 
 @Component({
   selector: 'ngt-timepicker',
-  templateUrl: './timepicker.component.html'
+  templateUrl: './timepicker.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtTimepicker implements OnInit {
   @Input() set model(value: TimeInput) {

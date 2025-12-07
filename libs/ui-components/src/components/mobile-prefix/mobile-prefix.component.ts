@@ -1,5 +1,5 @@
 import { LowerCasePipe, SlicePipe } from '@angular/common';
-import { Component, effect, EventEmitter, forwardRef, input, Output } from '@angular/core';
+import { Component, effect, EventEmitter, forwardRef, input, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { IMobilePrefix, IPrefix } from '../../models';
 import { Params } from '@angular/router';
@@ -9,6 +9,7 @@ import { Params } from '@angular/router';
   standalone: true,
   templateUrl: './mobile-prefix.component.html',
   styleUrl: './flags.css',
+  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'block w-full'
   },

@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { classMerge } from '../../utils';
 import { Variant } from '../../models';
 import { NgtProgressbarConfig } from './progressbar-config.service';
@@ -7,6 +7,7 @@ import { NgtProgressbarConfig } from './progressbar-config.service';
   selector: 'ngt-progressbar',
   templateUrl: './progressbar.component.html',
   styleUrls: ['./progressbar.component.css'],
+  encapsulation: ViewEncapsulation.None,
   host: {
     '[attr.role]': '"progressbar"',
     '[attr.aria-valuemin]': '0',
