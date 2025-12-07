@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.6.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.5.0...ngtailwind-v1.6.0) (2025-12-07)
+
+
+### Features
+
+* **carousel, progressbar:** add carousel and progress bar components with configurations ([173dacb](https://github.com/alexnoise79/ng-tailwind/commit/173dacbe67f95a1c35786d6b101d15d54dd0fc6b))
+* **carousel:** add carousel component with configuration service and template ([97ba0b7](https://github.com/alexnoise79/ng-tailwind/commit/97ba0b7e04f0e725bf93696ab9df94a726da3356))
+* **progressbar:** add progress bar component with demo examples and routing ([15390dc](https://github.com/alexnoise79/ng-tailwind/commit/15390dc832c1f0931518ebcbd8573519516eb896))
+
+
+### Bug Fixes
+
+* **datepicker:** sync current month/year with model when opening calendar ([3df92bd](https://github.com/alexnoise79/ng-tailwind/commit/3df92bddf917912f4d8999a41a29df01bf34fcb4))
+* restore previous ([4866f21](https://github.com/alexnoise79/ng-tailwind/commit/4866f21d4d5b6dc95b7f03a449e645a7acf4f4d6))
+
 ## [1.5.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.4.0...ngtailwind-v1.5.0) (2025-11-30)
 
 
