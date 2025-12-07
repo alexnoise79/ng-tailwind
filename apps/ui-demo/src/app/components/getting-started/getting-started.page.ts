@@ -25,6 +25,22 @@ pnpm add @ngtailwind/ngtailwind`;
     "autoprefixer": {}
   }
 }`;
+  readonly minimalTheme = `@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Primary Colors */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+}`;
   readonly usageExample = `import { Component, signal } from '@angular/core';
 import { NgtButton, NgtModal, NgtAlert } from '@ngtailwind/ui-components';
 

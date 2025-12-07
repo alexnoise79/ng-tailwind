@@ -86,9 +86,35 @@ pnpm add &#64;ngtailwind/ngtailwind</code></pre>
 &#125;</code></pre>
         </div>
       </li>
+      <li class="mb-2">
+        <strong class="text-gray-900 dark:text-white">Define a minimal theme</strong> (optional but recommended) in your global styles file. Add a minimal <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;theme</code> block with primary colors:
+        <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mt-2 overflow-x-auto">
+          <button (click)="copyToClipboard(minimalTheme)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </button>
+          <pre class="text-sm text-gray-100 font-mono"><code>&#64;custom-variant dark (&#38;:where(.dark, .dark *));
+
+&#64;theme &#123;
+  /* Primary Colors */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+&#125;</code></pre>
+        </div>
+      </li>
     </ol>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4"><strong class="text-gray-900 dark:text-white">Important:</strong> The <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;source</code> directive is required because Tailwind CSS 4.x does not automatically scan <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">node_modules</code> directories. This tells Tailwind to scan the library's compiled JavaScript and HTML files to detect all the utility classes used by the components.</p>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">You can define your theme directly in your CSS file using the <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;theme</code> directive if needed. No <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">tailwind.config.js</code> file is required.</p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">You can define your theme directly in your CSS file using the <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;theme</code> directive. The minimal theme above includes the primary color palette used by the library components. No <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">tailwind.config.js</code> file is required.</p>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6"><strong class="text-gray-900 dark:text-white">Note:</strong> All component CSS files are automatically bundled with the library. The <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;source</code> directive ensures Tailwind generates the necessary utility classes for the library components.</p>
   </section>
 

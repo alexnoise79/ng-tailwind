@@ -62,9 +62,30 @@ npm install -D tailwindcss@^4.1.17 postcss autoprefixer
 }
 ```
 
+4. **Define a minimal theme** (optional but recommended) in your global styles file. Add a minimal `@theme` block with primary colors:
+
+```css
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Primary Colors */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+}
+```
+
 **Important:** The `@source` directive is required because Tailwind CSS 4.x does not automatically scan `node_modules` directories. This tells Tailwind to scan the library's compiled JavaScript and HTML files to detect all the utility classes used by the components.
 
-You can define your theme directly in your CSS file using the `@theme` directive if needed. No `tailwind.config.js` file is required.
+You can define your theme directly in your CSS file using the `@theme` directive. The minimal theme above includes the primary color palette used by the library components. No `tailwind.config.js` file is required.
 
 **Note:** All component CSS files are automatically bundled with the library. The `@source` directive ensures Tailwind generates the necessary utility classes for the library components.
 
