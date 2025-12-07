@@ -17,7 +17,14 @@ yarn add @ngtailwind/ngtailwind
 # Using pnpm
 pnpm add @ngtailwind/ngtailwind`;
   readonly installTailwind = 'npm install -D tailwindcss@^4.1.17 postcss autoprefixer';
-  readonly tailwindDirectives = `@import 'tailwindcss';`;
+  readonly tailwindDirectives = `@import 'tailwindcss';
+@source '../node_modules/@ngtailwind/ngtailwind/esm2022/**/*.{html,js}';`;
+  readonly postcssConfig = `{
+  "plugins": {
+    "@tailwindcss/postcss": {},
+    "autoprefixer": {}
+  }
+}`;
   readonly usageExample = `import { Component, signal } from '@angular/core';
 import { NgtButton, NgtModal, NgtAlert } from '@ngtailwind/ui-components';
 

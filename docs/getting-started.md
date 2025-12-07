@@ -34,7 +34,7 @@ For more information, visit the [npm package page](https://www.npmjs.com/package
 
 ### Configure Tailwind CSS
 
-After installing the package, ensure your project has Tailwind CSS 4.x configured. The library components are designed to work seamlessly with Tailwind CSS utility classes.
+After installing the package, ensure your project has Tailwind CSS 4.x configured. Since the library is installed in `node_modules`, you need to tell Tailwind to scan the library's compiled files using the `@source` directive.
 
 If you haven't set up Tailwind CSS 4.x yet:
 
@@ -44,15 +44,29 @@ If you haven't set up Tailwind CSS 4.x yet:
 npm install -D tailwindcss@^4.1.17 postcss autoprefixer
 ```
 
-2. **Add Tailwind CSS to your global styles file** (e.g., `src/styles.css`):
+2. **Add Tailwind CSS and configure it to scan the library** in your global styles file (e.g., `src/styles.css`):
 
 ```css
 @import 'tailwindcss';
+@source '../node_modules/@ngtailwind/ngtailwind/esm2022/**/*.{html,js}';
 ```
 
-That's it! Tailwind CSS 4.x uses automatic content detection and CSS-based configuration. You can define your theme directly in your CSS file using the `@theme` directive if needed. No `tailwind.config.js` file is required.
+3. **Create a PostCSS configuration file** (e.g., `postcss.config.json` in your project root):
 
-**Note:** All component CSS files are automatically bundled with the library. Tailwind utility classes will work correctly as long as Tailwind CSS 4.x is properly configured in your application.
+```json
+{
+  "plugins": {
+    "@tailwindcss/postcss": {},
+    "autoprefixer": {}
+  }
+}
+```
+
+**Important:** The `@source` directive is required because Tailwind CSS 4.x does not automatically scan `node_modules` directories. This tells Tailwind to scan the library's compiled JavaScript and HTML files to detect all the utility classes used by the components.
+
+You can define your theme directly in your CSS file using the `@theme` directive if needed. No `tailwind.config.js` file is required.
+
+**Note:** All component CSS files are automatically bundled with the library. The `@source` directive ensures Tailwind generates the necessary utility classes for the library components.
 
 ## Usage Example
 

@@ -44,7 +44,7 @@ pnpm add &#64;ngtailwind/ngtailwind</code></pre>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">For more information, visit the <a href="https://www.npmjs.com/package/&#64;ngtailwind/ngtailwind" target="_blank" rel="noopener noreferrer" class="text-primary-600 dark:text-primary-400 hover:underline">npm package page</a>.</p>
 
     <h4 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Configure Tailwind CSS</h4>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">After installing the package, ensure your project has Tailwind CSS 4.x configured. The library components are designed to work seamlessly with Tailwind CSS utility classes.</p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">After installing the package, ensure your project has Tailwind CSS 4.x configured. Since the library is installed in <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">node_modules</code>, you need to tell Tailwind to scan the library's compiled files using the <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;source</code> directive.</p>
     <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">If you haven't set up Tailwind CSS 4.x yet:</p>
     <ol class="list-decimal list-inside space-y-3 text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6">
       <li class="mb-2">
@@ -59,19 +59,37 @@ pnpm add &#64;ngtailwind/ngtailwind</code></pre>
         </div>
       </li>
       <li class="mb-2">
-        <strong class="text-gray-900 dark:text-white">Add Tailwind CSS to your global styles file</strong> (e.g., <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">src/styles.css</code>):
+        <strong class="text-gray-900 dark:text-white">Add Tailwind CSS and configure it to scan the library</strong> in your global styles file (e.g., <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">src/styles.css</code>):
         <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mt-2 overflow-x-auto">
           <button (click)="copyToClipboard(tailwindDirectives)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
           </button>
-          <pre class="text-sm text-gray-100 font-mono"><code>&#64;import 'tailwindcss';</code></pre>
+          <pre class="text-sm text-gray-100 font-mono"><code>&#64;import 'tailwindcss';
+&#64;source '../node_modules/&#64;ngtailwind/ngtailwind/esm2022/**/*.&#123;html,js&#125;';</code></pre>
+        </div>
+      </li>
+      <li class="mb-2">
+        <strong class="text-gray-900 dark:text-white">Create a PostCSS configuration file</strong> (e.g., <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">postcss.config.json</code> in your project root):
+        <div class="relative bg-gray-900 dark:bg-gray-800 rounded-lg p-4 mt-2 overflow-x-auto">
+          <button (click)="copyToClipboard(postcssConfig)" type="button" class="absolute top-2 right-2 p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors" title="Copy code">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </button>
+          <pre class="text-sm text-gray-100 font-mono"><code>&#123;
+  "plugins": &#123;
+    "&#64;tailwindcss/postcss": &#123;&#125;,
+    "autoprefixer": &#123;&#125;
+  &#125;
+&#125;</code></pre>
         </div>
       </li>
     </ol>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">That's it! Tailwind CSS 4.x uses automatic content detection and CSS-based configuration. You can define your theme directly in your CSS file using the <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;theme</code> directive if needed. No <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">tailwind.config.js</code> file is required.</p>
-    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6"><strong class="text-gray-900 dark:text-white">Note:</strong> All component CSS files are automatically bundled with the library. Tailwind utility classes will work correctly as long as Tailwind CSS 4.x is properly configured in your application.</p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4"><strong class="text-gray-900 dark:text-white">Important:</strong> The <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;source</code> directive is required because Tailwind CSS 4.x does not automatically scan <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">node_modules</code> directories. This tells Tailwind to scan the library's compiled JavaScript and HTML files to detect all the utility classes used by the components.</p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">You can define your theme directly in your CSS file using the <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;theme</code> directive if needed. No <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">tailwind.config.js</code> file is required.</p>
+    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6"><strong class="text-gray-900 dark:text-white">Note:</strong> All component CSS files are automatically bundled with the library. The <code class="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs font-mono">&#64;source</code> directive ensures Tailwind generates the necessary utility classes for the library components.</p>
   </section>
 
   <section>
