@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, output, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, signal, computed, output, TemplateRef, ViewChild, ElementRef, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { classMerge } from '../../utils';
 import { Variant } from '../../models';
@@ -6,7 +6,8 @@ import { Variant } from '../../models';
 @Component({
   selector: 'ngt-toast',
   imports: [NgTemplateOutlet],
-  templateUrl: './toast.component.html'
+  templateUrl: './toast.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtToast implements OnInit, OnDestroy {
   toastId = '';

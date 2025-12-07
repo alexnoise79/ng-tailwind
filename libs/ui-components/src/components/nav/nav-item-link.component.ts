@@ -1,4 +1,4 @@
-import { Component, Input, computed, effect, inject, Injector, runInInjectionContext, signal, OnInit, OnDestroy, EffectRef, AfterViewInit } from '@angular/core';
+import { Component, Input, computed, effect, inject, Injector, runInInjectionContext, signal, OnInit, OnDestroy, EffectRef, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgtNavItem } from './nav-item.directive';
 import { NgtNav } from './nav.directive';
@@ -6,6 +6,7 @@ import { NgtNav } from './nav.directive';
 @Component({
   selector: 'ngt-nav-item-link',
   imports: [RouterLink],
+  encapsulation: ViewEncapsulation.None,
   template: `
     @if (routerLink(); as link) {
       <a [routerLink]="link" [id]="buttonId()" [class]="navClasses()" [attr.aria-selected]="isActive() ? 'true' : 'false'" [attr.aria-disabled]="disabled() ? 'true' : 'false'" [attr.tabindex]="isActive() && !disabled() ? '0' : '-1'" role="tab" (click)="handleClick($event)">

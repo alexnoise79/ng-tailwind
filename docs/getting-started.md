@@ -34,41 +34,25 @@ For more information, visit the [npm package page](https://www.npmjs.com/package
 
 ### Configure Tailwind CSS
 
-After installing the package, ensure your project has Tailwind CSS configured. If you haven't set up Tailwind CSS yet:
+After installing the package, ensure your project has Tailwind CSS 4.x configured. The library components are designed to work seamlessly with Tailwind CSS utility classes.
 
-1. **Install Tailwind CSS and its dependencies:**
+If you haven't set up Tailwind CSS 4.x yet:
 
-```bash
-npm install -D tailwindcss postcss autoprefixer
-```
-
-1. **Initialize Tailwind CSS configuration:**
+1. **Install Tailwind CSS 4.x and its dependencies:**
 
 ```bash
-npx tailwindcss init
+npm install -D tailwindcss@^4.1.17 postcss autoprefixer
 ```
 
-1. **Update your `tailwind.config.js` to scan your component files:**
-
-```javascript
-module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
-
-1. **Add Tailwind directives to your global styles file** (e.g., `src/styles.css`):
+2. **Add Tailwind CSS to your global styles file** (e.g., `src/styles.css`):
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 ```
+
+That's it! Tailwind CSS 4.x uses automatic content detection and CSS-based configuration. You can define your theme directly in your CSS file using the `@theme` directive if needed. No `tailwind.config.js` file is required.
+
+**Note:** All component CSS files are automatically bundled with the library. Tailwind utility classes will work correctly as long as Tailwind CSS 4.x is properly configured in your application.
 
 ## Usage Example
 

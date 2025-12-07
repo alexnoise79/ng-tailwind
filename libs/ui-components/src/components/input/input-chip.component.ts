@@ -1,4 +1,4 @@
-import { Component, forwardRef, computed, HostListener, input, output, signal } from '@angular/core';
+import { Component, forwardRef, computed, HostListener, input, output, signal, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase, InputType } from './input-base.component';
 import { classMerge } from '../../utils';
@@ -8,6 +8,7 @@ import { Size } from '../../models';
   selector: 'ngt-input[chip]',
   imports: [FormsModule],
   templateUrl: './input-chip.component.html',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

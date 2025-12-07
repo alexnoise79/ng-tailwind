@@ -1,4 +1,4 @@
-import { Component, forwardRef, effect, OnInit, computed, input, output } from '@angular/core';
+import { Component, forwardRef, effect, OnInit, computed, input, output, ViewEncapsulation } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputType } from './input-base.component';
 import { NgtInputNumberBase } from './input-number-base.component';
@@ -9,6 +9,7 @@ import { Size } from '../../models';
   selector: 'ngt-input[currency], ngt-input[mode="currency"]',
   imports: [FormsModule],
   templateUrl: './input-currency.component.html',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -81,14 +82,34 @@ export class NgtInputCurrency extends NgtInputNumberBase implements OnInit {
   }
 
   protected override handleNormalInput(value: string) {
-    // Update display value
     this._displayValue.set(value);
     const modelValue = this.getModelValue(value);
 
-    // For number type, convert to number
+    if (!modelValue || modelValue.trim() === '') {
+      this._value.set('');
+      this.onChange('');
+      this.valueChange.emit('');
+      return;
+    }
+
     const numValue = this.parseNumber(modelValue);
-    this._value.set(numValue);
-    this.onChange(numValue);
-    this.valueChange.emit(numValue);
+    if (numValue !== 0 && !isNaN(numValue)) {
+      this._value.set(numValue);
+      this.onChange(numValue);
+      this.valueChange.emit(numValue);
+    } else {
+      this._value.set('');
+      this.onChange('');
+      this.valueChange.emit('');
+    }
+  }
+
+  override writeValue(value: string | number | null) {
+    if (!value || value === 0) {
+      this._value.set('');
+      this.updateDisplayValue();
+    } else {
+      super.writeValue(value);
+    }
   }
 }

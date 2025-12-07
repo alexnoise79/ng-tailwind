@@ -1,11 +1,12 @@
-import { Component, Input, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input, output } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, inject, ViewChild, ElementRef, signal, effect, Signal, WritableSignal, input, output, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TrapFocusDirective } from '../../directives';
 
 @Component({
   selector: 'ngt-modal',
   imports: [TrapFocusDirective],
-  templateUrl: './modal.component.html'
+  templateUrl: './modal.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtModal implements OnInit, OnDestroy {
   @Input() set isOpen(value: boolean | WritableSignal<boolean>) {

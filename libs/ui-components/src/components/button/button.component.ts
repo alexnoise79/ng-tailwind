@@ -1,4 +1,4 @@
-import { Component, Input, computed, signal, input } from '@angular/core';
+import { Component, Input, computed, signal, input, ViewEncapsulation } from '@angular/core';
 import { classMerge } from '../../utils';
 import { Size } from '../../models';
 
@@ -6,7 +6,8 @@ export type ButtonVariant = 'primary' | 'outline' | 'ghost';
 
 @Component({
   selector: 'ngt-button',
-  templateUrl: './button.component.html'
+  templateUrl: './button.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtButton {
   readonly variant = input<ButtonVariant>('primary');

@@ -18,6 +18,7 @@ export class PaginationPage {
   currentPage6 = signal(1);
   currentPage7 = signal(1);
   currentPage8 = signal(1);
+  currentPage9 = signal(1);
 
   Math = Math;
 

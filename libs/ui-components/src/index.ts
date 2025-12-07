@@ -23,6 +23,7 @@ export * from './components/input';
 export * from './components/mobile-prefix';
 export * from './components/password';
 export * from './components/checkbox';
+export * from './components/progressbar';
 
 // Directives
 export * from './directives';

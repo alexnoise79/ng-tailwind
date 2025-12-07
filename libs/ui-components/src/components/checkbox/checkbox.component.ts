@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, forwardRef, ElementRef, ViewChild, ContentChild, TemplateRef, effect, AfterViewInit } from '@angular/core';
+import { Component, Input, signal, computed, input, forwardRef, ElementRef, ViewChild, ContentChild, TemplateRef, effect, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgTemplateOutlet } from '@angular/common';
 import { classMerge } from '../../utils';
@@ -8,6 +8,7 @@ import { Size } from '../../models';
   selector: 'ngt-checkbox',
   imports: [NgTemplateOutlet],
   templateUrl: './checkbox.component.html',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

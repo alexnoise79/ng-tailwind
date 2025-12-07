@@ -30,13 +30,58 @@ export abstract class NgtInputNumberBase extends NgtInputBase {
     }
   }
 
+  protected override updateDisplayValue() {
+    if (this.type() === 'number' && this.mode() !== null) {
+      const val = this._value();
+      if (!val || val === 0) {
+        this._displayValue.set('');
+        return;
+      }
+      
+      const numValue = typeof val === 'number' ? val : this.parseNumber(String(val));
+      if (!isNaN(numValue) && numValue !== 0) {
+        if (this.mode() === 'currency' || this.mode() === 'decimal') {
+          this._displayValue.set(numValue.toFixed(2));
+        } else {
+          this._displayValue.set(String(numValue));
+        }
+      } else {
+        this._displayValue.set('');
+      }
+    } else {
+      super.updateDisplayValue();
+    }
+  }
+
   protected formatNumberOnBlur() {
-    const numValue = this.parseNumber(this._displayValue());
+    const input = this.inputElementRef?.nativeElement;
+    const currentDisplay = input?.value?.trim() || this._displayValue().trim();
+    
+    if (currentDisplay === '' || currentDisplay === '-') {
+      this._value.set('');
+      this._displayValue.set('');
+      this.onChange('');
+      this.valueChange.emit('');
+      return;
+    }
+    
+    const numValue = this.parseNumber(currentDisplay);
+    
     if (!isNaN(numValue) && numValue !== 0) {
-      const formatted = this.formatNumber(numValue);
-      this._displayValue.set(formatted);
-      // Update the value to match formatted display
+      if (this.mode() === 'currency' || this.mode() === 'decimal') {
+        this._displayValue.set(numValue.toFixed(2));
+      } else {
+        this._displayValue.set(String(numValue));
+      }
       this._value.set(numValue);
+      this.onChange(numValue);
+      this.valueChange.emit(numValue);
+    } else {
+      // For 0, NaN, or invalid values, keep empty
+      this._value.set('');
+      this._displayValue.set('');
+      this.onChange('');
+      this.valueChange.emit('');
     }
   }
 

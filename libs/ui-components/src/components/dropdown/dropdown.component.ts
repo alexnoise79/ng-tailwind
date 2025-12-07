@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input } from '@angular/core';
+import { Component, Input, signal, computed, input, ViewEncapsulation } from '@angular/core';
 import { OutsideClickDirective } from '../../directives';
 
 export type DropdownPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
@@ -6,7 +6,8 @@ export type DropdownPlacement = 'bottom-start' | 'bottom-end' | 'top-start' | 't
 @Component({
   selector: 'ngt-dropdown',
   imports: [OutsideClickDirective],
-  templateUrl: './dropdown.component.html'
+  templateUrl: './dropdown.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtDropdown {
   @Input() set placement(value: DropdownPlacement) {

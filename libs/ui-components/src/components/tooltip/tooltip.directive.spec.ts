@@ -133,12 +133,10 @@ describe('NgtTooltip', () => {
     // it('should display the tooltip text', () => {
     //   component.tooltipText = 'Custom tooltip text';
     //   fixture.detectChanges();
-
     //   buttonElement.triggerEventHandler('mouseenter', null);
     //   fixture.detectChanges();
     //   vi.advanceTimersByTime(200);
     //   fixture.detectChanges();
-
     //   const tooltipElement = fixture.nativeElement.querySelector('[role="tooltip"]');
     //   expect(tooltipElement).toBeTruthy();
     //   expect(tooltipElement.textContent).toBe('Custom tooltip text');
@@ -150,38 +148,30 @@ describe('NgtTooltip', () => {
     // it('should respect custom show delay', () => {
     //   component.delay = 500;
     //   fixture.detectChanges();
-
     //   buttonElement.triggerEventHandler('mouseenter', null);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(false);
-
     //   vi.advanceTimersByTime(200);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(false);
-
     //   vi.advanceTimersByTime(300);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(true);
     // });
-
     // it('should respect custom hide delay', () => {
     //   component.hideDelay = 500;
     //   fixture.detectChanges();
-
     //   buttonElement.triggerEventHandler('mouseenter', null);
     //   fixture.detectChanges();
     //   vi.advanceTimersByTime(200);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(true);
-
     //   buttonElement.triggerEventHandler('mouseleave', null);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(true);
-
     //   vi.advanceTimersByTime(200);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(true);
-
     //   vi.advanceTimersByTime(300);
     //   fixture.detectChanges();
     //   expect(directive.isVisible()).toBe(false);

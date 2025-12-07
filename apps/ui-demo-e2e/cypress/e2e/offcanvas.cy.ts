@@ -86,7 +86,7 @@ describe('Offcanvas Page E2E', () => {
           cy.contains('Open from Start').click();
           cy.wait(500);
           // Press escape key on the document/body - use document directly
-          cy.document().then((doc) => {
+          cy.document().then(doc => {
             cy.wrap(doc.body).type('{esc}', { force: true });
           });
           cy.wait(500);

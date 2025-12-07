@@ -16,20 +16,8 @@ yarn add @ngtailwind/ngtailwind
 
 # Using pnpm
 pnpm add @ngtailwind/ngtailwind`;
-  readonly installTailwind = 'npm install -D tailwindcss postcss autoprefixer';
-  readonly initTailwind = 'npx tailwindcss init';
-  readonly tailwindConfig = `module.exports = {
-  content: [
-    "./src/**/*.{html,ts}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}`;
-  readonly tailwindDirectives = `@tailwind base;
-@tailwind components;
-@tailwind utilities;`;
+  readonly installTailwind = 'npm install -D tailwindcss@^4.1.17 postcss autoprefixer';
+  readonly tailwindDirectives = `@import 'tailwindcss';`;
   readonly usageExample = `import { Component, signal } from '@angular/core';
 import { NgtButton, NgtModal, NgtAlert } from '@ngtailwind/ui-components';
 

@@ -1,4 +1,4 @@
-import { Component, Input, signal, computed, input, output, OnInit, effect, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, signal, computed, input, output, OnInit, effect, forwardRef, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { classMerge } from '../../utils';
 import { NgtTimepicker, NgtTimeStruct } from '../timepicker';
@@ -21,6 +21,7 @@ export type DateFormat = 'iso' | 'iso-local' | 'date' | 'datetime';
   selector: 'ngt-datepicker',
   imports: [NgtTimepicker, OutsideClickDirective],
   templateUrl: './datepicker.component.html',
+  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -389,6 +390,12 @@ export class NgtDatepicker implements OnInit, ControlValueAccessor {
   // Calendar visibility methods
   openCalendar() {
     if (!this.disabled()) {
+      // Sync current month/year with model when opening calendar
+      const model = this.modelValue();
+      if (model) {
+        this._currentMonth.set(model.month);
+        this._currentYear.set(model.year);
+      }
       this._isOpen.set(true);
     }
   }

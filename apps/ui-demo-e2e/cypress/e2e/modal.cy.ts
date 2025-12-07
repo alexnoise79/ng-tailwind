@@ -73,7 +73,7 @@ describe('Modal Page E2E', () => {
           cy.wait(300);
           cy.get('[role="dialog"]').should('be.visible');
           // Press escape key on the document/body - use document directly
-          cy.document().then((doc) => {
+          cy.document().then(doc => {
             cy.wrap(doc.body).type('{esc}', { force: true });
           });
           cy.wait(500);

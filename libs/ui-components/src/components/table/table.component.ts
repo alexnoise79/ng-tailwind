@@ -1,4 +1,4 @@
-import { Component, ContentChild, TemplateRef, input, output, signal, computed, effect, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnDestroy } from '@angular/core';
+import { Component, ContentChild, TemplateRef, input, output, signal, computed, effect, ElementRef, ViewChild, AfterViewInit, AfterViewChecked, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { NgtPagination } from '../pagination/pagination.component';
 import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
@@ -6,7 +6,8 @@ import { Size, SortOrder, TableColumn, SortMeta } from '../../models';
 @Component({
   selector: 'ngt-table',
   imports: [NgTemplateOutlet, NgtPagination],
-  templateUrl: './table.component.html'
+  templateUrl: './table.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class NgtTable implements AfterViewInit, AfterViewChecked, OnDestroy {
   // Inputs

@@ -16,7 +16,9 @@ describe('Datepicker E2E', () => {
           cy.get('ngt-datepicker').find('input').click();
           cy.wait(300);
           // Scroll calendar into view to avoid clipping - use force for visibility check
-          cy.get('ngt-datepicker').find('[role="application"]').scrollIntoView({ offset: { top: -100, left: 0 } });
+          cy.get('ngt-datepicker')
+            .find('[role="application"]')
+            .scrollIntoView({ offset: { top: -100, left: 0 } });
           cy.wait(200);
           // Check for buttons - they might be clipped but should exist
           cy.get('button[aria-label="Previous month"]').should('exist');
@@ -76,7 +78,9 @@ describe('Datepicker E2E', () => {
           cy.get('ngt-datepicker').find('input').click();
           cy.wait(300);
           // Scroll calendar into view to avoid clipping - use force for visibility check
-          cy.get('ngt-datepicker').find('[role="application"]').scrollIntoView({ offset: { top: -100, left: 0 } });
+          cy.get('ngt-datepicker')
+            .find('[role="application"]')
+            .scrollIntoView({ offset: { top: -100, left: 0 } });
           cy.wait(200);
           // Check for buttons - they might be clipped but should exist
           cy.get('button[aria-label="Previous month"]').should('exist');
@@ -209,7 +213,10 @@ describe('Datepicker E2E', () => {
         .within(() => {
           cy.get('ngt-datepicker').find('input').should('not.have.value', '');
           // The value should match YYYY-MM-DD format
-          cy.get('ngt-datepicker').find('input').invoke('val').should('match', /^\d{4}-\d{2}-\d{2}$/);
+          cy.get('ngt-datepicker')
+            .find('input')
+            .invoke('val')
+            .should('match', /^\d{4}-\d{2}-\d{2}$/);
         });
     });
   });
