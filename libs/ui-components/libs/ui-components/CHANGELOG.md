@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.1](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.6.0...ngtailwind-v1.6.1) (2025-12-08)
+
+
+### Bug Fixes
+
+* restore normal encapsulation ([ec9e9c0](https://github.com/alexnoise79/ng-tailwind/commit/ec9e9c00f6f5185062a7342bacc68675b3149da9))
+
 ## [1.6.0](https://github.com/alexnoise79/ng-tailwind/compare/ngtailwind-v1.5.0...ngtailwind-v1.6.0) (2025-12-07)
 
 
