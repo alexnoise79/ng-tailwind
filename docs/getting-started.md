@@ -41,7 +41,7 @@ If you haven't set up Tailwind CSS 4.x yet:
 1. **Install Tailwind CSS 4.x and its dependencies:**
 
 ```bash
-npm install -D tailwindcss@^4.1.17 postcss autoprefixer
+npm install -D tailwindcss @tailwindcss/postcss autoprefixer
 ```
 
 2. **Add Tailwind CSS and configure it to scan the library** in your global styles file (e.g., `src/styles.css`):
