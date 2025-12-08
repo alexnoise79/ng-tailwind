@@ -175,13 +175,16 @@ This example demonstrates:
 - **Alert** - Alert component with multiple variants and dismissible functionality
 - **Button** - Variants, sizes, and loading states
 - **Card** - Flexible card component with template loading for header, title, subtitle, and footer
+- **Checkbox** - Form control with custom values, indeterminate state, and template support
 - **Collapse** - Expandable/collapsible content (horizontal or vertical)
 - **Datepicker** - Date selection component with calendar view
 - **Dropdown** - Dropdown menu with positioning
+- **Input** - Text input with multiple types (text, number, email, tel), validation, and advanced features
 - **Modal** - Dialog with backdrop and animations
 - **Nav** - Navigation component with multiple styles (tabs, pills, underline)
 - **Offcanvas** - Side panel component with multiple positions (start, end, top, bottom)
 - **Pagination** - Page navigation with customizable options
+- **Progressbar** - Progress indicator with animated, striped, and value display options
 - **Select** - Dropdown select with form integration and option grouping
 - **Table** - Data table with sorting, pagination, grouping, and column reordering
 - **Toast** - Notification messages with severity levels and auto-dismiss
