@@ -1,4 +1,4 @@
-import { Component, forwardRef, effect, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, forwardRef, effect, input, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase, InputType } from './input-base.component';
 import { Size } from '../../models';
@@ -7,7 +7,6 @@ import { Size } from '../../models';
   selector: 'ngt-input[mask]',
   imports: [FormsModule],
   templateUrl: './input-base.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

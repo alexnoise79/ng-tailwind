@@ -1,4 +1,4 @@
-import { Component, forwardRef, computed, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, forwardRef, computed, input, output } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgtInputBase } from './input-base.component';
 import { Size } from '../../models';
@@ -8,7 +8,6 @@ import { InputType } from './input-base.component';
   selector: 'ngt-input:not([currency]):not([mode]):not([mask]):not([chip]):not([autocomplete]):not([completeMethod])',
   imports: [FormsModule],
   templateUrl: './input-base.component.html',
-  encapsulation: ViewEncapsulation.None,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

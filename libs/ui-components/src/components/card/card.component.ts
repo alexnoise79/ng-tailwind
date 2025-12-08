@@ -1,10 +1,9 @@
-import { Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { classMerge } from '../../utils';
 
 @Component({
   selector: 'ngt-card',
-  templateUrl: './card.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './card.component.html'
 })
 export class NgtCard {
   readonly variant = input<'default' | 'bordered' | 'elevated'>('default');

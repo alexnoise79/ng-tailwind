@@ -1,11 +1,10 @@
-import { Component, computed, signal, input, output, ViewEncapsulation } from '@angular/core';
+import { Component, computed, signal, input, output } from '@angular/core';
 import { classMerge } from '../../utils';
 import { Variant } from '../../models';
 
 @Component({
   selector: 'ngt-alert',
-  templateUrl: './alert.component.html',
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './alert.component.html'
 })
 export class NgtAlert {
   readonly variant = input<Variant>('info');
